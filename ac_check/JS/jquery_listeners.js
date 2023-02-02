@@ -112,6 +112,9 @@ $(document).ready(function(){
 
         //if ($('#A11Y_checkbox').is(":checked")) merge(json,a11y());
 
+        /*console.log(json);
+        alert("aaaaa");*/
+
         saveJson(json);
       }
     /*}else if($('#A11Y_checkbox').is(":checked")){

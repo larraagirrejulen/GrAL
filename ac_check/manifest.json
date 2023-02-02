@@ -30,7 +30,7 @@
   "content_scripts": [
   {
     "matches": ["<all_urls>"],
-    "js":["/JS/jquery.min.js","/JS/tablas.js", "/JS/library/oaa_a11y_evaluation.js", "/JS/library/oaa_a11y_rules.js", "/JS/library/oaa_a11y_rulesets.js"],
+    "js":["/JS/jquery.min.js","/JS/tablas.js", "/JS/a11y.js", "/JS/library/oaa_a11y_evaluation.js", "/JS/library/oaa_a11y_rules.js", "/JS/library/oaa_a11y_rulesets.js"],
     "css": ["/CSS/main_sidebar.css","/CSS/tablas.css"]
   }]
 }
