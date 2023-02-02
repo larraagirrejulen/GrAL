@@ -1,0 +1,127 @@
+.tabla_RES th{
+	text-align: center !important;
+  color: black  !important;
+  background-color: white;
+	width:50px !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tabla_contenido th{
+  color: black !important;
+  font-family: 'Helvetica' !important;
+	font-size: 11px !important;
+  text-align: center !important;
+  font-weight: bold;
+  padding: 1px 0px 1px 0px !important;
+}
+
+
+.boton_tabla {
+  border: none;
+  background-color: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-block;
+  color: dodgerblue;
+}
+
+.boton_tabla:hover {background: #eee;}
+
+.collapsible_tabla {
+  background-color: white  !important;
+  color:black  !important;
+  cursor: pointer  !important;
+  padding: 10px !important;
+  width: 100% !important;
+  border: none !important;
+  text-align: left !important;
+  outline: none !important;
+  font-size: 12px !important;
+}
+
+.active, .collapsible_tabla:hover, .collapsible_tabla2:hover {
+  color: white !important;
+  background-color: #00B4D5 !important;
+}
+
+.content_tabla {
+  display: none;
+  overflow: hidden !important;
+  font-size: 10px !important;
+
+}
+
+.collapsible_tabla2 {
+  background-color: #C7D1D3 !important;
+  color:black !important;
+  cursor: pointer !important;
+  padding: 10px !important;
+  width: 100% !important;
+  border: none !important;
+  text-align: left !important;
+  outline: none !important;
+  font-size: 10px !important;
+}
+
+.collapsible_tabla3 {
+  color:black !important;
+  cursor: pointer !important;
+  padding: 10px !important;
+  width: 100% !important;
+  border: none !important;
+  text-align: left !important;
+  outline: none !important;
+  font-size: 10px !important;
+}
+.collapsible_tabla3 table tr td{
+  color: black !important;
+}
+
+/*
+.collapsible_tabla,.collapsible_tabla2 td{
+  white-space:nowrap !important;
+}
+*/
+.collapsible_tabla{
+  white-space:nowrap !important;
+}
+.collapsible_tabla table tr td{
+  font-size: 12px !important;
+  white-space:nowrap !important;
+  background-color: inherit !important;
+  color: black !important;
+
+
+}
+
+.tabla_resultados {
+  width:100% !important;
+  font-size:12px !important;
+  overflow-wrap: anywhere !important;
+}
+.tabla_resultados th{
+  height: 40px !important; 
+}
+.tabla_resultados td{
+  padding-left:10px !important;
+  font-size: 12px !important;
+  overflow-wrap: anywhere !important;
+
+}
+
+.tabla_resultados code{
+  overflow-wrap: anywhere !important;
+  background-color: #f7f7f9;
+  color: #d14;
+  cursor: pointer;
+  border: 1px solid #e1e1e8;
+}
+
+
+
+.codigo_analisis{
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
+
+}
