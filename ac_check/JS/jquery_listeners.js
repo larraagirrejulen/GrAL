@@ -188,44 +188,62 @@ $(document).ready(function(){
 
     // Get document info from browser context
     doc = window.document;
-    url = window.location.href;
 
     // Get and configure an evaluatorFactory
     let evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
 
     // A tools developer wants to use the ARIAStrictRuleset
-    var asRuleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
+    var ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
+
+    // Set options in evaluation library
+    OpenAjax.a11y.CONSOLE_MESSAGES = false;
 
     // and configure it...
-    evaluatorFactory.setParameter('ruleset', asRuleset);
-    evaluatorFactory.setFeature('eventProcessing',   'none');
-    evaluatorFactory.setFeature('brokenLinkTesting', false);
+    evaluatorFactory.setParameter('ruleset', ruleset);
+    evaluatorFactory.setFeature('eventProcessing', 'fae-util');
+    evaluatorFactory.setFeature('groups', 7);
+    /*evaluatorFactory.setFeature('eventProcessing', 'chrome');
+    evaluatorFactory.setFeature('brokenLinkTesting', false);*/
 
     // Get the evaluator
     let evaluator = evaluatorFactory.newEvaluator();
 
     // Gure luzapenak jarritako html elementuak kendu
-    const element = doc.getElementById("sidenav_s");
-    element.remove();
-    /*const ancestor = doc.getElementById("main_s");
-    descendents = ancestor.getElementsByTagName('*');
-    ancestor.remove();
-    for (i = 0; i < descendents.length; ++i) {
-      doc.body.appendChild(descendents[i]);
-      console.log(descendents[i]);
+    const side_nav = doc.getElementById("sidenav_s");
+    side_nav.remove();
+    const father = doc.getElementById("main_s");
+    children = father.children;
+    father.remove();
+    for (i = children.length-1; i >= 0; i--) {
+      doc.body.prepend(children[i]);
+      console.log(children[i]);
     }
-    alert("aaaaa");*/
+    /*for (i = 0; i < children.length; i++) {
+      doc.body.appendChild(children[i]);
+      console.log(children[i]);
+    }
+    for (i = 0; i < children.length; i++) {
+      doc.body.appendChild(children[i]);
+      console.log(children[i]);
+    }
+    for (i = 0; i < children.length; i++) {
+      doc.body.appendChild(children[i]);
+      console.log(children[i]);
+    }
+    for (i = 0; i < children.length; i++) {
+      doc.body.appendChild(children[i]);
+      console.log(children[i]);
+    }*/
 
     // Evaluate
-    result = evaluator.evaluate(doc, doc.title, url);
+    result = evaluator.evaluate(doc, doc.title, window.location.href);
 
     // Gure luzapenak jarritako html elementuak berriro jarri
-    /*descendents = doc.body.getElementsByTagName('*');
-    for (i = 0; i < descendents.length; ++i) {
-      descendents[i].remove();
+    /*for (i = 0; i < children.length; ++i) {
+      children[i].remove();
     }
-    doc.body.appendChild(ancestor);*/
-    doc.body.appendChild(element);
+    doc.body.appendChild(father);*/
+    doc.body.appendChild(side_nav);
 
     console.log(result);
 
@@ -242,16 +260,16 @@ $(document).ready(function(){
     for (rule in json.rule_mappings){
       ers = result.getRuleResult(rule).getElementResultsSummary();
       if (ers.violations>=1) v += 1;
-      if (ers.warnings>=1) w += 1;
+      if (ers.warnings>=1) {
+        alert(rule);
+        w += 1
+      };
       if (ers.passed>=1) p += 1;
       if (ers.manual_checks>=1) m += 1;
       if (ers.hidden>=1) h += 1;
     }
-    console.log("violations: ", v);
-    console.log("warnings: ", w);
-    console.log("passed: ", p);
-    console.log("manual_checks: ", m);
-    console.log("hidden: ", h);
+    alert("violations: " + v + " warnings: " + w + " passed: " + p + " manual_checks: " + m + " hidden: " + h)
+
 
     /*checked = []
     for (rule in json.rule_mappings){
