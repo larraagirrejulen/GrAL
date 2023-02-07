@@ -186,26 +186,14 @@ $(document).ready(function(){
 
   $("#prueba").click(function(){
 
-    // Get document info from browser context
+
+    // Configure evaluator factory and get evaluator
     doc = window.document;
-
-    // Get and configure an evaluatorFactory
     let evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
-
-    // A tools developer wants to use the ARIAStrictRuleset
     var ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
-
-    // Set options in evaluation library
-    OpenAjax.a11y.CONSOLE_MESSAGES = false;
-
-    // and configure it...
     evaluatorFactory.setParameter('ruleset', ruleset);
     evaluatorFactory.setFeature('eventProcessing', 'fae-util');
     evaluatorFactory.setFeature('groups', 7);
-    /*evaluatorFactory.setFeature('eventProcessing', 'chrome');
-    evaluatorFactory.setFeature('brokenLinkTesting', false);*/
-
-    // Get the evaluator
     let evaluator = evaluatorFactory.newEvaluator();
 
     // Gure luzapenak jarritako html elementuak kendu
@@ -218,24 +206,8 @@ $(document).ready(function(){
       doc.body.prepend(children[i]);
       console.log(children[i]);
     }
-    /*for (i = 0; i < children.length; i++) {
-      doc.body.appendChild(children[i]);
-      console.log(children[i]);
-    }
-    for (i = 0; i < children.length; i++) {
-      doc.body.appendChild(children[i]);
-      console.log(children[i]);
-    }
-    for (i = 0; i < children.length; i++) {
-      doc.body.appendChild(children[i]);
-      console.log(children[i]);
-    }
-    for (i = 0; i < children.length; i++) {
-      doc.body.appendChild(children[i]);
-      console.log(children[i]);
-    }*/
 
-    // Evaluate
+    // Evaluate and save result
     result = evaluator.evaluate(doc, doc.title, window.location.href);
 
     // Gure luzapenak jarritako html elementuak berriro jarri
@@ -248,59 +220,33 @@ $(document).ready(function(){
     console.log(result);
 
     // Get evaluation results
-    data = result.getRuleset().toJSON();
-    json = JSON.parse(data);
+    let ruleGroupResult   = result.getRuleResultsAll();
+    let ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
+    v = ruleSummaryResult.violations;
+    w = ruleSummaryResult.warnings;
+    p = ruleSummaryResult.manual_checks;
+    m = ruleSummaryResult.passed;
+    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p);
 
-    // Print results
+    let ruleResults = ruleGroupResult.getRuleResultsArray();
     var v = 0;
     var w = 0;
     var p = 0;
     var m = 0;
-    var h = 0;
-    for (rule in json.rule_mappings){
-      ers = result.getRuleResult(rule).getElementResultsSummary();
-      if (ers.violations>=1) v += 1;
-      if (ers.warnings>=1) {
-        alert(rule);
-        w += 1
-      };
-      if (ers.passed>=1) p += 1;
-      if (ers.manual_checks>=1) m += 1;
-      if (ers.hidden>=1) h += 1;
-    }
-    alert("violations: " + v + " warnings: " + w + " passed: " + p + " manual_checks: " + m + " hidden: " + h)
-
-
-    /*checked = []
-    for (rule in json.rule_mappings){
-      r = rule.substring(0, rule.length - 2);
-      r = r.replace('_', '');
-      if (!checked.includes(r)){
-        checked.push(r);
-        var v = 0;
-        var w = 0;
-        var p = 0;
-        var m = 0;
-        var h = 0;
-        console.log("RULE TYPE: ", r);
-        for (rule in json.rule_mappings){
-          if(rule.startsWith(r)){
-            ers = result.getRuleResult(rule).getElementResultsSummary();
-            v += ers.violations;
-            w += ers.warnings;
-            p += ers.passed;
-            m += ers.manual_checks;
-            h += ers.hidden;
-          }
-        }
-        console.log("violations: ", v);
-        console.log("warnings: ", w);
-        console.log("passed: ", p);
-        console.log("manual_checks: ", m);
-        console.log("hidden: ", h);
-        console.log(" ----------------------- ");
+    for(let i = 0; i < ruleResults.length; i++) {
+      try{
+        ers = ruleResults[i].getElementResultsSummary();
+        if (ers.violations>=1) v += 1;
+        if (ers.warnings>=1) w += 1;
+        if (ers.passed>=1) p += 1;
+        if (ers.manual_checks>=1) m += 1;
       }
-    }*/
+      catch (e){
+        console.log("Error with rule " + rule + ": " + e)
+      }
+      
+    }
+    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p);
 
   });
 
