@@ -35,6 +35,8 @@ if(typeof init === 'undefined'){
 			codigo_nav+= '<label id = "AC_label" class="sn_label_paginas">AChecker</label><input type="checkbox" id="AC_checkbox" checked="checked"><br>';
 			codigo_nav+= '<label id = "A11Y_label" class="sn_label_paginas">A11Y</label><input type="checkbox" id="A11Y_checkbox" checked="checked"><br>';
 
+
+			codigo_nav+= '<label id="fetch" name="fetch" class="boton_fetch">fetch</label><br><br><br><br>';
 			codigo_nav+= '<label id="prueba" name="prueba" class="boton_prueba">prueba</label><br><br><br><br>';
 
 			codigo_nav+= '<label id="auto" name="auto" class="boton_principal_sn">Get automatically <br> generated report</label><br><br><br><br>';

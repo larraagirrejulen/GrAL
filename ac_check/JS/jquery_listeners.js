@@ -180,7 +180,46 @@ $(document).ready(function(){
   });
 
 
+  $("#fetch").click(function(){
 
+    async function fetchEvaluators() {
+      const [amResponse, acResponse] = await Promise.all([
+        fetchWithTimeout('https://accessmonitor.acessibilidade.gov.pt/', {timeout: 5000}),
+        fetchWithTimeout('https://achecker.achecks.ca/checker/index.php')
+      ]);
+      if (!amResponse.ok || !acResponse.ok) {
+        const message1 = `An error has occured: ${amResponse.status}`;
+        const message2 = `An error has occured: ${acResponse.status}`;
+        throw new Error(message1 + "\n" + message2);
+      }
+      const am = await amResponse.json();
+      const ac = await acResponse.json();
+      return [am, ac];
+    }
+
+    fetchEvaluators().then(([am, ac]) => {
+      am;
+      ac;
+    }).catch(error => {
+      console.log(error.message);
+    });
+
+    async function fetchWithTimeout(resource, options = {}) {
+      const { timeout = 8000 } = options;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+      const response = await fetch(resource, {
+        ...options,
+        mode: "cors",
+        signal: controller.signal  
+      });
+      clearTimeout(timer);
+      return response;
+    }
+
+    
+
+  });
 
 
 
