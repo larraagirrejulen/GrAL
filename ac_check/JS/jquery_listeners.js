@@ -184,22 +184,22 @@ $(document).ready(function(){
 
     async function fetchEvaluators() {
       const [amResponse, acResponse] = await Promise.all([
-        fetchWithTimeout('https://accessmonitor.acessibilidade.gov.pt/', {timeout: 5000}),
-        fetchWithTimeout('https://achecker.achecks.ca/checker/index.php')
+        fetchWithTimeout('http://localhost:8080/https://accessmonitor.acessibilidade.gov.pt/:443', {timeout: 5000}),
+        fetchWithTimeout('http://localhost:8080/https://achecker.achecks.ca/checker/index.php:443')
       ]);
       if (!amResponse.ok || !acResponse.ok) {
         const message1 = `An error has occured: ${amResponse.status}`;
         const message2 = `An error has occured: ${acResponse.status}`;
         throw new Error(message1 + "\n" + message2);
       }
-      const am = await amResponse.json();
-      const ac = await acResponse.json();
+      const am = await amResponse.text();
+      const ac = await acResponse.text();
       return [am, ac];
     }
 
     fetchEvaluators().then(([am, ac]) => {
-      am;
-      ac;
+      console.log("am: " + am);
+      console.log("ac: " + ac);
     }).catch(error => {
       console.log(error.message);
     });
