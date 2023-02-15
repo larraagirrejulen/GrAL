@@ -1,0 +1,40 @@
+{
+  "name": "React Chrome Extension",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "description": "Una extension de accesibilidad",
+  "author": "Mikel Iturria y Julen Larrañaga",
+
+  "background":{
+    "service_worker": "/js/background.js"
+  },
+
+  "permissions": ["scripting","storage","activeTab","unlimitedStorage","<all_urls>"],
+  "host_permissions": ["<all_urls>"],
+
+  "action": {
+    "default_title": "Click to turn on/off"
+  },
+
+  "icons": { 
+    "16": "/images/icon16.png",
+    "19": "/images/icon19.png",
+    "32": "/images/icon32.png",
+    "48": "/images/icon48.png",
+    "128": "/images/icon128.png" },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "/js/jquery.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["/images/icon128.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
