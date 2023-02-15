@@ -14,7 +14,6 @@
   },
   "permissions": ["scripting","storage","activeTab","unlimitedStorage"],
   "host_permissions": ["<all_urls>"],
-  "manifest_version": 3,
 
   "action": {
     "default_title": "Click to turn on/off"
@@ -30,7 +29,7 @@
   "content_scripts": [
   {
     "matches": ["<all_urls>"],
-    "js":["/JS/jquery.min.js","/JS/tablas.js", "/JS/a11y.js", "/JS/library/a11y_library.js"],
+    "js":["/JS/jquery.min.js","/JS/tablas.js", "/JS/library/a11y_library.js"],
     "css": ["/CSS/main_sidebar.css","/CSS/tablas.css"]
   }]
 }

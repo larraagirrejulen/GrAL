@@ -24305,39 +24305,35 @@ OpenAjax.a11y.cache.LinksCache = function (dom_cache) {
  * @return {Array}  Returns an array of LinkElement objects
  */
 
-OpenAjax.a11y.cache.LinksCache.prototype.getLinkElementsSortedByName = function () {
+/**
+ * @method getLinkElementsSortedByHREF
+ *
+ * @memberOf OpenAjax.a11y.cache.LinksCache
+ *
+ * @desc Returns a list of link elements sorted by accessible name property
+ *
+ * @return {Array}  Returns an array of LinkElement objects
+ */
 
-  function compare(a,b) {
+OpenAjax.a11y.cache.LinksCache.prototype.getLinkElementsSortedByHREF = function () {
 
-    return ((a.accessible_name_for_comparison > b.accessible_name_for_comparison) ||
-            ((a.accessible_name_for_comparison === b.accessible_name_for_comparison) &&
-             (a.href > b.href)));
-
-  }
-
-
-  if (!this.sorted_by_name_ready) {
-
-    this.links_sorted_by_name.sort(compare);
-
-    this.sorted_by_name_ready = true;
-
-  }
-
-/*
-  OpenAjax.a11y.logger.debug( "Number of Links: " + this.links_sorted_by_name.length);
-
-  for (i = 0; i < this.links_sorted_by_name.length; i++ ) {
-
-    var l = this.links_sorted_by_name[i];
-
-    OpenAjax.a11y.logger.debug( i + "  Name: " + l.accessible_name + "  Compare Name: " + l.accessible_name_for_comparison + " HREF: " + l.href );
-
-  }
-*/
-  return this.links_sorted_by_name;
-
-};
+    function compare(a,b) {
+  
+      return ((a.href > b.href) ||
+              ((a.href === b.href) &&
+               (a.accessible_name_for_comparison > b.accessible_name_for_comparison)));
+  
+    }
+  
+  
+    if (!this.sorted_by_href_ready) {
+      this.links_sorted_by_href.sort(compare);
+      this.sorted_by_href_ready = true;
+    }
+  
+    return this.links_sorted_by_href;
+  
+  };
 
 /**
  * @method getLinksThatShareTheSameName
@@ -24355,101 +24351,101 @@ OpenAjax.a11y.cache.LinksCache.prototype.getLinkElementsSortedByName = function 
 
 OpenAjax.a11y.cache.LinksCache.prototype.getLinksThatShareTheSameName = function () {
 
-  function checkForUniqueDescriptions(sns) {
+    function checkForUniqueDescriptions(sns) {
 
-    function compareDescriptions( a, b ) {
-      return a.accessible_description_for_comparison < b.accessible_description_for_comparison;
-    }
-
-    var same_name = sns.links.sort(compareDescriptions);
-    sns.unique_descriptions = true;
-
-    for (var i = 1; i < same_name.length; i++) {
-      var name1 = same_name[i-1];
-      var name2 = same_name[i];
-
-      sns.unique_descriptions = same_names.unique_descriptions &&
-      ((name1.accessible_description_for_comparison !== name2.accessible_description_for_comparison) ||
-       (name1.href === name2.href));
-    }
-
-  }
-
-
-
-  var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-
-  var list_of_same_names = [];
-  var same_names = null;
-
-  var names = this.getLinkElementsSortedByName();
-  var names_len = names.length;
-
-  var i = 0;
-  var j = 1;
-
-  while (j < names_len) {
-
-    var name1 = names[i];
-    var name2 = names[j];
-
-    if (name1.dom_element.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-      i++;
-      j++;
-      continue;
-    }
-
-    if (name2.dom_element.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-      j++;
-      continue;
-    }
-
-    if (name1.accessible_name_for_comparison === name2.accessible_name_for_comparison) {
-
-      if (same_names) {
-
-        same_names.links.push(name2);
-
-        if (name1.href !== name2.href) {
-            same_names.same_hrefs = false;
-            same_names.hrefs_count += 1;
+        function compareDescriptions( a, b ) {
+        return a.accessible_description_for_comparison < b.accessible_description_for_comparison;
         }
 
-      }
-      else {
-        same_names = {
-          links       : [name1, name2],
-          same_hrefs  : name1.href === name2.href,
-          hrefs_count : (name1.href === name2.href) ? 1 : 2
-        };
-      }
+        var same_name = sns.links.sort(compareDescriptions);
+        sns.unique_descriptions = true;
+
+        for (var i = 1; i < same_name.length; i++) {
+        var name1 = same_name[i-1];
+        var name2 = same_name[i];
+
+        sns.unique_descriptions = same_names.unique_descriptions &&
+        ((name1.accessible_description_for_comparison !== name2.accessible_description_for_comparison) ||
+            (name1.href === name2.href));
+        }
+
     }
-    else {
-      if (same_names) {
+
+
+
+    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
+
+    var list_of_same_names = [];
+    var same_names = null;
+
+    var names = this.getLinkElementsSortedByName();
+    var names_len = names.length;
+
+    var i = 0;
+    var j = 1;
+
+    while (j < names_len) {
+
+        var name1 = names[i];
+        var name2 = names[j];
+
+        if (name1.dom_element.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+        i++;
+        j++;
+        continue;
+        }
+
+        if (name2.dom_element.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+        j++;
+        continue;
+        }
+
+        if (name1.accessible_name_for_comparison === name2.accessible_name_for_comparison) {
+
+        if (same_names) {
+
+            same_names.links.push(name2);
+
+            if (name1.href !== name2.href) {
+                same_names.same_hrefs = false;
+                same_names.hrefs_count += 1;
+            }
+
+        }
+        else {
+            same_names = {
+            links       : [name1, name2],
+            same_hrefs  : name1.href === name2.href,
+            hrefs_count : (name1.href === name2.href) ? 1 : 2
+            };
+        }
+        }
+        else {
+        if (same_names) {
+            checkForUniqueDescriptions(same_names);
+            list_of_same_names.push(same_names);
+            same_names = null;
+        }
+        }
+
+        i = j;
+        j++;
+    }
+
+    if (same_names) {
         checkForUniqueDescriptions(same_names);
         list_of_same_names.push(same_names);
-        same_names = null;
-      }
     }
 
-   i = j;
-   j++;
-  }
+    /*
+    OpenAjax.a11y.logger.debug( "Number of same name objects in list: " + list_of_same_names.length);
 
-  if (same_names) {
-    checkForUniqueDescriptions(same_names);
-    list_of_same_names.push(same_names);
-  }
-
-/*
-  OpenAjax.a11y.logger.debug( "Number of same name objects in list: " + list_of_same_names.length);
-
-  for (i = 0; i < list_of_same_names.length; i++ ) {
-    var item = list_of_same_names[i];
-    OpenAjax.a11y.logger.debug( i  + " NAME: " + item.links[0].accessible_name + "  Number: " + item.links.length + "  Same HREF: " + item.same_hrefs);
-  }
-*/
-  return list_of_same_names;
+    for (i = 0; i < list_of_same_names.length; i++ ) {
+        var item = list_of_same_names[i];
+        OpenAjax.a11y.logger.debug( i  + " NAME: " + item.links[0].accessible_name + "  Number: " + item.links.length + "  Same HREF: " + item.same_hrefs);
+    }
+    */
+    return list_of_same_names;
 
 };
 

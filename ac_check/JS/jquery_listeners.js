@@ -243,7 +243,6 @@ $(document).ready(function(){
     father.remove();
     for (i = children.length-1; i >= 0; i--) {
       doc.body.prepend(children[i]);
-      console.log(children[i]);
     }
 
     // Evaluate and save result
@@ -274,6 +273,9 @@ $(document).ready(function(){
     var m = 0;
     for(let i = 0; i < ruleResults.length; i++) {
       try{
+        if(ruleResults[i].rule.rule_id.startsWith("LINK")){
+          console.log(ruleResults[i]);
+        }
         ers = ruleResults[i].getElementResultsSummary();
         if (ers.violations>=1) v += 1;
         if (ers.warnings>=1) w += 1;
