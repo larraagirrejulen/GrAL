@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["/images/icon128.png"],
+      "resources": ["/images/icon128.png", "/images/arrow.png", "/images/arrow_up.png"],
       "matches": ["<all_urls>"]
     }
   ]

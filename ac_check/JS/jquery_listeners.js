@@ -246,7 +246,7 @@ $(document).ready(function(){
     }
 
     // Evaluate and save result
-    result = evaluator.evaluate(doc, doc.title, window.location.href);
+    result = evaluator.evaluate(doc, doc.title, doc.location.href);
 
     // Gure luzapenak jarritako html elementuak berriro jarri
     /*for (i = 0; i < children.length; ++i) {

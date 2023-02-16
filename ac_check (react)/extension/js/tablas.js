@@ -56,7 +56,6 @@ function update(){
     }
 
     var len = Object.keys(json_resultados).length;
-    console.log("Len; "+len);
     localStorage.setItem('json_resultados',JSON.stringify(json_resultados));
 
     var html_results = "<div style='text-align:center'><br>";

@@ -2,7 +2,7 @@ $(document).ready(function(){
   /** 
    * Listener for when a document is uploaded
    */
-  $(document).on('change', '#file-upload-button', function(event) {
+  $(document).on('change', '#btn_upload', function(event) {
     var reader = new FileReader();
     
     reader.onload = function(event) {
@@ -13,15 +13,13 @@ $(document).ready(function(){
       if (json == null){
         //Case is empty, the one who has just entered gets in.
         localStorage.setItem("json",JSON.stringify(jsonObj));
-        update();
       }else{
         //Case not empty, merge with the previous one
         merge(json,jsonObj);
         localStorage.setItem("json",JSON.stringify(json));
-        update();
       }
-      alert("JSON successfully loaded!");
-      window.location.reload();
+      update();
+      //window.location.reload();
     }
   
     reader.readAsText(event.target.files[0]);
@@ -30,16 +28,17 @@ $(document).ready(function(){
   /**
    * Listener for the clear data button click
    */
-  $("#limpiar").click(function(){
+  $("#btn_clear_data").click(function(){
       localStorage.removeItem('json');
       localStorage.removeItem('json_resultados');
       localStorage.removeItem("tabla_resultados");
       localStorage.removeItem("tabla_main");
       localStorage.removeItem("ultimo");
       
-      alert("Data successfully deleted");
+      //alert("Data successfully deleted");
       var origin = window.location.origin; 
       if(origin !=="https://www.w3.org"){
+        //update();  
         window.location.reload();
       }
   });
@@ -79,9 +78,9 @@ $(document).ready(function(){
     if (typeof foto_ele !== 'undefined') {   
       let actual_src = foto_ele.getAttribute('src');  
       if(actual_src === "http://127.0.0.1:5000/flecha.png"){
-        foto_ele.setAttribute('src',"http://127.0.0.1:5000/flecha_arriba.png");
+        foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow_up.png'));
       }else{
-        foto_ele.setAttribute('src',"http://127.0.0.1:5000/flecha.png");
+        foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow.png'));
       }
       var content = this.nextElementSibling;
       if (content.style.display === "block") {
@@ -147,7 +146,7 @@ $(document).ready(function(){
   /**
    * Listener for the click on the download button report
    */
-  $("#download").click(function(e){
+  $("#btn_download").click(function(e){
     console.log('Id: '+$(this).attr('id'));
       var jsonT = localStorage.getItem("json");
       var json = JSON.parse(jsonT);
@@ -157,25 +156,14 @@ $(document).ready(function(){
       var origin = window.location.origin; 
       console.log("Or"+origin);
       
-      if(String(origin) !=="https://www.w3.org"){
-        window.location.href = "https://www.w3.org/WAI/eval/report-tool/";
-      }
-  });
 
-  /**
-   * Listener for clicking on the links of the accessibility analyzers
-     */
-  $(".sn_label_paginas").click(function(){
-      let url =$(this).attr('id');
-      url = url.substring(0,2);
-      if(url === "AM"){
-         window.open("https://accessmonitor.acessibilidade.gov.pt/", '_blank').focus();
-      }
-      if(url === "AC"){
-         window.open("https://achecker.achecks.ca/checker/index.php", '_blank').focus();
-      }
-      if(url === "A1"){ // A11Y
-        window.open("https://github.com/ainspector/a11y-evaluation-library", '_blank').focus();
+
+      if(String(origin) !=="https://www.w3.org"){
+        var ask = window.confirm("Do you want to upload the report on W3C?");
+        if (ask) {
+          window.location.href = "https://www.w3.org/WAI/eval/report-tool/";
+        }
+        
       }
   });
 
@@ -216,12 +204,7 @@ $(document).ready(function(){
       clearTimeout(timer);
       return response;
     }
-
-    
-
   });
-
-
 
   $("#prueba").click(function(){
 
@@ -236,25 +219,14 @@ $(document).ready(function(){
     let evaluator = evaluatorFactory.newEvaluator();
 
     // Gure luzapenak jarritako html elementuak kendu
-    const side_nav = doc.getElementById("sidenav_s");
-    side_nav.remove();
-    const father = doc.getElementById("main_s");
-    children = father.children;
-    father.remove();
-    for (i = children.length-1; i >= 0; i--) {
-      doc.body.prepend(children[i]);
-      console.log(children[i]);
-    }
+    const extension = doc.getElementById("react-chrome-extension");
+    extension.remove();
 
     // Evaluate and save result
     result = evaluator.evaluate(doc, doc.title, window.location.href);
 
     // Gure luzapenak jarritako html elementuak berriro jarri
-    /*for (i = 0; i < children.length; ++i) {
-      children[i].remove();
-    }
-    doc.body.appendChild(father);*/
-    doc.body.appendChild(side_nav);
+    doc.body.appendChild(extension);
 
     console.log(result);
 
