@@ -1,0 +1,44 @@
+
+.react-chrome-extension *{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.react-chrome-extension{
+  all: initial;
+  padding: 40px 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: fixed; 
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #969696;
+  z-index:99999;
+}
+
+.react-chrome-extension .img_container{
+  all: initial;
+  display: block;
+  align-self: center;
+  text-align: center;
+}
+
+.react-chrome-extension .img_container .img_logo{
+  all: initial;
+  height: 120px;
+  border-radius: 30px;
+  border: 2px solid #005a6a;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0);
+  transition: 0.2s ease;
+}
+
+.react-chrome-extension .img_container .img_logo:hover {
+  filter: drop-shadow(0 0 3px #005a6a);
+  transition: 0.2s ease;
+}

@@ -78,25 +78,27 @@ $(document).ready(function(){
   });
 
   /**
-   * Listener for clicking on a sub-sub-element of the results
-   */
-  $(".collapsible_tabla3").click(function(){
-    let foto_ele = $(this).find('img')[0];
-    if (typeof foto_ele !== 'undefined') {   
-      let actual_src = foto_ele.getAttribute('src');  
-      if(actual_src === chrome.runtime.getURL('/images/arrow.png')){
-        foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow_up.png'));
+ * Listener for clicking on a sub-sub-element of the results
+ */
+/*$(".collapsible_tabla3").click(function(){
+  let foto_ele = $(this).find('img')[0];
+  if (typeof foto_ele !== 'undefined') {   
+      console.log(foto_ele) 
+      let actual_src = foto_ele.getAttribute('src'); 
+      console.log(actual_src) 
+      if(actual_src === "" || actual_src ===chrome.runtime.getURL('/images/arrow.png')){
+      foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow_up.png'));
       }else{
-        foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow.png'));
+      foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow.png'));
       }
       var content = this.nextElementSibling;
       if (content.style.display === "block") {
-        content.style.display = "none";
+      content.style.display = "none";
       } else {
-        content.style.display = "block";
+      content.style.display = "block";
       }
-    }
-  });
+  }
+});*/
 
   /**
    * Listener for the click on the button to get data automatically

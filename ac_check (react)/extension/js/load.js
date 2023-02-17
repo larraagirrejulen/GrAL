@@ -1,1 +1,0 @@
-chrome.tabs.executeScript(tabId, {file: 'js/LeoScript.js'});
