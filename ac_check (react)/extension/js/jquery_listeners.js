@@ -43,6 +43,13 @@ $(document).ready(function(){
       }
   });
 
+  /**
+   * Listener for the logo image click
+   */
+  $("#react_extension_logo_image").click(function(){
+    window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
+    window.open("https://github.com/Itusil/TFG", '_blank')
+  });
 
   /**
    * Listener for clicking on an element of the results
@@ -77,7 +84,7 @@ $(document).ready(function(){
     let foto_ele = $(this).find('img')[0];
     if (typeof foto_ele !== 'undefined') {   
       let actual_src = foto_ele.getAttribute('src');  
-      if(actual_src === "http://127.0.0.1:5000/flecha.png"){
+      if(actual_src === chrome.runtime.getURL('/images/arrow.png')){
         foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow_up.png'));
       }else{
         foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow.png'));
@@ -168,6 +175,10 @@ $(document).ready(function(){
   });
 
 
+
+
+
+
   $("#fetch").click(function(){
 
     async function fetchEvaluators() {
@@ -206,6 +217,9 @@ $(document).ready(function(){
     }
   });
 
+
+
+
   $("#prueba").click(function(){
 
 
@@ -237,27 +251,38 @@ $(document).ready(function(){
     w = ruleSummaryResult.warnings;
     p = ruleSummaryResult.manual_checks;
     m = ruleSummaryResult.passed;
-    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p);
+    pa = ruleSummaryResult.page;
+    h = ruleSummaryResult.hidden;
+    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p + " page: " + pa + " h: " + h);
 
     let ruleResults = ruleGroupResult.getRuleResultsArray();
+    console.log(ruleSummaryResult);
+    console.log(ruleResults);
     var v = 0;
     var w = 0;
     var p = 0;
     var m = 0;
+    var pa = 0;
+    var h = 0;
     for(let i = 0; i < ruleResults.length; i++) {
       try{
+        if(ruleResults[i].rule.rule_id.startsWith("LINK")){
+          console.log(ruleResults[i]);
+        }
         ers = ruleResults[i].getElementResultsSummary();
         if (ers.violations>=1) v += 1;
         if (ers.warnings>=1) w += 1;
         if (ers.passed>=1) p += 1;
         if (ers.manual_checks>=1) m += 1;
+        if (ers.page>=1) pa += 1;
+        if (ers.hidden>=1) h += 1;
       }
       catch (e){
         console.log("Error with rule " + rule + ": " + e)
       }
       
     }
-    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p);
+    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p + " page: " + pa + " h: " + h);
 
   });
 
