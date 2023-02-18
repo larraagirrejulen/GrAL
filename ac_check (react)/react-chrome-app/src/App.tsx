@@ -44,29 +44,28 @@ export default function App() {
     
   }, [])
 
-  return (
-    <>
+  return (<>
       <div className="img_container">
         <img id="react_extension_logo_image" className="img_logo" alt="extension logo" src={logoImgSrc} />
       </div>
 
-      <Dropdown id="selection_dropdown" className="selection_dropdown" label="Select evaluators:" type="selection" />
-      <Dropdown id="evaluation_dropdown" className="evaluation_dropdown" label="Evaluation options:" type="evaluation" />
-      <Dropdown id="result_dropdown" className="result_dropdown" label="Evaluation results" type="result" />
+      <Dropdown ident="selection_dropdown" label="Select evaluators:" type="selection" />
+      <Dropdown ident="evaluation_dropdown" label="Evaluation options:" type="evaluation" />
+      <Dropdown ident="result_dropdown" label="Evaluation results" type="result" />
       
       <button id="prueba"> a11y proba </button>
       <button id="fetch"> fetch proba </button>
-    </>
-  );
+  </>);
 }
 
 
 
-const Dropdown = ({id, className, label, type}:any) => {
+const Dropdown = ({ident, label, type}:any) => {
 
   const [isOpen, setIsOpen] = useState(false);
+
   return(
-    <div id={id} className={className} >
+    <div id={ident} className={ident} >
       <div className="dropdown_header" onClick={(type:any) => type !== "result" ? setIsOpen((prev:any) => !prev) : null }>
         { type !== "result" ? <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" /> : null }
         <span>{label}</span>
@@ -99,7 +98,6 @@ const DropdownBody = ({type}:any ) => {
   }, [])
 
   return (<>{
-    
     (type === "selection" ?
       evaluators.map(({ cId, cLabel, cChecked, cHref }, i) => (<><Checkbox id={cId} label={cLabel} checked={cChecked} href={cHref} /> <br/></>))
     : ( type === "evaluation" ? 
@@ -114,7 +112,6 @@ const DropdownBody = ({type}:any ) => {
       <p id="result_table" dangerouslySetInnerHTML={{__html: resultTableContent}}></p>
       <p id="content_table" dangerouslySetInnerHTML={{__html: contentTableContent}}  ref={ref}></p>
     </>))
-      
   }</>);
 }
 
