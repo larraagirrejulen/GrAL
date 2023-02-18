@@ -1,94 +1,123 @@
-import { useState, useEffect, createRef } from "react";
 import './css/main.css';
 import './css/selection_dropdown.css';
 import './css/evaluation_dropdown.css';
 import './css/result_section.css';
-import {getLogoSrc, getArrowSrc, getArrowUpSrc} from './js/get_extension_images.js';
+
+import { useState, useEffect, useRef } from "react";
+import { loadLogoImage, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
+//import addListeners from './js/listeners.js';
 
 
+
+/*function getCollapsibles(node:any) {
+  console.log(node);
+  return node.getElementsByClassName("collapsible_tabla");
+}*/
+/**
+ * Listener for clicking on an element of the results
+ */
+/*function collapsible1(elem:any){
+  console.log("aaaaaaaaa");
+  elem.classList.toggle("active");
+  var content = elem.nextElementSibling;
+  if (content.style.display === "block") {
+  content.style.display = "none";
+  } else {
+  content.style.display = "block";
+  }
+}*/
 
 export default function App() {
+
+  const [logoImgSrc, setLogoImgSrc] = useState("");
   
-  const [resultTableContent, setResultTableContent] = useState("");
-  const [contentTableContent, setContentTableContent] = useState("");
-  const [imgSrc, setImgSrc] = useState("");
+  useEffect(() => { 
+    loadLogoImage(setLogoImgSrc);
 
-  useEffect(() => {
-    setImgSrc(getLogoSrc());
-    loadStoredResults(setResultTableContent, setContentTableContent);
+    /*const collapsibles = getCollapsibles(ref.current);
+    console.log(collapsibles);
+    for (let i = 0; i < collapsibles.length; i++) {
+      console.log(i);
+      console.log(collapsibles.item(i));
+      collapsibles.item(i).addEventListener('click', collapsible1, { passive: true });
+    }*/
+    
   }, [])
-
-  function loadStoredResults(setResultTableContent:any, setContentTableContent:any){
-    if(window.location.hostname !== 'www.w3.org'){
-        var jsonT:any = localStorage.getItem("json");
-        var jsonTabla = localStorage.getItem("tabla_resultados");
-        var json = JSON.parse(jsonT);
-        var main = localStorage.getItem("tabla_main");
-        
-        var texto:any = "";
-        var texto2 = "";
-
-        if (json == null) texto = "<div style='text-align:center'><text style='font-size:14px'>No data stored</text></div>";
-        else texto = jsonTabla;
-
-        if (main == null) texto2 = "<text style='font-size:26px'></text>";
-        else texto2 = main;
-
-        setResultTableContent(texto);
-        setContentTableContent(texto2);
-    }
-  }
 
   return (
     <>
       <div className="img_container">
-        <img id="react_extension_logo_image" className="img_logo" alt="extension logo image" src={imgSrc} />
+        <img id="react_extension_logo_image" className="img_logo" alt="extension logo" src={logoImgSrc} />
       </div>
 
-      <Dropdown id="selection_dropdown" className="selection_dropdown" label="Select evaluators:" checkbox={true}/>
+      <Dropdown id="selection_dropdown" className="selection_dropdown" label="Select evaluators:" type="selection" />
+      <Dropdown id="evaluation_dropdown" className="evaluation_dropdown" label="Evaluation options:" type="evaluation" />
+      <Dropdown id="result_dropdown" className="result_dropdown" label="Evaluation results" type="result" />
       
-      <Dropdown id="evaluation_dropdown" className="evaluation_dropdown" label="Evaluation options:" checkbox={false}/>
-      
-      <div className="result_section">
-        <span>Report content:</span>
-        <p id="result_table" dangerouslySetInnerHTML={{__html: resultTableContent}}></p>
-        <p id="content_table" dangerouslySetInnerHTML={{__html: contentTableContent}}></p>
-      </div>
       <button id="prueba"> a11y proba </button>
       <button id="fetch"> fetch proba </button>
     </>
   );
 }
 
-const Dropdown = ({id, className, label, checkbox}:any) => {
+
+
+const Dropdown = ({id, className, label, type}:any) => {
+
   const [isOpen, setIsOpen] = useState(false);
-  const [evaluators, setEvaluators] = useState([
-    { cId: "AM_checkbox", cLabel: "AccessMonitor", cChecked: true, cHref: "https://accessmonitor.acessibilidade.gov.pt/" },
-    { cId: "AC_checkbox", cLabel: "AChecker", cChecked: true, cHref: "https://achecker.achecks.ca/checker/index.php" },
-    { cId: "A11Y_checkbox", cLabel: "A11Y library", cChecked: true, cHref: "https://github.com/ainspector/a11y-evaluation-library" }
-  ]);
   return(
     <div id={id} className={className} >
-      <div className="dropdown_header" onClick={() => setIsOpen((prev:any) => !prev)}>
-        <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
+      <div className="dropdown_header" onClick={(type:any) => type !== "result" ? setIsOpen((prev:any) => !prev) : null }>
+        { type !== "result" ? <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" /> : null }
         <span>{label}</span>
       </div>
-      <div className="dropdown_body">
-        { isOpen && (checkbox ? 
-          evaluators.map(({ cId, cLabel, cChecked, cHref }, i) => (<><Checkbox id={cId} label={cLabel} checked={cChecked} href={cHref} /> <br/></>))
-          : <>
-            <div className="button_wrapper">
-              <label id="btn_get_data" className="button primary">Get automatically <br/> generated report</label><br/>
-              <label id="btn_clear_data" className="button secondary"> Clean stored data </label>
-              <label id="btn_download" className="button primary">Download report</label>
-              <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
-            </div>
-          </>)
-        } 
+      <div className="dropdown_body" style={type === "result" || isOpen ? {display: "block"} : {display: "none"}} >
+        <DropdownBody type={type} />
       </div>
     </div>
   );
+
 }
+
+
+
+const DropdownBody = ({type}:any ) => {
+
+  const [evaluators] = useState([
+    { cId: "AM_checkbox", cLabel: "AccessMonitor", cChecked: true, cHref: "https://accessmonitor.acessibilidade.gov.pt/" },
+    { cId: "AC_checkbox", cLabel: "AChecker", cChecked: true, cHref: "https://achecker.achecks.ca/checker/index.php" },
+    { cId: "MV_checkbox", cLabel: "Mauve", cChecked: true, cHref: "https://mauve.isti.cnr.it/singleValidation.jsp" },
+    { cId: "A11Y_checkbox", cLabel: "A11Y library", cChecked: true, cHref: "https://github.com/ainspector/a11y-evaluation-library" }
+  ]);
+
+  const ref = useRef(null); // reference to DOM
+  const [resultTableContent, setResultTableContent] = useState("<div style='text-align:center'><text style='font-size:14px'>No data stored</text></div>");
+  const [contentTableContent, setContentTableContent] = useState("");
+
+  useEffect(() => {
+    loadStoredReport({setResultTableContent, setContentTableContent});
+  }, [])
+
+  return (<>{
+    
+    (type === "selection" ?
+      evaluators.map(({ cId, cLabel, cChecked, cHref }, i) => (<><Checkbox id={cId} label={cLabel} checked={cChecked} href={cHref} /> <br/></>))
+    : ( type === "evaluation" ? 
+    <>
+      <div className="button_wrapper">
+        <label id="btn_get_data" className="button primary">Get automatically <br/> generated report</label><br/>
+        <label id="btn_clear_data" className="button secondary"> Clean stored data </label>
+        <label id="btn_download" className="button primary">Download report</label>
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
+      </div>
+    </> : <>
+      <p id="result_table" dangerouslySetInnerHTML={{__html: resultTableContent}}></p>
+      <p id="content_table" dangerouslySetInnerHTML={{__html: contentTableContent}}  ref={ref}></p>
+    </>))
+      
+  }</>);
+}
+
 
 
 const Checkbox = ({id, label, checked, href}:any ) => {
@@ -107,3 +136,15 @@ const Checkbox = ({id, label, checked, href}:any ) => {
 
 
 
+function loadStoredReport({setResultTableContent, setContentTableContent}:any){
+  
+  var jsonT:any = localStorage.getItem("json");
+  var jsonTabla = localStorage.getItem("tabla_resultados");
+  var json = JSON.parse(jsonT);
+  var main = localStorage.getItem("tabla_main");
+
+  if (json != null) setResultTableContent(jsonTabla);
+
+  if (main != null) setContentTableContent(main);
+
+}

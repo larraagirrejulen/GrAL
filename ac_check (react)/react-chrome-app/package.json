@@ -27,7 +27,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:react-hooks/recommended"
     ]
   },
   "browserslist": {
@@ -43,7 +44,9 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.16",
     "css-loader": "^6.7.3",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "img-loader": "^4.0.0",
     "ts-loader": "^9.4.2",
     "webpack": "^5.75.0",

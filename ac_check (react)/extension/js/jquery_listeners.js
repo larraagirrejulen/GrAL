@@ -51,60 +51,53 @@ $(document).ready(function(){
     window.open("https://github.com/Itusil/TFG", '_blank')
   });
 
-  /**
-   * Listener for clicking on an element of the results
-   */
-  $(".collapsible_tabla").click(function(){
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
 
-  /**
-   * Listener for clicking on a sub-element of the results
-   */
-  $(".collapsible_tabla2").click(function(){
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
 
-  /**
- * Listener for clicking on a sub-sub-element of the results
- */
-/*$(".collapsible_tabla3").click(function(){
-  let foto_ele = $(this).find('img')[0];
-  if (typeof foto_ele !== 'undefined') {   
-      console.log(foto_ele) 
-      let actual_src = foto_ele.getAttribute('src'); 
-      console.log(actual_src) 
-      if(actual_src === "" || actual_src ===chrome.runtime.getURL('/images/arrow.png')){
-      foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow_up.png'));
-      }else{
-      foto_ele.setAttribute('src',chrome.runtime.getURL('/images/arrow.png'));
-      }
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-      content.style.display = "none";
-      } else {
-      content.style.display = "block";
-      }
+  async function fetchEvaluators(url) {
+    const [amResponse, acResponse, mvResponse] = await Promise.all([
+      fetchWithTimeout('http://localhost:8080/https://accessmonitor.acessibilidade.gov.pt/:443', {timeout: 60000}),
+      fetchWithTimeout('http://localhost:8080/https://achecker.achecks.ca/checker/index.php:443', {timeout: 60000}),
+      fetchWithTimeout('http://localhost:8080/https://mauve.isti.cnr.it/singleValidation.jsp', {timeout: 60000})
+    ]);
+    if (!amResponse.ok || !acResponse.ok || !mvResponse.ok) {
+      const message1 = `AM error: ${amResponse.status}`;
+      const message2 = `AC error: ${acResponse.status}`;
+      const message3 = `MV error: ${mvResponse.status}`;
+      throw new Error(message1 + "\n" + message2 + "\n" + message3);
+    }
+    const am = await amResponse.text();
+    const ac = await acResponse.text();
+    const mv = await mvResponse.text();
+    return [am, ac, mv];
   }
-});*/
+
+  async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 8000 } = options;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    const response = await fetch(resource, {
+      ...options,
+      mode: "cors",
+      signal: controller.signal  
+    });
+    clearTimeout(timer);
+    return response;
+  }
 
   /**
    * Listener for the click on the button to get data automatically
    */
-  $("#auto").click(function(){
+  $("#btn_get_data").click(function(){
 
+    fetchEvaluators(window.location.href).then(([am, ac, mv]) => {
+      /*console.log("am: " + am);
+      console.log("ac: " + ac);*/
+      console.log("Mauve: " + mv);
+    }).catch(error => {
+      console.log(error.message);
+    });
+
+    return;
     if ($('#AM_checkbox').is(":checked") || $('#AC_checkbox').is(":checked")){
 
       localStorage.removeItem('json');
@@ -133,13 +126,13 @@ $(document).ready(function(){
       return;
     }
 
-    req.setRequestHeader('Content-Type', 'application/json');
+    /*req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({
         'url': url_local,
         'AM': $('#AM_checkbox').is(":checked"),
         'AC': $('#AC_checkbox').is(":checked")
     }));
-    document.getElementById('result_table').innerHTML='<div class="loader_s"></div>';
+    document.getElementById('result_table').innerHTML='<div class="loader_s"></div>';*/
   });
 
   function saveJson(json){
@@ -174,49 +167,6 @@ $(document).ready(function(){
         }
         
       }
-  });
-
-
-
-
-
-
-  $("#fetch").click(function(){
-
-    async function fetchEvaluators() {
-      const [amResponse, acResponse] = await Promise.all([
-        fetchWithTimeout('http://localhost:8080/https://accessmonitor.acessibilidade.gov.pt/:443', {timeout: 5000}),
-        fetchWithTimeout('http://localhost:8080/https://achecker.achecks.ca/checker/index.php:443')
-      ]);
-      if (!amResponse.ok || !acResponse.ok) {
-        const message1 = `An error has occured: ${amResponse.status}`;
-        const message2 = `An error has occured: ${acResponse.status}`;
-        throw new Error(message1 + "\n" + message2);
-      }
-      const am = await amResponse.text();
-      const ac = await acResponse.text();
-      return [am, ac];
-    }
-
-    fetchEvaluators().then(([am, ac]) => {
-      console.log("am: " + am);
-      console.log("ac: " + ac);
-    }).catch(error => {
-      console.log(error.message);
-    });
-
-    async function fetchWithTimeout(resource, options = {}) {
-      const { timeout = 8000 } = options;
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeout);
-      const response = await fetch(resource, {
-        ...options,
-        mode: "cors",
-        signal: controller.signal  
-      });
-      clearTimeout(timer);
-      return response;
-    }
   });
 
 
