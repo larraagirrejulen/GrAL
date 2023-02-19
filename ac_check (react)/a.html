@@ -1,0 +1,391 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="MAUVE++ Accessibility validator is an environment for Web accessibility evaluation. It supports WCAG 2.1 and WCAG 2.0 guidelines. It checks both HTML and CSS of single web pages and entire websites and, through some browsers? plugins, it can validate dynamic sites.">
+        <meta name="keywords" content="Mauve, free, accessibility checker, accessibility evaluator, accessibility evaluation, WCAG evaluation, evaluate accessibility, test accessibility, review accessibility, WCAG 2.1, WCAG 2.0, Legge Stanca, Usability, WAI, W3C, Accessibility browser plugin, Firefox, dynamic sites."
+              />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./themes/default/css/stile2019.css" type="text/css">
+        <link rel="stylesheet" href="./themes/default/css/w3_login.css" type="text/css">
+        <link rel="icon" type="image/png" sizes="192x192" href="./themes/default/images/flower.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./themes/default/images/flower.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="./themes/default/images/flower.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./themes/default/images/flower.png">
+        <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light|Waiting+for+the+Sunrise" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="./themes/default/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <script src="./themes/default/js/constants.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="./themes/default/js/jquery-URLEncode.js" type="text/javascript"></script>
+        <script src="./themes/default/js/fader.js" type="text/javascript"></script>
+        <script src="./themes/default/js/gastats.js" type="text/javascript"></script>
+        <script src="./themes/default/js/deviceinfohandler.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>-->
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="application/ld+json">
+            {
+            "@context": "http://schema.org/",
+            "@type": "WebApplication",
+            "name": "MAUVE++ Accessibility Validator",
+            "operatingSystem": "Windows XP, Windows 7, Windows 8, Windows 10, OSX 10.6, Android 1.6",
+            "applicationCategory": "Validator",
+            "applicationSubCategory": "Accessibility Validator",
+            "screenshot": "http://giove.isti.cnr.it/images/tools-img/mauve.png",
+            "softwareVersion": "1.0",
+            "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.6",
+            "ratingCount": "865"
+            },
+            "author": {
+            "@type": "Group",
+            "name": "Antonio Giovanni Schiavone, Marco Manca, Francesca Pulina, Giovanna Broccia, Fabio Paternò, Nicola Iannuzzi",
+            "worksFor": {
+            "@type": "Organization",
+            "name": "HIIS Laboratory",
+            "location": {
+            "@type": "Place",
+            "address": "Via G. Moruzzi 1, Pisa"
+            },
+            "parentOrganization":  {
+            "@type": "Organization",
+            "name": "Istituto di Scienza e Tecnologie dell'Informazione",
+            "location": {
+            "@type": "Place",
+            "address": "Via G. Moruzzi 1, Pisa"
+            },
+            "parentOrganization":  {
+            "@type": "Organization",
+            "name": "Consiglio Nazionale delle Ricerche",
+            "location": {
+            "@type": "Place",
+            "address": "Piazzale Aldo Moro,7 - 00185, Roma, Italia"
+            }
+            }
+            }
+            },
+            "affiliation": {
+            "@type": "Organization",
+            "name": "Consiglio Nazionale delle Ricerche",
+            "location": {
+            "@type": "Place",
+            "address": "Piazzale Aldo Moro,7 - 00185, Roma, Italia"
+            }
+            },
+            "datePublished": "2014-09-22",
+            "dateModified": "2023-2-19"
+            }
+        </script>
+        <link rel="stylesheet" href="live_preview/styles/iframe_style.css">
+        <link rel="stylesheet" href="live_preview/styles/main_style.css">
+
+
+<title>MAUVE++ Accessibility Validator | Homepage</title>
+</head>
+<body id="homepage">
+    <div class="container-fluid p-0" id="landingPage">
+        <!--HEADER -->
+        <div><img style="width:4em;height:4em" class="img" alt="logo di MAUVE" src="./themes/default/images/flower.png" />
+            <h1 class="font-weight-bolder ">MAUVE++</h1>
+            <p class="subtitle">
+                <span class="text-uppercase">M</span>ultiguideline <span class="text-uppercase">A</span>ccessibility and <span
+                    class="text-uppercase">U</span>sability <span class="text-uppercase">V</span>alidation <span
+                    class="text-uppercase">E</span>nvironment
+            </p>
+        </div>
+        <div id="homepage_menu_container">
+            <ul>
+                <li> <a class="homepage_button btn btn-primary btn-lg active" href="./singleValidation.jsp">Evaluate single web page</a></li>
+                    
+                <li> <a class="homepage_button btn btn-primary btn-lg active" href="#" onclick="document.getElementById('login').style.display = 'block';">Evaluate Web site</a></li>
+                    
+                <li> <a class="nav-link" href="./about.jsp" target="_self">About</a></li>
+                <li> <a class="nav-link" href="./help.jsp" target="_self">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row footer" style="height:8vh">
+        <div class="container-fluid p-0" >
+            <footer class="jumbotron jumbotron-fluid text-center p-3 mb-0  w-100" style="height:100%;">
+                <div class="container-fluid">
+                    
+                    <p>© Copyright 2012 - 2023        
+                        <a href="http://giove.isti.cnr.it/" title="Home page of HIIS Laboratory"><abbr title="Human Interface in Information System">HIIS</abbr> Lab</a> 
+                        at <a href="http://www.isti.cnr.it/" title="Institute of Information Science and Technologies \?A. Faedo\?"><abbr title="Institute of Information Science and Technologies">ISTI</abbr></a>
+                        - <a href="http://www.cnr.it/" title="National Research Council"><abbr title="National Research Council">CNR</abbr></a> </p>
+
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+<!-- NAVIGATION BAR -->
+<nav class="navbar sticky-top navbar-expand-md navbar-dark ">
+    <a class="navbar-brand" href="./" target="_self">
+        <img alt="icona logo" src="./themes/default/images/flower_nav.png"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="./index.jsp">Home</a>
+            </li>
+            <!--<li class="nav-item active">
+                <a class="nav-link active" href="./singleValidation.jsp">Evaluation</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="./about.jsp" target="_self">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./help.jsp" target="_self">Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./bug_report.jsp" target="_self">Bug report</a>
+            </li>
+            <li class="nav-item" id="dropdown">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Accessibility guidelines
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="https://www.w3.org/TR/WCAG21/" target="_blank">WCAG 2.1 (ENG) <i class="material-icons">open_in_new</i></a>
+                    <a class="dropdown-item" href="http://www.w3.org/TR/WCAG/" target="_blank">WCAG 2.0 (ENG) <i class="material-icons">open_in_new</i></a>
+
+                </div>
+            </li>
+            
+        </ul>
+        <ul class="navbar-nav">
+
+            
+            <li class="nav-item dropdown_new" id="dropdown_new">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    Start New Evaluation
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul>
+                        <li> <a class="dropdown-item" href="./singleValidation.jsp">Single page evaluation</a></li>
+                        <li> <a class="dropdown-item" href="#" onclick="document.getElementById('login').style.display = 'block';">Login to create a Project</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="document.getElementById('login').style.display = 'block';">Log in</a>
+            </li>
+
+            <div id="login" class="w3-modal dspl-none">
+                <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;">
+                    <div class="w3-center"><br />
+                        <span
+                            onclick="document.getElementById('login_form').style.display = 'block'; document.getElementById('password_recovery').style.display = 'none'; document.getElementById('login').style.display = 'none'"
+                            class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Login">&times;</span>
+                        <img class="w3-margin-top img" alt="logo di MAUVE" src="./themes/default/images/flower.png" />
+                        <h1 class="font-weight-bolder" style="font-family: 'Shadows Into Light', cursive; color: #361640;">MAUVE++
+                        </h1>
+                    </div>
+
+                    <form id="login_form" class="w3-container" method="POST" action="LoginCheck">
+                        <div class="w3-section">
+                            <div class="popup_messages" id="container_popup_messages_login">
+                                <h4 id="popup_message_login"></h4>
+                                <div id="countDown_redirect"><span id="number_countdown"></span></div>
+                            </div>
+                            <div id="container_popup_form_login">
+                                <label><b>Email</b></label>
+                                <input class="w3-input w3-border w3-margin-bottom" type="text" name="email" placeholder="Email ..."
+                                       required />
+                                <label><b>Password</b></label>
+                                <input class="w3-input w3-border" type="password" placeholder="Password ..." name="password" required />
+                                <button class="w3-block w3-section w3-padding btn btn-primary btn-lg" id="login-btn"
+                                        type="submit">Login</button>
+                            </div>
+                        </div>
+
+                        <div class="w3-center">
+                            <span><a style="color: #9b9b9b;" href="#"
+                                     onclick="document.getElementById('login_form').style.display = 'none'; document.getElementById('password_recovery').style.display = 'block'">Forgot
+                                    password?</a></span>
+                        </div>
+                        <script>
+                            $('#login_form').on('submit', function (event) {
+                                event.preventDefault();
+                                let form = $(this);
+                                let array = form.serializeArray();
+                                const jsonData = {};
+                                $.each(array, function () {
+                                    jsonData[this.name] = this.value;
+                                });
+                                var message = document.getElementById("popup_message_login");
+                                if(message.classList.contains("blink")){
+                                    message.classList.remove("blink");
+                                };
+                                $.ajax({
+                                    url: "Login",
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {data: JSON.stringify(jsonData)},
+                                    success: function (res) {
+                                        var redirect = "";
+                                        if (res.loginCheck) {
+                                            var count = 3; // Timer
+                                            if (!res.isAdmin) {
+                                                redirect = "./user_profile.jsp"; // Target URL
+                                            } else {
+                                                redirect = "./admin/index.jsp";
+                                            }
+
+                                            function countDown() {
+                                                var timer = document.getElementById("number_countdown"); // Timer ID
+                                                if (count > 0) {
+                                                    count--;
+                                                    timer.innerHTML = "This page will redirect in " + count + " seconds."; // Timer Message
+                                                    setTimeout(function () {
+                                                        countDown();
+                                                    }, 1000);
+                                                } else {
+                                                    window.location.href = redirect;
+                                                }
+                                            }
+                                            countDown();
+                                            document.getElementById("container_popup_form_login").style.display = "none";
+                                            message.innerText = "Successful login. You will be redirected to your profile page";
+                                        } else if (!res.loginCheck) {
+                                            console.log(res);
+                                            if (res.mailError != null && res.mailError) {
+                                                message.classList.add("blink");
+                                                message.innerText = "Email incorrect. Please, try again.";
+                                            } else if (res.passwordError != null && res.passwordError) {
+                                                message.classList.add("blink");
+                                                message.innerText = "Password incorrect. Please, try again.";
+                                            } else {
+                                                message.classList.add("blink");
+                                                message.innerText = "Unsuccessful login. Please, try again.";
+                                            }
+                                        }
+                                    },
+                                    error: function (res) {
+                                        window.location = res.responseText;
+                                    }
+                                });
+                            });
+                        </script>
+
+                    </form>
+
+                    <form id="password_recovery" class="w3-container" method="POST" action="PasswordRecovery"
+                          style="display: none;">
+                        <div class="w3-section">
+                            <div class="popup_messages" id="container_popup_messages_recovery">
+                                <h4 id="popup_message_recovery"></h4>
+                                <div id="container_popup_form_recovery">
+                                    <label><b>Email</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" type="text" name="email" placeholder="Email ..."
+                                           required />
+                                    <input type="hidden" name="recovery" value="true">
+                                    <button class="w3-block w3-section w3-padding btn btn-primary btn-lg" id="login-btn" type="submit">Send password reset email</button>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $('#password_recovery').on('submit', function (event) {
+                                event.preventDefault();
+                                let form = $(this);
+                                let array = form.serializeArray();
+                                const jsonData = {};
+                                $.each(array, function () {
+                                    jsonData[this.name] = this.value;
+                                });
+                                var message = document.getElementById("popup_message_recovery");
+                                if(message.classList.contains("blink")){
+                                    message.classList.remove("blink");
+                                };
+                                $.ajax({
+                                    url: "PasswordRecovery",
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {data: JSON.stringify(jsonData)},
+                                    success: function (res) {
+                                        console.log(res);
+                                        if (res.emailSent != null && res.emailSent) {
+                                            document.getElementById("container_popup_form_recovery").style.display = "none";
+                                            message.classList.add("blink");
+                                            message.innerText = "Email sent! Please, check your email inbox and follow the link.";
+                                        } else if (res.emailFound != null && !res.emailFound) {
+                                            message.classList.add("blink");
+                                            //document.getElementById("container_popup_form_recovery").style.display = "none";
+                                            message.innerText = "Email not found! Please, try again.";
+                                        } else if (res.error != null && res.error) {
+                                            //document.getElementById("container_popup_form_recovery").style.display = "none";
+                                            message.classList.add("blink");
+                                            message.innerText = "An error occurred! Please, try again.";
+                                        }
+                                    },
+                                    error: function (res) {
+                                        window.location = res.responseText;
+                                    }
+                                });
+                            });
+                        </script>
+                    </form>
+
+                    <hr>
+                    <div class="w3-center w3-container w3-padding-16 ">
+                        <p style="color: #9b9b9b; margin-bottom: 0;">Are you a new user?</p><br />
+                        <a class="register" href="./register.jsp">Register</a>
+                    </div>
+
+                </div>
+            </div>
+             
+    </div>
+    <script>
+var title = document.getElementsByTagName("title")[0];
+var btns = $('.nav-link');
+console.log(btns);
+console.log(title.innerText);
+if(title.innerText.includes("About")) {
+    btns[1].classList.add("active");
+} else if(title.innerText.includes("Info")){
+    btns[2].classList.add("active");
+}else if(title.innerText.includes("Bug")){
+    btns[3].classList.add("active");
+}
+  
+    </script>
+</nav>
+
+</body>
+</html>

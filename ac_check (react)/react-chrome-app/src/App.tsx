@@ -4,7 +4,7 @@ import './css/evaluation_dropdown.css';
 import './css/result_section.css';
 
 import { useState, useEffect, useRef } from "react";
-import { loadLogoImage, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
+import { getLogoImage, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
 //import addListeners from './js/listeners.js';
 
 
@@ -32,7 +32,7 @@ export default function App() {
   const [logoImgSrc, setLogoImgSrc] = useState("");
   
   useEffect(() => { 
-    loadLogoImage(setLogoImgSrc);
+    setLogoImgSrc(getLogoImage());
 
     /*const collapsibles = getCollapsibles(ref.current);
     console.log(collapsibles);
@@ -62,7 +62,7 @@ export default function App() {
 
 const Dropdown = ({ident, label, type}:any) => {
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return(
     <div id={ident} className={ident} >
@@ -75,23 +75,21 @@ const Dropdown = ({ident, label, type}:any) => {
       </div>
     </div>
   );
-
 }
 
 
 
 const DropdownBody = ({type}:any ) => {
 
-  const [evaluators] = useState([
-    { cId: "AM_checkbox", cLabel: "AccessMonitor", cChecked: true, cHref: "https://accessmonitor.acessibilidade.gov.pt/" },
-    { cId: "AC_checkbox", cLabel: "AChecker", cChecked: true, cHref: "https://achecker.achecks.ca/checker/index.php" },
-    { cId: "MV_checkbox", cLabel: "Mauve", cChecked: true, cHref: "https://mauve.isti.cnr.it/singleValidation.jsp" },
-    { cId: "A11Y_checkbox", cLabel: "A11Y library", cChecked: true, cHref: "https://github.com/ainspector/a11y-evaluation-library" }
-  ]);
-
   const ref = useRef(null); // reference to DOM
   const [resultTableContent, setResultTableContent] = useState("<div style='text-align:center'><text style='font-size:14px'>No data stored</text></div>");
   const [contentTableContent, setContentTableContent] = useState("");
+  const evaluators = [
+    { cId: "AM_checkbox", cCheck: true, cLabel: "AccessMonitor", cHref: "https://accessmonitor.acessibilidade.gov.pt/" },
+    { cId: "AC_checkbox", cCheck: false, cLabel: "AChecker", cHref: "https://achecker.achecks.ca/checker/index.php" },
+    { cId: "MV_checkbox", cCheck: false, cLabel: "Mauve", cHref: "https://mauve.isti.cnr.it/singleValidation.jsp" },
+    { cId: "A11Y_checkbox", cCheck: false, cLabel: "A11Y library", cHref: "https://github.com/ainspector/a11y-evaluation-library" }
+  ];
 
   useEffect(() => {
     loadStoredReport({setResultTableContent, setContentTableContent});
@@ -99,7 +97,7 @@ const DropdownBody = ({type}:any ) => {
 
   return (<>{
     (type === "selection" ?
-      evaluators.map(({ cId, cLabel, cChecked, cHref }, i) => (<><Checkbox id={cId} label={cLabel} checked={cChecked} href={cHref} /> <br/></>))
+      evaluators.map(({ cId, cCheck, cLabel, cHref }, i) => (<> <Checkbox id={cId} check={cCheck} label={cLabel} href={cHref}/><br/> </>))
     : ( type === "evaluation" ? 
     <>
       <div className="button_wrapper">
@@ -117,13 +115,12 @@ const DropdownBody = ({type}:any ) => {
 
 
 
-const Checkbox = ({id, label, checked, href}:any ) => {
-  const defaultChecked = checked ? true : false;
-  const [isChecked, setIsChecked] = useState(defaultChecked);
+const Checkbox = ({id, check, label, href}:any ) => {
+  const [isChecked, setIsChecked] = useState(check);
   return (
-    <div id={id} className="checkbox-wrapper">
+    <div className="checkbox-wrapper">
       <div className="checkbox">
-        <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev:any) => !prev)} className={isChecked ? "checked" : ""} />
+        <input id={id} type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev:any) => !prev)} className={isChecked ? "checked" : ""} />
         <a href={href}>{label}</a>
       </div><br/>
       <span>{isChecked ? "Selected" : "Unchecked"}</span>
@@ -141,7 +138,6 @@ function loadStoredReport({setResultTableContent, setContentTableContent}:any){
   var main = localStorage.getItem("tabla_main");
 
   if (json != null) setResultTableContent(jsonTabla);
-
+  
   if (main != null) setContentTableContent(main);
-
 }

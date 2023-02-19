@@ -10,6 +10,12 @@
 function merge(json,json1){
     //First we check if the conditions for the merge are met:
     //They both have to be AA:
+    if(json == null){
+        json = json1;
+        return;
+    } else if (json1 == null){
+        return;
+    }
     var tipo_1 = json.defineScope.conformanceTarget;
     var tipo_2 = json1.defineScope.conformanceTarget;
 
