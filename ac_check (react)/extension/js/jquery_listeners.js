@@ -53,14 +53,14 @@ $(document).ready(function(){
 
 
 
-
-
   async function fetchEvaluators(url, AM, AC, MV) {
+
+    console.log(url.replaceAll("/",'%2f'));
 
     const formData  = new FormData();
     formData.append("uri", url);
     const [amResponse, acResponse, mvResponse] = await Promise.all([
-      fetchWithTimeout('http://localhost:8080/https://accessmonitor.acessibilidade.gov.pt/:443', {evaluate: AM, timeout: 60000}),
+      fetchWithTimeout('http://localhost:8080/https://accessmonitor.acessibilidade.gov.pt/results/' + url.replaceAll("/",'%2f'), {evaluate: AM, timeout: 60000}),
       fetchWithTimeout('http://localhost:8080/https://achecker.achecks.ca/checker/index.php:443', {evaluate: AC, timeout: 60000}),
       fetchWithTimeout('http://localhost:8080/https://mauve.isti.cnr.it/singleValidation.jsp', {evaluate: MV, timeout: 60000, method:"POST", body: formData})
     ]);
@@ -72,9 +72,9 @@ $(document).ready(function(){
       throw new Error(message1 + "\n" + message2 + "\n" + message3);
     }
     
-    const am = await amResponse;
-    const ac = await acResponse;
-    const mv = await mvResponse;
+    const am = await amResponse.text();
+    const ac = await acResponse.text();
+    const mv = await mvResponse.text();
 
     return [am, ac, mv];
   }
@@ -84,13 +84,12 @@ $(document).ready(function(){
   async function fetchWithTimeout(resource, options = {}) {
     const { evaluate } = options;
     if (!evaluate){
-      console.log("yes");
       return fetch("http://localhost:8080/");
     } 
-    const { timeout = 8000 } = options;
+    const { timeout = 60000 } = options;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
-    const response = await fetch(resource, {
+    const response = fetch(resource, {
       ...options,
       mode: "cors",
       redirect: "follow",
@@ -118,8 +117,15 @@ $(document).ready(function(){
         /*json = JSON.stringify(amResponse);
         merge(json, JSON.stringify(acResponse));
         merge(json, JSON.stringify(mvResponse));*/
+
+        var parser = new DOMParser();
+
+        var doc = parser.parseFromString(amResponse, "text/html");
+
+        console.log(doc);
+
         json = amResponse;
-        console.log(json);
+
       }).catch(error => {
         console.log(error.message);
       });
@@ -244,7 +250,4 @@ $(document).ready(function(){
   });
 
 
-
-
-  
 });

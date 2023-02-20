@@ -5,6 +5,7 @@ import './css/result_section.css';
 
 import { useState, useEffect, useRef } from "react";
 import { getLogoImage, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
+//import pruebaAccessMonitor from './js/jquery_listeners.js';
 //import addListeners from './js/listeners.js';
 
 
@@ -33,6 +34,7 @@ export default function App() {
   
   useEffect(() => { 
     setLogoImgSrc(getLogoImage());
+    //pruebaAccessMonitor();
 
     /*const collapsibles = getCollapsibles(ref.current);
     console.log(collapsibles);
@@ -82,8 +84,10 @@ const Dropdown = ({ident, label, type}:any) => {
 const DropdownBody = ({type}:any ) => {
 
   const ref = useRef(null); // reference to DOM
-  const [resultTableContent, setResultTableContent] = useState("<div style='text-align:center'><text style='font-size:14px'>No data stored</text></div>");
-  const [contentTableContent, setContentTableContent] = useState("");
+  const [result, setResult] = useState({
+    resultTableContent: "<div style='text-align:center'><text style='font-size:14px'>No data stored</text></div>",
+    contentTableContent: ""
+  });
   const evaluators = [
     { cId: "AM_checkbox", cCheck: true, cLabel: "AccessMonitor", cHref: "https://accessmonitor.acessibilidade.gov.pt/" },
     { cId: "AC_checkbox", cCheck: false, cLabel: "AChecker", cHref: "https://achecker.achecks.ca/checker/index.php" },
@@ -92,7 +96,7 @@ const DropdownBody = ({type}:any ) => {
   ];
 
   useEffect(() => {
-    loadStoredReport({setResultTableContent, setContentTableContent});
+    loadStoredReport(setResult);
   }, [])
 
   return (<>{
@@ -107,8 +111,8 @@ const DropdownBody = ({type}:any ) => {
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
       </div>
     </> : <>
-      <p id="result_table" dangerouslySetInnerHTML={{__html: resultTableContent}}></p>
-      <p id="content_table" dangerouslySetInnerHTML={{__html: contentTableContent}}  ref={ref}></p>
+      <p id="result_table" dangerouslySetInnerHTML={{__html: result.resultTableContent}}></p>
+      <p id="content_table" dangerouslySetInnerHTML={{__html: result.contentTableContent}}  ref={ref}></p>
     </>))
   }</>);
 }
@@ -130,14 +134,17 @@ const Checkbox = ({id, check, label, href}:any ) => {
 
 
 
-function loadStoredReport({setResultTableContent, setContentTableContent}:any){
+function loadStoredReport(setResult:any){
   
   var jsonT:any = localStorage.getItem("json");
   var jsonTabla = localStorage.getItem("tabla_resultados");
   var json = JSON.parse(jsonT);
   var main = localStorage.getItem("tabla_main");
 
-  if (json != null) setResultTableContent(jsonTabla);
-  
-  if (main != null) setContentTableContent(main);
+  if (json != null && main != null){
+    setResult({
+      resultTableContent: jsonTabla,
+      contentTableContent: main
+    });
+  }
 }
