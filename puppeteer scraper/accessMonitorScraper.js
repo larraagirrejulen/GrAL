@@ -8,8 +8,8 @@ const amScrapperObject = {
 
         await page.waitForSelector('#url');
         //await page.$eval('#url', el => el.value = "https://www.ehu.eus/es/home");
-        await page.focus('#url')
-        await page.keyboard.type("https://www.ehu.eus/es/home")
+        await page.focus('#url');
+        await page.keyboard.type(evaluationUrl);
         await page.click('button[type="submit"]');
 
         await page.waitForSelector('.evaluation-table');
