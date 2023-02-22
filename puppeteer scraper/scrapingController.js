@@ -39,13 +39,7 @@ async function scrapeSelected(MV, AM, AC, evaluationUrl){
 			});
 		}));
 	});
-
-	/*fs.writeFile("results.json", JSON.stringify(results), 'utf8', function(err) {
-		if(err) {
-			return console.log(err);
-		}
-		console.log("The data has been scraped and saved successfully! View it at './results.json'");
-	});*/
+	return results;
 
 }
 

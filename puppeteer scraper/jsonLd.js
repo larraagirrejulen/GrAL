@@ -12,26 +12,60 @@ export default class jsonLd{
         "FAIL": {"id": "earl:failed", "type": "earl:Fail"},
         "CANNOTTELL": {"id": "earl:failed", "type": "earl:Fail"},
     };
-    #techniques = {
-        "ARIA6": {"url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6", "sc": "1.1.1", "description": "Using aria-label to provide labels for objects"},
-        "ARIA5": {"url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5", "sc": "4.1.2", "description": "Using the title attribute to identify form controls when the label element cannot be used"},
-        "ARIA11": {"url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11", "sc": ["1.3.1", "1.3.6", "2.4.1"], "description": "Using ARIA landmarks to identify regions of a page"},
-        "ARIA7": {"url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA7", "sc": "2.4.4", "description": "Using aria-labelledby for link purpose"},
-        "ARIA16": {"url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA16", "sc": "4.2.1", "description": "Using aria-labelledby to provide a name for user interface controls"},
-        "": {"url": "", "sc": "", "description": ""},
-        "": {"url": "", "sc": "", "description": ""},
-        "": {"url": "", "sc": "", "description": ""},
-        "": {"url": "", "sc": "", "description": ""},
-        "": {"url": "", "sc": "", "description": ""},
-        "": {"url": "", "sc": "", "description": ""},
+    #successCriterias = { 
+        '1.1.1':'non-text-content',
+        '1.2.1':'audio-only-and-video-only-prerecorded',
+        '1.2.2':'captions-prerecorded',
+        '1.2.3':'audio-description-or-media-alternative-prerecorded',
+        '1.2.4':'captions-live',
+        '1.2.5':'audio-description-prerecorded',
+        '1.3.1':'info-and-relationships',
+        '1.3.2':'meaningful-sequence',
+        '1.3.3':'sensory-characteristics',
+        '1.3.4':'orientation',
+        '1.3.5':'identify-input-purpose',
+        '1.4.1':'use-of-color',
+        '1.4.2':'audio-control',
+        '1.4.3':'contrast-minimum',
+        '1.4.4':'resize-text',
+        '1.4.5':'images-of-text',
+        '1.4.10':'reflow',
+        '1.4.11':'non-text-contrast',
+        '1.4.12':'text-spacing',
+        '1.4.13':'content-on-hover-or-focus',
+        '2.1.1':'keyboard',
+        '2.1.2':'no-keyboard-trap',
+        '2.1.4':'character-key-shortcuts',
+        '2.2.1':'timing-adjustable',
+        '2.2.2':'pause-stop-hide',
+        '2.3.1':'three-flashes-or-below-threshold',
+        '2.4.1':'bypass-blocks',
+        '2.4.2':'page-titled',
+        '2.4.3':'focus-order',
+        '2.4.4':'link-purpose-in-context',
+        '2.4.5':'multiple-ways',
+        '2.4.6':'headings-and-labels',
+        '2.4.7':'focus-visible',
+        '2.5.1':'pointer-gestures',
+        '2.5.2':'pointer-cancellation',
+        '2.5.3':'label-in-name',
+        '2.5.4':'motion-actuation',
+        '3.1.1':'language-of-page',
+        '3.1.2':'language-of-parts',
+        '3.2.1':'on-focus',
+        '3.2.2':'on-input',
+        '3.2.3':'consistent-navigation',
+        '3.2.4':'consistent-identification',
+        '3.3.1':'error-identification',
+        '3.3.2':'labels-or-instructions',
+        '3.3.3':'error-suggestion',
+        '3.4.3':'error-prevention-legal-financial-data',
+        '4.1.1':'parsing',
+        '4.1.2':'name-role-value',
+        '4.1.3':'status-messages'
     };
 
-    constructor({validator, evaluatedPageUrl} = null, fileName = null){
-        
-        if(fileName != null){
-            this.#json = require('./' + fileName);
-            return;
-        }
+    constructor(validator, evaluatedPageUrl){
         
         this.#json = {
             "@contest": {
@@ -64,19 +98,13 @@ export default class jsonLd{
 				"@id" : "earl:automatic",
 				"@type" : "earl:TestMode"
 			},
-			"earl:result" : {
-				
-			},
+			"earl:result" : {},
 			"earl:subject" : {
 				"@id" : "????",
 				"dcterms:source" : evaluatedPageUrl,
 				"@type" : "earl:TestSubject"
 			},
-			"earl:test" : {
-				"@id" : "https://imergo.com/ns/compliance/wcag21/techniques/html/H44", 
-				"@type" : "earl:TestCriterion"
-			},
-
+			"earl:test" : {},
 			"@id" : "????",
 			"@type" : "earl:Assertion"
 		};
@@ -86,7 +114,7 @@ export default class jsonLd{
         return this.#json;
     }
 
-    addNewElement(outcome, pointer = null, techniqueId, htmlElementPath){ // State: fail, cannotell, pass
+    addNewElement(outcome, criteriaId, criteriaDescription, htmlElementPath = null){
 
         var element = Object.assign({}, this.#elementTemplate);
 
@@ -97,7 +125,7 @@ export default class jsonLd{
             outcomeId = this.#outcomes[outcome].id
             outcomeType = this.#outcomes[outcome].type
         }else{
-            if(pointer != null){
+            if(htmlElementPath != null){
                 outcomeId = "earl:passed"
                 outcomeType = "earl:Pass"
             } else{
@@ -106,10 +134,9 @@ export default class jsonLd{
             }
         }
         
-
         element["earl:result"] = {
-            "dcterms:description" : this.#techniques[techniqueId].description, 
-            "earl:info" : "WCAG 2.1: technique " + techniqueId, 
+            "dcterms:description" : criteriaDescription, 
+            "earl:info" : "WCAG 2.1 Success Criteria " + criteriaId + ": " + this.#successCriterias[criteriaId], 
             "earl:outcome" : {
                 "@id" : outcomeId, 
                 "@type" : outcomeType, 
@@ -128,6 +155,11 @@ export default class jsonLd{
             "dcterms:title" : outcome, 
             "@id" : "????", 
             "@type" : "earl:TestResult"
+        };
+
+        element["earl:test"] = {
+            "@id" : "https://www.w3.org/WAI/WCAG21/quickref/#" + this.#successCriterias[criteriaId],
+            "@type" : "earl:TestCriterion"
         };
 
         this.#json["@graph"].push(element);
