@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const withBrowser = async (fn) => {
 	const browser = await puppeteer.launch({ 
-		headless: false,
+		headless: true,
 		args: ["--disable-setuid-sandbox"],
 		'ignoreHTTPSErrors': true 
 	});
@@ -25,12 +25,12 @@ const withPage = (browser) => async (fn) => {
 	}
 }
 
-async function scrapeSelected(AM, AC, MV, evaluationUrl){
+async function scrapeSelected(MV, AM, AC, evaluationUrl){
 
 	const evaluators = ["MV", "AM", "AC"];
-	const selectedEvaluators = [AM, AC, MV];
+	const selectedEvaluators = [MV, AM, AC];
 	
-	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.pop();
+	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.splice(i,1);
 
 	const results = await withBrowser(async (browser) => {
 		return Promise.all(evaluators.map(async (evaluator) => {
@@ -49,4 +49,4 @@ async function scrapeSelected(AM, AC, MV, evaluationUrl){
 
 }
 
-module.exports = (AM, AC, MV, evaluationUrl) => scrapeSelected(AM, AC, MV, evaluationUrl)
+module.exports = (MV, AM, AC, evaluationUrl) => scrapeSelected(MV, AM, AC, evaluationUrl)
