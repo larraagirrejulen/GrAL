@@ -1,17 +1,16 @@
 
-import jsonLd from './jsonLd';
-
-const { table } = require('console');
-const { getTemplate } = require('./jsonTemplate');
+const { jsonLd } = require('./jsonLd');
 
 const scraper = {
 
     mvUrl: 'https://mauve.isti.cnr.it/singleValidation.jsp',
     amUrl: 'https://accessmonitor.acessibilidade.gov.pt/results/',
     acUrl: 'https://achecker.achecks.ca/checker/index.php',
-    template: jsonLd.getTemplate(),
+    json: null,
 
     async scrape(page, evaluator, evaluationUrl){
+
+        this.json = new jsonLd(evaluator, evaluationUrl);
 
         // Call to specified scraper
         var result;
@@ -66,69 +65,83 @@ const scraper = {
 
     async amScraper(page, evaluationUrl){
 
-        // Navigate to url
+        // Navigate to url and wait to be loaded
         const url = this.amUrl + evaluationUrl.replaceAll("/",'%2f');
         await page.goto(url);
-
-        // Wait for results to be loaded
         await page.waitForSelector('.evaluation-table');
-        const [rows, score] = await page.evaluate(() => {
+
+        // Get interested data
+        await page.evaluate(async () => {
             
-            const score = document.querySelector('.reading-block');
-            
-            const rows = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
-            for (var i = 0, row; row = rows[i]; i++){
-                objeto_codigos_fallantes = {}
-                const cols = Array.from(row.querySelectorAll('td'));
-                divc = cols[1].querySelector('.collapsible-content');
-                nivel = cols[2].textContent;
-                nivel = nivel.replaceAll(' ','');
-                if (nivel == 'A' || nivel =='AA'){
-                    const estandares = Array.from(divc.querySelectorAll('li')).map(li => li.textContent.substring(21,26));
-                    var array_prueba = [];
-                    tipo_texto = cols[0].querySelector('svg title').textContent;
-                    tipo = false;
-                    var texto_final;
-                    if (tipo_texto == "monitor_icons_praticas_status_incorrect"){
-                        tipo = true;
-                        array_prueba.push("Failed");
-                        acf_res = "Failed";
-                        texto_final += "The next ERROR was found: \n\n"
-                    }else if (tipo_texto == "monitor_icons_praticas_status_review"){
-                        tipo = true;
-                        array_prueba.push("Cannot Tell");
-                        acf_res = "Warning";
-                        texto_final += "The next WARNING was found: \n\n"
-                    }else if (tipo_texto == "monitor_icons_praticas_status_correct"){
-                        array_prueba.push("Passed");
-                        acf_res = "Passed";
-                        texto_final += "The next CORRECTION CHECK was found: \n\n"
-                    }
-                    //Si es un error o un warning habrá que hacer scraping
-                    return [estandares,tipo_texto];
+            const techniquesFound = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
+
+            for (var i = 0, technique; technique = techniquesFound[i]; i++){
+
+                const cols = Array.from(technique.querySelectorAll('td'));
+                const complianceLevel = cols[2].textContent.replaceAll(' ','');
+
+                if (complianceLevel != 'A' || complianceLevel !='AA') continue; // Ignore level AAA
+                 
+                var status;
+                const statusText = cols[0].querySelector('svg title').textContent;
+
+                switch(statusText){
+                    case "monitor_icons_praticas_status_incorrect":
+                        status = "FAIL";
+                        break;
+                    case "monitor_icons_praticas_status_review":
+                        status = "CANNOTTELL";
+                        break;
+                    case "monitor_icons_praticas_status_correct":
+                        status = "PASS";
+                        break;
+                    default:
+                        continue;
                 }
-                return [0,2];
+
+                const criteriaIds = Array.from(criteriaInfo.querySelectorAll('li')).map(li => li.textContent.substring(20,27));
+                const techniqueInfo = cols[1].querySelector('.collapsible-content');
+                const techniqueGuideText = techniqueInfo.querySelector("p").text;
+
+                const casesReference = cols[3].querySelector("a");
+
+                if (casesReference != null){
+
+                    var casesLink = reference.getAttribute('href');
+
+                    casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + casesLink
+
+                    await page.goto(casesLink);
+                    await page.waitForSelector('#list_tab');
+
+                    const foundCases = Array.from(document.querySelectorAll("#list_tab ol li"));
+
+                    for (var j = 0, ca; ca = foundCases[j]; j++){
+
+                        caseElements = Array.from(ca.querySelectorAll("table tr"));
+                        /*caseCode = caseElements[1].querySelector("td code").textContent;
+                        caseCode = caseCode.replaceAll('\n','');
+                        caseCode = caseCode.replaceAll('\t','');*/
+                        caseLocation = caseElements[3].querySelector("td span").textContent
+
+                        for (var k = 0, criteriaId; criteriaId = criteriaIds[k]; k++){
+                            criteriaId = criteriaId.replaceAll(' ','');
+                            this.json.addNewElement(status, criteriaId, techniqueGuideText, caseLocation);
+                        }
+                    }
+
+                } else {
+
+                    for (var k = 0, criteriaId; criteriaId = criteriaIds[k]; k++){
+                        criteriaId = criteriaId.replaceAll(' ','');
+                        this.json.addNewElement(status, criteriaId, techniqueGuideText);
+                    }
+                }
             }
-
-            return [rows, score.textContent];
         });
-
-        console.log(rows);
-        console.log(score);
-        //var informe['RESULTADO'] = score;
-
-        for (row in tableRows){
-            objeto_codigos_fallantes = {}
-            const cols = row('td');
-            divc = cols[1].querySelector('.collapsible-content');
-            nivel = cols[2].textContent;
-            nivel = nivel.replaceAll(' ','');
-            console.log(nivel);
-        }
-
-        
+  
         // Return data
-        return [evaluationTableBody, score];
+        return this.json.getJson();
     },
 
 

@@ -1,5 +1,5 @@
 
-export default class jsonLd{
+class jsonLd{
 
     #json;
     #elementTemplate;
@@ -168,3 +168,5 @@ export default class jsonLd{
     }
 
 }
+
+module.exports = jsonLd;
