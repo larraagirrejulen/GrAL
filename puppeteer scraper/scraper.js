@@ -1,5 +1,5 @@
 
-const { jsonLd } = require('./jsonLd');
+const jsonLd = require('./jsonLd');
 
 const scraper = {
 
@@ -8,7 +8,7 @@ const scraper = {
     acUrl: 'https://achecker.achecks.ca/checker/index.php',
     json: null,
 
-    async scrape(page, evaluator, evaluationUrl){
+    async scrape(page, page1, evaluator, evaluationUrl){
 
         this.json = new jsonLd(evaluator, evaluationUrl);
 
@@ -16,13 +16,13 @@ const scraper = {
         var result;
         switch(evaluator){
             case 'MV':
-                result = this.mvScraper(page, evaluationUrl);
+                result = this.mvScraper(page1, evaluationUrl);
                 break;
             case 'AM':
-                result = this.amScraper(page, evaluationUrl);
+                result = this.amScraper(page, page1, evaluationUrl);
                 break;
             case 'AC':
-                result = this.acScraper(page, evaluationUrl);
+                result = this.acScraper(page1, evaluationUrl);
                 break;
             default:
                 result = "SCRAPER ERROR: Wrong evaluator!";
@@ -63,7 +63,7 @@ const scraper = {
     },
 
 
-    async amScraper(page, evaluationUrl){
+    async amScraper(page, page1, evaluationUrl){
 
         // Navigate to url and wait to be loaded
         const url = this.amUrl + evaluationUrl.replaceAll("/",'%2f');
@@ -71,8 +71,8 @@ const scraper = {
         await page.waitForSelector('.evaluation-table');
 
         // Get interested data
-        await page.evaluate(async () => {
-            
+        const results = await page.evaluate(async () => {
+            var results = [];
             const techniquesFound = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
 
             for (var i = 0, technique; technique = techniquesFound[i]; i++){
@@ -80,7 +80,7 @@ const scraper = {
                 const cols = Array.from(technique.querySelectorAll('td'));
                 const complianceLevel = cols[2].textContent.replaceAll(' ','');
 
-                if (complianceLevel != 'A' || complianceLevel !='AA') continue; // Ignore level AAA
+                if (complianceLevel != 'A' && complianceLevel !='AA') continue; // Ignore level AAA
                  
                 var status;
                 const statusText = cols[0].querySelector('svg title').textContent;
@@ -99,46 +99,73 @@ const scraper = {
                         continue;
                 }
 
-                const criteriaIds = Array.from(criteriaInfo.querySelectorAll('li')).map(li => li.textContent.substring(20,27));
                 const techniqueInfo = cols[1].querySelector('.collapsible-content');
-                const techniqueGuideText = techniqueInfo.querySelector("p").text;
-
-                const casesReference = cols[3].querySelector("a");
-
-                if (casesReference != null){
-
-                    var casesLink = reference.getAttribute('href');
-
-                    casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + casesLink
-
-                    await page.goto(casesLink);
-                    await page.waitForSelector('#list_tab');
-
-                    const foundCases = Array.from(document.querySelectorAll("#list_tab ol li"));
-
-                    for (var j = 0, ca; ca = foundCases[j]; j++){
-
-                        caseElements = Array.from(ca.querySelectorAll("table tr"));
-                        /*caseCode = caseElements[1].querySelector("td code").textContent;
-                        caseCode = caseCode.replaceAll('\n','');
-                        caseCode = caseCode.replaceAll('\t','');*/
-                        caseLocation = caseElements[3].querySelector("td span").textContent
-
-                        for (var k = 0, criteriaId; criteriaId = criteriaIds[k]; k++){
-                            criteriaId = criteriaId.replaceAll(' ','');
-                            this.json.addNewElement(status, criteriaId, techniqueGuideText, caseLocation);
-                        }
+                const criteriaIds = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
+                const techniqueGuideText = techniqueInfo.querySelector("p").textContent;
+                
+                var casesLink = null;
+                try{
+                    link = cols[3].querySelector("a").href;
+                    if(link.startsWith("/results")){
+                        casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
+                    }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
+                        casesLink = link;
                     }
+                }catch{}
 
-                } else {
-
-                    for (var k = 0, criteriaId; criteriaId = criteriaIds[k]; k++){
-                        criteriaId = criteriaId.replaceAll(' ','');
-                        this.json.addNewElement(status, criteriaId, techniqueGuideText);
-                    }
-                }
+                results.push({
+                    "outcome": status,
+                    "criteriaIds": criteriaIds,
+                    "criteriaDescription": techniqueGuideText,
+                    "casesLink": casesLink
+                });
             }
+            return results;  
         });
+
+        console.log(results);
+
+        var criterias;
+        for (var i = 0, result; result = results[i]; i++){
+            criterias = result["criteriaIds"];
+
+            for (var j = 0, criteria; criteria = criterias[j]; j++){
+                if (result["casesLink"] != null){
+                    await page1.goto(result["casesLink"]);
+                    await page1.waitForSelector('#list_tab');
+                    const casesLocations = await page1.evaluate(async () => {
+                                
+                        var casesLocations = [];
+                        const foundCases = Array.from(document.querySelectorAll("#list_tab ol li"));
+
+                        for (var l = 0, ca; ca = foundCases[l]; l++){
+                            caseElements = Array.from(ca.querySelectorAll(".table tr"));
+                            /*caseCode = caseElements[1].querySelector("td code").textContent;
+                            caseCode = caseCode.replaceAll('\n','');
+                            caseCode = caseCode.replaceAll('\t','');*/
+                            casesLocations.push(caseElements[3].querySelector("td span").textContent);
+                        }
+                        return casesLocations;  
+                    });
+                    console.log(casesLocations);
+                    for (var k = 0, path; path = casesLocations[k]; k++){
+                        this.json.addNewElement(result["outcome"], criteria, result["criteriaDescription"], path);
+                    }
+                }else{
+                    this.json.addNewElement(result["outcome"], criteria, result["criteriaDescription"]);
+                }       
+            }
+        }
+
+
+        
+
+        
+
+       
+
+        //console.log(JSON.stringify(this.json.getJson()));
+        console.log(this.json.getJson());
   
         // Return data
         return this.json.getJson();
