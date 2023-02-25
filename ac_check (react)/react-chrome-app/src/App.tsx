@@ -56,6 +56,7 @@ export default function App() {
       <Dropdown ident="result_dropdown" label="Evaluation results" type="result" />
       
       <button id="prueba"> a11y proba </button>
+      <button id="http"> http request </button>
       <button id="fetch"> fetch proba </button>
   </>);
 }

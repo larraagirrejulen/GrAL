@@ -181,6 +181,23 @@ $(document).ready(function(){
   });
 
 
+  $("#http").click(function(){
+    AM = $('#AM_checkbox').is(":checked");
+    AC = $('#AC_checkbox').is(":checked");
+    MV = $('#MV_checkbox').is(":checked");
+
+    fetch('http://localhost:8080/http://localhost:7070/getEvaluationJson', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href})
+})
+   .then(response => response.json())
+   .then(response => console.log(JSON.stringify(response["body"], null, 2)))
+  });
+
 
 
   $("#prueba").click(function(){

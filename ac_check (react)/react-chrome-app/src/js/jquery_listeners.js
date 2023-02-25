@@ -72,8 +72,6 @@ async function fetchWithTimeout(resource, options = {}) {
   return response;
 }
 
-
-
 /**
  * Listener for the click on the button to get data automatically
  */
@@ -87,11 +85,11 @@ async function fetchWithTimeout(resource, options = {}) {
   if (AM || AC || MV){
 
     fetchEvaluators(window.location.href, AM, AC, MV).then(([amResponse, acResponse, mvResponse]) => {
-      /*json = JSON.stringify(amResponse);
+      json = JSON.stringify(amResponse);
       merge(json, JSON.stringify(acResponse));
-      merge(json, JSON.stringify(mvResponse));*/
+      merge(json, JSON.stringify(mvResponse));
 
-      /*var parser = new DOMParser();
+      var parser = new DOMParser();
 
       var doc = parser.parseFromString(amResponse, "text/html");
 
@@ -103,21 +101,21 @@ async function fetchWithTimeout(resource, options = {}) {
       console.log(error.message);
     });
 
-    /*localStorage.removeItem('json');
+    localStorage.removeItem('json');
 
     //if (A11Y) merge(json,a11y());
 
-    saveJson(json);*/
+    saveJson(json);
 
-  /*}else if(A11Y){
-    /* localStorage.removeItem('json');
+  }else if(A11Y){
+    localStorage.removeItem('json');
     json = a11y();
-    saveJson(json);*/
-  /*}else{
+    saveJson(json);
+  }else{
     alert('You need to choose at least one analizer');
   }
 
-});
+});*/
 
 /*function saveJson(json){
   localStorage.setItem("json",json);
