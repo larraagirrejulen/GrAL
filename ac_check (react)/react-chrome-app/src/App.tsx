@@ -5,7 +5,6 @@ import './css/result_section.css';
 
 import { useState, useEffect, useRef } from "react";
 import { getLogoImage, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
-//import pruebaAccessMonitor from './js/jquery_listeners.js';
 //import addListeners from './js/listeners.js';
 
 
@@ -56,8 +55,6 @@ export default function App() {
       <Dropdown ident="result_dropdown" label="Evaluation results" type="result" />
       
       <button id="prueba"> a11y proba </button>
-      <button id="http"> http request </button>
-      <button id="fetch"> fetch proba </button>
   </>);
 }
 
