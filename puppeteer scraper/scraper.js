@@ -8,7 +8,7 @@ const scraper = {
     acUrl: 'https://achecker.achecks.ca/checker/index.php',
     json: null,
 
-    async scrape(page, page1, evaluator, evaluationUrl){
+    async scrape(page, evaluator, evaluationUrl){
 
         this.json = new jsonLd(evaluator, evaluationUrl);
 
@@ -16,13 +16,13 @@ const scraper = {
         var result;
         switch(evaluator){
             case 'MV':
-                result = this.mvScraper(page1, evaluationUrl);
+                result = this.mvScraper(page, evaluationUrl);
                 break;
             case 'AM':
-                result = this.amScraper(page, page1, evaluationUrl);
+                result = this.amScraper(page, evaluationUrl);
                 break;
             case 'AC':
-                result = this.acScraper(page1, evaluationUrl);
+                result = this.acScraper(page, evaluationUrl);
                 break;
             default:
                 result = "SCRAPER ERROR: Wrong evaluator!";
@@ -63,7 +63,7 @@ const scraper = {
     },
 
 
-    async amScraper(page, page1, evaluationUrl){
+    async amScraper(page, evaluationUrl){
 
         // Navigate to url and wait to be loaded
         const url = this.amUrl + evaluationUrl.replaceAll("/",'%2f');
@@ -123,31 +123,29 @@ const scraper = {
             return results;  
         });
 
-        console.log(results);
-
         var criterias;
         for (var i = 0, result; result = results[i]; i++){
             criterias = result["criteriaIds"];
 
             for (var j = 0, criteria; criteria = criterias[j]; j++){
                 if (result["casesLink"] != null){
-                    await page1.goto(result["casesLink"]);
-                    await page1.waitForSelector('#list_tab');
-                    const casesLocations = await page1.evaluate(async () => {
-                                
+                    await page.goto(result["casesLink"]);
+                    await page.waitForSelector('#list_tab');
+                    const casesLocations = await page.evaluate(async () => {
+                        
                         var casesLocations = [];
-                        const foundCases = Array.from(document.querySelectorAll("#list_tab ol li"));
+                        const foundCases = Array.from(document.querySelectorAll('ol > li'));
 
                         for (var l = 0, ca; ca = foundCases[l]; l++){
-                            caseElements = Array.from(ca.querySelectorAll(".table tr"));
+                            caseElements = Array.from(ca.querySelectorAll('table > tr'));
                             /*caseCode = caseElements[1].querySelector("td code").textContent;
                             caseCode = caseCode.replaceAll('\n','');
                             caseCode = caseCode.replaceAll('\t','');*/
-                            casesLocations.push(caseElements[3].querySelector("td span").textContent);
+                            
+                            casesLocations.push(caseElements[3].querySelector('td span').textContent);
                         }
                         return casesLocations;  
                     });
-                    console.log(casesLocations);
                     for (var k = 0, path; path = casesLocations[k]; k++){
                         this.json.addNewElement(result["outcome"], criteria, result["criteriaDescription"], path);
                     }
@@ -156,16 +154,6 @@ const scraper = {
                 }       
             }
         }
-
-
-        
-
-        
-
-       
-
-        //console.log(JSON.stringify(this.json.getJson()));
-        console.log(this.json.getJson());
   
         // Return data
         return this.json.getJson();
