@@ -1,7 +1,10 @@
 const http = require('http');
 const scraperController = require('./scrapingController');
 
-const server = http.createServer((request, response) => {
+const puerto = 7070;
+console.log("listening on: 0.0.0.0:" + puerto);
+
+http.createServer((request, response) => {
 
     request.on('error', (err) => {
         console.error(err);
@@ -26,15 +29,14 @@ const server = http.createServer((request, response) => {
         
         requestBody = Buffer.concat(requestBody).toString();
         const requestJson = JSON.parse(requestBody);
-        requestBody = [];
-        console.log("Request: " + requestJson);
+        console.log("Request: " + requestBody);
     
         var body = await scraperController(requestJson["mv"], requestJson["am"], requestJson["ac"], requestJson["url"]);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         const responseBody = { headers, method, url, body };
         response.end(JSON.stringify(responseBody));
-
+        console.log("Fetch Success");
     });
-}).listen(7070); // Activates this server, listening on port 7070.
+}).listen(puerto);
 

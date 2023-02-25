@@ -96,7 +96,11 @@ $(document).ready(function(){
 
       const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
       
+      document.getElementById('result_table').innerHTML='<div class="loading_gif"/>';
+
       var json = await fetchScraper(bodyData).catch(error => { console.log(error.message); });
+
+      document.getElementById('result_table').innerHTML='';
 
       console.log(json);
 

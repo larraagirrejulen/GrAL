@@ -44,8 +44,6 @@ async function scrapeSelected(MV, AM, AC, evaluationUrl){
 	fs.writeFile('./resultData.json', JSON.stringify(results, null, 2), err => {
 		if (err) {
 			console.log('Error writing file', err)
-		} else {
-			console.log('Successfully wrote file')
 		}
 	});
 
