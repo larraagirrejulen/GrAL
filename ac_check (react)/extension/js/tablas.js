@@ -7,7 +7,6 @@
 function update(){
     var jsonT = localStorage.getItem("json");
     var json = JSON.parse(jsonT);
-    var a_s = json.auditSample;
     let longitud = json.auditSample.length;
     //Length is 50 in AA
 

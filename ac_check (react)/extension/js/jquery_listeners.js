@@ -1,15 +1,6 @@
 $(document).ready(function(){
 
   /** 
-   * Function to store given json on extension localStorage
-   */
-  function saveJson(json){
-    localStorage.setItem("json",json);
-    update();
-    window.location.reload();
-  }
-
-  /** 
    * Listener to upload a new document
    */
   $(document).on('change', '#btn_upload', (event) => {
@@ -63,63 +54,6 @@ $(document).ready(function(){
 
 
 
-  async function fetchWithTimeout(resource, options = {}) {
-    const { timeout = 60000 } = options;
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeout);
-    const response = fetch(resource, {
-      ...options,
-      signal: controller.signal
-    });
-    clearTimeout(timer);
-    return response;
-  }
-
-  async function fetchScraper(bodyData) {
-    const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { method: 'POST', body: bodyData });
-    if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
-    const json = await response.json();
-    return JSON.stringify(json["body"], null, 2);
-  }
-
-  /**
-   * Listener for the click on the button to get data automatically
-   */
-  $("#btn_get_data").click(async () => {
-
-    AM = $('#AM_checkbox').is(":checked");
-    AC = $('#AC_checkbox').is(":checked");
-    MV = $('#MV_checkbox').is(":checked");
-    A11Y = $('#A11Y_checkbox').is(":checked");
-
-    if (AM || AC || MV){
-
-      const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
-      
-      document.getElementById('result_table').innerHTML='<div class="loading_gif"/>';
-
-      var json = await fetchScraper(bodyData).catch(error => { console.log(error.message); });
-
-      document.getElementById('result_table').innerHTML='';
-
-      console.log(json);
-
-      /*localStorage.removeItem('json');
-      if (A11Y){
-        const a11y = a11y();
-        merge(json, a11y);
-      } 
-      saveJson(json);*/
-
-    }else if(A11Y){
-      /* localStorage.removeItem('json');
-      json = a11y();
-      saveJson(json);*/
-    }else{
-      alert('You need to choose at least one analizer');
-    }
-
-  });
 
 
   $("#prueba").click(() => {
