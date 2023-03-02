@@ -1,14 +1,29 @@
-.result_section{
+.result_dropdown{
   margin: 0;
   padding: 0 20px;
   border-top: 1px solid #c0c0c0;
   border-bottom: 2px solid #c0c0c0;
+  padding-bottom: 5px;
 }
+
+.result_dropdown .dropdown_header {
+  padding-top: 15px;
+  /*padding: 15px 0;
+  border-bottom: 1px solid #c6c6c6;*/
+  text-align: center;
+}
+
+.result_dropdown .dropdown_body {
+  margin: 15px 0;
+  border: 1px solid #005a6a;
+  background-color: #f4f4f4;
+}
+
+
 
 .tabla_RES th{
 	text-align: center !important;
   color: black  !important;
-  background-color: white;
 	width:50px !important;
   font-size: 14px;
   font-weight: bold;
@@ -36,7 +51,7 @@
 .boton_tabla:hover {background: #eee;}
 
 .collapsible_tabla {
-  background-color: white  !important;
+  background-color: #f4f4f4;
   color:black  !important;
   cursor: pointer  !important;
   padding: 10px !important;

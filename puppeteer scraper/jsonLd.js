@@ -158,7 +158,7 @@ class jsonLd{
         };
 
         element["earl:test"] = {
-            "@id" : "https://www.w3.org/WAI/WCAG21/quickref/#" + this.#successCriterias[criteriaId],
+            "@id" : "https://www.w3.org/TR/WCAG21/#" + this.#successCriterias[criteriaId],
             "@type" : "earl:TestCriterion"
         };
 

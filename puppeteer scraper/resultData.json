@@ -29,6 +29,816 @@
           "@type": "earl:TestMode"
         },
         "earl:result": {
+          "dcterms:description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
+          "earl:info": "WCAG 2.1 Success Criteria 3.2.2: on-input",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#on-input",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
+          "earl:info": "WCAG 2.1 Success Criteria 3.2.2: on-input",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > form:nth-child(2)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#on-input",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.4.3: contrast-minimum",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(1) > span:nth-child(2) > span:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.4.3: contrast-minimum",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(2) > span:nth-child(2) > span:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.4.3: contrast-minimum",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(3) > span:nth-child(2) > span:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.4.3: contrast-minimum",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(4) > span:nth-child(2) > span:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.4.3: contrast-minimum",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(5) > span:nth-child(2) > span:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "HTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.",
+          "earl:info": "WCAG 2.1 Success Criteria 4.1.1: parsing",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": null,
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "FAIL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#parsing",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "With the appearance of the CSS all the HTML elements used to control styles of the webpages became obsolete. Elements as: b, big, blink, center, font, i, s, strike, u became obsolete - use CSS to replace them.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:inapplicable",
+            "@type": "earl:NotApplicable"
+          },
+          "earl:pointer": {
+            "ptr:expression": null,
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.",
+          "earl:info": "WCAG 2.1 Success Criteria 3.1.1: language-of-page",
+          "earl:outcome": {
+            "@id": "earl:failed",
+            "@type": "earl:Fail"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "CANNOTTELL",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#language-of-page",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "Take note that the <title> element should only appear once in the webpage.",
+          "earl:info": "WCAG 2.1 Success Criteria 2.4.2: page-titled",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > head:nth-child(1) > title:nth-child(7)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#page-titled",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(8) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
+          "dcterms:description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+          "earl:info": "WCAG 2.1 Success Criteria 1.3.1: info-and-relationships",
+          "earl:outcome": {
+            "@id": "earl:passed",
+            "@type": "earl:Pass"
+          },
+          "earl:pointer": {
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(9) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "ptr:namespace": {
+              "@id": "http://www.w3.org/1999/xhtml",
+              "@type": "ptr:NamespaceMapping",
+              "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
+              "ptr:prefix": ""
+            },
+            "@id": "????",
+            "@type": "ptr:XPathPointer"
+          },
+          "dcterms:title": "PASS",
+          "@id": "????",
+          "@type": "earl:TestResult"
+        },
+        "earl:subject": {
+          "@id": "????",
+          "dcterms:source": "https://www.ehu.eus/es/home",
+          "@type": "earl:TestSubject"
+        },
+        "earl:test": {
+          "@id": "https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships",
+          "@type": "earl:TestCriterion"
+        },
+        "@id": "????",
+        "@type": "earl:Assertion"
+      },
+      {
+        "auditID": "????",
+        "earl:assertedBy": {
+          "doap:name": "AccessMonitor Validator",
+          "@id": "https://accessmonitor.acessibilidade.gov.pt",
+          "@type": "earl:Software"
+        },
+        "earl:mode": {
+          "@id": "earl:automatic",
+          "@type": "earl:TestMode"
+        },
+        "earl:result": {
           "dcterms:description": "Verify if the alternative textual equivalent found in the graphic buttons serves the equal information or function performed by the graphic button on the page.",
           "earl:info": "WCAG 2.1 Success Criteria 1.1.1: non-text-content",
           "earl:outcome": {

@@ -5,39 +5,57 @@ async function fetchWithTimeout(resource, options = {}) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
     const response = fetch(resource, {
-      ...options,
-      signal: controller.signal
+        ...options,
+        signal: controller.signal
     });
     clearTimeout(timer);
     return response;
-  }
+}
 
-  async function fetchScraper(bodyData) {
+
+async function fetchScraper(bodyData) {
     const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { method: 'POST', body: bodyData });
     if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
     const json = await response.json();
     return JSON.stringify(json["body"], null, 2);
-  }
+}
 
-  /**
-   * Listener for the click on the button to get data automatically
-   */
-  export default async function getDataHandler() {
 
-    const AM = document.getElementById('#AM_checkbox').is(":checked");
-    const AC = document.getElementById('#AC_checkbox').is(":checked");
-    const MV = document.getElementById('#MV_checkbox').is(":checked");
-    const A11Y = document.getElementById('#A11Y_checkbox').is(":checked");
+export function loadStoredReport(setResult){
+
+    var jsonT = localStorage.getItem("json");
+    var jsonTabla = localStorage.getItem("tabla_resultados");
+    var json = JSON.parse(jsonT);
+    var main = localStorage.getItem("tabla_main");
+
+    if (json != null && main != null){
+        setResult({
+            resultTableContent: jsonTabla,
+            contentTableContent: main
+        });
+        return true;
+    }
+    return false;
+}
+
+
+export async function getEvaluation(checkStates, setResult){
+
+    const AM = checkStates[0];
+    const AC = checkStates[1];
+    const MV = checkStates[2];
+    const A11Y = checkStates[3];
+    console.log(AM, AC, MV, A11Y);
 
     if (AM || AC || MV){
-
       const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
+
+      setResult({
+        resultTableContent: "<div className='loading_gif'/>",
+        contentTableContent: ""
+      });
       
-      document.getElementById('result_table').innerHTML='<div class="loading_gif"/>';
-
-      var json = await fetchScraper(bodyData).catch(error => { console.log(error.message); });
-
-      document.getElementById('result_table').innerHTML='';
+      var json = await fetchScraper(bodyData);
 
       console.log(json);
 
@@ -53,11 +71,9 @@ async function fetchWithTimeout(resource, options = {}) {
       json = a11y();
       saveJson(json);*/
     }else{
-      alert('You need to choose at least one analizer');
+        throw new Error("You need to choose at least one analizer");
     }
-
   }
-
 
 
 

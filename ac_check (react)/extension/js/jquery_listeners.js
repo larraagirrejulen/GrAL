@@ -55,7 +55,6 @@ $(document).ready(function(){
 
 
 
-
   $("#prueba").click(() => {
 
     // Configure evaluator factory and get evaluator

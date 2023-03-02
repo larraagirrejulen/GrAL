@@ -20,7 +20,6 @@
 }
 
 .evaluation_dropdown .button{
-  display: inline-block;
   cursor: pointer;
   padding: 8px 12px;
   font-weight: bold;
@@ -39,6 +38,7 @@
   border: 2px solid #005a6a;
   background-color: white;
   color: #005a6a;
+  font-style: italic;
 }
 
 .evaluation_dropdown .button_wrapper{
@@ -49,18 +49,19 @@
 }
 
 #btn_get_data{
-  padding: 8px 13px;
+  margin-bottom: 5px;
 }
 
 #btn_clear_data{
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+#btn_download {
+  margin-bottom: 5px;
 }
 
 #btn_upload input{
   display: none;
 }
 
-#btn_upload {
-  padding: 8px 19px;
-}
 

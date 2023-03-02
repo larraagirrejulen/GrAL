@@ -66,7 +66,7 @@ function update(){
     html_results += "</table></div>";
 
     localStorage.setItem("tabla_resultados",html_results);
-    document.getElementById('result_table').innerHTML=html_results;
+    //document.getElementById('result_table').innerHTML=html_results;
 
 
     var tabla_contenido= "<table class='tabla_contenido' style='width:100%; font-size:10px'>";
@@ -93,7 +93,7 @@ function update(){
     }
 
     localStorage.setItem("tabla_main",tabla_contenido);
-    document.getElementById('content_table').innerHTML=tabla_contenido;
+    //document.getElementById('content_table').innerHTML=tabla_contenido;
 }
 
 
