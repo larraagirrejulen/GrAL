@@ -21,7 +21,7 @@ async function fetchScraper(bodyData) {
 }
 
 
-export function loadStoredReport(setResult){
+export function loadStoredReport(){
 
     var jsonT = localStorage.getItem("json");
     var jsonTabla = localStorage.getItem("tabla_resultados");
@@ -29,31 +29,26 @@ export function loadStoredReport(setResult){
     var main = localStorage.getItem("tabla_main");
 
     if (json != null && main != null){
-        setResult({
-            resultTableContent: jsonTabla,
-            contentTableContent: main
-        });
-        return true;
+        return {resultsSummary: jsonTabla, resultsContent: main};
+    } else{
+        return {
+            resultsSummary: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
+            resultsContent: ""
+        };
     }
-    return false;
 }
 
 
-export async function getEvaluation(checkStates, setResult){
+export async function getEvaluation(checkboxes, setIsLoading){
 
-    const AM = checkStates[0];
-    const AC = checkStates[1];
-    const MV = checkStates[2];
-    const A11Y = checkStates[3];
+    const AM = checkboxes[0].checked;
+    const AC = checkboxes[1].checked;
+    const MV = checkboxes[2].checked;
+    const A11Y = checkboxes[3].checked;
     console.log(AM, AC, MV, A11Y);
 
     if (AM || AC || MV){
       const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
-
-      setResult({
-        resultTableContent: "<div className='loading_gif'/>",
-        contentTableContent: ""
-      });
       
       var json = await fetchScraper(bodyData);
 
@@ -73,6 +68,7 @@ export async function getEvaluation(checkStates, setResult){
     }else{
         throw new Error("You need to choose at least one analizer");
     }
+    setIsLoading(false);
   }
 
 

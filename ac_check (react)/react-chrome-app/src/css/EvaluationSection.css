@@ -1,47 +1,48 @@
-.evaluation_dropdown{
+.evaluation_section{
   padding: 0 20px;
   border-top: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
 }
 
-.evaluation_dropdown .dropdown_header {
+.evaluation_section .header {
   align-items: center;
   display: inline-flex;
   cursor: pointer;
   padding: 10px 0;
 }
 
-.evaluation_dropdown .dropdown_header img{
+.evaluation_section .header img{
   height: 30px;
 }
 
-.evaluation_dropdown .dropdown_header span{
+.evaluation_section .header span{
   width: 170px;
 }
 
-.evaluation_dropdown .button{
+.evaluation_section .button{
   cursor: pointer;
   padding: 8px 12px;
   font-weight: bold;
   margin: 0;
   font-size: 13px;
   font-weight: 300;
+  border-radius: 5px;
 }
 
-.evaluation_dropdown .primary{
+.evaluation_section .primary{
   border: 2px solid #005a6a;
   background-color: #005a6a;
   color: white;
 }
 
-.evaluation_dropdown .secondary{
+.evaluation_section .secondary{
   border: 2px solid #005a6a;
   background-color: white;
   color: #005a6a;
   font-style: italic;
 }
 
-.evaluation_dropdown .button_wrapper{
+.evaluation_section .body{
   align-items: center;
   text-align: center;
   border-top: 1px solid #c6c6c6;

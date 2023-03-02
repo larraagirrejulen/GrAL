@@ -1,4 +1,4 @@
-.result_dropdown{
+.result_section{
   margin: 0;
   padding: 0 20px;
   border-top: 1px solid #c0c0c0;
@@ -6,17 +6,18 @@
   padding-bottom: 5px;
 }
 
-.result_dropdown .dropdown_header {
+.result_section .header {
   padding-top: 15px;
   /*padding: 15px 0;
   border-bottom: 1px solid #c6c6c6;*/
   text-align: center;
 }
 
-.result_dropdown .dropdown_body {
+.result_section .body {
   margin: 15px 0;
   border: 1px solid #005a6a;
   background-color: #f4f4f4;
+  border-radius: 5px;
 }
 
 

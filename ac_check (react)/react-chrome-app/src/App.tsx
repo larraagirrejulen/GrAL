@@ -1,17 +1,18 @@
 import './css/main.css';
-import './css/selection_dropdown.css';
-import './css/evaluation_dropdown.css';
-import './css/result_section.css';
+import './css/EvaluatorSelectionSection.css';
+import './css/EvaluationSection.css';
+import './css/ResultSection.css';
 
 import { useState, useEffect, useRef } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
 import { loadStoredReport, getEvaluation} from './js/utils.js';
 import parse from 'html-react-parser';
+import { BeatLoader } from 'react-spinners';
 
 
 export default function App() {
 
-  const [logoImgSrc, setLogoImgSrc] = useState("");
+  const [logoImgSrc, setLogoImgSrc] = useState();
   useEffect(() => { 
     setLogoImgSrc(getLogoSrc());
   }, []);
@@ -21,9 +22,7 @@ export default function App() {
       <img id="react_extension_logo_image" className="img_logo" alt="extension logo" src={logoImgSrc} />
     </div>
 
-    <Dropdown ident="selection_dropdown" label="Select evaluators" type="selection" />
-    <Dropdown ident="evaluation_dropdown" label="Evaluation options" type="evaluation" />
-    <Dropdown ident="result_dropdown" label="Evaluation results" type="result" />
+    <MainSections />
     
     <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
   </>);
@@ -31,18 +30,117 @@ export default function App() {
 
 
 
-const Dropdown = ({ident, label, type}:any) => {
+
+
+function MainSections(){
+
+  const [checkboxes, setCheckboxes] = useState([
+    { checked: true, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
+    { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
+    { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
+    { checked: false, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
+  ]);
+  const handleCheckboxesChange = (newCheckboxes:any) => {
+    setCheckboxes(newCheckboxes);
+  };
+
+  const [results, setResults] = useState({resultsSummary: "", resultsContent: ""});
+  const handleResultsChange = (newResults:any) => {
+    setResults(newResults);
+  };
+  useEffect(() => {
+    const loadedResults = loadStoredReport();
+    handleResultsChange(loadedResults);
+  }, [])
+
+  return(<>
+    <EvaluatorSelectionSection checkboxes={checkboxes} onCheckboxesChange={handleCheckboxesChange} />
+    <EvaluationSection checkboxes={checkboxes} onResultsChange={handleResultsChange} />
+    <ResultSection results={results} />
+  </>);
+}
+
+
+
+
+
+function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  return(
-    <div id={ident} className={ident} >
-      <div className="dropdown_header" onClick={(type:any) => type !== "result" ? setIsOpen((prev:any) => !prev) : null }>
-        { type !== "result" ? <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" /> : null }
-        <span>{label}</span>
+  const handleCheckboxChange = (index:any, isChecked:any) => {
+    const newCheckboxes = [...checkboxes];
+    newCheckboxes[index].checked = isChecked;
+    onCheckboxesChange(newCheckboxes);
+  };
+
+  return (
+    <div className="evaluator_selection_section">
+      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
+        <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
+        <span>Select evaluators</span>
       </div>
-      <div className="dropdown_body" style={type === "result" || isOpen ? {display: "block"} : {display: "none"}} >
-        <DropdownBody type={type} />
+
+      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
+        {checkboxes.map((checkbox:any, index:any) => (
+          <CustomCheckbox key={index} label={checkbox.label} href={checkbox.href} checked={checkbox.checked} onChange={(isChecked:any) => handleCheckboxChange(index, isChecked)} />
+        ))}
+      </div>
+    </div> 
+  );
+}
+
+
+
+
+function EvaluationSection ({checkboxes, handleResultsChange}:any) {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGetResultsClick = () => {
+    setIsLoading(true);
+    console.log("Outsider function called with items:", checkboxes);
+    // Make an API call or perform some asynchronous operation here
+    // When the operation is complete, set isLoading back to false
+    const newResults = getEvaluation(checkboxes, setIsLoading).catch(error => { console.log(error.message); });
+    handleResultsChange(newResults);
+  };
+
+  return (
+    <div className="evaluation_section">
+      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
+        <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
+        <span>Evaluation options</span>
+      </div>
+
+      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
+        <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
+          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate <br/> current page")}
+        </button><br/>
+        <label id="btn_clear_data" className="button secondary"> Clear stored data </label>
+        <label id="btn_download" className="button primary">Download report</label>
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
+      </div>
+    </div> 
+  );
+}
+
+
+
+
+
+function ResultSection({results}:any) {
+
+  return (
+    <div className="result_section">
+      <div className="header">
+        <span>Evaluation Results</span>
+      </div>
+      <div className="body">
+        <span id="result_table">{parse(results.resultsSummary)}</span><br/>
+        <span id="content_table">{parse(results.resultsContent)}</span>
       </div>
     </div>
   );
@@ -50,79 +148,24 @@ const Dropdown = ({ident, label, type}:any) => {
 
 
 
-const DropdownBody = ({type}:any ) => {
 
-  const [checkStates, setCheckStates] = useState([ true, false, false, false ]); // AM, AC, MV, A11Y
+
+function CustomCheckbox ({label, href, checked, onChange}:any ) {
   
-  function checkHandler(checkboxIndex:any) {
-    const updatedCheckedStates = checkStates.map((check, index) =>
-      index === checkboxIndex ? !check : check
-    );
-    setCheckStates(updatedCheckedStates);
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const handleCheckboxChange = (event:any) => {
+    setIsChecked(event.target.checked);
+    onChange(event.target.checked);
   };
 
-  const [result, setResult] = useState({
-    resultTableContent: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
-    contentTableContent: ""
-  });
-
-  async function getResultsHandler(){
-    /*setResult({
-      resultTableContent: "<div className='loading_gif'/>",
-      contentTableContent: ""
-    });
-    console.log({checkStates});*/
-    await getEvaluation(checkStates, setResult).catch(error => { console.log(error.message); });
-  }
-
-
-  useEffect(() => {
-    loadStoredReport(setResult);
-  }, [])
-
-  return (<>{
-    (type === "selection" ? <>
-      <Checkboxes checkStates={checkStates} checkHandler={checkHandler} /><br/> 
-    </> : ( type === "evaluation" ? 
-      <div className="button_wrapper">
-        <label id="btn_get_data" className="button primary" onClick={getResultsHandler}>Evaluate <br></br> current page</label>
-        <label id="btn_clear_data" className="button secondary"> Clear stored data </label>
-        <label id="btn_download" className="button primary">Download report</label>
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
-      </div> 
-    : <>
-        <span id="result_table">{parse(result.resultTableContent)}</span><br/>
-        <span id="content_table">{parse(result.contentTableContent)}</span>
-    </>))
-  }</>);
-}
-
-
-
-
-
-/**
- * React custom checkboxes component
- * @param checkStates has a boolean value for each checkbox checked state. True if checked.
- * @param checkHandler handler for checkbox onChange event.
- * @returns react custom checkbox components
- */
-const Checkboxes = ({checkStates, checkHandler}:any ) => {
-  const checkboxInfo = [
-    { label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
-    { label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
-    { label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
-    { label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
-  ];
-  return (<>
-    {checkboxInfo.map(({ label, href}, index) => (
-      <div className="checkbox-wrapper">
-        <div className="checkbox">
-          <input type="checkbox" checked={checkStates[index]} onChange={() => checkHandler(index)} className={checkStates[index] ? "checked" : ""} />
-          <a href={href}>{label}</a>
-        </div><br/>
-        <span>{checkStates[index] ? "Selected" : "Unchecked"}</span>
-      </div>
-    ))}
-  </>);
+  return (
+    <div className="checkbox-wrapper">
+      <div className="checkbox">
+        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className={isChecked ? "checked" : ""} />
+        <a href={href}>{label}</a>
+      </div><br/>
+      <span>{isChecked ? "Selected" : "Unchecked"}</span>
+    </div>
+  );
 }
