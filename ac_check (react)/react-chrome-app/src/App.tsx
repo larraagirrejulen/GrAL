@@ -48,6 +48,7 @@ function MainSections(){
   const handleResultsChange = (newResults:any) => {
     setResults(newResults);
   };
+
   useEffect(() => {
     const loadedResults = loadStoredReport();
     handleResultsChange(loadedResults);
@@ -101,10 +102,7 @@ function EvaluationSection ({checkboxes, handleResultsChange}:any) {
 
   const handleGetResultsClick = () => {
     setIsLoading(true);
-    console.log("Outsider function called with items:", checkboxes);
-    // Make an API call or perform some asynchronous operation here
-    // When the operation is complete, set isLoading back to false
-    const newResults = getEvaluation(checkboxes, setIsLoading).catch(error => { console.log(error.message); });
+    const newResults = getEvaluation(checkboxes, setIsLoading);
     handleResultsChange(newResults);
   };
 
@@ -119,7 +117,7 @@ function EvaluationSection ({checkboxes, handleResultsChange}:any) {
         <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate <br/> current page")}
         </button><br/>
-        <label id="btn_clear_data" className="button secondary"> Clear stored data </label>
+        <label id="btn_clear_data" className="button secondary">Clear stored data</label>
         <label id="btn_download" className="button primary">Download report</label>
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
       </div>
@@ -138,6 +136,7 @@ function ResultSection({results}:any) {
       <div className="header">
         <span>Evaluation Results</span>
       </div>
+      
       <div className="body">
         <span id="result_table">{parse(results.resultsSummary)}</span><br/>
         <span id="content_table">{parse(results.resultsContent)}</span>

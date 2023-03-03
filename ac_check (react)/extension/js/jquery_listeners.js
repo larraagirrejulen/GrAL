@@ -52,13 +52,9 @@ $(document).ready(function(){
   
 
 
-
-
-
-  $("#prueba").click(() => {
+  $("#prueba").click(async () => {
 
     // Configure evaluator factory and get evaluator
-    doc = window.document;
     let evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
     var ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
     evaluatorFactory.setParameter('ruleset', ruleset);
@@ -66,15 +62,11 @@ $(document).ready(function(){
     evaluatorFactory.setFeature('groups', 7);
     let evaluator = evaluatorFactory.newEvaluator();
 
-    // Gure luzapenak jarritako html elementuak kendu
-    const extension = doc.getElementById("react-chrome-extension");
-    extension.remove();
+    // Get the original document wihtout extension changes and current runtime state
+    const originalDoc = getOriginalDocWithCurrentState();
 
     // Evaluate and save result
-    result = evaluator.evaluate(doc, doc.title, window.location.href);
-
-    // Gure luzapenak jarritako html elementuak berriro jarri
-    doc.body.appendChild(extension);
+    result = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);
 
     console.log(result);
 

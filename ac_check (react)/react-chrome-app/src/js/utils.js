@@ -49,9 +49,7 @@ export async function getEvaluation(checkboxes, setIsLoading){
 
     if (AM || AC || MV){
       const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
-      
       var json = await fetchScraper(bodyData);
-
       console.log(json);
 
       /*localStorage.removeItem('json');
@@ -66,9 +64,14 @@ export async function getEvaluation(checkboxes, setIsLoading){
       json = a11y();
       saveJson(json);*/
     }else{
-        throw new Error("You need to choose at least one analizer");
+        alert("You need to choose at least one analizer");
     }
     setIsLoading(false);
+
+    return {
+        resultsSummary: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
+        resultsContent: ""
+    };
   }
 
 
