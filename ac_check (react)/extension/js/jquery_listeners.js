@@ -62,13 +62,23 @@ $(document).ready(function(){
     evaluatorFactory.setFeature('groups', 7);
     let evaluator = evaluatorFactory.newEvaluator();
 
-    // Get the original document wihtout extension changes and current runtime state
+    // Gure luzapenak jarritako html elementuak kendu
+    const extension = window.document.getElementById("react-chrome-extension");
+    extension.remove();
+
+    
+    /*// Get the original document wihtout extension changes and current runtime state
     const originalDoc = getOriginalDocWithCurrentState();
-
     // Evaluate and save result
-    result = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);
-
+    result = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);*/
+    
+    result = evaluator.evaluate(document, document.title, window.location.href);
     console.log(result);
+
+
+    // Gure luzapenak jarritako html elementuak berriro jarri
+    document.body.appendChild(extension);
+
 
     // Get evaluation results
     let ruleGroupResult   = result.getRuleResultsAll();
