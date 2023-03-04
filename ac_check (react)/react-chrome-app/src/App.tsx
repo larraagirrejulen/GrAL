@@ -12,22 +12,32 @@ import { BeatLoader } from 'react-spinners';
 
 export default function App() {
 
+  const [hidden, setHidden] = useState(false);
+
+  function toggleHidden() {
+    setHidden(!hidden);
+  }
+
   const [logoImgSrc, setLogoImgSrc] = useState();
   useEffect(() => { 
     setLogoImgSrc(getLogoSrc());
   }, []);
 
   return (<>
-    <div className="img_container">
-      <img alt="extension logo" src={logoImgSrc} onClick={() => {
-        window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
-        window.open("https://github.com/Itusil/TFG", '_blank')
-      }} />
-    </div>
+    {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={logoImgSrc} onClick={toggleHidden} /> : ""}
+    <div className= {`react_chrome_extension ${hidden ? 'hidden' : ''}`}>
+      <span className="close_icon" onClick={toggleHidden}>&times;</span>
+      <div className="img_container">
+        <img alt="extension logo" src={logoImgSrc} onClick={() => {
+          window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
+          window.open("https://github.com/Itusil/TFG", '_blank')
+        }} />
+      </div>
 
-    <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
-    
-    <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
+      <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
+      
+      <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
+    </div>
   </>);
 }
 
