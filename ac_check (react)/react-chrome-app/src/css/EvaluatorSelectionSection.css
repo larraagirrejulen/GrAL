@@ -1,5 +1,5 @@
 .evaluator_selection_section{
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
   padding: 0 20px;
   border-top: 2px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
@@ -34,10 +34,10 @@
   margin-bottom: 10px;
 }
 
-.evaluator_selection_section .checkbox-wrapper a {
+.evaluator_selection_section .checkbox-wrapper .checkbox span {
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 300;
+  color: rgb(0, 147, 147);
+  margin-left: 10px;
 }
 
 .checkbox-wrapper input[type="checkbox"] {

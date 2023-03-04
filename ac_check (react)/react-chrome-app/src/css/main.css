@@ -7,7 +7,7 @@
 
 .react-chrome-extension{
   all: initial;
-  padding: 40px 0;
+  padding: 20px 0;
   box-sizing: border-box;
   overflow-x: hidden;
   position: fixed; 
@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-.react-chrome-extension .img_container .img_logo{
+.react-chrome-extension .img_container img{
   all: initial;
   height: 120px;
   border-radius: 30px;
@@ -38,7 +38,7 @@
   transition: 0.2s ease;
 }
 
-.react-chrome-extension .img_container .img_logo:hover {
+.react-chrome-extension .img_container img:hover {
   filter: drop-shadow(0 0 3px #005a6a);
   transition: 0.2s ease;
 }

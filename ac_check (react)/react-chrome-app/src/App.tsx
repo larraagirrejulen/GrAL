@@ -5,7 +5,7 @@ import './css/ResultSection.css';
 
 import { useState, useEffect, useRef } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
-import { loadStoredReport, getEvaluation} from './js/utils.js';
+import { loadStoredReport, getEvaluation, downloadCurrentReport, clearStoredEvaluationData} from './js/utils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 
@@ -19,10 +19,13 @@ export default function App() {
 
   return (<>
     <div className="img_container">
-      <img id="react_extension_logo_image" className="img_logo" alt="extension logo" src={logoImgSrc} />
+      <img alt="extension logo" src={logoImgSrc} onClick={() => {
+        window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
+        window.open("https://github.com/Itusil/TFG", '_blank')
+      }} />
     </div>
 
-    <MainSections />
+    <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
     
     <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
   </>);
@@ -32,7 +35,7 @@ export default function App() {
 
 
 
-function MainSections(){
+function MainSections({dropdownsDefaultState}:any){
 
   const [checkboxes, setCheckboxes] = useState([
     { checked: true, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -55,8 +58,8 @@ function MainSections(){
   }, [])
 
   return(<>
-    <EvaluatorSelectionSection checkboxes={checkboxes} onCheckboxesChange={handleCheckboxesChange} />
-    <EvaluationSection checkboxes={checkboxes} onResultsChange={handleResultsChange} />
+    <EvaluatorSelectionSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onCheckboxesChange={handleCheckboxesChange} />
+    <EvaluationSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onResultsChange={handleResultsChange} />
     <ResultSection results={results} />
   </>);
 }
@@ -65,9 +68,8 @@ function MainSections(){
 
 
 
-function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
-
-  const [isOpen, setIsOpen] = useState(false);
+function EvaluatorSelectionSection ({dropdownsDefaultState, checkboxes, onCheckboxesChange}:any) {
+  const [isOpen, setIsOpen] = useState(dropdownsDefaultState);
 
   const handleCheckboxChange = (index:any, isChecked:any) => {
     const newCheckboxes = [...checkboxes];
@@ -91,13 +93,31 @@ function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
   );
 }
 
+function CustomCheckbox ({label, href, checked, onChange}:any ) {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const handleCheckboxChange = (event:any) => {
+    setIsChecked(event.target.checked);
+    onChange(event.target.checked);
+  };
+
+  return (
+    <div className="checkbox-wrapper">
+      <div className="checkbox">
+        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className={isChecked ? "checked" : ""} />
+        <span onClick={() => { window.open(href, '_blank'); }}>{label}</span>
+      </div><br/>
+      <span>{isChecked ? "Selected" : "Unchecked"}</span>
+    </div>
+  );
+}
 
 
 
-function EvaluationSection ({checkboxes, handleResultsChange}:any) {
 
-  const [isOpen, setIsOpen] = useState(false);
 
+function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsChange}:any) {
+  const [isOpen, setIsOpen] = useState(dropdownsDefaultState);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGetResultsClick = () => {
@@ -117,8 +137,8 @@ function EvaluationSection ({checkboxes, handleResultsChange}:any) {
         <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate <br/> current page")}
         </button><br/>
-        <label id="btn_clear_data" className="button secondary">Clear stored data</label>
-        <label id="btn_download" className="button primary">Download report</label>
+        <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label>
+        <label id="btn_download" className="button primary" onClick={downloadCurrentReport}>Download report</label>
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
       </div>
     </div> 
@@ -130,7 +150,6 @@ function EvaluationSection ({checkboxes, handleResultsChange}:any) {
 
 
 function ResultSection({results}:any) {
-
   return (
     <div className="result_section">
       <div className="header">
@@ -141,30 +160,6 @@ function ResultSection({results}:any) {
         <span id="result_table">{parse(results.resultsSummary)}</span><br/>
         <span id="content_table">{parse(results.resultsContent)}</span>
       </div>
-    </div>
-  );
-}
-
-
-
-
-
-function CustomCheckbox ({label, href, checked, onChange}:any ) {
-  
-  const [isChecked, setIsChecked] = useState(checked);
-
-  const handleCheckboxChange = (event:any) => {
-    setIsChecked(event.target.checked);
-    onChange(event.target.checked);
-  };
-
-  return (
-    <div className="checkbox-wrapper">
-      <div className="checkbox">
-        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className={isChecked ? "checked" : ""} />
-        <a href={href}>{label}</a>
-      </div><br/>
-      <span>{isChecked ? "Selected" : "Unchecked"}</span>
     </div>
   );
 }

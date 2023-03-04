@@ -23,14 +23,6 @@
     "48": "/images/icon48.png",
     "128": "/images/icon128.png" },
 
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": [
-        "/js/dom_copy.js"
-      ]
-    }
-  ],
   "web_accessible_resources": [
     {
       "resources": ["/images/icon128.png", "/images/arrow.png", "/images/arrow_up.png"],

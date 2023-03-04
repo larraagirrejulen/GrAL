@@ -17,38 +17,6 @@ $(document).ready(function(){
     reader.readAsText(event.target.files[0]);
   });
 
-  /**
-   * Listener for the clear data button click
-   */
-  $("#btn_clear_data").click(() => {
-      localStorage.removeItem('json');
-      localStorage.removeItem('json_resultados');
-      localStorage.removeItem("tabla_resultados");
-      localStorage.removeItem("tabla_main");
-      localStorage.removeItem("ultimo");
-      window.location.reload();
-  });
-
-  /**
-   * Listener for the logo image click
-   */
-  $("#react_extension_logo_image").click(() => {
-    window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
-    window.open("https://github.com/Itusil/TFG", '_blank')
-  });
-
-  /**
-   * Listener for the download button report click
-   */
-  $("#btn_download").click(() => {
-    var jsonT = localStorage.getItem("json");
-    var json = JSON.parse(jsonT);
-
-    var title = json.defineScope.scope.title;
-    download(title+".json", JSON.stringify(json));
-
-    if (window.confirm("Do you want to upload the report on W3C?")) window.open("https://www.w3.org/WAI/eval/report-tool/", '_blank');
-  });
   
 
 
@@ -72,6 +40,31 @@ $(document).ready(function(){
     // Evaluate and save result
     result = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);*/
     
+
+
+
+
+    const info = {};
+
+    // evaluation script
+    let doc = window.document;
+    let evaluationLibrary = new EvaluationLibrary();
+    let evaluationResult  = evaluationLibrary.evaluate(doc, doc.title, doc.location.href);
+
+    const ruleGroupResults   = evaluationResult.getRuleResultsAll();
+    const ruleSummaryResults = ruleGroupResults.getRuleResultsSummary();
+
+    info.violations    = ruleSummaryResults.violations;
+    info.warnings      = ruleSummaryResults.warnings;
+    info.manual_checks = ruleSummaryResults.manual_checks;
+    info.passed        = ruleSummaryResults.passed;
+
+    info.rcResults = getRuleCategoryResults(evaluationResult);
+    info.glResults = getGuidelineResults(evaluationResult);
+    info.json = evaluationResult.toJSON();
+
+    console.log(info);
+
     result = evaluator.evaluate(document, document.title, window.location.href);
     console.log(result);
 

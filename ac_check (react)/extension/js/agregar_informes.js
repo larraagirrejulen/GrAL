@@ -10,21 +10,6 @@ function saveJson(json){
 }
 
 
-/**
- * Download the text passed as a parameter ("text") into a document named "filename".
- * */
-function download(filename, text) {
-
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-    element.style.display = 'none';
-    
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-}
-
 
 /**
  * Merge the two JSON passed by parameters to get a single JSON

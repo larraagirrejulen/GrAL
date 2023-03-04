@@ -1,26 +1,5 @@
 
 
-async function fetchWithTimeout(resource, options = {}) {
-    const { timeout = 60000 } = options;
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeout);
-    const response = fetch(resource, {
-        ...options,
-        signal: controller.signal
-    });
-    clearTimeout(timer);
-    return response;
-}
-
-
-async function fetchScraper(bodyData) {
-    const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { method: 'POST', body: bodyData });
-    if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
-    const json = await response.json();
-    return JSON.stringify(json["body"], null, 2);
-}
-
-
 export function loadStoredReport(){
 
     var jsonT = localStorage.getItem("json");
@@ -39,6 +18,28 @@ export function loadStoredReport(){
 }
 
 
+
+
+
+async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 60000 } = options;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    const response = fetch(resource, {
+        ...options,
+        signal: controller.signal
+    });
+    clearTimeout(timer);
+    return response;
+}
+
+async function fetchScraper(bodyData) {
+    const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { method: 'POST', body: bodyData });
+    if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
+    const json = await response.json();
+    return JSON.stringify(json["body"], null, 2);
+}
+
 export async function getEvaluation(checkboxes, setIsLoading){
 
     const AM = checkboxes[0].checked;
@@ -48,21 +49,21 @@ export async function getEvaluation(checkboxes, setIsLoading){
     console.log(AM, AC, MV, A11Y);
 
     if (AM || AC || MV){
-      const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
-      var json = await fetchScraper(bodyData);
-      console.log(json);
+        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
+        var json = await fetchScraper(bodyData);
+        console.log(json);
 
-      /*localStorage.removeItem('json');
-      if (A11Y){
+        /*localStorage.removeItem('json');
+        if (A11Y){
         const a11y = a11y();
         merge(json, a11y);
-      } 
-      saveJson(json);*/
+        } 
+        saveJson(json);*/
 
     }else if(A11Y){
-      /* localStorage.removeItem('json');
-      json = a11y();
-      saveJson(json);*/
+        /* localStorage.removeItem('json');
+        json = a11y();
+        saveJson(json);*/
     }else{
         alert("You need to choose at least one analizer");
     }
@@ -72,10 +73,56 @@ export async function getEvaluation(checkboxes, setIsLoading){
         resultsSummary: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
         resultsContent: ""
     };
-  }
+}
 
 
 
+
+
+export function clearStoredEvaluationData(){
+    if (!window.confirm("Are you sure you want to permanently delete current stored evaluation data?")) return;
+
+    localStorage.removeItem("json");
+    localStorage.removeItem("json_resultados");
+    localStorage.removeItem("tabla_resultados");
+    localStorage.removeItem("tabla_main");
+    localStorage.removeItem("ultimo");
+    window.location.reload();
+}
+
+
+
+
+
+
+export function downloadCurrentReport(){
+    if(localStorage.getItem("tabla_main")==null){
+        alert("There is currently no evaluation data stored! Start by evaluating the page or uploading an existing report.");
+        return;
+    }
+
+    var jsonT = localStorage.getItem("json");
+    var json = JSON.parse(jsonT);
+
+    const data = JSON.stringify(json);
+    const fileName = json.defineScope.scope.title + ".json";
+    const fileType = "text/json";
+
+    const blob = new Blob([data], { type: fileType })
+
+    const a = document.createElement('a')
+    a.download = fileName
+    a.href = window.URL.createObjectURL(blob)
+    const clickEvt = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+    })
+    a.dispatchEvent(clickEvt)
+    a.remove()
+
+    if (window.confirm("Do you want to upload the report on W3C?")) window.open("https://www.w3.org/WAI/eval/report-tool/", '_blank');
+}
 
 
 

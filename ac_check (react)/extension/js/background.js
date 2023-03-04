@@ -21,9 +21,9 @@ function main_bk(){
         }
       });
 
-      chrome.scripting.executeScript({
+      chrome.scripting.executeScript({ 
         target: {tabId: tab.id},
-        files: ['/js/reload.js']
+        func: ()=>{window.location.reload();}
       });
   });
 
@@ -40,7 +40,7 @@ function main_bk(){
       if(changeInfo.status == 'complete' && toggle){
         chrome.action.setIcon({path: "/images/icon16.png"});
         chrome.scripting.executeScript({
-          files: ["/js/libraries/jquery.min.js", "/js/libraries/a11y_library.js", "content.js", "/js/tablas.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js', '/js/jquery_listeners.js'],
+          files: ["/js/dom_copy.js", "/js/libraries/ainspector-content-script.js", "/js/libraries/jquery.min.js", "/js/libraries/a11y_library.js", "content.js", "/js/tablas.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js', '/js/jquery_listeners.js'],
           target: {tabId: tab.id}
         });
       }
