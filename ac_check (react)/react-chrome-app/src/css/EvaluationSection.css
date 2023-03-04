@@ -27,6 +27,13 @@
   font-size: 13px;
   font-weight: 300;
   border-radius: 5px;
+  filter: drop-shadow(0 0 0 #005a6a) brightness(1);
+  transition: 0.2s ease;
+}
+
+.evaluation_section .button:hover {
+  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
+  transition: 0.2s ease;
 }
 
 .evaluation_section .primary{
@@ -50,7 +57,7 @@
 }
 
 #btn_get_data{
-  margin-bottom: 5px;
+  margin-bottom: 9px;
 }
 
 #btn_clear_data{
@@ -58,7 +65,7 @@
 }
 
 #btn_download {
-  margin-bottom: 5px;
+  margin-bottom: 9px;
 }
 
 #btn_upload input{
