@@ -38,81 +38,39 @@ $(document).ready(function(){
     /*// Get the original document wihtout extension changes and current runtime state
     const originalDoc = getOriginalDocWithCurrentState();
     // Evaluate and save result
-    result = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);*/
-    
+    let evaluationResult = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);*/
 
 
-
-
-    const info = {};
-
-    // evaluation script
-    let doc = window.document;
-    let evaluationLibrary = new EvaluationLibrary();
-    let evaluationResult  = evaluationLibrary.evaluate(doc, doc.title, doc.location.href);
-
-    const ruleGroupResults   = evaluationResult.getRuleResultsAll();
-    const ruleSummaryResults = ruleGroupResults.getRuleResultsSummary();
-
-    info.violations    = ruleSummaryResults.violations;
-    info.warnings      = ruleSummaryResults.warnings;
-    info.manual_checks = ruleSummaryResults.manual_checks;
-    info.passed        = ruleSummaryResults.passed;
-
-    info.rcResults = getRuleCategoryResults(evaluationResult);
-    info.glResults = getGuidelineResults(evaluationResult);
-    info.json = evaluationResult.toJSON();
-
-    console.log(info);
-
-    result = evaluator.evaluate(document, document.title, window.location.href);
-    console.log(result);
+    let evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
 
 
     // Gure luzapenak jarritako html elementuak berriro jarri
     document.body.appendChild(extension);
 
 
-    // Get evaluation results
-    let ruleGroupResult   = result.getRuleResultsAll();
+    let info = {};
+
+    let ruleGroupResult   = evaluationResult.getRuleResultsAll();
     let ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
-    v = ruleSummaryResult.violations;
-    w = ruleSummaryResult.warnings;
-    p = ruleSummaryResult.manual_checks;
-    m = ruleSummaryResult.passed;
-    pa = ruleSummaryResult.page;
-    h = ruleSummaryResult.hidden;
-    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p + " page: " + pa + " h: " + h);
+    let ruleResults       = ruleGroupResult.getRuleResultsArray();
 
-    let ruleResults = ruleGroupResult.getRuleResultsArray();
-    console.log(ruleSummaryResult);
-    console.log(ruleResults);
-    var v = 0;
-    var w = 0;
-    var p = 0;
-    var m = 0;
-    var pa = 0;
-    var h = 0;
+    info.ruleset  = evaluationResult.getRuleset().getId();
+
+    info.violations    = ruleSummaryResult.violations;
+    info.warnings      = ruleSummaryResult.warnings;
+    info.manual_checks = ruleSummaryResult.manual_checks;
+    info.passed        = ruleSummaryResult.passed;
+
+    info.rcResults = getRuleCategoryResults(evaluationResult);
+    info.glResults = getGuidelineResults(evaluationResult);
+    info.json = evaluationResult.toJSON();
+
+    info.allRuleResults = [];
     for(let i = 0; i < ruleResults.length; i++) {
-      try{
-        if(ruleResults[i].rule.rule_id.startsWith("LINK")){
-          console.log(ruleResults[i]);
-        }
-        ers = ruleResults[i].getElementResultsSummary();
-        if (ers.violations>=1) v += 1;
-        if (ers.warnings>=1) w += 1;
-        if (ers.passed>=1) p += 1;
-        if (ers.manual_checks>=1) m += 1;
-        if (ers.page>=1) pa += 1;
-        if (ers.hidden>=1) h += 1;
-      }
-      catch (e){
-        console.log("Error with rule " + rule + ": " + e)
-      }
-      
+      info.allRuleResults.push(getRuleResultsItem(ruleResults[i]));
     }
-    console.log("violations: " + v + " warnings: " + w + " manual_checks: " + m + " passed: " + p + " page: " + pa + " h: " + h);
 
+    console.log(info);
   });
 
 

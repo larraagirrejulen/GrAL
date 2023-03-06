@@ -10,6 +10,8 @@ class jsonLd{
     };
     #outcomes = {
         "FAIL": {"id": "earl:failed", "type": "earl:Fail"},
+        "UNTESTED": {"id": "earl:failed", "type": "earl:Fail"},
+        "INNAPLICABLE": {"id": "earl:failed", "type": "earl:Fail"},
         "CANNOTTELL": {"id": "earl:failed", "type": "earl:Fail"},
     };
     #successCriterias = { 

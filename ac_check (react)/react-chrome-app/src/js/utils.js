@@ -25,8 +25,14 @@ async function fetchWithTimeout(resource, options = {}) {
     const { timeout = 60000 } = options;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
-    const response = fetch(resource, {
+    const response = await fetch(resource, {
         ...options,
+        mode: "cors",
+        method: 'POST', 
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
         signal: controller.signal
     });
     clearTimeout(timer);
@@ -34,7 +40,7 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 async function fetchScraper(bodyData) {
-    const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { method: 'POST', body: bodyData });
+    const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { body: bodyData });
     if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
     const json = await response.json();
     return JSON.stringify(json["body"], null, 2);

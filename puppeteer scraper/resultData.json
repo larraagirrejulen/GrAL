@@ -81,7 +81,7 @@
             "@type": "earl:Fail"
           },
           "earl:pointer": {
-            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+            "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
             "ptr:namespace": {
               "@id": "http://www.w3.org/1999/xhtml",
               "@type": "ptr:NamespaceMapping",
