@@ -1,5 +1,5 @@
 
-const jsonLd = require('./jsonLd');
+const jsonLd = require('./jsonLd NEW');
 
 const scraper = {
 
@@ -8,20 +8,20 @@ const scraper = {
     acUrl: 'https://achecker.achecks.ca/checker/index.php',
     json: null,
 
-    async scrape(page, evaluator, evaluationUrl){
+    async scrape(page, evaluator, evaluationUrl, evaluatedPageTitle){
 
-        this.json = new jsonLd(evaluator, evaluationUrl);
+        this.json = new jsonLd(evaluator, evaluationUrl, evaluatedPageTitle);
 
         // Call to specified scraper
         var result;
         switch(evaluator){
-            case 'MV':
+            case 'mv':
                 result = this.mvScraper(page, evaluationUrl);
                 break;
-            case 'AM':
+            case 'am':
                 result = this.amScraper(page, evaluationUrl);
                 break;
-            case 'AC':
+            case 'ac':
                 result = this.acScraper(page, evaluationUrl);
                 break;
             default:
@@ -101,7 +101,7 @@ const scraper = {
 
                 const techniqueInfo = cols[1].querySelector('.collapsible-content');
                 const criteriaIds = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
-                const techniqueGuideText = techniqueInfo.querySelector("p").textContent;
+                const techniqueGuideText = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
                 
                 var casesLink = null;
                 try{
@@ -147,10 +147,10 @@ const scraper = {
                         return casesLocations;  
                     });
                     for (var k = 0, path; path = casesLocations[k]; k++){
-                        this.json.addNewElement(result["outcome"], criteria, result["criteriaDescription"], path);
+                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], path);
                     }
                 }else{
-                    this.json.addNewElement(result["outcome"], criteria, result["criteriaDescription"]);
+                    this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
                 }       
             }
         }

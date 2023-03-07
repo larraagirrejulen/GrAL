@@ -2,168 +2,42 @@
 class jsonLd{
 
     #json;
-    #elementTemplate;
     #assertors = {
-        "MV": {"name": "MAUVE Validator", "url": "http://mauve.isti.cnr.it"},
-        "AM": {"name": "AccessMonitor Validator", "url": "https://accessmonitor.acessibilidade.gov.pt"},
-        "AC": {"name": "AChecker Validator", "url": "https://achecker.achecks.ca/checker/index.php"},
+        "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
+        "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
+        "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
     };
     #outcomes = {
-        0: { outcome: "earl:passed", description: "No violations found" },
-        1: { outcome: "earl:failed", description: "Found a violation ..." },
-        2: { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
-        3: { outcome: "earl:inapplicable", description: "SC is not applicable" }
-    };
-    #successCriterias = { 
-        '1.1.1':'non-text-content',
-        '1.2.1':'audio-only-and-video-only-prerecorded',
-        '1.2.2':'captions-prerecorded',
-        '1.2.3':'audio-description-or-media-alternative-prerecorded',
-        '1.2.4':'captions-live',
-        '1.2.5':'audio-description-prerecorded',
-        '1.3.1':'info-and-relationships',
-        '1.3.2':'meaningful-sequence',
-        '1.3.3':'sensory-characteristics',
-        '1.3.4':'orientation',
-        '1.3.5':'identify-input-purpose',
-        '1.4.1':'use-of-color',
-        '1.4.2':'audio-control',
-        '1.4.3':'contrast-minimum',
-        '1.4.4':'resize-text',
-        '1.4.5':'images-of-text',
-        '1.4.10':'reflow',
-        '1.4.11':'non-text-contrast',
-        '1.4.12':'text-spacing',
-        '1.4.13':'content-on-hover-or-focus',
-        '2.1.1':'keyboard',
-        '2.1.2':'no-keyboard-trap',
-        '2.1.4':'character-key-shortcuts',
-        '2.2.1':'timing-adjustable',
-        '2.2.2':'pause-stop-hide',
-        '2.3.1':'three-flashes-or-below-threshold',
-        '2.4.1':'bypass-blocks',
-        '2.4.2':'page-titled',
-        '2.4.3':'focus-order',
-        '2.4.4':'link-purpose-in-context',
-        '2.4.5':'multiple-ways',
-        '2.4.6':'headings-and-labels',
-        '2.4.7':'focus-visible',
-        '2.5.1':'pointer-gestures',
-        '2.5.2':'pointer-cancellation',
-        '2.5.3':'label-in-name',
-        '2.5.4':'motion-actuation',
-        '3.1.1':'language-of-page',
-        '3.1.2':'language-of-parts',
-        '3.2.1':'on-focus',
-        '3.2.2':'on-input',
-        '3.2.3':'consistent-navigation',
-        '3.2.4':'consistent-identification',
-        '3.3.1':'error-identification',
-        '3.3.2':'labels-or-instructions',
-        '3.3.3':'error-suggestion',
-        '3.4.3':'error-prevention-legal-financial-data',
-        '4.1.1':'parsing',
-        '4.1.2':'name-role-value',
-        '4.1.3':'status-messages'
+        "PASS": { outcome: "earl:passed", description: "No violations found" },
+        "FAIL": { outcome: "earl:failed", description: "Found a violation ..." },
+        "CANNOTTELL": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
+        "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
     };
 
-    constructor(assertor, evaluatedPageUrl, evaluatedPageTitle){
-        
-        const url = (new URL(evaluatedPageUrl));
-        const domain = url.hostname.replace('www.','');
+    constructor(evaluator, pageUrl, pageTitle){
+
+        const siteName = (new URL(pageUrl)).hostname.replace('www.','');
 
         const date = new Date();
-        const currentDate = date.toLocaleString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZoneOffset: true,
-            timeZoneName: 'short'
-          }).replace(/ GMT\+\d+/, '');
+        const currentDate = date.toLocaleString();
 
-        this.#json = {
-            "@context":
-            {
-                "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
-                "wcag2": "http://www.w3.org/TR/WCAG21/#",
-                "earl": "http://www.w3.org/ns/earl#",
-                "dct": "http://purl.org/dc/terms/",
-                "wai": "http://www.w3.org/WAI/",
-                "sch": "http://schema.org/",
-                "xmlns": "http://xmlns.com/foaf/0.1/",
+        var json = {
 
-                "evaluationScope": "step1",
-                "siteScope": "step1a",
-                "conformanceTarget": { "@id": "step1b", "@type": "@id" },
-                "accessibilitySupportBaseline": "step1c",
-                "additionalEvalRequirement": "step1d",
-                "structuredSample": "step3a",
-                "auditResult": "step4",
-
-                "siteName": "sch:name",
-                "website": "wcag2:dfn-set-of-web-pages",
-                "webpage": "wcag2:dfn-web-page-s",
-
-                "Assertion": "earl:Assertion",
-                "test":
-                {
-                    "@id": "earl:test",
-                    "@type": "@id"
-                },
-                "assertedBy":
-                {
-                    "@id": "earl:assertedBy",
-                    "@type": "@id"
-                },
-                "subject":
-                {
-                    "@id": "earl:subject",
-                    "@type": "@id"
-                },
-                "result": "earl:result",
-                "mode":
-                {
-                    "@id": "earl:mode",
-                    "@type": "@id"
-                },
-                "outcome":
-                {
-                    "@id": "earl:outcome",
-                    "@type": "@id"
-                },
-                "pointer":
-                {
-                    "@id": "earl:pointer",
-                    "@type": "@id"
-                },
-
-                "title": "dct:title",
-                "description": "dct:description",
-                "hasPart": "dct:hasPart",
-                "creator":
-                {
-                    "@id": "dct:creator",
-                    "@type": "@id"
-                },
-
-                "id": "@id",
-                "type": "@type"
-            },
+            "@context": this.#context,
 
             "type": "Evaluation",
             "@language": "en",
-    
-            "title": "Accessibility Evaluation Report for " + domain + " Website",
+            "title": "Accessibility Evaluation Report for " + siteName + " website",
             "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-            "creator": {
-                "type": "earl:Assertor",
-                "xmlns:name": assertor
-            },
             "dct:date": currentDate,
             "dct:summary": "Undefined",
+
+            "creator": [{
+                "id": "_assertor0",
+                "type": "earl:Assertor",
+                "xmlns:name": this.#assertors[evaluator].name,
+                "description": this.#assertors[evaluator].url
+            }],
     
             "evaluationScope":
             {
@@ -175,8 +49,8 @@ class jsonLd{
                         "earl:TestSubject",
                         "sch:WebSite"
                     ],
-                    "siteName": domain,
-                    "siteScope": "Single page: " + url
+                    "siteName": siteName,
+                    "siteScope": "Single page: " + pageUrl
                 },
                 "conformanceTarget": "wai:WCAG2AA-Conformance",
                 "accessibilitySupportBaseline": "Google Chrome latest version",
@@ -188,23 +62,23 @@ class jsonLd{
                 "type": "Sample",
                 "webpage": [
                 {
-                    "id": "_:webpage",
+                    "id": "_:webpage0",
                     "@type": ["earl:TestSubject", "sch:WebPage"],
-                    "description": url + " (desktop version)",
-                    "source": url,
-                    "title": evaluatedPageTitle,
+                    "description": pageUrl,
+                    "source": "_:website",
+                    "title": pageTitle,
                     "tested": true
                 }]
             },
     
-            "auditResult": []
+            "auditSample": []
         };
 
-        Object.keys(this.#successCriterias).forEach(function(key) {
-            this.#json["@graph"][0].auditResult.push(
+        for (const key in this.#successCriterias){
+            json.auditSample.push(
                 {
                     "type": "Assertion",
-                    "test": "WCAG2:" + this.#successCriterias[key],
+                    "test": "wcag2:" + this.#successCriterias[key].id,
                     "subject": "_:website",
                     "result":
                     {
@@ -214,55 +88,448 @@ class jsonLd{
                     "hasPart": []
                 }
             );
-        })
+        };
 
-        this.#elementTemplate = {
-			"auditID" : "????",
-			"earl:assertedBy" : {
-				"doap:name" : this.#assertors[assertor].name,
-				"@id" : this.#assertors[assertor].url, 
-				"@type" : "earl:Software"
-			},
-			"earl:mode" : {
-				"@id" : "earl:automatic",
-				"@type" : "earl:TestMode"
-			},
-			"earl:result" : {},
-			"earl:subject" : {
-				"@id" : "????",
-				"dcterms:source" : evaluatedPageUrl,
-				"@type" : "earl:TestSubject"
-			},
-			"earl:test" : {},
-			"@id" : "????",
-			"@type" : "earl:Assertion"
-		};
+        this.#json = json;
     }
 
     getJson(){
         return this.#json;
     }
 
-    getNewAuditResult(successCriteriaNumber, outcome, description){
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null){
 
-        const successCriteriaId = this.#successCriterias[successCriteriaNumber]
+        if (this.#successCriterias[criteriaNumber].conformanceLevel == "AAA") return; // Ignore AAA level
+
+        const criteriaId = this.#successCriterias[criteriaNumber].id
+
+        const matches = this.#json.auditSample.filter(assertion => assertion['test'] === "wcag2:" + criteriaId)[0]
+
+        const resultOutcome = this.#outcomes[outcome].outcome
+
+        
+        const currentGeneralOutcome = matches.result.outcome
+        switch (currentGeneralOutcome) {
+            case "earl:untested":
+                matches.result.outcome = resultOutcome
+                matches["assertedBy"] = "_assertor0",
+                matches["mode"] = "earl:automatic"
+                break;    
+            case "earl:passed":
+                matches.result.outcome = resultOutcome
+                break;
+            case "earl:cantTell":
+                if(resultOutcome != "earl:passed"){
+                    matches.result.outcome = resultOutcome
+                }
+                break;
+        }
 
 
-        return {
+        const assertion = {
             "type": "Assertion",
-            "test": "WCAG2:" + successCriteriaId,
-            "assertedBy": "_:evaluator",
-            "subject": "_:website",
+            "testcase": "wcag2:" + criteriaId,
+            "assertedBy": "_assertor0",
+            "subject": "_:webpage0",
+            "mode": "earl:automatic",
             "result":
             {
-                "outcome": this.#outcomes[outcome].outcome,
-                "description": this.#outcomes[outcome].description,
-                "date": currentDate
-            },
-            "mode": "earl:automatic",
-            "hasPart": []
+                "outcome": resultOutcome,
+                "description": criteriaDescription
+            }
         }
+
+        if(path != null){
+
+            var correctPath = "//" + path
+            correctPath = correctPath.replace(/ \> /g, "/")
+            correctPath = correctPath.replace(/:nth-child\(/g, "[")
+            correctPath = correctPath.replaceAll(")", "]")
+
+            assertion.result["pointer"] = {
+                "id": "_:pointer",
+                "type": [
+                    "ptr:ExpressionPointer",
+                    "ptr:XPathPointer"
+                ],
+                "ptr:expression" : correctPath, 
+                "ptr:namespace" : { 
+                    "@id" : "http://www.w3.org/1999/xhtml", 
+                    "@type" : "ptr:NamespaceMapping", 
+                    "ptr:namespaceName" : "http://www.w3.org/1999/xhtml", 
+                    "ptr:prefix" :  "" 
+                }
+            }
+        }
+
+        matches.hasPart.push(assertion);
     }
+
+    #context = {
+        "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
+        "wcag2": "http://www.w3.org/TR/WCAG21/#",
+        "earl": "http://www.w3.org/ns/earl#",
+        "dct": "http://purl.org/dc/terms/",
+        "wai": "http://www.w3.org/WAI/",
+        "sch": "http://schema.org/",
+        "xmlns": "http://xmlns.com/foaf/0.1/",
+        "ptr": "http://www.w3.org/2009/pointers#",
+        
+        "evaluationScope": "step1",
+        "siteScope": "step1a",
+        "conformanceTarget": { "@id": "step1b", "@type": "@id" },
+        "accessibilitySupportBaseline": "step1c",
+        "additionalEvalRequirement": "step1d",
+        "structuredSample": "step3a",
+        "auditSample": "step4",
+
+        "siteName": "sch:name",
+        "website": "wcag2:dfn-set-of-web-pages",
+        "webpage": "wcag2:dfn-web-page-s",
+
+        "Assertion": "earl:Assertion",
+        "test":
+        {
+            "@id": "earl:test",
+            "@type": "@id"
+        },
+        "assertedBy":
+        {
+            "@id": "earl:assertedBy",
+            "@type": "@id"
+        },
+        "subject":
+        {
+            "@id": "earl:subject",
+            "@type": "@id"
+        },
+        "result": "earl:result",
+        "mode":
+        {
+            "@id": "earl:mode",
+            "@type": "@id"
+        },
+        "outcome":
+        {
+            "@id": "earl:outcome",
+            "@type": "@id"
+        },
+        "pointer":
+        {
+            "@id": "earl:pointer",
+            "@type": "@id"
+        },
+
+        "title": "dct:title",
+        "description": "dct:description",
+        "hasPart": "dct:hasPart",
+        "creator":
+        {
+            "@id": "dct:creator",
+            "@type": "@id"
+        },
+
+        "id": "@id",
+        "type": "@type"
+    }
+
+    #successCriterias = { 
+        "1.1.1": {
+            "id": "non-text-content",
+            "conformanceLevel": "A"
+        },
+        "1.2.1": {
+            "id": "audio-only-and-video-only-prerecorded",
+            "conformanceLevel": "A"
+        },
+        "1.2.2": {
+            "id": "captions-prerecorded",
+            "conformanceLevel": "A"
+        },
+        "1.2.3": {
+            "id": "audio-description-or-media-alternative-prerecorded",
+            "conformanceLevel": "A"
+        },
+        "1.2.4": {
+            "id": "captions-live",
+            "conformanceLevel": "AA"
+        },
+        "1.2.5": {
+            "id": "audio-description-prerecorded",
+            "conformanceLevel": "AA"
+        },
+        "1.2.6": {
+            "id": "sign-language-prerecorded",
+            "conformanceLevel": "AAA"
+        },
+        "1.2.7": {
+            "id": "extended-audio-description-prerecorded",
+            "conformanceLevel": "AAA"
+        },
+        "1.2.8": {
+            "id": "media-alternative-prerecorded",
+            "conformanceLevel": "AAA"
+        },
+        "1.2.9": {
+            "id": "audio-only-live",
+            "conformanceLevel": "AAA"
+        },
+        "1.3.1": {
+            "id": "info-and-relationships",
+            "conformanceLevel": "A"
+        },
+        "1.3.2": {
+            "id": "meaningful-sequence",
+            "conformanceLevel": "A"
+        },
+        "1.3.3": {
+            "id": "sensory-characteristics",
+            "conformanceLevel": "A"
+        },
+        "1.3.4": {
+            "id": "orientation",
+            "conformanceLevel": "AA"
+        },
+        "1.3.5": {
+            "id": "identify-input-purpose",
+            "conformanceLevel": "AA"
+        },
+        "1.3.6": {
+            "id": "identify-purpose",
+            "conformanceLevel": "AAA"
+        },
+        "1.4.1": {
+            "id": "use-of-color",
+            "conformanceLevel": "A"
+        },
+        "1.4.2": {
+            "id": "audio-control",
+            "conformanceLevel": "A"
+        },
+        "1.4.3": {
+            "id": "contrast-minimum",
+            "conformanceLevel": "AA"
+        },
+        "1.4.4": {
+            "id": "resize-text",
+            "conformanceLevel": "AA"
+        },
+        "1.4.5": {
+            "id": "images-of-text",
+            "conformanceLevel": "AA"
+        },
+        "1.4.6": {
+            "id": "contrast-enhanced",
+            "conformanceLevel": "AAA"
+        },
+        "1.4.7": {
+            "id": "low-or-no-background-audio",
+            "conformanceLevel": "AAA"
+        },
+        "1.4.8": {
+            "id": "visual-presentation",
+            "conformanceLevel": "AAA"
+        },
+        "1.4.9": {
+            "id": "images-of-text-no-exception",
+            "conformanceLevel": "AAA"
+        },
+        "1.4.10": { "id": "reflow", "conformanceLevel": "AA" },
+        "1.4.11": {
+            "id": "non-text-contrast",
+            "conformanceLevel": "AA"
+        },
+        "1.4.12": {
+            "id": "text-spacing",
+            "conformanceLevel": "AA"
+        },
+        "1.4.13": {
+            "id": "content-on-hover-or-focus",
+            "conformanceLevel": "AA"
+        },
+        "2.1.1": { "id": "keyboard", "conformanceLevel": "A" },
+        "2.1.2": {
+            "id": "no-keyboard-trap",
+            "conformanceLevel": "A"
+        },
+        "2.1.3": {
+            "id": "keyboard-no-exception",
+            "conformanceLevel": "AAA"
+        },
+        "2.1.4": {
+            "id": "character-key-shortcuts",
+            "conformanceLevel": "A"
+        },
+        "2.2.1": {
+            "id": "timing-adjustable",
+            "conformanceLevel": "A"
+        },
+        "2.2.2": {
+            "id": "pause-stop-hide",
+            "conformanceLevel": "A"
+        },
+        "2.2.3": {
+            "id": "no-timing",
+            "conformanceLevel": "AAA"
+        },
+        "2.2.4": {
+            "id": "interruptions",
+            "conformanceLevel": "AAA"
+        },
+        "2.2.5": {
+            "id": "re-authenticating",
+            "conformanceLevel": "AAA"
+        },
+        "2.2.6": {
+            "id": "timeouts",
+            "conformanceLevel": "AAA"
+        },
+        "2.3.1": {
+            "id": "three-flashes-or-below-threshold",
+            "conformanceLevel": "A"
+        },
+        "2.3.2": {
+            "id": "three-flashes",
+            "conformanceLevel": "AAA"
+        },
+        "2.3.3": {
+            "id": "animation-from-interactions",
+            "conformanceLevel": "AAA"
+        },
+        "2.4.1": {
+            "id": "bypass-blocks",
+            "conformanceLevel": "A"
+        },
+        "2.4.2": {
+            "id": "page-titled",
+            "conformanceLevel": "A"
+        },
+        "2.4.3": {
+            "id": "focus-order",
+            "conformanceLevel": "A"
+        },
+        "2.4.4": {
+            "id": "link-purpose-in-context",
+            "conformanceLevel": "A"
+        },
+        "2.4.5": {
+            "id": "multiple-ways",
+            "conformanceLevel": "AA"
+        },
+        "2.4.6": {
+            "id": "headings-and-labels",
+            "conformanceLevel": "AA"
+        },
+        "2.4.7": {
+            "id": "focus-visible",
+            "conformanceLevel": "AA"
+        },
+        "2.4.8": {
+            "id": "location",
+            "conformanceLevel": "AAA"
+        },
+        "2.4.9": {
+            "id": "link-purpose-link-only",
+            "conformanceLevel": "AAA"
+        },
+        "2.4.10": {
+            "id": "section-headings",
+            "conformanceLevel": "AAA"
+        },
+        "2.5.1": {
+            "id": "pointer-gestures",
+            "conformanceLevel": "A"
+        },
+        "2.5.2": {
+            "id": "pointer-cancellation",
+            "conformanceLevel": "A"
+        },
+        "2.5.3": {
+            "id": "label-in-name",
+            "conformanceLevel": "A"
+        },
+        "2.5.4": {
+            "id": "motion-actuation",
+            "conformanceLevel": "A"
+        },
+        "2.5.5": {
+            "id": "target-size",
+            "conformanceLevel": "AAA"
+        },
+        "2.5.6": {
+            "id": "concurrent-input-mechanisms",
+            "conformanceLevel": "AAA"
+        },
+        "3.1.1": {
+            "id": "language-of-page",
+            "conformanceLevel": "A"
+        },
+        "3.1.2": {
+            "id": "language-of-parts",
+            "conformanceLevel": "AA"
+        },
+        "3.1.3": {
+            "id": "unusual-words",
+            "conformanceLevel": "AAA"
+        },
+        "3.1.4": {
+            "id": "abbreviations",
+            "conformanceLevel": "AAA"
+        },
+        "3.1.5": {
+            "id": "reading-level",
+            "conformanceLevel": "AAA"
+        },
+        "3.1.6": {
+            "id": "pronunciation",
+            "conformanceLevel": "AAA"
+        },
+        "3.2.1": { "id": "on-focus", "conformanceLevel": "A" },
+        "3.2.2": { "id": "on-input", "conformanceLevel": "A" },
+        "3.2.3": {
+            "id": "consistent-navigation",
+            "conformanceLevel": "AA"
+        },
+        "3.2.4": {
+            "id": "consistent-identification",
+            "conformanceLevel": "AA"
+        },
+        "3.2.5": {
+            "id": "change-on-request",
+            "conformanceLevel": "AAA"
+        },
+        "3.3.1": {
+            "id": "error-identification",
+            "conformanceLevel": "A"
+        },
+        "3.3.2": {
+            "id": "labels-or-instructions",
+            "conformanceLevel": "A"
+        },
+        "3.3.3": {
+            "id": "error-suggestion",
+            "conformanceLevel": "AA"
+        },
+        "3.3.4": {
+            "id": "error-prevention-legal-financial-data",
+            "conformanceLevel": "AA"
+        },
+        "3.3.5": { "id": "help", "conformanceLevel": "AAA" },
+        "3.3.6": {
+            "id": "error-prevention-all",
+            "conformanceLevel": "AAA"
+        },
+        "4.1.1": { "id": "parsing", "conformanceLevel": "A" },
+        "4.1.2": {
+            "id": "name-role-value",
+            "conformanceLevel": "A"
+        },
+        "4.1.3": {
+            "id": "status-messages",
+            "conformanceLevel": "AA"
+        }
+    };
+
 
 }
 

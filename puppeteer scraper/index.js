@@ -31,7 +31,7 @@ http.createServer((request, response) => {
         const requestJson = JSON.parse(requestBody);
         console.log("Request: " + requestBody);
     
-        var body = await scraperController(requestJson["mv"], requestJson["am"], requestJson["ac"], requestJson["url"]);
+        var body = await scraperController(requestJson["mv"], requestJson["am"], requestJson["ac"], requestJson["url"], requestJson["title"]);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         const responseBody = { headers, method, url, body };

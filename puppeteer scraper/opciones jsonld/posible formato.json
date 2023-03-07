@@ -8,6 +8,7 @@
         "wai": "http://www.w3.org/WAI/",
         "sch": "http://schema.org/",
         "xmlns": "http://xmlns.com/foaf/0.1/",
+        "ptr" : "http://www.w3.org/2009/pointers#",
 
         "evaluationScope": "step1",
         "siteScope": "step1a",
@@ -73,8 +74,9 @@
     "title": "Accessibility Evaluation Report for AccessMonitor Website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
     "creator": {
+        "id": "https://accessmonitor.acessibilidade.gov.pt",
         "type": "earl:Assertor",
-        "xmlns:name": "Access_Monitor & Achecker"
+        "xmlns:name": "Access_Monitor"
     },
     "dct:date": "2019-09-05 11:27:55 +0200",
     "dct:summary": "There have been found some violations.",
@@ -207,7 +209,9 @@
             "outcome": "earl:untested",
             "description": ""
         },
-        "hasPart": []
+        "hasPart": [],
+        "assertedBy": "_:evaluator",
+        "mode": "earl:automatic"
     },
     {
         "type": "Assertion",

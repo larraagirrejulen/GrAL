@@ -26,9 +26,9 @@ const withPage = (browser) => async (fn) => {
 	}
 }
 
-async function scrapeSelected(MV, AM, AC, evaluationUrl){
+async function scrapeSelected(MV, AM, AC, evaluationUrl, evaluatedPageTitle){
 
-	const evaluators = ["MV", "AM", "AC"];
+	const evaluators = ["mv", "am", "ac"];
 	const selectedEvaluators = [MV, AM, AC];
 	
 	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.splice(i,1);
@@ -36,7 +36,7 @@ async function scrapeSelected(MV, AM, AC, evaluationUrl){
 	const results = await withBrowser(async (browser) => {
 		return Promise.all(evaluators.map(async (evaluator) => {
 			return withPage(browser)(async (page) => {
-				return scraper.scrape(page, evaluator, evaluationUrl);
+				return scraper.scrape(page, evaluator, evaluationUrl, evaluatedPageTitle);
 			});
 		}));
 	});
@@ -51,4 +51,4 @@ async function scrapeSelected(MV, AM, AC, evaluationUrl){
 
 }
 
-module.exports = (MV, AM, AC, evaluationUrl) => scrapeSelected(MV, AM, AC, evaluationUrl)
+module.exports = (MV, AM, AC, evaluationUrl, evaluatedPageTitle) => scrapeSelected(MV, AM, AC, evaluationUrl, evaluatedPageTitle)

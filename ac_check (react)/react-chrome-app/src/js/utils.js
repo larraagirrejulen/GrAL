@@ -55,7 +55,7 @@ export async function getEvaluation(checkboxes, setIsLoading){
     console.log(AM, AC, MV, A11Y);
 
     if (AM || AC || MV){
-        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href});
+        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         var json = await fetchScraper(bodyData);
         console.log(json);
 
