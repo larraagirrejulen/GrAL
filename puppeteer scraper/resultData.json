@@ -62,16 +62,14 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "7/3/2023, 18:30:40",
-    "dct:summary": "Undefined",
-    "creator": [
-      {
-        "id": "_assertor0",
-        "type": "earl:Assertor",
-        "xmlns:name": "AccessMonitor",
-        "description": "https://accessmonitor.acessibilidade.gov.pt"
-      }
-    ],
+    "dct:date": "7/3/2023, 20:15:20",
+    "dct:summary": "Some errors where found...",
+    "creator": {
+      "id": "_:assertor",
+      "type": "earl:Assertor",
+      "xmlns:name": "AccessMonitor",
+      "description": "https://accessmonitor.acessibilidade.gov.pt"
+    },
     "evaluationScope": {
       "type": "EvaluationScope",
       "website": {
@@ -110,7 +108,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
-          "description": ""
+          "description": "Found a violation ..."
         },
         "hasPart": [
           {
@@ -128,7 +126,9 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]"
+                ],
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -153,632 +153,34 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[14]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[5]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[6]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[8]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[9]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[12]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[14]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[5]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[6]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[8]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[9]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[12]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -803,32 +205,10 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -938,7 +318,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
-          "description": ""
+          "description": "No violations found"
         },
         "hasPart": [
           {
@@ -956,218 +336,17 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "//html/body[2]/nav[3]/h1[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "With the appearance of the CSS all the HTML elements used to control styles of the webpages became obsolete. Elements as: b, big, blink, center, font, i, s, strike, u became obsolete - use CSS to replace them."
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -1257,7 +436,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
-          "description": ""
+          "description": "Found a violation ..."
         },
         "hasPart": [
           {
@@ -1275,107 +454,13 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -1625,7 +710,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
-          "description": ""
+          "description": "Found possible applicable issue, but not sure..."
         },
         "hasPart": [
           {
@@ -1643,57 +728,10 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:bypass-blocks",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "Check if the links that I found provide the most suitable skips to the content; if  they are  always visible or if become visible when receiving focus by keyboard.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]"
                 ],
-                "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:bypass-blocks",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:cantTell",
-              "description": "Check if the links that I found provide the most suitable skips to the content; if  they are  always visible or if become visible when receiving focus by keyboard.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -1713,7 +751,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
-          "description": ""
+          "description": "No violations found"
         },
         "hasPart": [
           {
@@ -1731,7 +769,9 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/head[1]/title[7]",
+                "ptr:expression": [
+                  "//html/head[1]/title[7]"
+                ],
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -1761,7 +801,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
-          "description": ""
+          "description": "Found a violation ..."
         },
         "hasPart": [
           {
@@ -1779,157 +819,15 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:failed",
-              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -2069,7 +967,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
-          "description": ""
+          "description": "Found possible applicable issue, but not sure..."
         },
         "hasPart": [
           {
@@ -2087,7 +985,9 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html",
+                "ptr:expression": [
+                  "//html"
+                ],
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -2167,7 +1067,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
-          "description": ""
+          "description": "No violations found"
         },
         "hasPart": [
           {
@@ -2185,32 +1085,10 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:on-input",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
+                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -2270,7 +1148,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
-          "description": ""
+          "description": "No violations found"
         },
         "hasPart": [
           {
@@ -2288,32 +1166,10 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:labels-or-instructions",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",
@@ -2373,7 +1229,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
-          "description": ""
+          "description": "Found a violation ..."
         },
         "hasPart": [
           {
@@ -2397,7 +1253,7 @@
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
-          "description": ""
+          "description": "No violations found"
         },
         "hasPart": [
           {
@@ -2415,32 +1271,10 @@
                   "ptr:ExpressionPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
-                }
-              }
-            }
-          },
-          {
-            "type": "Assertion",
-            "testcase": "wcag2:name-role-value",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
-            "mode": "earl:automatic",
-            "result": {
-              "outcome": "earl:passed",
-              "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
+                "ptr:expression": [
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
                 "ptr:namespace": {
                   "@id": "http://www.w3.org/1999/xhtml",
                   "@type": "ptr:NamespaceMapping",

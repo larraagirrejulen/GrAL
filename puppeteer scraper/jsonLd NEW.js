@@ -31,13 +31,13 @@ class jsonLd{
             "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
             "dct:date": currentDate,
             "dct:summary": "Undefined",
-
-            "creator": [{
-                "id": "_assertor0",
+            
+            "creator": {
+                "id": "_:assertor",
                 "type": "earl:Assertor",
                 "xmlns:name": this.#assertors[evaluator].name,
                 "description": this.#assertors[evaluator].url
-            }],
+            },
     
             "evaluationScope":
             {
@@ -54,7 +54,7 @@ class jsonLd{
                 },
                 "conformanceTarget": "wai:WCAG2AA-Conformance",
                 "accessibilitySupportBaseline": "Google Chrome latest version",
-                "additionalEvalRequirement": "The report will include a list of all errors identified by the evaluator, rather than examples only"
+                "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
             },
     
             "structuredSample":
@@ -94,6 +94,13 @@ class jsonLd{
     }
 
     getJson(){
+
+        if(this.#json.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
+            this.#json["dct:summary"] = "Some errors where found..."
+        } else{
+            this.#json["dct:summary"] = "No errors where found!!!"
+        }
+
         return this.#json;
     }
 
@@ -103,24 +110,64 @@ class jsonLd{
 
         const criteriaId = this.#successCriterias[criteriaNumber].id
 
-        const matches = this.#json.auditSample.filter(assertion => assertion['test'] === "wcag2:" + criteriaId)[0]
+        const siteAssertion = this.#json.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
 
         const resultOutcome = this.#outcomes[outcome].outcome
 
-        
-        const currentGeneralOutcome = matches.result.outcome
+        var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
+
+        var correctPath = "//" + path
+        correctPath = correctPath.replace(/ \> /g, "/")
+        correctPath = correctPath.replace(/:nth-child\(/g, "[")
+        correctPath = correctPath.replaceAll(")", "]")
+
+        if(pageAssertion.length > 0){
+            pageAssertion = pageAssertion[0];
+
+            if(path != null){
+                if("pointer" in pageAssertion.result){
+                    if(!pageAssertion.result.pointer["ptr:expression"].includes(correctPath)){
+                        pageAssertion.result.pointer["ptr:expression"].push(correctPath)
+                    }
+                } else{
+                    pageAssertion.result["pointer"] = {
+                        "id": "_:pointer",
+                        "type": [
+                            "ptr:ExpressionPointer",
+                            "ptr:XPathPointer"
+                        ],
+                        "ptr:expression": [correctPath], 
+                        "ptr:namespace" : { 
+                            "@id" : "http://www.w3.org/1999/xhtml", 
+                            "@type" : "ptr:NamespaceMapping", 
+                            "ptr:namespaceName" : "http://www.w3.org/1999/xhtml", 
+                            "ptr:prefix" :  "" 
+                        }
+                    }
+                }
+            }
+
+            return;
+        }
+
+
+
+        const currentGeneralOutcome = siteAssertion.result.outcome
         switch (currentGeneralOutcome) {
             case "earl:untested":
-                matches.result.outcome = resultOutcome
-                matches["assertedBy"] = "_assertor0",
-                matches["mode"] = "earl:automatic"
+                siteAssertion.result.outcome = resultOutcome
+                siteAssertion.result.description = this.#outcomes[outcome].description
+                siteAssertion["assertedBy"] = "_assertor0",
+                siteAssertion["mode"] = "earl:automatic"
                 break;    
             case "earl:passed":
-                matches.result.outcome = resultOutcome
+                siteAssertion.result.outcome = resultOutcome
+                siteAssertion.result.description = this.#outcomes[outcome].description
                 break;
             case "earl:cantTell":
                 if(resultOutcome != "earl:passed"){
-                    matches.result.outcome = resultOutcome
+                    siteAssertion.result.outcome = resultOutcome
+                    siteAssertion.result.description = this.#outcomes[outcome].description
                 }
                 break;
         }
@@ -141,18 +188,13 @@ class jsonLd{
 
         if(path != null){
 
-            var correctPath = "//" + path
-            correctPath = correctPath.replace(/ \> /g, "/")
-            correctPath = correctPath.replace(/:nth-child\(/g, "[")
-            correctPath = correctPath.replaceAll(")", "]")
-
             assertion.result["pointer"] = {
                 "id": "_:pointer",
                 "type": [
                     "ptr:ExpressionPointer",
                     "ptr:XPathPointer"
                 ],
-                "ptr:expression" : correctPath, 
+                "ptr:expression": [correctPath], 
                 "ptr:namespace" : { 
                     "@id" : "http://www.w3.org/1999/xhtml", 
                     "@type" : "ptr:NamespaceMapping", 
@@ -162,7 +204,7 @@ class jsonLd{
             }
         }
 
-        matches.hasPart.push(assertion);
+        siteAssertion.hasPart.push(assertion);
     }
 
     #context = {
