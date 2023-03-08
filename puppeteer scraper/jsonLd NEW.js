@@ -124,7 +124,7 @@ class jsonLd{
 
             if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
                 pageAssertion.result.locationPointersGroup.push({
-                    "id": "data:" + hash,
+                    "id": "data:sha256:" + hash,
                     "type": [
                         "ptr:groupPointer",
                         "ptr:XPathPointer"
@@ -177,7 +177,7 @@ class jsonLd{
         if(path != null){
 
             assertion.result.locationPointersGroup.push({
-                "id": "data:" + hash,
+                "id": "data:sha256:" + hash,
                 "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
@@ -556,8 +556,6 @@ class jsonLd{
             "conformanceLevel": "AA"
         }
     };
-
-
 }
 
 module.exports = jsonLd;
