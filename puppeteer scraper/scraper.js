@@ -1,5 +1,6 @@
 
 const jsonLd = require('./jsonLd NEW');
+const { createHash } = require('crypto');
 
 const scraper = {
 
@@ -147,7 +148,13 @@ const scraper = {
                         return casesLocations;  
                     });
                     for (var k = 0, path; path = casesLocations[k]; k++){
-                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], path);
+                        var correctPath = "//" + path
+                        correctPath = correctPath.replace(/ \> /g, "/")
+                        correctPath = correctPath.replace(/:nth-child\(/g, "[")
+                        correctPath = correctPath.replaceAll(")", "]")
+                        const hashPath = createHash('sha256').update(correctPath).digest('hex');
+                        
+                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath);
                     }
                 }else{
                     this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);

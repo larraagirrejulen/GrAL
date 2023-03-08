@@ -44,9 +44,11 @@
         "@id": "earl:outcome",
         "@type": "@id"
       },
-      "pointer": {
-        "@id": "earl:pointer",
-        "@type": "@id"
+      "locationPointersGroup": "ptr:PointersGroup",
+      "elementPointersGroup": "ptr:PointersGroup",
+      "namespace": {
+        "@id": "ptr:namespace",
+        "@type": "ptr:NamespaceMapping"
       },
       "title": "dct:title",
       "description": "dct:description",
@@ -62,7 +64,7 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "7/3/2023, 20:15:20",
+    "dct:date": "8/3/2023, 8:33:50",
     "dct:summary": "Some errors where found...",
     "creator": {
       "id": "_:assertor",
@@ -83,7 +85,7 @@
       },
       "conformanceTarget": "wai:WCAG2AA-Conformance",
       "accessibilitySupportBaseline": "Google Chrome latest version",
-      "additionalEvalRequirement": "The report will include a list of all errors identified by the evaluator, rather than examples only"
+      "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
     },
     "structuredSample": {
       "type": "Sample",
@@ -120,22 +122,17 @@
             "result": {
               "outcome": "earl:failed",
               "description": "Verify if the alternative textual equivalent found in the graphic buttons serves the equal information or function performed by the graphic button on the page.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:66df852b45fd80c2a954ec134048f1f051465b3d3c71d3da00e5cefb576939ea",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           },
           {
@@ -147,47 +144,242 @@
             "result": {
               "outcome": "earl:cantTell",
               "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[14]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[5]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[6]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[8]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[9]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[12]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:f9656cce8df7f8d203c6db865705bfb79fc406a629346cc9891babd8d955f39d",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:1a4ae13293eb11d10fe3c8f79ce11f1c4958d13d86d6bf3eac5e6d53c01b61d4",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:02fbed30b8b512e2d9acf86abcc69048dc1579ea05b5da01cc1501a346fa2f6c",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8c8d506e5834ad0464d2af5ae598d8e0e49b9059c5cd7e297e2aba60d001d4cf",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:e5b3ee9e33d44210b039cfc815e292e508d3a641cbd8f614236267d21c417719",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:4f62cf4dbe572f1ca1fce0d0679d089a656391d339fc45c67fcd0f163dab2450",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:d73103d5fa81d0a74159d76f23341627288e26ab0434464bb978f7da609b5194",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[14]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8c1181fef5549ed303f096c01eee55098650335cb055066f8aa400e6f479c342",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:135489923d24565e0194efd9e928d7ba16a605881219ec19e1085e1953c734ba",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:96c363b84d508237ba0da2dbbc6b4ef620cc92ad924328efd25efc9d2add1ed5",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:ca9f1d92d4f10bab9dadc005397a7a5f737b27c9c4aaecc2bd64a4a50a2f0446",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:a1a2426d25d2a6924f22d2860885999ff18bbee221403f5df63efcd7f130d55f",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[5]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:df2320d2b9e00389f3e6cb6467d22765bcefe82b15b584393181aad8f8026d59",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[6]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:dd57242c23a12260b69791bf32e0a5747fe19892f49e07c4ebb7c0195388d19c",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:6b6553efba40a0fd2e42e8bafcb3f633444f776c2620e4b5e89535022c683c51",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[8]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:1da69a4a1cf1bf57e930e403428c28eed54504c4b18cf5137fd684c33316f07d",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[9]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:c29f28a8964c6e64e479c9135f2c426c5483bc4bffa7fb8afd650f67cb4494ba",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:5a9b8d603c30fdefd63fcc64d6d4cf77c96bc920f84ce6d3cc31ba9378e9fd41",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8394cbfc07421f6b083edc898427d4dc494884a491def50d1c6f4c1f47f0f006",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[12]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:21270229587fd6fe3342579f5163bceba6d4ce3ed3a35adfe7d746aa122f3c3f",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:c4ef1071176b7c4ceb80ab91e3d0ae04ed2ac19a0b3eb3024c158a72a1842dde",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:d3d32e0bed4cc414dd69ef4006a4e315b4225df0090fe3a17ae192c4e314a64f",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:e3654e0f22afdf1cf4339918e332d6dfbf21793aa81edea224d1781498fc2f6a",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8fedf59f8fd75db471edf92f331b354defdef8852484b2cb0d80d603a5cb2138",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:e229ed99d850cdc41b38c672ab167a76980a4084e892a1fe47eb694ec168e6ec",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8e87ca21aa3180560760c101714e2bef19b691c9d53ea22c2827cd1492c99640",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           },
           {
@@ -199,23 +391,26 @@
             "result": {
               "outcome": "earl:passed",
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -330,30 +525,89 @@
             "result": {
               "outcome": "earl:passed",
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                  "//html/body[2]/nav[3]/h1[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8fc21a45e0c02e3f1501d808c88dab489056c9f2a4e58ab9f3f7bdeaaef9adcf",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:4b3534fe9595c06e5a4106e2b3ceb2083988566d11e6532fcf36a6796e49f635",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:4f7c709636a9a7391bac3cc777ab2284123db7e86ce55f12cdd65cc6d1f65ba0",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:3d511894466b6591d5c29e15639ed688ef33a9a446443aa0f61d9dba82ef52ab",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:59d7357e22ebdd64a675249ac65692b4376e300778df622f76f95b27c5655ab5",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:953050c22c3192c8c63e618089e17c8382fbd9b18861b9fd25e2e7f5af625c16",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:0f658fb5953b83458f25d08c04d16eb023fcaa24c975efcc81f95cd7837dca5d",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -448,26 +702,53 @@
             "result": {
               "outcome": "earl:failed",
               "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:a3199de4e7e6456ba3d4c33649b9cfadeec9c9105c22c9b7e2224cdd073799a6",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:5dce357f39a4fb8035248f098538b5783d16ff08c870c40bc4eb727d3cc76291",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:36de01dc56737dc2bf1d8cd06f7786df97fdb39b82936d82445bf3c61c2392e7",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:98014f6535ffb26d050e6502bb481b2fdedd84b207f416378a1dc9e251a84ff0",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:3c28ecb0e0db88f2abbc159e52404b703f5d3c64872e85084d0052be9a2e007b",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -722,23 +1003,35 @@
             "result": {
               "outcome": "earl:cantTell",
               "description": "Make available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:9a6fef0b51c0afd8eb67fed338da6eb576b82e00dc1cec62f626ba889e571677",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:9a6fef0b51c0afd8eb67fed338da6eb576b82e00dc1cec62f626ba889e571677",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:b1df18a2594d97703a6abeb94e5b4109fd4233310c785c201591c88655c2d68c",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -763,22 +1056,17 @@
             "result": {
               "outcome": "earl:passed",
               "description": "Take note that the <title> element should only appear once in the webpage.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/head[1]/title[7]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:911f8caacb532ae9b74e455b1fc55e3948a69b16a29bf509adb26668cdf84035",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/head[1]/title[7]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -813,28 +1101,71 @@
             "result": {
               "outcome": "earl:failed",
               "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:3753a9fa8d9424375b4f79b466e833d01df5bc177521e531ae69da6d457d9cb3",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:ac0fd7d5f1359ace36e447c350d33d527a0e8d79c929fab72fe90fa2060cc35a",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:27af43fa5db8855a6f4ed685d08cba3eccdca3ad0777fc745129f6c508cbb841",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:0a713d9950a63196f9d00a7dd52b0b46fbb8a9d2667709e539ff3c021c67fc71",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:3c489a8413692f534a1d7afc752cb7e4b9a4fbed3c5287afb41e629e141060ea",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:6e58b8d2b25ef8dd4c045d13d61e87624c41cbdaa52e47763ce9d400a76a308a",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:4cfb92eef0bb7758159f9eebabe93d054d00ce007d5293b0ebdfa5761f1fecf3",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -979,22 +1310,17 @@
             "result": {
               "outcome": "earl:cantTell",
               "description": "The HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:65f606cd4ca3a1ec034530bcba87d42065180d7153afadd520c507409b83531b",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -1079,23 +1405,26 @@
             "result": {
               "outcome": "earl:passed",
               "description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
-                  "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:d5f0aed94c18f91454b716d96e21d449d5136c47ec2309103f37e3dcfaba961b",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:aea7480de4ca14089cf1d4d958a0c1a8f6be7afdd7eb1e2eafe0c0f76d4d4985",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -1160,23 +1489,26 @@
             "result": {
               "outcome": "earl:passed",
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],
@@ -1240,7 +1572,8 @@
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:failed",
-              "description": "HTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies."
+              "description": "HTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.",
+              "locationPointersGroup": []
             }
           }
         ],
@@ -1265,23 +1598,26 @@
             "result": {
               "outcome": "earl:passed",
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
-              "pointer": {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:ExpressionPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": [
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                  "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]"
-                ],
-                "ptr:namespace": {
-                  "@id": "http://www.w3.org/1999/xhtml",
-                  "@type": "ptr:NamespaceMapping",
-                  "ptr:namespaceName": "http://www.w3.org/1999/xhtml",
-                  "ptr:prefix": ""
+              "locationPointersGroup": [
+                {
+                  "id": "data:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
                 }
-              }
+              ]
             }
           }
         ],

@@ -1,4 +1,6 @@
 
+
+
 class jsonLd{
 
     #json;
@@ -104,7 +106,7 @@ class jsonLd{
         return this.#json;
     }
 
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null){
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, hash = null){
 
         if (this.#successCriterias[criteriaNumber].conformanceLevel == "AAA") return; // Ignore AAA level
 
@@ -116,35 +118,20 @@ class jsonLd{
 
         var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
 
-        var correctPath = "//" + path
-        correctPath = correctPath.replace(/ \> /g, "/")
-        correctPath = correctPath.replace(/:nth-child\(/g, "[")
-        correctPath = correctPath.replaceAll(")", "]")
 
         if(pageAssertion.length > 0){
             pageAssertion = pageAssertion[0];
 
-            if(path != null){
-                if("pointer" in pageAssertion.result){
-                    if(!pageAssertion.result.pointer["ptr:expression"].includes(correctPath)){
-                        pageAssertion.result.pointer["ptr:expression"].push(correctPath)
-                    }
-                } else{
-                    pageAssertion.result["pointer"] = {
-                        "id": "_:pointer",
-                        "type": [
-                            "ptr:ExpressionPointer",
-                            "ptr:XPathPointer"
-                        ],
-                        "ptr:expression": [correctPath], 
-                        "ptr:namespace" : { 
-                            "@id" : "http://www.w3.org/1999/xhtml", 
-                            "@type" : "ptr:NamespaceMapping", 
-                            "ptr:namespaceName" : "http://www.w3.org/1999/xhtml", 
-                            "ptr:prefix" :  "" 
-                        }
-                    }
-                }
+            if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
+                pageAssertion.result.locationPointersGroup.push({
+                    "id": "data:" + hash,
+                    "type": [
+                        "ptr:groupPointer",
+                        "ptr:XPathPointer"
+                    ],
+                    "ptr:expression": path, 
+                    "namespace" : "http://www.w3.org/1999/xhtml"
+                });
             }
 
             return;
@@ -182,26 +169,22 @@ class jsonLd{
             "result":
             {
                 "outcome": resultOutcome,
-                "description": criteriaDescription
+                "description": criteriaDescription,
+                "locationPointersGroup": []
             }
         }
 
         if(path != null){
 
-            assertion.result["pointer"] = {
-                "id": "_:pointer",
+            assertion.result.locationPointersGroup.push({
+                "id": "data:" + hash,
                 "type": [
-                    "ptr:ExpressionPointer",
+                    "ptr:groupPointer",
                     "ptr:XPathPointer"
                 ],
-                "ptr:expression": [correctPath], 
-                "ptr:namespace" : { 
-                    "@id" : "http://www.w3.org/1999/xhtml", 
-                    "@type" : "ptr:NamespaceMapping", 
-                    "ptr:namespaceName" : "http://www.w3.org/1999/xhtml", 
-                    "ptr:prefix" :  "" 
-                }
-            }
+                "ptr:expression": path, 
+                "namespace" : "http://www.w3.org/1999/xhtml"
+            });
         }
 
         siteAssertion.hasPart.push(assertion);
@@ -256,10 +239,12 @@ class jsonLd{
             "@id": "earl:outcome",
             "@type": "@id"
         },
-        "pointer":
-        {
-            "@id": "earl:pointer",
-            "@type": "@id"
+
+        "locationPointersGroup": "ptr:PointersGroup",
+        "elementPointersGroup": "ptr:PointersGroup",
+        "namespace" : { 
+            "@id": "ptr:namespace", 
+            "@type": "ptr:NamespaceMapping"
         },
 
         "title": "dct:title",
