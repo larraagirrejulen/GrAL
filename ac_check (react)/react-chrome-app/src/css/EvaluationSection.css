@@ -27,6 +27,7 @@
   font-size: 13px;
   font-weight: 300;
   border-radius: 5px;
+  border: 2px solid #005a6a;
   filter: drop-shadow(0 0 0 #005a6a) brightness(1);
   transition: 0.2s ease;
 }
@@ -37,21 +38,17 @@
 }
 
 .evaluation_section .primary{
-  border: 2px solid #005a6a;
   background-color: #005a6a;
   color: white;
 }
 
 .evaluation_section .secondary{
-  border: 2px solid #005a6a;
   background-color: white;
   color: #005a6a;
   font-style: italic;
 }
 
 .evaluation_section .body{
-  align-items: center;
-  text-align: center;
   border-top: 1px solid #c6c6c6;
   padding: 20px 0;
 }

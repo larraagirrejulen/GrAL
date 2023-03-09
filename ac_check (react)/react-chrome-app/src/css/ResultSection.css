@@ -15,10 +15,53 @@
 
 .result_section .body {
   margin: 15px 0;
+  padding: 15px 0;
+  border-top: 1px solid #c6c6c6;
+}
+
+.conformanceLevelSelector{
+  align-items: center;
+  text-align: center;
+}
+
+.level-container {
+  margin-bottom: 15px;
+  border: 1px solid #005a6a;
+  border-radius: 5px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.conformanceLevel {
+  display: inline-flex;
+  padding: 10px 15px;
+  border: 1px solid #005a6a;
+  cursor: pointer;
+  font-size: 12px;
+  background-color: white;
+  color: #005a6a;
+  filter: drop-shadow(0 0 0) brightness(1);
+  transition: 0.2s ease-in-out;
+  font-style: italic;
+}
+
+.conformanceLevel.selected {
+  background-color: #005a6a;
+  color: white;
+  font-style: normal;
+}
+
+.conformanceLevel:hover {
+  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
+}
+
+.result_section .body .table {
   border: 1px solid #005a6a;
   background-color: #f4f4f4;
   border-radius: 5px;
 }
+
+
 
 
 

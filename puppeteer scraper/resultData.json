@@ -9,7 +9,10 @@
       "sch": "http://schema.org/",
       "xmlns": "http://xmlns.com/foaf/0.1/",
       "ptr": "http://www.w3.org/2009/pointers#",
-      "evaluationScope": "step1",
+      "evaluationScope": {
+        "@id": "step1",
+        "@type": "EvaluationScope"
+      },
       "siteScope": "step1a",
       "conformanceTarget": {
         "@id": "step1b",
@@ -17,7 +20,10 @@
       },
       "accessibilitySupportBaseline": "step1c",
       "additionalEvalRequirement": "step1d",
-      "structuredSample": "step3a",
+      "structuredSample": {
+        "@id": "step3a",
+        "@type": "Sample"
+      },
       "auditSample": "step4",
       "siteName": "sch:name",
       "website": "wcag2:dfn-set-of-web-pages",
@@ -55,8 +61,11 @@
       "hasPart": "dct:hasPart",
       "creator": {
         "@id": "dct:creator",
-        "@type": "@id"
+        "@type": "earl:Assertor"
       },
+      "level_a": "wai:WCAG2A-Conformance",
+      "level_aa": "wai:WCAG2AA-Conformance",
+      "level_aaa": "wai:WCAG2AAA-Conformance",
       "id": "@id",
       "type": "@type"
     },
@@ -64,16 +73,14 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "8/3/2023, 8:48:05",
+    "dct:date": "9/3/2023, 8:11:26",
     "dct:summary": "Some errors where found...",
     "creator": {
       "id": "_:assertor",
-      "type": "earl:Assertor",
       "xmlns:name": "AccessMonitor",
       "description": "https://accessmonitor.acessibilidade.gov.pt"
     },
     "evaluationScope": {
-      "type": "EvaluationScope",
       "website": {
         "id": "_:website",
         "type": [
@@ -83,16 +90,15 @@
         "siteName": "ehu.eus",
         "siteScope": "Single page: https://www.ehu.eus/es/home"
       },
-      "conformanceTarget": "wai:WCAG2AA-Conformance",
+      "conformanceTarget": "level_aa",
       "accessibilitySupportBaseline": "Google Chrome latest version",
       "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
     },
     "structuredSample": {
-      "type": "Sample",
       "webpage": [
         {
-          "id": "_:webpage0",
-          "@type": [
+          "id": "_:webpage",
+          "type": [
             "earl:TestSubject",
             "sch:WebPage"
           ],
@@ -116,8 +122,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:failed",
@@ -138,8 +144,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:cantTell",
@@ -385,8 +391,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -414,7 +420,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -512,15 +518,91 @@
         "test": "wcag2:info-and-relationships",
         "subject": "_:website",
         "result": {
-          "outcome": "earl:passed",
-          "description": "No violations found"
+          "outcome": "earl:cantTell",
+          "description": "Found possible applicable issue, but not sure..."
         },
         "hasPart": [
           {
             "type": "Assertion",
             "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
+            "mode": "earl:automatic",
+            "result": {
+              "outcome": "earl:cantTell",
+              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+              "locationPointersGroup": [
+                {
+                  "id": "data:sha256:8fc21a45e0c02e3f1501d808c88dab489056c9f2a4e58ab9f3f7bdeaaef9adcf",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:4b3534fe9595c06e5a4106e2b3ceb2083988566d11e6532fcf36a6796e49f635",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:4f7c709636a9a7391bac3cc777ab2284123db7e86ce55f12cdd65cc6d1f65ba0",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:3d511894466b6591d5c29e15639ed688ef33a9a446443aa0f61d9dba82ef52ab",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:59d7357e22ebdd64a675249ac65692b4376e300778df622f76f95b27c5655ab5",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:953050c22c3192c8c63e618089e17c8382fbd9b18861b9fd25e2e7f5af625c16",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:0f658fb5953b83458f25d08c04d16eb023fcaa24c975efcc81f95cd7837dca5d",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                }
+              ]
+            }
+          },
+          {
+            "type": "Assertion",
+            "testcase": "wcag2:info-and-relationships",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -611,7 +693,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -696,8 +778,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:failed",
@@ -752,7 +834,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -997,8 +1079,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:bypass-blocks",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:cantTell",
@@ -1035,7 +1117,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1050,8 +1132,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:page-titled",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -1070,7 +1152,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1095,8 +1177,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:failed",
@@ -1169,7 +1251,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1304,8 +1386,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:language-of-page",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:cantTell",
@@ -1324,7 +1406,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1399,8 +1481,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:on-input",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -1428,7 +1510,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1483,8 +1565,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:labels-or-instructions",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -1512,7 +1594,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1567,8 +1649,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:parsing",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:failed",
@@ -1577,7 +1659,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {
@@ -1592,8 +1674,8 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:name-role-value",
-            "assertedBy": "_assertor0",
-            "subject": "_:webpage0",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
               "outcome": "earl:passed",
@@ -1621,7 +1703,7 @@
             }
           }
         ],
-        "assertedBy": "_assertor0",
+        "assertedBy": "_:assertor",
         "mode": "earl:automatic"
       },
       {

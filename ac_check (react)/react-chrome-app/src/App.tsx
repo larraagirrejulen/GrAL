@@ -142,10 +142,9 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
         <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
         <span>Evaluation options</span>
       </div>
-
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
         <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
-          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate <br/> current page")}
+          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label>
         <label id="btn_download" className="button primary" onClick={downloadCurrentReport}>Download report</label>
@@ -167,9 +166,49 @@ function ResultSection({results}:any) {
       </div>
       
       <div className="body">
-        <span id="result_table">{parse(results.resultsSummary)}</span><br/>
-        <span id="content_table">{parse(results.resultsContent)}</span>
+        <ConformanceLevelSelector />
+        <div className = "table">
+          <span id="result_table">{parse(results.resultsSummary)}</span><br/>
+          <span id="content_table">{parse(results.resultsContent)}</span>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function ConformanceLevelSelector(){
+
+  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
+
+  const handleLevelClick = (label:any) => {
+    if (label === 'A') {
+      setActiveLevels(['A']);
+    } else if (label === 'AA') {
+      setActiveLevels(['A', 'AA']);
+    } else if (label === 'AAA') {
+      setActiveLevels(['A', 'AA', 'AAA']);
+    }
+  }
+
+  return (
+    <div className='conformanceLevelSelector'>
+      <p>Select conformace level:</p>
+      <div className="level-container">
+        <ConformanceLevel label="A" selected={activeLevels.includes('A')} onClick={() => handleLevelClick('A')} />
+        <ConformanceLevel label="AA" selected={activeLevels.includes('AA')} onClick={() => handleLevelClick('AA')} />
+        <ConformanceLevel label="AAA" selected={activeLevels.includes('AAA')} onClick={() => handleLevelClick('AAA')} />
+      </div>
+    </div>
+  );
+}
+
+function ConformanceLevel(props:any){
+
+  const { label, selected, onClick } = props;
+
+  return(
+    <div className={`conformanceLevel ${selected ? 'selected' : ''}`} onClick={onClick}>
+      {label}
     </div>
   );
 }

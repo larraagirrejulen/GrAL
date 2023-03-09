@@ -79,9 +79,6 @@ const scraper = {
             for (var i = 0, technique; technique = techniquesFound[i]; i++){
 
                 const cols = Array.from(technique.querySelectorAll('td'));
-                const complianceLevel = cols[2].textContent.replaceAll(' ','');
-
-                if (complianceLevel != 'A' && complianceLevel !='AA') continue; // Ignore level AAA
                  
                 var status;
                 const statusText = cols[0].querySelector('svg title').textContent;
