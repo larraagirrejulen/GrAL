@@ -15,11 +15,10 @@ export default function load_result_table(){
     var not_checked = 0;
 
     var criterias = getSuccessCriterias();
-    var results = json.auditSample
+    var results = json[0]["auditSample"]
     var obj;
     var json_resultados = {};
-    console.log(json);
-    console.log(results);
+    console.log( results);
     for (var i = 0; i <results.length; i++){
         obj = results[i];
         switch(obj.result.outcome) {
@@ -50,13 +49,16 @@ export default function load_result_table(){
 
     localStorage.setItem('json_resultados',JSON.stringify(json_resultados));
 
-    var html_results = "<div style='text-align:center'><br>";
-    html_results += "<table class='tabla_RES'><tr><th style='background-color:#C8FA8C !important;' title='Passed'>P</th>";
-    html_results += "<th style='background-color:#FA8C8C !important;' title='Failed'>F</th><th style='background-color:#F5FA8C !important;' title='Can&#39;t tell'>CT</th>";
-    html_results += "<th title='Not Present' style='background-color:#FFFFFF !important;'>NP</th><th style='background-color:#8CFAFA !important;' title='Not checked'>NC</th></tr>";
-    html_results += "<tr><th style='background-color:#FFFFFF !important;'>"+passed+"</th><th style='background-color:#FFFFFF !important;'>"+failed+"</th><th style='background-color:#FFFFFF !important;'>"+cannot_tell+"</th><th style='background-color:#FFFFFF !important;'>"+not_present+"</th><th style='background-color:#FFFFFF !important;'>"+not_checked+"</th></tr>"
-    html_results += "</table></div>";
-    
+    var results_summary = {
+        "passed": passed,
+        "failed": failed,
+        "cannot_tell": cannot_tell,
+        "not_present": not_present,
+        "not_checked": not_checked
+    }
+
+    localStorage.setItem("tabla_resultados",JSON.stringify(results_summary));
+
     var tabla_contenido= "<table class='tabla_contenido' style='width:100%; font-size:10px'>";
     tabla_contenido += "<tr><th style='width:68% !important;font-size:12px !important;background-color:white !important'>Standard</th><th style='background-color:#C8FA8C' title='Passed'>P</th>";
     tabla_contenido += "<th style='background-color:#FA8C8C' title='Failed'>F</th><th style='background-color:#F5FA8C' title='Can&#39;t tell'>CT</th>";
@@ -74,7 +76,7 @@ export default function load_result_table(){
         tabla_contenido += '</div>';
     }
 
-    localStorage.setItem("tabla_resultados",html_results);
+    
     localStorage.setItem("tabla_main",tabla_contenido);
 }
 

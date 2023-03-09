@@ -3,20 +3,24 @@ import load_result_table from './results_table.js';
 
 
 export function loadStoredReport(){
+    try{
+        var jsonT = localStorage.getItem("json");
+        var jsonTabla = localStorage.getItem("tabla_resultados");
+        var json = JSON.parse(jsonT);
+        var main = localStorage.getItem("tabla_main");
 
-    var jsonT = localStorage.getItem("json");
-    var jsonTabla = localStorage.getItem("tabla_resultados");
-    var json = JSON.parse(jsonT);
-    var main = localStorage.getItem("tabla_main");
-
-    if (json != null && main != null){
-        return {resultsSummary: jsonTabla, resultsContent: main};
-    } else{
-        return {
-            resultsSummary: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
-            resultsContent: ""
-        };
+        if (json != null && main != null){
+            return {resultsSummary: JSON.parse(jsonTabla), resultsContent: main};
+        } else{
+            return {
+                resultsSummary: "<div style='text-align: center; padding:15px 0;'>No data stored</div>",
+                resultsContent: ""
+            };
+        }
+    }catch (error){
+        console.log(error);
     }
+    
 }
 
 
@@ -45,7 +49,7 @@ async function fetchScraper(bodyData) {
     const response = await fetchWithTimeout('http://localhost:8080/http://localhost:7070/getEvaluationJson', { body: bodyData });
     if (!response.ok) throw new Error("Error on fetching scraper server: " + response.status);
     const json = await response.json();
-    return JSON.stringify(json["body"], null, 2);
+    return JSON.parse(json["body"]);
 }
 
 export async function getEvaluation(checkboxes, setIsLoading){
@@ -60,13 +64,14 @@ export async function getEvaluation(checkboxes, setIsLoading){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         var json = await fetchScraper(bodyData);
         console.log(json);
+        
 
         /*localStorage.removeItem('json');
         if (A11Y){
         const a11y = a11y();
         merge(json, a11y);
         } */
-        saveJson(json);
+        saveJson(JSON.stringify(json));
 
     }else if(A11Y){
         /* localStorage.removeItem('json');
