@@ -7,6 +7,7 @@
 function update(){
     var jsonT = localStorage.getItem("json");
     var json = JSON.parse(jsonT);
+    var a_s = json.auditSample;
     let longitud = json.auditSample.length;
     //Length is 50 in AA
 
@@ -55,6 +56,7 @@ function update(){
     }
 
     var len = Object.keys(json_resultados).length;
+    console.log("Len; "+len);
     localStorage.setItem('json_resultados',JSON.stringify(json_resultados));
 
     var html_results = "<div style='text-align:center'><br>";
@@ -66,7 +68,6 @@ function update(){
     html_results += "</table></div>";
 
     localStorage.setItem("tabla_resultados",html_results);
-    //document.getElementById('result_table').innerHTML=html_results;
 
 
     var tabla_contenido= "<table class='tabla_contenido' style='width:100%; font-size:10px'>";
@@ -93,7 +94,6 @@ function update(){
     }
 
     localStorage.setItem("tabla_main",tabla_contenido);
-    //document.getElementById('content_table').innerHTML=tabla_contenido;
 }
 
 
@@ -447,9 +447,9 @@ function print_sub_subsubsections(estandar){
 
         st = sub_temas[keyST];
         codigo_nav_st +='<button type="button" class="collapsible_tabla3" style="'+style+'"><table style="width:100%; table-layout: fixed; overflow-wrap: break-word;""><tr>';
-
+        
         if(len>0 || manual){
-            codigo_nav_st += '<td style="width:15%;"><img src="" alt="Show information" height="20px"></td>';
+            codigo_nav_st += '<td style="width:15%;"><img src="http://127.0.0.1:5000/flecha.png" alt="Show information" height="20px"></td>';
             codigo_nav_st += '<td style="width:55%;  font-size:10px;  text-align: left;">'+st+'</td>';
         }else{
             codigo_nav_st += '<td style="width:70%;  font-size:10px;  text-align: left;">'+st+'</td>';

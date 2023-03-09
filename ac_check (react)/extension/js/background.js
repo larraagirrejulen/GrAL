@@ -40,7 +40,7 @@ function main_bk(){
       if(changeInfo.status == 'complete' && toggle){
         chrome.action.setIcon({path: "/images/icon16.png"});
         chrome.scripting.executeScript({
-          files: ["/js/dom_copy.js", "/js/libraries/content-script1.js", "/js/libraries/jquery.min.js", "content.js", "/js/tablas.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js', '/js/jquery_listeners.js'],
+          files: ["/js/dom_copy.js", "/js/libraries/content-script1.js", "/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js', '/js/jquery_listeners.js'],
           target: {tabId: tab.id}
         });
       }

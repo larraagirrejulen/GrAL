@@ -1,5 +1,5 @@
 
-const jsonLd = require('./jsonLd NEW');
+const jsonLd = require('./jsonLd');
 const { createHash } = require('crypto');
 
 const scraper = {
@@ -129,29 +129,30 @@ const scraper = {
                 if (result["casesLink"] != null){
                     await page.goto(result["casesLink"]);
                     await page.waitForSelector('#list_tab');
-                    const casesLocations = await page.evaluate(async () => {
+                    const [casesLocations, casesHtmls] = await page.evaluate(async () => {
                         
                         var casesLocations = [];
+                        var casesHtmls = [];
                         const foundCases = Array.from(document.querySelectorAll('ol > li'));
 
                         for (var l = 0, ca; ca = foundCases[l]; l++){
                             caseElements = Array.from(ca.querySelectorAll('table > tr'));
-                            /*caseCode = caseElements[1].querySelector("td code").textContent;
+                            caseCode = caseElements[1].querySelector("td code").textContent;
                             caseCode = caseCode.replaceAll('\n','');
-                            caseCode = caseCode.replaceAll('\t','');*/
-                            
+                            caseCode = caseCode.replaceAll('\t','');
+                            casesHtmls.push(caseCode);
                             casesLocations.push(caseElements[3].querySelector('td span').textContent);
                         }
-                        return casesLocations;  
+                        return [casesLocations, casesHtmls];  
                     });
                     for (var k = 0, path; path = casesLocations[k]; k++){
                         var correctPath = "//" + path
                         correctPath = correctPath.replace(/ \> /g, "/")
                         correctPath = correctPath.replace(/:nth-child\(/g, "[")
                         correctPath = correctPath.replaceAll(")", "]")
-                        const hashPath = createHash('sha256').update(correctPath).digest('hex');
+                        const hashPath = createHash('sha256').update(correctPath+criteria).digest('hex');
                         
-                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath);
+                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath, casesHtmls[k]);
                     }
                 }else{
                     this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);

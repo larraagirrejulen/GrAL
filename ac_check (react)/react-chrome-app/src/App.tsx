@@ -166,7 +166,7 @@ function ResultSection({results}:any) {
       </div>
       
       <div className="body">
-        <ConformanceLevelSelector />
+        {results.resultsContent !== "" ? <ConformanceLevelSelector /> : ""}
         <div className = "table">
           <span id="result_table">{parse(results.resultsSummary)}</span><br/>
           <span id="content_table">{parse(results.resultsContent)}</span>

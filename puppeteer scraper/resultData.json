@@ -63,9 +63,6 @@
         "@id": "dct:creator",
         "@type": "earl:Assertor"
       },
-      "level_a": "wai:WCAG2A-Conformance",
-      "level_aa": "wai:WCAG2AA-Conformance",
-      "level_aaa": "wai:WCAG2AAA-Conformance",
       "id": "@id",
       "type": "@type"
     },
@@ -73,7 +70,7 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "9/3/2023, 8:11:26",
+    "dct:date": "9/3/2023, 14:51:43",
     "dct:summary": "Some errors where found...",
     "creator": {
       "id": "_:assertor",
@@ -90,7 +87,7 @@
         "siteName": "ehu.eus",
         "siteScope": "Single page: https://www.ehu.eus/es/home"
       },
-      "conformanceTarget": "level_aa",
+      "conformanceTarget": "wai:WCAG2AAA-Conformance",
       "accessibilitySupportBaseline": "Google Chrome latest version",
       "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
     },
@@ -130,12 +127,13 @@
               "description": "Verify if the alternative textual equivalent found in the graphic buttons serves the equal information or function performed by the graphic button on the page.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:66df852b45fd80c2a954ec134048f1f051465b3d3c71d3da00e5cefb576939ea",
+                  "id": "data:sha256:4054d6ff1d699b6092b62ac898d6c99eb64f2644b0d0437985674c99d9090fbc",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
+                  "description": "<img class=\"col-4\" alt=\" \" src=\"https://www.ehu.eus/documents/10136/43423667/Ester_Zuza_dest.jpg/7e662303-31c4-b756-679a-edb51a599957?t=1678353032016\"/documents/10136/43423667/Ester_Zuza_dest.jpg/7e662303-31c4-b756-679a-edb51a599957?t=1678353032016\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -152,237 +150,253 @@
               "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:f9656cce8df7f8d203c6db865705bfb79fc406a629346cc9891babd8d955f39d",
+                  "id": "data:sha256:a46809434f3f8bea391178c41fb50f91675fc6e0be1691af5002ef132bc8f3f8",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img class=\"col-4\" src=\"https://www.ehu.eus/documents/10136/7516423/Destacado-masteres.jpg/4bebab3b-f147-32a0-14cd-a608c3aeae94?t=1657008250845\"/documents/10136/7516423/Destacado-masteres.jpg/4bebab3b-f147-32a0-14cd-a608c3aeae94?t=1657008250845\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:1a4ae13293eb11d10fe3c8f79ce11f1c4958d13d86d6bf3eac5e6d53c01b61d4",
+                  "id": "data:sha256:87fa511924a34040df06deeb1e5ba69b171630cbc6f839b091af2acc7d2e99a4",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img class=\"col-4\" src=\"https://www.ehu.eus/documents/10136/7516423/8m-2023-destacado.jpg/3891adc2-b576-786f-6c88-288e3d53d79b?t=1678102855331\"/documents/10136/7516423/8m-2023-destacado.jpg/3891adc2-b576-786f-6c88-288e3d53d79b?t=1678102855331\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:02fbed30b8b512e2d9acf86abcc69048dc1579ea05b5da01cc1501a346fa2f6c",
+                  "id": "data:sha256:b43bb43577016645c24bc711fa0e254cae467ffaa53783156b6b7655bbdb8fd7",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img class=\"col-4\" src=\"https://www.ehu.eus/documents/10136/0/emplegu-foroa-martxoak-16_dest.jpg/4b935e06-f271-f3d2-7ab3-15cb9086a319?t=1676981327988\"/documents/10136/0/emplegu-foroa-martxoak-16_dest.jpg/4b935e06-f271-f3d2-7ab3-15cb9086a319?t=1676981327988\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8c8d506e5834ad0464d2af5ae598d8e0e49b9059c5cd7e297e2aba60d001d4cf",
+                  "id": "data:sha256:d657a8eb766860cb05df69c171c5dde69ecf6835d43ed02440c7fc4043a5011c",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:e5b3ee9e33d44210b039cfc815e292e508d3a641cbd8f614236267d21c417719",
+                  "id": "data:sha256:bb6359fc62fc8563ebc9bcee961af766e541541271033e7df42bb17665884971",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4f62cf4dbe572f1ca1fce0d0679d089a656391d339fc45c67fcd0f163dab2450",
+                  "id": "data:sha256:c6ba20dcb8d080ea0abf2d10a04a54ac7c6348418511f1eda76a12ce6630d2d3",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:d73103d5fa81d0a74159d76f23341627288e26ab0434464bb978f7da609b5194",
-                  "type": [
-                    "ptr:groupPointer",
-                    "ptr:XPathPointer"
-                  ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[14]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                  "namespace": "http://www.w3.org/1999/xhtml"
-                },
-                {
-                  "id": "data:sha256:8c1181fef5549ed303f096c01eee55098650335cb055066f8aa400e6f479c342",
+                  "id": "data:sha256:bf6b279b569b13eff18ce7ea84c3c07e37d0b8959303ba4a23bcae01ab34f533",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:135489923d24565e0194efd9e928d7ba16a605881219ec19e1085e1953c734ba",
+                  "id": "data:sha256:27c165e38a26d73a9f33cfd6f41ac8886a828d38b982028ffc3e9c24554bf963",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:96c363b84d508237ba0da2dbbc6b4ef620cc92ad924328efd25efc9d2add1ed5",
+                  "id": "data:sha256:e5be7ad2e8d07f0e0570747d3a11463c2b97196c22d61b2729ead54c67bd3d28",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:ca9f1d92d4f10bab9dadc005397a7a5f737b27c9c4aaecc2bd64a4a50a2f0446",
+                  "id": "data:sha256:7a05d8cb02f6d89959765f2a3f57a013cedd43b76069b4b5a81fd2573d189f24",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:a1a2426d25d2a6924f22d2860885999ff18bbee221403f5df63efcd7f130d55f",
+                  "id": "data:sha256:7ff6e5439a73d49d7f64d25b5e2efafd744de89aebd865bccd959f89ac76fc8d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[5]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:df2320d2b9e00389f3e6cb6467d22765bcefe82b15b584393181aad8f8026d59",
+                  "id": "data:sha256:183d373ea8046e50ba7e8c7e8c71cff0e9e1d585030fd52fbf3996f284dda049",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[6]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:dd57242c23a12260b69791bf32e0a5747fe19892f49e07c4ebb7c0195388d19c",
+                  "id": "data:sha256:eb40a6e1ed7101166c61121c75e4cb970f21ea721fba0da88f0eacb82e5eee77",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:6b6553efba40a0fd2e42e8bafcb3f633444f776c2620e4b5e89535022c683c51",
+                  "id": "data:sha256:60a432f1c6aeadf1abdab14b6dbe655ee508adecad8621cc31a2d7dd7a1d2db9",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[8]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:1da69a4a1cf1bf57e930e403428c28eed54504c4b18cf5137fd684c33316f07d",
+                  "id": "data:sha256:5cfabd27de3f38e7a88ef5aa4f18630f5a6220827e2e261e298ca782a494000a",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[9]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:c29f28a8964c6e64e479c9135f2c426c5483bc4bffa7fb8afd650f67cb4494ba",
+                  "id": "data:sha256:3b169f6cdadbee9c02529d3773029e40b16bcd8505bae1f74de55781b715a0b1",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:5a9b8d603c30fdefd63fcc64d6d4cf77c96bc920f84ce6d3cc31ba9378e9fd41",
+                  "id": "data:sha256:ad2763b794638b686e4c6862ec35920d762a173ec6ed8021ffe1bd7bf93fcf43",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8394cbfc07421f6b083edc898427d4dc494884a491def50d1c6f4c1f47f0f006",
+                  "id": "data:sha256:91efda9db739206c3303e19d128c0973354f76533dcb16a3a1da14db12a0e104",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[12]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:21270229587fd6fe3342579f5163bceba6d4ce3ed3a35adfe7d746aa122f3c3f",
+                  "id": "data:sha256:7a7ff00d3f39c37c4ab383630b5bf808a0ed9d4e83e23319cd201a4c01c53581",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:c4ef1071176b7c4ceb80ab91e3d0ae04ed2ac19a0b3eb3024c158a72a1842dde",
+                  "id": "data:sha256:2faf9b3801d7aad9135ca69fbef60d521a170be60b9f1da99b4fe44ee4892eee",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:d3d32e0bed4cc414dd69ef4006a4e315b4225df0090fe3a17ae192c4e314a64f",
+                  "id": "data:sha256:65a9805d4e2f8a13b1a5c6c4a578587a33fd17f68cd6cc6e1d2aa0f39d80e545",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:e3654e0f22afdf1cf4339918e332d6dfbf21793aa81edea224d1781498fc2f6a",
+                  "id": "data:sha256:580d8d3b198b8b25f46127f8c095b15d2783148e59b94ce21400a103e27df415",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8fedf59f8fd75db471edf92f331b354defdef8852484b2cb0d80d603a5cb2138",
+                  "id": "data:sha256:7619eed419ad5ceaab3ccbc63c9badf19d441fb30b568f3762e86f7a8ab25caf",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:e229ed99d850cdc41b38c672ab167a76980a4084e892a1fe47eb694ec168e6ec",
+                  "id": "data:sha256:7a66cdf2c7ed9db2d5d293fc400955e942897c331c6a8c8dd0188489f91c4a58",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+                  "description": "<img src=\"https://www.ehu.eus/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\" alt=\"\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8e87ca21aa3180560760c101714e2bef19b691c9d53ea22c2827cd1492c99640",
+                  "id": "data:sha256:4775d36ea7dfcc2a1cd4a7af54c1db3696a84357796cf2e56c4c6bb17ac62ac0",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                  "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -399,21 +413,23 @@
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "id": "data:sha256:a0f5804c7397cc42e011f0d85ae109e97d1213317d4e24657b2afa9faa600d51",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "id": "data:sha256:f16e8a2b93a525892cde62fae5a083ef8198613133cb2f71c4eb5eeb426edd85",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -533,66 +549,73 @@
               "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:8fc21a45e0c02e3f1501d808c88dab489056c9f2a4e58ab9f3f7bdeaaef9adcf",
+                  "id": "data:sha256:a1109c86b539067679909847674890d3842e4de26f9005159742e61f47f8f273",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
+                  "description": "<h1 class=\"hide-accessible\">Navegación</h1>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4b3534fe9595c06e5a4106e2b3ceb2083988566d11e6532fcf36a6796e49f635",
+                  "id": "data:sha256:49952e53fcf6a65c3c43bde3ec05aee1ef71239abf75c2e8ecc29b3957b6d010",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "description": "<h2 class=\"menu-item_h2\">Inicio</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4f7c709636a9a7391bac3cc777ab2284123db7e86ce55f12cdd65cc6d1f65ba0",
+                  "id": "data:sha256:bbacb6e31a5e028f20e39aa421227c2afe9ff65646db07cebe379bfb0222178d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "description": "<h1>¡Síguenos!</h1>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:3d511894466b6591d5c29e15639ed688ef33a9a446443aa0f61d9dba82ef52ab",
+                  "id": "data:sha256:9fb0bc2724294c4791a4bc487b08898eb303f7e2f2676863987a245b4845859f",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Noticias</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:59d7357e22ebdd64a675249ac65692b4376e300778df622f76f95b27c5655ab5",
+                  "id": "data:sha256:cc8d80489d9475fed4927e1b3a823e3b8b86df0186ff6d6a2faf629ff0245487",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Cathedra</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:953050c22c3192c8c63e618089e17c8382fbd9b18861b9fd25e2e7f5af625c16",
+                  "id": "data:sha256:9e0a887ec28306afd1c760a8bf7a8e9ed0774893f3430c63b73cf9bf15322de8",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Imagen del día</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:3d677e71cedf3da4b1cdfd86fb68ee1e29f4814902ce88fb1670467d0c20ba3f",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                  "namespace": "http://www.w3.org/1999/xhtml"
-                },
-                {
-                  "id": "data:sha256:0f658fb5953b83458f25d08c04d16eb023fcaa24c975efcc81f95cd7837dca5d",
-                  "type": [
-                    "ptr:groupPointer",
-                    "ptr:XPathPointer"
-                  ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Agenda</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -609,84 +632,93 @@
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "id": "data:sha256:45076cf6f1caae1cef9df9c2a9041554b2b197b1c48e9ea574f66ead9cd98280",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "id": "data:sha256:ea2655bdc566ecc4ee5a65999bef21e7c935576740c65d276695865f99aae5c6",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8fc21a45e0c02e3f1501d808c88dab489056c9f2a4e58ab9f3f7bdeaaef9adcf",
+                  "id": "data:sha256:a1109c86b539067679909847674890d3842e4de26f9005159742e61f47f8f273",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
+                  "description": "<h1 class=\"hide-accessible\">Navegación</h1>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4b3534fe9595c06e5a4106e2b3ceb2083988566d11e6532fcf36a6796e49f635",
+                  "id": "data:sha256:49952e53fcf6a65c3c43bde3ec05aee1ef71239abf75c2e8ecc29b3957b6d010",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "description": "<h2 class=\"menu-item_h2\"><a href=\"/es/home\"><span \" >Inicio</span></a></h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4f7c709636a9a7391bac3cc777ab2284123db7e86ce55f12cdd65cc6d1f65ba0",
+                  "id": "data:sha256:bbacb6e31a5e028f20e39aa421227c2afe9ff65646db07cebe379bfb0222178d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "description": "<h1>¡Síguenos!</h1>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:3d511894466b6591d5c29e15639ed688ef33a9a446443aa0f61d9dba82ef52ab",
+                  "id": "data:sha256:9fb0bc2724294c4791a4bc487b08898eb303f7e2f2676863987a245b4845859f",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Noticias</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:59d7357e22ebdd64a675249ac65692b4376e300778df622f76f95b27c5655ab5",
+                  "id": "data:sha256:cc8d80489d9475fed4927e1b3a823e3b8b86df0186ff6d6a2faf629ff0245487",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Cathedra</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:953050c22c3192c8c63e618089e17c8382fbd9b18861b9fd25e2e7f5af625c16",
+                  "id": "data:sha256:9e0a887ec28306afd1c760a8bf7a8e9ed0774893f3430c63b73cf9bf15322de8",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Imagen del día</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:3d677e71cedf3da4b1cdfd86fb68ee1e29f4814902ce88fb1670467d0c20ba3f",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                  "namespace": "http://www.w3.org/1999/xhtml"
-                },
-                {
-                  "id": "data:sha256:0f658fb5953b83458f25d08c04d16eb023fcaa24c975efcc81f95cd7837dca5d",
-                  "type": [
-                    "ptr:groupPointer",
-                    "ptr:XPathPointer"
-                  ],
-                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Agenda</h2>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -786,48 +818,53 @@
               "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:a3199de4e7e6456ba3d4c33649b9cfadeec9c9105c22c9b7e2224cdd073799a6",
+                  "id": "data:sha256:414d02b38347acf569113218242ed14045da66763ecbaa1797c2c3711e5ffe3d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
+                  "description": "<span class=\"hide-accessible\">Mostrar/ocultar subpáginas</span>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:5dce357f39a4fb8035248f098538b5783d16ff08c870c40bc4eb727d3cc76291",
+                  "id": "data:sha256:0a026bb3182cf7342889375afcb409404fcf9b543d3e6fec1756ee500c225115",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
+                  "description": "<span class=\"hide-accessible\">Mostrar/ocultar subpáginas</span>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:36de01dc56737dc2bf1d8cd06f7786df97fdb39b82936d82445bf3c61c2392e7",
+                  "id": "data:sha256:82d8e44807d48cdf5c2bf61639e202fa99a96d99c1cc262274b8fe01b4304dd0",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
+                  "description": "<span class=\"hide-accessible\">Mostrar/ocultar subpáginas</span>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:98014f6535ffb26d050e6502bb481b2fdedd84b207f416378a1dc9e251a84ff0",
+                  "id": "data:sha256:45f6444f41028d3a641abdf38b2c44aa9af6ecb8e03805736c09c44d85e033cb",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
+                  "description": "<span class=\"hide-accessible\">Mostrar/ocultar subpáginas</span>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:3c28ecb0e0db88f2abbc159e52404b703f5d3c64872e85084d0052be9a2e007b",
+                  "id": "data:sha256:179aac710d703b142a76afdcf564892b4256aee5c8b0efd1408fe334ac5499b7",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
+                  "description": "<span class=\"hide-accessible\">Mostrar/ocultar subpáginas</span>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1087,30 +1124,33 @@
               "description": "Make available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:9a6fef0b51c0afd8eb67fed338da6eb576b82e00dc1cec62f626ba889e571677",
+                  "id": "data:sha256:a3ed293bd8203703b888898080f4ee1c26aa1c53d36856c20e7e8b915d3b44b9",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
+                  "description": "<a href=\"#main-content\">Saltar al contenido</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:9a6fef0b51c0afd8eb67fed338da6eb576b82e00dc1cec62f626ba889e571677",
+                  "id": "data:sha256:a3ed293bd8203703b888898080f4ee1c26aa1c53d36856c20e7e8b915d3b44b9",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
+                  "description": "<a href=\"#main-content\">Saltar al contenido</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:b1df18a2594d97703a6abeb94e5b4109fd4233310c785c201591c88655c2d68c",
+                  "id": "data:sha256:4dca4bc81818d030fcb508dc97332b71bdb9c15ec4f5e0485fd1338bb23aef2d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
+                  "description": "<div class=\"upv-ehu-3-cols columns-3 container\" id=\"main-content\" role=\"main\">                                            Inicio      Inicio        Menú       Abrir/cerrar menú del sitio                                Perfiles Mostrar/ocultar subpáginas                                                    Alumnado                                                                Futuro alumnado                                                                EHUalumni                                                                Profesorado                                                                Personal de Administración y Servicios                                                                Empresas                                      Estudiar Mostrar/ocultar subpáginas                                                    Orientación                                                                Acceso a la universidad                                                                Grados                                                                Másteres y Títulos Propios                                                                Doctorado                                                                eCampus: campus virtual                                      Estructura UPV/EHU Mostrar/ocultar subpáginas                                                    Información institucional                                                                Área de la Rectora                                                                Equipo de Gobierno                                                                Consejo de Gobierno                                                                Aldezle                                                                Centros                                                                Departamentos                                                                Institutos                                      Áreas temáticas Mostrar/ocultar subpáginas                                                    EHUkultura                                                                Becas y Ayudas                                                                Dirección para la Igualdad                                                                Euskera                                                                Plurilingüismo                                                                Sostenibilidad                                                                Proyección universitaria                                                                Relaciones internacionales                                                                Transparencia                                                                EHUkirola                                      Servicios Mostrar/ocultar subpáginas                                                    Biblioteca                                                                Editorial                                                                Oficina de Comunicación                                                                Perfil del contratante                                             ¡Síguenos!TwitterFacebookInstagramLinkedinYoutubeVimeo     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                EHU Master Week (6-10 marzo)¡Incríbete en la feria virtual!                            Másteres universitariosPreinscripción abierta hasta el 31 de marzo                            Día Internacional de las Mujeres 2023Acto institucional (10 de marzo, Donostia), otras actividades, manifiesto y declaración de la rectora                            Puertas Abiertas 2023 (17-25 de marzo)Inscripción: del 6 al 12 de marzo                            Foro de Empleo del Campus de Bizkaia (16 de marzo)Más de 80 empresas y entidades presentan ofertas. ¡Inscríbete!            Noticias                                                                                                                         También el 10 de marzo celebramos el Día de las Mujeres                                                                                                                                                                                             Mejora la probabilidad de que las academias de ciencia reconozcan el trabajo de las investigadoras                                                                                                                                                                                             La exrectora Nekane Balluerka, Doctora Honoris Causa por la Universidad de Aconcagua                                                                                                                                                                                             700.000 € para desarrollar componentes cruciales para la computación cuántica                                                                                                                                                                                             La Universidad del País Vasco celebra el día internacional de las mujeres con un programa centrado en la eliminación de sesgos de género                                                                                                                                                                                             La UPV/EHU invierte 1,3 millones de euros en mejorar, con Euskaltel, la infraestructura WiFi de sus centros                                                                     RSS (Abre una nueva ventana) Ver todas las noticias     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Cathedra                                                                                                                         Un 8 de marzo por la revisión disciplinar                                                                                                                                                                                             La importancia de la dieta para prevenir el cáncer y mejorar la calidad de vida de los pacientes                                                                                                                                                                                             La energía del pueblo para el pueblo                                                                                                                                                                                             Pseudociencias: quiénes y cuántos creen en la telepatía, el contacto con extraterrestres o que las emociones provocan cáncer                                                                                                                                                                                             ¿Podemos prevenir el suicidio?                                                                     RSS (Abre una nueva ventana) Ver la sección Cathedra     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Imagen del día                                                                                                                                     Gure txokoak: Un lugar para muchos aprendizajes                                                                                                                 Agenda                                                                                                            La Universidad del País Vasco presenta online su oferta de posgrados en la EHU Master Week06/03/2023 - 10/03/2023, 15:00 - 20:00                                                                                                                                                                             Proyección de Cuerdas con su directora Estíbaliz Urresola 09/03/2023, 12:00Leioa-Erandio                                                                                                                                                                             Charla-coloquio: 'Celebrando el año Cajal. Presente y futuro de su legado' 09/03/2023, 19:00 Bilbao                                                                                                                                                                             Mesa redonda: ‘Entre la guerra civil y la invasión rusa: el conflicto en los medios, el papel de la ultraderecha y la situación en Rusia’ 10/03/2023, 11:00Leioa-Erandio                                                                                                                                                                             Acto institucional para conmemorar el Día Internacional de la Mujer 10/03/2023, 11:30Donostia / San Sebastián                                                                                                                                                                             XIX Carrera de Primavera UPV/EHU-Donostiarrak 12/03/2023, 10:00Donostia / San Sebastián                                                                                                                                                                             ‘XI Jornada Ituna. La Conciencia Fiscal en Euskadi: estrategias para fortalecer el cumplimiento tributario’ 14/03/2023, 09:00 Bilbao                                                                                                                                                                             Conferencia: ‘Fascismos, ultraderechas y derechas radicales’ 17/03/2023, 10:00Leioa-Erandio                                                                                                                                                                             Exposición: ‘Les Corps Incorruptibles’15/02/2023 - 10/03/2023, 08:00 - 20:00 Bilbao                                                                                                                                                                             Exposición: Honor a las mujeres07/03/2023 - 28/03/2023Donostia / San Sebastián                                                                 RSS (Abre una nueva ventana) Ver todos los eventos     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                         Transparencia y buen gobierno                         Imprimir banner-portal_transparencia             Sede electrónica                        Imprimir banner-egoitza-elektronikoa                 Cursos online                         Imprimir Cursos online             Plan Estratégico 2022-2025                        Imprimir banner Plan Estratégico 2018-2021             Enlight                        Imprimir Enlight 2021                 Convocatoria LTC abierta                         Imprimir Misiones Euskampus             Cofund ADAGIO                        Imprimir Cofund ADAGIO             EHUagenda 2030                        Imprimir EHUagenda 2030                 Contratación administrativa                         Imprimir Kontratazio eta erosketak             Prácticas y Empleo                        Imprimir banner-enplegua             ¿Ya eres EHUalumni?                        Imprimir banner-ehualumni                 Noticias de la UPV/EHU                         Imprimir banner-campusa             Consejo de Estudiantes                        Imprimir banner-ikasle-kontseilua             Escuela de Doctorado                        Imprimir banner-MDe             Tesis doctorales                        Imprimir banner-tesiak             EHUdenda                        Imprimir banner-ehudenda             Servicio de blogs                        Imprimir banner-ehusfera             EHUtb portal multimedia                        Imprimir banner-ehutb RSS (Abre una nueva ventana) Ver todos los eventos     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }  </div>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1140,12 +1180,13 @@
               "description": "Take note that the <title> element should only appear once in the webpage.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:911f8caacb532ae9b74e455b1fc55e3948a69b16a29bf509adb26668cdf84035",
+                  "id": "data:sha256:063f5debc4336df55ee6f76273bfd12176129f301365fca6171947dcd45f5229",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/head[1]/title[7]",
+                  "description": "<title>Inicio - UPV/EHU</title>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1185,66 +1226,73 @@
               "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:3753a9fa8d9424375b4f79b466e833d01df5bc177521e531ae69da6d457d9cb3",
+                  "id": "data:sha256:e9448783950f948144d87a8023b67d2f0467e4f043d8223b54fc52e375390f0d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
+                  "description": "<a class=\"breadcrumb-link\" href=\"https://www.ehu.eus/es\" title=\"UPV/EHU\">            UPV/EHU            </a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:ac0fd7d5f1359ace36e447c350d33d527a0e8d79c929fab72fe90fa2060cc35a",
+                  "id": "data:sha256:2e29ccabaf7ff077103c120302d3df2e7d7489cd3cb0d184f2e73b05b94e1b19",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
+                  "description": "<a class=\"twitter\" href=\"https://twitter.com/upvehu\" target=\"blank\" title=\"Twitter\">Twitter</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:27af43fa5db8855a6f4ed685d08cba3eccdca3ad0777fc745129f6c508cbb841",
+                  "id": "data:sha256:f1d7cfba863478d71d1f5d9f67489c311c782979cb863e0e1ee20c5574ab94cd",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
+                  "description": "<a class=\"facebook\" href=\"https://www.facebook.com/upv.ehu\" target=\"blank\" title=\"Facebook\">Facebook</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:0a713d9950a63196f9d00a7dd52b0b46fbb8a9d2667709e539ff3c021c67fc71",
+                  "id": "data:sha256:93e9b57d59b7eeef3f155d69c2045151ff5cece4105f04c7530a1b2079480afc",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
+                  "description": "<a class=\"instagram\" href=\"https://www.instagram.com/upvehu_gara/\" target=\"blank\" title=\"Instagram\">Instagram</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:3c489a8413692f534a1d7afc752cb7e4b9a4fbed3c5287afb41e629e141060ea",
+                  "id": "data:sha256:81e0e9d54233e84c51967fae043d8e74547e29bfb25b24b4b64864e404c3a529",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
+                  "description": "<a class=\"linkedin\" href=\"https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title\" target=\"blank\" title=\"Linkedin\">Linkedin</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:6e58b8d2b25ef8dd4c045d13d61e87624c41cbdaa52e47763ce9d400a76a308a",
+                  "id": "data:sha256:fe9dca6b06ad806d9e4edb84252e82b332391faf48d4c107665063ebe74c3fb7",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
+                  "description": "<a class=\"youtube\" href=\"https://www.youtube.com/@upvehu\" target=\"blank\" title=\"Youtube\">Youtube</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:4cfb92eef0bb7758159f9eebabe93d054d00ce007d5293b0ebdfa5761f1fecf3",
+                  "id": "data:sha256:4dc8e4d9af9bad54ce7bb9f00cd5fc626e43d95221563c241cc44dff001b803d",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
+                  "description": "<a class=\"vimeo\" href=\"https://vimeo.com/UPVEHU/ALBUMS\" target=\"blank\" title=\"Vimeo\">Vimeo</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1299,20 +1347,265 @@
         "test": "wcag2:link-purpose-link-only",
         "subject": "_:website",
         "result": {
-          "outcome": "earl:untested",
-          "description": ""
+          "outcome": "earl:failed",
+          "description": "Found a violation ..."
         },
-        "hasPart": []
+        "hasPart": [
+          {
+            "type": "Assertion",
+            "testcase": "wcag2:link-purpose-link-only",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
+            "mode": "earl:automatic",
+            "result": {
+              "outcome": "earl:failed",
+              "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
+              "locationPointersGroup": [
+                {
+                  "id": "data:sha256:5272cb8d97b6c5df7ed28f05d29842f9f337eabc560fcb254115171e17ec8ee1",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
+                  "description": "<a class=\"breadcrumb-link\" href=\"https://www.ehu.eus/es\" title=\"UPV/EHU\">            UPV/EHU            </a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:bde9bbd74eeda79ce863c3cb305c20b8d3bdaf709c199356e918e29538c8a242",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
+                  "description": "<a class=\"twitter\" href=\"https://twitter.com/upvehu\" target=\"blank\" title=\"Twitter\">Twitter</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:d9c66ac8567ea5fb3d6dba266fc5953894aa83bb09fc293e54a7f29e54567526",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
+                  "description": "<a class=\"facebook\" href=\"https://www.facebook.com/upv.ehu\" target=\"blank\" title=\"Facebook\">Facebook</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:d5ccdbe6cd655468e4cd5d7456efa045751a51420147aa2e089cf1b253a6d0b8",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
+                  "description": "<a class=\"instagram\" href=\"https://www.instagram.com/upvehu_gara/\" target=\"blank\" title=\"Instagram\">Instagram</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:1aa297750c6dc786894ae39d75497186a440706607cca7ae79fbcd7ca54cba3b",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
+                  "description": "<a class=\"linkedin\" href=\"https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title\" target=\"blank\" title=\"Linkedin\">Linkedin</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:6d12b14cb768f25fe7f9d03c54ed0d2afaf2140d0791dae194165eb11deb8179",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
+                  "description": "<a class=\"youtube\" href=\"https://www.youtube.com/@upvehu\" target=\"blank\" title=\"Youtube\">Youtube</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:b19d9445560eee0f5ad3d9bdd920a7ff54b6e381a0d72dc4ed2aaffab7ebd162",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
+                  "description": "<a class=\"vimeo\" href=\"https://vimeo.com/UPVEHU/ALBUMS\" target=\"blank\" title=\"Vimeo\">Vimeo</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                }
+              ]
+            }
+          },
+          {
+            "type": "Assertion",
+            "testcase": "wcag2:link-purpose-link-only",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
+            "mode": "earl:automatic",
+            "result": {
+              "outcome": "earl:cantTell",
+              "description": "It is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.",
+              "locationPointersGroup": [
+                {
+                  "id": "data:sha256:3880d72d5d8399f6b9ca37cda397d73254df78d43de5868160328f3d5cbb554c",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/a[1]",
+                  "description": "<a href=\"/es/ikasi\"> Estudiar</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:640bed2de31182c891865cd36bac515f0afb639bdae403dbb2113af2e415e549",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/header[1]/div[3]/div[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[2]/a[1]",
+                  "description": "<a role=\"menuitem\" href=\"/es/web/ikasi\">Estudiar</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:6f071dc0327e3aac7e814c8ceeceba9ecd18430ecfab12ed6799c16296c64efb",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                  "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/cathedra/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> RSS (Abre una nueva ventana)</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:4fafd231ac3b979e30505695b4061448af6ffb4f76a27ef1ece6d96d11d87dff",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[13]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                  "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> RSS (Abre una nueva ventana)</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:eae42c7d567317d162597a3d08c4463d6ee4f5c43f8743668070e283b970e2ca",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                  "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> RSS (Abre una nueva ventana)</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:1f18dd1d764f0b0114e2080bcf924c536af0b8f405f76305ab788afd0754d766",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                  "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/noticias/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> RSS (Abre una nueva ventana)</a>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                }
+              ]
+            }
+          }
+        ],
+        "assertedBy": "_:assertor",
+        "mode": "earl:automatic"
       },
       {
         "type": "Assertion",
         "test": "wcag2:section-headings",
         "subject": "_:website",
         "result": {
-          "outcome": "earl:untested",
-          "description": ""
+          "outcome": "earl:cantTell",
+          "description": "Found possible applicable issue, but not sure..."
         },
-        "hasPart": []
+        "hasPart": [
+          {
+            "type": "Assertion",
+            "testcase": "wcag2:section-headings",
+            "assertedBy": "_:assertor",
+            "subject": "_:webpage",
+            "mode": "earl:automatic",
+            "result": {
+              "outcome": "earl:cantTell",
+              "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+              "locationPointersGroup": [
+                {
+                  "id": "data:sha256:e2eee1976d68d27ff16b4c6d6b55449c7bf03be0a92a921e7bb4239e71b75b90",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
+                  "description": "<h1 class=\"hide-accessible\">Navegación</h1>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:e079dbb10491e96ec3e803d16d3d5e2d147117e915f0a21a83eda6c317fa6ce6",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
+                  "description": "<h2 class=\"menu-item_h2\">Inicio</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:2b11559db2b8978ef6837638852ea266997ff68fa9b6a32a455d8a20a2e2d56c",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
+                  "description": "<h1>¡Síguenos!</h1>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:6bdacf535f08bc55dc52821c8b8d8ab380642141e74a9bb5c9467764365bd95f",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Noticias</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:6d7a02aa671b661974c7c156049a9ec744acf3f56fb64a3ae1ab84a376a82b6a",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Cathedra</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:99ece222ffed503b73862608bf21456cc5d3792e1d8e810d1aa5a14af2d582d9",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Imagen del día</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "data:sha256:ad5b7697007e0129bf1601f9ff7b1d06fb3f7cebdb4b3232242c9bc134788996",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                  "description": "<h2 class=\"portlet-title-text\">Agenda</h2>",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                }
+              ]
+            }
+          }
+        ],
+        "assertedBy": "_:assertor",
+        "mode": "earl:automatic"
       },
       {
         "type": "Assertion",
@@ -1394,12 +1687,13 @@
               "description": "The HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:65f606cd4ca3a1ec034530bcba87d42065180d7153afadd520c507409b83531b",
+                  "id": "data:sha256:eecb6f90a90bccc521f2e22520b517effcfd13e3aafa4a7bd3c2b47b587916d3",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html",
+                  "description": "<html class=\"ltr aui yui3-js-enabled webkit js chrome chrome101 chrome101-0 win secure\" dir=\"ltr\" lang=\"es-ES\"><head></head><body></body></html>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1489,21 +1783,23 @@
               "description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:d5f0aed94c18f91454b716d96e21d449d5136c47ec2309103f37e3dcfaba961b",
+                  "id": "data:sha256:95c1106d2d3aeb0930d7671e3126d60e1f9600da329e5daec14ddbae7ec2ec80",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
+                  "description": "<form action=\"https://www.ehu.eus/es/home?p_p_id=com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70&amp;p_p_lifecycle=0&amp;p_p_state=maximized&amp;p_p_mode=view&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_mvcPath=%2Fsearch.jsp&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_redirect=https%3A%2F%2Fwww.ehu.eus%2Fes%2Fhome%3Fp_p_id%3Dcom_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview\" class=\"form  \" data-fm-namespace=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm\" method=\"get\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm\">Búsqueda webTodoEste sitio web(function() {var select = document.getElementById('_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope');if (select) {}})();// <!--[CDATA[window._com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_search = function() {var keywords =document._com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm._com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords.value;keywords = keywords.replace(/^\\s+|\\s+$/, '');if (keywords != '') {submitForm(document._com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm);}};// ]]--></form>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:aea7480de4ca14089cf1d4d958a0c1a8f6be7afdd7eb1e2eafe0c0f76d4d4985",
+                  "id": "data:sha256:483cfa8c470e7c8f17068146d80fd5defe130df3bd03b0d99003fc3736226909",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
+                  "description": "<form action=\"#\" class=\"hide\" id=\"hrefFm\" method=\"post\" name=\"hrefFm\" aria-hidden=\"true\"></form>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1573,21 +1869,23 @@
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "id": "data:sha256:3924170d1c99f97246b567859194c7709d75c346340c631e2d1980021a934fe1",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "id": "data:sha256:647a23aa9711075c06d84d34520635b18ffecbbdc916447c80ae0d6be3aba3e4",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1682,21 +1980,23 @@
               "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
               "locationPointersGroup": [
                 {
-                  "id": "data:sha256:56c591fb3a1180911cf2f82ee5c7abb666dcd02851e984979ee65f5ac4637ac9",
+                  "id": "data:sha256:6536f54484d05aaba4884dd1ec60b6459be4ff9e5c198377168cd708eaa28643",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
+                  "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\">",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
-                  "id": "data:sha256:8e8e7c950454da724fb7ef413df53f1a89b14a095921d69f48205ff21cb389ae",
+                  "id": "data:sha256:c9e3a2ecaf3df4067a36f96a68453cff671f22e9b6128e6cd44c0a9d7f296436",
                   "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
+                  "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]

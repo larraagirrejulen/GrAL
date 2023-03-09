@@ -1,4 +1,6 @@
 
+import load_result_table from './results_table.js';
+
 
 export function loadStoredReport(){
 
@@ -63,8 +65,8 @@ export async function getEvaluation(checkboxes, setIsLoading){
         if (A11Y){
         const a11y = a11y();
         merge(json, a11y);
-        } 
-        saveJson(json);*/
+        } */
+        saveJson(json);
 
     }else if(A11Y){
         /* localStorage.removeItem('json');
@@ -82,7 +84,14 @@ export async function getEvaluation(checkboxes, setIsLoading){
 }
 
 
-
+/** 
+ * Function to store given json on extension localStorage
+ */
+function saveJson(json){
+    localStorage.setItem("json",json);
+    load_result_table();
+    window.location.reload();
+}
 
 
 export function clearStoredEvaluationData(){
