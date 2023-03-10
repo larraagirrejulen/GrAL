@@ -69,7 +69,7 @@ export default function load_result_table(){
         subsesction_results = load_subsections(categoryKey);
 
         category_results.push({
-            "category": [mainCategories[categoryKey]],
+            "category": mainCategories[categoryKey],
             "passed": categoryData[0],
             "failed": categoryData[1],
             "cannot_tell": categoryData[2],
@@ -91,7 +91,7 @@ export default function load_result_table(){
 function load_subsections(categoryKey){
 
     var subCategories = get_table_structure(categoryKey);
-    var subsection_results = {};
+    var subsection_results = [];
     var subCategoryData, sub2section_results;
 
     for(var subCategoryKey in subCategories){
@@ -102,14 +102,15 @@ function load_subsections(categoryKey){
             sub2section_results = load_sub2sections(subCategoryKey);
         }
 
-        subsection_results[subCategories[subCategoryKey]] = {
+        subsection_results.push({
+            "subsection": subCategories[subCategoryKey],
             "passed": subCategoryData[0],
             "failed": subCategoryData[1],
             "cannot_tell": subCategoryData[2],
             "not_present": subCategoryData[3],
             "not_checked": subCategoryData[4],
             "sub2section": sub2section_results
-        }
+        });
 
     }
     return subsection_results;
@@ -122,9 +123,9 @@ function load_sub2sections(subCategoryKey){
 
     const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
 
-    var sub2section_results = {};
+    var sub2section_results = [];
     var sub2Categories = get_table_structure(subCategoryKey);
-    var length, result, criteria, manual, background_color, result_text, final_results;
+    var length, result, criteria, manual, background_color, result_text, results;
 
     for(var sub2CategoryKey in sub2Categories){
         length = 0;
@@ -179,18 +180,21 @@ function load_sub2sections(subCategoryKey){
         }
 
         criteria = sub2Categories[sub2CategoryKey];
-        
-        sub2section_results[sub2Categories[sub2CategoryKey]] = {
+
+        results = {
+            "sub2section": sub2Categories[sub2CategoryKey],
             "background_color": background_color,
             "criteria": criteria,
             "result_text": result_text
         }
 
         if(length>0){
-            sub2section_results[sub2Categories[sub2CategoryKey]]["results"] = load_final_results(sub2CategoryKey);
+            results["results"] = load_final_results(sub2CategoryKey);
         }else if(manual){
-            sub2section_results[sub2Categories[sub2CategoryKey]]["manual_message"] = mensaje_wcag_manual;
+            results["manual_message"] = mensaje_wcag_manual;
         }
+
+        sub2section_results.push(results);
 
     }
     return sub2section_results;
@@ -205,9 +209,9 @@ function load_final_results(sub2CategoryKey){
     const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
     const assertions = json_resultados[sub2CategoryKey]['Codigos'];
 
-    var locations, outcome, description, locations_length, assertor, pointed_html, xpath;
+    var locations, outcome, description, locations_length, assertor, pointed_html, xpath, results;
 
-    var final_results = {};
+    var final_results = [];
 
     for (var i = 0; i < assertions.length; i++) {
         locations = assertions[i].result.locationPointersGroup;
@@ -220,21 +224,23 @@ function load_final_results(sub2CategoryKey){
         description = description.replaceAll('&lt;','<code>&lt;');
         description = description.replaceAll('&gt;','&gt;</code>');
         
-        final_results[i] = {
+        
+
+        results = {
             "assertor": assertor,
             "outcome": outcome,
             "description": description
         }
 
         if("solucion" in assertions[i]){
-            final_results[i]["solution"] = assertions[i]['solucion'];
+            results["solution"] = assertions[i]['solucion'];
         }
 
         locations_length = locations.length;
 
         if(locations_length>0){
 
-            final_results[i]["pointers"] = []
+            results["pointers"] = []
 
             for (var j = 0; j < locations_length; j++) {
                 pointed_html = locations[j]['description'].replaceAll('<','&lt;');
@@ -242,12 +248,14 @@ function load_final_results(sub2CategoryKey){
 
                 xpath = locations[j]['ptr:expression']; 
 
-                final_results[i]["pointers"].push({
+                results["pointers"].push({
                     "pointed_html": pointed_html,
                     "pointed_xpath": xpath
                 })
             }
         }
+
+        final_results.push(results);
     }
 
     return final_results;

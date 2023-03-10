@@ -216,8 +216,15 @@ function ConformanceLevel(props:any){
 }
 
 function ResultsTable({results}:any){
-  console.log(JSON.stringify(results.resultsSummary));
-  console.log(results.resultsContent)
+  
+  const [collapsible1s, setCollapsible1s] = useState([false, false, false, false]);
+
+  const handleCollapsible1sChange = (index:any) => {
+    const newCollapsible1s = [...collapsible1s];
+    newCollapsible1s[index] = !collapsible1s[index];
+    setCollapsible1s(newCollapsible1s);
+  };
+
   return(
     <div className = "table_container">
       <table className="summary_table">
@@ -231,18 +238,66 @@ function ResultsTable({results}:any){
         </tr>
       </table>
 
-      {results.resultsContent.map((section:any, index:any) => (
-          <button type="button" className="collapsible_tabla">
-            <table style={{tableLayout: "fixed",  overflowWrap: "break-word"}}>
-              <tr style={{width:"68%"}}>
-                <td style={{width:"68%"}}>{section.category}</td>
-                
-                <td>{section.passed + " " + section.failed + "  " + section.cannot_tell + "  " + section.not_present + "  " + section.not_checked}</td>
-              </tr>
-            </table>
-          </button>
-      ))}
+      {results.resultsContent.map((section:any, index:any) => (<>
+
+        <button className="collapsible_tabla" onClick={()=>handleCollapsible1sChange(index)}>
+          <table style={{tableLayout: "fixed",  overflowWrap: "break-word"}}>
+            <tr>
+              <td style={{width:"68%"}}>{section.category}</td>
+              <td>{section.passed + " " + section.failed + "  " + section.cannot_tell + "  " + section.not_present + "  " + section.not_checked}</td>
+            </tr>
+          </table>
+        </button>
+        { collapsible1s[index] ?
+          <Collapsible1 section={section} />
+          : ""}
+      </>))}
     </div>
   );
   
+}
+
+function Collapsible1({section}:any){
+
+  const [collapsible2s, setCollapsible2s] = useState(Array(section.subsection.length).fill(false));
+
+  const handleCollapsible2sChange = (index:any) => {
+    const newCollapsible2s = [...collapsible2s];
+    newCollapsible2s[index] = !collapsible2s[index];
+    setCollapsible2s(newCollapsible2s);
+  };
+
+  return(
+    <div className="content_tabla">
+      {section.subsection.map((subsection:any, index:any) => (<>
+      
+        <button type="button" className="collapsible_tabla2" onClick={()=>handleCollapsible2sChange(index)}>
+          <table style={{width:"100%", tableLayout: "fixed", overflowWrap: "break-word"}}>
+            <tr>
+              <td style={{fontSize:"10px", width:"70%", whiteSpace:"normal", textAlign: "left"}}>{subsection.subsection}</td>
+              <td>{subsection.passed + " " + subsection.failed + "  " + subsection.cannot_tell + "  " + subsection.not_present + "  " + subsection.not_checked}</td>
+            </tr>
+          </table>
+        </button>
+        { collapsible2s[index] ?
+          <Collapsible2 subsection={subsection} />
+          : ""}
+      </>))}
+    </div>
+  );
+}
+
+function Collapsible2({subsection}:any){
+
+  return(
+    <div className="content_tabla">
+      {subsection.sub2section.map((sub2section:any, index:any) => (<>
+        <button type="button" className="collapsible_tabla3" style={{backgroundColor: sub2section.background_color}}>
+          <table style={{width:"100%", tableLayout: "fixed", overflowWrap: "break-word"}}>
+            
+          </table>
+        </button>
+      </>))}
+    </div>
+  );
 }

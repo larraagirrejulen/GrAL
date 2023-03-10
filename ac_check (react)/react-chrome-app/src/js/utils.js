@@ -10,6 +10,8 @@ export function loadStoredReport(){
         var main = localStorage.getItem("tabla_main");
 
         if (json != null && main != null){
+            console.log(JSON.parse(jsonTabla));
+            console.log(JSON.parse(main))
             return {resultsSummary: JSON.parse(jsonTabla), resultsContent: JSON.parse(main)};
         } else{
             return {
@@ -172,7 +174,6 @@ export function downloadCurrentReport(){
  * Listener for clicking on an element of the results
  */
 function collapsible1(elem){
-    console.log("aaaaaaaaa");
     elem.classList.toggle("active");
     var content = elem.nextElementSibling;
     if (content.style.display === "block") {
