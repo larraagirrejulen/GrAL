@@ -42,7 +42,7 @@ export default function load_result_table(){
 
         json_resultados[criterias[i].num] = {
             'result' : obj.result.outcome,
-            "Codigos": obj.result.hasPart,
+            "Codigos": obj.hasPart,
             'mensaje': obj.result.description
         };
     }
@@ -125,11 +125,10 @@ function load_sub2sections(subCategoryKey){
 
     var sub2section_results = [];
     var sub2Categories = get_table_structure(subCategoryKey);
-    var length, result, criteria, manual, background_color, result_text, results;
+    var length, result, criteria, background_color, result_text, results;
 
     for(var sub2CategoryKey in sub2Categories){
         length = 0;
-        manual = false;
         if(sub2CategoryKey in json_resultados){
             result = json_resultados[sub2CategoryKey]; 
             switch(result.result) {
@@ -168,17 +167,6 @@ function load_sub2sections(subCategoryKey){
             result_text = "NOT CHECKED";
         }
         
-        //Text could be painted bacause it was made auot or manual.
-        //Manual has len = 0, we need to check if 
-        //First we get the WCAG name
-        var mensaje_wcag_manual = '';
-        if(length === 0){
-            mensaje_wcag_manual = json_resultados[sub2CategoryKey].mensaje; 
-            if(mensaje_wcag_manual!== ''){
-                manual = true;
-            }
-        }
-
         criteria = sub2Categories[sub2CategoryKey];
 
         results = {
@@ -188,10 +176,17 @@ function load_sub2sections(subCategoryKey){
             "result_text": result_text
         }
 
-        if(length>0){
+        //Text could be painted bacause it was made auot or manual.
+        //Manual has len = 0, we need to check if 
+        //First we get the WCAG name
+        var mensaje_wcag_manual = '';
+        if(length === 0){
+            mensaje_wcag_manual = json_resultados[sub2CategoryKey].mensaje; 
+            if(mensaje_wcag_manual!== ''){
+                results["manual_message"] = mensaje_wcag_manual;
+            }
+        }else{
             results["results"] = load_final_results(sub2CategoryKey);
-        }else if(manual){
-            results["manual_message"] = mensaje_wcag_manual;
         }
 
         sub2section_results.push(results);
