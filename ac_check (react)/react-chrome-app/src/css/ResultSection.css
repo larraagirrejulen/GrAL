@@ -55,51 +55,33 @@
 
 .result_section .body .table_container {
   border: 2px solid #005a6a;
-  background-color: #f4f4f4;
   border-radius: 5px;
   overflow: hidden;
+  cursor: default;
 }
-
-
-
 
 .summary_table{
 	border-bottom: 1px solid #c0c0c0;
 }
 .summary_table th{
-	text-align: center;
-  color: black;
 	width: 45px;
   font-size: 14px;
-  font-weight: bold;
-  cursor: default;
   border-left: 1px solid #c0c0c0;
   border-right: 1px solid #c0c0c0;
   background-color: #ffffff;
+	text-align: center;
+  font-weight: bold;
 }
 
 .results_table th{
-  text-align: center;
-  font-weight: bold;
   font-size: 12px;
   padding: 1px;
+	text-align: center;
+  font-weight: bold;
 }
 
 
-
-
-.boton_tabla {
-  border: none;
-  background-color: inherit;
-  font-size: 11px;
-  cursor: pointer;
-  display: inline-block;
-  color: dodgerblue;
-}
-
-.boton_tabla:hover {background: #eee;}
-
-.collapsible_tabla {
+.collapsible {
   background-color: #f4f4f4;
   color:black;
   cursor: pointer;
@@ -109,62 +91,24 @@
   border-top: 1px solid #c0c0c0;
   text-align: left;
   outline: none;
+  white-space:nowrap;
+}
+
+.collapsible.table1 {
+  background-color: #C7D1D3;
+}
+
+.collapsible:hover {
+  color: white;
+  background-color: #00B4D5;
+}
+
+.collapsible table tr td{
   font-size: 12px;
 }
 
-.active, .collapsible_tabla:hover, .collapsible_tabla2:hover {
-  color: white !important;
-  background-color: #00B4D5 !important;
-}
-
-.content_tabla {
-  overflow: hidden !important;
-  font-size: 10px !important;
-
-}
-
-.collapsible_tabla2 {
-  background-color: #C7D1D3 !important;
-  color:black !important;
-  cursor: pointer !important;
-  padding: 10px !important;
-  width: 100% !important;
-  border: none !important;
-  text-align: left !important;
-  outline: none !important;
-  font-size: 10px !important;
-}
-
-.collapsible_tabla3 {
-  color:black !important;
-  cursor: pointer !important;
-  padding: 10px !important;
-  width: 100% !important;
-  border: none !important;
-  text-align: left !important;
-  outline: none !important;
-  font-size: 10px !important;
-}
-.collapsible_tabla3 table tr td{
-  color: black !important;
-}
-
-/*
-.collapsible_tabla,.collapsible_tabla2 td{
-  white-space:nowrap !important;
-}
-*/
-.collapsible_tabla{
-  white-space:nowrap !important;
-}
-.collapsible_tabla table tr td{
-  font-size: 12px !important;
-  white-space:nowrap !important;
-  background-color: inherit !important;
-  color: black !important;
 
 
-}
 
 .tabla_resultados {
   width:100% !important;
