@@ -10,7 +10,7 @@ export function loadStoredReport(){
         var main = localStorage.getItem("tabla_main");
 
         if (json != null && main != null){
-            return {resultsSummary: JSON.parse(jsonTabla), resultsContent: main};
+            return {resultsSummary: JSON.parse(jsonTabla), resultsContent: JSON.parse(main)};
         } else{
             return {
                 resultsSummary: "<div style='text-align: center; padding:15px 0;'>No data stored</div>",

@@ -59,25 +59,28 @@ export default function load_result_table(){
 
     localStorage.setItem("tabla_resultados",JSON.stringify(results_summary));
 
-    var tabla_contenido= "<table class='tabla_contenido' style='width:100%; font-size:10px'>";
-    tabla_contenido += "<tr><th style='width:68% !important;font-size:12px !important;background-color:white !important'>Standard</th><th style='background-color:#C8FA8C' title='Passed'>P</th>";
-    tabla_contenido += "<th style='background-color:#FA8C8C' title='Failed'>F</th><th style='background-color:#F5FA8C' title='Can&#39;t tell'>CT</th>";
-    tabla_contenido += "<th title='Not Present' style='background-color:#FFFFFF !important;'>NP</th><th style='background-color:#8CFAFA' title='Not checked'>NC</th></tr></table>";
-
-    var categoryData;
+    var category_results = {};
+    var categoryData, subsesction_results;
     var mainCategories = get_table_structure('0');
+
     for(var categoryKey in mainCategories){
+        
         categoryData = get_data_by_category(categoryKey);
-        tabla_contenido +='<button type="button" class="collapsible_tabla"><table style="width:100%; table-layout: fixed; overflow-wrap: break-word;""><tr><td style="width:70%">';
-        tabla_contenido += mainCategories[categoryKey];
-        tabla_contenido += '</td><td>'+categoryData[0]+'</td><td>'+categoryData[1]+'</td><td>'+categoryData[2]+'</td><td>'+categoryData[3]+'</td><td>'+categoryData[4]+'</td>';
-        tabla_contenido += '</tr></table></button><div class="content_tabla">';
-        tabla_contenido += load_subsections(categoryKey);
-        tabla_contenido += '</div>';
+        subsesction_results = load_subsections(categoryKey);
+
+        category_results[mainCategories[categoryKey]] = {
+            "passed": categoryData[0],
+            "failed": categoryData[1],
+            "cannot_tell": categoryData[2],
+            "not_present": categoryData[3],
+            "not_checked": categoryData[4],
+            "subsection": subsesction_results
+        }
+
+        
     }
 
-    
-    localStorage.setItem("tabla_main",tabla_contenido);
+    localStorage.setItem("tabla_main",JSON.stringify(category_results));
 }
 
 
@@ -85,33 +88,42 @@ export default function load_result_table(){
  * Prints out the subsections of the "s" section in HTML and returns it
  */
 function load_subsections(categoryKey){
+
     var subCategories = get_table_structure(categoryKey);
-    let sub2Categories;
-    var codigo_nav_st = "";
-    var subCategoryData
+    var subsection_results = {};
+    var subCategoryData, sub2section_results;
+
     for(var subCategoryKey in subCategories){
+
         subCategoryData = get_data_by_category(subCategoryKey);
-        codigo_nav_st +='<button type="button" class="collapsible_tabla2"><table style="width:100%; table-layout: fixed; overflow-wrap: break-word;""><tr><td style="font-size:10px;width:70%; white-space:normal;text-align: left;">';
-        codigo_nav_st += subCategories[subCategoryKey];
-        codigo_nav_st += '</td><td style="font-size:10px;">'+subCategoryData[0]+'</td><td style="font-size:10px;">'+subCategoryData[1]+'</td><td style="font-size:10px;">'+subCategoryData[2]+'</td><td style="font-size:10px;">'+subCategoryData[3]+'</td><td style="font-size:10px;">'+subCategoryData[4]+'</td>';
-        codigo_nav_st += '</tr></table></button><div class="content_tabla">';
-        sub2Categories = get_table_structure(subCategoryKey);
-        if (Object.keys(sub2Categories).length >0){
-            codigo_nav_st += load_sub2sections(subCategoryKey);
+
+        if (Object.keys(get_table_structure(subCategoryKey)).length > 0){
+            sub2section_results = load_sub2sections(subCategoryKey);
         }
-        codigo_nav_st+='</div>';
+
+        subsection_results[subCategories[subCategoryKey]] = {
+            "passed": subCategoryData[0],
+            "failed": subCategoryData[1],
+            "cannot_tell": subCategoryData[2],
+            "not_present": subCategoryData[3],
+            "not_checked": subCategoryData[4],
+            "sub2section": sub2section_results
+        }
+
     }
-    return codigo_nav_st;
+    return subsection_results;
 }
 
 /**
  * Prints the subsubsections of the subsection passed as parameter and returns it as HTML string
  */
 function load_sub2sections(subCategoryKey){
-    var sub2Categories = get_table_structure(subCategoryKey);
-    var codigo_nav_st = "";
-    var length, result, criteria, manual, style, result_text;
+
     const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
+
+    var sub2section_results = {};
+    var sub2Categories = get_table_structure(subCategoryKey);
+    var length, result, criteria, manual, background_color, result_text, final_results;
 
     for(var sub2CategoryKey in sub2Categories){
         length = 0;
@@ -120,27 +132,27 @@ function load_sub2sections(subCategoryKey){
             result = json_resultados[sub2CategoryKey]; 
             switch(result.result) {
                 case "earl:failed":
-                    style = "background-color:#FA8C8C";
+                    background_color = "#FA8C8C";
                     result_text = "FAILED";
                     break;
                 case "earl:untested":
-                    style = "background-color:#8CFAFA";
+                    background_color = "#8CFAFA";
                     result_text = "NOT CHECKED";
                     break;
                 case "earl:cantTell":
-                    style = "background-color:#F5FA8C";
+                    background_color = "#F5FA8C";
                     result_text = "CAN'T TELL";
                     break;
                 case "earl:passed":
-                    style = "background-color:#C8FA8C";
+                    background_color = "#C8FA8C";
                     result_text = "PASSED";
                     break;
                 case "earl:inapplicable":
-                    style = "background-color:#000000";
+                    background_color = "#000000";
                     result_text = "NOT PRESENT";                
                     break;
                 default:
-                    style = "";
+                    background_color = "";
                     result_text = "";
             }
             
@@ -150,7 +162,7 @@ function load_sub2sections(subCategoryKey){
             
         }else{
             console.log('No en el documento: '+sub2CategoryKey);
-            style = "background-color:#8CFAFA";
+            background_color = "#8CFAFA";
             result_text = "NOT CHECKED";
         }
         
@@ -166,29 +178,21 @@ function load_sub2sections(subCategoryKey){
         }
 
         criteria = sub2Categories[sub2CategoryKey];
-        codigo_nav_st +='<button type="button" class="collapsible_tabla3" style="'+style+'"><table style="width:100%; table-layout: fixed; overflow-wrap: break-word;""><tr>';
-
-        if(length>0 || manual){
-            codigo_nav_st += '<td style="width:15%;"><img src="" alt="Show information" height="20px"></td>';
-            codigo_nav_st += '<td style="width:55%;  font-size:10px;  text-align: left;">'+criteria+'</td>';
-        }else{
-            codigo_nav_st += '<td style="width:70%;  font-size:10px;  text-align: left;">'+criteria+'</td>';
-        }
-        codigo_nav_st += '<td style="font-size:9px"><b>'+result_text+'</b></td>';
-        codigo_nav_st += '</tr></table></button><div class="content_tabla">';
         
+        sub2section_results[sub2Categories[sub2CategoryKey]] = {
+            "background_color": background_color,
+            "criteria": criteria,
+            "result_text": result_text
+        }
+
         if(length>0){
-            codigo_nav_st += load_final_results(sub2CategoryKey);
+            sub2section_results[sub2Categories[sub2CategoryKey]]["results"] = load_final_results(sub2CategoryKey);
         }else if(manual){
-            codigo_nav_st += '<table class="tabla_resultados">';
-            codigo_nav_st += '<tr><td><b><u>Manual message</u></b>: <br>'+mensaje_wcag_manual;
-            codigo_nav_st += '</td></tr></table>';
-
+            sub2section_results[sub2Categories[sub2CategoryKey]]["manual_message"] = mensaje_wcag_manual;
         }
-        
-        codigo_nav_st+='</div>';
+
     }
-    return codigo_nav_st;
+    return sub2section_results;
 }
 
 /** 
@@ -200,9 +204,9 @@ function load_final_results(sub2CategoryKey){
     const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
     const assertions = json_resultados[sub2CategoryKey]['Codigos'];
 
-    var html = '<table class="tabla_resultados">';
+    var locations, outcome, description, locations_length, assertor, pointed_html, xpath;
 
-    var locations, outcome, description, locations_length, assertor, pointed_html, pointer_xpath;
+    var final_results = {};
 
     for (var i = 0; i < assertions.length; i++) {
         locations = assertions[i].result.locationPointersGroup;
@@ -214,38 +218,38 @@ function load_final_results(sub2CategoryKey){
         description = description.replaceAll('>','&gt;');
         description = description.replaceAll('&lt;','<code>&lt;');
         description = description.replaceAll('&gt;','&gt;</code>');
-
-        html += '<tr><td><u>Assertor</u>:  <b>'+assertor+'</b></td></tr>';
-        html += '<tr><td><u>Result</u>:  <b>'+outcome+'</b></td></tr>';
-        html += '<tr><td><u>Message:</u></td></tr>';
-        html += '<tr><td>'+description+'</td></tr>';
-        if("solucion" in assertions[i]){
-            html += '<tr><td><u>Posible solution</u>:</td></tr>';
-            html += '<tr><td>'+assertions[i]['solucion']+'</td></tr>';
+        
+        final_results[i] = {
+            "assertor": assertor,
+            "outcome": outcome,
+            "description": description
         }
+
+        if("solucion" in assertions[i]){
+            final_results[i]["solution"] = assertions[i]['solucion'];
+        }
+
         locations_length = locations.length;
+
         if(locations_length>0){
-            html += '<tr><td><u>Code</u>:</td></tr>';
-            html += '<tr><td>';
+
+            final_results[i]["pointers"] = []
+
             for (var j = 0; j < locations_length; j++) {
                 pointed_html = locations[j]['description'].replaceAll('<','&lt;');
                 pointed_html = pointed_html.replaceAll('>','&gt;');
 
-                pointer_xpath = ""; 
-                if('location' in locations[j]){
-                    pointer_xpath = 'alt="'+locations[j]['ptr:expression']+'"';
-                }
+                xpath = locations[j]['ptr:expression']; 
 
-                html += '<code class="codigo_analisis" style="cursor: pointer;"'+pointer_xpath+'>'+pointed_html+'</code>';
+                final_results[i]["pointers"].push({
+                    "pointed_html": pointed_html,
+                    "pointed_xpath": xpath
+                })
             }
-            html += '<br><br></td></tr>';
-        }else{
-            html = html.substring(0,html.length-10)+'<br><br></td></tr>';
         }
     }
-    html += '</table>'; 
 
-    return html;
+    return final_results;
 }
 
 

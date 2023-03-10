@@ -217,6 +217,7 @@ function ConformanceLevel(props:any){
 
 function ResultsTable({results}:any){
   console.log(JSON.stringify(results.resultsSummary));
+  console.log(results.resultsContent)
   return(
     <div className = "table_container">
       <table className="summary_table">
@@ -224,8 +225,12 @@ function ResultsTable({results}:any){
         <tr><th>{results.resultsSummary.passed}</th><th>{results.resultsSummary.failed}</th><th>{results.resultsSummary.cannot_tell}</th><th>{results.resultsSummary.not_present}</th><th>{results.resultsSummary.not_checked}</th></tr>
       </table>
       <table className="results_table">
-
+        <tr>
+          <th style={{width:"68%", backgroundColor:"white"}}>Standard</th>
+          <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
+        </tr>
       </table>
+      
     </div>
   );
   

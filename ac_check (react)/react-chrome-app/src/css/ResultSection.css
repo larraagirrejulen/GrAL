@@ -32,10 +32,10 @@
 
 .conformanceLevel {
   display: inline-flex;
-  padding: 10px 15px;
+  padding: 8px 12px;
   border: 1px solid #005a6a;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   background-color: white;
   color: #005a6a;
   filter: drop-shadow(0 0 0) brightness(1);
@@ -63,7 +63,9 @@
 
 
 
-
+.summary_table{
+	border-bottom: 1px solid #c0c0c0;
+}
 .summary_table th{
 	text-align: center;
   color: black;
@@ -76,14 +78,14 @@
   background-color: #ffffff;
 }
 
-.tabla_contenido th{
-  color: black !important;
-  font-family: 'Helvetica' !important;
-	font-size: 11px !important;
-  text-align: center !important;
+.results_table th{
+  text-align: center;
   font-weight: bold;
-  padding: 1px 0px 1px 0px !important;
+  font-size: 12px;
+  padding: 1px;
 }
+
+
 
 
 .boton_tabla {
