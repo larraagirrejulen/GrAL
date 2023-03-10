@@ -230,7 +230,18 @@ function ResultsTable({results}:any){
           <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
         </tr>
       </table>
-      
+
+      {results.resultsContent.map((section:any, index:any) => (
+          <button type="button" className="collapsible_tabla">
+            <table style={{tableLayout: "fixed",  overflowWrap: "break-word"}}>
+              <tr style={{width:"68%"}}>
+                <td style={{width:"68%"}}>{section.category}</td>
+                
+                <td>{section.passed + " " + section.failed + "  " + section.cannot_tell + "  " + section.not_present + "  " + section.not_checked}</td>
+              </tr>
+            </table>
+          </button>
+      ))}
     </div>
   );
   

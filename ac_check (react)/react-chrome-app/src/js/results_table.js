@@ -59,7 +59,7 @@ export default function load_result_table(){
 
     localStorage.setItem("tabla_resultados",JSON.stringify(results_summary));
 
-    var category_results = {};
+    var category_results = [];
     var categoryData, subsesction_results;
     var mainCategories = get_table_structure('0');
 
@@ -68,14 +68,15 @@ export default function load_result_table(){
         categoryData = get_data_by_category(categoryKey);
         subsesction_results = load_subsections(categoryKey);
 
-        category_results[mainCategories[categoryKey]] = {
+        category_results.push({
+            "category": [mainCategories[categoryKey]],
             "passed": categoryData[0],
             "failed": categoryData[1],
             "cannot_tell": categoryData[2],
             "not_present": categoryData[3],
             "not_checked": categoryData[4],
             "subsection": subsesction_results
-        }
+        });
 
         
     }

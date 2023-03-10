@@ -101,14 +101,15 @@
 
 .collapsible_tabla {
   background-color: #f4f4f4;
-  color:black  !important;
-  cursor: pointer  !important;
-  padding: 10px !important;
-  width: 100% !important;
-  border: none !important;
-  text-align: left !important;
-  outline: none !important;
-  font-size: 12px !important;
+  color:black;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #c0c0c0;
+  text-align: left;
+  outline: none;
+  font-size: 12px;
 }
 
 .active, .collapsible_tabla:hover, .collapsible_tabla2:hover {
