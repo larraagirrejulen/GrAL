@@ -70,7 +70,7 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "11/3/2023, 7:44:10",
+    "dct:date": "11/3/2023, 8:44:11",
     "dct:summary": "Some errors where found...",
     "creator": {
       "id": "_:assertor",
@@ -110,6 +110,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:non-text-content",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
@@ -442,6 +443,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:audio-only-and-video-only-prerecorded",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -452,6 +454,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:captions-prerecorded",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -462,6 +465,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:audio-description-or-media-alternative-prerecorded",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -472,6 +476,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:captions-live",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -482,6 +487,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:audio-description-prerecorded",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -492,6 +498,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:sign-language-prerecorded",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -502,6 +509,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:extended-audio-description-prerecorded",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -512,6 +520,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:media-alternative-prerecorded",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -522,6 +531,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:audio-only-live",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -532,6 +542,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:info-and-relationships",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
@@ -731,6 +742,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:meaningful-sequence",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -741,6 +753,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:sensory-characteristics",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -751,6 +764,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:orientation",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -761,6 +775,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:identify-input-purpose",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -771,6 +786,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:identify-purpose",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -781,6 +797,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:use-of-color",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -791,6 +808,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:audio-control",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -801,6 +819,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:contrast-minimum",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
@@ -877,6 +896,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:resize-text",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -887,6 +907,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:images-of-text",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -897,6 +918,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:contrast-enhanced",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -907,6 +929,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:low-or-no-background-audio",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -917,6 +940,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:visual-presentation",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -927,6 +951,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:images-of-text-no-exception",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -937,6 +962,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:reflow",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -947,6 +973,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:non-text-contrast",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -957,6 +984,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:text-spacing",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -967,6 +995,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:content-on-hover-or-focus",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -977,6 +1006,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:keyboard",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -987,6 +1017,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:no-keyboard-trap",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -997,6 +1028,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:keyboard-no-exception",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1007,6 +1039,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:character-key-shortcuts",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1017,6 +1050,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:timing-adjustable",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1027,6 +1061,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:pause-stop-hide",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1037,6 +1072,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:no-timing",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1047,6 +1083,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:interruptions",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1057,6 +1094,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:re-authenticating",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1067,6 +1105,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:timeouts",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1077,6 +1116,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:three-flashes-or-below-threshold",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1087,6 +1127,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:three-flashes",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1097,6 +1138,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:animation-from-interactions",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1107,6 +1149,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:bypass-blocks",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
@@ -1163,6 +1206,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:page-titled",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
@@ -1199,6 +1243,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:focus-order",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1209,6 +1254,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:link-purpose-in-context",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
@@ -1305,6 +1351,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:multiple-ways",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1315,6 +1362,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:headings-and-labels",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1325,6 +1373,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:focus-visible",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1335,6 +1384,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:location",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1345,6 +1395,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:link-purpose-link-only",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
@@ -1514,6 +1565,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:section-headings",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
@@ -1610,6 +1662,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:pointer-gestures",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1620,6 +1673,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:pointer-cancellation",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1630,6 +1684,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:label-in-name",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1640,6 +1695,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:motion-actuation",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1650,6 +1706,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:target-size",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1660,6 +1717,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:concurrent-input-mechanisms",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1670,6 +1728,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:language-of-page",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:cantTell",
@@ -1706,6 +1765,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:language-of-parts",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1716,6 +1776,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:unusual-words",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1726,6 +1787,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:abbreviations",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1736,6 +1798,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:reading-level",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1746,6 +1809,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:pronunciation",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1756,6 +1820,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:on-focus",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1766,6 +1831,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:on-input",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
@@ -1812,6 +1878,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:consistent-navigation",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1822,6 +1889,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:consistent-identification",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1832,6 +1900,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:change-on-request",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1842,6 +1911,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:error-identification",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1852,6 +1922,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:labels-or-instructions",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
@@ -1898,6 +1969,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:error-suggestion",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1908,6 +1980,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:error-prevention-legal-financial-data",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1918,6 +1991,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:help",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1928,6 +2002,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:error-prevention-all",
+        "conformanceLevel": "AAA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",
@@ -1938,6 +2013,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:parsing",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:failed",
@@ -1963,6 +2039,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:name-role-value",
+        "conformanceLevel": "A",
         "subject": "_:website",
         "result": {
           "outcome": "earl:passed",
@@ -2009,6 +2086,7 @@
       {
         "type": "Assertion",
         "test": "wcag2:status-messages",
+        "conformanceLevel": "AA",
         "subject": "_:website",
         "result": {
           "outcome": "earl:untested",

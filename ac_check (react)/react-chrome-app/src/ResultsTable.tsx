@@ -11,15 +11,6 @@ export default function ResultsTable({results, activeLevels}:any){
       newCollapsible1s[index] = !collapsible1s[index];
       setCollapsible1s(newCollapsible1s);
     };
-
-    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(var level of activeLevels){
-        passed += results.resultsSummary.passed[level];
-        failed += results.resultsSummary.failed[level];
-        cannot_tell += results.resultsSummary.cannot_tell[level];
-        not_present += results.resultsSummary.not_present[level];
-        not_checked += results.resultsSummary.not_checked[level];
-    }
   
     return(
       <div className = "table_container">

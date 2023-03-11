@@ -2,17 +2,34 @@
 import load_result_table from './results_table.js';
 
 
+function getStoredJson(){
+    var json = localStorage.getItem("json");
+    return JSON.parse(json);
+}
+
+/** 
+ * Function to store given json on extension localStorage
+ */
+function saveJson(json){
+    localStorage.removeItem('json');
+    localStorage.setItem("json",json);
+    load_result_table();
+    window.location.reload();
+}
+
+
+
 export function loadStoredReport(){
     try{
-        var jsonT = localStorage.getItem("json");
+        var json = getStoredJson()
         var jsonTabla = localStorage.getItem("tabla_resultados");
-        var json = JSON.parse(jsonT);
         var main = localStorage.getItem("tabla_main");
 
         if (json != null && main != null){
-            console.log(JSON.parse(jsonTabla));
-            console.log(JSON.parse(main))
-            return {resultsSummary: JSON.parse(jsonTabla), resultsContent: JSON.parse(main)};
+            return {
+                resultsSummary: JSON.parse(jsonTabla), 
+                resultsContent: JSON.parse(main)
+            };
         } else{
             return {
                 resultsSummary: "<div style='text-align: center; padding:15px 0;'>No data stored</div>",
@@ -24,9 +41,6 @@ export function loadStoredReport(){
     }
     
 }
-
-
-
 
 
 async function fetchWithTimeout(resource, options = {}) {
@@ -65,19 +79,16 @@ export async function getEvaluation(checkboxes, setIsLoading){
     if (AM || AC || MV){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         var json = await fetchScraper(bodyData);
-        console.log(json);
         
 
-        /*localStorage.removeItem('json');
-        if (A11Y){
+        /* if (A11Y){
         const a11y = a11y();
         merge(json, a11y);
         } */
-        saveJson(JSON.stringify(json));
+        saveJson(JSON.stringify(json[0]));
 
     }else if(A11Y){
-        /* localStorage.removeItem('json');
-        json = a11y();
+        /* json = a11y();
         saveJson(json);*/
     }else{
         alert("You need to choose at least one analizer");
@@ -91,14 +102,7 @@ export async function getEvaluation(checkboxes, setIsLoading){
 }
 
 
-/** 
- * Function to store given json on extension localStorage
- */
-function saveJson(json){
-    localStorage.setItem("json",json);
-    load_result_table();
-    window.location.reload();
-}
+
 
 
 export function clearStoredEvaluationData(){
@@ -117,17 +121,23 @@ export function clearStoredEvaluationData(){
 
 
 
-export function downloadCurrentReport(){
+export function downloadCurrentReport(activeLevels){
+
     if(localStorage.getItem("tabla_main")==null){
         alert("There is currently no evaluation data stored! Start by evaluating the page or uploading an existing report.");
         return;
     }
 
-    var jsonT = localStorage.getItem("json");
-    var json = JSON.parse(jsonT);
+    var json = getStoredJson()
+
+    json.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
+
+    var interestedSamples = json.auditSample.filter(sample => activeLevels.includes(sample.conformanceLevel));
+
+    json.auditSample = interestedSamples;
 
     const data = JSON.stringify(json);
-    const fileName = json.defineScope.scope.title + ".json";
+    const fileName = json.title + ".json";
     const fileType = "text/json";
 
     const blob = new Blob([data], { type: fileType })

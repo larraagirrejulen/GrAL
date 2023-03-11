@@ -154,6 +154,7 @@ class jsonLd{
                 {
                     "type": "Assertion",
                     "test": "wcag2:" + this.#successCriterias[key].id,
+                    "conformanceLevel": this.#successCriterias[key].conformanceLevel,
                     "subject": "_:website",
                     "result":
                     {

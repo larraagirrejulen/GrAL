@@ -63,6 +63,17 @@ function MainSections({dropdownsDefaultState}:any){
     setResults(newResults);
   };
 
+  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
+  const handleLevelClick = (label:any) => {
+    if (label === 'A') {
+      setActiveLevels(['A']);
+    } else if (label === 'AA') {
+      setActiveLevels(['A', 'AA']);
+    } else if (label === 'AAA') {
+      setActiveLevels(['A', 'AA', 'AAA']);
+    }
+  }
+
   useEffect(() => {
     const loadedResults = loadStoredReport();
     handleResultsChange(loadedResults);
@@ -70,8 +81,8 @@ function MainSections({dropdownsDefaultState}:any){
 
   return(<>
     <EvaluatorSelectionSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onCheckboxesChange={handleCheckboxesChange} />
-    <EvaluationSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onResultsChange={handleResultsChange} />
-    <ResultSection results={results} />
+    <EvaluationSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onResultsChange={handleResultsChange} activeLevels={activeLevels} />
+    <ResultSection results={results} activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)} />
   </>);
 }
 
@@ -127,7 +138,7 @@ function CustomCheckbox ({label, href, checked, onChange}:any ) {
 
 
 
-function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsChange}:any) {
+function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsChange, activeLevels}:any) {
   const [isOpen, setIsOpen] = useState(dropdownsDefaultState);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -148,7 +159,7 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label>
-        <label id="btn_download" className="button primary" onClick={downloadCurrentReport}>Download report</label>
+        <label id="btn_download" className="button primary" onClick={()=>downloadCurrentReport(activeLevels)}>Download report</label>
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
       </div>
     </div> 
@@ -159,19 +170,7 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
 
 
 
-function ResultSection({results}:any) {
-
-  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
-
-  const handleLevelClick = (label:any) => {
-    if (label === 'A') {
-      setActiveLevels(['A']);
-    } else if (label === 'AA') {
-      setActiveLevels(['A', 'AA']);
-    } else if (label === 'AAA') {
-      setActiveLevels(['A', 'AA', 'AAA']);
-    }
-  }
+function ResultSection({results, activeLevels, onLevelsChange}:any) {
 
   return (
     <div className="result_section">
@@ -182,7 +181,7 @@ function ResultSection({results}:any) {
       <div className="body">
         {results.resultsContent !== "" ? 
         <>
-          <ConformanceLevelSelector activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)}/>
+          <ConformanceLevelSelector activeLevels={activeLevels} onLevelsChange={onLevelsChange}/>
           <ResultsTable results={results} activeLevels={activeLevels}/>
         </>: 
           <div className = "table_container">{parse(results.resultsSummary)}</div>

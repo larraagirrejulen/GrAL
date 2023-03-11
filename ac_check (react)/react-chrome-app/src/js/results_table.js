@@ -36,7 +36,7 @@ export default function load_result_table(){
     }
 
     var criterias = getSuccessCriterias();
-    var results = json[0]["auditSample"]
+    var results = json["auditSample"]
     var obj, level;
     var json_resultados = {};
     console.log( results);
