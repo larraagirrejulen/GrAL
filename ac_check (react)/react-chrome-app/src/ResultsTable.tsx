@@ -1,6 +1,10 @@
 
+import './css/ResultsTable.css';
+
 import { useState } from "react";
 import { getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
+
+
 
 
 export default function ResultsTable({results, activeLevels}:any){
@@ -13,23 +17,53 @@ export default function ResultsTable({results, activeLevels}:any){
     };
   
     return(
-      <div className = "table_container">
-        <SummaryAndHeaders results={results} activeLevels={activeLevels} />
-        {results.resultsContent.map((section:any, index:any) => (<>
+      <div className = "results_container">
 
-          <button className="collapsible" onClick={()=>handleCollapsible1sChange(index)}>
-            <table style={{tableLayout: "fixed",  overflowWrap: "break-word"}}>
-              <tr>
-                <td style={{width:"68%"}}>{section.category}</td>
-                <Results section={section} activeLevels={activeLevels}/>
-              </tr>
+        <Summary results={results} activeLevels={activeLevels} />
+
+        <div className='table_container'>
+            <table className="header">
+                <tr>
+                <th style={{width:"68%", backgroundColor:"white"}}>Standard</th>
+                <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
+                </tr>
             </table>
-          </button>
-          { collapsible1s[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
-        </>))}
+
+            {results.resultsContent.map((section:any, index:any) => (<>
+            <button className="collapsible" onClick={()=>handleCollapsible1sChange(index)}>
+                <table style={{tableLayout: "fixed",  overflowWrap: "break-word"}}>
+                <tr>
+                    <td style={{width:"68%"}}>{section.category}</td>
+                    <Results section={section} activeLevels={activeLevels}/>
+                </tr>
+                </table>
+            </button>
+            { collapsible1s[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
+            </>))}
+        </div>
+        
       </div>
     );
     
+}
+
+function Summary({results,  activeLevels}:any){
+
+    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
+    for(var level of activeLevels){
+        passed += results.resultsSummary.passed[level];
+        failed += results.resultsSummary.failed[level];
+        cannot_tell += results.resultsSummary.cannot_tell[level];
+        not_present += results.resultsSummary.not_present[level];
+        not_checked += results.resultsSummary.not_checked[level];
+    }
+
+    return(<>
+        <table className="summary">
+            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
+            <tr><td>{passed}</td><td>{failed}</td><td>{cannot_tell}</td><td>{not_present}</td><td>{not_checked}</td></tr>
+        </table>
+    </>);
 }
 
 
@@ -137,30 +171,7 @@ function Collapsible3({sub2section}:any){
 
 
 
-function SummaryAndHeaders({results,  activeLevels}:any){
 
-    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(var level of activeLevels){
-        passed += results.resultsSummary.passed[level];
-        failed += results.resultsSummary.failed[level];
-        cannot_tell += results.resultsSummary.cannot_tell[level];
-        not_present += results.resultsSummary.not_present[level];
-        not_checked += results.resultsSummary.not_checked[level];
-    }
-
-    return(<>
-        <table className="summary_table">
-            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
-            <tr><th>{passed}</th><th>{failed}</th><th>{cannot_tell}</th><th>{not_present}</th><th>{not_checked}</th></tr>
-        </table>
-        <table className="results_table">
-            <tr>
-            <th style={{width:"68%", backgroundColor:"white"}}>Standard</th>
-            <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
-            </tr>
-        </table>
-    </>);
-}
 
 
 

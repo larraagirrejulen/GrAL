@@ -1,0 +1,89 @@
+
+
+.results_container .summary{
+    border: 2px solid #005a6a;
+    margin-bottom: 15px;
+}
+.results_container .summary th, .results_container .summary td{
+    width: 45px;
+    border: none;
+    border-right: 1px solid #c6c6c6;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+}
+.results_container .summary tr:first-of-type{
+    border-bottom: 1px solid #c6c6c6;
+}
+.results_container .summary th:last-of-type, .results_container .summary td:last-of-type{
+    border-right: 0;
+}
+
+  
+.results_container .table_container{
+    border: 2px solid #005a6a;
+}
+
+
+  .results_table th{
+    font-size: 12px;
+    padding: 1px;
+      text-align: center;
+    font-weight: bold;
+  }
+  
+  
+  .collapsible {
+    background-color: #f4f4f4;
+    color:black;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-top: 1px solid #c0c0c0;
+    text-align: left;
+    outline: none;
+  }
+  
+  .collapsible.table1 {
+    background-color: #C7D1D3;
+  }
+  
+  .collapsible.table2 {
+    font-size: 10px;
+  }
+  
+  .collapsible:hover {
+    color: white;
+    background-color: #00B4D5;
+  }
+  
+  .collapsible table tr td{
+    font-size: 12px;
+  }
+  
+  
+  
+  
+  .tabla_resultados {
+    width:100%;
+    font-size:12px;
+    overflow-wrap: anywhere;
+  }
+  .tabla_resultados td{
+    padding-left:10px;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  
+  }
+  
+  
+  
+  .codigo_analisis{
+    white-space: normal;
+    overflow-wrap: anywhere;
+    background-color: #f7f7f9;
+    color: #d14;
+    cursor: pointer;
+    border: 1px solid #e1e1e8;
+  }

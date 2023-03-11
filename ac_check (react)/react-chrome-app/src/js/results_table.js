@@ -57,7 +57,7 @@ export default function load_result_table(){
                 passed[level] = passed[level]+1;
                 break;
             case "earl:inapplicable":
-                not_checked[level] = not_checked[level]+1;
+                not_present[level] = not_present[level]+1;
                 break;
             default:
         }
@@ -335,7 +335,7 @@ function get_data_by_category(categoryKey){
                     passed[level] = passed[level]+1;
                     break;
                 case "earl:inapplicable":
-                    not_checked[level] = not_checked[level]+1;
+                    not_present[level] = not_present[level]+1;
                     break;
                 default:
             }
