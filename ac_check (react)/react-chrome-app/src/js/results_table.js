@@ -8,34 +8,56 @@ export default function load_result_table(){
     var report = localStorage.getItem("json");
     var json = JSON.parse(report);
 
-    var passed = 0;
-    var failed = 0;
-    var cannot_tell = 0;
-    var not_present = 0;
-    var not_checked = 0;
+
+    var passed = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var failed = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var cannot_tell = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var not_present = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var not_checked = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
 
     var criterias = getSuccessCriterias();
     var results = json[0]["auditSample"]
-    var obj;
+    var obj, level;
     var json_resultados = {};
     console.log( results);
     for (var i = 0; i <results.length; i++){
+        level = criterias[i].conformanceLevel;
         obj = results[i];
         switch(obj.result.outcome) {
             case "earl:failed":
-                failed = failed+1;
+                failed[level] = failed[level]+1;
                 break;
             case "earl:untested":
-                not_checked = not_checked+1;
+                not_checked[level] = not_checked[level]+1;
                 break;
             case "earl:cantTell":
-                cannot_tell = cannot_tell+1;
+                cannot_tell[level] = cannot_tell[level]+1;
                 break;
             case "earl:passed":
-                passed = passed+1;
+                passed[level] = passed[level]+1;
                 break;
             case "earl:inapplicable":
-                not_present = not_present+1;
+                not_checked[level] = not_checked[level]+1;
                 break;
             default:
         }
@@ -43,7 +65,8 @@ export default function load_result_table(){
         json_resultados[criterias[i].num] = {
             'result' : obj.result.outcome,
             "Codigos": obj.hasPart,
-            'mensaje': obj.result.description
+            'mensaje': obj.result.description,
+            "conformanceLevel": level
         };
     }
 
@@ -173,7 +196,8 @@ function load_sub2sections(subCategoryKey){
             "sub2section": sub2Categories[sub2CategoryKey],
             "background_color": background_color,
             "criteria": criteria,
-            "result_text": result_text
+            "result_text": result_text,
+            "conformanceLevel": json_resultados[sub2CategoryKey].conformanceLevel
         }
 
         //Text could be painted bacause it was made auot or manual.
@@ -266,31 +290,52 @@ function get_data_by_category(categoryKey){
     var json_resultados = localStorage.getItem('json_resultados');
     json_resultados = JSON.parse(json_resultados);
 
-    var passed = 0;
-    var failed = 0;
-    var cannot_tell = 0;
-    var not_present = 0;
-    var not_checked = 0;
-    var result;
+    var passed = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var failed = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var cannot_tell = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var not_present = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
+    var not_checked = {
+        "A": 0,
+        "AA": 0,
+        "AAA": 0
+    }
 
+    var result, level;
     for (var criteriaNumber in json_resultados) {
         if (criteriaNumber.startsWith(categoryKey)){
             result = json_resultados[criteriaNumber].result; 
+            level = json_resultados[criteriaNumber].conformanceLevel;
             switch(result) {
                 case "earl:failed":
-                    failed = failed+1;
+                    failed[level] = failed[level]+1;
                     break;
                 case "earl:untested":
-                    not_checked = not_checked+1;
+                    not_checked[level] = not_checked[level]+1;
                     break;
                 case "earl:cantTell":
-                    cannot_tell = cannot_tell+1;
+                    cannot_tell[level] = cannot_tell[level]+1;
                     break;
                 case "earl:passed":
-                    passed = passed+1;
+                    passed[level] = passed[level]+1;
                     break;
                 case "earl:inapplicable":
-                    not_present = not_present+1;
+                    not_checked[level] = not_checked[level]+1;
                     break;
                 default:
             }

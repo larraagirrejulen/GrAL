@@ -91,11 +91,14 @@
   border-top: 1px solid #c0c0c0;
   text-align: left;
   outline: none;
-  white-space:nowrap;
 }
 
 .collapsible.table1 {
   background-color: #C7D1D3;
+}
+
+.collapsible.table2 {
+  font-size: 10px;
 }
 
 .collapsible:hover {
@@ -111,32 +114,24 @@
 
 
 .tabla_resultados {
-  width:100% !important;
-  font-size:12px !important;
-  overflow-wrap: anywhere !important;
-}
-.tabla_resultados th{
-  height: 40px !important; 
+  width:100%;
+  font-size:12px;
+  overflow-wrap: anywhere;
 }
 .tabla_resultados td{
-  padding-left:10px !important;
-  font-size: 12px !important;
-  overflow-wrap: anywhere !important;
+  padding-left:10px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
 
-}
-
-.tabla_resultados code{
-  overflow-wrap: anywhere !important;
-  background-color: #f7f7f9;
-  color: #d14;
-  cursor: pointer;
-  border: 1px solid #e1e1e8;
 }
 
 
 
 .codigo_analisis{
-  overflow-wrap: anywhere !important;
-  white-space: normal !important;
-
+  white-space: normal;
+  overflow-wrap: anywhere;
+  background-color: #f7f7f9;
+  color: #d14;
+  cursor: pointer;
+  border: 1px solid #e1e1e8;
 }
