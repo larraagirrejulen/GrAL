@@ -25,24 +25,47 @@
 }
 
 
-  .results_table th{
+
+.results_container .table_container thead tr{
+    padding: 10px 0;
+}
+.results_container .table_container thead th{
+    width: 6%;
     font-size: 12px;
-    padding: 1px;
-      text-align: center;
+    text-align: center;
     font-weight: bold;
-  }
-  
+    cursor: default; 
+    border-left: 1px solid #c6c6c6;
+}
+.results_container .table_container thead th:first-of-type{
+    width: 70%;
+    border-left: 0;
+}
+
+
+.results_container .table_container tbody .collapsible{
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.results_container .table_container tbody .collapsible td{
+    border-left: 1px solid #c6c6c6;
+}
+.results_container .table_container tbody .collapsible td:first-of-type{
+    text-align: left;
+    padding-left: 5px;
+    border-left: 0;
+}
+
+
   
   .collapsible {
     background-color: #f4f4f4;
     color:black;
     cursor: pointer;
     padding: 10px;
-    width: 100%;
     border: none;
     border-top: 1px solid #c0c0c0;
-    text-align: left;
-    outline: none;
   }
   
   .collapsible.table1 {
@@ -56,10 +79,6 @@
   .collapsible:hover {
     color: white;
     background-color: #00B4D5;
-  }
-  
-  .collapsible table tr td{
-    font-size: 12px;
   }
   
   
