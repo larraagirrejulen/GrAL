@@ -145,8 +145,8 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
         <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
-        <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label>
-        <label id="btn_download" className="button primary" onClick={()=>downloadCurrentReport(activeLevels)}>Download report</label>
+        <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label><br/>
+        <label id="btn_download" className="button primary" onClick={()=>downloadCurrentReport(activeLevels)}>Download report</label><br/>
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
       </div>
     

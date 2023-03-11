@@ -7,6 +7,28 @@ import { getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
 
 
 
+function Summary({results,  activeLevels}:any){
+
+    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
+    for(var level of activeLevels){
+        passed += results.resultsSummary.passed[level];
+        failed += results.resultsSummary.failed[level];
+        cannot_tell += results.resultsSummary.cannot_tell[level];
+        not_present += results.resultsSummary.not_present[level];
+        not_checked += results.resultsSummary.not_checked[level];
+    }
+
+    return(<>
+        <table className="summary">
+            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
+            <tr><td>{passed}</td><td>{failed}</td><td>{cannot_tell}</td><td>{not_present}</td><td>{not_checked}</td></tr>
+        </table>
+    </>);
+}
+
+
+
+
 export default function ResultsTable({results, activeLevels}:any){
   
     const [collapsibles, setCollapsibles] = useState([false, false, false, false]);
@@ -34,7 +56,7 @@ export default function ResultsTable({results, activeLevels}:any){
                     <td>{section.category}</td>
                     <Results section={section} activeLevels={activeLevels}/>
                 </tr>
-                { collapsibles[index] ? <Collapsible section={section} activeLevels={activeLevels} /> : ""}
+                { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
                 </>))}
             </tbody>
         </table>
@@ -47,23 +69,23 @@ export default function ResultsTable({results, activeLevels}:any){
 
 
 
-function Collapsible({section, activeLevels}:any){
+function Collapsible1({section, activeLevels}:any){
 
-    const [collapsible2s, setCollapsible2s] = useState(Array(section.subsection.length).fill(false));
+    const [collapsibles, setCollapsibles] = useState(Array(section.subsection.length).fill(false));
 
-    const handleCollapsible2sChange = (index:any) => {
-        const newCollapsible2s = [...collapsible2s];
-        newCollapsible2s[index] = !collapsible2s[index];
-        setCollapsible2s(newCollapsible2s);
-    };
+    const handleCollapsiblesChange = (index:any) => {
+        const newCollapsibles = [...collapsibles];
+        newCollapsibles[index] = !collapsibles[index];
+        setCollapsibles(newCollapsibles);
+      };
 
     return(<> {section.subsection.map((subsection:any, index:any) => (<>
 
-        <tr className="collapsible table1" onClick={()=>handleCollapsible2sChange(index)}>
+        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
             <td>{subsection.subsection}</td>
             <Results section={subsection} activeLevels={activeLevels}/>
         </tr>
-        { collapsible2s[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} /> : ""}
+        { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} /> : ""}
     
     </>))} </>);
 }
@@ -73,7 +95,12 @@ function Collapsible({section, activeLevels}:any){
 
 function Collapsible2({subsection, activeLevels}:any){
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(Array(subsection.sub2section.length).fill(false));
+    const handleIsOpen = (index:any) => {
+        const newIsOpen = [...isOpen];
+        newIsOpen[index] = !isOpen[index];
+        setIsOpen(newIsOpen);
+    };
 
     const [collapsible3s, setCollapsible3s] = useState(Array(subsection.sub2section.length).fill(false));
 
@@ -87,15 +114,15 @@ function Collapsible2({subsection, activeLevels}:any){
 
         { activeLevels.includes(sub2section.conformanceLevel) ? <>
         
-            <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {setIsOpen((prev:any) => !prev); handleCollapsible3sChange(index)}}>
+            <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleIsOpen(index); handleCollapsible3sChange(index)}}>
                 {sub2section.hasOwnProperty("results") ? <>
-                    <td style={{width:"15%"}}>
-                        <img src={ isOpen ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                    <td colSpan={6}>
+                        <img src={ isOpen[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                        {sub2section.sub2section}
                     </td>
-                    {sub2section.sub2section}
                 </>: <>
                     <td>{sub2section.sub2section}</td>
-                    {sub2section.result_text}
+                    <td colSpan={5}>{sub2section.result_text}</td>
                 </>}
             </tr>
             {sub2section.hasOwnProperty("results") && collapsible3s[index] ? <Collapsible3 sub2section={sub2section} /> : "" }
@@ -140,28 +167,6 @@ function Collapsible3({sub2section}:any){
         </>))} 
         </table>
     );
-}
-
-
-
-
-function Summary({results,  activeLevels}:any){
-
-    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(var level of activeLevels){
-        passed += results.resultsSummary.passed[level];
-        failed += results.resultsSummary.failed[level];
-        cannot_tell += results.resultsSummary.cannot_tell[level];
-        not_present += results.resultsSummary.not_present[level];
-        not_checked += results.resultsSummary.not_checked[level];
-    }
-
-    return(<>
-        <table className="summary">
-            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
-            <tr><td>{passed}</td><td>{failed}</td><td>{cannot_tell}</td><td>{not_present}</td><td>{not_checked}</td></tr>
-        </table>
-    </>);
 }
 
 

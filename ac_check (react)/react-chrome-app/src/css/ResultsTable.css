@@ -1,52 +1,70 @@
 
 
+.results_container{
+  text-align: center;
+}
+
+
+
+/* SUMMARY TABLE */
 .results_container .summary{
-    border: 2px solid #005a6a;
-    margin-bottom: 15px;
+  border: 2px solid #005a6a;
+  margin-bottom: 15px;
+  display: inline-block;
 }
 .results_container .summary th, .results_container .summary td{
-    width: 45px;
-    border: none;
-    border-right: 1px solid #c6c6c6;
-    font-size: 14px;
-    text-align: center;
-    font-weight: bold;
+  width: 45px;
+  border: none;
+  border-right: 1px solid #c6c6c6;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
 }
 .results_container .summary tr:first-of-type{
-    border-bottom: 1px solid #c6c6c6;
+  border-bottom: 1px solid #c6c6c6;
 }
 .results_container .summary th:last-of-type, .results_container .summary td:last-of-type{
-    border-right: 0;
+  border-right: 0;
 }
 
   
+
+/* RESULTS TABLE */
 .results_container .table_container{
-    border: 2px solid #005a6a;
+  border: 2px solid #005a6a;
 }
 
 
 
+/* RESULTS TABLE HEADER */
 .results_container .table_container thead tr{
-    padding: 10px 0;
+  padding: 10px 0;
+  border-bottom: 2px solid #005a6a;
+  background-color: white;
 }
 .results_container .table_container thead th{
-    width: 6%;
-    font-size: 12px;
-    text-align: center;
-    font-weight: bold;
-    cursor: default; 
-    border-left: 1px solid #c6c6c6;
+  width: 6%;
+  font-size: 14px;
+  text-align: center;
+  cursor: default; 
 }
 .results_container .table_container thead th:first-of-type{
-    width: 70%;
-    border-left: 0;
+  width: 70%;
+  font-weight: bold;
 }
 
 
+
+/* RESULTS TABLE BODY */
 .results_container .table_container tbody .collapsible{
     text-align: center;
     font-weight: bold;
     padding: 10px 0;
+    background-color: #f4f4f4;
+    color:black;
+    cursor: pointer;
+    border: none;
+    border-top: 1px solid #c0c0c0;
 }
 .results_container .table_container tbody .collapsible td{
     border-left: 1px solid #c6c6c6;
@@ -58,15 +76,6 @@
 }
 
 
-  
-  .collapsible {
-    background-color: #f4f4f4;
-    color:black;
-    cursor: pointer;
-    padding: 10px;
-    border: none;
-    border-top: 1px solid #c0c0c0;
-  }
   
   .collapsible.table1 {
     background-color: #C7D1D3;
