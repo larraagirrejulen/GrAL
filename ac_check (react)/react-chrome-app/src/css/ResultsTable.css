@@ -58,8 +58,6 @@
 /* RESULTS TABLE BODY */
 .results_container .table_container tbody .collapsible{
     text-align: center;
-    font-weight: bold;
-    padding: 10px 0;
     background-color: #f4f4f4;
     color:black;
     cursor: pointer;
@@ -67,7 +65,11 @@
     border-top: 1px solid #c0c0c0;
 }
 .results_container .table_container tbody .collapsible td{
-    border-left: 1px solid #c6c6c6;
+    border-left: 1px solid #c0c0c0;
+    padding: 10px 0;
+}
+.results_container .table_container tbody .collapsible.section td{
+  font-weight: bold;
 }
 .results_container .table_container tbody .collapsible td:first-of-type{
     text-align: left;
@@ -75,20 +77,10 @@
     border-left: 0;
 }
 
-
-  
-  .collapsible.table1 {
-    background-color: #C7D1D3;
-  }
-  
-  .collapsible.table2 {
-    font-size: 10px;
-  }
-  
-  .collapsible:hover {
-    color: white;
-    background-color: #00B4D5;
-  }
+.results_container .table_container tbody .collapsible:hover {
+  color: white;
+  background-color: #00B4D5;
+}
   
   
   

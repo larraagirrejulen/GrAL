@@ -52,7 +52,7 @@ export default function ResultsTable({results, activeLevels}:any){
             </thead>
             <tbody>
                 {results.resultsContent.map((section:any, index:any) => (<>
-                <tr className="collapsible" onClick={()=>handleCollapsiblesChange(index)}>
+                <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index)}>
                     <td>{section.category}</td>
                     <Results section={section} activeLevels={activeLevels}/>
                 </tr>
@@ -81,7 +81,7 @@ function Collapsible1({section, activeLevels}:any){
 
     return(<> {section.subsection.map((subsection:any, index:any) => (<>
 
-        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
+        <tr style={{backgroundColor: "#C7D1D3"}} className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
             <td>{subsection.subsection}</td>
             <Results section={subsection} activeLevels={activeLevels}/>
         </tr>
@@ -139,34 +139,31 @@ function Collapsible2({subsection, activeLevels}:any){
 
 function Collapsible3({sub2section}:any){
 
-    return(
-        <table className="tabla_resultados">
+    return(<>
         {sub2section.results.map((result:any, index:any) => (<>
         
-            <tr><td><u>Analizer</u>:  <b>{result.assertor}</b></td></tr>
-            <tr><td><u>Result</u>:  <b>{result.outcome}</b></td></tr>
-            <tr><td><u>Message:</u></td></tr>
-            <tr><td>{result.description}</td></tr>
+            <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
+            <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
+            <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
+            <tr><td style={{textAlign:"left"}} colSpan={6}>{result.description}</td></tr>
 
             {result.hasOwnProperty("solucion") ? <>
-                <tr><td><u>Possible solution</u>:</td></tr>
-                <tr><td>{result.solucion}</td></tr> 
+                <tr><td style={{textAlign:"left"}}><u>Possible solution</u>:</td></tr>
+                <tr><td style={{textAlign:"left"}}colSpan={6}>{result.solucion}</td></tr> 
             </> : ""}
 
             {result.hasOwnProperty("pointers") ? <>
-                <tr><td><u>Code</u>:</td></tr>
-                <tr><td>
+                <tr><td style={{textAlign:"left"}}><u>Code</u>:</td></tr>
+                
                 {result.pointers.map((pointer:any, index:any) => (<>
-            
-                    <code className="codigo_analisis" style={{cursor: "pointer"}} data-pointed-xpath={pointer.pointed_xpath}>{pointer.pointed_html}</code>                    <br/><br/>
-
+                    <tr><td colSpan={6} style={{textAlign:"left"}}>
+                        <code className="codigo_analisis" style={{cursor: "pointer"}} data-pointed-xpath={pointer.pointed_xpath}>{pointer.pointed_html}</code>             
+                    </td></tr><br/>
                 </>))};
-                <br/><br/></td></tr>
             </> : ""}
 
         </>))} 
-        </table>
-    );
+    </>);
 }
 
 
