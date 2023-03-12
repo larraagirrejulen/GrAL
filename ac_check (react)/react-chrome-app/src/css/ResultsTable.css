@@ -32,6 +32,20 @@
 /* RESULTS TABLE */
 .results_container .table_container{
   border: 2px solid #005a6a;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.results_container .table_container::-webkit-scrollbar {
+  width: 3px;
+}
+.results_container .table_container::-webkit-scrollbar-track {
+  background: transparent;
+
+}
+.results_container .table_container::-webkit-scrollbar-thumb {
+  background: #005a6a;
+  border-radius: 50px;
 }
 
 
@@ -39,14 +53,16 @@
 /* RESULTS TABLE HEADER */
 .results_container .table_container thead tr{
   padding: 10px 0;
-  border-bottom: 2px solid #005a6a;
-  background-color: white;
 }
 .results_container .table_container thead th{
   width: 6%;
   font-size: 14px;
   text-align: center;
   cursor: default; 
+  position: sticky;
+  top: 0px;
+  border-bottom: 2px solid #005a6a;
+  background-color: white;
 }
 .results_container .table_container thead th:first-of-type{
   width: 70%;

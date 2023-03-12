@@ -43,23 +43,26 @@ export default function ResultsTable({results, activeLevels}:any){
 
         <Summary results={results} activeLevels={activeLevels} />
 
-        <table className='table_container'>
-            <thead>
-                <tr>
-                    <th>Standard</th>
-                    <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
-                </tr>
-            </thead>
-            <tbody>
-                {results.resultsContent.map((section:any, index:any) => (<>
-                <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index)}>
-                    <td>{section.category}</td>
-                    <Results section={section} activeLevels={activeLevels}/>
-                </tr>
-                { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
-                </>))}
-            </tbody>
-        </table>
+        <div className='table_container'>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Standard</th>
+                        <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {results.resultsContent.map((section:any, index:any) => (<>
+                    <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index)}>
+                        <td>{section.category}</td>
+                        <Results section={section} activeLevels={activeLevels}/>
+                    </tr>
+                    { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
+                    </>))}
+                </tbody>
+            </table>
+        </div>
+        
         
       </div>
     );
@@ -141,7 +144,7 @@ function Collapsible3({sub2section}:any){
 
     return(<>
         {sub2section.results.map((result:any, index:any) => (<>
-        
+            
             <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
             <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
             <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
@@ -161,7 +164,7 @@ function Collapsible3({sub2section}:any){
                     </td></tr><br/>
                 </>))};
             </> : ""}
-
+            
         </>))} 
     </>);
 }

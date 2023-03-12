@@ -10,6 +10,7 @@
   padding: 20px 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: auto;
   position: fixed; 
   top: 0;
   left: -300px;
@@ -91,3 +92,4 @@
   filter: drop-shadow(0 0 2px #005a6a) brightness(1.1);
   transition: 0.2s ease;
 }
+
