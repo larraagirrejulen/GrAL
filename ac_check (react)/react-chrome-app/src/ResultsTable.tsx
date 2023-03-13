@@ -84,7 +84,7 @@ function Collapsible1({section, activeLevels}:any){
 
     return(<> {section.subsection.map((subsection:any, index:any) => (<>
 
-        <tr style={{backgroundColor: "#C7D1D3"}} className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
+        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
             <td>{subsection.subsection}</td>
             <Results section={subsection} activeLevels={activeLevels}/>
         </tr>

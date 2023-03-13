@@ -73,29 +73,38 @@
 
 /* RESULTS TABLE BODY */
 .results_container .table_container tbody .collapsible{
-    text-align: center;
-    background-color: #f4f4f4;
-    color:black;
-    cursor: pointer;
-    border: none;
-    border-top: 1px solid #c0c0c0;
+  text-align: center;
+  background-color: #f4f4f4;
+  color:black;
+  cursor: pointer;
+  border: none;
+  border-top: 1px solid #c0c0c0;
 }
 .results_container .table_container tbody .collapsible td{
-    border-left: 1px solid #c0c0c0;
-    padding: 10px 0;
+  border-left: 1px solid #c0c0c0;
+  padding: 10px 0;
 }
 .results_container .table_container tbody .collapsible.section td{
   font-weight: bold;
 }
 .results_container .table_container tbody .collapsible td:first-of-type{
-    text-align: left;
-    padding-left: 5px;
-    border-left: 0;
+  text-align: left;
+  padding-left: 5px;
+  border-left: 0;
 }
 
 .results_container .table_container tbody .collapsible:hover {
   color: white;
   background-color: #00B4D5;
+}
+
+.results_container .table_container tbody .collapsible.table1 td{
+  font-size: 12px;
+  background-color: #d3dcde;
+}
+
+.results_container .table_container tbody .collapsible.table2 td{
+  font-size: 10px;
 }
   
   

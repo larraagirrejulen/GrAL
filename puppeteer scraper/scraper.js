@@ -173,6 +173,12 @@ const scraper = {
         // Wait for input element to load
         await page.waitForSelector('#checkuri');
 
+        // Configure to include AAA level
+        await page.focus('h2[align="left"] a');
+        await page.click('h2[align="left"] a');
+        await page.focus("#radio_gid_9");
+        await page.click("#radio_gid_9");
+
         // Load the url we want to evaluate and submit
         await page.focus('#checkuri');
         await page.keyboard.type(evaluationUrl);
@@ -182,13 +188,111 @@ const scraper = {
         await page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
 
         // Get evaluation data
-        const data = await page.evaluate(() => {
-            const table = document.querySelector('fieldset[class="group_form"]');
-            return table.innerHTML;
+        const results = await page.evaluate(() => {
+            
+            var results = [];
+            var errors, warnings, problems, criterias, checks, criteria_num, check, problem, solution, actual_text, cases, error_location, error_code;
+
+            // Found errors
+            errors = document.querySelector('#AC_errors');
+            criterias = Array.from(errors.querySelectorAll("h4"));
+            checks = Array.from(errors.querySelectorAll(".gd_one_check"));
+
+            for (var i = 0, criteria; criteria = criterias[i]; i++){
+                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
+                check = checks[i];
+
+                problem = check.querySelector("span a").textContent;
+                solution = check.querySelector("div").textContent.substring(9).trim();
+                actual_text = 'The next ERROR was found: "'+problem+'". You can solve it with: "'+solution+'".'
+
+                cases = Array.from(check.querySelectorAll("table tbody tr td"));
+                for (var j = 0, found_case; found_case = cases[j]; j++){
+                    error_location = found_case.querySelector("em").textContent;
+                    error_code = found_case.querySelector("pre code").textContent;
+                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
+
+                    results.push({
+                        "criteria_num": criteria_num,
+                        "outcome": "FAIL",
+                        "description": actual_text,
+                        "location": error_location,
+                        "target_html": error_code
+                    });
+                }
+            }
+
+
+            // Found warnings
+            warnings = document.querySelector('#AC_likely_problems');
+            criterias = Array.from(warnings.querySelectorAll("h4"));
+            checks = Array.from(warnings.querySelectorAll(".gd_one_check"));
+
+            for (var i = 0, criteria; criteria = criterias[i]; i++){
+                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
+                check = checks[i];
+
+                problem = check.querySelector("span a").textContent;
+                actual_text = 'The next WARNING was found: "'+problem+'".'
+
+                cases = Array.from(check.querySelectorAll("table tbody tr td"));
+                for (var j = 0, found_case; found_case = cases[j]; j++){
+                    error_location = found_case.querySelector("em").textContent;
+                    error_code = found_case.querySelector("pre code").textContent;
+                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
+
+                    results.push({
+                        "criteria_num": criteria_num,
+                        "outcome": "CANNOTTELL",
+                        "description": actual_text,
+                        "location": error_location,
+                        "target_html": error_code
+                    });
+                }
+            }
+
+
+            // Found potentian problems
+            problems = document.querySelector('#AC_potential_problems');
+            criterias = Array.from(problems.querySelectorAll("h4"));
+            checks = Array.from(problems.querySelectorAll(".gd_one_check"));
+
+            for (var i = 0, criteria; criteria = criterias[i]; i++){
+                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
+                check = checks[i];
+
+                problem = check.querySelector("span a").textContent;
+                actual_text = 'A POTENTIAL PROBLEM was found: "'+problem+'".'
+
+                cases = Array.from(check.querySelectorAll("table tbody tr td"));
+                for (var j = 0, found_case; found_case = cases[j]; j++){
+                    error_location = found_case.querySelector("em").textContent;
+                    error_code = found_case.querySelector("pre code").textContent;
+                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
+
+                    results.push({
+                        "criteria_num": criteria_num,
+                        "outcome": "CANNOTTELL",
+                        "description": actual_text,
+                        "location": error_location,
+                        "target_html": error_code
+                    });
+                }
+            }
+
+
+            return results;
         });
 
+
+        for (var i = 0, result; result = results[i]; i++){
+            const hashPath = createHash('sha256').update(result.location+result.criteria_num).digest('hex');
+            this.json.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, hashPath, result.target_html);
+        }
+        
+
         // Return data
-        return data;
+        return this.json.getJson();
     }
 }
 
