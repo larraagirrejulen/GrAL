@@ -52,8 +52,8 @@ export default function App() {
 function MainSections({dropdownsDefaultState}:any){
 
   const [checkboxes, setCheckboxes] = useState([
-    { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
-    { checked: true, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
+    { checked: true, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
+    { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
     { checked: false, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
   ]);

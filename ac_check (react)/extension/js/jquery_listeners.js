@@ -34,15 +34,7 @@ $(document).ready(function(){
     const extension = window.document.getElementById("react-chrome-extension");
     extension.remove();
 
-    
-    /*// Get the original document wihtout extension changes and current runtime state
-    const originalDoc = getOriginalDocWithCurrentState();
-    // Evaluate and save result
-    let evaluationResult = evaluator.evaluate(originalDoc, originalDoc.title, window.location.href);*/
-
-
     let evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
-
 
     // Gure luzapenak jarritako html elementuak berriro jarri
     document.body.appendChild(extension);

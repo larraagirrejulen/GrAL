@@ -47,16 +47,16 @@ async function fetchWithTimeout(resource, options = {}) {
     const { timeout = 60000 } = options;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
+    console.log("aaaa");
     const response = await fetch(resource, {
         ...options,
-        mode: "cors",
+        mode: 'cors',
         method: 'POST', 
-        headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: {"Content-Type": "application/json"},
         signal: controller.signal
     });
+    console.log("bbbb");
+    
     clearTimeout(timer);
     return response;
 }
@@ -74,12 +74,11 @@ export async function getEvaluation(checkboxes, setIsLoading){
     const AC = checkboxes[1].checked;
     const MV = checkboxes[2].checked;
     const A11Y = checkboxes[3].checked;
-    console.log(AM, AC, MV, A11Y);
-
+        
     if (AM || AC || MV){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
-        var json = await fetchScraper(bodyData);
         
+        var json = await fetchScraper(bodyData);
 
         /* if (A11Y){
         const a11y = a11y();
@@ -93,6 +92,7 @@ export async function getEvaluation(checkboxes, setIsLoading){
     }else{
         alert("You need to choose at least one analizer");
     }
+
     setIsLoading(false);
 
     return {

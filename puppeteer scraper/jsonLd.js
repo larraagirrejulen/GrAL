@@ -4,6 +4,7 @@
 class jsonLd{
 
     #json;
+    #evaluator;
     #assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
@@ -99,6 +100,8 @@ class jsonLd{
         const date = new Date();
         const currentDate = date.toLocaleString();
 
+        this.#evaluator = evaluator;
+
         var json = {
 
             "@context": this.#context,
@@ -110,10 +113,16 @@ class jsonLd{
             "dct:date": currentDate,
             "dct:summary": "Undefined",
 
+            "assertors": [{
+                "id": "_:" + this.#assertors[this.#evaluator].name,
+                "type": "earl:Assertor",
+                "xmlns:name": this.#assertors[this.#evaluator].name,
+                "description": this.#assertors[this.#evaluator].url
+            }],
+
             "creator": {
-                "id": "_:assertor",
-                "xmlns:name": this.#assertors[evaluator].name,
-                "description": this.#assertors[evaluator].url
+                "id": "_:assertors",
+                "xmlns:name": this.#assertors[this.#evaluator].name
             },
     
             "evaluationScope":
@@ -206,7 +215,7 @@ class jsonLd{
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
                 siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion["assertedBy"] = "_:assertor",
+                siteAssertion["assertedBy"] = "_:" + this.#assertors[this.#evaluator].name,
                 siteAssertion["mode"] = "earl:automatic"
                 break;    
             case "earl:passed":
@@ -225,7 +234,7 @@ class jsonLd{
         const assertion = {
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
-            "assertedBy": "_:assertor",
+            "assertedBy": "_:" + this.#assertors[this.#evaluator].name,
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result":
