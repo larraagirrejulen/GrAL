@@ -16,7 +16,7 @@ http.createServer((request, response) => {
     });
 
     const { headers, method, url } = request;
-    if (!method === 'POST' || !url === '/getEvaluationJson') {
+    if (method !== 'POST' || url !== '/getEvaluationJson') {
         response.statusCode = 404;
         response.end();
     }
@@ -28,15 +28,26 @@ http.createServer((request, response) => {
     }).on('end', async () => {
         
         requestBody = Buffer.concat(requestBody).toString();
-        const requestJson = JSON.parse(requestBody);
-        console.log("Request: " + requestBody);
-    
-        var body = await scraperController(requestJson["mv"], requestJson["am"], requestJson["ac"], requestJson["url"], requestJson["title"]);
 
-        response.writeHead(200, {'Content-Type': 'application/json'});
-        const responseBody = { headers, method, url, body };
-        response.end(JSON.stringify(responseBody));
-        console.log("Fetch Success");
+        console.log("\n### ----- New Scraping Request ----- ###\n" + "\nRequest: " + requestBody + "\n");
+
+        try{
+            const requestJson = JSON.parse(requestBody);
+    
+            const body = await scraperController(requestJson["mv"], requestJson["am"], requestJson["ac"], requestJson["url"], requestJson["title"]);
+
+            response.writeHead(200, {'Content-Type': 'application/json'});
+
+            response.end(JSON.stringify( { headers, method, url, body } ));
+
+            console.log("### ----- Request SUCCESS  ----- ###");
+
+        } catch(error) { 
+            response.statusCode = 500;
+            response.end();
+            console.log("\n ERROR: " + error + "\n\n### ----- Request FAILURE  ----- ###");
+        }
+        
     });
 }).listen(puerto);
 

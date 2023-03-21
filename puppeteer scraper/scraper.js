@@ -1,74 +1,47 @@
 
 const jsonLd = require('./jsonLd');
-const { createHash } = require('crypto');
+
+
 
 const scraper = {
 
-    mvUrl: 'https://mauve.isti.cnr.it/singleValidation.jsp',
-    amUrl: 'https://accessmonitor.acessibilidade.gov.pt/results/',
-    acUrl: 'https://achecker.achecks.ca/checker/index.php',
-    json: null,
+
 
     async scrape(page, evaluator, evaluationUrl, evaluatedPageTitle){
 
+        console.log("Initiating " + evaluator.toUpperCase() + " scraping process ...");
+
         this.json = new jsonLd(evaluator, evaluationUrl, evaluatedPageTitle);
 
-        // Call to specified scraper
-        var result;
-        switch(evaluator){
-            case 'mv':
-                result = this.mvScraper(page, evaluationUrl);
-                break;
-            case 'am':
-                result = this.amScraper(page, evaluationUrl);
-                break;
-            case 'ac':
-                result = this.acScraper(page, evaluationUrl);
-                break;
-            default:
-                result = "SCRAPER ERROR: Wrong evaluator!";
-        }
+        try{
+            switch(evaluator){
+                case 'am':
+                    await this.amScraper(page, evaluationUrl, 'https://accessmonitor.acessibilidade.gov.pt/results/');
+                    break;
+                case 'ac':
+                    await this.acScraper(page, evaluationUrl, 'https://achecker.achecks.ca/checker/index.php');
+                    break;
+                case 'mv':
+                    await this.mvScraper(page, evaluationUrl, 'https://mauve.isti.cnr.it/singleValidation.jsp');
+                    break;
+                default:
+                    throw new Error("\n" + evaluator.toUpperCase() + " is not a valid evaluator !!!");
+            }
 
-        // Return result
-        return result;
+            console.log("\nSUCCESS: " + evaluator.toUpperCase() + " scraping process successfully finished !!!");
+            
+        } catch(error) { throw new Error("\nThe next error was found on " + evaluator.toUpperCase()  + " scraping process: " + error) }
+
+        return this.json.getJson();
     },
 
 
-    async mvScraper(page, evaluationUrl){
-
-        // Navigate to url
-        await page.goto(this.mvUrl);
-
-        // Wait for input element to load
-        await page.waitForSelector('#uri');
-
-        // Load the url we want to evaluate and submit
-        await page.focus('#uri');
-        await page.keyboard.type(evaluationUrl);
-        await page.click('#validate');
-
-        // Wait for results to be loaded
-        await page.waitForSelector('#evaluationSummary');
-
-        // Set default download directory:
-        const path = require('path');
-        const client = await page.target().createCDPSession(); 
-        await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: path.resolve('./evaluations'), });
-
-        // Start evaluation download and wait for 3 secs
-        await page.click('#evaluationSummary a[title="download earl report"]');
-        await page.waitForTimeout(3000);
-
-        // Return data
-        return "nice";
-    },
 
 
-    async amScraper(page, evaluationUrl){
+    async amScraper(page, evaluationUrl, evaluatorUrl){
 
         // Navigate to url and wait to be loaded
-        const url = this.amUrl + evaluationUrl.replaceAll("/",'%2f');
-        await page.goto(url);
+        await page.goto(evaluatorUrl + evaluationUrl.replaceAll("/",'%2f'));
         await page.waitForSelector('.evaluation-table');
 
         // Get interested data
@@ -102,14 +75,12 @@ const scraper = {
                 const techniqueGuideText = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
                 
                 var casesLink = null;
-                try{
-                    link = cols[3].querySelector("a").href;
-                    if(link.startsWith("/results")){
-                        casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
-                    }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
-                        casesLink = link;
-                    }
-                }catch{}
+                const link = cols[3].querySelector("a").href;
+                if(link.startsWith("/results")){
+                    casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
+                }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
+                    casesLink = link;
+                }
 
                 results.push({
                     "outcome": status,
@@ -120,7 +91,6 @@ const scraper = {
             }
             return results;  
         });
-
         var criterias;
         for (var i = 0, result; result = results[i]; i++){
             criterias = result["criteriaIds"];
@@ -150,9 +120,8 @@ const scraper = {
                         correctPath = correctPath.replace(/ \> /g, "/")
                         correctPath = correctPath.replace(/:nth-child\(/g, "[")
                         correctPath = correctPath.replaceAll(")", "]")
-                        const hashPath = createHash('sha256').update(correctPath+criteria).digest('hex');
                         
-                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath, casesHtmls[k]);
+                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
                     }
                 }else{
                     this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
@@ -160,15 +129,17 @@ const scraper = {
             }
         }
   
-        // Return data
-        return this.json.getJson();
     },
 
 
-    async acScraper(page, evaluationUrl){
+
+
+
+
+    async acScraper(page, evaluationUrl, evaluatorUrl){
 
         // Navigate to url
-        await page.goto(this.acUrl);
+        await page.goto(evaluatorUrl);
 
         // Wait for input element to load
         await page.waitForSelector('#checkuri');
@@ -286,13 +257,40 @@ const scraper = {
 
 
         for (var i = 0, result; result = results[i]; i++){
-            const hashPath = createHash('sha256').update(result.location+result.criteria_num).digest('hex');
-            this.json.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, hashPath, result.target_html);
+            this.json.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
         }
         
+    },
 
-        // Return data
-        return this.json.getJson();
+
+
+
+
+    async mvScraper(page, evaluationUrl, evaluatorUrl){
+
+        // Navigate to url
+        await page.goto(evaluatorUrl);
+
+        // Wait for input element to load
+        await page.waitForSelector('#uri');
+
+        // Load the url we want to evaluate and submit
+        await page.focus('#uri');
+        await page.keyboard.type(evaluationUrl);
+        await page.click('#validate');
+
+        // Wait for results to be loaded
+        await page.waitForSelector('#evaluationSummary');
+
+        // Set default download directory:
+        const path = require('path');
+        const client = await page.target().createCDPSession(); 
+        await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: path.resolve('./evaluations'), });
+
+        // Start evaluation download and wait for 3 secs
+        await page.click('#evaluationSummary a[title="download earl report"]');
+        await page.waitForTimeout(3000);
+
     }
 }
 

@@ -1,24 +1,5 @@
 $(document).ready(function(){
 
-  /** 
-   * Listener to upload a new document
-   */
-  $(document).on('change', '#btn_upload', (event) => {
-    var reader = new FileReader();
-    reader.onload = function(event) {
-      var jsonT = localStorage.getItem("json");
-      var savedJson = JSON.parse(jsonT);
-      var json = JSON.parse(event.target.result);
-      
-      if (savedJson != null) merge(json,savedJson);
-
-      saveJson(JSON.stringify(json));
-    }
-    reader.readAsText(event.target.files[0]);
-  });
-
-  
-
 
   $("#prueba").click(async () => {
 

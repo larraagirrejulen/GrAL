@@ -19,6 +19,9 @@ function saveJson(json){
 
 
 
+
+
+
 export function loadStoredReport(){
     try{
         var json = getStoredJson()
@@ -28,7 +31,7 @@ export function loadStoredReport(){
         if (json != null && main != null){
             return {
                 resultsSummary: JSON.parse(jsonTabla), 
-                resultsContent: JSON.parse(main)
+                resultsContent: ""
             };
         } else{
             return {
@@ -48,13 +51,16 @@ async function fetchWithTimeout(resource, options = {}) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
     console.log("aaaa");
+
     const response = await fetch(resource, {
         ...options,
         mode: 'cors',
         method: 'POST', 
         headers: {"Content-Type": "application/json"},
         signal: controller.signal
-    });
+    }).catch((error)=>{console.log(error)});
+
+    
     console.log("bbbb");
     
     clearTimeout(timer);
@@ -84,7 +90,7 @@ export async function getEvaluation(checkboxes, setIsLoading){
         const a11y = a11y();
         merge(json, a11y);
         } */
-        saveJson(JSON.stringify(json[0]));
+        saveJson(JSON.stringify(json));
 
     }else if(A11Y){
         /* json = a11y();
@@ -121,6 +127,26 @@ export function clearStoredEvaluationData(){
 
 
 
+export function uploadReport(event){
+
+    var reader = new FileReader();
+    reader.readAsText(event.target.files[0], "UTF-8");
+    reader.onload = (event) => {
+       /* var jsonT = localStorage.getItem("json");
+        var savedJson = JSON.parse(jsonT);*/
+        var json = JSON.parse(event.target.result);
+        console.log(json);
+        //if (savedJson != null) merge(json,savedJson);
+
+        saveJson(JSON.stringify(json));
+    }
+
+}
+
+
+
+
+
 export function downloadCurrentReport(activeLevels){
 
     if(localStorage.getItem("tabla_main")==null){
@@ -132,9 +158,8 @@ export function downloadCurrentReport(activeLevels){
 
     json.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
 
-    var interestedSamples = json.auditSample.filter(sample => activeLevels.includes(sample.conformanceLevel));
-
-    json.auditSample = interestedSamples;
+    /*var interestedSamples = json.auditSample.filter(sample => activeLevels.includes(sample.conformanceLevel));
+    json.auditSample = interestedSamples;*/
 
     const data = JSON.stringify(json);
     const fileName = json.title + ".json";

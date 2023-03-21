@@ -7,7 +7,7 @@ import './css/ResultSection.css';
 
 import { useState, useEffect} from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
-import { loadStoredReport, getEvaluation, downloadCurrentReport, clearStoredEvaluationData} from './js/utils.js';
+import { loadStoredReport, getEvaluation, downloadCurrentReport, uploadReport, clearStoredEvaluationData} from './js/utils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
@@ -75,8 +75,8 @@ function MainSections({dropdownsDefaultState}:any){
   }
 
   useEffect(() => {
-    const loadedResults = loadStoredReport();
-    handleResultsChange(loadedResults);
+    //const loadedResults = loadStoredReport();
+    //handleResultsChange(loadedResults);
   }, [])
 
   return(<>
@@ -147,7 +147,7 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label><br/>
         <label id="btn_download" className="button primary" onClick={()=>downloadCurrentReport(activeLevels)}>Download report</label><br/>
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json"/>Upload Report</label>
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadReport(event)} />Upload Report</label>
       </div>
     
   </div> );

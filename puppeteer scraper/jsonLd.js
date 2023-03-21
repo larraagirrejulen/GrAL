@@ -3,8 +3,7 @@
 
 class jsonLd{
 
-    #json;
-    #evaluator;
+    #evaluator; #json;
     #assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
@@ -15,8 +14,7 @@ class jsonLd{
         "FAIL": { outcome: "earl:failed", description: "Found a violation ..." },
         "CANNOTTELL": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
         "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
-    };
-
+    }
     #context = {
         "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
         "wcag2": "http://www.w3.org/TR/WCAG21/#",
@@ -91,7 +89,7 @@ class jsonLd{
 
         "id": "@id",
         "type": "@type"
-    }
+    };
 
     constructor(evaluator, pageUrl, pageTitle){
 
@@ -100,9 +98,9 @@ class jsonLd{
         const date = new Date();
         const currentDate = date.toLocaleString();
 
-        this.#evaluator = evaluator;
+        this.#evaluator = this.#assertors[evaluator];
 
-        var json = {
+        this.#json = {
 
             "@context": this.#context,
 
@@ -114,15 +112,15 @@ class jsonLd{
             "dct:summary": "Undefined",
 
             "assertors": [{
-                "id": "_:" + this.#assertors[this.#evaluator].name,
+                "id": "_:" + this.#evaluator.name,
                 "type": "earl:Assertor",
-                "xmlns:name": this.#assertors[this.#evaluator].name,
-                "description": this.#assertors[this.#evaluator].url
+                "xmlns:name": this.#evaluator.name,
+                "description": this.#evaluator.url
             }],
 
             "creator": {
                 "id": "_:assertors",
-                "xmlns:name": this.#assertors[this.#evaluator].name
+                "xmlns:name": this.#evaluator.name
             },
     
             "evaluationScope":
@@ -159,7 +157,7 @@ class jsonLd{
         };
 
         for (const key in this.#successCriterias){
-            json.auditSample.push(
+            this.#json.auditSample.push(
                 {
                     "type": "Assertion",
                     "test": "wcag2:" + this.#successCriterias[key].id,
@@ -174,11 +172,9 @@ class jsonLd{
                 }
             );
         };
-
-        this.#json = json;
     }
 
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, hash = null, html = null){
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
 
         const criteriaId = this.#successCriterias[criteriaNumber].id
 
@@ -194,7 +190,7 @@ class jsonLd{
 
             if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
                 pageAssertion.result.locationPointersGroup.push({
-                    "id": "data:sha256:" + hash,
+                    "id": "_:pointer",
                     "type": [
                         "ptr:groupPointer",
                         "ptr:XPathPointer"
@@ -215,7 +211,7 @@ class jsonLd{
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
                 siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion["assertedBy"] = "_:" + this.#assertors[this.#evaluator].name,
+                siteAssertion["assertedBy"] = "_:" + this.#evaluator.name,
                 siteAssertion["mode"] = "earl:automatic"
                 break;    
             case "earl:passed":
@@ -234,7 +230,7 @@ class jsonLd{
         const assertion = {
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
-            "assertedBy": "_:" + this.#assertors[this.#evaluator].name,
+            "assertedBy": "_:" + this.#evaluator.name,
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result":
@@ -247,7 +243,7 @@ class jsonLd{
 
         if(path != null){
             assertion.result.locationPointersGroup.push({
-                "id": "data:sha256:" + hash,
+                "id": "_:pointer",
                 "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
@@ -268,7 +264,6 @@ class jsonLd{
         } else{
             this.#json["dct:summary"] = "No errors where found!!!"
         }
-
         return this.#json;
     }
 
