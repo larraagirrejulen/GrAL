@@ -29,7 +29,7 @@ http.createServer((request, response) => {
         
         requestBody = Buffer.concat(requestBody).toString();
 
-        console.log("\n### ----- New Scraping Request ----- ###\n" + "\nRequest: " + requestBody + "\n");
+        console.log("\n### ----- New Scraping Request ----- ###\n" + "\nRequest: " + requestBody);
 
         try{
             const requestJson = JSON.parse(requestBody);

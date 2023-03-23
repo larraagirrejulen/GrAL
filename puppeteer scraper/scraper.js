@@ -1,5 +1,5 @@
 
-const jsonLd = require('./jsonLd');
+
 
 
 
@@ -7,11 +7,11 @@ const scraper = {
 
 
 
-    async scrape(page, evaluator, evaluationUrl, evaluatedPageTitle){
+    async scrape(page, evaluator, evaluationUrl, jsonld){
 
-        console.log("Initiating " + evaluator.toUpperCase() + " scraping process ...");
+        console.log("\nInitiating " + evaluator.toUpperCase() + " scraping process ...");
 
-        this.json = new jsonLd(evaluator, evaluationUrl, evaluatedPageTitle);
+        this.json = jsonld;
 
         try{
             switch(evaluator){
@@ -75,12 +75,15 @@ const scraper = {
                 const techniqueGuideText = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
                 
                 var casesLink = null;
-                const link = cols[3].querySelector("a").href;
-                if(link.startsWith("/results")){
-                    casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
-                }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
-                    casesLink = link;
-                }
+          
+                if(cols[3].querySelector("a") != undefined){
+                    var link = cols[3].querySelector("a").href;
+                    if(link.startsWith("/results")){
+                        casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
+                    }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
+                        casesLink = link;
+                    }
+                } 
 
                 results.push({
                     "outcome": status,

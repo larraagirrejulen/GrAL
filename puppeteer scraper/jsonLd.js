@@ -3,27 +3,26 @@
 
 class jsonLd{
 
-    #evaluator; #json;
-    #assertors = {
+    assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
         "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
     };
-    #outcomes = {
+    outcomes = {
         "PASS": { outcome: "earl:passed", description: "No violations found" },
         "FAIL": { outcome: "earl:failed", description: "Found a violation ..." },
         "CANNOTTELL": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
         "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
     }
-    #context = {
-        "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
-        "wcag2": "http://www.w3.org/TR/WCAG21/#",
-        "earl": "http://www.w3.org/ns/earl#",
+    context = {
+        "@vocab": "http://www.w3.org/TR/WCAG-EM/",
+        "wcag2": "http://www.w3.org/TR/WCAG21/",
+        "earl": "http://www.w3.org/ns/earl",
         "dct": "http://purl.org/dc/terms/",
         "wai": "http://www.w3.org/WAI/",
         "sch": "http://schema.org/",
         "xmlns": "http://xmlns.com/foaf/0.1/",
-        "ptr": "http://www.w3.org/2009/pointers#",
+        "ptr": "http://www.w3.org/2009/pointers",
         
         "evaluationScope": { 
             "@id": "step1",
@@ -98,11 +97,11 @@ class jsonLd{
         const date = new Date();
         const currentDate = date.toLocaleString();
 
-        this.#evaluator = this.#assertors[evaluator];
+        this.evaluator = this.assertors[evaluator];
 
-        this.#json = {
+        this.json = {
 
-            "@context": this.#context,
+            "@context": this.context,
 
             "type": "Evaluation",
             "@language": "en",
@@ -112,15 +111,15 @@ class jsonLd{
             "dct:summary": "Undefined",
 
             "assertors": [{
-                "id": "_:" + this.#evaluator.name,
+                "id": "_:" + this.evaluator.name,
                 "type": "earl:Assertor",
-                "xmlns:name": this.#evaluator.name,
-                "description": this.#evaluator.url
+                "xmlns:name": this.evaluator.name,
+                "description": this.evaluator.url
             }],
 
             "creator": {
                 "id": "_:assertors",
-                "xmlns:name": this.#evaluator.name
+                "xmlns:name": this.evaluator.name
             },
     
             "evaluationScope":
@@ -156,12 +155,12 @@ class jsonLd{
             "auditSample": []
         };
 
-        for (const key in this.#successCriterias){
-            this.#json.auditSample.push(
+        for (const key in this.successCriterias){
+            this.json.auditSample.push(
                 {
                     "type": "Assertion",
-                    "test": "wcag2:" + this.#successCriterias[key].id,
-                    "conformanceLevel": this.#successCriterias[key].conformanceLevel,
+                    "test": "wcag2:" + this.successCriterias[key].id,
+                    "conformanceLevel": this.successCriterias[key].conformanceLevel,
                     "subject": "_:website",
                     "result":
                     {
@@ -176,11 +175,11 @@ class jsonLd{
 
     addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
 
-        const criteriaId = this.#successCriterias[criteriaNumber].id
+        const criteriaId = this.successCriterias[criteriaNumber].id
 
-        const siteAssertion = this.#json.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
+        const siteAssertion = this.json.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
 
-        const resultOutcome = this.#outcomes[outcome].outcome
+        const resultOutcome = this.outcomes[outcome].outcome
 
         var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
 
@@ -210,18 +209,18 @@ class jsonLd{
         switch (currentGeneralOutcome) {
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
-                siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion["assertedBy"] = "_:" + this.#evaluator.name,
+                siteAssertion.result.description = this.outcomes[outcome].description
+                siteAssertion["assertedBy"] = "_:" + this.evaluator.name,
                 siteAssertion["mode"] = "earl:automatic"
                 break;    
             case "earl:passed":
                 siteAssertion.result.outcome = resultOutcome
-                siteAssertion.result.description = this.#outcomes[outcome].description
+                siteAssertion.result.description = this.outcomes[outcome].description
                 break;
             case "earl:cantTell":
                 if(resultOutcome != "earl:passed"){
                     siteAssertion.result.outcome = resultOutcome
-                    siteAssertion.result.description = this.#outcomes[outcome].description
+                    siteAssertion.result.description = this.outcomes[outcome].description
                 }
                 break;
         }
@@ -230,7 +229,7 @@ class jsonLd{
         const assertion = {
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
-            "assertedBy": "_:" + this.#evaluator.name,
+            "assertedBy": "_:" + this.evaluator.name,
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result":
@@ -259,15 +258,15 @@ class jsonLd{
 
     getJson(){
 
-        if(this.#json.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
-            this.#json["dct:summary"] = "Some errors where found..."
+        if(this.json.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
+            this.json["dct:summary"] = "Some errors where found..."
         } else{
-            this.#json["dct:summary"] = "No errors where found!!!"
+            this.json["dct:summary"] = "No errors where found!!!"
         }
-        return this.#json;
+        return this.json;
     }
 
-    #successCriterias = { 
+    successCriterias = { 
         "1.1.1": {
             "id": "non-text-content",
             "conformanceLevel": "A"
