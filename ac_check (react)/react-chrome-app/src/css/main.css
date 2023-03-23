@@ -93,3 +93,12 @@
   transition: 0.2s ease;
 }
 
+.react_chrome_extension .options_icon{
+  height: 15px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

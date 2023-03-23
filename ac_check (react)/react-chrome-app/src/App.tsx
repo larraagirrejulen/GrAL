@@ -6,8 +6,8 @@ import './css/ResultSection.css';
 
 
 import { useState, useEffect} from "react";
-import { getLogoSrc, getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
-import { loadStoredReport, getEvaluation, downloadCurrentReport, uploadReport, clearStoredEvaluationData} from './js/utils.js';
+import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc } from './js/extension_images.js';
+import { loadStoredReport, openOptionsPage, getEvaluation, downloadCurrentReport, uploadReport, clearStoredEvaluationData} from './js/utils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
@@ -20,8 +20,10 @@ export default function App() {
   const [hidden, setHidden] = useState(false);
 
   const [logoImgSrc, setLogoImgSrc] = useState();
+  const [configImgSrc, setConfigImgSrc] = useState();
   useEffect(() => { 
     setLogoImgSrc(getLogoSrc());
+    setConfigImgSrc(getConfigImgSrc());
   }, []);
 
   return (<>
@@ -29,6 +31,7 @@ export default function App() {
     {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={logoImgSrc} onClick={()=>setHidden(!hidden)} /> : ""}
     
     <div className= {`react_chrome_extension ${hidden ? 'hidden' : ''}`}>
+      <img className="options_icon" src={configImgSrc} alt="open configuration options window" onClick={()=>openOptionsPage()} />
       <span className="close_icon" onClick={()=>setHidden(!hidden)}>&times;</span>
       <div className="img_container">
         <img alt="extension logo" src={logoImgSrc} onClick={() => {

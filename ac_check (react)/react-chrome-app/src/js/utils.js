@@ -18,7 +18,10 @@ function saveJson(json){
 }
 
 
-
+export function openOptionsPage(){
+    // eslint-disable-next-line no-undef
+    chrome.runtime.sendMessage({ action: "openOptionsPage" });
+}
 
 
 

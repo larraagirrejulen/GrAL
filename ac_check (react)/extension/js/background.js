@@ -45,7 +45,13 @@ function main_bk(){
         });
       }
     });
-  });    
+  });
+  
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "openOptionsPage") {
+      chrome.runtime.openOptionsPage();
+    }
+  });  
   
   }catch(e){
     console.log(e);
