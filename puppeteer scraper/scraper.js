@@ -1,51 +1,60 @@
 
+const JsonLd = require('./jsonLd');
 
 
+class Scraper {
+
+    #puppeteer_page;
+    #evaluator;
+    #evaluationUrl;
+    #jsonld;
+
+    constructor(page, evaluator, evaluationUrl, evaluatedPageTitle){
+
+        this.#puppeteer_page = page;
+        this.#evaluator = evaluator;
+        this.#evaluationUrl = evaluationUrl;
+        this.#jsonld = new JsonLd(evaluator, evaluationUrl, evaluatedPageTitle);
+
+    }
 
 
-const scraper = {
+    async scrape(){
 
-
-
-    async scrape(page, evaluator, evaluationUrl, jsonld){
-
-        console.log("\nInitiating " + evaluator.toUpperCase() + " scraping process ...");
-
-        this.json = jsonld;
+        console.log("\nInitiating " + this.#evaluator.toUpperCase() + " scraping process ...");
 
         try{
-            switch(evaluator){
+            switch(this.#evaluator){
                 case 'am':
-                    await this.amScraper(page, evaluationUrl, 'https://accessmonitor.acessibilidade.gov.pt/results/');
+                    await this.amScraper('https://accessmonitor.acessibilidade.gov.pt/results/');
                     break;
                 case 'ac':
-                    await this.acScraper(page, evaluationUrl, 'https://achecker.achecks.ca/checker/index.php');
+                    await this.acScraper('https://achecker.achecks.ca/checker/index.php');
                     break;
                 case 'mv':
-                    await this.mvScraper(page, evaluationUrl, 'https://mauve.isti.cnr.it/singleValidation.jsp');
+                    await this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp');
                     break;
                 default:
-                    throw new Error("\n" + evaluator.toUpperCase() + " is not a valid evaluator !!!");
+                    throw new Error("\n" + this.#evaluator.toUpperCase() + " is not a valid evaluator !!!");
             }
 
-            console.log("\nSUCCESS: " + evaluator.toUpperCase() + " scraping process successfully finished !!!");
+            console.log("\nSUCCESS: " + this.#evaluator.toUpperCase() + " scraping process successfully finished !!!");
             
-        } catch(error) { throw new Error("\nThe next error was found on " + evaluator.toUpperCase()  + " scraping process: " + error) }
+        } catch(error) { throw new Error("\nThe next error was found on " + this.#evaluator.toUpperCase()  + " scraping process: " + error) }
 
-        return this.json.getJson();
-    },
-
-
+        return this.#jsonld.getJsonLd();
+    }
 
 
-    async amScraper(page, evaluationUrl, evaluatorUrl){
+
+    async amScraper(evaluatorUrl){
 
         // Navigate to url and wait to be loaded
-        await page.goto(evaluatorUrl + evaluationUrl.replaceAll("/",'%2f'));
-        await page.waitForSelector('.evaluation-table');
+        await this.#puppeteer_page.goto(evaluatorUrl + this.#evaluationUrl.replaceAll("/",'%2f'));
+        await this.#puppeteer_page.waitForSelector('.evaluation-table');
 
         // Get interested data
-        const results = await page.evaluate(async () => {
+        const results = await this.#puppeteer_page.evaluate(async () => {
             var results = [];
             const techniquesFound = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
 
@@ -100,9 +109,9 @@ const scraper = {
 
             for (var j = 0, criteria; criteria = criterias[j]; j++){
                 if (result["casesLink"] != null){
-                    await page.goto(result["casesLink"]);
-                    await page.waitForSelector('#list_tab');
-                    const [casesLocations, casesHtmls] = await page.evaluate(async () => {
+                    await this.#puppeteer_page.goto(result["casesLink"]);
+                    await this.#puppeteer_page.waitForSelector('#list_tab');
+                    const [casesLocations, casesHtmls] = await this.#puppeteer_page.evaluate(async () => {
                         
                         var casesLocations = [];
                         var casesHtmls = [];
@@ -124,45 +133,44 @@ const scraper = {
                         correctPath = correctPath.replace(/:nth-child\(/g, "[")
                         correctPath = correctPath.replaceAll(")", "]")
                         
-                        this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
+                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
                     }
                 }else{
-                    this.json.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
+                    this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
                 }       
             }
         }
-  
-    },
+    }
 
 
 
 
 
 
-    async acScraper(page, evaluationUrl, evaluatorUrl){
+    async acScraper(evaluatorUrl){
 
         // Navigate to url
-        await page.goto(evaluatorUrl);
+        await this.#puppeteer_page.goto(evaluatorUrl);
 
         // Wait for input element to load
-        await page.waitForSelector('#checkuri');
+        await this.#puppeteer_page.waitForSelector('#checkuri');
 
         // Configure to include AAA level
-        await page.focus('h2[align="left"] a');
-        await page.click('h2[align="left"] a');
-        await page.focus("#radio_gid_9");
-        await page.click("#radio_gid_9");
+        await this.#puppeteer_page.focus('h2[align="left"] a');
+        await this.#puppeteer_page.click('h2[align="left"] a');
+        await this.#puppeteer_page.focus("#radio_gid_9");
+        await this.#puppeteer_page.click("#radio_gid_9");
 
         // Load the url we want to evaluate and submit
-        await page.focus('#checkuri');
-        await page.keyboard.type(evaluationUrl);
-        await page.click('#validate_uri');
+        await this.#puppeteer_page.focus('#checkuri');
+        await this.#puppeteer_page.keyboard.type(this.#evaluationUrl);
+        await this.#puppeteer_page.click('#validate_uri');
 
         // Wait for results to be loaded
-        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
+        await this.#puppeteer_page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
 
         // Get evaluation data
-        const results = await page.evaluate(() => {
+        const results = await this.#puppeteer_page.evaluate(() => {
             
             var results = [];
             var errors, warnings, problems, criterias, checks, criteria_num, check, problem, solution, actual_text, cases, error_location, error_code;
@@ -258,43 +266,41 @@ const scraper = {
             return results;
         });
 
-
         for (var i = 0, result; result = results[i]; i++){
-            this.json.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
+            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
         }
-        
-    },
+    }
 
 
 
 
 
-    async mvScraper(page, evaluationUrl, evaluatorUrl){
+    async mvScraper(evaluatorUrl){
 
         // Navigate to url
-        await page.goto(evaluatorUrl);
+        await this.#puppeteer_page.goto(evaluatorUrl);
 
         // Wait for input element to load
-        await page.waitForSelector('#uri');
+        await this.#puppeteer_page.waitForSelector('#uri');
 
         // Load the url we want to evaluate and submit
-        await page.focus('#uri');
-        await page.keyboard.type(evaluationUrl);
-        await page.click('#validate');
+        await this.#puppeteer_page.focus('#uri');
+        await this.#puppeteer_page.keyboard.type(this.#evaluationUrl);
+        await this.#puppeteer_page.click('#validate');
 
         // Wait for results to be loaded
-        await page.waitForSelector('#evaluationSummary');
+        await this.#puppeteer_page.waitForSelector('#evaluationSummary');
 
         // Set default download directory:
         const path = require('path');
-        const client = await page.target().createCDPSession(); 
+        const client = await this.#puppeteer_page.target().createCDPSession(); 
         await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: path.resolve('./evaluations'), });
 
         // Start evaluation download and wait for 3 secs
-        await page.click('#evaluationSummary a[title="download earl report"]');
-        await page.waitForTimeout(3000);
+        await this.#puppeteer_page.click('#evaluationSummary a[title="download earl report"]');
+        await this.#puppeteer_page.waitForTimeout(3000);
 
     }
 }
 
-module.exports = scraper;
+module.exports = Scraper;

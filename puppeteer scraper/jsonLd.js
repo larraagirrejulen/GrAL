@@ -1,20 +1,20 @@
 
 
+class JsonLd{
 
-class jsonLd{
-
-    assertors = {
+    #jsonld; #evaluator_data;
+    #assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
         "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
     };
-    outcomes = {
+    #outcomes = {
         "PASS": { outcome: "earl:passed", description: "No violations found" },
         "FAIL": { outcome: "earl:failed", description: "Found a violation ..." },
         "CANNOTTELL": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
         "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
     }
-    context = {
+    #context = {
         "@vocab": "http://www.w3.org/TR/WCAG-EM/",
         "wcag2": "http://www.w3.org/TR/WCAG21/",
         "earl": "http://www.w3.org/ns/earl",
@@ -89,184 +89,7 @@ class jsonLd{
         "id": "@id",
         "type": "@type"
     };
-
-    constructor(evaluator, pageUrl, pageTitle){
-
-        const siteName = (new URL(pageUrl)).hostname.replace('www.','');
-
-        const date = new Date();
-        const currentDate = date.toLocaleString();
-
-        this.evaluator = this.assertors[evaluator];
-
-        this.json = {
-
-            "@context": this.context,
-
-            "type": "Evaluation",
-            "@language": "en",
-            "title": "Accessibility Evaluation Report for " + siteName + " website",
-            "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-            "dct:date": currentDate,
-            "dct:summary": "Undefined",
-
-            "assertors": [{
-                "id": "_:" + this.evaluator.name,
-                "type": "earl:Assertor",
-                "xmlns:name": this.evaluator.name,
-                "description": this.evaluator.url
-            }],
-
-            "creator": {
-                "id": "_:assertors",
-                "xmlns:name": this.evaluator.name
-            },
-    
-            "evaluationScope":
-            {
-                "website":
-                {
-                    "id": "_:website",
-                    "type": [
-                        "earl:TestSubject",
-                        "sch:WebSite"
-                    ],
-                    "siteName": siteName,
-                    "siteScope": "Single page: " + pageUrl
-                },
-                "conformanceTarget": "wai:WCAG2AAA-Conformance",
-                "accessibilitySupportBaseline": "Google Chrome latest version",
-                "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
-            },
-    
-            "structuredSample":
-            {
-                "webpage": [
-                {
-                    "id": "_:webpage",
-                    "type": ["earl:TestSubject", "sch:WebPage"],
-                    "description": pageUrl,
-                    "source": "_:website",
-                    "title": pageTitle,
-                    "tested": true
-                }]
-            },
-    
-            "auditSample": []
-        };
-
-        for (const key in this.successCriterias){
-            this.json.auditSample.push(
-                {
-                    "type": "Assertion",
-                    "test": "wcag2:" + this.successCriterias[key].id,
-                    "conformanceLevel": this.successCriterias[key].conformanceLevel,
-                    "subject": "_:website",
-                    "result":
-                    {
-                        "outcome": "earl:untested",
-                        "description": ""
-                    },
-                    "hasPart": []
-                }
-            );
-        };
-    }
-
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
-
-        const criteriaId = this.successCriterias[criteriaNumber].id
-
-        const siteAssertion = this.json.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
-
-        const resultOutcome = this.outcomes[outcome].outcome
-
-        var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
-
-
-        if(pageAssertion.length > 0){
-            pageAssertion = pageAssertion[0];
-
-            if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
-                pageAssertion.result.locationPointersGroup.push({
-                    "id": "_:pointer",
-                    "type": [
-                        "ptr:groupPointer",
-                        "ptr:XPathPointer"
-                    ],
-                    "ptr:expression": path, 
-                    "description": html,
-                    "namespace" : "http://www.w3.org/1999/xhtml"
-                });
-            }
-
-            return;
-        }
-
-
-
-        const currentGeneralOutcome = siteAssertion.result.outcome
-        switch (currentGeneralOutcome) {
-            case "earl:untested":
-                siteAssertion.result.outcome = resultOutcome
-                siteAssertion.result.description = this.outcomes[outcome].description
-                siteAssertion["assertedBy"] = "_:" + this.evaluator.name,
-                siteAssertion["mode"] = "earl:automatic"
-                break;    
-            case "earl:passed":
-                siteAssertion.result.outcome = resultOutcome
-                siteAssertion.result.description = this.outcomes[outcome].description
-                break;
-            case "earl:cantTell":
-                if(resultOutcome != "earl:passed"){
-                    siteAssertion.result.outcome = resultOutcome
-                    siteAssertion.result.description = this.outcomes[outcome].description
-                }
-                break;
-        }
-
-
-        const assertion = {
-            "type": "Assertion",
-            "testcase": "wcag2:" + criteriaId,
-            "assertedBy": "_:" + this.evaluator.name,
-            "subject": "_:webpage",
-            "mode": "earl:automatic",
-            "result":
-            {
-                "outcome": resultOutcome,
-                "description": criteriaDescription,
-                "locationPointersGroup": []
-            }
-        }
-
-        if(path != null){
-            assertion.result.locationPointersGroup.push({
-                "id": "_:pointer",
-                "type": [
-                    "ptr:groupPointer",
-                    "ptr:XPathPointer"
-                ],
-                "ptr:expression": path, 
-                "description": html, 
-                "namespace" : "http://www.w3.org/1999/xhtml"
-            });
-        }
-
-        siteAssertion.hasPart.push(assertion);
-    }
-
-    getJson(){
-
-        if(this.json.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
-            this.json["dct:summary"] = "Some errors where found..."
-        } else{
-            this.json["dct:summary"] = "No errors where found!!!"
-        }
-        return this.json;
-    }
-
-    successCriterias = { 
+    #successCriterias = { 
         "1.1.1": {
             "id": "non-text-content",
             "conformanceLevel": "A"
@@ -562,6 +385,184 @@ class jsonLd{
             "conformanceLevel": "AA"
         }
     };
+
+    constructor(evaluator, pageUrl, pageTitle){
+
+        const siteName = (new URL(pageUrl)).hostname.replace('www.','');
+
+        const date = new Date();
+        const currentDate = date.toLocaleString();
+
+        this.#evaluator_data = this.#assertors[evaluator];
+
+        this.#jsonld = {
+
+            "@context": this.#context,
+
+            "type": "Evaluation",
+            "@language": "en",
+            "title": "Accessibility Evaluation Report for " + siteName + " website",
+            "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
+            "dct:date": currentDate,
+            "dct:summary": "Undefined",
+
+            "assertors": [{
+                "id": "_:" + this.#evaluator_data.name,
+                "type": "earl:Assertor",
+                "xmlns:name": this.#evaluator_data.name,
+                "description": this.#evaluator_data.url
+            }],
+
+            "creator": {
+                "id": "_:assertors",
+                "xmlns:name": this.#evaluator_data.name
+            },
+    
+            "evaluationScope":
+            {
+                "website":
+                {
+                    "id": "_:website",
+                    "type": [
+                        "earl:TestSubject",
+                        "sch:WebSite"
+                    ],
+                    "siteName": siteName,
+                    "siteScope": "Single page: " + pageUrl
+                },
+                "conformanceTarget": "wai:WCAG2AAA-Conformance",
+                "accessibilitySupportBaseline": "Google Chrome latest version",
+                "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
+            },
+    
+            "structuredSample":
+            {
+                "webpage": [
+                {
+                    "id": "_:webpage",
+                    "type": ["earl:TestSubject", "sch:WebPage"],
+                    "description": pageUrl,
+                    "source": "_:website",
+                    "title": pageTitle,
+                    "tested": true
+                }]
+            },
+    
+            "auditSample": []
+        };
+
+        for (const key in this.#successCriterias){
+            this.#jsonld.auditSample.push(
+                {
+                    "type": "Assertion",
+                    "test": "wcag2:" + this.#successCriterias[key].id,
+                    "conformanceLevel": this.#successCriterias[key].conformanceLevel,
+                    "subject": "_:website",
+                    "result":
+                    {
+                        "outcome": "earl:untested",
+                        "description": ""
+                    },
+                    "hasPart": []
+                }
+            );
+        };
+    }
+
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
+
+        const criteriaId = this.#successCriterias[criteriaNumber].id
+
+        const siteAssertion = this.#jsonld.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
+
+        const resultOutcome = this.#outcomes[outcome].outcome
+
+        var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
+
+
+        if(pageAssertion.length > 0){
+            pageAssertion = pageAssertion[0];
+
+            if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
+                pageAssertion.result.locationPointersGroup.push({
+                    "id": "_:pointer",
+                    "type": [
+                        "ptr:groupPointer",
+                        "ptr:XPathPointer"
+                    ],
+                    "ptr:expression": path, 
+                    "description": html,
+                    "namespace" : "http://www.w3.org/1999/xhtml"
+                });
+            }
+
+            return;
+        }
+
+
+
+        const currentGeneralOutcome = siteAssertion.result.outcome
+        switch (currentGeneralOutcome) {
+            case "earl:untested":
+                siteAssertion.result.outcome = resultOutcome
+                siteAssertion.result.description = this.#outcomes[outcome].description
+                siteAssertion["assertedBy"] = "_:" + this.#evaluator_data.name,
+                siteAssertion["mode"] = "earl:automatic"
+                break;    
+            case "earl:passed":
+                siteAssertion.result.outcome = resultOutcome
+                siteAssertion.result.description = this.#outcomes[outcome].description
+                break;
+            case "earl:cantTell":
+                if(resultOutcome != "earl:passed"){
+                    siteAssertion.result.outcome = resultOutcome
+                    siteAssertion.result.description = this.#outcomes[outcome].description
+                }
+                break;
+        }
+
+
+        const assertion = {
+            "type": "Assertion",
+            "testcase": "wcag2:" + criteriaId,
+            "assertedBy": "_:" + this.#evaluator_data.name,
+            "subject": "_:webpage",
+            "mode": "earl:automatic",
+            "result":
+            {
+                "outcome": resultOutcome,
+                "description": criteriaDescription,
+                "locationPointersGroup": []
+            }
+        }
+
+        if(path != null){
+            assertion.result.locationPointersGroup.push({
+                "id": "_:pointer",
+                "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                ],
+                "ptr:expression": path, 
+                "description": html, 
+                "namespace" : "http://www.w3.org/1999/xhtml"
+            });
+        }
+
+        siteAssertion.hasPart.push(assertion);
+    }
+
+    getJsonLd(){
+
+        if(this.#jsonld.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
+            this.#jsonld["dct:summary"] = "Some errors where found..."
+        } else{
+            this.#jsonld["dct:summary"] = "No errors where found!!!"
+        }
+        return this.#jsonld;
+    }
+
+
 }
 
-module.exports = jsonLd;
+module.exports = JsonLd;

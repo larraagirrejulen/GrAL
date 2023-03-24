@@ -1,8 +1,7 @@
 
 const puppeteer = require('puppeteer');
-const scraper = require('./scraper');
+const Scraper = require('./scraper');
 const fs = require("fs");
-const jsonLd = require('./jsonLd');
 
 
 const withBrowser = async (fn) => {
@@ -27,18 +26,21 @@ const withPage = (browser) => async (fn) => {
 	}
 }
 
-async function scrapeSelected(MV, AM, AC, evaluationUrl, evaluatedPageTitle){
+async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
 
-	const evaluators = ["mv", "am", "ac"];
-	const selectedEvaluators = [MV, AM, AC];
+	const evaluators = ["am", "ac", "mv"];
+	const selectedEvaluators = [AM, AC, MV];
 	
-	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.splice(i,1);
+	for(var i=evaluators.length-1; i>=0; i--)
+		if(!selectedEvaluators[i])
+			evaluators.splice(i,1);
 
 	const results = await withBrowser(async (browser) => {
 		return await Promise.all(
 			evaluators.map(async (evaluator) => {
 				return await withPage(browser)(async (page) => {
-					return await scraper.scrape(page, evaluator, evaluationUrl, new jsonLd(evaluator, evaluationUrl, evaluatedPageTitle)).catch((error) => {
+					var scraper = new Scraper(page, evaluator, evaluationUrl, evaluatedPageTitle);
+					return await scraper.scrape().catch((error) => {
 						console.log("\n" + error + "\n");
 					});
 				});
@@ -57,7 +59,7 @@ async function scrapeSelected(MV, AM, AC, evaluationUrl, evaluatedPageTitle){
 		results[0] = merge(results[0], results[i]);
 	}*/
 
-	return JSON.stringify(results);
+	return JSON.stringify(results[0]);
 
 }
 
@@ -68,4 +70,4 @@ function merge(jsonLd1, jsonLd2){
 
 }
 
-module.exports = (MV, AM, AC, evaluationUrl, evaluatedPageTitle) => scrapeSelected(MV, AM, AC, evaluationUrl, evaluatedPageTitle)
+module.exports = (AM, AC, MV, evaluationUrl, evaluatedPageTitle) => scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle)
