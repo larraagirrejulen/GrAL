@@ -1,5 +1,6 @@
 
 const JsonLd = require('./jsonLd');
+const { createHash } = require('crypto');
 
 
 class Scraper {
@@ -132,8 +133,8 @@ class Scraper {
                         correctPath = correctPath.replace(/ \> /g, "/")
                         correctPath = correctPath.replace(/:nth-child\(/g, "[")
                         correctPath = correctPath.replaceAll(")", "]")
-                        
-                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
+                        const hashPath = createHash('sha256').update(correctPath+criteria).digest('hex');
+                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath, casesHtmls[k]);
                     }
                 }else{
                     this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
@@ -267,7 +268,8 @@ class Scraper {
         });
 
         for (var i = 0, result; result = results[i]; i++){
-            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
+            const hashPath = createHash('sha256').update(result.location + result.criteria_num).digest('hex');
+            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, hashPath, result.target_html);
         }
     }
 

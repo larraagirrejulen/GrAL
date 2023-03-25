@@ -15,14 +15,14 @@ class JsonLd{
         "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
     }
     #context = {
-        "@vocab": "http://www.w3.org/TR/WCAG-EM/",
-        "wcag2": "http://www.w3.org/TR/WCAG21/",
-        "earl": "http://www.w3.org/ns/earl",
+        "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
+        "wcag2": "http://www.w3.org/TR/WCAG21/#",
+        "earl": "http://www.w3.org/ns/earl#",
         "dct": "http://purl.org/dc/terms/",
         "wai": "http://www.w3.org/WAI/",
         "sch": "http://schema.org/",
         "xmlns": "http://xmlns.com/foaf/0.1/",
-        "ptr": "http://www.w3.org/2009/pointers",
+        "ptr": "http://www.w3.org/2009/pointers#",
         
         "evaluationScope": { 
             "@id": "step1",
@@ -469,7 +469,7 @@ class JsonLd{
         };
     }
 
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, hash = null, html = null){
 
         const criteriaId = this.#successCriterias[criteriaNumber].id
 
@@ -485,7 +485,7 @@ class JsonLd{
 
             if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
                 pageAssertion.result.locationPointersGroup.push({
-                    "id": "_:pointer",
+                    "id": "data:sha256:" + hash,
                     "type": [
                         "ptr:groupPointer",
                         "ptr:XPathPointer"
@@ -506,8 +506,8 @@ class JsonLd{
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
                 siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion["assertedBy"] = "_:" + this.#evaluator_data.name,
-                siteAssertion["mode"] = "earl:automatic"
+                siteAssertion.assertedBy = "_:" + this.#evaluator_data.name,
+                siteAssertion.mode = "earl:automatic"
                 break;    
             case "earl:passed":
                 siteAssertion.result.outcome = resultOutcome
@@ -538,7 +538,7 @@ class JsonLd{
 
         if(path != null){
             assertion.result.locationPointersGroup.push({
-                "id": "_:pointer",
+                "id": "data:sha256:" + hash,
                 "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"

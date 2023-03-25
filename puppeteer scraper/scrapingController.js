@@ -17,6 +17,7 @@ const withBrowser = async (fn) => {
 	}
 }
 
+
 const withPage = (browser) => async (fn) => {
 	const page = await browser.newPage();
 	try {
@@ -26,14 +27,13 @@ const withPage = (browser) => async (fn) => {
 	}
 }
 
+
 async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
 
 	const evaluators = ["am", "ac", "mv"];
 	const selectedEvaluators = [AM, AC, MV];
 	
-	for(var i=evaluators.length-1; i>=0; i--)
-		if(!selectedEvaluators[i])
-			evaluators.splice(i,1);
+	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.splice(i,1);
 
 	const results = await withBrowser(async (browser) => {
 		return await Promise.all(
@@ -48,19 +48,18 @@ async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
 		));
 	});
 
-	fs.writeFile('./resultData.json', JSON.stringify(results, null, 2), err => {
-		if (err) console.log('Error writing file', err)
-	});
-
 	for(var i = 1; i<results.length; i++){
 		merge(results[0], results[i]);
 	}
 
-	console.log(results[0]);
+	fs.writeFile('./resultData.json', JSON.stringify(results[0], null, 2), err => {
+		if (err) console.log('Error writing file', err)
+	});
 
 	return JSON.stringify(results[0]);
 
 }
+
 
 function merge(jsonLd1, jsonLd2){
 
@@ -87,7 +86,7 @@ function merge(jsonLd1, jsonLd2){
 			if((assertion1.result.outcome === "earl:passed" && assertion2.result.outcome !== "earl:passed") 
 			|| (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
 
-				assertion1.result.outcome = assertion2.result.outcome;
+				assertion1.result = assertion2.result;
 	
 			}
 
@@ -97,34 +96,39 @@ function merge(jsonLd1, jsonLd2){
 
 }
 
+
 function mergeFoundCases(assertion1, assertion2){
-
-	assertion1.hasPart.forEach(case1 => {
 		
-		assertion2.hasPart.forEach(case2 => {
-		
-			if(case1.result.outcome !== case2.result.outcome) return;
-
-			case2.assertedBy.forEach((assertor)=>{
-				case1.assertedBy.push(assertor);
-			});
-
-			case1.result.description += "\n" + case2.result.description;
-
-			case2.result.locationPointersGroup.forEach((pointer2) => {
-				
-				exists_index = case1.result.locationPointersGroup.findIndex((pointer1) => {
-					return pointer1.description === pointer2.description;
-				});
-
-				if(exists_index === -1){
-					case1.result.locationPointersGroup.push(pointer2);					
-				}else if(pointer2["ptr:expression"].startsWith("//html/body")){
-					case1.result.locationPointersGroup[exists_index]["ptr:expression"] = pointer2["ptr:expression"];
-				}
-				
-			});
+	assertion2.hasPart.forEach(case2 => {
 	
+		case_index = assertion1.hasPart.findIndex((case1) => {
+			return case1.result.outcome === case2.result.outcome;
+		});
+
+		if(case_index === -1){
+			assertion1.hasPart.push(case2);
+			return;
+		}
+
+		case2.assertedBy.forEach((assertor)=>{
+			console.log(assertor);
+			assertion1.hasPart[case_index].assertedBy.push(assertor);
+		});
+
+		assertion1.hasPart[case_index].result.description += "\n" + case2.result.description;
+
+		case2.result.locationPointersGroup.forEach((pointer2) => {
+			
+			exists_index = assertion1.hasPart[case_index].result.locationPointersGroup.findIndex((pointer1) => {
+				return pointer1.description === pointer2.description;
+			});
+
+			if(exists_index === -1){
+				assertion1.hasPart[case_index].result.locationPointersGroup.push(pointer2);					
+			}else if(pointer2["ptr:expression"].startsWith("//html/body")){
+				assertion1.hasPart[case_index].result.locationPointersGroup[exists_index]["ptr:expression"] = pointer2["ptr:expression"];
+			}
+			
 		});
 
 	});
