@@ -525,7 +525,7 @@ class JsonLd{
         const assertion = {
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
-            "assertedBy": "_:" + this.#evaluator_data.name,
+            "assertedBy": ["_:" + this.#evaluator_data.name],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result":

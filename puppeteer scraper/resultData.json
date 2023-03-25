@@ -70,7 +70,7 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "24/3/2023, 9:56:20",
+    "dct:date": "25/3/2023, 7:34:33",
     "dct:summary": "Some errors where found...",
     "assertors": [
       {
@@ -127,7 +127,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -320,7 +322,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -466,7 +470,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -549,7 +555,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -743,7 +751,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:contrast-minimum",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1073,7 +1083,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:bypass-blocks",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1107,7 +1119,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
-                  "description": "<div class=\"upv-ehu-3-cols columns-3 container\" id=\"main-content\" role=\"main\">                                            Inicio      Inicio        Menú       Abrir/cerrar menú del sitio                                Perfiles Mostrar/ocultar subpáginas                                                    Alumnado                                                                Futuro alumnado                                                                EHUalumni                                                                Profesorado                                                                Personal de Administración y Servicios                                                                Empresas                                      Estudiar Mostrar/ocultar subpáginas                                                    Orientación                                                                Acceso a la universidad                                                                Grados                                                                Másteres y Títulos Propios                                                                Doctorado                                                                eCampus: campus virtual                                      Estructura UPV/EHU Mostrar/ocultar subpáginas                                                    Información institucional                                                                Área de la Rectora                                                                Equipo de Gobierno                                                                Consejo de Gobierno                                                                Aldezle                                                                Centros                                                                Departamentos                                                                Institutos                                      Áreas temáticas Mostrar/ocultar subpáginas                                                    EHUkultura                                                                Becas y Ayudas                                                                Dirección para la Igualdad                                                                Euskera                                                                Plurilingüismo                                                                Sostenibilidad                                                                Proyección universitaria                                                                Relaciones internacionales                                                                Transparencia                                                                EHUkirola                                      Servicios Mostrar/ocultar subpáginas                                                    Biblioteca                                                                Editorial                                                                Oficina de Comunicación                                                                Perfil del contratante                                             ¡Síguenos!TwitterFacebookInstagramLinkedinYoutubeVimeo     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                Becas para estudiantes de otras comunidadesSolicítala del 27 de marzo al 17 de mayo                            Másteres universitariosPreinscripción abierta hasta el 31 de marzo                            ¿Necesitas ayuda?Contacta con la Red de Escucha y Respuesta                            Puertas Abiertas 2023 (17-25 de marzo)            Noticias                                                                                                                         El III Plan de Inclusión finaliza con un balance altamente positivo de sus distintos programas                                                                                                                                                                                             Advierten de la necesidad de uniformizar el sistema de señalización de seguridad de las playas                                                                                                                                                                                             Música e imagen: La reivindicación de las carátulas de discos como objeto artístico                                                                                                                                                                                             Primera bioimpresora 3D de Euskadi para la industria farmacéutica                                                                                                                                                                                             En marcha la Cátedra Jose Migel Barandiaran con el fin de reflexionar y transmitir la cultura e identidad vascas                                                                                                                                                                                             Radio Bilbao concede el Premio a la Excelencia a Hitz Zentroa y a Sara de la Rica                                                                     RSS (Abre una nueva ventana) Ver todas las noticias     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Cathedra                                                                                                                         Sobre la ‘ley mordaza’ (*)                                                                                                                                                                                             Las alumnas gestionan y los alumnos se lucen: el género en los trabajos en grupo                                                                                                                                                                                             Relaciones UE-Colombia: entre el interés comercial y la coherencia de políticas                                                                                                                                                                                             Traducir la obra de Annie Ernaux                                                                                                                                                                                             Cómo prevenir la violencia de pareja desde los centros educativos                                                                     RSS (Abre una nueva ventana) Ver la sección Cathedra     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Imagen del día                                                                                                                                     Que veintiocho años no es nada                                                                                                                 Agenda                                                                                                             Jornada: ‘Kantatzen Duten Herriak 2023’22/03/2023 - 24/03/2023,10:30 - 14:30Leioa-Erandio                                                                                                                                                                             Proyección y coloquio de Tetuán, con Iratxe Fresneda 24/03/2023, 20:00 Bilbao                                                                                                                                                                             Taller: Sormen ola, Joseba Sarrionandia e Iholdi Beristain 25/03/2023, 09:30- 15:00 Bilbao                                                                                                                                                                             II Jornadas de divulgación y encuentro de Vehículos Eléctricos25/03/2023 - 27/03/2023Vitoria-Gasteiz                                                                                                                                                                             Ceremonia de graduación de la promoción 2021/2022 de la Facultad de Economía y Empresa 28/03/2023, 18:00 Bilbao                                                                                                                                                                             Acto de graduación del alumnado de la Facultad de Derecho (Bizkaia) 30/03/2023, 17:30 Bilbao                                                                                                                                                                             Exposición: Honor a las mujeres07/03/2023 - 28/03/2023Donostia / San Sebastián                                                                                                                                                                             El Campus de Álava acoge la muestra ‘Camisetas que enseñan’20/03/2023 - 03/04/2023Vitoria-Gasteiz                                                                 RSS (Abre una nueva ventana) Ver todos los eventos     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                             Transparencia y buen gobierno                         Imprimir banner-portal_transparencia                 Sede electrónica                        Imprimir banner-egoitza-elektronikoa                     Cursos online                         Imprimir Cursos online                 Plan Estratégico 2022-2025                        Imprimir banner Plan Estratégico 2018-2021                 Enlight                        Imprimir Enlight 2021                     Convocatoria LTC abierta                         Imprimir Misiones Euskampus                 Cofund ADAGIO                        Imprimir Cofund ADAGIO                 EHUagenda 2030                        Imprimir EHUagenda 2030                     Contratación administrativa                         Imprimir Kontratazio eta erosketak                 Prácticas y Empleo                        Imprimir banner-enplegua                 ¿Ya eres EHUalumni?                        Imprimir banner-ehualumni                     Noticias de la UPV/EHU                         Imprimir banner-campusa                 Consejo de Estudiantes                        Imprimir banner-ikasle-kontseilua                 Escuela de Doctorado                        Imprimir banner-MDe                 Tesis doctorales                        Imprimir banner-tesiak                 EHUdenda                        Imprimir banner-ehudenda                 Servicio de blogs                        Imprimir banner-ehusfera                 EHUtb portal multimedia                        Imprimir banner-ehutb  </div>",
+                  "description": "<div class=\"upv-ehu-3-cols columns-3 container\" id=\"main-content\" role=\"main\">                                            Inicio      Inicio        Menú       Abrir/cerrar menú del sitio                                Perfiles Mostrar/ocultar subpáginas                                                    Alumnado                                                                Futuro alumnado                                                                EHUalumni                                                                Profesorado                                                                Personal de Administración y Servicios                                                                Empresas                                      Estudiar Mostrar/ocultar subpáginas                                                    Orientación                                                                Acceso a la universidad                                                                Grados                                                                Másteres y Títulos Propios                                                                Doctorado                                                                eCampus: campus virtual                                      Estructura UPV/EHU Mostrar/ocultar subpáginas                                                    Información institucional                                                                Área de la Rectora                                                                Equipo de Gobierno                                                                Consejo de Gobierno                                                                Aldezle                                                                Centros                                                                Departamentos                                                                Institutos                                      Áreas temáticas Mostrar/ocultar subpáginas                                                    EHUkultura                                                                Becas y Ayudas                                                                Dirección para la Igualdad                                                                Euskera                                                                Plurilingüismo                                                                Sostenibilidad                                                                Proyección universitaria                                                                Relaciones internacionales                                                                Transparencia                                                                EHUkirola                                      Servicios Mostrar/ocultar subpáginas                                                    Biblioteca                                                                Editorial                                                                Oficina de Comunicación                                                                Perfil del contratante                                             ¡Síguenos!TwitterFacebookInstagramLinkedinYoutubeVimeo     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                Becas para estudiantes de otras comunidadesSolicítala del 27 de marzo al 17 de mayo                            Másteres universitariosPreinscripción abierta hasta el 31 de marzo                            ¿Necesitas ayuda?Contacta con la Red de Escucha y Respuesta                            Puertas Abiertas 2023 (17-25 de marzo)            Noticias                                                                                                                         Más de 6.000 jóvenes visitan la Universidad del País Vasco durante las Jornadas de Puertas Abiertas                                                                                                                                                                                             El máster Erasmus Mundus REM Plus en Energías Renovables en el Medio Marino, premio ‘Ocean Energy Conference’                                                                                                                                                                                             El III Plan de Inclusión finaliza con un balance altamente positivo de sus distintos programas                                                                                                                                                                                             Advierten de la necesidad de uniformizar el sistema de señalización de seguridad de las playas                                                                                                                                                                                             Música e imagen: La reivindicación de las carátulas de discos como objeto artístico                                                                                                                                                                                             Primera bioimpresora 3D de Euskadi para la industria farmacéutica                                                                     RSS (Abre una nueva ventana) Ver todas las noticias     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Cathedra                                                                                                                         Sobre la 'ley mordaza'                                                                                                                                                                                             Las alumnas gestionan y los alumnos se lucen: el género en los trabajos en grupo                                                                                                                                                                                             Relaciones UE-Colombia: entre el interés comercial y la coherencia de políticas                                                                                                                                                                                             Traducir la obra de Annie Ernaux                                                                                                                                                                                             Cómo prevenir la violencia de pareja desde los centros educativos                                                                     RSS (Abre una nueva ventana) Ver la sección Cathedra     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Imagen del día                                                                                                                                     Que veintiocho años no es nada                                                                                                                 Agenda                                                                                                             Jornada: ‘Kantatzen Duten Herriak 2023’22/03/2023 - 24/03/2023,10:30 - 14:30Leioa-Erandio                                                                                                                                                                             Proyección y coloquio de Tetuán, con Iratxe Fresneda 24/03/2023, 20:00 Bilbao                                                                                                                                                                             Taller: Sormen ola, Joseba Sarrionandia e Iholdi Beristain 25/03/2023, 09:30- 15:00 Bilbao                                                                                                                                                                             II Jornadas de divulgación y encuentro de Vehículos Eléctricos25/03/2023 - 27/03/2023Vitoria-Gasteiz                                                                                                                                                                             Ceremonia de graduación de la promoción 2021/2022 de la Facultad de Economía y Empresa 28/03/2023, 18:00 Bilbao                                                                                                                                                                             Charla: 'Irulegiko eskua: indusketa arkeologiko baten kronika' 29/03/2023, 12:00Leioa-Erandio                                                                                                                                                                             Acto de graduación del alumnado de la Facultad de Derecho (Bizkaia) 30/03/2023, 17:30 Bilbao                                                                                                                                                                             Exposición: Honor a las mujeres07/03/2023 - 28/03/2023Donostia / San Sebastián                                                                                                                                                                             El Campus de Álava acoge la muestra ‘Camisetas que enseñan’20/03/2023 - 03/04/2023Vitoria-Gasteiz                                                                 RSS (Abre una nueva ventana) Ver todos los eventos     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                             Transparencia y buen gobierno                         Imprimir banner-portal_transparencia                 Sede electrónica                        Imprimir banner-egoitza-elektronikoa                     Cursos online                         Imprimir Cursos online                 Plan Estratégico 2022-2025                        Imprimir banner Plan Estratégico 2018-2021                 Enlight                        Imprimir Enlight 2021                     Convocatoria LTC abierta                         Imprimir Misiones Euskampus                 Cofund ADAGIO                        Imprimir Cofund ADAGIO                 EHUagenda 2030                        Imprimir EHUagenda 2030                     Contratación administrativa                         Imprimir Kontratazio eta erosketak                 Prácticas y Empleo                        Imprimir banner-enplegua                 ¿Ya eres EHUalumni?                        Imprimir banner-ehualumni                     Noticias de la UPV/EHU                         Imprimir banner-campusa                 Consejo de Estudiantes                        Imprimir banner-ikasle-kontseilua                 Escuela de Doctorado                        Imprimir banner-MDe                 Tesis doctorales                        Imprimir banner-tesiak                 EHUdenda                        Imprimir banner-ehudenda                 Servicio de blogs                        Imprimir banner-ehusfera                 EHUtb portal multimedia                        Imprimir banner-ehutb  </div>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
               ]
@@ -1130,7 +1142,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:page-titled",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1178,7 +1192,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1319,7 +1335,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:link-purpose-link-only",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1402,7 +1420,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:link-purpose-link-only",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1459,7 +1479,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:section-headings",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1622,7 +1644,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:language-of-page",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1725,7 +1749,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:on-input",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1816,7 +1842,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:labels-or-instructions",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1907,7 +1935,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:parsing",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -1933,7 +1963,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:name-role-value",
-            "assertedBy": "_:AccessMonitor",
+            "assertedBy": [
+              "_:AccessMonitor"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2051,7 +2083,7 @@
     "@language": "en",
     "title": "Accessibility Evaluation Report for ehu.eus website",
     "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-    "dct:date": "24/3/2023, 9:56:20",
+    "dct:date": "25/3/2023, 7:34:33",
     "dct:summary": "Some errors where found...",
     "assertors": [
       {
@@ -2108,7 +2140,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2141,7 +2175,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9148, Column 183",
+                  "ptr:expression": "Line 9225, Column 183",
                   "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -2151,7 +2185,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:non-text-content",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2287,7 +2323,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2310,7 +2348,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:info-and-relationships",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2423,7 +2463,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10708, Column 5",
+                  "ptr:expression": "Line 10785, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -2433,7 +2473,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10958, Column 5",
+                  "ptr:expression": "Line 11035, Column 5",
                   "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -2443,7 +2483,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11460, Column 5",
+                  "ptr:expression": "Line 11537, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -2453,7 +2493,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11710, Column 5",
+                  "ptr:expression": "Line 11787, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -2463,7 +2503,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12462, Column 5",
+                  "ptr:expression": "Line 12539, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -2498,7 +2538,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:sensory-characteristics",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2608,7 +2650,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:use-of-color",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2678,7 +2722,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:images-of-text",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2715,7 +2761,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:contrast-enhanced",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2829,7 +2877,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:keyboard",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -2965,7 +3015,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:three-flashes-or-below-threshold",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3024,7 +3076,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:bypass-blocks",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3071,7 +3125,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:page-titled",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3174,7 +3230,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9148, Column 183",
+                  "ptr:expression": "Line 9225, Column 183",
                   "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3184,7 +3240,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9704, Column 5",
+                  "ptr:expression": "Line 9781, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3194,7 +3250,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9956, Column 5",
+                  "ptr:expression": "Line 10033, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa28400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3204,7 +3260,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10206, Column 5",
+                  "ptr:expression": "Line 10283, Column 5",
                   "description": "<img src=\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3214,7 +3270,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10458, Column 5",
+                  "ptr:expression": "Line 10535, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3224,7 +3280,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10708, Column 5",
+                  "ptr:expression": "Line 10785, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3234,7 +3290,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10958, Column 5",
+                  "ptr:expression": "Line 11035, Column 5",
                   "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3244,7 +3300,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11210, Column 5",
+                  "ptr:expression": "Line 11287, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3254,7 +3310,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11460, Column 5",
+                  "ptr:expression": "Line 11537, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3264,7 +3320,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11710, Column 5",
+                  "ptr:expression": "Line 11787, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3274,7 +3330,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11962, Column 5",
+                  "ptr:expression": "Line 12039, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3284,7 +3340,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12212, Column 5",
+                  "ptr:expression": "Line 12289, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=149494154500 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3294,7 +3350,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12462, Column 5",
+                  "ptr:expression": "Line 12539, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3304,7 +3360,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12714, Column 5",
+                  "ptr:expression": "Line 12791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c460 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3314,7 +3370,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12964, Column 5",
+                  "ptr:expression": "Line 13041, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3324,7 +3380,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13214, Column 5",
+                  "ptr:expression": "Line 13291, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=141268 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3334,7 +3390,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13464, Column 5",
+                  "ptr:expression": "Line 13541, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=142236880400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3344,7 +3400,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13714, Column 5",
+                  "ptr:expression": "Line 13791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=14430069410 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3354,7 +3410,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13964, Column 5",
+                  "ptr:expression": "Line 14041, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"  ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -3389,7 +3445,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:link-purpose-in-context",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3412,7 +3470,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14155, Column 103",
+                  "ptr:expression": "Line 14232, Column 103",
                   "description": "<input hidden type=\"submit\"/>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -3436,7 +3494,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:multiple-ways",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3500,7 +3560,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 599, Column 1",
-                  "description": "<script src=\"/o/js_loader_config?t=1679579584921\" type=\"text/javascript\"></script>",
+                  "description": "<script src=\"/o/js_loader_config?t=1679569530133\" type=\"text/javascript\"></script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -3540,7 +3600,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 609, Column 2",
-                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679579599478\" type=\"text/javascript ...",
+                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679569541868\" type=\"text/javascript ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -3579,7 +3639,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 1093, Column 1",
+                  "ptr:expression": "Line 1075, Column 1",
                   "description": "<script data-senna-track=\"temporary\" type=\"text/javascript\">\n\tif (window.Analytics) {\n\t\twindow._com_ ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3649,7 +3709,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9182, Column 1",
+                  "ptr:expression": "Line 9259, Column 1",
                   "description": "<script>\n    if($(\".information-detail__body h2\").length==0){\n        var element=$(\".informacion-ad ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3659,7 +3719,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14352, Column 1",
+                  "ptr:expression": "Line 14429, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\n\t\t\n\n\t\t\t\n\n\t\t\t\n\t\t\n\t\n\n\tLiferay.BrowserSelectors.run();\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3669,7 +3729,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14381, Column 1",
+                  "ptr:expression": "Line 14458, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\n\t\t\n\n\t\tLiferay.currentURL = '\\x2fes\\x2fhome';\n\t\tLifera ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3679,7 +3739,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14398, Column 2",
+                  "ptr:expression": "Line 14475, Column 2",
                   "description": "<script type=\"text/javascript\">\n\t\t// <![CDATA[\n\t\t\t\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t\n\t\t// ]]>\n\t\n\n\n\n\n\n\n\n</script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3689,7 +3749,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14429, Column 1",
+                  "ptr:expression": "Line 14506, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\t\t\t\t\t\t\tfunction _com_liferay_asset_publisher_web_por ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3699,7 +3759,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15157, Column 1",
+                  "ptr:expression": "Line 15234, Column 1",
                   "description": "<script src=\"https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;lang ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3709,7 +3769,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15162, Column 1",
+                  "ptr:expression": "Line 15239, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\t\tAUI().use(\n\t\t\t'aui-base',\n\t\t\tfunction(A) {\n\t\t\t\tvar f ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3719,7 +3779,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15175, Column 10",
+                  "ptr:expression": "Line 15252, Column 10",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\nLiferay.Loader.require('frontend-js-tooltip-support-web ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -3743,7 +3803,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:headings-and-labels",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -3826,7 +3888,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9704, Column 5",
+                  "ptr:expression": "Line 9781, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3836,7 +3898,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9956, Column 5",
+                  "ptr:expression": "Line 10033, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa28400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3846,7 +3908,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10206, Column 5",
+                  "ptr:expression": "Line 10283, Column 5",
                   "description": "<img src=\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3856,7 +3918,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10458, Column 5",
+                  "ptr:expression": "Line 10535, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3866,7 +3928,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10708, Column 5",
+                  "ptr:expression": "Line 10785, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3876,7 +3938,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10958, Column 5",
+                  "ptr:expression": "Line 11035, Column 5",
                   "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3886,7 +3948,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11210, Column 5",
+                  "ptr:expression": "Line 11287, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3896,7 +3958,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11460, Column 5",
+                  "ptr:expression": "Line 11537, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3906,7 +3968,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11710, Column 5",
+                  "ptr:expression": "Line 11787, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3916,7 +3978,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11962, Column 5",
+                  "ptr:expression": "Line 12039, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3926,7 +3988,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12212, Column 5",
+                  "ptr:expression": "Line 12289, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=149494154500 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3936,7 +3998,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12462, Column 5",
+                  "ptr:expression": "Line 12539, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3946,7 +4008,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12714, Column 5",
+                  "ptr:expression": "Line 12791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c460 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3956,7 +4018,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12964, Column 5",
+                  "ptr:expression": "Line 13041, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3966,7 +4028,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13214, Column 5",
+                  "ptr:expression": "Line 13291, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=141268 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3976,7 +4038,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13464, Column 5",
+                  "ptr:expression": "Line 13541, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=142236880400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3986,7 +4048,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13714, Column 5",
+                  "ptr:expression": "Line 13791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=14430069410 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -3996,7 +4058,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13964, Column 5",
+                  "ptr:expression": "Line 14041, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"  ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -4031,7 +4093,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:location",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -4134,7 +4198,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9148, Column 183",
+                  "ptr:expression": "Line 9225, Column 183",
                   "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4144,7 +4208,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9704, Column 5",
+                  "ptr:expression": "Line 9781, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4154,7 +4218,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9956, Column 5",
+                  "ptr:expression": "Line 10033, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa28400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4164,7 +4228,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10206, Column 5",
+                  "ptr:expression": "Line 10283, Column 5",
                   "description": "<img src=\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4174,7 +4238,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10458, Column 5",
+                  "ptr:expression": "Line 10535, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4184,7 +4248,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10708, Column 5",
+                  "ptr:expression": "Line 10785, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4194,7 +4258,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10958, Column 5",
+                  "ptr:expression": "Line 11035, Column 5",
                   "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4204,7 +4268,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11210, Column 5",
+                  "ptr:expression": "Line 11287, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4214,7 +4278,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11460, Column 5",
+                  "ptr:expression": "Line 11537, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4224,7 +4288,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11710, Column 5",
+                  "ptr:expression": "Line 11787, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4234,7 +4298,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11962, Column 5",
+                  "ptr:expression": "Line 12039, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5? ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4244,7 +4308,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12212, Column 5",
+                  "ptr:expression": "Line 12289, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=149494154500 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4254,7 +4318,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12462, Column 5",
+                  "ptr:expression": "Line 12539, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4264,7 +4328,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12714, Column 5",
+                  "ptr:expression": "Line 12791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c460 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4274,7 +4338,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12964, Column 5",
+                  "ptr:expression": "Line 13041, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4284,7 +4348,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13214, Column 5",
+                  "ptr:expression": "Line 13291, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=141268 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4294,7 +4358,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13464, Column 5",
+                  "ptr:expression": "Line 13541, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=142236880400 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4304,7 +4368,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13714, Column 5",
+                  "ptr:expression": "Line 13791, Column 5",
                   "description": "<img src=\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=14430069410 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4314,7 +4378,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13964, Column 5",
+                  "ptr:expression": "Line 14041, Column 5",
                   "description": "<img src=\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"  ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -4448,7 +4512,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:unusual-words",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -4512,7 +4578,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 599, Column 1",
-                  "description": "<script src=\"/o/js_loader_config?t=1679579584921\" type=\"text/javascript\"></script>",
+                  "description": "<script src=\"/o/js_loader_config?t=1679569530133\" type=\"text/javascript\"></script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -4552,7 +4618,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 609, Column 2",
-                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679579599478\" type=\"text/javascript ...",
+                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679569541868\" type=\"text/javascript ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -4591,7 +4657,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 1093, Column 1",
+                  "ptr:expression": "Line 1075, Column 1",
                   "description": "<script data-senna-track=\"temporary\" type=\"text/javascript\">\n\tif (window.Analytics) {\n\t\twindow._com_ ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4661,7 +4727,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9182, Column 1",
+                  "ptr:expression": "Line 9259, Column 1",
                   "description": "<script>\n    if($(\".information-detail__body h2\").length==0){\n        var element=$(\".informacion-ad ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4671,7 +4737,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14352, Column 1",
+                  "ptr:expression": "Line 14429, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\n\t\t\n\n\t\t\t\n\n\t\t\t\n\t\t\n\t\n\n\tLiferay.BrowserSelectors.run();\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4681,7 +4747,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14381, Column 1",
+                  "ptr:expression": "Line 14458, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\n\t\t\n\n\t\tLiferay.currentURL = '\\x2fes\\x2fhome';\n\t\tLifera ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4691,7 +4757,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14398, Column 2",
+                  "ptr:expression": "Line 14475, Column 2",
                   "description": "<script type=\"text/javascript\">\n\t\t// <![CDATA[\n\t\t\t\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t\n\t\t// ]]>\n\t\n\n\n\n\n\n\n\n</script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4701,7 +4767,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14429, Column 1",
+                  "ptr:expression": "Line 14506, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\t\t\t\t\t\t\tfunction _com_liferay_asset_publisher_web_por ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4711,7 +4777,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15157, Column 1",
+                  "ptr:expression": "Line 15234, Column 1",
                   "description": "<script src=\"https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;lang ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4721,7 +4787,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15162, Column 1",
+                  "ptr:expression": "Line 15239, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\t\tAUI().use(\n\t\t\t'aui-base',\n\t\t\tfunction(A) {\n\t\t\t\tvar f ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4731,7 +4797,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15175, Column 10",
+                  "ptr:expression": "Line 15252, Column 10",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\nLiferay.Loader.require('frontend-js-tooltip-support-web ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -4755,7 +4821,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:abbreviations",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -4819,7 +4887,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 599, Column 1",
-                  "description": "<script src=\"/o/js_loader_config?t=1679579584921\" type=\"text/javascript\"></script>",
+                  "description": "<script src=\"/o/js_loader_config?t=1679569530133\" type=\"text/javascript\"></script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -4859,7 +4927,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 609, Column 2",
-                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679579599478\" type=\"text/javascript ...",
+                  "description": "<script data-senna-track=\"temporary\" src=\"/o/js_bundle_config?t=1679569541868\" type=\"text/javascript ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -4898,7 +4966,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 1093, Column 1",
+                  "ptr:expression": "Line 1075, Column 1",
                   "description": "<script data-senna-track=\"temporary\" type=\"text/javascript\">\n\tif (window.Analytics) {\n\t\twindow._com_ ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4968,7 +5036,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9182, Column 1",
+                  "ptr:expression": "Line 9259, Column 1",
                   "description": "<script>\n    if($(\".information-detail__body h2\").length==0){\n        var element=$(\".informacion-ad ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4978,7 +5046,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14352, Column 1",
+                  "ptr:expression": "Line 14429, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\n\t\t\n\n\t\t\t\n\n\t\t\t\n\t\t\n\t\n\n\tLiferay.BrowserSelectors.run();\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4988,7 +5056,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14381, Column 1",
+                  "ptr:expression": "Line 14458, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\n\t\t\n\n\t\tLiferay.currentURL = '\\x2fes\\x2fhome';\n\t\tLifera ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -4998,7 +5066,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14398, Column 2",
+                  "ptr:expression": "Line 14475, Column 2",
                   "description": "<script type=\"text/javascript\">\n\t\t// <![CDATA[\n\t\t\t\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t\n\t\t// ]]>\n\t\n\n\n\n\n\n\n\n</script>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -5008,7 +5076,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14429, Column 1",
+                  "ptr:expression": "Line 14506, Column 1",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\n\n\t\t\t\t\t\t\t\tfunction _com_liferay_asset_publisher_web_por ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -5018,7 +5086,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15157, Column 1",
+                  "ptr:expression": "Line 15234, Column 1",
                   "description": "<script src=\"https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;lang ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -5028,7 +5096,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15162, Column 1",
+                  "ptr:expression": "Line 15239, Column 1",
                   "description": "<script type=\"text/javascript\">\n\t// <![CDATA[\n\t\tAUI().use(\n\t\t\t'aui-base',\n\t\t\tfunction(A) {\n\t\t\t\tvar f ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -5038,7 +5106,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 15175, Column 10",
+                  "ptr:expression": "Line 15252, Column 10",
                   "description": "<script type=\"text/javascript\">\n// <![CDATA[\nLiferay.Loader.require('frontend-js-tooltip-support-web ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -5106,7 +5174,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:consistent-navigation",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -5143,7 +5213,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:consistent-identification",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -5180,7 +5252,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:change-on-request",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -5994,7 +6068,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5612, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/balance-plan-inclusion\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/jornadas-puertas-abiertas-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6004,7 +6078,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5654, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/se%C3%B1alizacion-seguridad-playas\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/master-rem-premio-world-maritime-week-awards\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6014,7 +6088,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5696, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/musica-imagen-reivindicacion-caratulas-discos-objeto-artistico\">\n\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/balance-plan-inclusion\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6024,7 +6098,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5738, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/primera-bioimpresora-3d-de-euskadi-para-la-industria-farmaceutica\" ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/se%C3%B1alizacion-seguridad-playas\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6034,7 +6108,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5780, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/presentacion-catedra-barandiaran-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/musica-imagen-reivindicacion-caratulas-discos-objeto-artistico\">\n\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6044,7 +6118,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5822, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/premios-excelencia\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/primera-bioimpresora-3d-de-euskadi-para-la-industria-farmaceutica\" ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6204,7 +6278,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 8549, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/acto-de-graduacion-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/charla-irulegiko-eskua-indusketa-arkeologiko-baten-kronika-\">\n\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -6214,6 +6288,16 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 8626, Column 10",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/acto-de-graduacion-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t ...",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "_:pointer",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "Line 8703, Column 10",
                   "description": "<a href=\"https://www.ehu.eus/es/-/exposicion-honor-mujeres\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6223,7 +6307,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 8707, Column 10",
+                  "ptr:expression": "Line 8784, Column 10",
                   "description": "<a href=\"https://www.ehu.eus/es/-/el-campus-de-%C3%81lava-acoge-la-muestra-camisetas-que-ense%C3%B1a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6233,7 +6317,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9148, Column 30",
+                  "ptr:expression": "Line 9225, Column 30",
                   "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/r ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6243,7 +6327,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9152, Column 4",
+                  "ptr:expression": "Line 9229, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/campusa/eventos\">Ver todos los eventos</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6253,7 +6337,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9701, Column 4",
+                  "ptr:expression": "Line 9778, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/gardentasun-ataria\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6263,7 +6347,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9953, Column 4",
+                  "ptr:expression": "Line 10030, Column 4",
                   "description": "<a href=\"https://egoitza.ehu.eus/es\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/sede ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6273,7 +6357,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10203, Column 4",
+                  "ptr:expression": "Line 10280, Column 4",
                   "description": "<a href=\"https://www.uik.eus/es/cursos\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/0/banner- ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6283,7 +6367,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10455, Column 4",
+                  "ptr:expression": "Line 10532, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/idazkaritza-nagusia/upv-ehuren-plan-estrategikoa-2022-2025\">\n\t\t     ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6293,7 +6377,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10705, Column 4",
+                  "ptr:expression": "Line 10782, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/enlight/2-maila\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6303,7 +6387,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10955, Column 5",
+                  "ptr:expression": "Line 11032, Column 5",
                   "description": "<a href=\"https://www.euskampus.eus/es/actualidad/abierta-convocatoria-ltc-2023\" title=\"Misiones Eusk ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6313,7 +6397,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11207, Column 4",
+                  "ptr:expression": "Line 11284, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/en/web/cofund-adagio/home\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6323,7 +6407,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11457, Column 4",
+                  "ptr:expression": "Line 11534, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/iraunkortasuna/ehuagenda-2030\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6333,7 +6417,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11707, Column 5",
+                  "ptr:expression": "Line 11784, Column 5",
                   "description": "<a href=\"https://www.ehu.eus/es/web/kontratazioa\" title=\"pagina web de patrimonio y contratación\" t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6343,7 +6427,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11959, Column 4",
+                  "ptr:expression": "Line 12036, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/enplegua\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/ba ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6353,7 +6437,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12209, Column 4",
+                  "ptr:expression": "Line 12286, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ehualumni\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/e ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6363,7 +6447,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12459, Column 4",
+                  "ptr:expression": "Line 12536, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/campusa\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/ ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6373,7 +6457,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12711, Column 4",
+                  "ptr:expression": "Line 12788, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ikasle-kontseilua\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6383,7 +6467,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12961, Column 4",
+                  "ptr:expression": "Line 13038, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/doktorego-eskola\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6393,7 +6477,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13211, Column 4",
+                  "ptr:expression": "Line 13288, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/doktoregoa/tesis-doctoral/tesis-defendidas\">\n\t\t    \n\t\t\t<figure>\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6403,7 +6487,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13461, Column 4",
+                  "ptr:expression": "Line 13538, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/gizartea/ehu-denda\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/52 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6413,7 +6497,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13711, Column 4",
+                  "ptr:expression": "Line 13788, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ehusfera/es/\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/100237 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6423,7 +6507,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13961, Column 4",
+                  "ptr:expression": "Line 14038, Column 4",
                   "description": "<a href=\"http://ehutb.ehu.eus/\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/522485/1339603/ehutb.jp ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6433,7 +6517,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14161, Column 16",
+                  "ptr:expression": "Line 14238, Column 16",
                   "description": "<a href=\"/es/irisgarritasuna\">Accesibilidad</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6443,7 +6527,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14162, Column 13",
+                  "ptr:expression": "Line 14239, Column 13",
                   "description": "<a href=\"/es/lege-oharra\">Información legal</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6453,7 +6537,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14165, Column 13",
+                  "ptr:expression": "Line 14242, Column 13",
                   "description": "<a href=\"/es/web/guest/contact\">Contacto</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6463,7 +6547,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14166, Column 13",
+                  "ptr:expression": "Line 14243, Column 13",
                   "description": "<a href=\"/es/web/guest/sitemap\">Mapa</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -6473,7 +6557,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14167, Column 13",
+                  "ptr:expression": "Line 14244, Column 13",
                   "description": "<a href=\"/es/laguntza\">Ayuda</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -6497,7 +6581,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:error-identification",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -6534,7 +6620,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:labels-or-instructions",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -6557,7 +6645,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:labels-or-instructions",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -6594,7 +6684,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:error-suggestion",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -7448,7 +7540,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5612, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/balance-plan-inclusion\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/jornadas-puertas-abiertas-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7458,7 +7550,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5654, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/se%C3%B1alizacion-seguridad-playas\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/master-rem-premio-world-maritime-week-awards\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7468,7 +7560,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5696, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/musica-imagen-reivindicacion-caratulas-discos-objeto-artistico\">\n\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/balance-plan-inclusion\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7478,7 +7570,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5738, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/primera-bioimpresora-3d-de-euskadi-para-la-industria-farmaceutica\" ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/se%C3%B1alizacion-seguridad-playas\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7488,7 +7580,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5780, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/presentacion-catedra-barandiaran-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/musica-imagen-reivindicacion-caratulas-discos-objeto-artistico\">\n\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7498,7 +7590,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 5822, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/premios-excelencia\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/primera-bioimpresora-3d-de-euskadi-para-la-industria-farmaceutica\" ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7658,7 +7750,7 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 8549, Column 10",
-                  "description": "<a href=\"https://www.ehu.eus/es/-/acto-de-graduacion-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t ...",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/charla-irulegiko-eskua-indusketa-arkeologiko-baten-kronika-\">\n\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
                 {
@@ -7668,6 +7760,16 @@
                     "ptr:XPathPointer"
                   ],
                   "ptr:expression": "Line 8626, Column 10",
+                  "description": "<a href=\"https://www.ehu.eus/es/-/acto-de-graduacion-1\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t ...",
+                  "namespace": "http://www.w3.org/1999/xhtml"
+                },
+                {
+                  "id": "_:pointer",
+                  "type": [
+                    "ptr:groupPointer",
+                    "ptr:XPathPointer"
+                  ],
+                  "ptr:expression": "Line 8703, Column 10",
                   "description": "<a href=\"https://www.ehu.eus/es/-/exposicion-honor-mujeres\">\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7677,7 +7779,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 8707, Column 10",
+                  "ptr:expression": "Line 8784, Column 10",
                   "description": "<a href=\"https://www.ehu.eus/es/-/el-campus-de-%C3%81lava-acoge-la-muestra-camisetas-que-ense%C3%B1a ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7687,7 +7789,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9148, Column 30",
+                  "ptr:expression": "Line 9225, Column 30",
                   "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/r ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7697,7 +7799,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9152, Column 4",
+                  "ptr:expression": "Line 9229, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/campusa/eventos\">Ver todos los eventos</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7707,7 +7809,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9701, Column 4",
+                  "ptr:expression": "Line 9778, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/gardentasun-ataria\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7717,7 +7819,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9786, Column 6",
+                  "ptr:expression": "Line 9863, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7727,7 +7829,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 9953, Column 4",
+                  "ptr:expression": "Line 10030, Column 4",
                   "description": "<a href=\"https://egoitza.ehu.eus/es\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/sede ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7737,7 +7839,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10036, Column 6",
+                  "ptr:expression": "Line 10113, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7747,7 +7849,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10203, Column 4",
+                  "ptr:expression": "Line 10280, Column 4",
                   "description": "<a href=\"https://www.uik.eus/es/cursos\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/0/banner- ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7757,7 +7859,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10288, Column 6",
+                  "ptr:expression": "Line 10365, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7767,7 +7869,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10455, Column 4",
+                  "ptr:expression": "Line 10532, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/idazkaritza-nagusia/upv-ehuren-plan-estrategikoa-2022-2025\">\n\t\t     ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7777,7 +7879,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10538, Column 6",
+                  "ptr:expression": "Line 10615, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7787,7 +7889,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10705, Column 4",
+                  "ptr:expression": "Line 10782, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/enlight/2-maila\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7797,7 +7899,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10788, Column 6",
+                  "ptr:expression": "Line 10865, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7807,7 +7909,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 10955, Column 5",
+                  "ptr:expression": "Line 11032, Column 5",
                   "description": "<a href=\"https://www.euskampus.eus/es/actualidad/abierta-convocatoria-ltc-2023\" title=\"Misiones Eusk ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7817,7 +7919,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11040, Column 6",
+                  "ptr:expression": "Line 11117, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7827,7 +7929,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11207, Column 4",
+                  "ptr:expression": "Line 11284, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/en/web/cofund-adagio/home\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7837,7 +7939,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11290, Column 6",
+                  "ptr:expression": "Line 11367, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7847,7 +7949,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11457, Column 4",
+                  "ptr:expression": "Line 11534, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/iraunkortasuna/ehuagenda-2030\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src= ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7857,7 +7959,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11540, Column 6",
+                  "ptr:expression": "Line 11617, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7867,7 +7969,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11707, Column 5",
+                  "ptr:expression": "Line 11784, Column 5",
                   "description": "<a href=\"https://www.ehu.eus/es/web/kontratazioa\" title=\"pagina web de patrimonio y contratación\" t ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7877,7 +7979,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11792, Column 6",
+                  "ptr:expression": "Line 11869, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7887,7 +7989,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 11959, Column 4",
+                  "ptr:expression": "Line 12036, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/enplegua\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/ba ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7897,7 +7999,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12042, Column 6",
+                  "ptr:expression": "Line 12119, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7907,7 +8009,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12209, Column 4",
+                  "ptr:expression": "Line 12286, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ehualumni\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/e ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7917,7 +8019,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12292, Column 6",
+                  "ptr:expression": "Line 12369, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7927,7 +8029,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12459, Column 4",
+                  "ptr:expression": "Line 12536, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/campusa\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1002378/ ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7937,7 +8039,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12544, Column 6",
+                  "ptr:expression": "Line 12621, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7947,7 +8049,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12711, Column 4",
+                  "ptr:expression": "Line 12788, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ikasle-kontseilua\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7957,7 +8059,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12794, Column 6",
+                  "ptr:expression": "Line 12871, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7967,7 +8069,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 12961, Column 4",
+                  "ptr:expression": "Line 13038, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/doktorego-eskola\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/1 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7977,7 +8079,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13044, Column 6",
+                  "ptr:expression": "Line 13121, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7987,7 +8089,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13211, Column 4",
+                  "ptr:expression": "Line 13288, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/es/web/doktoregoa/tesis-doctoral/tesis-defendidas\">\n\t\t    \n\t\t\t<figure>\n ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -7997,7 +8099,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13294, Column 6",
+                  "ptr:expression": "Line 13371, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8007,7 +8109,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13461, Column 4",
+                  "ptr:expression": "Line 13538, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/web/gizartea/ehu-denda\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/52 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8017,7 +8119,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13544, Column 6",
+                  "ptr:expression": "Line 13621, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8027,7 +8129,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13711, Column 4",
+                  "ptr:expression": "Line 13788, Column 4",
                   "description": "<a href=\"https://www.ehu.eus/ehusfera/es/\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/10136/100237 ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8037,7 +8139,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13794, Column 6",
+                  "ptr:expression": "Line 13871, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8047,7 +8149,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 13961, Column 4",
+                  "ptr:expression": "Line 14038, Column 4",
                   "description": "<a href=\"http://ehutb.ehu.eus/\">\n\t\t    \n\t\t\t<figure>\n\t\t\t\t<img src=\"/documents/522485/1339603/ehutb.jp ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8057,7 +8159,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14044, Column 6",
+                  "ptr:expression": "Line 14121, Column 6",
                   "description": "<a href=\"javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_pri ...",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8067,7 +8169,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14161, Column 16",
+                  "ptr:expression": "Line 14238, Column 16",
                   "description": "<a href=\"/es/irisgarritasuna\">Accesibilidad</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8077,7 +8179,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14162, Column 13",
+                  "ptr:expression": "Line 14239, Column 13",
                   "description": "<a href=\"/es/lege-oharra\">Información legal</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8087,7 +8189,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14165, Column 13",
+                  "ptr:expression": "Line 14242, Column 13",
                   "description": "<a href=\"/es/web/guest/contact\">Contacto</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8097,7 +8199,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14166, Column 13",
+                  "ptr:expression": "Line 14243, Column 13",
                   "description": "<a href=\"/es/web/guest/sitemap\">Mapa</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 },
@@ -8107,7 +8209,7 @@
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                   ],
-                  "ptr:expression": "Line 14167, Column 13",
+                  "ptr:expression": "Line 14244, Column 13",
                   "description": "<a href=\"/es/laguntza\">Ayuda</a>",
                   "namespace": "http://www.w3.org/1999/xhtml"
                 }
@@ -8131,7 +8233,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:error-prevention-legal-financial-data",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {
@@ -8179,7 +8283,9 @@
           {
             "type": "Assertion",
             "testcase": "wcag2:error-prevention-all",
-            "assertedBy": "_:AChecker",
+            "assertedBy": [
+              "_:AChecker"
+            ],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result": {

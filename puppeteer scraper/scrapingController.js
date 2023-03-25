@@ -52,21 +52,82 @@ async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
 		if (err) console.log('Error writing file', err)
 	});
 
-	console.log(results.length);
-	//console.log(results);
-	console.log(results[0].creator["xmlns:name"] + "  ------  " + results[1].creator["xmlns:name"]);
-	/*for(var i = 1; i<results.length; i++){
-		results[0] = merge(results[0], results[i]);
-	}*/
+	for(var i = 1; i<results.length; i++){
+		merge(results[0], results[i]);
+	}
+
+	console.log(results[0]);
 
 	return JSON.stringify(results[0]);
 
 }
 
 function merge(jsonLd1, jsonLd2){
+
 	if(jsonLd2["dct:date"] > jsonLd1["dct:date"]) jsonLd1["dct:date"] = jsonLd2["dct:date"]
+
 	jsonLd1.assertors.push(jsonLd2.assertors[0]);
-	jsonLd1.creator["xmlns:name"] = jsonLd1.creator["xmlns:name"] + " & " + jsonLd2.creator["xmlns:name"];
+
+	jsonLd1.creator["xmlns:name"] += " & " + jsonLd2.creator["xmlns:name"];
+
+	for (var i = 0, assertion1, assertion2; assertion1 = jsonLd1.auditSample[i], assertion2 = jsonLd2.auditSample[i]; i++){
+		
+		if(assertion2.result.outcome === "earl:untested"){ 
+
+			continue; 
+
+		} else if(/^(earl:untested|earl:inapplicable)$/.test(assertion1.result.outcome)){
+
+			assertion1 = assertion2;
+
+		} else {
+
+			mergeFoundCases(assertion1, assertion2);
+
+			if((assertion1.result.outcome === "earl:passed" && assertion2.result.outcome !== "earl:passed") 
+			|| (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
+
+				assertion1.result.outcome = assertion2.result.outcome;
+	
+			}
+
+		}
+
+	}
+
+}
+
+function mergeFoundCases(assertion1, assertion2){
+
+	assertion1.hasPart.forEach(case1 => {
+		
+		assertion2.hasPart.forEach(case2 => {
+		
+			if(case1.result.outcome !== case2.result.outcome) return;
+
+			case2.assertedBy.forEach((assertor)=>{
+				case1.assertedBy.push(assertor);
+			});
+
+			case1.result.description += "\n" + case2.result.description;
+
+			case2.result.locationPointersGroup.forEach((pointer2) => {
+				
+				exists_index = case1.result.locationPointersGroup.findIndex((pointer1) => {
+					return pointer1.description === pointer2.description;
+				});
+
+				if(exists_index === -1){
+					case1.result.locationPointersGroup.push(pointer2);					
+				}else if(pointer2["ptr:expression"].startsWith("//html/body")){
+					case1.result.locationPointersGroup[exists_index]["ptr:expression"] = pointer2["ptr:expression"];
+				}
+				
+			});
+	
+		});
+
+	});
 
 }
 
