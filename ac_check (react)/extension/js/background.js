@@ -40,7 +40,7 @@ function main_bk(){
       if(changeInfo.status == 'complete' && toggle){
         chrome.action.setIcon({path: "/images/icon16.png"});
         chrome.scripting.executeScript({
-          files: ["/js/libraries/a11y_ainspector.js", "/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js', '/js/jquery_listeners.js'],
+          files: ["/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js'],
           target: {tabId: tab.id}
         });
       }
@@ -50,6 +50,8 @@ function main_bk(){
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "openOptionsPage") {
       chrome.runtime.openOptionsPage();
+    } else if(message.action === "evaluateWithA11y"){
+      
     }
   });  
   

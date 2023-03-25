@@ -69,7 +69,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "25/3/2023, 13:33:08",
+  "dct:date": "25/3/2023, 17:31:33",
   "dct:summary": "Some errors where found...",
   "assertors": [
     {
@@ -77,17 +77,11 @@
       "type": "earl:Assertor",
       "xmlns:name": "AccessMonitor",
       "description": "https://accessmonitor.acessibilidade.gov.pt"
-    },
-    {
-      "id": "_:AChecker",
-      "type": "earl:Assertor",
-      "xmlns:name": "AChecker",
-      "description": "https://achecker.achecks.ca/checker/index.php"
     }
   ],
   "creator": {
     "id": "_:assertors",
-    "xmlns:name": "AccessMonitor & AChecker"
+    "xmlns:name": "AccessMonitor"
   },
   "evaluationScope": {
     "website": {
@@ -125,22 +119,21 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
       "hasPart": [
         {
           "type": "Assertion",
           "testcase": "wcag2:non-text-content",
           "assertedBy": [
-            "_:AccessMonitor",
-            "_:AChecker"
+            "_:AccessMonitor"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Alt text does not convey the same information as the image.\".     Line 1490, Column 6: <img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -321,16 +314,6 @@
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
                 "description": "<img src=\"https://www.ehu.eus/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\" alt=\"\">",
                 "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1490, Column 6",
-                "description": "<img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
           }
@@ -365,51 +348,6 @@
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
                 "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:non-text-content",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Image used as anchor is missing valid Alt text.\". \n\nYou can solve it with: \n\n\"Repair: Add Alt text that identifies the purpose or function of the image.\".     Line 6224, Column 184: <img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 6224, Column 184",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 7253, Column 184",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 9225, Column 183",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -524,22 +462,21 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
       "hasPart": [
         {
           "type": "Assertion",
           "testcase": "wcag2:info-and-relationships",
           "assertedBy": [
-            "_:AccessMonitor",
-            "_:AChecker"
+            "_:AccessMonitor"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\n*************@AChecker************* \n\nThe next WARNING was found: \n\n\"p element may be misused (could be a header).\".     Line 4105, Column 8: <p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -609,156 +546,6 @@
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\">Agenda</h2>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4105, Column 8",
-                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4465, Column 8",
-                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tMásteres universitarios\n\t\t\t\t\t\t\t</strong></p>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4825, Column 8",
-                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\t¿Necesitas ayuda?\n\t\t\t\t\t\t\t</strong></p>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 5185, Column 8",
-                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tPuertas Abiertas 2023 (17-25 de marzo)\n\t\t\t\t\t\t\t</strong></p>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 7727, Column 17",
-                "description": "<p class=\"card-title\"><strong>Que veintiocho años no es nada</strong></p>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1485, Column 6",
-                "description": "<img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1490, Column 6",
-                "description": "<img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4463, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/7516423/Web+642x276+V2.jpg/ce9486ec-32ce-a4ec-f43d-4edd3d4f ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4823, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/42192610/red-escucha_dest.jpg/a79ed2f5-7004-58cd-548d-79f04 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 5183, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/7516423/puertas-abiertas-2023_dest.jpg/5a65b230-7800-c111-2 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 10785, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11035, Column 5",
-                "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11537, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11787, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 12539, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -864,31 +651,6 @@
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\">Agenda</h2>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:info-and-relationships",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"input element, type of \"text\", has no text in label.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the input element's associated label that describes the purpose or function of the control.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 2001, Column 5",
-                "description": "<input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1321,14 +1083,13 @@
           "type": "Assertion",
           "testcase": "wcag2:bypass-blocks",
           "assertedBy": [
-            "_:AccessMonitor",
-            "_:AChecker"
+            "_:AccessMonitor"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"select element's label is not positioned close to control.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1359,26 +1120,6 @@
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
                 "description": "<div class=\"upv-ehu-3-cols columns-3 container\" id=\"main-content\" role=\"main\">                                            Inicio      Inicio        Menú       Abrir/cerrar menú del sitio                                Perfiles Mostrar/ocultar subpáginas                                                    Alumnado                                                                Futuro alumnado                                                                EHUalumni                                                                Profesorado                                                                Personal de Administración y Servicios                                                                Empresas                                      Estudiar Mostrar/ocultar subpáginas                                                    Orientación                                                                Acceso a la universidad                                                                Grados                                                                Másteres y Títulos Propios                                                                Doctorado                                                                eCampus: campus virtual                                      Estructura UPV/EHU Mostrar/ocultar subpáginas                                                    Información institucional                                                                Área de la Rectora                                                                Equipo de Gobierno                                                                Consejo de Gobierno                                                                Aldezle                                                                Centros                                                                Departamentos                                                                Institutos                                      Áreas temáticas Mostrar/ocultar subpáginas                                                    EHUkultura                                                                Becas y Ayudas                                                                Dirección para la Igualdad                                                                Euskera                                                                Plurilingüismo                                                                Sostenibilidad                                                                Proyección universitaria                                                                Relaciones internacionales                                                                Transparencia                                                                EHUkirola                                      Servicios Mostrar/ocultar subpáginas                                                    Biblioteca                                                                Editorial                                                                Oficina de Comunicación                                                                Perfil del contratante                                             ¡Síguenos!TwitterFacebookInstagramLinkedinYoutubeVimeo     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                Becas para estudiantes de otras comunidadesSolicítala del 27 de marzo al 17 de mayo                            Másteres universitariosPreinscripción abierta hasta el 31 de marzo                            ¿Necesitas ayuda?Contacta con la Red de Escucha y Respuesta                            Puertas Abiertas 2023 (17-25 de marzo)            Noticias                                                                                                                         Más de 6.000 jóvenes visitan la Universidad del País Vasco durante las Jornadas de Puertas Abiertas                                                                                                                                                                                             El máster Erasmus Mundus REM Plus en Energías Renovables en el Medio Marino, premio ‘Ocean Energy Conference’                                                                                                                                                                                             El III Plan de Inclusión finaliza con un balance altamente positivo de sus distintos programas                                                                                                                                                                                             Advierten de la necesidad de uniformizar el sistema de señalización de seguridad de las playas                                                                                                                                                                                             Música e imagen: La reivindicación de las carátulas de discos como objeto artístico                                                                                                                                                                                             Primera bioimpresora 3D de Euskadi para la industria farmacéutica                                                                     RSS (Abre una nueva ventana) Ver todas las noticias     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Cathedra                                                                                                                         Sobre la 'ley mordaza'                                                                                                                                                                                             Las alumnas gestionan y los alumnos se lucen: el género en los trabajos en grupo                                                                                                                                                                                             Relaciones UE-Colombia: entre el interés comercial y la coherencia de políticas                                                                                                                                                                                             Traducir la obra de Annie Ernaux                                                                                                                                                                                             Cómo prevenir la violencia de pareja desde los centros educativos                                                                     RSS (Abre una nueva ventana) Ver la sección Cathedra     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }Imagen del día                                                                                                                                     Que veintiocho años no es nada                                                                                                                 Agenda                                                                                                             Jornada: ‘Kantatzen Duten Herriak 2023’22/03/2023 - 24/03/2023,10:30 - 14:30Leioa-Erandio                                                                                                                                                                             Proyección y coloquio de Tetuán, con Iratxe Fresneda 24/03/2023, 20:00 Bilbao                                                                                                                                                                             Taller: Sormen ola, Joseba Sarrionandia e Iholdi Beristain 25/03/2023, 09:30- 15:00 Bilbao                                                                                                                                                                             II Jornadas de divulgación y encuentro de Vehículos Eléctricos25/03/2023 - 27/03/2023Vitoria-Gasteiz                                                                                                                                                                             Ceremonia de graduación de la promoción 2021/2022 de la Facultad de Economía y Empresa 28/03/2023, 18:00 Bilbao                                                                                                                                                                             Charla: 'Irulegiko eskua: indusketa arkeologiko baten kronika' 29/03/2023, 12:00Leioa-Erandio                                                                                                                                                                             Acto de graduación del alumnado de la Facultad de Derecho (Bizkaia) 30/03/2023, 17:30 Bilbao                                                                                                                                                                             Exposición: Honor a las mujeres07/03/2023 - 28/03/2023Donostia / San Sebastián                                                                                                                                                                             El Campus de Álava acoge la muestra ‘Camisetas que enseñan’20/03/2023 - 03/04/2023Vitoria-Gasteiz                                                                 RSS (Abre una nueva ventana) Ver todos los eventos     if($(\".information-detail__body h2\").length==0){        var element=$(\".informacion-adicional__title h3\").html();        $(\".informacion-adicional__title h3\").remove();        $(\".informacion-adicional__title\").prepend(\"<h2>\"+element+\"</h2>\");    }                             Transparencia y buen gobierno                         Imprimir banner-portal_transparencia                 Sede electrónica                        Imprimir banner-egoitza-elektronikoa                     Cursos online                         Imprimir Cursos online                 Plan Estratégico 2022-2025                        Imprimir banner Plan Estratégico 2018-2021                 Enlight                        Imprimir Enlight 2021                     Convocatoria LTC abierta                         Imprimir Misiones Euskampus                 Cofund ADAGIO                        Imprimir Cofund ADAGIO                 EHUagenda 2030                        Imprimir EHUagenda 2030                     Contratación administrativa                         Imprimir Kontratazio eta erosketak                 Prácticas y Empleo                        Imprimir banner-enplegua                 ¿Ya eres EHUalumni?                        Imprimir banner-ehualumni                     Noticias de la UPV/EHU                         Imprimir banner-campusa                 Consejo de Estudiantes                        Imprimir banner-ikasle-kontseilua                 Escuela de Doctorado                        Imprimir banner-MDe                 Tesis doctorales                        Imprimir banner-tesiak                 EHUdenda                        Imprimir banner-ehudenda                 Servicio de blogs                        Imprimir banner-ehusfera                 EHUtb portal multimedia                        Imprimir banner-ehutb  </div>",
                 "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 2091, Column 2",
-                "description": "<select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1106, Column 1",
-                "description": "<body class=\" controls-visible  yui3-skin-sam guest-site signed-out public-page site es_ES\">\n\n\t<no ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
           }
@@ -1393,8 +1134,8 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:passed",
+        "description": "No violations found"
       },
       "hasPart": [
         {
@@ -1417,301 +1158,6 @@
                 ],
                 "ptr:expression": "//html/head[1]/title[7]",
                 "description": "<title>Inicio - UPV/EHU</title>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:page-titled",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Image may contain text with poor contrast.\".     Line 1485, Column 6: <img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1485, Column 6",
-                "description": "<img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 1490, Column 6",
-                "description": "<img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4103, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4c ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4463, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/7516423/Web+642x276+V2.jpg/ce9486ec-32ce-a4ec-f43d-4edd3d4f ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4823, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/42192610/red-escucha_dest.jpg/a79ed2f5-7004-58cd-548d-79f04 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 5183, Column 7",
-                "description": "<img class=\"col-4\" src=\"/documents/10136/7516423/puertas-abiertas-2023_dest.jpg/5a65b230-7800-c111-2 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 6224, Column 184",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 7253, Column 184",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 7725, Column 13",
-                "description": "<img class=\"col-4\" alt='' src='/documents/10136/42006033/Iratxe-Fresneda-dest.jpg/d3478808-7fbb-ab68 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 9225, Column 183",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 9781, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 10033, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa28400 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 10283, Column 5",
-                "description": "<img src=\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c? ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 10535, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 10785, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=16 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11035, Column 5",
-                "description": "<img src=\"/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t= ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11287, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11537, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca? ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 11787, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 12039, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5? ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 12289, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=149494154500 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 12539, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 12791, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c460 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 13041, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 13291, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=141268 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 13541, Column 5",
-                "description": "<img src=\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=142236880400 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 13791, Column 5",
-                "description": "<img src=\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=14430069410 ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 14041, Column 5",
-                "description": "<img src=\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"  ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1822,41 +1268,6 @@
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
                 "description": "<a class=\"vimeo\" href=\"https://vimeo.com/UPVEHU/ALBUMS\" target=\"blank\" title=\"Vimeo\">Vimeo</a>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:link-purpose-in-context",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"input possibly using color alone.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 2001, Column 5",
-                "description": "<input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 14232, Column 103",
-                "description": "<input hidden type=\"submit\"/>",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -2423,8 +1834,8 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:passed",
+        "description": "No violations found"
       },
       "hasPart": [
         {
@@ -2457,56 +1868,6 @@
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
                 "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\">TodoEste sitio web</select>",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:labels-or-instructions",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Label text is empty for select element.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the label associated with the select element.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 2091, Column 2",
-                "description": "<select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:labels-or-instructions",
-          "assertedBy": [
-            "_:AChecker"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"title might not describe the document.\".     Line 123, Column 2: <title>Inicio - UPV/EHU</title>\"\n\n",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 123, Column 2",
-                "description": "<title>Inicio - UPV/EHU</title>",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]

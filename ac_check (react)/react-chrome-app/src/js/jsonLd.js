@@ -6,8 +6,7 @@ class JsonLd{
     #assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
-        "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
-        "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
+        "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
     };
     #outcomes = {
         "PASS": { outcome: "earl:passed", description: "No violations found" },

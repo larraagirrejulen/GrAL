@@ -2,7 +2,7 @@
 import './css/ResultsTable.css';
 
 import { useState } from "react";
-import { getArrowSrc, getArrowUpSrc } from './js/extension_images.js';
+import { getArrowSrc, getArrowUpSrc } from './js/extensionUtils.js';
 
 
 

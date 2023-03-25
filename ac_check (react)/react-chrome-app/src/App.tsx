@@ -6,8 +6,9 @@ import './css/ResultSection.css';
 
 
 import { useState, useEffect} from "react";
-import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc } from './js/extension_images.js';
-import { loadStoredReport, openOptionsPage, getEvaluation, downloadCurrentReport, uploadReport, clearStoredEvaluationData} from './js/utils.js';
+import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
+import { getEvaluation} from './js/evaluating.js';
+import { removeStoredReport, loadStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
@@ -41,8 +42,6 @@ export default function App() {
       </div>
 
       <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
-      
-      <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
     </div>
 
   </>);
@@ -78,8 +77,8 @@ function MainSections({dropdownsDefaultState}:any){
   }
 
   useEffect(() => {
-    //const loadedResults = loadStoredReport();
-    //handleResultsChange(loadedResults);
+    const loadedResults = loadStoredReport();
+    handleResultsChange(loadedResults);
   }, [])
 
   return(<>
@@ -148,9 +147,9 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
         <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
-        <label id="btn_clear_data" className="button secondary" onClick={clearStoredEvaluationData}>Clear stored data</label><br/>
-        <label id="btn_download" className="button primary" onClick={()=>downloadCurrentReport(activeLevels)}>Download report</label><br/>
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadReport(event)} />Upload Report</label>
+        <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
+        <label id="btn_download" className="button primary" onClick={()=>downloadStoredReport(activeLevels)}>Download report</label><br/>
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadAndStoreReport(event)} />Upload Report</label>
       </div>
     
   </div> );
