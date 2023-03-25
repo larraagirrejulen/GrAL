@@ -432,7 +432,7 @@ class JsonLd{
                 },
                 "conformanceTarget": "wai:WCAG2AAA-Conformance",
                 "accessibilitySupportBaseline": "Google Chrome latest version",
-                "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
+                "additionalEvalRequirement": "The report will include XPath expressions or line & column locations as pointers to the cases found for each result"
             },
     
             "structuredSample":
@@ -469,7 +469,7 @@ class JsonLd{
         };
     }
 
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, hash = null, html = null){
+    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
 
         const criteriaId = this.#successCriterias[criteriaNumber].id
 
@@ -485,7 +485,7 @@ class JsonLd{
 
             if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
                 pageAssertion.result.locationPointersGroup.push({
-                    "id": "data:sha256:" + hash,
+                    "id": "_:pointer",
                     "type": [
                         "ptr:groupPointer",
                         "ptr:XPathPointer"
@@ -531,14 +531,14 @@ class JsonLd{
             "result":
             {
                 "outcome": resultOutcome,
-                "description": criteriaDescription,
+                "description": "*************@" + this.#evaluator_data.name + "************* \n\n" + criteriaDescription,
                 "locationPointersGroup": []
             }
         }
 
         if(path != null){
             assertion.result.locationPointersGroup.push({
-                "id": "data:sha256:" + hash,
+                "id": "_:pointer",
                 "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"

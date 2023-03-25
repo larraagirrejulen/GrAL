@@ -34,7 +34,7 @@ export function loadStoredReport(){
         if (json != null && main != null){
             return {
                 resultsSummary: JSON.parse(jsonTabla), 
-                resultsContent: ""
+                resultsContent: JSON.parse(main)
             };
         } else{
             return {
@@ -162,7 +162,13 @@ export function downloadCurrentReport(activeLevels){
     json.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
 
     /*var interestedSamples = json.auditSample.filter(sample => activeLevels.includes(sample.conformanceLevel));
-    json.auditSample = interestedSamples;*/
+    json.auditSample = interestedSamples;*/ // Si lo utilizo luego al intentar importar surgen problemas
+
+    json.auditSample.forEach((audit) => {
+        audit.hasPart.forEach((elem) => {
+            elem.result.description = "\n\n----------------------------------\n\n" + elem.result.description;
+        });
+    });
 
     const data = JSON.stringify(json);
     const fileName = json.title + ".json";

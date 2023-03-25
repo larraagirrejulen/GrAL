@@ -69,7 +69,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "25/3/2023, 12:42:56",
+  "dct:date": "25/3/2023, 13:33:08",
   "dct:summary": "Some errors where found...",
   "assertors": [
     {
@@ -101,7 +101,7 @@
     },
     "conformanceTarget": "wai:WCAG2AAA-Conformance",
     "accessibilitySupportBaseline": "Google Chrome latest version",
-    "additionalEvalRequirement": "The report will include XPath expressions as pointers to the cases found for each result"
+    "additionalEvalRequirement": "The report will include XPath expressions or line & column locations as pointers to the cases found for each result"
   },
   "structuredSample": {
     "webpage": [
@@ -140,10 +140,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\nA POTENTIAL PROBLEM was found: \"Alt text does not convey the same information as the image.\".     Line 1490, Column 6: <img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Alt text does not convey the same information as the image.\".     Line 1490, Column 6: <img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:ea56bf27b52d4406fa96c8f82499b3f8a93da492e86f6655a91a17fed66e9da4",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -153,7 +153,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fd2fa7eaca54770f6792065904324e28c027485b3264d4dd3f7ef43a86fea226",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -163,7 +163,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:885715562f4024afdb56d00cbffaa500ddb6c0bf75af0a6172c2884cad635dba",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -173,7 +173,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:67532b0b3a1aa1e6aa94116abc9086655d53e33c9cac2ea6c529effe953ad9f5",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -183,7 +183,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:9d97f956bcb5327ec6d0e430b0640b5d491f0001932f01966f16fe418ba1a96a",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -193,7 +193,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:bf6b279b569b13eff18ce7ea84c3c07e37d0b8959303ba4a23bcae01ab34f533",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -203,7 +203,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:27c165e38a26d73a9f33cfd6f41ac8886a828d38b982028ffc3e9c24554bf963",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -213,7 +213,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:e5be7ad2e8d07f0e0570747d3a11463c2b97196c22d61b2729ead54c67bd3d28",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -223,7 +223,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:7a05d8cb02f6d89959765f2a3f57a013cedd43b76069b4b5a81fd2573d189f24",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -233,7 +233,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:eb40a6e1ed7101166c61121c75e4cb970f21ea721fba0da88f0eacb82e5eee77",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -243,7 +243,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:3b169f6cdadbee9c02529d3773029e40b16bcd8505bae1f74de55781b715a0b1",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -253,7 +253,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:ad2763b794638b686e4c6862ec35920d762a173ec6ed8021ffe1bd7bf93fcf43",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -263,7 +263,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:7a7ff00d3f39c37c4ab383630b5bf808a0ed9d4e83e23319cd201a4c01c53581",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -273,7 +273,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:2faf9b3801d7aad9135ca69fbef60d521a170be60b9f1da99b4fe44ee4892eee",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -283,7 +283,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:65a9805d4e2f8a13b1a5c6c4a578587a33fd17f68cd6cc6e1d2aa0f39d80e545",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -293,7 +293,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:580d8d3b198b8b25f46127f8c095b15d2783148e59b94ce21400a103e27df415",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -303,7 +303,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:7619eed419ad5ceaab3ccbc63c9badf19d441fb30b568f3762e86f7a8ab25caf",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -313,7 +313,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:7a66cdf2c7ed9db2d5d293fc400955e942897c331c6a8c8dd0188489f91c4a58",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -323,7 +323,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:88ae1c476399107480a7a85c600df808eead0da72ec08f0edea56dc62f01877b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -345,10 +345,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
+            "description": "*************@AccessMonitor************* \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:a0f5804c7397cc42e011f0d85ae109e97d1213317d4e24657b2afa9faa600d51",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -358,7 +358,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:f16e8a2b93a525892cde62fae5a083ef8198613133cb2f71c4eb5eeb426edd85",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -380,10 +380,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "The next ERROR was found: \"Image used as anchor is missing valid Alt text.\". You can solve it with: \"Repair: Add Alt text that identifies the purpose or function of the image.\".     Line 6224, Column 184: <img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Image used as anchor is missing valid Alt text.\". \n\nYou can solve it with: \n\n\"Repair: Add Alt text that identifies the purpose or function of the image.\".     Line 6224, Column 184: <img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:2063fbb97665dbd477c3529a7d4f0900550acfea91dc24e4992776d2de5eb52b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -393,7 +393,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:2ef1d3f75bd0efee8874faf01ecbe238e3f19206229a8d412ee507eab5b4e564",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -403,7 +403,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:86ba1285e6b1263e526bb4e00d46d599d58a0259ba97da7bbf1fc52f87a0a677",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -539,10 +539,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\nThe next WARNING was found: \"p element may be misused (could be a header).\".     Line 4105, Column 8: <p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\n*************@AChecker************* \n\nThe next WARNING was found: \n\n\"p element may be misused (could be a header).\".     Line 4105, Column 8: <p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:a1109c86b539067679909847674890d3842e4de26f9005159742e61f47f8f273",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -552,7 +552,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:49952e53fcf6a65c3c43bde3ec05aee1ef71239abf75c2e8ecc29b3957b6d010",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -562,7 +562,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:bbacb6e31a5e028f20e39aa421227c2afe9ff65646db07cebe379bfb0222178d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -572,7 +572,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:83b361ee72afacb8f4733be2fbb8e590ee131e9a8389cd1127858af45529cba4",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -582,7 +582,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:635b05a0c41f414ca5104ed26e51ec70f32569354423bdb2979acc71361e0cd8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -592,7 +592,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:d7a61507c08ea6087df7b943f99665048ee79b3635b79d940caaf9f3c64670bd",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -602,7 +602,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:9e0a887ec28306afd1c760a8bf7a8e9ed0774893f3430c63b73cf9bf15322de8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -612,7 +612,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:74213ddb7b39622636475f9e1adcad1e6e9dd0fb9e404f29bc7b414df627fc33",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -622,7 +622,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:41971faee3b0cc4e9ebb4bb78bb183fd18caa86cb83dccc2c79c8f1d9385ebbe",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -632,7 +632,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:dc0172c145164b86cfc6b6f4c4806306c9766362d34b46365918b175a15d3e95",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -642,7 +642,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:40a3d11475a9d03d225e6b176c91a2e22a75523bb1cbb37ae9f0ee3c72e7b345",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -652,7 +652,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:77946b69033c778aa6fa5c5032bcfba46bc9f0426d4cf9fcae5a8f548101321b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -662,7 +662,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:ccf59af2fc85032c5f72c140316c73c9550a636db5ec8578e060e05b446663bf",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -672,7 +672,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fc4cd5373e4a8b0e8f1a6e9f1cff60638372a836626d395d0e06496b1e5dfb1b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -682,7 +682,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fb13ae2ecebde0d29e3efd0aa96a54ec42d177a376112203bb925ac92b41dc18",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -692,7 +692,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:aaf75602b031a69bb392bb5b69c296c34795f2b98660281dae5f14f331d60b52",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -702,7 +702,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:9f9f819d275e9d2219c57878feebb544008a2de45de7e5b6dea24654b097cfeb",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -712,7 +712,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:b4da58f923b3cabfd45c27964e4413591b4a83376fe38691291a111d11f7f717",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -722,7 +722,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:a893c7e23047101eb4ab7c59395c45aa6b0f5aa5d6f8bf8450eabefe696edf26",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -732,7 +732,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:4109e5bdebe53ee2274b9e1703a08aeed27ed808b48e3dbc0e7803841e831454",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -742,7 +742,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:8d052c13b515e885d813a5b8ee6ace3d778996975df117cde335f0f93b922913",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -752,7 +752,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:712975fab9e6c4fa1e48bf114c58228d037eeeb22407edbb2796d01b0b57decc",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -774,10 +774,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
+            "description": "*************@AccessMonitor************* \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:45076cf6f1caae1cef9df9c2a9041554b2b197b1c48e9ea574f66ead9cd98280",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -787,7 +787,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:ea2655bdc566ecc4ee5a65999bef21e7c935576740c65d276695865f99aae5c6",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -797,7 +797,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:a1109c86b539067679909847674890d3842e4de26f9005159742e61f47f8f273",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -807,7 +807,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:49952e53fcf6a65c3c43bde3ec05aee1ef71239abf75c2e8ecc29b3957b6d010",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -817,7 +817,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:bbacb6e31a5e028f20e39aa421227c2afe9ff65646db07cebe379bfb0222178d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -827,7 +827,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:83b361ee72afacb8f4733be2fbb8e590ee131e9a8389cd1127858af45529cba4",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -837,7 +837,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:635b05a0c41f414ca5104ed26e51ec70f32569354423bdb2979acc71361e0cd8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -847,7 +847,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:d7a61507c08ea6087df7b943f99665048ee79b3635b79d940caaf9f3c64670bd",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -857,7 +857,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:9e0a887ec28306afd1c760a8bf7a8e9ed0774893f3430c63b73cf9bf15322de8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -879,10 +879,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "The next ERROR was found: \"input element, type of \"text\", has no text in label.\". You can solve it with: \"Repair: Add text to the input element's associated label that describes the purpose or function of the control.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"input element, type of \"text\", has no text in label.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the input element's associated label that describes the purpose or function of the control.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:3e1d6771bdebcc2327e5cc1188cb335ac78507606aeec96de007d0dc6f79d271",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -995,10 +995,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
+            "description": "*************@AccessMonitor************* \n\nAccording to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:414d02b38347acf569113218242ed14045da66763ecbaa1797c2c3711e5ffe3d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1008,7 +1008,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:0a026bb3182cf7342889375afcb409404fcf9b543d3e6fec1756ee500c225115",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1018,7 +1018,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:82d8e44807d48cdf5c2bf61639e202fa99a96d99c1cc262274b8fe01b4304dd0",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1028,7 +1028,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:45f6444f41028d3a641abdf38b2c44aa9af6ecb8e03805736c09c44d85e033cb",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1038,7 +1038,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:179aac710d703b142a76afdcf564892b4256aee5c8b0efd1408fe334ac5499b7",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1328,10 +1328,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "Make available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\nA POTENTIAL PROBLEM was found: \"select element's label is not positioned close to control.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"select element's label is not positioned close to control.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:a3ed293bd8203703b888898080f4ee1c26aa1c53d36856c20e7e8b915d3b44b9",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1341,7 +1341,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:a3ed293bd8203703b888898080f4ee1c26aa1c53d36856c20e7e8b915d3b44b9",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1351,7 +1351,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:4dca4bc81818d030fcb508dc97332b71bdb9c15ec4f5e0485fd1338bb23aef2d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1361,7 +1361,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:e46b34d06b52dd25a5b63e96fca4110707ea38270907972db358acfe7b6408d3",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1371,7 +1371,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:dd047e4733e3e3cbfc9c323fe2d7fb41adbd4c40766e858e05cbfee13ddd22fe",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1407,10 +1407,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "Take note that the <title> element should only appear once in the webpage.",
+            "description": "*************@AccessMonitor************* \n\nTake note that the <title> element should only appear once in the webpage.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:063f5debc4336df55ee6f76273bfd12176129f301365fca6171947dcd45f5229",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1432,10 +1432,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "A POTENTIAL PROBLEM was found: \"Image may contain text with poor contrast.\".     Line 1485, Column 6: <img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...\"\n\n",
+            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Image may contain text with poor contrast.\".     Line 1485, Column 6: <img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:600e920a913924e52696434769760b5c9ea96a6e1aa8ace3e7563657bd7a8a80",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1445,7 +1445,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:97a6f7c69055efe8183116d11acadb24d5499d4f2ffd15a06e4b045b47b269d4",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1455,7 +1455,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:69e8a64312342c1d93f3330ae9225f0932060cbffae8cc1dbad3a0b89007bb8b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1465,7 +1465,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:177fff21222259878610fbda5a805c91bb52688e2ebafd6de8cac869ea8671d7",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1475,7 +1475,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:9221b7554a2f810a8b11e8850211a2ab2280fbd8412911fe23eb152e5b8e7d8e",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1485,7 +1485,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:812d525e64c92ce593ab8f904fb3a5d8654ba5fc111cfe65613eda097834c8dc",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1495,7 +1495,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:ea56be11d4d4c68c6f4aca5d0b1cc43f4cd79d3d955c5e86e26c0e813c56e7b2",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1505,7 +1505,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:a2e735cb1c396171e09bbc74eb192e057b0bdf2921ff201e127a5da0f9d41906",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1515,7 +1515,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:685a2ad96ea1fa4204ac6672572cc2bb82155003517cd00d7907dda068d2f511",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1525,7 +1525,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:d57a33b32c304b8667a7659ab539751184fd980076ac776f9e1420b9d4947e65",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1535,7 +1535,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:ac294819c93e7a96f6f716e40505a94019d752a02e18a217b02991a6dcfff714",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1545,7 +1545,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:35998ff2bc1768935e9898e083d44ca745ff26069b1fde407fc2c77e4ae79263",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1555,7 +1555,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:3fab86cf94eaecfd27724f77772cb14f26afb9c57aa10ece8112ed5b16431582",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1565,7 +1565,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:124d15ab211409a101dfdbb96f8513dc206677d1e51cd22bb260342aee69979f",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1575,7 +1575,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:886db9de1c7e2824dcc7d2672a9701c2c1c3c1221ad4c0264446665b3fae7c14",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1585,7 +1585,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:935646fd179807b6a0b28e117c4d2241e4d5199c1aeab5623648cff22fe61623",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1595,7 +1595,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:28b2d6598f05f164c95693d3a59a2a6ad66f37eb566e6bf54e5808d7ee1079af",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1605,7 +1605,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:25834452106869c7376ec2f057ab0b8dc3a0100d64b512df424986e9f9453b6f",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1615,7 +1615,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:87ae44e1e8f0050206f49736666ae9a9bcbc1ff0ab337c2996875652506ab4d5",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1625,7 +1625,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:0066b3d98f05f0eb7c6b9e7b350ed6e0a48f2e07b569d31f5b7f4f8c59faa945",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1635,7 +1635,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:f0d7103791fc3582b0dbeec7a389b25bc862735eb3ead62f31e5860b7959b55a",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1645,7 +1645,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:f8e1405a7309da4e384cd0f1faeda1a168b24e70e0585360fd5cb39db7406e3c",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1655,7 +1655,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:c9ac8df647286699da4257e6bb7d08b1dd5496664bb10a23632a57b62ea43af2",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1665,7 +1665,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:3d919a659a633328517253729b2722fd9ab37922243b3fc2e664035357c56de6",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1675,7 +1675,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:abaa147a79b8cc160dd1bf90491b9280a434d2fb301da55704532b1300463660",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1685,7 +1685,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:a32312b32ecfcc643491cd343d8aefe8af7b23fd04fa393a6d2018896e2317c8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1695,7 +1695,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:6b0a94bbb9785b2e483b55a4e18c5492a969a6d6cae4361081c57fe34625c33c",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1705,7 +1705,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fa71f43da79fb2d336cb114177440577dd6f759fba8a8ceea165801a14a809c8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1752,10 +1752,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
+            "description": "*************@AccessMonitor************* \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:e9448783950f948144d87a8023b67d2f0467e4f043d8223b54fc52e375390f0d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1765,7 +1765,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:2e29ccabaf7ff077103c120302d3df2e7d7489cd3cb0d184f2e73b05b94e1b19",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1775,7 +1775,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:f1d7cfba863478d71d1f5d9f67489c311c782979cb863e0e1ee20c5574ab94cd",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1785,7 +1785,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:93e9b57d59b7eeef3f155d69c2045151ff5cece4105f04c7530a1b2079480afc",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1795,7 +1795,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:81e0e9d54233e84c51967fae043d8e74547e29bfb25b24b4b64864e404c3a529",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1805,7 +1805,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fe9dca6b06ad806d9e4edb84252e82b332391faf48d4c107665063ebe74c3fb7",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1815,7 +1815,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:4dc8e4d9af9bad54ce7bb9f00cd5fc626e43d95221563c241cc44dff001b803d",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1837,10 +1837,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "A POTENTIAL PROBLEM was found: \"input possibly using color alone.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
+            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"input possibly using color alone.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:feecf97150a26e039353565d2f9305e3f91b593f2afbcd98a8614d220e32ead0",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1850,7 +1850,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:31d06687e19e840b0d1e9c02af9c95d6ab3f967c3fdb187496dc87b1ea31c2d9",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1930,10 +1930,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
+            "description": "*************@AccessMonitor************* \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:5272cb8d97b6c5df7ed28f05d29842f9f337eabc560fcb254115171e17ec8ee1",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1943,7 +1943,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:bde9bbd74eeda79ce863c3cb305c20b8d3bdaf709c199356e918e29538c8a242",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1953,7 +1953,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:d9c66ac8567ea5fb3d6dba266fc5953894aa83bb09fc293e54a7f29e54567526",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1963,7 +1963,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:d5ccdbe6cd655468e4cd5d7456efa045751a51420147aa2e089cf1b253a6d0b8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1973,7 +1973,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:1aa297750c6dc786894ae39d75497186a440706607cca7ae79fbcd7ca54cba3b",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1983,7 +1983,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:6d12b14cb768f25fe7f9d03c54ed0d2afaf2140d0791dae194165eb11deb8179",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -1993,7 +1993,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:b19d9445560eee0f5ad3d9bdd920a7ff54b6e381a0d72dc4ed2aaffab7ebd162",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2015,10 +2015,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "It is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.",
+            "description": "*************@AccessMonitor************* \n\nIt is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:3b6851ea9bcf69ebf74e62215276e9393fdc2978d3d6add73363879446abea82",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2028,7 +2028,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:5e66787784ac52a5d2b2806be80e5effd8b75c167101f20f0c92371586abeba8",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2038,7 +2038,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:860e8e86e3158e218616fb80ad6ece9e8c556f0ff31834fc204cdb531dc9e75c",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2074,10 +2074,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
+            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:e2eee1976d68d27ff16b4c6d6b55449c7bf03be0a92a921e7bb4239e71b75b90",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2087,7 +2087,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:e079dbb10491e96ec3e803d16d3d5e2d147117e915f0a21a83eda6c317fa6ce6",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2097,7 +2097,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:2b11559db2b8978ef6837638852ea266997ff68fa9b6a32a455d8a20a2e2d56c",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2107,7 +2107,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:164bce9f059236d57f76668159e3eade377fe052ed77218b5fefe8d62fe0e608",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2117,7 +2117,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:fbaffc98383fe8d30c3219dd57382ac6748ba0789368a16e50ebbecc47b449de",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2127,7 +2127,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:b93dc8e969ff4aa7bc797a7571bcf3793d06d4e4d80f677dc23740b426c711c3",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2137,7 +2137,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:99ece222ffed503b73862608bf21456cc5d3792e1d8e810d1aa5a14af2d582d9",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2239,10 +2239,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "The HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.",
+            "description": "*************@AccessMonitor************* \n\nThe HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:eecb6f90a90bccc521f2e22520b517effcfd13e3aafa4a7bd3c2b47b587916d3",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2344,10 +2344,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
+            "description": "*************@AccessMonitor************* \n\nAfter being filled, it is necessary to submit the form data to the server. This is the function of the submit button.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:95c1106d2d3aeb0930d7671e3126d60e1f9600da329e5daec14ddbae7ec2ec80",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2357,7 +2357,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:483cfa8c470e7c8f17068146d80fd5defe130df3bd03b0d99003fc3736226909",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2437,10 +2437,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
+            "description": "*************@AccessMonitor************* \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:3924170d1c99f97246b567859194c7709d75c346340c631e2d1980021a934fe1",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2450,7 +2450,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:647a23aa9711075c06d84d34520635b18ffecbbdc916447c80ae0d6be3aba3e4",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2472,10 +2472,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "The next ERROR was found: \"Label text is empty for select element.\". You can solve it with: \"Repair: Add text to the label associated with the select element.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Label text is empty for select element.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the label associated with the select element.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:82c7ce32023556515923234500aa2895a1d5ce1a97104c22408f258cec21459e",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2497,10 +2497,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "A POTENTIAL PROBLEM was found: \"title might not describe the document.\".     Line 123, Column 2: <title>Inicio - UPV/EHU</title>\"\n\n",
+            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"title might not describe the document.\".     Line 123, Column 2: <title>Inicio - UPV/EHU</title>\"\n\n",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:1850405d483707109c421d3069572cbc88270edb230b67518e9cf8c2200cb4c9",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2580,7 +2580,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "HTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.",
+            "description": "*************@AccessMonitor************* \n\nHTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.",
             "locationPointersGroup": []
           }
         }
@@ -2608,10 +2608,10 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
+            "description": "*************@AccessMonitor************* \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.",
             "locationPointersGroup": [
               {
-                "id": "data:sha256:6536f54484d05aaba4884dd1ec60b6459be4ff9e5c198377168cd708eaa28643",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
@@ -2621,7 +2621,7 @@
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
-                "id": "data:sha256:c9e3a2ecaf3df4067a36f96a68453cff671f22e9b6128e6cd44c0a9d7f296436",
+                "id": "_:pointer",
                 "type": [
                   "ptr:groupPointer",
                   "ptr:XPathPointer"

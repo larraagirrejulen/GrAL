@@ -1,6 +1,5 @@
 
 const JsonLd = require('./jsonLd');
-const { createHash } = require('crypto');
 
 
 class Scraper {
@@ -133,8 +132,7 @@ class Scraper {
                         correctPath = correctPath.replace(/ \> /g, "/")
                         correctPath = correctPath.replace(/:nth-child\(/g, "[")
                         correctPath = correctPath.replaceAll(")", "]")
-                        const hashPath = createHash('sha256').update(correctPath+criteria).digest('hex');
-                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, hashPath, casesHtmls[k]);
+                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
                     }
                 }else{
                     this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
@@ -187,7 +185,7 @@ class Scraper {
 
                 problem = check.querySelector("span a").textContent;
                 solution = check.querySelector("div").textContent.substring(9).trim();
-                actual_text = 'The next ERROR was found: "'+problem+'". You can solve it with: "'+solution+'".'
+                actual_text = 'The next ERROR was found: \n\n"'+problem+'". \n\nYou can solve it with: \n\n"'+solution+'".'
 
                 cases = Array.from(check.querySelectorAll("table tbody tr td"));
                 for (var j = 0, found_case; found_case = cases[j]; j++){
@@ -216,7 +214,7 @@ class Scraper {
                 check = checks[i];
 
                 problem = check.querySelector("span a").textContent;
-                actual_text = 'The next WARNING was found: "'+problem+'".'
+                actual_text = 'The next WARNING was found: \n\n"'+problem+'".'
 
                 cases = Array.from(check.querySelectorAll("table tbody tr td"));
                 for (var j = 0, found_case; found_case = cases[j]; j++){
@@ -245,7 +243,7 @@ class Scraper {
                 check = checks[i];
 
                 problem = check.querySelector("span a").textContent;
-                actual_text = 'A POTENTIAL PROBLEM was found: "'+problem+'".'
+                actual_text = 'A POTENTIAL PROBLEM was found: \n\n"'+problem+'".'
 
                 cases = Array.from(check.querySelectorAll("table tbody tr td"));
                 for (var j = 0, found_case; found_case = cases[j]; j++){
@@ -268,8 +266,7 @@ class Scraper {
         });
 
         for (var i = 0, result; result = results[i]; i++){
-            const hashPath = createHash('sha256').update(result.location + result.criteria_num).digest('hex');
-            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, hashPath, result.target_html);
+            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
         }
     }
 

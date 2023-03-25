@@ -111,11 +111,10 @@ function mergeFoundCases(assertion1, assertion2){
 		}
 
 		case2.assertedBy.forEach((assertor)=>{
-			console.log(assertor);
 			assertion1.hasPart[case_index].assertedBy.push(assertor);
 		});
 
-		assertion1.hasPart[case_index].result.description += "\n" + case2.result.description;
+		assertion1.hasPart[case_index].result.description += "\n\n" + case2.result.description;
 
 		case2.result.locationPointersGroup.forEach((pointer2) => {
 			
