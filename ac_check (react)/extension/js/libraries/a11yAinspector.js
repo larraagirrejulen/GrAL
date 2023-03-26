@@ -59992,7 +59992,7 @@ function getElementResultInfo(ruleResult) {
 *   (2) return result objec for the rule view in the sidebar;
 */
 
-function getElementResultsInfo(ruleId, highlight, position, evaluationResult) {
+function getElementResultsInfo(ruleId, evaluationResult) {
 
   const ruleResult = evaluationResult.getRuleResult(ruleId);
   const elemSummaryResult = ruleResult.getElementResultsSummary();
@@ -60069,12 +60069,9 @@ function getDetailsAction(ruleResult) {
     'summary'         : rule.getSummary(required),
     'definition'      : rule.getDefinition(required),
     'action'          : ruleResult.getResultMessagesArray(),
-    'purpose'         : rule.getPurpose(),
-    'techniques'      : getInformationalInfoArray(rule.getTechniques()),
     'targets'         : rule.getTargetResources(),
     'compliance'      : 'WCAG Level ' + rule.getWCAG20Level() + ', ' + (required ? 'Required' : 'Recommended'),
-    'sc'              : getInformationalInfoArray(wcag),
-    'additionalLinks' : getInformationalInfoArray(rule.getInformationalLinks())
+    'sc'              : getInformationalInfoArray(wcag)
   }
 
   return detailsAction;
