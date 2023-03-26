@@ -7,7 +7,7 @@ import './css/ResultSection.css';
 
 import { useState, useEffect} from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
-import { getEvaluation} from './js/evaluation.js';
+import { performEvaluation} from './js/evaluation.js';
 import { removeStoredReport, loadStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
@@ -41,9 +41,7 @@ export default function App() {
         }} />
       </div>
 
-      <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
-
-      <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
+      <MainSections />
     </div>
 
   </>);
@@ -53,22 +51,17 @@ export default function App() {
 
 
 
-function MainSections({dropdownsDefaultState}:any){
+function MainSections(){
 
   const [checkboxes, setCheckboxes] = useState([
-    { checked: true, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
+    { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
     { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
-    { checked: false, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
+    { checked: true, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
   ]);
 
-  const [results, setResults] = useState({resultsSummary: "", resultsContent: ""});
-  const handleResultsChange = (newResults:any) => {
-    setResults(newResults);
-  };
-
   const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
-  const handleLevelClick = (level:any) => {
+  function handleLevelClick (level:any) {
     if (level === 'A') {
       setActiveLevels(['A']);
     } else if (level === 'AA') {
@@ -78,15 +71,10 @@ function MainSections({dropdownsDefaultState}:any){
     }
   }
 
-  useEffect(() => {
-    const loadedResults = loadStoredReport();
-    handleResultsChange(loadedResults);
-  }, [])
-
   return(<>
-    <EvaluatorSelectionSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onCheckboxesChange={(newCheckboxes:any)=>setCheckboxes(newCheckboxes)} />
-    <EvaluationSection dropdownsDefaultState={dropdownsDefaultState} checkboxes={checkboxes} onResultsChange={handleResultsChange} activeLevels={activeLevels} />
-    <ResultSection results={results} activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)} />
+    <EvaluatorSelectionSection checkboxes={checkboxes} onCheckboxesChange={(newCheckboxes:any)=>setCheckboxes(newCheckboxes)} />
+    <EvaluationSection checkboxes={checkboxes} activeLevels={activeLevels} />
+    <ResultSection activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)} />
   </>);
 }
 
@@ -94,8 +82,8 @@ function MainSections({dropdownsDefaultState}:any){
 
 
 
-function EvaluatorSelectionSection ({dropdownsDefaultState, checkboxes, onCheckboxesChange}:any) {
-  const [isOpen, setIsOpen] = useState(dropdownsDefaultState);
+function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
 
   const handleCheckboxChange = (index:any, isChecked:any) => {
     const newCheckboxes = [...checkboxes];
@@ -128,15 +116,9 @@ function EvaluatorSelectionSection ({dropdownsDefaultState, checkboxes, onCheckb
 
 
 
-function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsChange, activeLevels}:any) {
-  const [isOpen, setIsOpen] = useState(dropdownsDefaultState);
+function EvaluationSection ({checkboxes, activeLevels}:any) {
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleGetResultsClick = () => {
-    setIsLoading(true);
-    const newResults = getEvaluation(checkboxes, setIsLoading);
-    handleResultsChange(newResults);
-  };
 
   return ( <div className="evaluation_section">
 
@@ -146,7 +128,7 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
       </div>
 
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
-        <button id="btn_get_data" className="button primary" onClick={handleGetResultsClick} disabled={isLoading}>
+        <button id="btn_get_data" className="button primary" onClick={() => performEvaluation(checkboxes, setIsLoading)} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
@@ -160,14 +142,17 @@ function EvaluationSection ({dropdownsDefaultState, checkboxes, handleResultsCha
 
 
 
-function ResultSection({results, activeLevels, onLevelsChange}:any) {
+function ResultSection({activeLevels, onLevelsChange}:any) {
 
-  return ( <div className="result_section">
+  const storedReport:any = loadStoredReport();
+
+  return ( 
+    <div className="result_section">
 
       <div className="header"><span>Evaluation Results</span></div>
 
       <div className="body">
-        {results.resultsContent !== "" ? 
+        {storedReport.resultsContent !== "" ? 
         <>
           <div className='conformanceLevelSelector'>
             <p>Select conformace level:</p>
@@ -178,12 +163,14 @@ function ResultSection({results, activeLevels, onLevelsChange}:any) {
             </div>
           </div>
 
-          <ResultsTable results={results} activeLevels={activeLevels}/>
+          <ResultsTable results={storedReport} activeLevels={activeLevels}/>
         </>: 
-          <div className = "table_container">{parse(results.resultsSummary)}</div>
+          <div className = "table_container">{parse(storedReport.resultsSummary)}</div>
         }
       </div>
 
-  </div> );
+    </div> 
+  );
+
 }
 

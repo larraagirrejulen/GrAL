@@ -20,25 +20,24 @@ export function getStoredReport(){
 
 
 export function loadStoredReport(){
-    try{
-        var json = getStoredReport()
-        var jsonTabla = localStorage.getItem("tabla_resultados");
-        var main = localStorage.getItem("tabla_main");
 
-        if (json != null && main != null){
-            return {
-                resultsSummary: JSON.parse(jsonTabla), 
-                resultsContent: JSON.parse(main)
-            };
-        } else{
-            return {
-                resultsSummary: "<div style='text-align: center; padding:15px 0;'>No data stored</div>",
-                resultsContent: ""
-            };
-        }
-    }catch (error){
-        console.log(error);
+    var report = {
+        resultsSummary: "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
+        resultsContent: ""
     }
+
+    var json = getStoredReport()
+    var jsonTabla = localStorage.getItem("tabla_resultados");
+    var main = localStorage.getItem("tabla_main");
+
+    if (json != null && main != null){
+        report = {
+            resultsSummary: JSON.parse(jsonTabla), 
+            resultsContent: JSON.parse(main)
+        };
+    }
+
+    return report;
     
 }
 

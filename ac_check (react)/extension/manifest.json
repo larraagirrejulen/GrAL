@@ -6,7 +6,7 @@
   "author": "Mikel Iturria y Julen Larrañaga",
 
   "background":{
-    "service_worker": "/js/background.js"
+    "service_worker": "/js/background.js", "type": "module"
   },
 
   "permissions": ["scripting","storage","activeTab","unlimitedStorage"],

@@ -18,6 +18,7 @@ class Scraper {
 
     }
 
+    
 
     async scrape(){
 
