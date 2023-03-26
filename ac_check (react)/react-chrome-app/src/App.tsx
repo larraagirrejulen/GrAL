@@ -42,6 +42,8 @@ export default function App() {
       </div>
 
       <MainSections dropdownsDefaultState={localStorage.getItem("tabla_main")==null}/>
+
+      <button id="prueba" style={{margin: "30px"}}> a11y proba </button>
     </div>
 
   </>);
