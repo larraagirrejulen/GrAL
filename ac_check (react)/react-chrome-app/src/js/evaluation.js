@@ -1,6 +1,6 @@
 
 
-import {OpenAjax, getRuleCategoryResults, getGuidelineResults, getRuleResultsItem} from './libraries/a11yAinspector.js';
+import { OpenAjax } from './libraries/a11yAinspector.js';
 import { storeReport } from './reportStoringUtils.js';
 const JsonLd = require('./jsonLd');
 
@@ -40,52 +40,83 @@ async function fetchEvaluation(bodyData, timeout = 60000) {
 }
 
 
-async function localA11yEvaluation() {
+async function localA11yEvaluation(){
 
     var jsonld = new JsonLd("a11y", window.document.location.href, window.document.title);
 
+    console.log("aaaaaaaaaaaaaaaaaa");
+
     // Configure evaluator factory and get evaluator
-    let evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
-    var ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
+    var evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
+    const ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
     evaluatorFactory.setParameter('ruleset', ruleset);
     evaluatorFactory.setFeature('eventProcessing', 'fae-util');
     evaluatorFactory.setFeature('groups', 7);
-    let evaluator = evaluatorFactory.newEvaluator();
+    const evaluator = evaluatorFactory.newEvaluator();
+
+    console.log("bbbbbbbbbbbbbbb");
 
     // Gure luzapenak jarritako html elementuak kendu
     const extension = window.document.getElementById("react-chrome-extension");
     extension.remove();
 
-    let evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
+    const evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
 
     // Gure luzapenak jarritako html elementuak berriro jarri
     document.body.appendChild(extension);
 
-    let info = {};
+    const ruleResults = evaluationResult.getRuleResultsAll().getRuleResultsArray();
 
-    let ruleGroupResult   = evaluationResult.getRuleResultsAll();
-    let ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
-    let ruleResults       = ruleGroupResult.getRuleResultsArray();
 
-    info.ruleset  = evaluationResult.getRuleset().getId();
+    var ruleResult, outcome, description, messages, xpath, html, results;
 
-    info.violations    = ruleSummaryResult.violations;
-    info.warnings      = ruleSummaryResult.warnings;
-    info.manual_checks = ruleSummaryResult.manual_checks;
-    info.passed        = ruleSummaryResult.passed;
-
-    info.rcResults = getRuleCategoryResults(evaluationResult);
-    info.glResults = getGuidelineResults(evaluationResult);
-    info.json = evaluationResult.toJSON();
-
-    info.allRuleResults = [];
     for(let i = 0; i < ruleResults.length; i++) {
-        console.log("Rule result: " + ruleResults[i]);
-        info.allRuleResults.push(getRuleResultsItem(ruleResults[i]));
+
+        ruleResult = ruleResults[i];
+        
+        switch(ruleResult.getResultValue()){
+            case 1:
+                outcome = "INNAPLICABLE"
+                break;
+            case 2:
+                outcome = "PASS"
+                break;
+            case 3 || 4:
+                outcome = "CANNOTTELL"
+                break;
+            case 5:
+                outcome = "FAIL"
+                break;
+            default:
+                continue;
+        }
+
+        messages = ruleResult.getResultMessagesArray().filter(message => message !== "N/A");
+        description = ruleResult.getRuleSummary() + messages.join("\n\n");
+        results = ruleResult.getElementResultsArray();
+
+        for(let j = 0; j < results.length; j++) {
+
+            xpath = results[j].getDOMElement().xpath;
+            html = results[j].getDOMElement().node.outerHTML;
+            html = html.substring(0, html.indexOf(">")+1) + " ...";
+            console.log(xpath);
+            console.log(html);
+
+        }
+
+        results.push({
+            "successCriteriaNumber": ruleResult.getRule().getPrimarySuccessCriterion().id,
+            "outcome": outcome,
+            "description": description,
+            "path": "",
+            "html": ""
+        });
+
     }
 
     return jsonld.getJsonLd();
-};
+}
 
 
 

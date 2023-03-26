@@ -1,44 +1,40 @@
 $(document).ready(function(){
 
 
-    $("#prueba").click(async () => {
-  
+    function evaluateWithA11y(){
         // Configure evaluator factory and get evaluator
-        let evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
-        var ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
+        var evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
+        const ruleset = OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT');
         evaluatorFactory.setParameter('ruleset', ruleset);
         evaluatorFactory.setFeature('eventProcessing', 'fae-util');
         evaluatorFactory.setFeature('groups', 7);
-        let evaluator = evaluatorFactory.newEvaluator();
+        const evaluator = evaluatorFactory.newEvaluator();
     
         // Gure luzapenak jarritako html elementuak kendu
         const extension = window.document.getElementById("react-chrome-extension");
         extension.remove();
     
-        let evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
+        const evaluationResult = evaluator.evaluate(window.document, window.document.title, window.document.location.href);
     
         // Gure luzapenak jarritako html elementuak berriro jarri
         document.body.appendChild(extension);
+
+        return evaluationResult;
+    }
+
+
+    /*function getA11yEvaluationResults(){
+
+    }*/
+
+
+    $("#prueba").click(async () => {
+  
+        
+        const evaluationResult = evaluateWithA11y();
+
+        const ruleResults = evaluationResult.getRuleResultsAll().getRuleResultsArray();
     
-    
-        let info = {};
-    
-        let ruleGroupResult   = evaluationResult.getRuleResultsAll();
-        let ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
-        let ruleResults       = ruleGroupResult.getRuleResultsArray();
-    
-        info.ruleset  = evaluationResult.getRuleset().getId();
-    
-        info.violations    = ruleSummaryResult.violations;
-        info.warnings      = ruleSummaryResult.warnings;
-        info.manual_checks = ruleSummaryResult.manual_checks;
-        info.passed        = ruleSummaryResult.passed;
-    
-        info.rcResults = getRuleCategoryResults(evaluationResult);
-        info.glResults = getGuidelineResults(evaluationResult);
-        info.json = evaluationResult.toJSON();
-    
-        info.allRuleResults = [];
         results = [];
 
         var ruleResult, description, outcome;
@@ -72,6 +68,19 @@ $(document).ready(function(){
                 }
             });
 
+            var xpath, html;
+            var results = ruleResult.getElementResultsArray();
+
+            for(let j = 0; j < results.length; j++) {
+
+                xpath = results[j].getDOMElement().xpath;
+                html = results[j].getDOMElement().node.outerHTML;
+                html = html.substring(0, html.indexOf(">")+1) + " ...";
+                console.log(xpath);
+                console.log(html);
+
+            }
+
             results.push({
                 "successCriteriaNumber": ruleResult.getRule().getPrimarySuccessCriterion().id,
                 "outcome": outcome,
@@ -80,12 +89,7 @@ $(document).ready(function(){
                 "html": ""
             });
 
-            //console.log(getElementResultInfo(ruleResults[i]))
-
-            info.allRuleResults.push(getRuleResultsItem(ruleResults[i]));
         }
-
-        console.log(info);
 
         
     });

@@ -6,7 +6,8 @@ class JsonLd{
     #assertors = {
         "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
         "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
-        "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
+        "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
+        "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
     };
     #outcomes = {
         "PASS": { outcome: "earl:passed", description: "No violations found" },
@@ -491,7 +492,7 @@ class JsonLd{
                         "ptr:XPathPointer"
                     ],
                     "ptr:expression": path, 
-                    "description": html,
+                    "description": html.substring(0, html.indexOf(">")+1) + " ...",
                     "namespace" : "http://www.w3.org/1999/xhtml"
                 });
             }
@@ -506,7 +507,7 @@ class JsonLd{
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
                 siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion.assertedBy = "_:" + this.#evaluator_data.name,
+                siteAssertion.assertedBy = "_:" + this.#evaluator_data.name
                 siteAssertion.mode = "earl:automatic"
                 break;    
             case "earl:passed":
@@ -514,11 +515,12 @@ class JsonLd{
                 siteAssertion.result.description = this.#outcomes[outcome].description
                 break;
             case "earl:cantTell":
-                if(resultOutcome != "earl:passed"){
+                if(resultOutcome !== "earl:passed"){
                     siteAssertion.result.outcome = resultOutcome
                     siteAssertion.result.description = this.#outcomes[outcome].description
                 }
                 break;
+            default:
         }
 
 
@@ -544,7 +546,7 @@ class JsonLd{
                     "ptr:XPathPointer"
                 ],
                 "ptr:expression": path, 
-                "description": html, 
+                "description": html.substring(0, html.indexOf(">")+1) + " ...",
                 "namespace" : "http://www.w3.org/1999/xhtml"
             });
         }

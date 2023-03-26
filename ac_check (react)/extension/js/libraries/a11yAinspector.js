@@ -59949,6 +59949,8 @@ function getElementResultInfo(ruleResult) {
     let htmlAttrInfo   = JSON.stringify(elementResult.getHTMLAttributes());
     let ariaAttrInfo   = JSON.stringify(elementResult.getAriaAttributes());
 
+    elementResult
+
     let item = {
       'tagName'        : elementResult.getTagName(),
       'role'           : elementResult.getRole(),

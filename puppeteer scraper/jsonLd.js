@@ -492,7 +492,7 @@ class JsonLd{
                         "ptr:XPathPointer"
                     ],
                     "ptr:expression": path, 
-                    "description": html,
+                    "description": html.substring(0, html.indexOf(">")+1) + " ...",
                     "namespace" : "http://www.w3.org/1999/xhtml"
                 });
             }
@@ -507,7 +507,7 @@ class JsonLd{
             case "earl:untested":
                 siteAssertion.result.outcome = resultOutcome
                 siteAssertion.result.description = this.#outcomes[outcome].description
-                siteAssertion.assertedBy = "_:" + this.#evaluator_data.name,
+                siteAssertion.assertedBy = "_:" + this.#evaluator_data.name
                 siteAssertion.mode = "earl:automatic"
                 break;    
             case "earl:passed":
@@ -515,11 +515,12 @@ class JsonLd{
                 siteAssertion.result.description = this.#outcomes[outcome].description
                 break;
             case "earl:cantTell":
-                if(resultOutcome != "earl:passed"){
+                if(resultOutcome !== "earl:passed"){
                     siteAssertion.result.outcome = resultOutcome
                     siteAssertion.result.description = this.#outcomes[outcome].description
                 }
                 break;
+            default:
         }
 
 
@@ -545,7 +546,7 @@ class JsonLd{
                     "ptr:XPathPointer"
                 ],
                 "ptr:expression": path, 
-                "description": html, 
+                "description": html.substring(0, html.indexOf(">")+1) + " ...", 
                 "namespace" : "http://www.w3.org/1999/xhtml"
             });
         }

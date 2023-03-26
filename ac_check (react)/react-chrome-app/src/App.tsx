@@ -7,7 +7,7 @@ import './css/ResultSection.css';
 
 import { useState, useEffect} from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
-import { getEvaluation} from './js/evaluating.js';
+import { getEvaluation} from './js/evaluation.js';
 import { removeStoredReport, loadStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
