@@ -19,7 +19,6 @@ export function load_result_table(){
     var results = stored_report["auditSample"]
     var obj, level;
     var json_resultados = {};
-    console.log( results);
     for (var i = 0; i <results.length; i++){
         level = criterias[i].conformanceLevel;
         obj = results[i];

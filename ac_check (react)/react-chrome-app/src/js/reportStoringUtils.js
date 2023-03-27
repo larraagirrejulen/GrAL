@@ -18,6 +18,18 @@ export function getStoredReport(){
 
 
 
+export function loadStoredReport(){
+    const jsonTabla = localStorage.getItem("tabla_resultados");
+    const main = localStorage.getItem("tabla_main");
+
+    return {
+        resultsSummary: JSON.parse(jsonTabla) ?? "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
+        resultsContent: JSON.parse(main) ?? ""
+    }
+}
+
+
+
 export function removeStoredReport(){
     if (!window.confirm("Are you sure you want to permanently delete current stored evaluation data?")) return;
 

@@ -8,7 +8,7 @@ import './css/ResultSection.css';
 import { useEffect, useState } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
 import { performEvaluation} from './js/evaluation.js';
-import { removeStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
+import { removeStoredReport, downloadStoredReport, uploadAndStoreReport, loadStoredReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
@@ -130,24 +130,11 @@ function EvaluationSection () {
 
 function ResultSection() {
 
-  const jsonTabla:any = localStorage.getItem("tabla_resultados");
-  const main:any = localStorage.getItem("tabla_main");
-
-  const storedReport = {
-    resultsSummary: JSON.parse(jsonTabla) ?? "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
-    resultsContent: JSON.parse(main) ?? ""
-  }
+  const storedReport = loadStoredReport();
 
   const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
-    var levels;
-    if (level === 'A') {
-      levels = ['A'];
-    } else if (level === 'AA') {
-      levels = ['A', 'AA'];
-    } else {
-      levels = ['A', 'AA', 'AAA'];
-    }
+    const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
     setActiveLevels(levels);
     localStorage.setItem("activeLevels", JSON.stringify(levels));
   };

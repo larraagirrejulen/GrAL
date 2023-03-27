@@ -39,6 +39,7 @@ async function fetchEvaluation(bodyData, timeout = 60000) {
 }
 
 
+
 export async function performEvaluation(){
 
     const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
