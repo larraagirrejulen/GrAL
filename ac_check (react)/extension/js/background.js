@@ -41,7 +41,7 @@ function main_bk(){
         if(changeInfo.status == 'complete' && toggle){
           chrome.action.setIcon({path: "/images/icon16.png"});
           chrome.scripting.executeScript({
-            files: ["/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js'],
+            files: ["js/extensionListeners.js", "/js/libraries/a11yAinspector.js", "/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js'],
             target: {tabId: tab.id}
           });
         }
@@ -63,6 +63,14 @@ function main_bk(){
         switch(action){
           case "openOptionsPage":
             chrome.runtime.openOptionsPage();
+            break;
+          case "performA11yEvaluation":
+            jsonld = await (async () => {
+              const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
+              const response = await chrome.tabs.sendMessage(tab.id, {action: "performA11yEvaluation", jsonld: jsonld});            
+              return response.evaluationResult;
+            })();
+            sendResponse({evaluationResult: jsonld});
             break;
           default:
             console.log(" @Background: " + action + " request does not exist !!!");

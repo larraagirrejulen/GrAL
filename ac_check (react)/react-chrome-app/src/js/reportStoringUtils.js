@@ -19,7 +19,6 @@ export function getStoredReport(){
 
 
 export function loadStoredReport(){
-    //localStorage.clear();
     const jsonTabla = localStorage.getItem("tabla_resultados");
     const main = localStorage.getItem("tabla_main");
 
