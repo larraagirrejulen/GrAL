@@ -5,7 +5,7 @@ import './css/EvaluationSection.css';
 import './css/ResultSection.css';
 
 
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
 import { performEvaluation} from './js/evaluation.js';
 import { removeStoredReport, loadStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
@@ -20,12 +20,8 @@ export default function App() {
 
   const [hidden, setHidden] = useState(false);
 
-  const [logoImgSrc, setLogoImgSrc] = useState();
-  const [configImgSrc, setConfigImgSrc] = useState();
-  useEffect(() => { 
-    setLogoImgSrc(getLogoSrc());
-    setConfigImgSrc(getConfigImgSrc());
-  }, []);
+  const logoImgSrc:any = getLogoSrc();
+  const configImgSrc:any = getConfigImgSrc();
 
   return (<>
     
@@ -46,7 +42,6 @@ export default function App() {
 
   </>);
 }
-
 
 
 
@@ -77,7 +72,6 @@ function MainSections(){
     <ResultSection activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)} />
   </>);
 }
-
 
 
 

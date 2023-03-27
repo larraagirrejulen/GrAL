@@ -6,14 +6,14 @@
   "author": "Mikel Iturria y Julen Larrañaga",
 
   "background":{
-    "service_worker": "/js/background.js", "type": "module"
+    "service_worker": "/js/background.js"
   },
 
-  "permissions": ["scripting","storage","activeTab","unlimitedStorage"],
+  "permissions": ["scripting","storage","activeTab","unlimitedStorage","tabs"],
 
   "options_ui": {
     "page": "/options/options.html",
-    "open_in_tab": false
+    "open_in_tab": true
   },
 
   "host_permissions": ["<all_urls>"],
