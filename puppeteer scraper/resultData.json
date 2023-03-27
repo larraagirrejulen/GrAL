@@ -69,7 +69,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "27/3/2023, 6:42:46",
+  "dct:date": "27/3/2023, 9:52:01",
   "dct:summary": "Some errors where found...",
   "assertors": [
     {
@@ -140,7 +140,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Alt text does not convey the same information as the image.\".     Line 1490, Column 6: <img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Alt text does not convey the same information as the image.\".     Line 1486, Column 6: <img class=\"logo-guest\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png\" alt=\"UP ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -158,7 +158,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
                 "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -168,7 +168,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
                 "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -178,7 +178,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
                 "description": "<img class=\"col-4\" alt=\"\" src=\"https://www.ehu.eus/documents/10136/42006033/Iratxe-Fresneda-dest.jpg/d3478808-7fbb-ab68-2277-dcd21ce1af09?t=1679568094004\"/documents/10136/42006033/Iratxe-Fresneda-dest.jpg/d3478808-7fbb-ab68-2277-dcd21ce1af09?t=1679568094004\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -188,7 +188,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
                 "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -328,7 +328,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 1490, Column 6",
+                "ptr:expression": "Line 1486, Column 6",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -380,7 +380,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Image used as anchor is missing valid Alt text.\". \n\nYou can solve it with: \n\n\"Repair: Add Alt text that identifies the purpose or function of the image.\".     Line 6224, Column 184: <img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Image used as anchor is missing valid Alt text.\". \n\nYou can solve it with: \n\n\"Repair: Add Alt text that identifies the purpose or function of the image.\".     Line 5861, Column 184: <img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -388,7 +388,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 6224, Column 184",
+                "ptr:expression": "Line 5861, Column 184",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -398,7 +398,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 7253, Column 184",
+                "ptr:expression": "Line 6890, Column 184",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -408,7 +408,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 9225, Column 183",
+                "ptr:expression": "Line 8625, Column 183",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -539,7 +539,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\n*************@AChecker************* \n\nThe next WARNING was found: \n\n\"p element may be misused (could be a header).\".     Line 4105, Column 8: <p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\n*************@AChecker************* \n\nThe next WARNING was found: \n\n\"p element may be misused (could be a header).\".     Line 4101, Column 8: <p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t</strong>< ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -577,7 +577,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -587,7 +587,17 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -607,17 +617,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 4105, Column 8",
+                "ptr:expression": "Line 4101, Column 8",
                 "description": "<p class=\"card-title\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -627,7 +627,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 1485, Column 6",
+                "ptr:expression": "Line 1481, Column 6",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -702,7 +702,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -712,7 +712,17 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -723,16 +733,6 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -749,7 +749,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"input element, type of \"text\", has no text in label.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the input element's associated label that describes the purpose or function of the control.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"input element, type of \"text\", has no text in label.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the input element's associated label that describes the purpose or function of the control.\".     Line 1997, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -757,7 +757,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 2001, Column 5",
+                "ptr:expression": "Line 1997, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -1198,7 +1198,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"select element's label is not positioned close to control.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
+            "description": "*************@AccessMonitor************* \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\n*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"select element's label is not positioned close to control.\".     Line 2087, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1236,7 +1236,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 2091, Column 2",
+                "ptr:expression": "Line 2087, Column 2",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1246,7 +1246,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 1106, Column 1",
+                "ptr:expression": "Line 1102, Column 1",
                 "description": "<body class=\" controls-visible  yui3-skin-sam guest-site signed-out public-page site es_ES\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -1302,7 +1302,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Image may contain text with poor contrast.\".     Line 1485, Column 6: <img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...\"\n\n",
+            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"Image may contain text with poor contrast.\".     Line 1481, Column 6: <img class=\"logo\" src=\"https://www.ehu.eus/o/ehu-theme/images/custom/logo.png\" alt=\"Universidad del  ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1310,7 +1310,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 1485, Column 6",
+                "ptr:expression": "Line 1481, Column 6",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1320,7 +1320,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 1490, Column 6",
+                "ptr:expression": "Line 1486, Column 6",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1330,7 +1330,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 4103, Column 7",
+                "ptr:expression": "Line 4099, Column 7",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1340,7 +1340,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 4463, Column 7",
+                "ptr:expression": "Line 4459, Column 7",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1350,7 +1350,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 4823, Column 7",
+                "ptr:expression": "Line 4819, Column 7",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1360,7 +1360,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 5183, Column 7",
+                "ptr:expression": "Line 5861, Column 184",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1370,7 +1370,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 6224, Column 184",
+                "ptr:expression": "Line 6890, Column 184",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1380,7 +1380,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 7253, Column 184",
+                "ptr:expression": "Line 7362, Column 13",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1390,7 +1390,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 7725, Column 13",
+                "ptr:expression": "Line 8625, Column 183",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1400,7 +1400,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 9225, Column 183",
+                "ptr:expression": "Line 9181, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1410,7 +1410,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 9781, Column 5",
+                "ptr:expression": "Line 9433, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1420,7 +1420,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 10033, Column 5",
+                "ptr:expression": "Line 9683, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1430,7 +1430,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 10283, Column 5",
+                "ptr:expression": "Line 9935, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1440,7 +1440,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 10535, Column 5",
+                "ptr:expression": "Line 10185, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1450,7 +1450,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 10785, Column 5",
+                "ptr:expression": "Line 10435, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1460,7 +1460,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 11035, Column 5",
+                "ptr:expression": "Line 10687, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1470,7 +1470,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 11287, Column 5",
+                "ptr:expression": "Line 10937, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1480,7 +1480,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 11537, Column 5",
+                "ptr:expression": "Line 11187, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1490,7 +1490,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 11787, Column 5",
+                "ptr:expression": "Line 11439, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1500,7 +1500,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 12039, Column 5",
+                "ptr:expression": "Line 11689, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1510,7 +1510,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 12289, Column 5",
+                "ptr:expression": "Line 11939, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1520,7 +1520,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 12539, Column 5",
+                "ptr:expression": "Line 12191, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1530,7 +1530,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 12791, Column 5",
+                "ptr:expression": "Line 12441, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1540,7 +1540,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 13041, Column 5",
+                "ptr:expression": "Line 12691, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1550,7 +1550,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 13291, Column 5",
+                "ptr:expression": "Line 12941, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1560,7 +1560,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 13541, Column 5",
+                "ptr:expression": "Line 13191, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1570,17 +1570,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 13791, Column 5",
-                "description": " ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "Line 14041, Column 5",
+                "ptr:expression": "Line 13441, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -1707,7 +1697,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"input possibly using color alone.\".     Line 2001, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
+            "description": "*************@AChecker************* \n\nA POTENTIAL PROBLEM was found: \n\n\"input possibly using color alone.\".     Line 1997, Column 5: <input  class=\"field search-input search-portlet-keywords-input form-control\"  id=\"_com_liferay_port ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1715,7 +1705,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 2001, Column 5",
+                "ptr:expression": "Line 1997, Column 5",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1725,7 +1715,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 14232, Column 103",
+                "ptr:expression": "Line 13632, Column 103",
                 "description": "<input hidden type=\"submit\"/> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -1893,7 +1883,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
                 "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/cathedra/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1903,7 +1893,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[12]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
                 "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1913,7 +1903,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
                 "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/noticias/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -1982,7 +1972,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -1992,7 +1982,17 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
@@ -2003,16 +2003,6 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[11]/section[2]/div[1]/div[1]/div[1]/h2[1]",
                 "description": "<h2 class=\"portlet-title-text\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
@@ -2342,7 +2332,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Label text is empty for select element.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the label associated with the select element.\".     Line 2091, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
+            "description": "*************@AChecker************* \n\nThe next ERROR was found: \n\n\"Label text is empty for select element.\". \n\nYou can solve it with: \n\n\"Repair: Add text to the label associated with the select element.\".     Line 2087, Column 2: <select class=\"form-control search-select\"  id=\"_com_liferay_portal_search_web_portlet_SearchPortlet ...\"\n\n",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -2350,7 +2340,7 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "Line 2091, Column 2",
+                "ptr:expression": "Line 2087, Column 2",
                 "description": " ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }

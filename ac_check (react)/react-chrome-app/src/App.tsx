@@ -5,10 +5,10 @@ import './css/EvaluationSection.css';
 import './css/ResultSection.css';
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
 import { performEvaluation} from './js/evaluation.js';
-import { removeStoredReport, loadStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
+import { removeStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
@@ -37,7 +37,9 @@ export default function App() {
         }} />
       </div>
 
-      <MainSections />
+      <EvaluatorSelectionSection />
+      <EvaluationSection />
+      <ResultSection />
     </div>
 
   </>);
@@ -46,7 +48,8 @@ export default function App() {
 
 
 
-function MainSections(){
+function EvaluatorSelectionSection () {
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
 
   const [checkboxes, setCheckboxes] = useState([
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -55,35 +58,16 @@ function MainSections(){
     { checked: true, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
   ]);
 
-  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
-  function handleLevelClick (level:any) {
-    if (level === 'A') {
-      setActiveLevels(['A']);
-    } else if (level === 'AA') {
-      setActiveLevels(['A', 'AA']);
-    } else if (level === 'AAA') {
-      setActiveLevels(['A', 'AA', 'AAA']);
-    }
-  }
-
-  return(<>
-    <EvaluatorSelectionSection checkboxes={checkboxes} onCheckboxesChange={(newCheckboxes:any)=>setCheckboxes(newCheckboxes)} />
-    <EvaluationSection checkboxes={checkboxes} activeLevels={activeLevels} />
-    <ResultSection activeLevels={activeLevels} onLevelsChange={(label:any) => handleLevelClick(label)} />
-  </>);
-}
-
-
-
-
-function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
-
-  const handleCheckboxChange = (index:any, isChecked:any) => {
+  const handleCheckboxChange = (index:any) => {
     const newCheckboxes = [...checkboxes];
-    newCheckboxes[index].checked = isChecked;
-    onCheckboxesChange(newCheckboxes);
+    newCheckboxes[index].checked = !newCheckboxes[index].checked;
+    setCheckboxes(newCheckboxes);
+    localStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
   };
+
+  useEffect(() => {
+    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+  });
 
   return ( <div className="evaluator_selection_section">
 
@@ -96,7 +80,7 @@ function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
         {checkboxes.map((checkbox:any, index:any) => (
           <div className="checkbox-wrapper">
             <div className="checkbox">
-              <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index, !checkbox.checked)} className={checkbox.checked ? "checked" : ""} />
+              <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index)} className={checkbox.checked ? "checked" : ""} />
               <span onClick={() => { window.open(checkbox.href, '_blank'); }}>{checkbox.label}</span>
             </div><br/>
             <span>{checkbox.checked ? "Selected" : "Unchecked"}</span>
@@ -110,9 +94,17 @@ function EvaluatorSelectionSection ({checkboxes, onCheckboxesChange}:any) {
 
 
 
-function EvaluationSection ({checkboxes, activeLevels}:any) {
+function EvaluationSection () {
+
   const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
   const [isLoading, setIsLoading] = useState(false);
+
+  function evaluateCurrentPage(){
+    setIsLoading(true);
+    performEvaluation().catch(
+      (error)=>console.log("@evaluation.js: ERROR evaluating the page => " + error)
+    ).finally(()=>setIsLoading(false));
+  }
 
   return ( <div className="evaluation_section">
 
@@ -122,11 +114,11 @@ function EvaluationSection ({checkboxes, activeLevels}:any) {
       </div>
 
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
-        <button id="btn_get_data" className="button primary" onClick={() => performEvaluation(checkboxes, setIsLoading)} disabled={isLoading}>
+        <button id="btn_get_data" className="button primary" onClick={evaluateCurrentPage} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
-        <label id="btn_download" className="button primary" onClick={()=>downloadStoredReport(activeLevels)}>Download report</label><br/>
+        <label id="btn_download" className="button primary" onClick={downloadStoredReport}>Download report</label><br/>
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadAndStoreReport(event)} />Upload Report</label>
       </div>
     
@@ -136,9 +128,33 @@ function EvaluationSection ({checkboxes, activeLevels}:any) {
 
 
 
-function ResultSection({activeLevels, onLevelsChange}:any) {
+function ResultSection() {
 
-  const storedReport:any = loadStoredReport();
+  const jsonTabla:any = localStorage.getItem("tabla_resultados");
+  const main:any = localStorage.getItem("tabla_main");
+
+  const storedReport = {
+    resultsSummary: JSON.parse(jsonTabla) ?? "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
+    resultsContent: JSON.parse(main) ?? ""
+  }
+
+  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
+  function handleLevelClick (level:any) {
+    var levels;
+    if (level === 'A') {
+      levels = ['A'];
+    } else if (level === 'AA') {
+      levels = ['A', 'AA'];
+    } else {
+      levels = ['A', 'AA', 'AAA'];
+    }
+    setActiveLevels(levels);
+    localStorage.setItem("activeLevels", JSON.stringify(levels));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("activeLevels", JSON.stringify(activeLevels));
+  });
 
   return ( 
     <div className="result_section">
@@ -151,9 +167,9 @@ function ResultSection({activeLevels, onLevelsChange}:any) {
           <div className='conformanceLevelSelector'>
             <p>Select conformace level:</p>
             <div className="level-container">
-              <div className={`conformanceLevel ${activeLevels.includes('A') ? 'selected' : ''}`} onClick={() => onLevelsChange('A')}>A</div>
-              <div className={`conformanceLevel ${activeLevels.includes('AA') ? 'selected' : ''}`} onClick={() => onLevelsChange('AA')}>AA</div>
-              <div className={`conformanceLevel ${activeLevels.includes('AAA') ? 'selected' : ''}`} onClick={() => onLevelsChange('AAA')}>AAA</div>
+              <div className={`conformanceLevel ${activeLevels.includes('A') ? 'selected' : ''}`} onClick={() => handleLevelClick('A')}>A</div>
+              <div className={`conformanceLevel ${activeLevels.includes('AA') ? 'selected' : ''}`} onClick={() => handleLevelClick('AA')}>AA</div>
+              <div className={`conformanceLevel ${activeLevels.includes('AAA') ? 'selected' : ''}`} onClick={() => handleLevelClick('AAA')}>AAA</div>
             </div>
           </div>
 

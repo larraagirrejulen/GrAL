@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-
 import { storeReport } from './reportStoringUtils.js';
 const JsonLd = require('./jsonLd');
 
@@ -40,16 +39,16 @@ async function fetchEvaluation(bodyData, timeout = 60000) {
 }
 
 
-export async function performEvaluation(checkboxes, setIsLoading){
+export async function performEvaluation(){
 
-    setIsLoading(true);
+    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
 
     const AM = checkboxes[0].checked;
     const AC = checkboxes[1].checked;
     const MV = checkboxes[2].checked;
     const A11Y = checkboxes[3].checked;
         
-    if (AM || AC || MV){
+    if(AM || AC || MV){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         
         var json = await fetchEvaluation(bodyData);
@@ -71,41 +70,12 @@ export async function performEvaluation(checkboxes, setIsLoading){
             console.log(response);
         })();
 
-        
-        /*function evaluateA11y(jsonld) {
-            return new Promise(function(resolve, reject) {
-                chrome.runtime.sendMessage({ action: "localA11yEvaluation", jsonld: jsonld }, function (response) {
-                    if (response) {
-                        resolve(response);
-                    } else {
-                        reject(new Error("No response received from background"));
-                    }
-                });
-            });
-        }
-          
-        evaluateA11y(jsonld)
-        .then(function(response) {
-            jsonld = response.jsonld;
-            console.log("jsonld evaluated successfully:");
-            console.log(jsonld);
-        })
-        .catch(function(error) {
-            console.error("Error evaluating jsonld:", error);
-        });*/
-
         //storeReport(JSON.stringify(jsonld));
 
     }else{
         alert("You need to choose at least one analizer");
     }
 
-    setIsLoading(false);
-
-    return {
-        resultsSummary: "<div style='text-align: center; padding-top: 15px;'>No data stored</div>",
-        resultsContent: ""
-    };
 }
 
 
