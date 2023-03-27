@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
+export function getOpenAjax(){
+    return this.OpenAjax;
+}
+
 /*
  * Support IE and Node constant
  */
-
+export async function a11yLibrary(){
 
 try {
     if (Node.ELEMENT_NODE != 1) {
@@ -34876,7 +34880,7 @@ OpenAjax.a11y.ElementResult.prototype.computeMessage = function () {
  */
 
 OpenAjax.a11y.ElementResult.prototype.getElementIndentifier = function () {
-  this.element_indentifier;
+  return this.element_indentifier;
 };
 
 /**
@@ -36712,7 +36716,7 @@ OpenAjax.a11y.nls.Cache = function() {
     getCacheNLS : function(loc) {
       var locale = "en-us";
       if ((typeof loc === 'string') && loc.length) locale = loc;
-      cache_nls[locale];
+      return cache_nls[locale];
     },
 
     /**
@@ -59949,8 +59953,6 @@ function getElementResultInfo(ruleResult) {
     let htmlAttrInfo   = JSON.stringify(elementResult.getHTMLAttributes());
     let ariaAttrInfo   = JSON.stringify(elementResult.getAriaAttributes());
 
-    elementResult
-
     let item = {
       'tagName'        : elementResult.getTagName(),
       'role'           : elementResult.getRole(),
@@ -60078,4 +60080,7 @@ function getDetailsAction(ruleResult) {
 
   return detailsAction;
 
+}
+
+    return OpenAjax;
 }
