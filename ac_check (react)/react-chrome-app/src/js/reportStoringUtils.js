@@ -4,6 +4,7 @@ import { load_result_table } from './displayReportData.js';
 
 
 export function storeReport(report){
+    localStorage.clear();
     localStorage.setItem("json",report);
     load_result_table();
     window.location.reload();

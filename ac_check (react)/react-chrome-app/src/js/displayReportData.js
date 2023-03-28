@@ -247,7 +247,7 @@ function load_final_results(sub2CategoryKey){
                 xpath = locations[j]['ptr:expression']; 
 
                 results["pointers"].push({
-                    "pointed_html": pointed_html,
+                    "pointed_html": pointed_html.substring(0, pointed_html.indexOf(">")+1) + " ...",
                     "pointed_xpath": xpath
                 })
             }

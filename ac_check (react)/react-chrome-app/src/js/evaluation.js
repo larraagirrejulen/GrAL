@@ -63,14 +63,13 @@ export async function performEvaluation(){
 
         chrome.runtime.sendMessage({ action: "loadOpenAjax" }, (response) => {
             console.log(response);
-            
-            /*
-            jsonld = await performA11yEvaluation(jsonld);
-    
-            console.log(JSON.stringify(jsonld));
-    
-            //storeReport(JSON.stringify(jsonld));*/
         })
+
+        var a11yEvaluationReport = localStorage.getItem("a11yEvaluationReport");
+
+        console.log(JSON.parse(a11yEvaluationReport))
+
+        storeReport(a11yEvaluationReport);
 
     }else{
         alert("You need to choose at least one analizer");

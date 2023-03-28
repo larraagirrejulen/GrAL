@@ -49,20 +49,19 @@ async function performA11yEvaluation(){
         results = ruleResult.getElementResultsArray();
 
         if (results.length <= 0){
-        jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description);
+            jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description);
         }
 
         for(let j = 0; j < results.length; j++) {
-        xpath = results[j].getDOMElement().xpath;
-        html = results[j].getDOMElement().node.outerHTML;
-        jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description, xpath, html);
+            xpath = results[j].getDOMElement().xpath;
+            html = results[j].getDOMElement().node.outerHTML;
+            jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description, xpath, html);
         }
 
     }
 
-    console.log(jsonld.getJsonLd())
+    localStorage.setItem("a11yEvaluationReport", JSON.stringify(jsonld.getJsonLd()));
 
-    //return jsonld.getJsonLd();
 }
 
 
