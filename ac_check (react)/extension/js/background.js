@@ -47,12 +47,10 @@ function main_bk(){
         }
       });
     });
-  
 
-    /**
-     * Background request handling listener
-     */
-    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+
+
+    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => { 
 
       action = request.action;
 
@@ -60,23 +58,32 @@ function main_bk(){
 
       try{
 
-        switch(action){
+      switch(action){
           case "openOptionsPage":
             chrome.runtime.openOptionsPage();
+            break;
+          case "loadOpenAjax":          
+            await chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+              await chrome.scripting.executeScript({
+                files: ["/js/libraries/a11yAinspector.js", "/js/a11yEvaluation.js"],
+                target: {tabId: tabs[0].id}
+              })
+            });
+            console.log("done")
+            sendResponse({action:"success"})
             break;
           default:
             console.log(" @Background: " + action + " request does not exist !!!");
             return;
-        }
+      }
 
       } catch(error) {
-        console.error(" @Background: " + action + " request ERROR => " + error);
-        return;
+      console.error(" @Background: " + action + " request ERROR => " + error);
+      return;
       }
 
       console.log(" @Background: " + action + " request completed !!!");
-    });  
-  
+    });
 
 }
 
