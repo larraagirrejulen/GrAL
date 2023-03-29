@@ -51,7 +51,7 @@ export function load_result_table(){
 
     localStorage.setItem('json_resultados',JSON.stringify(json_resultados));
 
-    var results_summary = {
+    const reportSummary = {
         "passed": passed,
         "failed": failed,
         "cannot_tell": cannot_tell,
@@ -59,16 +59,16 @@ export function load_result_table(){
         "not_checked": not_checked
     }
 
-    localStorage.setItem("tabla_resultados",JSON.stringify(results_summary));
+    localStorage.setItem("reportSummary",JSON.stringify(reportSummary));
 
     var category_results = [];
-    var categoryData, subsesction_results;
+    var categoryData, subsesctionResults;
     var mainCategories = getWcagStructure('0');
 
     for(var categoryKey in mainCategories){
         
         categoryData = get_data_by_category(categoryKey);
-        subsesction_results = load_subsections(categoryKey);
+        subsesctionResults = load_subsections(categoryKey);
 
         category_results.push({
             "category": mainCategories[categoryKey],
@@ -77,10 +77,9 @@ export function load_result_table(){
             "cannot_tell": categoryData[2],
             "not_present": categoryData[3],
             "not_checked": categoryData[4],
-            "subsection": subsesction_results
+            "subsection": subsesctionResults
         });
 
-        
     }
 
     localStorage.setItem("tabla_main",JSON.stringify(category_results));
@@ -258,7 +257,7 @@ function load_final_results(sub2CategoryKey){
 
     return final_results;
 }
-
+  
 
 
 /** 

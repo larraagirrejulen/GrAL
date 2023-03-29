@@ -130,7 +130,7 @@ function EvaluationSection () {
 
 function ResultSection() {
 
-  const storedReport = loadStoredReport();
+  const storedReport:any = loadStoredReport();
 
   const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {

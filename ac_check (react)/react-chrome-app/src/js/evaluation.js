@@ -61,15 +61,15 @@ export async function performEvaluation(){
 
     }else if(A11Y){
 
-        chrome.runtime.sendMessage({ action: "loadOpenAjax" }, (response) => {
-            console.log(response);
-        })
+        chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
+            console.log("result: " + response.result);
 
-        var a11yEvaluationReport = localStorage.getItem("a11yEvaluationReport");
+            var a11yEvaluationReport = localStorage.getItem("a11yEvaluationReport");
 
-        console.log(JSON.parse(a11yEvaluationReport))
+            storeReport(a11yEvaluationReport);
 
-        storeReport(a11yEvaluationReport);
+            localStorage.removeItem("a11yEvaluationReport")
+        });
 
     }else{
         alert("You need to choose at least one analizer");

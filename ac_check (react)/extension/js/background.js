@@ -1,11 +1,11 @@
 
-
 /**
  * Listeners for the click on the icon of the extension.
  * 
  * This listener is in charge of turning the extension on and off. It changes the logo's
  * colour to know the status of the extension.
  * */ 
+
 try{
 
 
@@ -30,7 +30,7 @@ try{
     chrome.storage.sync.get(['toggle'], function(result) {
       if(changeInfo.status == 'complete' && result.toggle){
         chrome.scripting.executeScript({
-          files: ["/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js'],
+          files: ["/js/libraries/a11yAinspector.js", "/js/jsonLd.js", "/js/libraries/jquery.min.js", "content.js", "/js/agregar_informes.js", '/js/jquery_find_elements.js'],
           target: {tabId: tab.id}
         });
       }
@@ -38,23 +38,23 @@ try{
   });
 
 
-  chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => { 
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { 
     if(request.action === "openOptionsPage"){
       
       chrome.runtime.openOptionsPage();
     
-    }else if(request.action === "loadOpenAjax"){
+    }else if(request.action === "performA11yEvaluation"){
 
-      await chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+      chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
         await chrome.scripting.executeScript({
-          files: ["/js/libraries/a11yAinspector.js", "/js/a11yEvaluation.js"],
+          files: ["/js/a11yEvaluation.js"],
           target: {tabId: tabs[0].id}
-        })
+        });
+        sendResponse({result:"success"});
       });
-
-      console.log("done")
-      sendResponse({action:"success"})
+      
     }
+    return true;  // for asynchronous response
   });
 
 

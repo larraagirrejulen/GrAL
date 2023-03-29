@@ -20,14 +20,16 @@ export function getStoredReport(){
 
 
 export function loadStoredReport(){
+    
     //localStorage.clear();
-    const jsonTabla = localStorage.getItem("tabla_resultados");
+    const jsonTabla = localStorage.getItem("reportSummary");
     const main = localStorage.getItem("tabla_main");
 
     return {
         resultsSummary: JSON.parse(jsonTabla) ?? "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
         resultsContent: JSON.parse(main) ?? ""
     }
+
 }
 
 
