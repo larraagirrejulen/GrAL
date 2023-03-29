@@ -28,18 +28,17 @@ function performA11yEvaluation(){
     for(let i = 0; i < ruleResults.length; i++) {
 
         ruleResult = ruleResults[i];
-        
         switch(ruleResult.getResultValue()){
-            case 1:
+            case 1: //NOT_APPLICABLE
                 outcome = "INNAPLICABLE"
                 break;
-            case 2:
+            case 2 || 4: //PASS or WARNING
                 outcome = "PASS"
                 break;
-            case 3 || 4:
+            case 3: //MANUAL_CHECK
                 outcome = "CANNOTTELL"
                 break;
-            case 5:
+            case 5: //VIOLATION
                 outcome = "FAIL"
                 break;
             default:
@@ -50,16 +49,16 @@ function performA11yEvaluation(){
         description = ruleResult.getRuleSummary() + messages.join("\n\n");
         results = ruleResult.getElementResultsArray();
 
-        if (results.length <= 0){
+        if (results.length <= 0 || outcome === "INAPPLICABLE"){
             jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description);
-        }
-
-        for(let j = 0; j < results.length; j++) {
-            var xpath = results[j].getDOMElement().xpath;
-            xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
-            xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
-            html = results[j].getDOMElement().node.outerHTML;
-            jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description, xpath, html);
+        }else{
+            for(let j = 0; j < results.length; j++) {
+                var xpath = results[j].getDOMElement().xpath;
+                xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
+                xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
+                html = results[j].getDOMElement().node.outerHTML;
+                jsonld.addNewAssertion(ruleResult.getRule().getPrimarySuccessCriterion().id, outcome, description, xpath, html);
+            }
         }
 
     }

@@ -3,7 +3,7 @@ import './css/ResultsTable.css';
 
 import { useState } from "react";
 import { getArrowSrc, getArrowUpSrc } from './js/extensionUtils.js';
-
+import parse from 'html-react-parser';
 
 
 
@@ -148,7 +148,7 @@ function Collapsible3({sub2section}:any){
             <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
             <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
             <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
-            <tr><td style={{textAlign:"left"}} colSpan={6}>{result.description}</td></tr>
+            <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(result.description)}</td></tr>
 
             {result.hasOwnProperty("solucion") ? <>
                 <tr><td style={{textAlign:"left"}}><u>Possible solution</u>:</td></tr>
@@ -160,9 +160,9 @@ function Collapsible3({sub2section}:any){
                 
                 {result.pointers.map((pointer:any, index:any) => (<>
                     <tr><td colSpan={6} style={{textAlign:"left"}}>
-                        <code className="codigo_analisis" style={{cursor: "pointer"}} data-pointed-xpath={pointer.pointed_xpath}>{pointer.pointed_html}</code>             
-                    </td></tr><br/>
-                </>))};
+                        <Pointer pointer={pointer} index={index}/>         
+                    </td></tr>
+                </>))}
             </> : ""}
             
         </>))} 
@@ -170,6 +170,36 @@ function Collapsible3({sub2section}:any){
 }
 
 
+function Pointer({ pointer, index }:any) {
+    const [expanded, setExpanded] = useState(false);
+  
+    const handleClick = () => {
+      setExpanded(!expanded);
+    };
+  
+    const displayCode = expanded
+      ? pointer.pointed_html
+      : pointer.pointed_html.substring(0, pointer.pointed_html.indexOf(" ")) + " ... /&gt;";
+  
+    const preStyles:any = {
+        backgroundColor: "#f4f4f4",
+        padding: "1rem",
+        border: "1px solid #ccc",
+        borderRadius: "5px",
+        fontSize: "14px"
+    };
+
+    return (
+      <pre
+        className="codigo_analisis"
+        style={{ ...preStyles, cursor: "pointer" }}
+        data-pointed-xpath={pointer.pointed_xpath}
+        onClick={handleClick}
+      >
+        {index + 1}. {parse(displayCode)}
+      </pre>
+    );
+  }
 
 
 function Results({section, activeLevels}:any){

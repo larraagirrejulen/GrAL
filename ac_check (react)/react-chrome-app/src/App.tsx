@@ -23,6 +23,11 @@ export default function App() {
   const logoImgSrc:any = getLogoSrc();
   const configImgSrc:any = getConfigImgSrc();
 
+  useEffect(() => {
+    const body = document.body;
+    hidden ? body.classList.remove('extension-active') : body.classList.add('extension-active');
+  }, [hidden]);
+
   return (<>
     
     {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={logoImgSrc} onClick={()=>setHidden(!hidden)} /> : ""}
@@ -115,7 +120,7 @@ function EvaluationSection () {
 
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
         <button id="btn_get_data" className="button primary" onClick={evaluateCurrentPage} disabled={isLoading}>
-          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : parse("Evaluate current page")}
+          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Evaluate current page"}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
         <label id="btn_download" className="button primary" onClick={downloadStoredReport}>Download report</label><br/>

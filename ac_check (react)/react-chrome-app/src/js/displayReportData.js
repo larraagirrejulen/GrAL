@@ -150,7 +150,7 @@ function load_sub2sections(subCategoryKey){
                     result_text = "PASSED";
                     break;
                 case "earl:inapplicable":
-                    background_color = "#000000";
+                    background_color = "#FFFFFF";
                     result_text = "NOT PRESENT";                
                     break;
                 default:
@@ -218,8 +218,8 @@ function load_final_results(sub2CategoryKey){
 
         description = description.replaceAll('<','&lt;');
         description = description.replaceAll('>','&gt;');
-        description = description.replaceAll('&lt;','<code>&lt;');
-        description = description.replaceAll('&gt;','&gt;</code>');
+        description = description.replaceAll('&lt;','<pre>&lt;');
+        description = description.replaceAll('&gt;','&gt;</pre>');
         
         
 
@@ -246,7 +246,7 @@ function load_final_results(sub2CategoryKey){
                 xpath = locations[j]['ptr:expression']; 
 
                 results["pointers"].push({
-                    "pointed_html": pointed_html.substring(0, pointed_html.indexOf(">")+1) + " ...",
+                    "pointed_html": pointed_html,
                     "pointed_xpath": xpath
                 })
             }
