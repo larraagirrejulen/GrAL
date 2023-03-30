@@ -62,13 +62,12 @@ export async function performEvaluation(){
     }else if(A11Y){
 
         chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
-            console.log("result: " + response.result);
 
-            var a11yEvaluationReport = localStorage.getItem("a11yEvaluationReport");
+            const a11yEvaluationReport = response.report;
 
-            storeReport(a11yEvaluationReport);
+            //storeReport(a11yEvaluationReport);
 
-            localStorage.removeItem("a11yEvaluationReport")
+            console.log(a11yEvaluationReport);
         });
 
     }else{

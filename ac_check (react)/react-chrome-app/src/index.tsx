@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 
 const rootElement = document.createElement("div");
-rootElement.id = "react-chrome-extension";
-rootElement.className = "react-chrome-extension"
+rootElement.id = "ac-check-extension";
 
 const siteList = ["https://www.w3.org", "https://accessmonitor.acessibilidade.gov.pt", "https://achecker.achecks.ca", "https://github.com", "https://mauve.isti.cnr.it"];
 

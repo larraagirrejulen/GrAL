@@ -35,22 +35,25 @@ try{
 
   
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { 
+
     if(request.action === "openOptionsPage"){
+
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         // save the tab ID for the options page
         chrome.storage.sync.set({ tabId: tabs[0].id });
         chrome.runtime.openOptionsPage();
       });
+
     }else if(request.action === "performA11yEvaluation"){
 
       chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
-        await chrome.scripting.executeScript({
+        const jsonld = await chrome.scripting.executeScript({
           files: ["/js/performA11yEvaluation.js"],
           target: {tabId: tabs[0].id}
         });
-        sendResponse({result:"success"});
+        sendResponse({report: jsonld});
       });
-      
+
     }
     return true;  // for asynchronous response
   });

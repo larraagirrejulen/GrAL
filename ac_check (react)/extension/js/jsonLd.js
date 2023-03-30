@@ -8,10 +8,10 @@ class JsonLd{
         "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
     };
     #outcomes = {
-        "PASS": { outcome: "earl:passed", description: "No violations found" },
-        "FAIL": { outcome: "earl:failed", description: "Found a violation ..." },
-        "CANNOTTELL": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
-        "INNAPLICABLE": { outcome: "earl:inapplicable", description: "SC is not applicable" }
+        "passed": { outcome: "earl:passed", description: "No violations found" },
+        "failed": { outcome: "earl:failed", description: "Found a violation ..." },
+        "cantTell": { outcome: "earl:cantTell", description: "Found possible applicable issue, but not sure..." },
+        "inapplicable": { outcome: "earl:inapplicable", description: "SC is not applicable" }
     }
     #context = {
         "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
