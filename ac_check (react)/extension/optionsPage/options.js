@@ -1,6 +1,6 @@
 
-// Saves options to chrome.storage
-const saveOptions = () => {
+// Save selected options into chrome.storage
+document.getElementById('saveOptions').addEventListener('click', ()=>{
 
   const mantainExtended = document.getElementById('mantainExtended').checked;
   const shiftWebpage = document.getElementById('shiftWebpage').checked;
@@ -16,19 +16,30 @@ const saveOptions = () => {
       }, 1000);
     }
   );
-};
-  
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
-const restoreOptions = () => {
   chrome.storage.sync.get(
-    { mantainExtended: false, shiftWebpage: true },
+    { tabId: null },
+    (items) => {
+      if (items.tabId !== null) {
+        // Reload the page from which the user opened options page
+        chrome.scripting.executeScript({ 
+          target: {tabId: items.tabId},
+          func: ()=>{window.location.reload();}
+        });
+      }
+    }
+  );
+});
+
+
+// Restore saved options from chrome.storage
+document.addEventListener('DOMContentLoaded', ()=>{
+
+  chrome.storage.sync.get(
+    { mantainExtended: true, shiftWebpage: true }, // Default values if there are no saved ones
     (items) => {
       document.getElementById('mantainExtended').checked = items.mantainExtended;
       document.getElementById('shiftWebpage').checked = items.shiftWebpage;
     }
   );
-};
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('saveOptions').addEventListener('click', saveOptions);
+});

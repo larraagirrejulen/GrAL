@@ -1,5 +1,9 @@
  
- .option{
+body{
+    padding: 15px;
+}
+
+.option{
     align-items: center;
     display: inline-flex;
     margin-bottom: 10px;
@@ -9,20 +13,20 @@
     border-radius: 5px;
     font-size: 13px;
     width: 75%;
- }
+}
 
- #saveStatus{
+#saveStatus{
     color: rgb(57, 195, 57);
     font-weight: bold;
     font-size: 13px;
- }
+}
 
- #saveOptions{
+#saveOptions{
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 13px;
- }
+}
  
  /* The switch - the box around the slider */
 .switch {

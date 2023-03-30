@@ -1,37 +1,37 @@
 {
+  "manifest_version": 3,
   "name": "AC-CHECK",
   "version": "2.0.0",
-  "manifest_version": 3,
-  "description": "Una extension de accesibilidad",
-  "author": "Mikel Iturria y Julen Larrañaga",
-
-  "background":{
-    "service_worker": "/js/background.js"
-  },
-
-  "permissions": ["scripting","storage","activeTab","unlimitedStorage","tabs"],
-
-  "options_ui": {
-    "page": "/options/options.html",
-    "open_in_tab": false
-  },
-
-  "host_permissions": ["<all_urls>"],
-
+  "description": "An accessibility evaluation extension",
+  "author": "Mikel Iturria & Julen Larrañaga",
+  
   "action": {
     "default_title": "Click to turn on/off"
   },
 
   "icons": { 
     "16": "/images/icon16.png",
-    "19": "/images/icon19.png",
     "32": "/images/icon32.png",
     "48": "/images/icon48.png",
-    "128": "/images/icon128.png" },
+    "128": "/images/icon128.png" 
+  },
+
+  "host_permissions": ["<all_urls>"],
+
+  "permissions": ["scripting","storage","activeTab","unlimitedStorage","tabs"],
+
+  "background":{
+    "service_worker": "/background.js"
+  },
+
+  "options_ui": {
+    "page": "/optionsPage/options.html",
+    "open_in_tab": false
+  },
 
   "web_accessible_resources": [
     {
-      "resources": ["/images/icon128.png", "/images/arrow.png", "/images/arrow_up.png", "/images/settings_gear.png"],
+      "resources": ["/images/icon128.png", "/images/contractedArrow.png", "/images/extendedArrow.png", "/images/settingsGear.png"],
       "matches": ["<all_urls>"]
     }
   ]

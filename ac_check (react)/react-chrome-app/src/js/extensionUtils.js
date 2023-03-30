@@ -5,15 +5,15 @@ export function getLogoSrc(){
 }
 
 export function getArrowSrc (){
-    return chrome.runtime.getURL('/images/arrow.png');
+    return chrome.runtime.getURL('/images/contractedArrow.png');
 }
 
 export function getArrowUpSrc (){
-    return chrome.runtime.getURL('/images/arrow_up.png');
+    return chrome.runtime.getURL('/images/extendedArrow.png');
 }
 
 export function getConfigImgSrc(){
-    return chrome.runtime.getURL('/images/settings_gear.png');
+    return chrome.runtime.getURL('/images/settingsGear.png');
 }
 
 
@@ -24,7 +24,7 @@ export function openOptionsPage(){
 export async function getOptions(option, setOptionValue){
     if(option === "mantainExtended"){
         chrome.storage.sync.get(["mantainExtended"], (result) => {
-            setOptionValue(!result.mantainExtended);
+            setOptionValue(result.mantainExtended);
         });
     } else if(option === "shiftWebpage"){
         const result = await new Promise((resolve) => { 

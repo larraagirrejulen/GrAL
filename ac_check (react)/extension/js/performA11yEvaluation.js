@@ -30,7 +30,7 @@ function performA11yEvaluation(){
         ruleResult = ruleResults[i];
         switch(ruleResult.getResultValue()){
             case 1: //NOT_APPLICABLE
-                outcome = "INNAPLICABLE"
+                outcome = "INNAPLICABLE" // earl:NotApplicable
                 break;
             case 2 || 4: //PASS or WARNING
                 outcome = "PASS"

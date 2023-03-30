@@ -69,7 +69,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "29/3/2023, 19:36:13",
+  "dct:date": "30/3/2023, 15:15:56",
   "dct:summary": "Some errors where found...",
   "assertors": [
     {
@@ -172,7 +172,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
-                "description": "<img class=\"col-4\" alt=\"\" src=\"https://www.ehu.eus/documents/10136/43371206/rincon-estudio_web.jpg/09563f9a-7837-97c9-3033-4366410aa60d?t=1680005989580\"/documents/10136/43371206/rincon-estudio_web.jpg/09563f9a-7837-97c9-3033-4366410aa60d?t=1680005989580\"> ...",
+                "description": "<img class=\"col-4\" alt=\"\" src=\"https://www.ehu.eus/documents/10136/43878056/zuri%C3%B1e-gomez-de-balugera_dest.jpg/46a26424-8ce4-bf35-8ab6-a4fe05d93481?t=1680158609685\"/documents/10136/43878056/zuri%C3%B1e-gomez-de-balugera_dest.jpg/46a26424-8ce4-bf35-8ab6-a4fe05d93481?t=1680158609685\"> ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
