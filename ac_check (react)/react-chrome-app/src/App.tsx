@@ -6,7 +6,7 @@ import './css/ResultSection.css';
 
 
 import { useEffect, useState } from "react";
-import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage } from './js/extensionUtils.js';
+import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage, getOptions } from './js/extensionUtils.js';
 import { performEvaluation} from './js/evaluation.js';
 import { removeStoredReport, downloadStoredReport, uploadAndStoreReport, loadStoredReport } from './js/reportStoringUtils.js';
 import parse from 'html-react-parser';
@@ -24,9 +24,19 @@ export default function App() {
   const configImgSrc:any = getConfigImgSrc();
 
   useEffect(() => {
-    const body = document.body;
-    hidden ? body.classList.remove('extension-active') : body.classList.add('extension-active');
+    const getOptionsFromStorage = async () => {
+      const shiftWebpage = await getOptions("shiftWebpage");
+      if(shiftWebpage){
+        const body = document.body;
+        hidden ? body.classList.remove('extension-active') : body.classList.add('extension-active');
+      }
+    };
+    getOptionsFromStorage();
   }, [hidden]);
+
+  useEffect(() => {
+    
+  }, []);
 
   return (<>
     

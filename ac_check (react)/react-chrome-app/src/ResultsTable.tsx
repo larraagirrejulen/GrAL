@@ -1,8 +1,9 @@
 
 import './css/ResultsTable.css';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getArrowSrc, getArrowUpSrc } from './js/extensionUtils.js';
+import { getOptions } from './js/extensionUtils.js';
 import parse from 'html-react-parser';
 
 
@@ -31,9 +32,14 @@ function Summary({results,  activeLevels}:any){
 
 export default function ResultsTable({results, activeLevels}:any){
   
-    const [collapsibles, setCollapsibles] = useState([false, false, false, false]);
-    const handleCollapsiblesChange = (index:any) => {
-      const newCollapsibles = [...collapsibles];
+    const [mantainExtended, setMantainExtended] = useState(false);
+    useEffect(() => {
+        getOptions("mantainExtended", setMantainExtended);
+    }, []);
+
+    const [collapsibles, setCollapsibles] = useState(Array(results.resultsContent.length).fill(false));
+    const handleCollapsiblesChange = (index:any, mantainExtended:any) => {
+      const newCollapsibles = mantainExtended ? [...collapsibles] : Array(results.resultsContent.length).fill(false);
       newCollapsibles[index] = !collapsibles[index];
       setCollapsibles(newCollapsibles);
     };
@@ -53,11 +59,11 @@ export default function ResultsTable({results, activeLevels}:any){
                 </thead>
                 <tbody>
                     {results.resultsContent.map((section:any, index:any) => (<>
-                    <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index)}>
+                    <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
                         <td>{section.category}</td>
                         <Results section={section} activeLevels={activeLevels}/>
                     </tr>
-                    { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} /> : ""}
+                    { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} mantainExtended={mantainExtended}/> : ""}
                     </>))}
                 </tbody>
             </table>
@@ -72,23 +78,23 @@ export default function ResultsTable({results, activeLevels}:any){
 
 
 
-function Collapsible1({section, activeLevels}:any){
+function Collapsible1({section, activeLevels, mantainExtended}:any){
 
     const [collapsibles, setCollapsibles] = useState(Array(section.subsection.length).fill(false));
 
-    const handleCollapsiblesChange = (index:any) => {
-        const newCollapsibles = [...collapsibles];
+    const handleCollapsiblesChange = (index:any, mantainExtended:any) => {
+        const newCollapsibles = mantainExtended ? [...collapsibles] : Array(section.subsection.length).fill(false);
         newCollapsibles[index] = !collapsibles[index];
         setCollapsibles(newCollapsibles);
       };
 
     return(<> {section.subsection.map((subsection:any, index:any) => (<>
 
-        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index)}>
+        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
             <td>{subsection.subsection}</td>
             <Results section={subsection} activeLevels={activeLevels}/>
         </tr>
-        { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} /> : ""}
+        { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> : ""}
     
     </>))} </>);
 }
@@ -96,19 +102,12 @@ function Collapsible1({section, activeLevels}:any){
 
 
 
-function Collapsible2({subsection, activeLevels}:any){
-
-    const [isOpen, setIsOpen] = useState(Array(subsection.sub2section.length).fill(false));
-    const handleIsOpen = (index:any) => {
-        const newIsOpen = [...isOpen];
-        newIsOpen[index] = !isOpen[index];
-        setIsOpen(newIsOpen);
-    };
+function Collapsible2({subsection, activeLevels, mantainExtended}:any){
 
     const [collapsible3s, setCollapsible3s] = useState(Array(subsection.sub2section.length).fill(false));
 
-    const handleCollapsible3sChange = (index:any) => {
-        const newCollapsible3s = [...collapsible3s];
+    const handleCollapsible3sChange = (index:any, mantainExtended:any) => {
+        const newCollapsible3s = mantainExtended ? [...collapsible3s] : Array(subsection.sub2section.length).fill(false);
         newCollapsible3s[index] = !collapsible3s[index];
         setCollapsible3s(newCollapsible3s);
     };
@@ -117,10 +116,10 @@ function Collapsible2({subsection, activeLevels}:any){
 
         { activeLevels.includes(sub2section.conformanceLevel) ? <>
         
-            <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleIsOpen(index); handleCollapsible3sChange(index)}}>
+            <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
                 {sub2section.hasOwnProperty("results") ? <>
                     <td colSpan={6}>
-                        <img src={ isOpen[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                        <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                         {sub2section.sub2section}
                     </td>
                 </>: <>

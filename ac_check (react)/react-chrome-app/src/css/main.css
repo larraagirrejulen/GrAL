@@ -1,7 +1,6 @@
 .extension-active {
   position: relative;
   left: 300px;
-  animation: slide-in 0.3s ease-in-out;
 }
 
 .react_chrome_extension *{

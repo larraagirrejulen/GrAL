@@ -20,3 +20,18 @@ export function getConfigImgSrc(){
 export function openOptionsPage(){
     chrome.runtime.sendMessage({ action: "openOptionsPage" });
 }
+
+export async function getOptions(option, setOptionValue){
+    if(option === "mantainExtended"){
+        chrome.storage.sync.get(["mantainExtended"], (result) => {
+            setOptionValue(!result.mantainExtended);
+        });
+    } else if(option === "shiftWebpage"){
+        const result = await new Promise((resolve) => { 
+            chrome.storage.sync.get(["shiftWebpage"], (result) => {
+                resolve(result.shiftWebpage);
+            });
+        });
+        return result;
+    }
+}

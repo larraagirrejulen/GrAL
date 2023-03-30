@@ -2,23 +2,37 @@
 <html>
   <head>
     <title>My Test Extension Options</title>
+    <link rel="stylesheet" href="options.css">
   </head>
-  <body>
-    <select id="color">
-      <option value="red">red</option>
-      <option value="green">green</option>
-      <option value="blue">blue</option>
-      <option value="yellow">yellow</option>
-    </select>
+  <body>    
+    
+    <div class="option">
+      <span>
+        Shift the webpage to the right <br/> so the extension doesn't cover it
+      </span>
+      <label class="switch">
+        <input type="checkbox" id="shiftWebpage">
+        <span class="slider round"></span>
+      </label>
+    </div>
 
-    <label>
-      <input type="checkbox" id="like" />
-      I like colors.
-    </label>
-
-    <div id="status"></div>
-    <button id="save">Save</button>
-
-    <!--script src="options.js"></script-->
+    <div class="option">
+      <span>
+        Mantain extended elements <br/> when opening a new element
+      </span>
+      <label class="switch">
+        <input type="checkbox" id="mantainExtended">
+        <span class="slider round"></span>
+      </label>
+    </div>
+   
+    <div>
+      <button id="saveOptions">Save</button>
+      <span id="saveStatus"></span><br/>
+    </div>
+    
+    <span>You will not see the changes until you reload the extension or the page you are evaluating</span>
+    
+    <script src="options.js"></script>
   </body>
 </html>
