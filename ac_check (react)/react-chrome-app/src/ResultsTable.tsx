@@ -1,45 +1,27 @@
 
-import './css/ResultsTable.css';
+import './css/resultsTable.css';
 
 import { useState, useEffect } from "react";
-import { getArrowSrc, getArrowUpSrc } from './js/extensionUtils.js';
-import { getOptions } from './js/extensionUtils.js';
+import { getArrowSrc, getArrowUpSrc, getOptions } from './js/extensionUtils.js';
 import parse from 'html-react-parser';
+import { getFromChromeStorage } from './js/extensionUtils.js';
 
 
 
-function Summary({results,  activeLevels}:any){
-
-    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(var level of activeLevels){
-        passed += results.resultsSummary.passed[level];
-        failed += results.resultsSummary.failed[level];
-        cannot_tell += results.resultsSummary.cannot_tell[level];
-        not_present += results.resultsSummary.not_present[level];
-        not_checked += results.resultsSummary.not_checked[level];
-    }
-
-    return(<>
-        <table className="summary">
-            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
-            <tr><td>{passed}</td><td>{failed}</td><td>{cannot_tell}</td><td>{not_present}</td><td>{not_checked}</td></tr>
-        </table>
-    </>);
-}
+export default function ResultsTable({activeLevels}:any){
 
 
-
-
-export default function ResultsTable({results, activeLevels}:any){
-  
+    const [reportTableContent, setReportTableContent] = useState([]);
     const [mantainExtended, setMantainExtended] = useState(false);
+    
     useEffect(() => {
         getOptions("mantainExtended", setMantainExtended);
+        (async ()=>{ setReportTableContent(await getFromChromeStorage("reportTableContent")); })();
     }, []);
 
-    const [collapsibles, setCollapsibles] = useState(Array(results.resultsContent.length).fill(false));
+    const [collapsibles, setCollapsibles] = useState(Array(reportTableContent.length).fill(false));
     const handleCollapsiblesChange = (index:any, mantainExtended:any) => {
-      const newCollapsibles = mantainExtended ? [...collapsibles] : Array(results.resultsContent.length).fill(false);
+      const newCollapsibles = mantainExtended ? [...collapsibles] : Array(reportTableContent.length).fill(false);
       newCollapsibles[index] = !collapsibles[index];
       setCollapsibles(newCollapsibles);
     };
@@ -47,7 +29,7 @@ export default function ResultsTable({results, activeLevels}:any){
     return(
       <div className = "results_container">
 
-        <Summary results={results} activeLevels={activeLevels} />
+        <Summary activeLevels={activeLevels} />
 
         <div className='table_container'>
             <table>
@@ -58,7 +40,7 @@ export default function ResultsTable({results, activeLevels}:any){
                     </tr>
                 </thead>
                 <tbody>
-                    {results.resultsContent.map((section:any, index:any) => (<>
+                    {reportTableContent.map((section:any, index:any) => (<>
                     <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
                         <td>{section.category}</td>
                         <Results section={section} activeLevels={activeLevels}/>
@@ -73,6 +55,37 @@ export default function ResultsTable({results, activeLevels}:any){
       </div>
     );
     
+}
+
+
+
+
+function Summary({activeLevels}:any){
+
+    const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
+
+    useEffect(() => { 
+        (async ()=>{
+            const reportSummary = await getFromChromeStorage("reportSummary");
+
+            let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
+            for(var level of activeLevels){
+                passed += reportSummary.passed[level];
+                failed += reportSummary.failed[level];
+                cannot_tell += reportSummary.cannot_tell[level];
+                not_present += reportSummary.not_present[level];
+                not_checked += reportSummary.not_checked[level];
+            }
+            setOutcomesCount([passed, failed, cannot_tell, not_present, not_checked]);
+        })();
+    });
+
+    return(<>
+        <table className="summary">
+            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
+            <tr><td>{outcomesCount[0]}</td><td>{outcomesCount[1]}</td><td>{outcomesCount[2]}</td><td>{outcomesCount[3]}</td><td>{outcomesCount[4]}</td></tr>
+        </table>
+    </>);
 }
 
 
@@ -117,7 +130,7 @@ function Collapsible2({subsection, activeLevels, mantainExtended}:any){
         { activeLevels.includes(sub2section.conformanceLevel) ? <>
         
             <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
-                {sub2section.hasOwnProperty("results") ? <>
+                {sub2section.hasOwnProperty("results") && sub2section.result_text !== "NOT PRESENT" ? <>
                     <td colSpan={6}>
                         <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                         {sub2section.sub2section}
@@ -203,7 +216,7 @@ function Pointer({ pointer, index }:any) {
 
 function Results({section, activeLevels}:any){
 
-    var passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
+    let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
     for(var level of activeLevels){
         passed += section.passed[level];
         failed += section.failed[level];

@@ -18,8 +18,8 @@ try{
         }, 1000);
       }
     );
-    chrome.storage.sync.get(
-      { tabId: null },
+
+    chrome.storage.session.get({ tabId: null },
       (items) => {
         if (items.tabId !== null) {
           // Reload the page from which the user opened options page

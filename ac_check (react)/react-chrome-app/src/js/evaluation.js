@@ -41,7 +41,7 @@ async function fetchEvaluation(bodyData, timeout = 60000) {
 
 export async function performEvaluation(){
 
-    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    const checkboxes = JSON.parse(sessionStorage.getItem("checkboxes"));
 
     const AM = checkboxes[0].checked;
     const AC = checkboxes[1].checked;
@@ -51,23 +51,24 @@ export async function performEvaluation(){
     if(AM || AC || MV){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         
-        var json = await fetchEvaluation(bodyData);
+        let json = await fetchEvaluation(bodyData);
 
         /* if (A11Y){
         const a11y = a11y();
         merge(json, a11y);
         } */
-        storeReport(JSON.stringify(json));
+        storeReport(json);
 
     }else if(A11Y){
 
         chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
 
-            const a11yEvaluationReport = response.report;
-
-            //storeReport(a11yEvaluationReport);
+            const a11yEvaluationReport = response.report[0].result;
 
             console.log(a11yEvaluationReport);
+
+            storeReport(a11yEvaluationReport);
+            
         });
 
     }else{

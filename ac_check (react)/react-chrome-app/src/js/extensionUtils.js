@@ -35,3 +35,21 @@ export async function getOptions(option, setOptionValue){
         return result;
     }
 }
+
+export async function storeOnChrome(key, value){
+    let obj = {};
+    obj[key] = value;
+    chrome.storage.local.set(obj);
+}
+
+export async function getFromChromeStorage(key) {
+    return new Promise((resolve) => {
+        chrome.storage.local.get(key, (result) => {
+            resolve(result[key]);
+        });
+    });
+}
+
+export async function removeFromChromeStorage(key) {
+    chrome.storage.local.remove(key);
+}

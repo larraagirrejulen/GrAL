@@ -6,9 +6,10 @@
 
 try{
 
-  chrome.runtime.onInstalled.addListener(function() {
+  chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({'toggle':true});
   });
+
 
   chrome.action.onClicked.addListener((tab) => {
     chrome.storage.sync.get(['toggle'], function(result) {
@@ -21,38 +22,35 @@ try{
     });
   });
 
-  chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     chrome.storage.sync.get(['toggle'], function(result) {
       if(changeInfo.status == 'complete' && result.toggle){
         chrome.scripting.executeScript({
           files: ["content.js", "/libraries/a11yAinspector.js", "/libraries/jquery.min.js", "/js/jsonLd.js", '/js/jquery_find_elements.js'],
-          target: {tabId: tab.id}
+          target: {tabId: tabId}
         });
       }
     });
   });
 
 
-  
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { 
 
     if(request.action === "openOptionsPage"){
-
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        // save the tab ID for the options page
-        chrome.storage.sync.set({ tabId: tabs[0].id });
-        chrome.runtime.openOptionsPage();
-      });
+      
+      chrome.storage.session.set({ tabId: sender.tab.id }); // store the tab ID for the options page to reload the tab when saving options
+      chrome.runtime.openOptionsPage();
 
     }else if(request.action === "performA11yEvaluation"){
 
-      chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+      (async () => {
         const jsonld = await chrome.scripting.executeScript({
           files: ["/js/performA11yEvaluation.js"],
-          target: {tabId: tabs[0].id}
+          target: {tabId: sender.tab.id}
         });
         sendResponse({report: jsonld});
-      });
+      })();
 
     }
     return true;  // for asynchronous response

@@ -476,7 +476,7 @@ class JsonLd{
 
         const resultOutcome = this.#outcomes[outcome].outcome
 
-        var pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
+        let pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == resultOutcome)
 
 
         if(pageAssertion.length > 0){
@@ -532,7 +532,7 @@ class JsonLd{
             "result":
             {
                 "outcome": resultOutcome,
-                "description": "*************@" + this.#evaluator_data.name + "************* \n\n" + criteriaDescription,
+                "description": "\n*************@" + this.#evaluator_data.name + "************* \n\n" + criteriaDescription,
                 "locationPointersGroup": []
             }
         }

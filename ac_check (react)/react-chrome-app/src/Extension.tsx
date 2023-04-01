@@ -1,60 +1,48 @@
 
-import './css/main.css';
-import './css/EvaluatorSelectionSection.css';
-import './css/EvaluationSection.css';
-import './css/ResultSection.css';
+import './css/extension.css';
+import './css/evaluatorSelectionSection.css';
+import './css/evaluationSection.css';
+import './css/resultSection.css';
 
 
 import { useEffect, useState } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage, getOptions } from './js/extensionUtils.js';
-import { performEvaluation} from './js/evaluation.js';
-import { removeStoredReport, downloadStoredReport, uploadAndStoreReport, loadStoredReport } from './js/reportStoringUtils.js';
-import parse from 'html-react-parser';
-import { BeatLoader } from 'react-spinners';
+import { removeStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
+import { performEvaluation } from './js/evaluation.js';
+import { BeatLoader } from 'react-spinners';  // Loading animation
 import ResultsTable from './ResultsTable';
 
 
 
 
-export default function App() {
+export default function Extension() {
 
   const [hidden, setHidden] = useState(false);
 
-  const logoImgSrc:any = getLogoSrc();
-  const configImgSrc:any = getConfigImgSrc();
-
   useEffect(() => {
-    const getOptionsFromStorage = async () => {
+    (async () => {
       const shiftWebpage = await getOptions("shiftWebpage");
       if(shiftWebpage){
-        const body = document.body;
-        hidden ? body.classList.remove('extension-active') : body.classList.add('extension-active');
+        hidden ? document.body.classList.remove('extension-active') : document.body.classList.add('extension-active');
       }
-    };
-    getOptionsFromStorage();
+    })();
   }, [hidden]);
-
-  useEffect(() => {
-    
-  }, []);
 
   return (<>
     
-    {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={logoImgSrc} onClick={()=>setHidden(!hidden)} /> : ""}
+    {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={getLogoSrc()} onClick={()=>setHidden(!hidden)} /> : ""}
     
     <div className= {`react_chrome_extension ${hidden ? 'hidden' : ''}`}>
-      <img className="options_icon" src={configImgSrc} alt="open configuration options window" onClick={()=>openOptionsPage()} />
+      <img className="options_icon" src={getConfigImgSrc()} alt="open configuration options window" onClick={()=>openOptionsPage()} />
       <span className="close_icon" onClick={()=>setHidden(!hidden)}>&times;</span>
       <div className="img_container">
-        <img alt="extension logo" src={logoImgSrc} onClick={() => {
+        <img alt="extension logo" src={getLogoSrc()} onClick={() => {
           window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
           window.open("https://github.com/Itusil/TFG", '_blank')
         }} />
       </div>
 
-      <EvaluatorSelectionSection />
-      <EvaluationSection />
-      <ResultSection />
+      <EvaluatorSelectionSection /> <EvaluationSection /> <ResultSection />
     </div>
 
   </>);
@@ -64,7 +52,7 @@ export default function App() {
 
 
 function EvaluatorSelectionSection () {
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
   const [checkboxes, setCheckboxes] = useState([
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -77,11 +65,11 @@ function EvaluatorSelectionSection () {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index].checked = !newCheckboxes[index].checked;
     setCheckboxes(newCheckboxes);
-    localStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
+    sessionStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
   };
 
-  useEffect(() => {
-    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+  useEffect(() => { 
+    sessionStorage.setItem("checkboxes", JSON.stringify(checkboxes));
   });
 
   return ( <div className="evaluator_selection_section">
@@ -111,7 +99,7 @@ function EvaluatorSelectionSection () {
 
 function EvaluationSection () {
 
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("tabla_main")==null);
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
   const [isLoading, setIsLoading] = useState(false);
 
   function evaluateCurrentPage(){
@@ -144,19 +132,17 @@ function EvaluationSection () {
 
 
 function ResultSection() {
-
-  const storedReport:any = loadStoredReport();
-
+  
   const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
     const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
     setActiveLevels(levels);
-    localStorage.setItem("activeLevels", JSON.stringify(levels));
+    sessionStorage.setItem("activeLevels", JSON.stringify(levels));
   };
 
   useEffect(() => {
-    localStorage.setItem("activeLevels", JSON.stringify(activeLevels));
-  });
+    sessionStorage.setItem("activeLevels", JSON.stringify(activeLevels));
+  }, [activeLevels]);
 
   return ( 
     <div className="result_section">
@@ -164,20 +150,20 @@ function ResultSection() {
       <div className="header"><span>Evaluation Results</span></div>
 
       <div className="body">
-        {storedReport.resultsContent !== "" ? 
+        {localStorage.getItem("evaluated") === "true" ? 
         <>
           <div className='conformanceLevelSelector'>
             <p>Select conformace level:</p>
             <div className="level-container">
-              <div className={`conformanceLevel ${activeLevels.includes('A') ? 'selected' : ''}`} onClick={() => handleLevelClick('A')}>A</div>
-              <div className={`conformanceLevel ${activeLevels.includes('AA') ? 'selected' : ''}`} onClick={() => handleLevelClick('AA')}>AA</div>
-              <div className={`conformanceLevel ${activeLevels.includes('AAA') ? 'selected' : ''}`} onClick={() => handleLevelClick('AAA')}>AAA</div>
+              {["A", "AA", "AAA"].map((level:any) => (
+                <div className={`conformanceLevel ${activeLevels.includes(level) ? 'selected' : ''}`} onClick={() => handleLevelClick(level)}>{level}</div>
+              ))}
             </div>
           </div>
 
-          <ResultsTable results={storedReport} activeLevels={activeLevels}/>
+          <ResultsTable activeLevels={activeLevels}/>
         </>: 
-          <div className = "table_container">{parse(storedReport.resultsSummary)}</div>
+          <div style={{textAlign: "center", padding:"15px 0"}}>No data stored</div>
         }
       </div>
 

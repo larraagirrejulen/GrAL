@@ -1,6 +1,6 @@
 
 import { getSuccessCriterias, getWcagStructure } from './wcagUtils.js'
-import { getStoredReport }  from './reportStoringUtils.js';
+import { getFromChromeStorage, storeOnChrome }  from './extensionUtils.js';
 
 
 /** 
@@ -9,20 +9,20 @@ import { getStoredReport }  from './reportStoringUtils.js';
  * 
  * With that data, it creates the results table.
  */
-export function load_result_table(){
+export async function load_result_table(){
 
-    var stored_report = getStoredReport();
+    const storedReport = await getFromChromeStorage("report");
+    const results = storedReport["auditSample"];
+    const criterias = getSuccessCriterias();
+    const json_resultados = {};
 
-    var [passed, failed, cannot_tell, not_present, not_checked] = initialiceOutcomeVariables();
-
-    var criterias = getSuccessCriterias();
-    var results = stored_report["auditSample"]
-    var obj, level;
-    var json_resultados = {};
+    let [passed, failed, cannot_tell, not_present, not_checked] = initialiceOutcomeVariables();
+    let result, level;
+    
     for (var i = 0; i <results.length; i++){
         level = criterias[i].conformanceLevel;
-        obj = results[i];
-        switch(obj.result.outcome) {
+        result = results[i];
+        switch(result.result.outcome) {
             case "earl:failed":
                 failed[level] = failed[level]+1;
                 break;
@@ -42,14 +42,14 @@ export function load_result_table(){
         }
 
         json_resultados[criterias[i].num] = {
-            'result' : obj.result.outcome,
-            "Codigos": obj.hasPart,
-            'mensaje': obj.result.description,
+            'result' : result.result.outcome,
+            "Codigos": result.hasPart,
+            'mensaje': result.result.description,
             "conformanceLevel": level
         };
     }
 
-    localStorage.setItem('json_resultados',JSON.stringify(json_resultados));
+    sessionStorage.setItem('json_resultados',JSON.stringify(json_resultados));
 
     const reportSummary = {
         "passed": passed,
@@ -59,7 +59,7 @@ export function load_result_table(){
         "not_checked": not_checked
     }
 
-    localStorage.setItem("reportSummary",JSON.stringify(reportSummary));
+    storeOnChrome("reportSummary", reportSummary);
 
     var category_results = [];
     var categoryData, subsesctionResults;
@@ -82,7 +82,7 @@ export function load_result_table(){
 
     }
 
-    localStorage.setItem("tabla_main",JSON.stringify(category_results));
+    storeOnChrome("reportTableContent", category_results);
 }
 
 
@@ -122,7 +122,7 @@ function load_subsections(categoryKey){
  */
 function load_sub2sections(subCategoryKey){
 
-    const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
+    const json_resultados = JSON.parse(sessionStorage.getItem('json_resultados'));
 
     var sub2section_results = [];
     var sub2Categories = getWcagStructure(subCategoryKey);
@@ -203,7 +203,7 @@ function load_sub2sections(subCategoryKey){
  */
 function load_final_results(sub2CategoryKey){
 
-    const json_resultados = JSON.parse(localStorage.getItem('json_resultados'));
+    const json_resultados = JSON.parse(sessionStorage.getItem('json_resultados'));
     const assertions = json_resultados[sub2CategoryKey]['Codigos'];
 
     var locations, outcome, description, locations_length, assertor, pointed_html, xpath, results;
@@ -265,7 +265,7 @@ function load_final_results(sub2CategoryKey){
  * not present and not checked for that sub-substandard and returns it as an array, 
  */
 function get_data_by_category(categoryKey){
-    var json_resultados = localStorage.getItem('json_resultados');
+    var json_resultados = sessionStorage.getItem('json_resultados');
     json_resultados = JSON.parse(json_resultados);
     
     var [passed, failed, cannot_tell, not_present, not_checked] = initialiceOutcomeVariables();

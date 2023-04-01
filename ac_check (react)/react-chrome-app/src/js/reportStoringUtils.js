@@ -1,35 +1,14 @@
 
 import { load_result_table } from './displayReportData.js';
+import { storeOnChrome, getFromChromeStorage, removeFromChromeStorage } from './extensionUtils.js';
 
 
 
 export function storeReport(report){
-    localStorage.clear();
-    localStorage.setItem("json",report);
+    storeOnChrome("report", report);
     load_result_table();
+    localStorage.setItem("evaluated", "true");
     window.location.reload();
-}
-
-
-
-export function getStoredReport(){
-    var json = localStorage.getItem("json");
-    return JSON.parse(json);
-}
-
-
-
-export function loadStoredReport(){
-    
-    //localStorage.clear();
-    const jsonTabla = localStorage.getItem("reportSummary");
-    const main = localStorage.getItem("tabla_main");
-
-    return {
-        resultsSummary: JSON.parse(jsonTabla) ?? "<div style='text-align: center; padding:15px 0;'>No data stored</div>", 
-        resultsContent: JSON.parse(main) ?? ""
-    }
-
 }
 
 
@@ -37,7 +16,10 @@ export function loadStoredReport(){
 export function removeStoredReport(){
     if (!window.confirm("Are you sure you want to permanently delete current stored evaluation data?")) return;
 
-    localStorage.clear();
+    localStorage.removeItem("evaluated");
+    removeFromChromeStorage("report");
+    removeFromChromeStorage("reportSummary");
+    removeFromChromeStorage("reportTableContent");
     window.location.reload();
 }
 
@@ -45,40 +27,40 @@ export function removeStoredReport(){
 
 export function uploadAndStoreReport(event){
 
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsText(event.target.files[0], "UTF-8");
-    reader.onload = (event) => {
-        //var savedJson = getStoredReport();
-        var json = JSON.parse(event.target.result);
-        //if (savedJson != null) merge(json,savedJson);
-        storeReport(JSON.stringify(json));
+    reader.onload = async (event) => {
+        //const storedReport = await getFromChromeStorage("report");
+        var report = JSON.parse(event.target.result);
+        //if (savedJson != null) merge(report,storedReport);
+        storeReport(report);
     }
 
 }
 
 
 
-export function downloadStoredReport(){
+export async function downloadStoredReport(){
 
-    if(localStorage.getItem("tabla_main")==null){
+    if(localStorage.getItem("evaluated") !== "true"){
         alert("There is currently no evaluation data stored! Start by evaluating the page or uploading an existing report.");
         return;
     }
 
-    var json = getStoredReport();
+    const storedReport = await getFromChromeStorage("report");
 
-    const activeLevels = JSON.parse(localStorage.getItem("activeLevels"));
+    const activeLevels = JSON.parse(sessionStorage.getItem("activeLevels"));
 
-    json.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
+    storedReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
 
-    json.auditSample.forEach((audit) => {
+    storedReport.auditSample.forEach((audit) => {
         audit.hasPart.forEach((elem) => {
             elem.result.description = "\n\n----------------------------------\n\n" + elem.result.description;
         });
     });
 
-    const data = JSON.stringify(json);
-    const fileName = json.title + ".json";
+    const data = JSON.stringify(storedReport);
+    const fileName = storedReport.title + ".json";
     const fileType = "text/json";
 
     const blob = new Blob([data], { type: fileType })
