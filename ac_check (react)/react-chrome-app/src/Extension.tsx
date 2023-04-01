@@ -4,7 +4,6 @@ import './css/evaluatorSelectionSection.css';
 import './css/evaluationSection.css';
 import './css/resultSection.css';
 
-
 import { useEffect, useState } from "react";
 import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage, getOptions } from './js/extensionUtils.js';
 import { removeStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
@@ -55,8 +54,8 @@ function EvaluatorSelectionSection () {
   const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
   const [checkboxes, setCheckboxes] = useState([
-    { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
-    { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
+    { checked: true, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
+    { checked: true, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
     { checked: true, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"}
   ]);
@@ -142,7 +141,7 @@ function ResultSection() {
 
   useEffect(() => {
     sessionStorage.setItem("activeLevels", JSON.stringify(activeLevels));
-  }, [activeLevels]);
+  });
 
   return ( 
     <div className="result_section">

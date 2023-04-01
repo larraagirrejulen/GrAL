@@ -79,7 +79,11 @@ function merge(jsonLd1, jsonLd2){
 
 			assertion1 = assertion2;
 
-		} else {
+		} else if(assertion2.result.outcome === "earl:inapplicable") {
+
+            continue;
+
+        } else {
 
 			mergeFoundCases(assertion1, assertion2);
 

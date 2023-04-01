@@ -10,7 +10,6 @@ import { getFromChromeStorage } from './js/extensionUtils.js';
 
 export default function ResultsTable({activeLevels}:any){
 
-
     const [reportTableContent, setReportTableContent] = useState([]);
     const [mantainExtended, setMantainExtended] = useState(false);
     
@@ -51,7 +50,6 @@ export default function ResultsTable({activeLevels}:any){
             </table>
         </div>
         
-        
       </div>
     );
     
@@ -80,12 +78,12 @@ function Summary({activeLevels}:any){
         })();
     });
 
-    return(<>
+    return(
         <table className="summary">
             <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
             <tr><td>{outcomesCount[0]}</td><td>{outcomesCount[1]}</td><td>{outcomesCount[2]}</td><td>{outcomesCount[3]}</td><td>{outcomesCount[4]}</td></tr>
         </table>
-    </>);
+    );
 }
 
 
@@ -101,15 +99,17 @@ function Collapsible1({section, activeLevels, mantainExtended}:any){
         setCollapsibles(newCollapsibles);
       };
 
-    return(<> {section.subsection.map((subsection:any, index:any) => (<>
+    return(<> 
+        {section.subsection.map((subsection:any, index:any) => (<>
 
-        <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
-            <td>{subsection.subsection}</td>
-            <Results section={subsection} activeLevels={activeLevels}/>
-        </tr>
-        { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> : ""}
-    
-    </>))} </>);
+            <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
+                <td>{subsection.subsection}</td>
+                <Results section={subsection} activeLevels={activeLevels}/>
+            </tr>
+            { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> : ""}
+        
+        </>))} 
+    </>);
 }
 
 
@@ -125,28 +125,30 @@ function Collapsible2({subsection, activeLevels, mantainExtended}:any){
         setCollapsible3s(newCollapsible3s);
     };
 
-    return(<> {subsection.sub2section.map((sub2section:any, index:any) => (<>
+    return(<> 
+        {subsection.sub2section.map((sub2section:any, index:any) => (<>
 
-        { activeLevels.includes(sub2section.conformanceLevel) ? <>
+            { activeLevels.includes(sub2section.conformanceLevel) ? <>
+            
+                <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
+                    {sub2section.hasOwnProperty("results") && sub2section.result_text !== "NOT PRESENT" ? <>
+                        <td colSpan={6}>
+                            <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                            {sub2section.sub2section}
+                        </td>
+                    </>: <>
+                        <td>{sub2section.sub2section}</td>
+                        <td colSpan={5}>{sub2section.result_text}</td>
+                    </>}
+                </tr>
+                {sub2section.hasOwnProperty("results") && collapsible3s[index] ? <Collapsible3 sub2section={sub2section} /> : "" }
         
-            <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
-                {sub2section.hasOwnProperty("results") && sub2section.result_text !== "NOT PRESENT" ? <>
-                    <td colSpan={6}>
-                        <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
-                        {sub2section.sub2section}
-                    </td>
-                </>: <>
-                    <td>{sub2section.sub2section}</td>
-                    <td colSpan={5}>{sub2section.result_text}</td>
-                </>}
-            </tr>
-            {sub2section.hasOwnProperty("results") && collapsible3s[index] ? <Collapsible3 sub2section={sub2section} /> : "" }
-    
-        </> : "" }
+            </> : "" }
 
 
-    
-    </>))} </>);
+        
+        </>))} 
+    </>);
 }
 
 

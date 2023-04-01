@@ -49,26 +49,26 @@ export async function performEvaluation(){
     const A11Y = checkboxes[3].checked;
         
     if(AM || AC || MV){
-        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
-        
-        let json = await fetchEvaluation(bodyData);
 
-        /* if (A11Y){
-        const a11y = a11y();
-        merge(json, a11y);
-        } */
-        storeReport(json);
+        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
+        let fetchEvaluationReport = await fetchEvaluation(bodyData);
+
+        if (A11Y){
+            chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
+                const a11yEvaluationReport = response.report[0].result;
+                merge(fetchEvaluationReport, a11yEvaluationReport);
+                storeReport(fetchEvaluationReport);
+            });
+        }else{
+            storeReport(fetchEvaluationReport);
+        }
+        
 
     }else if(A11Y){
 
         chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
-
             const a11yEvaluationReport = response.report[0].result;
-
-            console.log(a11yEvaluationReport);
-
             storeReport(a11yEvaluationReport);
-            
         });
 
     }else{
@@ -103,7 +103,11 @@ function merge(jsonLd1, jsonLd2){
 
 			assertion1 = assertion2;
 
-		} else {
+		} else if(assertion2.result.outcome === "earl:inapplicable"){
+
+            continue;
+
+        }else {
 
 			mergeFoundCases(assertion1, assertion2);
 
