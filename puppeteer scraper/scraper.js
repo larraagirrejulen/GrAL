@@ -304,7 +304,7 @@ class Scraper {
         const results = await this.#puppeteer_page.evaluate(() => {
             
             let results = [];
-            let criterias, description;
+            let criterias, description, occurrences, location;
 
             const errors = Array.from(document.querySelectorAll('#container_error_list > div'));
             const warnings = Array.from(document.querySelectorAll('#container_warning_list > div'));
@@ -319,16 +319,30 @@ class Scraper {
 
                 description = description.textContent;
 
-                for (let j = 0, criteria; criteria = criterias[j]; j++){
+                occurrences = error.querySelector(".accordion_content");
 
+                occurrences = Array.from(occurrences.querySelectorAll("div > span[class='single_error_info']"));
+
+                for (let j = 0, occurrence; occurrence = occurrences[j]; j++){
+    
+                    location = occurrence.querySelector("button");
+
+                    try{
+                        location = location.getAttribute("data-x");
+                    }catch(error){
+                        continue;
+                    }
+                    
+    
                     results.push({
-                        "criteria_num": criteria,
+                        "criterias": criterias,
                         "outcome": "FAIL",
                         "description": description,
-                        /*"location": error_location,
-                        "target_html": error_code*/
+                        "location": location,
+                        "target_html": occurrence.textContent.substring(11)
                     });
                 }
+
             }
 
             for (let i = 0, warning; warning = warnings[i]; i++){
@@ -341,33 +355,68 @@ class Scraper {
 
                 description = description.textContent;
 
-                for (let j = 0, criteria; criteria = criterias[j]; j++){
+                occurrences = warning.querySelector(".accordion_content");
 
+                occurrences = Array.from(occurrences.querySelectorAll("div > span[class='single_error_info']"));
+
+                for (let j = 0, occurrence; occurrence = occurrences[j]; j++){
+    
+                    location = occurrence.querySelector("button");
+
+                    try{
+                        location = location.getAttribute("data-x");
+                    }catch(error){
+                        continue;
+                    }
+    
                     results.push({
-                        "criteria_num": criteria,
+                        "criterias": criterias,
                         "outcome": "CANNOTTELL",
                         "description": description,
-                        /*"location": error_location,
-                        "target_html": error_code*/
+                        "location": location,
+                        "target_html": occurrence.textContent.substring(11)
                     });
+                }
+
+            }
+
+            criterias = Array.from(document.querySelectorAll('#table_sc_occ > tbody > tr'));
+
+            for(let i = 0, criteria; criteria = criterias[i]; i++){
+                
+                outcomes = Array.from(criteria.children);
+
+                let fail = outcomes[1].textContent.match(/\d+/); // find all matches of the regular expression in the string
+                let cannotTell = outcomes[2].textContent.match(/\d+/);
+                let pass = outcomes[3].textContent.match(/\d+/);
+
+                if(parseInt(fail[0]) === 0 && parseInt(cannotTell[0]) === 0  && parseInt(pass[0]) > 0 ){
+
+                    criteriaNumber = outcomes[0].querySelector("p");
+
+                    results.push({
+                        "criterias": criteriaNumber.textContent,
+                        "outcome": "PASS",
+                        "description": ""
+                    })
                 }
             }
 
             return results;
         });
 
-        
-        /*// Set default download directory:
-        const path = require('path');
-        const client = await this.#puppeteer_page.target().createCDPSession(); 
-        await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: path.resolve('./evaluations'), });
+        for (let i = 0, result; result = results[i]; i++){
 
-        // Start evaluation download and wait for 3 secs
-        await this.#puppeteer_page.click('#evaluationSummary a[title="download earl report"]');*/
+            if(result.outcome === "PASS"){
+                this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description);
+            }else{
+                for (let j = 0, criteria; criteria = result.criterias[j]; j++){
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, result.location, result.target_html);
+                }
+            }
 
-        console.log(results);
-
-        await this.#puppeteer_page.waitForTimeout(5000);
+            
+        }
 
     }
 }
