@@ -6,7 +6,7 @@ const fs = require("fs");
 
 const withBrowser = async (fn) => {
 	const browser = await puppeteer.launch({ 
-		headless: true,
+		headless: false,
 		args: ["--disable-setuid-sandbox", "--lang=en"],
 		'ignoreHTTPSErrors': true
 	});

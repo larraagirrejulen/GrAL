@@ -286,19 +286,88 @@ class Scraper {
         // Load the url we want to evaluate and submit
         await this.#puppeteer_page.focus('#uri');
         await this.#puppeteer_page.keyboard.type(this.#evaluationUrl);
+        await this.#puppeteer_page.select('#Level_of_Conformance', 'AAA');
         await this.#puppeteer_page.click('#validate');
 
         // Wait for results to be loaded
-        await this.#puppeteer_page.waitForSelector('#evaluationSummary');
+        await this.#puppeteer_page.waitForSelector('#livepreview_link');
+        await this.#puppeteer_page.waitForTimeout(1000);    // Ez dakit bestela nola egin daitekeen
+        await this.#puppeteer_page.click('#livepreview_link');
 
-        // Set default download directory:
+        // Wait for the loader to disappear
+        await this.#puppeteer_page.waitForFunction(() => {
+            const loader = document.querySelector('#loader');
+            return loader && loader.classList.contains('display_none');
+        });
+
+        // Get evaluation data
+        const results = await this.#puppeteer_page.evaluate(() => {
+            
+            let results = [];
+            let criterias, description;
+
+            const errors = Array.from(document.querySelectorAll('#container_error_list > div'));
+            const warnings = Array.from(document.querySelectorAll('#container_warning_list > div'));
+
+            for (let i = 0, error; error = errors[i]; i++){
+
+                criterias = error.querySelector("div > span");
+
+                criterias = criterias.textContent.match(/(\d\.\d\.\d)/g);
+
+                description = error.querySelector("span[class='error_summary']");
+
+                description = description.textContent;
+
+                for (let j = 0, criteria; criteria = criterias[j]; j++){
+
+                    results.push({
+                        "criteria_num": criteria,
+                        "outcome": "FAIL",
+                        "description": description,
+                        /*"location": error_location,
+                        "target_html": error_code*/
+                    });
+                }
+            }
+
+            for (let i = 0, warning; warning = warnings[i]; i++){
+
+                criterias = warning.querySelector("div > span");
+
+                criterias = criterias.textContent.match(/(\d\.\d\.\d)/g);
+
+                description = warning.querySelector("span[class='error_summary']");
+
+                description = description.textContent;
+
+                for (let j = 0, criteria; criteria = criterias[j]; j++){
+
+                    results.push({
+                        "criteria_num": criteria,
+                        "outcome": "CANNOTTELL",
+                        "description": description,
+                        /*"location": error_location,
+                        "target_html": error_code*/
+                    });
+                }
+            }
+
+            return results;
+        });
+
+        
+        /*// Set default download directory:
         const path = require('path');
         const client = await this.#puppeteer_page.target().createCDPSession(); 
         await client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: path.resolve('./evaluations'), });
 
         // Start evaluation download and wait for 3 secs
-        await this.#puppeteer_page.click('#evaluationSummary a[title="download earl report"]');
-        await this.#puppeteer_page.waitForTimeout(3000);
+        await this.#puppeteer_page.click('#evaluationSummary a[title="download earl report"]');*/
+
+        console.log(results);
+
+        await this.#puppeteer_page.waitForTimeout(5000);
 
     }
 }

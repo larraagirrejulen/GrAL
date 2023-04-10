@@ -47,6 +47,7 @@ export async function performEvaluation(){
     const AC = checkboxes[1].checked;
     const MV = checkboxes[2].checked;
     const A11Y = checkboxes[3].checked;
+    const TA11Y = checkboxes[4].checked;
         
     if(AM || AC || MV){
 
@@ -60,7 +61,7 @@ export async function performEvaluation(){
                 storeReport(fetchEvaluationReport);
             });
         }else{
-            storeReport(fetchEvaluationReport);
+            //storeReport(fetchEvaluationReport);
         }
         
 
