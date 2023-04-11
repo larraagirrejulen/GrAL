@@ -54,22 +54,22 @@ export async function performEvaluation(){
         const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
         let fetchEvaluationReport = await fetchEvaluation(bodyData);
 
-        if (A11Y){
-            chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
-                const a11yEvaluationReport = response.report[0].result;
-                merge(fetchEvaluationReport, a11yEvaluationReport);
+        if (A11Y || TA11Y){
+            chrome.runtime.sendMessage({ action: "performEvaluation", "a11y":A11Y, "ta11y":TA11Y }, (response)=>{
+                const localEvaluationReport = response.report[0].result;
+                merge(fetchEvaluationReport, localEvaluationReport);
                 storeReport(fetchEvaluationReport);
             });
         }else{
-            //storeReport(fetchEvaluationReport);
+            storeReport(fetchEvaluationReport);
         }
         
 
-    }else if(A11Y){
+    }else if(A11Y || TA11Y){
 
-        chrome.runtime.sendMessage({ action: "performA11yEvaluation" }, (response)=>{
-            const a11yEvaluationReport = response.report[0].result;
-            storeReport(a11yEvaluationReport);
+        chrome.runtime.sendMessage({ action: "performEvaluation", "a11y":A11Y, "ta11y":TA11Y }, (response)=>{
+            const evaluationReport = response.report[0].result;
+            storeReport(evaluationReport);
         });
 
     }else{

@@ -42,7 +42,7 @@ try{
       chrome.storage.session.set({ tabId: sender.tab.id }); // store the tab ID for the options page to reload the tab when saving options
       chrome.runtime.openOptionsPage();
 
-    }else if(request.action === "performA11yEvaluation"){
+    }else if(request.action === "performEvaluation"){
 
       (async () => {
         const jsonld = await chrome.scripting.executeScript({

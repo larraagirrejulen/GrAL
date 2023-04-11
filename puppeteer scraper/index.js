@@ -1,8 +1,8 @@
 const http = require('http');
 const scraperController = require('./scrapingController');
 
-const puerto = 7070;
-console.log("listening on: 0.0.0.0:" + puerto);
+const PORT = 7070;
+console.log("listening on: 0.0.0.0:" + PORT);
 
 http.createServer((request, response) => {
 
@@ -10,9 +10,6 @@ http.createServer((request, response) => {
         console.error(err);
         response.statusCode = 400;
         response.end();
-    });
-    response.on('error', (err) => {
-        console.error(err);
     });
 
     const { headers, method, url } = request;
@@ -23,31 +20,28 @@ http.createServer((request, response) => {
 
     let requestBody = [];
 
-    request.on('data', (chunk) => {
-        requestBody.push(chunk);
-    }).on('end', async () => {
+    request.on('data', (chunk) => requestBody.push(chunk)
+    ).on('end', async () => {
         
         requestBody = Buffer.concat(requestBody).toString();
-
-        console.log("\n### ----- New Scraping Request ----- ###\n" + "\nRequest: " + requestBody);
+        console.log("\n### ----- New Scraping Request ----- ###");
 
         try{
+
             const requestJson = JSON.parse(requestBody);
-    
             const body = await scraperController(requestJson["am"], requestJson["ac"], requestJson["mv"], requestJson["url"], requestJson["title"]);
-
             response.writeHead(200, {'Content-Type': 'application/json'});
-
             response.end(JSON.stringify( { headers, method, url, body } ));
-
-            console.log("### ----- Request SUCCESS  ----- ###");
+            console.log("\n### ----- Request SUCCESS  ----- ###");
 
         } catch(error) { 
+
             response.statusCode = 500;
             response.end();
             console.log("\n ERROR: " + error + "\n\n### ----- Request FAILURE  ----- ###");
-        }
         
+        }
     });
-}).listen(puerto);
+    
+}).listen(PORT);
 

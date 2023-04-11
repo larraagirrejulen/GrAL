@@ -9,37 +9,34 @@ class Scraper {
     #evaluationUrl;
     #jsonld;
 
+
     constructor(page, evaluator, evaluationUrl, evaluatedPageTitle){
+
+        if (!['am', 'ac', 'mv'].includes(evaluator)) {
+            throw new Error(evaluator.toUpperCase() + " is not a valid evaluator !!!");
+        }
 
         this.#puppeteer_page = page;
         this.#evaluator = evaluator;
         this.#evaluationUrl = evaluationUrl;
         this.#jsonld = new JsonLd(evaluator, evaluationUrl, evaluatedPageTitle);
-
     }
 
-    
 
-    async scrape(){
+    
+    async initiateScrapingProcess(){
+
+        const evaluators = {
+            'am': async () => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/results/', this.#puppeteer_page),
+            'ac': async () => this.acScraper('https://achecker.achecks.ca/checker/index.php', this.#puppeteer_page),
+            'mv': async () => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', this.#puppeteer_page)
+        };
 
         console.log("\nInitiating " + this.#evaluator.toUpperCase() + " scraping process ...");
 
         try{
-            switch(this.#evaluator){
-                case 'am':
-                    await this.amScraper('https://accessmonitor.acessibilidade.gov.pt/results/');
-                    break;
-                case 'ac':
-                    await this.acScraper('https://achecker.achecks.ca/checker/index.php');
-                    break;
-                case 'mv':
-                    await this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp');
-                    break;
-                default:
-                    throw new Error("\n" + this.#evaluator.toUpperCase() + " is not a valid evaluator !!!");
-            }
-
-            console.log("\nSUCCESS: " + this.#evaluator.toUpperCase() + " scraping process successfully finished !!!");
+            await evaluators[this.#evaluator]();
+            console.log(`\n${this.#evaluator.toUpperCase()} scraping successfully finished !!!`);
             
         } catch(error) { throw new Error("\nThe next error was found on " + this.#evaluator.toUpperCase()  + " scraping process: " + error) }
 
@@ -48,46 +45,40 @@ class Scraper {
 
 
 
-    async amScraper(evaluatorUrl){
 
-        // Navigate to url and wait to be loaded
-        await this.#puppeteer_page.goto(evaluatorUrl + this.#evaluationUrl.replaceAll("/",'%2f'));
-        await this.#puppeteer_page.waitForSelector('.evaluation-table');
+    async amScraper(evaluatorUrl, page){
 
-        // Get interested data
-        const results = await this.#puppeteer_page.evaluate(async () => {
-            var results = [];
-            const techniquesFound = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
+        await page.goto(evaluatorUrl + this.#evaluationUrl.replaceAll("/",'%2f'));
+        await page.waitForSelector('.evaluation-table');
 
-            for (var i = 0, technique; technique = techniquesFound[i]; i++){
+        const results = await page.evaluate(() => {
+
+            const results = [];
+
+            const status2Outcome = {
+                "monitor_icons_praticas_status_incorrect": "FAIL",
+                "monitor_icons_praticas_status_review": "CANNOTTELL",
+                "monitor_icons_praticas_status_correct": "PASS"
+            };
+
+            const foundTechniques = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
+
+            for (const technique of foundTechniques){
 
                 const cols = Array.from(technique.querySelectorAll('td'));
-                 
-                var status;
-                const statusText = cols[0].querySelector('svg title').textContent;
 
-                switch(statusText){
-                    case "monitor_icons_praticas_status_incorrect":
-                        status = "FAIL";
-                        break;
-                    case "monitor_icons_praticas_status_review":
-                        status = "CANNOTTELL";
-                        break;
-                    case "monitor_icons_praticas_status_correct":
-                        status = "PASS";
-                        break;
-                    default:
-                        continue;
-                }
+                const outcome = status2Outcome[cols[0].querySelector('svg title').textContent];
+
+                if (!outcome) continue;
 
                 const techniqueInfo = cols[1].querySelector('.collapsible-content');
                 const criteriaIds = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
-                const techniqueGuideText = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
+                const description = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
                 
-                var casesLink = null;
+                let casesLink = null;
           
                 if(cols[3].querySelector("a") != undefined){
-                    var link = cols[3].querySelector("a").href;
+                    const link = cols[3].querySelector("a").href;
                     if(link.startsWith("/results")){
                         casesLink = 'https://accessmonitor.acessibilidade.gov.pt' + link;
                     }else if(link.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
@@ -96,50 +87,48 @@ class Scraper {
                 } 
 
                 results.push({
-                    "outcome": status,
+                    "outcome": outcome,
                     "criteriaIds": criteriaIds,
-                    "criteriaDescription": techniqueGuideText,
+                    "description": description,
                     "casesLink": casesLink
                 });
             }
             return results;  
         });
-        var criterias;
-        for (var i = 0, result; result = results[i]; i++){
-            criterias = result["criteriaIds"];
 
-            for (var j = 0, criteria; criteria = criterias[j]; j++){
-                if (result["casesLink"] != null){
-                    await this.#puppeteer_page.goto(result["casesLink"]);
-                    await this.#puppeteer_page.waitForSelector('#list_tab');
-                    const [casesLocations, casesHtmls] = await this.#puppeteer_page.evaluate(async () => {
-                        
-                        var casesLocations = [];
-                        var casesHtmls = [];
-                        const foundCases = Array.from(document.querySelectorAll('ol > li'));
+        for (const result of results){
+            for (const criteria of result.criteriaIds){
 
-                        for (var l = 0, ca; ca = foundCases[l]; l++){
-                            caseElements = Array.from(ca.querySelectorAll('table > tr'));
-                            caseCode = caseElements[1].querySelector("td code").textContent;
-                            caseCode = caseCode.replaceAll('\n','');
-                            caseCode = caseCode.replaceAll('\t','');
-                            casesHtmls.push(caseCode);
-                            casesLocations.push(caseElements[3].querySelector('td span').textContent);
-                        }
-                        return [casesLocations, casesHtmls];  
-                    });
-                    for (var k = 0, path; path = casesLocations[k]; k++){
-                        var correctPath = "//" + path
-                        correctPath = correctPath.replace(/ \> /g, "/")
-                        correctPath = correctPath.replace(/:nth-child\(/g, "[")
-                        correctPath = correctPath.replaceAll(")", "]")
-                        this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"], correctPath, casesHtmls[k]);
+                if (result.casesLink === null){
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description);
+                    continue;
+                }
+
+                await page.goto(result.casesLink);
+                await page.waitForSelector('#list_tab');
+                const [casesLocations, casesHtmls] = await page.evaluate(async () => {
+                    
+                    const casesLocations = [];
+                    const casesHtmls = [];
+                    const foundCases = Array.from(document.querySelectorAll('ol > li'));
+
+                    for (const foundCase of foundCases){
+                        const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
+                        const caseCode = caseElements[1].querySelector("td code").textContent.replaceAll('\n','').replaceAll('\t','');
+                        casesHtmls.push(caseCode);
+                        casesLocations.push(caseElements[3].querySelector('td span').textContent);
                     }
-                }else{
-                    this.#jsonld.addNewAssertion(criteria, result["outcome"], result["criteriaDescription"]);
-                }       
+                    return [casesLocations, casesHtmls];  
+                });
+
+                for (let k = 0, path; path = casesLocations[k]; k++){
+                    const correctPath = "//" + path.replace(/ \> /g, "/").replace(/:nth-child\(/g, "[").replaceAll(")", "]")
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, correctPath, casesHtmls[k]);
+                }
+
             }
         }
+
     }
 
 
@@ -147,30 +136,30 @@ class Scraper {
 
 
 
-    async acScraper(evaluatorUrl){
+    async acScraper(evaluatorUrl, page){
 
         // Navigate to url
-        await this.#puppeteer_page.goto(evaluatorUrl);
+        await page.goto(evaluatorUrl);
 
         // Wait for input element to load
-        await this.#puppeteer_page.waitForSelector('#checkuri');
+        await page.waitForSelector('#checkuri');
 
         // Configure to include AAA level
-        await this.#puppeteer_page.focus('h2[align="left"] a');
-        await this.#puppeteer_page.click('h2[align="left"] a');
-        await this.#puppeteer_page.focus("#radio_gid_9");
-        await this.#puppeteer_page.click("#radio_gid_9");
+        await page.focus('h2[align="left"] a');
+        await page.click('h2[align="left"] a');
+        await page.focus("#radio_gid_9");
+        await page.click("#radio_gid_9");
 
         // Load the url we want to evaluate and submit
-        await this.#puppeteer_page.focus('#checkuri');
-        await this.#puppeteer_page.keyboard.type(this.#evaluationUrl);
-        await this.#puppeteer_page.click('#validate_uri');
+        await page.focus('#checkuri');
+        await page.keyboard.type(this.#evaluationUrl);
+        await page.click('#validate_uri');
 
         // Wait for results to be loaded
-        await this.#puppeteer_page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
+        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
 
         // Get evaluation data
-        const results = await this.#puppeteer_page.evaluate(() => {
+        const results = await page.evaluate(() => {
             
             var results = [];
             var errors, warnings, problems, criterias, checks, criteria_num, check, problem, solution, actual_text, cases, error_location, error_code;
@@ -275,33 +264,33 @@ class Scraper {
 
 
 
-    async mvScraper(evaluatorUrl){
+    async mvScraper(evaluatorUrl, page){
 
         // Navigate to url
-        await this.#puppeteer_page.goto(evaluatorUrl);
+        await page.goto(evaluatorUrl);
 
         // Wait for input element to load
-        await this.#puppeteer_page.waitForSelector('#uri');
+        await page.waitForSelector('#uri');
 
         // Load the url we want to evaluate and submit
-        await this.#puppeteer_page.focus('#uri');
-        await this.#puppeteer_page.keyboard.type(this.#evaluationUrl);
-        await this.#puppeteer_page.select('#Level_of_Conformance', 'AAA');
-        await this.#puppeteer_page.click('#validate');
+        await page.focus('#uri');
+        await page.keyboard.type(this.#evaluationUrl);
+        await page.select('#Level_of_Conformance', 'AAA');
+        await page.click('#validate');
 
         // Wait for results to be loaded
-        await this.#puppeteer_page.waitForSelector('#livepreview_link');
-        await this.#puppeteer_page.waitForTimeout(1000);    // Ez dakit bestela nola egin daitekeen
-        await this.#puppeteer_page.click('#livepreview_link');
+        await page.waitForSelector('#livepreview_link');
+        await page.waitForTimeout(1000);    // Ez dakit bestela nola egin daitekeen
+        await page.click('#livepreview_link');
 
         // Wait for the loader to disappear
-        await this.#puppeteer_page.waitForFunction(() => {
+        await page.waitForFunction(() => {
             const loader = document.querySelector('#loader');
             return loader && loader.classList.contains('display_none');
         });
 
         // Get evaluation data
-        const results = await this.#puppeteer_page.evaluate(() => {
+        const results = await page.evaluate(() => {
             
             let results = [];
             let criterias, description, occurrences, location;

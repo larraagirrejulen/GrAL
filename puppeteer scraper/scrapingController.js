@@ -40,7 +40,7 @@ async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
 			evaluators.map(async (evaluator) => {
 				return await withPage(browser)(async (page) => {
 					var scraper = new Scraper(page, evaluator, evaluationUrl, evaluatedPageTitle);
-					return await scraper.scrape().catch((error) => {
+					return await scraper.initiateScrapingProcess().catch((error) => {
 						console.log("\n" + error + "\n");
 					});
 				});
