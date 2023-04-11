@@ -4,7 +4,7 @@ import { storeReport } from './reportStoringUtils.js';
 
 
 
-async function fetchEvaluation(bodyData, timeout = 60000) {
+async function fetchEvaluation(bodyData, timeout = 120000) {
 
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);

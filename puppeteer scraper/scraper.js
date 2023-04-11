@@ -144,113 +144,57 @@ class Scraper {
         // Wait for input element to load
         await page.waitForSelector('#checkuri');
 
-        // Configure to include AAA level
-        await page.focus('h2[align="left"] a');
+        // Configure to include AAA level, type the url to evaluate and submit
         await page.click('h2[align="left"] a');
-        await page.focus("#radio_gid_9");
         await page.click("#radio_gid_9");
-
-        // Load the url we want to evaluate and submit
         await page.focus('#checkuri');
         await page.keyboard.type(this.#evaluationUrl);
         await page.click('#validate_uri');
 
         // Wait for results to be loaded
-        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 60000});
+        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 120000});
 
         // Get evaluation data
         const results = await page.evaluate(() => {
-            
+
             var results = [];
-            var errors, warnings, problems, criterias, checks, criteria_num, check, problem, solution, actual_text, cases, error_location, error_code;
 
-            // Found errors
-            errors = document.querySelector('#AC_errors');
-            criterias = Array.from(errors.querySelectorAll("h4"));
-            checks = Array.from(errors.querySelectorAll(".gd_one_check"));
+            function pushResults(id){
 
-            for (var i = 0, criteria; criteria = criterias[i]; i++){
-                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
-                check = checks[i];
+                const cases = document.querySelector(id);
+                const criterias = Array.from(cases.querySelectorAll("h4"));
+                const checks = Array.from(cases.querySelectorAll(".gd_one_check"));
 
-                problem = check.querySelector("span a").textContent;
-                solution = check.querySelector("div").textContent.substring(9).trim();
-                actual_text = 'The next ERROR was found: \n\n"'+problem+'". \n\nYou can solve it with: \n\n"'+solution+'".'
+                for (let i = 0, criteria; criteria = criterias[i]; i++){
+                
+                    const problem = checks[i].querySelector("span a").textContent;
 
-                cases = Array.from(check.querySelectorAll("table tbody tr td"));
-                for (var j = 0, found_case; found_case = cases[j]; j++){
-                    error_location = found_case.querySelector("em").textContent;
-                    error_code = found_case.querySelector("pre code").textContent;
-                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
-
-                    results.push({
-                        "criteria_num": criteria_num,
-                        "outcome": "FAIL",
-                        "description": actual_text,
-                        "location": error_location,
-                        "target_html": error_code
-                    });
+                    let solution;
+                    if(id === "#AC_errors"){
+                        solution = checks[i].querySelector("div").textContent.substring(9).trim();
+                    }
+                    
+                    const foundCases = Array.from(checks[i].querySelectorAll("table tbody tr td"));
+    
+                    for (const foundCase of foundCases){
+    
+                        const targetPath = foundCase.querySelector("em").textContent;
+                        const targetHtml = foundCase.querySelector("pre code").textContent;
+    
+                        results.push({
+                            "criteria_num": criteria.textContent.match(/(\d\.\d\.\d)/g)[0],
+                            "outcome": id === "#AC_errors" ? "FAIL" : "CANNOTTELL",
+                            "description": id === "#AC_errors" ? 'An ERROR was found: \n\n' + problem + '\n\n' + solution : 'A POSSIBLE ISSUE was found: \n\n' + problem,
+                            "location": targetPath,
+                            "target_html": targetHtml
+                        });
+                    }
                 }
             }
 
-
-            // Found warnings
-            warnings = document.querySelector('#AC_likely_problems');
-            criterias = Array.from(warnings.querySelectorAll("h4"));
-            checks = Array.from(warnings.querySelectorAll(".gd_one_check"));
-
-            for (var i = 0, criteria; criteria = criterias[i]; i++){
-                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
-                check = checks[i];
-
-                problem = check.querySelector("span a").textContent;
-                actual_text = 'The next WARNING was found: \n\n"'+problem+'".'
-
-                cases = Array.from(check.querySelectorAll("table tbody tr td"));
-                for (var j = 0, found_case; found_case = cases[j]; j++){
-                    error_location = found_case.querySelector("em").textContent;
-                    error_code = found_case.querySelector("pre code").textContent;
-                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
-
-                    results.push({
-                        "criteria_num": criteria_num,
-                        "outcome": "CANNOTTELL",
-                        "description": actual_text,
-                        "location": error_location,
-                        "target_html": error_code
-                    });
-                }
-            }
-
-
-            // Found potentian problems
-            problems = document.querySelector('#AC_potential_problems');
-            criterias = Array.from(problems.querySelectorAll("h4"));
-            checks = Array.from(problems.querySelectorAll(".gd_one_check"));
-
-            for (var i = 0, criteria; criteria = criterias[i]; i++){
-                criteria_num = criteria.textContent.substring(17,22).replaceAll(' ','');
-                check = checks[i];
-
-                problem = check.querySelector("span a").textContent;
-                actual_text = 'A POTENTIAL PROBLEM was found: \n\n"'+problem+'".'
-
-                cases = Array.from(check.querySelectorAll("table tbody tr td"));
-                for (var j = 0, found_case; found_case = cases[j]; j++){
-                    error_location = found_case.querySelector("em").textContent;
-                    error_code = found_case.querySelector("pre code").textContent;
-                    actual_text += '     ' + error_location + ': ' + error_code + '"\n\n';
-
-                    results.push({
-                        "criteria_num": criteria_num,
-                        "outcome": "CANNOTTELL",
-                        "description": actual_text,
-                        "location": error_location,
-                        "target_html": error_code
-                    });
-                }
-            }
-
+            pushResults("#AC_errors");
+            pushResults("#AC_likely_problems");
+            pushResults("#AC_potential_problems");
 
             return results;
         });
