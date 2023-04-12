@@ -30,16 +30,16 @@
 
             switch(ruleResult.getResultValue()){
                 case 1:
-                    outcome = "inapplicable" // NOT_APPLICABLE => earl:inapplicable
+                    outcome = "earl:inapplicable" // NOT_APPLICABLE
                     break;
                 case 2:
-                    outcome = "passed" // PASS => earl:passed
+                    outcome = "earl:passed" // PASS
                     break;
                 case 3:
-                    outcome = "cantTell" // MANUAL_CHECK => earl:cantTell
+                    outcome = "earl:cantTell" // MANUAL_CHECK
                     break;
                 case 5:
-                    outcome = "failed" // VIOLATION => earl:failed
+                    outcome = "earl:failed" // VIOLATION
                     break;
                 default:
                     continue;

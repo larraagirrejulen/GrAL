@@ -10,6 +10,7 @@ class Scraper {
     #jsonld;
 
 
+
     constructor(page, evaluator, evaluationUrl, evaluatedPageTitle){
 
         if (!['am', 'ac', 'mv'].includes(evaluator)) {
@@ -24,6 +25,7 @@ class Scraper {
 
 
     
+
     async initiateScrapingProcess(){
 
         const evaluators = {
@@ -46,6 +48,7 @@ class Scraper {
 
 
 
+
     async amScraper(evaluatorUrl, page){
 
         await page.goto(evaluatorUrl + this.#evaluationUrl.replaceAll("/",'%2f'));
@@ -56,9 +59,9 @@ class Scraper {
             const results = [];
 
             const status2Outcome = {
-                "monitor_icons_praticas_status_incorrect": "FAIL",
-                "monitor_icons_praticas_status_review": "CANNOTTELL",
-                "monitor_icons_praticas_status_correct": "PASS"
+                "monitor_icons_praticas_status_incorrect": "earl:failed",
+                "monitor_icons_praticas_status_review": "earl:cantTell",
+                "monitor_icons_praticas_status_correct": "earl:passed"
             };
 
             const foundTechniques = Array.from(document.querySelectorAll('.evaluation-table tbody tr'));
@@ -72,9 +75,10 @@ class Scraper {
                 if (!outcome) continue;
 
                 const techniqueInfo = cols[1].querySelector('.collapsible-content');
-                const criteriaIds = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
-                const description = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
-                
+                const criteriaNumbers = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
+                let description = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
+                description += "\n\n" + techniqueInfo.querySelector("div > span > strong > a").textContent.replace(/\u00A0/g, " ").substring(4).replace(":", "").replace(" ", "");
+
                 let casesLink = null;
           
                 if(cols[3].querySelector("a") != undefined){
@@ -88,8 +92,8 @@ class Scraper {
 
                 results.push({
                     "outcome": outcome,
-                    "criteriaIds": criteriaIds,
-                    "description": description,
+                    "criteriaNumbers": criteriaNumbers,
+                    "description": (outcome === "earl:failed" ? 'An ERROR was found: \n\n' : outcome === "earl:cantTell" ? 'A POSSIBLE ISSUE was found: \n\n' : 'PASSED: \n\n') + description,
                     "casesLink": casesLink
                 });
             }
@@ -97,7 +101,7 @@ class Scraper {
         });
 
         for (const result of results){
-            for (const criteria of result.criteriaIds){
+            for (const criteria of result.criteriaNumbers){
 
                 if (result.casesLink === null){
                     this.#jsonld.addNewAssertion(criteria, result.outcome, result.description);
@@ -106,6 +110,7 @@ class Scraper {
 
                 await page.goto(result.casesLink);
                 await page.waitForSelector('#list_tab');
+
                 const [casesLocations, casesHtmls] = await page.evaluate(async () => {
                     
                     const casesLocations = [];
@@ -130,7 +135,6 @@ class Scraper {
         }
 
     }
-
 
 
 
@@ -177,30 +181,26 @@ class Scraper {
                     const foundCases = Array.from(checks[i].querySelectorAll("table tbody tr td"));
     
                     for (const foundCase of foundCases){
-    
-                        const targetPath = foundCase.querySelector("em").textContent;
-                        const targetHtml = foundCase.querySelector("pre code").textContent;
-    
+
                         results.push({
-                            "criteria_num": criteria.textContent.match(/(\d\.\d\.\d)/g)[0],
-                            "outcome": id === "#AC_errors" ? "FAIL" : "CANNOTTELL",
+                            "criteriaNumber": criteria.textContent.match(/(\d\.\d\.\d)/)[0],
+                            "outcome": id === "#AC_errors" ? "earl:failed": "earl:cantTell",
                             "description": id === "#AC_errors" ? 'An ERROR was found: \n\n' + problem + '\n\n' + solution : 'A POSSIBLE ISSUE was found: \n\n' + problem,
-                            "location": targetPath,
-                            "target_html": targetHtml
+                            "targetPath": foundCase.querySelector("em").textContent,
+                            "targetHtml": foundCase.querySelector("pre code").textContent
                         });
                     }
                 }
             }
 
-            pushResults("#AC_errors");
-            pushResults("#AC_likely_problems");
-            pushResults("#AC_potential_problems");
+            ["#AC_errors", "#AC_likely_problems", "#AC_potential_problems"].map((id) => pushResults(id));
 
             return results;
+
         });
 
-        for (var i = 0, result; result = results[i]; i++){
-            this.#jsonld.addNewAssertion(result.criteria_num, result.outcome, result.description, result.location, result.target_html);
+        for (const result of results){
+            this.#jsonld.addNewAssertion(result.criteriaNumber, result.outcome, result.description, result.targetPath, result.targetHtml);
         }
     }
 
@@ -236,101 +236,58 @@ class Scraper {
         // Get evaluation data
         const results = await page.evaluate(() => {
             
-            let results = [];
-            let criterias, description, occurrences, location;
+            var results = [];
 
-            const errors = Array.from(document.querySelectorAll('#container_error_list > div'));
-            const warnings = Array.from(document.querySelectorAll('#container_warning_list > div'));
+            function pushResults(outcomeType){
 
-            for (let i = 0, error; error = errors[i]; i++){
+                const foundCases = Array.from(document.querySelectorAll('#container_' + outcomeType + '_list > div'));                
 
-                criterias = error.querySelector("div > span");
-
-                criterias = criterias.textContent.match(/(\d\.\d\.\d)/g);
-
-                description = error.querySelector("span[class='error_summary']");
-
-                description = description.textContent;
-
-                occurrences = error.querySelector(".accordion_content");
-
-                occurrences = Array.from(occurrences.querySelectorAll("div > span[class='single_error_info']"));
-
-                for (let j = 0, occurrence; occurrence = occurrences[j]; j++){
+                for (const foundCase of foundCases){
     
-                    location = occurrence.querySelector("button");
-
-                    try{
-                        location = location.getAttribute("data-x");
-                    }catch(error){
-                        continue;
-                    }
-                    
+                    const description = foundCase.querySelector("span[class='error_summary']").textContent;
     
-                    results.push({
-                        "criterias": criterias,
-                        "outcome": "FAIL",
-                        "description": description,
-                        "location": location,
-                        "target_html": occurrence.textContent.substring(11)
-                    });
-                }
-
-            }
-
-            for (let i = 0, warning; warning = warnings[i]; i++){
-
-                criterias = warning.querySelector("div > span");
-
-                criterias = criterias.textContent.match(/(\d\.\d\.\d)/g);
-
-                description = warning.querySelector("span[class='error_summary']");
-
-                description = description.textContent;
-
-                occurrences = warning.querySelector(".accordion_content");
-
-                occurrences = Array.from(occurrences.querySelectorAll("div > span[class='single_error_info']"));
-
-                for (let j = 0, occurrence; occurrence = occurrences[j]; j++){
+                    let occurrences = foundCase.querySelector(".accordion_content");
     
-                    location = occurrence.querySelector("button");
-
-                    try{
-                        location = location.getAttribute("data-x");
-                    }catch(error){
-                        continue;
+                    occurrences = Array.from(occurrences.querySelectorAll("div > span[class='single_error_info']"));
+    
+                    for (const occurrence of occurrences){
+        
+                        let location = occurrence.querySelector("button");
+    
+                        try{
+                            location = location.getAttribute("data-x");
+                        }catch(error){
+                            continue;
+                        }
+        
+                        results.push({
+                            "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
+                            "outcome": outcomeType === "error" ? "earl:failed" : "earl:cantTell",
+                            "description": (outcomeType === "error" ? 'An ERROR was found: \n\n' : 'A POSSIBLE ISSUE was found: \n\n') + description,
+                            "location": location,
+                            "target_html": occurrence.textContent.substring(11)
+                        });
                     }
     
-                    results.push({
-                        "criterias": criterias,
-                        "outcome": "CANNOTTELL",
-                        "description": description,
-                        "location": location,
-                        "target_html": occurrence.textContent.substring(11)
-                    });
                 }
+            }   
 
-            }
+            ["error", "warning"].map((outcomeType) => pushResults(outcomeType));
 
-            criterias = Array.from(document.querySelectorAll('#table_sc_occ > tbody > tr'));
+            const criteriaTable = Array.from(document.querySelectorAll('#table_sc_occ > tbody > tr'));
 
-            for(let i = 0, criteria; criteria = criterias[i]; i++){
+            for(const criteriaTableRow of criteriaTable){
                 
-                outcomes = Array.from(criteria.children);
+                const outcomes = Array.from(criteriaTableRow.children);
 
-                let fail = outcomes[1].textContent.match(/\d+/); // find all matches of the regular expression in the string
-                let cannotTell = outcomes[2].textContent.match(/\d+/);
-                let pass = outcomes[3].textContent.match(/\d+/);
-
-                if(parseInt(fail[0]) === 0 && parseInt(cannotTell[0]) === 0  && parseInt(pass[0]) > 0 ){
-
-                    criteriaNumber = outcomes[0].querySelector("p");
+                if (outcomes[1].textContent.match(/\d+/)[0] === "0" && 
+                    outcomes[2].textContent.match(/\d+/)[0] === "0"  && 
+                    outcomes[3].textContent.match(/\d+/)[0] !== "0" ){
 
                     results.push({
-                        "criterias": criteriaNumber.textContent,
-                        "outcome": "PASS",
-                        "description": ""
+                        "criterias": outcomes[0].querySelector("p").textContent,
+                        "outcome": "earl:passed",
+                        "description": "PASSED"
                     })
                 }
             }
@@ -338,17 +295,16 @@ class Scraper {
             return results;
         });
 
-        for (let i = 0, result; result = results[i]; i++){
+        for (const result of results){
 
-            if(result.outcome === "PASS"){
+            if(result.outcome === "earl:passed"){
                 this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description);
             }else{
-                for (let j = 0, criteria; criteria = result.criterias[j]; j++){
+                for (const criteria of result.criterias){
                     this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, result.location, result.target_html);
                 }
             }
-
-            
+  
         }
 
     }
