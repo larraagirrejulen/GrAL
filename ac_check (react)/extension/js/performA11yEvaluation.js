@@ -4,8 +4,8 @@
 
     try{
 
-        const url = window.document.location.href
-        const title = window.document.title
+        const url = window.document.location.href;
+        const title = window.document.title;
         const jsonld = new JsonLd("a11y", url, title);
 
         // Configure evaluator factory and get evaluator
@@ -24,40 +24,34 @@
         // Get interested results data and fill the jsonld evaluation report
         const ruleResults = evaluationResult.getRuleResultsAll().getRuleResultsArray();
 
-        let outcome, description, xpath, html, results, successCriteria;
+        const ruleResult2Outcome = {
+            1: "earl:inapplicable", // NOT_APPLICABLE
+            2: "earl:passed",   // PASS
+            3: "earl:cantTell",  // MANUAL_CHECK
+            5: "earl:failed"    // VIOLATION
+        }
 
-        for(let i = 0, ruleResult; ruleResult = ruleResults[i]; i++) {
+        for(const ruleResult of ruleResults) {
 
-            switch(ruleResult.getResultValue()){
-                case 1:
-                    outcome = "earl:inapplicable" // NOT_APPLICABLE
-                    break;
-                case 2:
-                    outcome = "earl:passed" // PASS
-                    break;
-                case 3:
-                    outcome = "earl:cantTell" // MANUAL_CHECK
-                    break;
-                case 5:
-                    outcome = "earl:failed" // VIOLATION
-                    break;
-                default:
-                    continue;
-            }
+            const outcome = ruleResult2Outcome[ruleResult.getResultValue()];
 
-            description = ruleResult.getResultMessagesArray().filter(message => message !== "N/A");
-            description = ruleResult.getRuleSummary() + description.join("\n\n");
-            successCriteria = ruleResult.getRule().getPrimarySuccessCriterion().id;
-            results = ruleResult.getElementResultsArray();
+            if (!outcome) continue;
+
+            let description = outcome === "earl:failed" ? 'An ERROR was found' : outcome === "earl:cantTell" ? 'A POSSIBLE ISSUE was found' : outcome === "earl:inapplicable" ? "Cannot apply" : 'PASSED'
+            description += ":\n\n" + ruleResult.getRuleSummary() + "\n\n";
+            description += ruleResult.getResultMessagesArray().filter(message => message !== "N/A").join("\n\n");
+
+            const successCriteria = ruleResult.getRule().getPrimarySuccessCriterion().id;
+            const results = ruleResult.getElementResultsArray();
 
             if (results.length <= 0){
                 jsonld.addNewAssertion(successCriteria, outcome, description);
             }else{
-                for(let j = 0, result; result = results[j]; j++) {
-                    xpath = result.getDOMElement().xpath;
+                for(const result of results) {
+                    let xpath = result.getDOMElement().xpath;
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
-                    html = result.getDOMElement().node.outerHTML;
+                    const html = result.getDOMElement().node.outerHTML;
                     jsonld.addNewAssertion(successCriteria, outcome, description, xpath, html);
                 }
             }

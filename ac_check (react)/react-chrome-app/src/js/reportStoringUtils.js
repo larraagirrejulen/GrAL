@@ -54,9 +54,12 @@ export async function downloadStoredReport(){
     storedReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
 
     storedReport.auditSample.forEach((audit) => {
-        audit.hasPart.forEach((elem) => {
-            elem.result.description = "\n\n----------------------------------\n\n" + elem.result.description;
-        });
+        if(audit.result.outcome === "earl:untested"){
+            audit.result.description += "\n\n----------------------------------\n\n";
+            audit.hasPart.forEach((elem) => {
+                elem.result.description += "\n\n----------------------------------\n\n";
+            });
+        }
     });
 
     const data = JSON.stringify(storedReport);

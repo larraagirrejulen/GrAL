@@ -69,7 +69,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "12/4/2023, 10:25:16",
+  "dct:date": "12/4/2023, 16:08:08",
   "assertors": [
     {
       "id": "_:AccessMonitor",

@@ -159,7 +159,7 @@ class JsonLd{
         let description = "*************@" + this.#evaluator.name + "************* \n\n" + criteriaDescription;
 
         if(path !== null){
-            description += "\n\n Found cases locations: \n\n " + path;
+            description += "\n\n Found cases locations: \n\n " + path + "... ";
             locationPointersGroup.push({
                 "id": "_:pointer",
                 "type": [
