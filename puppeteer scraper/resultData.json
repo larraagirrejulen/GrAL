@@ -69,18 +69,30 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "12/4/2023, 16:08:08",
+  "dct:date": "13/4/2023, 15:05:17",
   "assertors": [
     {
       "id": "_:AccessMonitor",
       "type": "earl:Assertor",
       "xmlns:name": "AccessMonitor",
       "description": "https://accessmonitor.acessibilidade.gov.pt"
+    },
+    {
+      "id": "_:AChecker",
+      "type": "earl:Assertor",
+      "xmlns:name": "AChecker",
+      "description": "https://achecker.achecks.ca/checker/index.php"
+    },
+    {
+      "id": "_:MAUVE",
+      "type": "earl:Assertor",
+      "xmlns:name": "MAUVE",
+      "description": "https://mauve.isti.cnr.it/singleValidation.jsp"
     }
   ],
   "creator": {
     "id": "_:assertors",
-    "xmlns:name": "AccessMonitor"
+    "xmlns:name": "AccessMonitor & AChecker & MAUVE"
   },
   "evaluationScope": {
     "website": {
@@ -118,21 +130,23 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
       "hasPart": [
         {
           "type": "Assertion",
           "testcase": "wcag2:non-text-content",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:AChecker",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\nUseCSS to include decorative images\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\nUseCSS to include decorative images\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n\n*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\nAlt text does not convey the same information as the image.\n\n Found cases locations: \n\n Line 1490, Column 6\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found: \n\nUsing null alt text and no title attribute on img elements for images that AT should ignore\n\n Found cases locations: \n\n //html/body/div/header/div[2]/div/div/div/a/img\n //html/body/div/header/div[2]/div/div/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[3]/section/div/div[2]/div/div/div/div/article/div/a/figure/img\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[5]/div[2]/div/aside/div/a/figure/img\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[6]/div[2]/div/aside/div/a/figure/img\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[8]/div[2]/div/aside/div/a/figure/img\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[9]/div[2]/div/aside/div/a/figure/img\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[12]/div[2]/div/aside/div/a/figure/img",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -140,8 +154,8 @@
                   "ptr:groupPointer",
                   "ptr:XPathPointer"
                 ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img class=\"col-4\" src=\"https://www.ehu.eus/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4cd7-d4ce-f07093afcba7?t=1679574657378\"/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4cd7-d4ce-f07093afcba7?t=1679574657378\" alt=\"\"> ...",
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[3]/section/div/div[2]/div/div/div/div/article/div/a/figure/img",
+                "description": "<img class=\"col-4\" s...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -151,7 +165,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
+                "description": "<img alt=\"\" src=\"htt...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -161,7 +175,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
+                "description": "<img alt=\"\" src=\"htt...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -171,7 +185,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
-                "description": "<img class=\"col-4\" alt=\"\" src=\"https://www.ehu.eus/documents/10136/42005083/cereus-peruvianus_dest.jpg/c246671a-d95f-d785-a3ed-c377ae87c332?t=1680678315179\"/documents/10136/42005083/cereus-peruvianus_dest.jpg/c246671a-d95f-d785-a3ed-c377ae87c332?t=1680678315179\"> ...",
+                "description": "<img class=\"col-4\" a...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -181,7 +195,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"https://www.ehu.eus/o/ehu-theme/images/common/rss.png\" style=\"background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;\"> ...",
+                "description": "<img alt=\"\" src=\"htt...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -191,7 +205,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000\"/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -201,7 +215,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803\"/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -211,7 +225,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420\"/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -221,7 +235,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000\"/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -231,7 +245,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956\"/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -241,7 +255,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000\"/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -251,7 +265,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000\"/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -261,7 +275,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000\"/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -271,7 +285,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754\"/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -281,7 +295,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000\"/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -291,7 +305,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000\"/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -301,7 +315,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000\"/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -311,7 +325,37 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://www.ehu.eus/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\"/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000\" alt=\"\"> ...",
+                "description": "<img src=\"https://ww...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[2]/div/div/img",
+                "description": "<img class=\"logo-gue...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[2]/div/div/div/a/img",
+                "description": "<img class=\"logo\" sr...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[12]/div[2]/div/aside/div/a/figure/img",
+                "description": "<img src=\"/documents...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -336,7 +380,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\"> ...",
+                "description": "<input class=\"field ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -346,7 +390,133 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\"> ...",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:non-text-content",
+          "assertedBy": [
+            "_:AChecker",
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AChecker************* \n\nAn ERROR was found: \n\nImage used as anchor is missing valid Alt text.\n\nRepair: Add Alt text that identifies the purpose or function of the image.\n\n Found cases locations: \n\n Line 5509, Column 184\n Line 6538, Column 184\n Line 7961, Column 183\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nUsing label elements to associate text labels with form controls.\n\n Found cases locations: \n\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[6]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 5509, Column 184",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 6538, Column 184",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 7961, Column 183",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input",
+                "description": "<input class=\"field ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]",
+                "description": "<input name=\"p_p_id\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]",
+                "description": "<input name=\"p_p_lif...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]",
+                "description": "<input name=\"p_p_sta...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]",
+                "description": "<input name=\"p_p_mod...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]",
+                "description": "<input name=\"_com_li...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button",
+                "description": "<button class=\"btn b...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -461,21 +631,23 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
       "hasPart": [
         {
           "type": "Assertion",
           "testcase": "wcag2:info-and-relationships",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:AChecker",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n //html/body[2]/nav[3]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n //html/body[2]/nav[3]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]\n\n*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\np element may be misused (could be a header).\n\n Found cases locations: \n\n Line 4106, Column 9\n Line 4468, Column 9\n Line 7012, Column 17\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4466, Column 8\n Line 9521, Column 5\n Line 9771, Column 5\n Line 10273, Column 5\n Line 10523, Column 5\n Line 11275, Column 5\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found: \n\nUsing ARIA landmarks to identify regions of a page\n\n Found cases locations: \n\n //html/body/div/header\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header\n //html/body/div/footer\n //html/body/nav\n //html/body/div/header/div[1]/div[1]/div/nav[1]\n //html/body/div/header/div[1]/div[1]/div/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[1]\n //html/body/div/header/div[1]/div[2]/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[3]\n //html/body/div/header/div[3]/div/div/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav/nav\n //html/body/div/section/div/div/div/div/div[1]/nav\n //html/body/div/header/div[1]/div[2]\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[2]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[3]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[4]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[5]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[6]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[7]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[8]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[9]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[10]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[11]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[12]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[13]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[14]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[15]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[16]/div[2]/div/aside",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -484,7 +656,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-accessible\"> ...",
+                "description": "<h1 class=\"hide-acce...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -494,7 +666,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item_h2\"> ...",
+                "description": "<h2 class=\"menu-item...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -504,7 +676,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1> ...",
+                "description": "<h1>¡Síguenos!</h1>...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -514,7 +686,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -524,7 +696,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -534,7 +706,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -544,7 +716,207 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 4106, Column 9",
+                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\t\tBecas para estudiantes de otras comunidades\n\t\t\t\t\t\t\t\t</strong ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 4468, Column 9",
+                "description": "<p class=\"card-title\"><strong>\n\t\t\t\t\t\t\t\t\t¿Necesitas ayuda?\n\t\t\t\t\t\t\t\t</strong></p>",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 7012, Column 17",
+                "description": "<p class=\"card-title...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 1485, Column 6",
+                "description": "<img class=\"logo\" sr...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 1490, Column 6",
+                "description": "<img class=\"logo-gue...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 4466, Column 8",
+                "description": "<img class=\"col-4\" s...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 9521, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header",
+                "description": "<header id=\"head\">\n\t ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header",
+                "description": "<header id=\"info-tit...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer",
+                "description": "<footer id=\"footer\">...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/nav",
+                "description": "<nav aria-label=\"Enl...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]",
+                "description": "<nav id=\"menu-langua...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[2]",
+                "description": "<nav id=\"menu-campus...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]",
+                "description": "<nav id=\"menu-main-r...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav",
+                "description": "<nav id=\"menu-main\" ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[2]/nav",
+                "description": "<nav class=\"breadcru...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[2]/nav/nav",
+                "description": "<nav aria-label=\"\" i...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav",
+                "description": "<nav id=\"side-menu\" ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]",
+                "description": "<div id=\"menu-respon...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[16]/div[2]/div/aside",
+                "description": "<aside>\n\t\t<div class ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -569,7 +941,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\"> ...",
+                "description": "<input class=\"field ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -579,7 +951,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\"> ...",
+                "description": "<select class=\"form-...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -589,7 +961,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-accessible\"> ...",
+                "description": "<h1 class=\"hide-acce...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -599,7 +971,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item_h2\"> ...",
+                "description": "<h2 class=\"menu-item...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -609,7 +981,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1> ...",
+                "description": "<h1>¡Síguenos!</h1>...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -619,7 +991,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -629,7 +1001,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -639,7 +1011,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -649,7 +1021,133 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:info-and-relationships",
+          "assertedBy": [
+            "_:AChecker",
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AChecker************* \n\nAn ERROR was found: \n\ninput element, type of \"text\", has no text in label.\n\nRepair: Add text to the input element's associated label that describes the purpose or function of the control.\n\n Found cases locations: \n\n Line 2001, Column 5\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nUsing label elements to associate text labels with form controls.\n\n Found cases locations: \n\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[6]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button\n //html/body/div/section/div/div/div\n //html/body/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 2001, Column 5",
+                "description": "<input  class=\"field...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
+                "description": "<input class=\"field ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]",
+                "description": "<input name=\"p_p_id\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]",
+                "description": "<input name=\"p_p_lif...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]",
+                "description": "<input name=\"p_p_sta...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]",
+                "description": "<input name=\"p_p_mod...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]",
+                "description": "<input name=\"_com_li...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button",
+                "description": "<button class=\"btn b...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div",
+                "description": "<div class=\"upv-ehu-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/input",
+                "description": "<input type=\"hidden\"...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -750,13 +1248,14 @@
           "type": "Assertion",
           "testcase": "wcag2:contrast-minimum",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nAccording to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.\n\nEnsure a contrast ratio of at least 3\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nAccording to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.\n\nEnsure a contrast ratio of at least 3\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nEnsuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text\n\n Found cases locations: \n\n //html/body/nav/ul/li/a\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[1]/a/span\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[2]/a/span\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[3]/a/span\n //html/body/div/header/div[1]/div[1]/div/nav[2]/div/div/ul/li[1]/a\n //html/body/div/header/div[1]/div[1]/div/nav[2]/div/div/ul/li[2]/a\n //html/body/div/header/div[1]/div[1]/div/nav[2]/div/div/ul/li[3]/a\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[1]/a/span\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[2]/a/span\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[3]/a/span\n //html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[1]/a\n //html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[2]/a\n //html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[3]/a\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[1]/a/span\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[2]/a/span\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[3]/a/span\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[4]/a/span\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[5]/a/span\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[6]/a/span\n //html/body/div/footer/div/div/ul/li[1]/a\n //html/body/div/footer/div/div/ul/li[2]/a\n //html/body/div/footer/div/div/ul/li[3]/a\n //html/body/div/footer/div/div/ul/li[4]/a\n //html/body/div/footer/div/div/ul/li[5]/a\n //html/body/div/footer/div/div/p",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -765,7 +1264,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
-                "description": "<span class=\"hide-accessible\"> ...",
+                "description": "<span class=\"hide-ac...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -775,7 +1274,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
-                "description": "<span class=\"hide-accessible\"> ...",
+                "description": "<span class=\"hide-ac...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -785,7 +1284,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
-                "description": "<span class=\"hide-accessible\"> ...",
+                "description": "<span class=\"hide-ac...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -795,7 +1294,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
-                "description": "<span class=\"hide-accessible\"> ...",
+                "description": "<span class=\"hide-ac...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -805,7 +1304,167 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
-                "description": "<span class=\"hide-accessible\"> ...",
+                "description": "<span class=\"hide-ac...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/nav/ul/li/a",
+                "description": "<a href=\"#main-conte...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[1]/a/span",
+                "description": "<span lang=\"eu\"> Eus...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[2]/a/span",
+                "description": "<span lang=\"es\"> Esp...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[3]/a/span",
+                "description": "<span lang=\"en\"> Eng...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[1]/a",
+                "description": "<a href=\"/es/web/ara...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[2]/a",
+                "description": "<a href=\"/es/web/biz...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[2]/div/div/ul/li[3]/a",
+                "description": "<a href=\"/es/web/gip...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[1]/a/span",
+                "description": "<span lang=\"eu\">Eusk...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[2]/a/span",
+                "description": "<span lang=\"es\">Espa...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[3]/a/span",
+                "description": "<span lang=\"en\">Engl...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/section/div/div/ul/li[6]/a/span",
+                "description": "<span class=\"hide-te...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer/div/div/ul/li[1]/a",
+                "description": "<a href=\"/es/irisgar...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer/div/div/ul/li[2]/a",
+                "description": "<a href=\"/es/lege-oh...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer/div/div/ul/li[4]/a",
+                "description": "<a href=\"/es/web/gue...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer/div/div/ul/li[5]/a",
+                "description": "<a href=\"/es/laguntz...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer/div/div/p",
+                "description": "<p class=\"pull-right...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1082,13 +1741,15 @@
           "type": "Assertion",
           "testcase": "wcag2:bypass-blocks",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:AChecker",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\nAdda link at the top of each page to directly access the main content area\n\n Found cases locations: \n\n //html/body[2]/nav[3]/ul[2]/li[1]/a[1]\n //html/body[2]/nav[3]/ul[2]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\nAdda link at the top of each page to directly access the main content area\n\n Found cases locations: \n\n //html/body[2]/nav[3]/ul[2]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]\n\n*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\nselect element's label is not positioned close to control.\n\n Found cases locations: \n\n Line 2091, Column 2\n Line 1106, Column 1\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found: \n\nUsing ARIA landmarks to identify regions of a page\n\n Found cases locations: \n\n //html/body/div/header\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header\n //html/body/div/footer\n //html/body/nav\n //html/body/div/header/div[1]/div[1]/div/nav[1]\n //html/body/div/header/div[1]/div[1]/div/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[1]\n //html/body/div/header/div[1]/div[2]/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[3]\n //html/body/div/header/div[3]/div/div/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav/nav\n //html/body/div/section/div/div/div/div/div[1]/nav\n //html/body/div/header/div[1]/div[2]\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[2]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[3]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[4]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[5]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[6]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[7]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[8]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[9]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[10]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[11]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[12]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[13]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[14]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[15]/div[2]/div/aside\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[16]/div[2]/div/aside",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1097,17 +1758,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                "description": "<a href=\"#main-content\"> ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                "description": "<a href=\"#main-content\"> ...",
+                "description": "<a href=\"#main-conte...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1117,7 +1768,157 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
-                "description": "<div class=\"upv-ehu-3-cols columns-3 container\" id=\"main-content\" role=\"main\"> ...",
+                "description": "<div class=\"upv-ehu-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 2091, Column 2",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 1106, Column 1",
+                "description": "<body class=\" controls-visible  yui3-skin-sam guest-site signed-out public-page site es_ES\">\n\n\t<no ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header",
+                "description": "<header id=\"head\">\n\t ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header",
+                "description": "<header id=\"info-tit...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/footer",
+                "description": "<footer id=\"footer\">...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/nav",
+                "description": "<nav aria-label=\"Enl...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]",
+                "description": "<nav id=\"menu-langua...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[2]",
+                "description": "<nav id=\"menu-campus...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]",
+                "description": "<nav id=\"menu-main-r...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav",
+                "description": "<nav id=\"menu-main\" ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[2]/nav",
+                "description": "<nav class=\"breadcru...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[2]/nav/nav",
+                "description": "<nav aria-label=\"\" i...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav",
+                "description": "<nav id=\"side-menu\" ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]",
+                "description": "<div id=\"menu-respon...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[16]/div[2]/div/aside",
+                "description": "<aside>\n\t\t<div class ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1133,8 +1934,8 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
       "hasPart": [
         {
@@ -1156,7 +1957,282 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/head[1]/title[7]",
-                "description": "<title> ...",
+                "description": "<title>Inicio - UPV/...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:page-titled",
+          "assertedBy": [
+            "_:AChecker"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\nImage may contain text with poor contrast.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 5509, Column 184\n Line 6538, Column 184\n Line 7010, Column 13\n Line 7961, Column 183\n Line 8517, Column 5\n Line 8769, Column 5\n Line 9019, Column 5\n Line 9271, Column 5\n Line 9521, Column 5\n Line 9771, Column 5\n Line 10023, Column 5\n Line 10273, Column 5\n Line 10523, Column 5\n Line 10775, Column 5\n Line 11025, Column 5\n Line 11275, Column 5\n Line 11527, Column 5\n Line 11777, Column 5\n Line 12027, Column 5\n Line 12277, Column 5\n Line 12527, Column 5\n Line 12777, Column 5",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 1485, Column 6",
+                "description": "<img class=\"logo\" sr...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 1490, Column 6",
+                "description": "<img class=\"logo-gue...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 4104, Column 8",
+                "description": "<img class=\"col-4\" s...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 4466, Column 8",
+                "description": "<img class=\"col-4\" s...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 5509, Column 184",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 6538, Column 184",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 7010, Column 13",
+                "description": "<img class=\"col-4\" a...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 7961, Column 183",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 8517, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 8769, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 9019, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 9271, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 9521, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 9771, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 10023, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 10273, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 10523, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 10775, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 11025, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 11275, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 11527, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 11777, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 12027, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 12277, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 12527, Column 5",
+                "description": "<img src=\"/documents...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 12777, Column 5",
+                "description": "<img src=\"/documents...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1191,13 +2267,14 @@
           "type": "Assertion",
           "testcase": "wcag2:link-purpose-in-context",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nFailure of Success Criteria 2.4.4, 2.4.9 and 4.1.2 due to not providing an accessible name for an image which is the only content in a link\n\n Found cases locations: \n\n //html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1206,7 +2283,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                "description": "<a class=\"breadcrumb-link\" href=\"https://www.ehu.eus/es\" title=\"UPV/EHU\"> ...",
+                "description": "<a class=\"breadcrumb...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1216,7 +2293,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                "description": "<a class=\"twitter\" href=\"https://twitter.com/upvehu\" target=\"blank\" title=\"Twitter\"> ...",
+                "description": "<a class=\"twitter\" h...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1226,7 +2303,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                "description": "<a class=\"facebook\" href=\"https://www.facebook.com/upv.ehu\" target=\"blank\" title=\"Facebook\"> ...",
+                "description": "<a class=\"facebook\" ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1236,7 +2313,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                "description": "<a class=\"instagram\" href=\"https://www.instagram.com/upvehu_gara/\" target=\"blank\" title=\"Instagram\"> ...",
+                "description": "<a class=\"instagram\"...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1246,7 +2323,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                "description": "<a class=\"linkedin\" href=\"https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title\" target=\"blank\" title=\"Linkedin\"> ...",
+                "description": "<a class=\"linkedin\" ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1256,7 +2333,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                "description": "<a class=\"youtube\" href=\"https://www.youtube.com/@upvehu\" target=\"blank\" title=\"Youtube\"> ...",
+                "description": "<a class=\"youtube\" h...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1266,7 +2343,52 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-                "description": "<a class=\"vimeo\" href=\"https://vimeo.com/UPVEHU/ALBUMS\" target=\"blank\" title=\"Vimeo\"> ...",
+                "description": "<a class=\"vimeo\" hre...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:link-purpose-in-context",
+          "assertedBy": [
+            "_:AChecker"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\ninput possibly using color alone.\n\n Found cases locations: \n\n Line 2001, Column 5\n Line 12968, Column 103",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 2001, Column 5",
+                "description": "<input  class=\"field...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 12968, Column 103",
+                "description": "<input hidden type=\"...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1334,13 +2456,14 @@
           "type": "Assertion",
           "testcase": "wcag2:link-purpose-link-only",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nFailure of Success Criteria 2.4.4, 2.4.9 and 4.1.2 due to not providing an accessible name for an image which is the only content in a link\n\n Found cases locations: \n\n //html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1349,7 +2472,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                "description": "<a class=\"breadcrumb-link\" href=\"https://www.ehu.eus/es\" title=\"UPV/EHU\"> ...",
+                "description": "<a class=\"breadcrumb...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1359,7 +2482,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                "description": "<a class=\"twitter\" href=\"https://twitter.com/upvehu\" target=\"blank\" title=\"Twitter\"> ...",
+                "description": "<a class=\"twitter\" h...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1369,7 +2492,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                "description": "<a class=\"facebook\" href=\"https://www.facebook.com/upv.ehu\" target=\"blank\" title=\"Facebook\"> ...",
+                "description": "<a class=\"facebook\" ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1379,7 +2502,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                "description": "<a class=\"instagram\" href=\"https://www.instagram.com/upvehu_gara/\" target=\"blank\" title=\"Instagram\"> ...",
+                "description": "<a class=\"instagram\"...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1389,7 +2512,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                "description": "<a class=\"linkedin\" href=\"https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title\" target=\"blank\" title=\"Linkedin\"> ...",
+                "description": "<a class=\"linkedin\" ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1399,7 +2522,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                "description": "<a class=\"youtube\" href=\"https://www.youtube.com/@upvehu\" target=\"blank\" title=\"Youtube\"> ...",
+                "description": "<a class=\"youtube\" h...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1409,7 +2532,17 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-                "description": "<a class=\"vimeo\" href=\"https://vimeo.com/UPVEHU/ALBUMS\" target=\"blank\" title=\"Vimeo\"> ...",
+                "description": "<a class=\"vimeo\" hre...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+                "description": "<img alt=\"\" src=\"htt...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1434,7 +2567,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/cathedra/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
+                "description": "<a class=\"taglib-ico...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1444,7 +2577,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
+                "description": "<a class=\"taglib-ico...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1454,7 +2587,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-icon\" href=\"https://www.ehu.eus/es/campusa/noticias/-/asset_publisher/MICMqglnC3fZ/rss\" target=\"_blank\" title=\"(Abre una nueva ventana)\"> ...",
+                "description": "<a class=\"taglib-ico...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1493,7 +2626,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-accessible\"> ...",
+                "description": "<h1 class=\"hide-acce...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1503,7 +2636,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item_h2\"> ...",
+                "description": "<h2 class=\"menu-item...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1513,7 +2646,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1> ...",
+                "description": "<h1>¡Síguenos!</h1>...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1523,7 +2656,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1533,7 +2666,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1543,7 +2676,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1553,7 +2686,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-title-text\"> ...",
+                "description": "<h2 class=\"portlet-t...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1658,10 +2791,24 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html",
-                "description": "<html class=\"ltr aui yui3-js-enabled webkit js chrome chrome101 chrome101-0 win secure\" dir=\"ltr\" lang=\"es-ES\"> ...",
+                "description": "<html class=\"ltr aui...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:language-of-page",
+          "assertedBy": [
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@MAUVE************* \n\nPASSED",
+            "locationPointersGroup": []
           }
         }
       ],
@@ -1748,13 +2895,14 @@
           "type": "Assertion",
           "testcase": "wcag2:on-input",
           "assertedBy": [
-            "_:AccessMonitor"
+            "_:AccessMonitor",
+            "_:MAUVE"
           ],
           "subject": "_:webpage",
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nAfter being filled, it is necessary to submit the form data to the server. This is the function of the submit button.\n\nProvide Submit buttons\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
+            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nAfter being filled, it is necessary to submit the form data to the server. This is the function of the submit button.\n\nProvide Submit buttons\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]\n\n*************@MAUVE************* \n\nPASSED",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -1763,7 +2911,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
-                "description": "<form action=\"https://www.ehu.eus/es/home?p_p_id=com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70&amp;p_p_lifecycle=0&amp;p_p_state=maximized&amp;p_p_mode=view&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_mvcPath=%2Fsearch.jsp&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_redirect=https%3A%2F%2Fwww.ehu.eus%2Fes%2Fhome%3Fp_p_id%3Dcom_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview\" class=\"form  \" data-fm-namespace=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm\" method=\"get\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm\"> ...",
+                "description": "<form action=\"https:...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1773,7 +2921,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
-                "description": "<form action=\"#\" class=\"hide\" id=\"hrefFm\" method=\"post\" name=\"hrefFm\" aria-hidden=\"true\"> ...",
+                "description": "<form action=\"#\" cla...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1833,8 +2981,8 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
       "hasPart": [
         {
@@ -1856,7 +3004,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\"> ...",
+                "description": "<input class=\"field ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1866,7 +3014,129 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\"> ...",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:labels-or-instructions",
+          "assertedBy": [
+            "_:AChecker",
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AChecker************* \n\nAn ERROR was found: \n\nLabel text is empty for select element.\n\nRepair: Add text to the label associated with the select element.\n\n Found cases locations: \n\n Line 2091, Column 2\n\n*************@MAUVE************* \n\nAn ERROR was found: \n\nUsing label elements to associate text labels with form controls.\n\n Found cases locations: \n\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[6]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input",
+                "description": "<input class=\"field ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]",
+                "description": "<input name=\"p_p_id\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]",
+                "description": "<input name=\"p_p_lif...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]",
+                "description": "<input name=\"p_p_sta...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]",
+                "description": "<input name=\"p_p_mod...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]",
+                "description": "<input name=\"_com_li...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:labels-or-instructions",
+          "assertedBy": [
+            "_:AChecker",
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found: \n\ntitle might not describe the document.\n\n Found cases locations: \n\n Line 123, Column 2\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found: \n\nPositioning labels to maximize predictability of relationships\n\n Found cases locations: \n\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "Line 123, Column 2",
+                "description": "<title>Inicio - UPV/...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input",
+                "description": "<input class=\"field ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]
@@ -1954,8 +3224,8 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
       "hasPart": [
         {
@@ -1977,7 +3247,7 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field search-input search-portlet-keywords-input form-control\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords\" placeholder=\"Buscar\" title=\"Escribe aquí el término de búsqueda\" type=\"text\" value=\"\" size=\"30\"> ...",
+                "description": "<input class=\"field ...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               },
               {
@@ -1987,7 +3257,487 @@
                   "ptr:XPathPointer"
                 ],
                 "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-control search-select\" id=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" name=\"_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\" title=\"Ámbito\"> ...",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:name-role-value",
+          "assertedBy": [
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@MAUVE************* \n\nAn ERROR was found: \n\nUsing label elements to associate text labels with form controls.\n\n Found cases locations: \n\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[6]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button\n //html/body/div/section/div/div/div\n //html/body/input\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]\n //html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img\n //html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[2]/select",
+                "description": "<select class=\"form-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input",
+                "description": "<input class=\"field ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[2]",
+                "description": "<input name=\"p_p_id\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[3]",
+                "description": "<input name=\"p_p_lif...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[4]",
+                "description": "<input name=\"p_p_sta...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[5]",
+                "description": "<input name=\"p_p_mod...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[6]",
+                "description": "<input name=\"_com_li...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[7]",
+                "description": "<input name=\"_com_li...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[3]/button",
+                "description": "<button class=\"btn b...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div",
+                "description": "<div class=\"upv-ehu-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/input",
+                "description": "<input type=\"hidden\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
+                "description": "<input class=\"field ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[10]/section/div/div[2]/div/div/div/article/section/div/div[1]/div/span/a/img",
+                "description": "<img alt=\"\" src=\"htt...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:name-role-value",
+          "assertedBy": [
+            "_:MAUVE"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@MAUVE************* \n\nA POSSIBLE ISSUE was found: \n\nUsing WAI-ARIA state and property attributes to expose the state of a user interface component\n\n Found cases locations: \n\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[1]/a\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[2]/a\n //html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[3]/a\n //html/body/div/header/div[1]/div[2]\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[1]/a\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[2]/a\n //html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[3]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[1]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[2]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[3]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[4]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[5]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[6]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[7]/a\n //html/body/div/header/div[1]/div[2]/nav[3]/ul/li[8]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[1]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[2]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[3]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[4]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[5]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[6]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[7]/a\n //html/body/div/header/div[3]/div/div/nav/div/div/ul/li[8]/a\n //html/body/div/header/div[4]/div/div/div[2]/nav\n //html/body/div/section/div/div/div\n //html/body/div/section/div/div/div/div/div[1]/nav/ul\n //html/body/div/section/div/div/div/div/div[1]/nav/ul/li[1]\n //html/body/div/section/div/div/div/div/div[1]/nav/ul/li[2]\n //html/body/div/section/div/div/div/div/div[1]/nav/ul/li[3]",
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[1]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[2]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[1]/div/nav[1]/div/div/ul/li[3]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]",
+                "description": "<div id=\"menu-respon...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[1]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[2]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[1]/div/div/ul/li[3]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[1]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[2]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[3]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[4]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[5]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[6]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[7]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[1]/div[2]/nav[3]/ul/li[8]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul",
+                "description": "<ul class=\"nav\" role...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[1]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[2]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[3]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[4]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[5]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[6]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[7]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[3]/div/div/nav/div/div/ul/li[8]/a",
+                "description": "<a role=\"menuitem\" h...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/header/div[4]/div/div/div[2]/nav",
+                "description": "<nav class=\"breadcru...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div",
+                "description": "<div class=\"upv-ehu-...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav/ul",
+                "description": "<ul class=\"level-1\" ...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav/ul/li[1]",
+                "description": "<li id=\"navParent65\"...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav/ul/li[2]",
+                "description": "<li id=\"navParent312...",
+                "namespace": "http://www.w3.org/1999/xhtml"
+              },
+              {
+                "id": "_:pointer",
+                "type": [
+                  "ptr:groupPointer",
+                  "ptr:XPathPointer"
+                ],
+                "ptr:expression": "//html/body/div/section/div/div/div/div/div[1]/nav/ul/li[3]",
+                "description": "<li id=\"navParent71\"...",
                 "namespace": "http://www.w3.org/1999/xhtml"
               }
             ]

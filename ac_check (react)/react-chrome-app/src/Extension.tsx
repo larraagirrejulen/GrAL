@@ -19,6 +19,8 @@ export default function Extension() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    removeStoredReport();
+
     (async () => {
       const shiftWebpage = await getOptions("shiftWebpage");
       if(shiftWebpage){

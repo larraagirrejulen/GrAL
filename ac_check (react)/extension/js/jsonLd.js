@@ -9,9 +9,6 @@ class JsonLd{
 
         const siteName = (new URL(pageUrl)).hostname.replace('www.','');
         const evaluators = {
-            "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
-            "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
-            "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
             "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
         };
 
@@ -90,7 +87,13 @@ class JsonLd{
     }
 
 
-    addNewAssertion(criteriaNumber, outcome, criteriaDescription, path = null, html = null){
+
+
+    addNewAssertion(criteriaNumber, newOutcome, newDescription, path = null, html = null){
+        
+        const criteriaId = this.#successCriterias[criteriaNumber].id;
+
+        const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
 
         const outcomeDescriptions = {
             "earl:passed": "No violations found",
@@ -99,80 +102,62 @@ class JsonLd{
             "earl:inapplicable": "SC is not applicable"
         };
 
-        const criteriaId = this.#successCriterias[criteriaNumber].id
-
-        const siteAssertion = this.#jsonld.auditSample.filter(siteAssert => siteAssert.test === "wcag2:" + criteriaId)[0]
-
-        let pageAssertion = siteAssertion.hasPart.filter(pageAssert => pageAssert.result.outcome == outcome)
-
-        let htmlElement = html;
-
-        if(html !== null && htmlElement.indexOf(">") > -1){
-            htmlElement = htmlElement.substring(0, html.indexOf(">")+1) + " ..."
-        }
-
-        if(pageAssertion.length > 0){
-            pageAssertion = pageAssertion[0];
-
-            if(path != null && !pageAssertion.result.locationPointersGroup.filter(pointer => pointer.expression == path).length > 0){
-                pageAssertion.result.description = pageAssertion.result.description;
-                pageAssertion.result.locationPointersGroup.push({
-                    "id": "_:pointer",
-                    "type": [
-                        "ptr:groupPointer",
-                        "ptr:XPathPointer"
-                    ],
-                    "ptr:expression": path, 
-                    "description": htmlElement,
-                    "namespace" : "http://www.w3.org/1999/xhtml"
-                });
-            }
-
-            return;
-        }
-
-
-
-        const currentGeneralOutcome = siteAssertion.result.outcome
-        switch (currentGeneralOutcome) {
-            case "earl:untested":
-                siteAssertion.result.outcome = outcome
-                siteAssertion.result.description = outcomeDescriptions[outcome]
-                siteAssertion.assertedBy = "_:" + this.#evaluator.name
-                siteAssertion.mode = "earl:automatic"
+        switch (webSiteAssertion.result.outcome) {  // Current general outcome
+            case "earl:untested" || "earl:inapplicable":
+                webSiteAssertion.result.outcome = newOutcome;
+                webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+                webSiteAssertion.assertedBy = "_:" + this.#evaluator.name;
+                webSiteAssertion.mode = "earl:automatic";
                 break;    
             case "earl:passed":
-                siteAssertion.result.outcome = outcome
-                siteAssertion.result.description = outcomeDescriptions[outcome]
+                if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:passed"){
+                    webSiteAssertion.result.outcome = newOutcome;
+                    webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+                }
                 break;
             case "earl:cantTell":
-                if(outcome !== "earl:passed"){
-                    siteAssertion.result.outcome = outcome
-                    siteAssertion.result.description = outcomeDescriptions[outcome]
+                if(newOutcome === "earl:failed"){
+                    webSiteAssertion.result.outcome = newOutcome;
+                    webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
                 }
                 break;
             default:
         }
 
-
+        const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.result.outcome === newOutcome);
+        
         const locationPointersGroup = [];
-        let description = "*************@" + this.#evaluator.name + "************* \n\n" + criteriaDescription;
+        let description = "*************@" + this.#evaluator.name + "************* \n\n" + newDescription;
 
-        if(path !== null){
-            description += "\n\n Found cases locations: \n\n " + path + "... ";
-            locationPointersGroup.push({
+        if(path){
+
+            const newPointer = {
                 "id": "_:pointer",
                 "type": [
                     "ptr:groupPointer",
                     "ptr:XPathPointer"
                 ],
                 "ptr:expression": path, 
-                "description": htmlElement, 
+                "description": html.replace(/^(.{0,20}).*$/, '$1...'),
                 "namespace" : "http://www.w3.org/1999/xhtml"
-            });
-        }
+            };
 
-        const assertion = {
+            if(webPageAssertion){
+
+                if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
+                && webPageAssertion.result.locationPointersGroup.length < 30){
+                    webPageAssertion.result.description += "\n " + path;
+                    webPageAssertion.result.locationPointersGroup.push(newPointer);
+                }
+                return;
+            }
+
+            description += "\n\n Found cases locations: \n\n " + path;
+            locationPointersGroup.push(newPointer);
+
+        }else if (webPageAssertion) return;
+
+        webSiteAssertion.hasPart.push({
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
             "assertedBy": ["_:" + this.#evaluator.name],
@@ -180,24 +165,29 @@ class JsonLd{
             "mode": "earl:automatic",
             "result":
             {
-                "outcome": outcome,
+                "outcome": newOutcome,
                 "description": description,
                 "locationPointersGroup": locationPointersGroup
             }
-        }
-
-        siteAssertion.hasPart.push(assertion);
+        });
+        
     }
+
+
+
 
     getJsonLd(){
 
-        if(this.#jsonld.auditSample.filter(assertion => assertion.result.outcome == "earl:failed").length > 0){
+        if(this.#jsonld.auditSample.find(assertion => assertion.result.outcome == "earl:failed")){
             this.#jsonld["dct:summary"] = "Some errors where found..."
         } else{
             this.#jsonld["dct:summary"] = "No errors where found!!!"
         }
         return this.#jsonld;
     }
+
+
+
 
     #context = {
         "@vocab": "http://www.w3.org/TR/WCAG-EM/#",
@@ -573,3 +563,4 @@ class JsonLd{
     };
 
 }
+

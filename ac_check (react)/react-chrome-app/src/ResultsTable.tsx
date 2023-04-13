@@ -185,15 +185,6 @@ function Collapsible3({sub2section}:any){
 
 
 function Pointer({ pointer, index }:any) {
-    const [expanded, setExpanded] = useState(false);
-  
-    const handleClick = () => {
-      setExpanded(!expanded);
-    };
-  
-    const displayCode = expanded
-      ? pointer.pointed_html
-      : pointer.pointed_html.substring(0, pointer.pointed_html.indexOf(" ")) + " ... /&gt;";
   
     const preStyles:any = {
         backgroundColor: "#f4f4f4",
@@ -208,9 +199,8 @@ function Pointer({ pointer, index }:any) {
         className="codigo_analisis"
         style={{ ...preStyles, cursor: "pointer" }}
         data-pointed-xpath={pointer.pointed_xpath}
-        onClick={handleClick}
       >
-        {index + 1}. {parse(displayCode)}
+        {index + 1}. {parse(pointer.pointed_html)}
       </pre>
     );
   }
