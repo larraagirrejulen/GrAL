@@ -138,7 +138,7 @@ class JsonLd{
                     "ptr:XPathPointer"
                 ],
                 "ptr:expression": path, 
-                "description": html.replace(/^(.{0,20}).*$/, '$1...'),
+                "description": html.replace(/[\n\t]/g, "").replace(/^(.{0,20}).*$/, '$1...'),
                 "namespace" : "http://www.w3.org/1999/xhtml"
             };
 
@@ -146,7 +146,7 @@ class JsonLd{
 
                 if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
                 && webPageAssertion.result.locationPointersGroup.length < 30){
-                    webPageAssertion.result.description += "\n " + path;
+                    webPageAssertion.result.description += "\n\n " + path;
                     webPageAssertion.result.locationPointersGroup.push(newPointer);
                 }
                 return;

@@ -131,7 +131,7 @@ function Collapsible2({subsection, activeLevels, mantainExtended}:any){
             { activeLevels.includes(sub2section.conformanceLevel) ? <>
             
                 <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
-                    {sub2section.hasOwnProperty("results") && sub2section.result_text !== "NOT PRESENT" ? <>
+                    {sub2section.hasOwnProperty("results") ? <>
                         <td colSpan={6}>
                             <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                             {sub2section.sub2section}

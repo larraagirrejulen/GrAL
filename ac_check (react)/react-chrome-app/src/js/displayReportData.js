@@ -220,8 +220,9 @@ function load_final_results(sub2CategoryKey){
         description = description.replaceAll('>','&gt;');
         description = description.replaceAll('&lt;','<pre>&lt;');
         description = description.replaceAll('&gt;','&gt;</pre>');
-        
-        
+
+
+        description = outcome === "inapplicable" ? description.substring(31) : description.substring(31, description.indexOf("Found cases locations:"));
 
         results = {
             "assertor": assertor,
