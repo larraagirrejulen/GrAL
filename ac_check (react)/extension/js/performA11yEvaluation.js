@@ -35,7 +35,7 @@
 
             const outcome = ruleResult2Outcome[ruleResult.getResultValue()];
 
-            if (!outcome) continue;
+            if (!outcome || !ruleResult.isRuleRequired()) continue;
 
             let description = outcome === "earl:failed" ? 'An ERROR was found' : outcome === "earl:cantTell" ? 'A POSSIBLE ISSUE was found' : outcome === "earl:inapplicable" ? "Cannot apply" : 'PASSED'
             description += ":\n\n" + ruleResult.getRuleSummary() + "\n\n";

@@ -92,7 +92,7 @@ class JsonLd{
 
 
     addNewAssertion(criteriaNumber, newOutcome, newDescription, path = null, html = null){
-        
+
         const criteriaId = this.#successCriterias[criteriaNumber].id;
 
         const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
@@ -104,23 +104,28 @@ class JsonLd{
             "earl:inapplicable": "SC is not applicable"
         };
 
+        function newGeneralOutcome(){
+            webSiteAssertion.result.outcome = newOutcome;
+            webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+        }
+
         switch (webSiteAssertion.result.outcome) {  // Current general outcome
-            case "earl:untested" || "earl:inapplicable":
-                webSiteAssertion.result.outcome = newOutcome;
-                webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+            case "earl:untested":
+                newGeneralOutcome();
                 webSiteAssertion.assertedBy = "_:" + this.#evaluator.name;
                 webSiteAssertion.mode = "earl:automatic";
-                break;    
+                break;  
+            case "earl:inapplicable":
+                newGeneralOutcome();
+                break;  
             case "earl:passed":
                 if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:passed"){
-                    webSiteAssertion.result.outcome = newOutcome;
-                    webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+                    newGeneralOutcome();
                 }
                 break;
             case "earl:cantTell":
                 if(newOutcome === "earl:failed"){
-                    webSiteAssertion.result.outcome = newOutcome;
-                    webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+                    newGeneralOutcome();
                 }
                 break;
             default:
