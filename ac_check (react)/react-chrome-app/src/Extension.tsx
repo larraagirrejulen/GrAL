@@ -19,7 +19,7 @@ export default function Extension() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    removeStoredReport();
+    //removeStoredReport();
 
     (async () => {
       const shiftWebpage = await getOptions("shiftWebpage");
@@ -33,7 +33,7 @@ export default function Extension() {
     
     {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={getLogoSrc()} onClick={()=>setHidden(!hidden)} /> : ""}
     
-    <div className= {`react_chrome_extension ${hidden ? 'hidden' : ''}`}>
+    <div className= {`react_chrome_extension ${hidden && 'hidden'}`}>
       <img className="options_icon" src={getConfigImgSrc()} alt="open configuration options window" onClick={()=>openOptionsPage()} />
       <span className="close_icon" onClick={()=>setHidden(!hidden)}>&times;</span>
       <div className="img_container">
@@ -85,7 +85,7 @@ function EvaluatorSelectionSection () {
         {checkboxes.map((checkbox:any, index:any) => (
           <div className="checkbox-wrapper">
             <div className="checkbox">
-              <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index)} className={checkbox.checked ? "checked" : ""} />
+              <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index)} className={checkbox.checked && "checked" } />
               <span onClick={() => { window.open(checkbox.href, '_blank'); }}>{checkbox.label}</span>
             </div><br/>
             <span>{checkbox.checked ? "Selected" : "Unchecked"}</span>
@@ -152,8 +152,8 @@ function ResultSection() {
       <div className="header"><span>Evaluation Results</span></div>
 
       <div className="body">
-        {localStorage.getItem("evaluated") === "true" ? 
-        <>
+        {localStorage.getItem("evaluated") === "true" ? <>
+
           <div className='conformanceLevelSelector'>
             <p>Select conformace level:</p>
             <div className="level-container">
@@ -164,7 +164,8 @@ function ResultSection() {
           </div>
 
           <ResultsTable activeLevels={activeLevels}/>
-        </>: 
+        
+        </> : 
           <div style={{textAlign: "center", padding:"15px 0"}}>No data stored</div>
         }
       </div>

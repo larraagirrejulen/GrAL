@@ -40,11 +40,11 @@ export default function ResultsTable({activeLevels}:any){
                 </thead>
                 <tbody>
                     {reportTableContent.map((section:any, index:any) => (<>
-                    <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
-                        <td>{section.category}</td>
-                        <Results section={section} activeLevels={activeLevels}/>
-                    </tr>
-                    { collapsibles[index] ? <Collapsible1 section={section} activeLevels={activeLevels} mantainExtended={mantainExtended}/> : ""}
+                        <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
+                            <td>{section.category}</td>
+                            <ResultCount section={section} activeLevels={activeLevels}/>
+                        </tr>
+                        { collapsibles[index] && <Collapsible1 section={section} activeLevels={activeLevels} mantainExtended={mantainExtended}/> }
                     </>))}
                 </tbody>
             </table>
@@ -86,6 +86,26 @@ function Summary({activeLevels}:any){
     );
 }
 
+function ResultCount({section, activeLevels}:any){
+
+    let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
+    for(const level of activeLevels){
+        passed += section.passed[level];
+        failed += section.failed[level];
+        cannot_tell += section.cannot_tell[level];
+        not_present += section.not_present[level];
+        not_checked += section.not_checked[level];
+    }
+
+    return(<>
+        <td>{passed}</td>
+        <td>{failed}</td>
+        <td>{cannot_tell}</td>
+        <td>{not_present}</td>
+        <td>{not_checked}</td>
+    </>);
+}
+
 
 
 
@@ -104,9 +124,9 @@ function Collapsible1({section, activeLevels, mantainExtended}:any){
 
             <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
                 <td>{subsection.subsection}</td>
-                <Results section={subsection} activeLevels={activeLevels}/>
+                <ResultCount section={subsection} activeLevels={activeLevels}/>
             </tr>
-            { collapsibles[index] ? <Collapsible2 subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> : ""}
+            { collapsibles[index] && <Criterias subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> }
         
         </>))} 
     </>);
@@ -115,25 +135,25 @@ function Collapsible1({section, activeLevels, mantainExtended}:any){
 
 
 
-function Collapsible2({subsection, activeLevels, mantainExtended}:any){
+function Criterias({subsection, activeLevels, mantainExtended}:any){
 
-    const [collapsible3s, setCollapsible3s] = useState(Array(subsection.sub2section.length).fill(false));
+    const [selectedCriterias, setSelectedCriterias] = useState(Array(subsection.sub2section.length).fill(false));
 
     const handleCollapsible3sChange = (index:any, mantainExtended:any) => {
-        const newCollapsible3s = mantainExtended ? [...collapsible3s] : Array(subsection.sub2section.length).fill(false);
-        newCollapsible3s[index] = !collapsible3s[index];
-        setCollapsible3s(newCollapsible3s);
+        const newCollapsible3s = mantainExtended ? [...selectedCriterias] : Array(subsection.sub2section.length).fill(false);
+        newCollapsible3s[index] = !selectedCriterias[index];
+        setSelectedCriterias(newCollapsible3s);
     };
 
     return(<> 
         {subsection.sub2section.map((sub2section:any, index:any) => (<>
 
-            { activeLevels.includes(sub2section.conformanceLevel) ? <>
+            { activeLevels.includes(sub2section.conformanceLevel) && <>
             
                 <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
                     {sub2section.hasOwnProperty("results") ? <>
                         <td colSpan={6}>
-                            <img src={ collapsible3s[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                            <img src={ selectedCriterias[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                             {sub2section.sub2section}
                         </td>
                     </>: <>
@@ -141,87 +161,100 @@ function Collapsible2({subsection, activeLevels, mantainExtended}:any){
                         <td colSpan={5}>{sub2section.result_text}</td>
                     </>}
                 </tr>
-                {sub2section.hasOwnProperty("results") && collapsible3s[index] ? <Collapsible3 sub2section={sub2section} /> : "" }
+                {sub2section.hasOwnProperty("results") && selectedCriterias[index] && <CriteriaResults sub2section={sub2section} />}
         
-            </> : "" }
+            </> }
 
-
-        
         </>))} 
     </>);
 }
 
 
 
+function CriteriaResults({sub2section}:any){  
 
-function Collapsible3({sub2section}:any){
+    const [selectedResults, setSelectedResults] = useState(Array(sub2section.results.length).fill(false));
+
+    function handleResultClick (index:any){
+        let newSelectedPointer = Array(sub2section.results.length).fill(false);
+        newSelectedPointer[index] = !selectedResults[index];
+        setSelectedResults(newSelectedPointer);
+    }
+
 
     return(<>
         {sub2section.results.map((result:any, index:any) => (<>
             
-            <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
-            <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
-            <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
-            <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(result.description)}</td></tr>
+            <tr className="collapsible criteriaResult" onClick={() => handleResultClick(index)}>
+                <td>
+                    <img src={ selectedResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                    {result.assertor}
+                </td>
+                <td colSpan={5}>
+                    {result.outcome}
+                </td>
+            </tr>
 
-            {result.hasOwnProperty("solucion") ? <>
-                <tr><td style={{textAlign:"left"}}><u>Possible solution</u>:</td></tr>
-                <tr><td style={{textAlign:"left"}}colSpan={6}>{result.solucion}</td></tr> 
-            </> : ""}
+            {selectedResults[index] && <>
 
-            {result.hasOwnProperty("pointers") ? <>
-                <tr><td style={{textAlign:"left"}}><u>Code</u>:</td></tr>
+                <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
+                <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
+                <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
+                <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(result.description)}</td></tr>
+
+                {result.hasOwnProperty("pointers") && <CriteriaResultPointers result={result} />}
                 
-                {result.pointers.map((pointer:any, index:any) => (<>
-                    <tr><td colSpan={6} style={{textAlign:"left"}}>
-                        <Pointer pointer={pointer} index={index}/>         
-                    </td></tr>
-                </>))}
-            </> : ""}
+            </>}
             
+
         </>))} 
     </>);
 }
 
 
-function Pointer({ pointer, index }:any) {
-  
+function CriteriaResultPointers({result}:any){  
+
+    const [selectedPointers, setSelectedPointers] = useState(Array(result.pointers.length).fill(false));
+
+    function handlePointerClick (index:any){
+        let newSelectedPointer = Array(result.pointers.length).fill(false);
+        newSelectedPointer[index] = !selectedPointers[index];
+        setSelectedPointers(newSelectedPointer);
+    }
+
     const preStyles:any = {
         backgroundColor: "#f4f4f4",
         padding: "1rem",
-        border: "1px solid #ccc",
         borderRadius: "5px",
-        fontSize: "14px"
+        fontSize: "14px",
+        cursor: "pointer"
     };
 
-    return (
-      <pre
-        className="codigo_analisis"
-        style={{ ...preStyles, cursor: "pointer" }}
-        data-pointed-xpath={pointer.pointed_xpath}
-      >
-        {index + 1}. {parse(pointer.pointed_html)}
-      </pre>
-    );
-  }
-
-
-function Results({section, activeLevels}:any){
-
-    let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(var level of activeLevels){
-        passed += section.passed[level];
-        failed += section.failed[level];
-        cannot_tell += section.cannot_tell[level];
-        not_present += section.not_present[level];
-        not_checked += section.not_checked[level];
-    }
+    useEffect(() => { 
+        
+    });
 
     return(<>
-        <td>{passed}</td>
-        <td>{failed}</td>
-        <td>{cannot_tell}</td>
-        <td>{not_present}</td>
-        <td>{not_checked}</td>
+
+        <tr><td style={{textAlign:"left"}}><u>Code pointers</u>:</td></tr>
+        
+        {result.pointers.map((pointer:any, index:any) => (<>
+
+            <tr><td colSpan={6} style={{textAlign:"left"}}>
+                <pre
+                    className="codigo_analisis"
+                    style={selectedPointers[index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }}
+                    data-pointed-xpath={pointer.pointed_xpath}
+                    onClick={() => handlePointerClick(index)}
+                >
+                    {index + 1}. {parse(pointer.pointed_html)}
+                </pre>       
+            </td></tr>
+        
+        </>))}
+
     </>);
 }
+
+
+

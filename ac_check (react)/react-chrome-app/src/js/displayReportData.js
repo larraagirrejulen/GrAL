@@ -230,10 +230,6 @@ function load_final_results(sub2CategoryKey){
             "description": description
         }
 
-        if("solucion" in assertions[i]){
-            results["solution"] = assertions[i]['solucion'];
-        }
-
         locations_length = locations.length;
 
         if(locations_length>0){

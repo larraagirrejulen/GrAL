@@ -81,84 +81,40 @@ export async function performEvaluation(){
 
 
 
-
-
-
-
-
 function merge(jsonLd1, jsonLd2){
 
-	if(jsonLd2["dct:date"] > jsonLd1["dct:date"]) jsonLd1["dct:date"] = jsonLd2["dct:date"]
+	if(jsonLd2["dct:date"] > jsonLd1["dct:date"]) jsonLd1["dct:date"] = jsonLd2["dct:date"];
 
-	jsonLd1.assertors.push(jsonLd2.assertors[0]);
+	jsonLd1.assertors.push(...jsonLd2.assertors);
 
 	jsonLd1.creator["xmlns:name"] += " & " + jsonLd2.creator["xmlns:name"];
 
-	for (var i = 0, assertion1, assertion2; assertion1 = jsonLd1.auditSample[i], assertion2 = jsonLd2.auditSample[i]; i++){
+	for (let i = 0; i < jsonLd1.auditSample.length; i++) {
+
+        let assertion1 = jsonLd1.auditSample[i];
+        let assertion2 = jsonLd2.auditSample[i];
 		
 		if(assertion2.result.outcome === "earl:untested"){ 
-
 			continue; 
 
-		} else if(/^(earl:untested|earl:inapplicable)$/.test(assertion1.result.outcome)){
+		} else if(assertion1.result.outcome === "earl:untested"){
 
-			assertion1 = assertion2;
+            jsonLd1.auditSample[i] = assertion2;
 
-		} else if(assertion2.result.outcome === "earl:inapplicable"){
+        } else {
 
-            continue;
+			if((assertion1.result.outcome === "earl:inapplicable" && assertion2.result.outcome !== "earl:inapplicable") 
+			|| (assertion1.result.outcome === "earl:passed" && (assertion2.result.outcome === "earl:cantTell" || assertion2.result.outcome === "earl:failed"))
+            || (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
 
-        }else {
-
-			mergeFoundCases(assertion1, assertion2);
-
-			if((assertion1.result.outcome === "earl:passed" && assertion2.result.outcome !== "earl:passed") 
-			|| (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
-
-				assertion1.result = assertion2.result;
+				jsonLd1.auditSample[i].result = assertion2.result;
 	
 			}
+
+            jsonLd1.auditSample[i].hasPart.push(...assertion2.hasPart);
 
 		}
 
 	}
-
-}
-
-
-function mergeFoundCases(assertion1, assertion2){
-		
-	assertion2.hasPart.forEach(case2 => {
-	
-		var case_index = assertion1.hasPart.findIndex((case1) => {
-			return case1.result.outcome === case2.result.outcome;
-		});
-
-		if(case_index === -1){
-			assertion1.hasPart.push(case2);
-			return;
-		}
-
-		case2.assertedBy.forEach((assertor)=>{
-			assertion1.hasPart[case_index].assertedBy.push(assertor);
-		});
-
-		assertion1.hasPart[case_index].result.description += "\n\n" + case2.result.description;
-
-		case2.result.locationPointersGroup.forEach((pointer2) => {
-			
-			var exists_index = assertion1.hasPart[case_index].result.locationPointersGroup.findIndex((pointer1) => {
-				return pointer1.description === pointer2.description;
-			});
-
-			if(exists_index === -1){
-				assertion1.hasPart[case_index].result.locationPointersGroup.push(pointer2);					
-			}else if(pointer2["ptr:expression"].startsWith("//html/body")){
-				assertion1.hasPart[case_index].result.locationPointersGroup[exists_index]["ptr:expression"] = pointer2["ptr:expression"];
-			}
-			
-		});
-
-	});
 
 }

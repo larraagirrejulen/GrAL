@@ -110,7 +110,7 @@ class JsonLd{
         switch (webSiteAssertion.result.outcome) {  // Current general outcome
             case "earl:untested":
                 newGeneralOutcome();
-                webSiteAssertion.assertedBy = "_:" + this.#evaluator.name;
+                webSiteAssertion.assertedBy = "_:assertors";
                 webSiteAssertion.mode = "earl:automatic";
                 break;  
             case "earl:inapplicable":
