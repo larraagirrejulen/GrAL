@@ -16,7 +16,7 @@ const outcome2Background:any = {
 }
 
 
-export default function ResultsTable({activeConformanceLevels}:any){
+export default function ResultsTable({conformanceLevels}:any){
 
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
@@ -37,7 +37,7 @@ export default function ResultsTable({activeConformanceLevels}:any){
     
     return(
       <div className = "resultsContainer">
-        <Summary activeConformanceLevels={activeConformanceLevels} />
+        <Summary conformanceLevels={conformanceLevels} />
         <div className="resultsTable">
             <table>
                 <thead>
@@ -47,10 +47,10 @@ export default function ResultsTable({activeConformanceLevels}:any){
                     {reportTableContent.map((mainCategory:any, index:any) => (<>
                         <tr className="collapsible mainCategory" onClick={()=>handleMainCategoryStateChange(index)}>
                             <td>{mainCategory.categoryTitle}</td>
-                            <ResultCount category={mainCategory} activeConformanceLevels={activeConformanceLevels}/>
+                            <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
                         </tr>
                         { selectedMainCategories[index] ? 
-                            <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} activeConformanceLevels={activeConformanceLevels} /> 
+                            <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels} /> 
                         : null }
                     </>))}
                 </tbody>
@@ -73,7 +73,7 @@ function OutcomeHeaders(){
     </>);
 }
 
-function Summary({activeConformanceLevels}:any){
+function Summary({conformanceLevels}:any){
 
     const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
 
@@ -81,7 +81,7 @@ function Summary({activeConformanceLevels}:any){
         (async ()=>{
             const reportSummary = await getFromChromeStorage("reportSummary");
             let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-            for(const conformanceLevel of activeConformanceLevels){
+            for(const conformanceLevel of conformanceLevels){
                 passed += reportSummary["earl:passed"][conformanceLevel];
                 failed += reportSummary["earl:failed"][conformanceLevel];
                 cantTell += reportSummary["earl:cantTell"][conformanceLevel];
@@ -90,7 +90,7 @@ function Summary({activeConformanceLevels}:any){
             }
             setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
         })();
-    },[activeConformanceLevels]);
+    },[conformanceLevels]);
 
     return(
         <table className="summaryTable">
@@ -100,11 +100,11 @@ function Summary({activeConformanceLevels}:any){
     );
 }
 
-function ResultCount({category, activeConformanceLevels}:any){
+function ResultCount({category, conformanceLevels}:any){
 
     let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
 
-    for(const conformanceLevel of activeConformanceLevels){
+    for(const conformanceLevel of conformanceLevels){
         passed += category.passed[conformanceLevel];
         failed += category.failed[conformanceLevel];
         cantTell += category.cantTell[conformanceLevel];
@@ -120,7 +120,7 @@ function ResultCount({category, activeConformanceLevels}:any){
 
 
 
-function SubCategory({subCategories, mantainExtended, activeConformanceLevels}:any){
+function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
     const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
 
@@ -135,10 +135,10 @@ function SubCategory({subCategories, mantainExtended, activeConformanceLevels}:a
 
             <tr className="collapsible subCategory" onClick={()=>handleSubCategoryStateChange(index)}>
                 <td>{subCategory.subCategoryTitle}</td>
-                <ResultCount category={subCategory} activeConformanceLevels={activeConformanceLevels} />
+                <ResultCount category={subCategory} conformanceLevels={conformanceLevels} />
             </tr>
             { selectedSubCategories[index] ? 
-                <Criterias criterias={subCategory.criterias} mantainExtended={mantainExtended} activeConformanceLevels={activeConformanceLevels}/> 
+                <Criterias criterias={subCategory.criterias} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels}/> 
             : null }
         
         </>))} 
@@ -148,7 +148,7 @@ function SubCategory({subCategories, mantainExtended, activeConformanceLevels}:a
 
 
 
-function Criterias({criterias, mantainExtended, activeConformanceLevels}:any){
+function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
 
@@ -163,7 +163,7 @@ function Criterias({criterias, mantainExtended, activeConformanceLevels}:any){
     return(<> 
         {criterias.map((criteria:any, index:any) => (<>
 
-            { activeConformanceLevels.includes(criteria.conformanceLevel) ? <>
+            { conformanceLevels.includes(criteria.conformanceLevel) ? <>
             
                 <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleCriteriaStateChange(index)}}>
                     <td colSpan={2}>

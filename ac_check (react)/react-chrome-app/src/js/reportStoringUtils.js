@@ -49,9 +49,9 @@ export async function downloadStoredReport(){
 
     const storedReport = await getFromChromeStorage("report");
 
-    const activeLevels = JSON.parse(sessionStorage.getItem("activeLevels"));
+    const activeConformanceLevels = JSON.parse(localStorage.getItem("activeConformanceLevels"));
 
-    storedReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeLevels[activeLevels.length - 1] + "-Conformance"
+    storedReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeConformanceLevels[activeConformanceLevels.length - 1] + "-Conformance"
 
     storedReport.auditSample.forEach((audit) => {
         if(audit.result.outcome === "earl:untested"){

@@ -59,7 +59,7 @@ function EvaluatorSelectionSection () {
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
     { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
-    { checked: true, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
+    { checked: false, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
     { checked: false, label: "Tota11y", href: "https://khan.github.io/tota11y/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub"}
   ]);
 
@@ -67,12 +67,17 @@ function EvaluatorSelectionSection () {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index].checked = !newCheckboxes[index].checked;
     setCheckboxes(newCheckboxes);
-    sessionStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
+    localStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
   };
 
   useEffect(() => { 
-    sessionStorage.setItem("checkboxes", JSON.stringify(checkboxes));
-  });
+    const storedCheckboxes = localStorage.getItem("checkboxes");
+    if(storedCheckboxes !== null){
+      setCheckboxes(JSON.parse(storedCheckboxes));
+    }else{
+      localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+    }     
+  }, [checkboxes]);
 
   return ( <div className="evaluator_selection_section">
 
@@ -135,16 +140,21 @@ function EvaluationSection () {
 
 function ResultSection() {
   
-  const [activeLevels, setActiveLevels] = useState(['A', 'AA']);
+  const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
     const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
-    setActiveLevels(levels);
-    sessionStorage.setItem("activeLevels", JSON.stringify(levels));
+    setConformanceLevels(levels);
+    localStorage.setItem("conformanceLevels", JSON.stringify(levels));
   };
 
   useEffect(() => {
-    sessionStorage.setItem("activeLevels", JSON.stringify(activeLevels));
-  });
+    const storedActiveLevels = localStorage.getItem("conformanceLevels");
+    if(storedActiveLevels !== null){
+      setConformanceLevels(JSON.parse(storedActiveLevels));
+    }else{
+      localStorage.setItem("conformanceLevels", JSON.stringify(conformanceLevels));
+    }
+  }, [conformanceLevels]);
 
   return ( 
     <div className="result_section">
@@ -158,12 +168,12 @@ function ResultSection() {
             <p>Select conformace level:</p>
             <div className="level-container">
               {["A", "AA", "AAA"].map((level:any) => (
-                <div className={`conformanceLevel ${activeLevels.includes(level) ? 'selected' : ''}`} onClick={() => handleLevelClick(level)}>{level}</div>
+                <div className={`conformanceLevels ${conformanceLevels.includes(level) ? 'selected' : ''}`} onClick={() => handleLevelClick(level)}>{level}</div>
               ))}
             </div>
           </div>
 
-          <ResultsTable activeConformanceLevels={activeLevels}/>
+          <ResultsTable conformanceLevels={conformanceLevels}/>
         
         </> : 
           <div style={{textAlign: "center", padding:"15px 0"}}>No data stored</div>

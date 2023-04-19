@@ -41,7 +41,7 @@ async function fetchEvaluation(bodyData, timeout = 120000) {
 
 export async function performEvaluation(){
 
-    const checkboxes = JSON.parse(sessionStorage.getItem("checkboxes"));
+    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
 
     const AM = checkboxes[0].checked;
     const AC = checkboxes[1].checked;
