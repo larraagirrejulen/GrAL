@@ -21,19 +21,12 @@ export function openOptionsPage(){
     chrome.runtime.sendMessage({ action: "openOptionsPage" });
 }
 
-export async function getOptions(option, setOptionValue){
-    if(option === "mantainExtended"){
-        chrome.storage.sync.get(["mantainExtended"], (result) => {
-            setOptionValue(result.mantainExtended);
+export async function getOptions(option){
+    return await new Promise((resolve) => { 
+        chrome.storage.sync.get([option], (result) => {
+            resolve(result[option]);
         });
-    } else if(option === "shiftWebpage"){
-        const result = await new Promise((resolve) => { 
-            chrome.storage.sync.get(["shiftWebpage"], (result) => {
-                resolve(result.shiftWebpage);
-            });
-        });
-        return result;
-    }
+    });
 }
 
 export async function storeOnChrome(key, value){
@@ -43,7 +36,7 @@ export async function storeOnChrome(key, value){
 }
 
 export async function getFromChromeStorage(key) {
-    return new Promise((resolve) => {
+    return await new Promise((resolve) => {
         chrome.storage.local.get(key, (result) => {
             resolve(result[key]);
         });

@@ -8,43 +8,42 @@ import { getFromChromeStorage } from './js/extensionUtils.js';
 
 
 
-export default function ResultsTable({activeLevels}:any){
+export default function ResultsTable({activeConformanceLevels}:any){
 
-    const [reportTableContent, setReportTableContent] = useState([]);
     const [mantainExtended, setMantainExtended] = useState(false);
-    
+    const [reportTableContent, setReportTableContent] = useState([]);
     useEffect(() => {
-        getOptions("mantainExtended", setMantainExtended);
-        (async ()=>{ setReportTableContent(await getFromChromeStorage("reportTableContent")); })();
+        (async ()=>{ 
+            setMantainExtended(await getOptions("mantainExtended"));
+            setReportTableContent(await getFromChromeStorage("reportTableContent")); 
+        })();
     }, []);
-
-    const [collapsibles, setCollapsibles] = useState(Array(reportTableContent.length).fill(false));
-    const handleCollapsiblesChange = (index:any, mantainExtended:any) => {
-      const newCollapsibles = mantainExtended ? [...collapsibles] : Array(reportTableContent.length).fill(false);
-      newCollapsibles[index] = !collapsibles[index];
-      setCollapsibles(newCollapsibles);
+   
+    const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
+    const handleMainCategoryStateChange = (index:any) => {
+        const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
+        newStates[index] = !selectedMainCategories[index];
+        setSelectedMainCategories(newStates);
     };
-  
+
+    
     return(
       <div className = "results_container">
-
-        <Summary activeLevels={activeLevels} />
-
-        <div className='table_container'>
+        <Summary activeConformanceLevels={activeConformanceLevels} />
+        <div className="table_container">
             <table>
                 <thead>
-                    <tr>
-                        <th>Standard</th>
-                        <th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th>
-                    </tr>
+                    <tr> <th>Standard</th> <OutcomeHeaders/> </tr>
                 </thead>
                 <tbody>
-                    {reportTableContent.map((section:any, index:any) => (<>
-                        <tr className="collapsible section" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
-                            <td>{section.category}</td>
-                            <ResultCount section={section} activeLevels={activeLevels}/>
+                    {reportTableContent.map((mainCategory:any, index:any) => (<>
+                        <tr className="collapsible mainCategory" onClick={()=>handleMainCategoryStateChange(index)}>
+                            <td>{mainCategory.categoryTitle}</td>
+                            <ResultCount category={mainCategory} activeConformanceLevels={activeConformanceLevels}/>
                         </tr>
-                        { collapsibles[index] && <Collapsible1 section={section} activeLevels={activeLevels} mantainExtended={mantainExtended}/> }
+                        { selectedMainCategories[index] ? 
+                            <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} activeConformanceLevels={activeConformanceLevels} /> 
+                        : null }
                     </>))}
                 </tbody>
             </table>
@@ -56,114 +55,123 @@ export default function ResultsTable({activeLevels}:any){
 }
 
 
+function OutcomeHeaders(){
+    return(<>
+        <th className="passed" title='Passed' style={{backgroundColor:"#C8FA8C"}}>P</th>
+        <th className="failed" title='Failed' style={{backgroundColor:"#FA8C8C"}}>F</th>
+        <th className="cantTell" title='Can&#39;t tell' style={{backgroundColor:"#F5FA8C"}}>CT</th>
+        <th className="inapplicable" title='Not Present' style={{backgroundColor:"#FFFFFF"}}>NP</th>
+        <th className="untested" title='Not checked' style={{backgroundColor:"#8CFAFA"}}>NC</th>
+    </>);
+}
 
-
-function Summary({activeLevels}:any){
+function Summary(activeConformanceLevels:any){
 
     const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
 
     useEffect(() => { 
         (async ()=>{
             const reportSummary = await getFromChromeStorage("reportSummary");
+            let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
 
-            let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-            for(var level of activeLevels){
-                passed += reportSummary.passed[level];
-                failed += reportSummary.failed[level];
-                cannot_tell += reportSummary.cannot_tell[level];
-                not_present += reportSummary.not_present[level];
-                not_checked += reportSummary.not_checked[level];
+            for(const conformanceLevel of activeConformanceLevels){
+                passed += reportSummary["earl:passed"][conformanceLevel];
+                failed += reportSummary["earl:failed"][conformanceLevel];
+                cantTell += reportSummary["earl:cantTell"][conformanceLevel];
+                inapplicable += reportSummary["earl:inapplicable"][conformanceLevel];
+                untested += reportSummary["earl:untested"][conformanceLevel];
             }
-            setOutcomesCount([passed, failed, cannot_tell, not_present, not_checked]);
+            setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
         })();
     });
 
     return(
-        <table className="summary">
-            <tr><th style={{backgroundColor: "#C8FA8C"}} title='Passed'>P</th><th style={{backgroundColor: "#FA8C8C"}} title='Failed'>F</th><th style={{backgroundColor: "#F5FA8C"}} title='Can&#39;t tell'>CT</th><th style={{backgroundColor: "#FFFFFF"}} title='Not Present'>NP</th><th style={{backgroundColor: "#8CFAFA"}} title='Not checked'>NC</th></tr>
-            <tr><td>{outcomesCount[0]}</td><td>{outcomesCount[1]}</td><td>{outcomesCount[2]}</td><td>{outcomesCount[3]}</td><td>{outcomesCount[4]}</td></tr>
+        <table className="reportSummary">
+            <tr> <OutcomeHeaders /> </tr>
+            <tr> {outcomesCount.map((count:any) => ( <td>{count}</td> ))} </tr>
         </table>
     );
 }
 
-function ResultCount({section, activeLevels}:any){
+function ResultCount({category, activeConformanceLevels}:any){
 
-    let passed = 0, failed = 0, cannot_tell = 0, not_present = 0, not_checked = 0;
-    for(const level of activeLevels){
-        passed += section.passed[level];
-        failed += section.failed[level];
-        cannot_tell += section.cannot_tell[level];
-        not_present += section.not_present[level];
-        not_checked += section.not_checked[level];
+    let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
+
+    for(const conformanceLevel of activeConformanceLevels){
+        passed += category.passed[conformanceLevel];
+        failed += category.failed[conformanceLevel];
+        cantTell += category.cantTell[conformanceLevel];
+        inapplicable += category.inapplicable[conformanceLevel];
+        untested += category.untested[conformanceLevel];
     }
 
     return(<>
-        <td>{passed}</td>
-        <td>{failed}</td>
-        <td>{cannot_tell}</td>
-        <td>{not_present}</td>
-        <td>{not_checked}</td>
+        <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td>
     </>);
 }
 
 
 
 
-function Collapsible1({section, activeLevels, mantainExtended}:any){
+function SubCategory({subCategories, mantainExtended, activeConformanceLevels}:any){
 
-    const [collapsibles, setCollapsibles] = useState(Array(section.subsection.length).fill(false));
+    const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
 
-    const handleCollapsiblesChange = (index:any, mantainExtended:any) => {
-        const newCollapsibles = mantainExtended ? [...collapsibles] : Array(section.subsection.length).fill(false);
-        newCollapsibles[index] = !collapsibles[index];
-        setCollapsibles(newCollapsibles);
-      };
-
-    return(<> 
-        {section.subsection.map((subsection:any, index:any) => (<>
-
-            <tr className="collapsible table1" onClick={()=>handleCollapsiblesChange(index, mantainExtended)}>
-                <td>{subsection.subsection}</td>
-                <ResultCount section={subsection} activeLevels={activeLevels}/>
-            </tr>
-            { collapsibles[index] && <Criterias subsection={subsection} activeLevels={activeLevels} mantainExtended={mantainExtended} /> }
-        
-        </>))} 
-    </>);
-}
-
-
-
-
-function Criterias({subsection, activeLevels, mantainExtended}:any){
-
-    const [selectedCriterias, setSelectedCriterias] = useState(Array(subsection.sub2section.length).fill(false));
-
-    const handleCollapsible3sChange = (index:any, mantainExtended:any) => {
-        const newCollapsible3s = mantainExtended ? [...selectedCriterias] : Array(subsection.sub2section.length).fill(false);
-        newCollapsible3s[index] = !selectedCriterias[index];
-        setSelectedCriterias(newCollapsible3s);
+    const handleSubCategoryStateChange = (index:any) => {
+        const newStates = mantainExtended ? [...selectedSubCategories] : Array(subCategories.length).fill(false);
+        newStates[index] = !selectedSubCategories[index];
+        setSelectedSubCategories(newStates);
     };
 
     return(<> 
-        {subsection.sub2section.map((sub2section:any, index:any) => (<>
+        {subCategories.map((subCategory:any, index:any) => (<>
 
-            { activeLevels.includes(sub2section.conformanceLevel) && <>
+            <tr className="collapsible subCategory" onClick={()=>handleSubCategoryStateChange(index)}>
+                <td>{subCategory.subCategoryTitle}</td>
+                <ResultCount category={subCategory} activeConformanceLevels={activeConformanceLevels} />
+            </tr>
+            { selectedSubCategories[index] ? 
+                <Criterias criterias={subCategory.criterias} mantainExtended={mantainExtended} activeConformanceLevels={activeConformanceLevels}/> 
+            : null }
+        
+        </>))} 
+    </>);
+}
+
+
+
+
+function Criterias({criterias, mantainExtended, activeConformanceLevels}:any){
+
+    const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
+
+    const handleCriteriaStateChange = (index:any) => {
+        const newStates = mantainExtended ? [...selectedCriterias] : Array(criterias.length).fill(false);
+        newStates[index] = !selectedCriterias[index];
+        setSelectedCriterias(newStates);
+    };
+
+    return(<> 
+        {criterias.map((criteria:any, index:any) => (<>
+
+            { activeConformanceLevels.includes(criteria.conformanceLevel) ? <>
             
-                <tr className="collapsible table2" style={{backgroundColor: sub2section.background_color}} onClick={() => {handleCollapsible3sChange(index,mantainExtended)}}>
-                    {sub2section.hasOwnProperty("results") ? <>
+                <tr className={"collapsible criteria " + criteria.outcome} onClick={() => {handleCriteriaStateChange(index)}}>
+                    {criteria.hasOwnProperty("results") ? <>
                         <td colSpan={6}>
                             <img src={ selectedCriterias[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
-                            {sub2section.sub2section}
+                            {criteria.criteria}
                         </td>
                     </>: <>
-                        <td>{sub2section.sub2section}</td>
-                        <td colSpan={5}>{sub2section.result_text}</td>
+                        <td>{criteria.criteria}</td>
+                        <td colSpan={5}>{criteria.outcome}</td>
                     </>}
                 </tr>
-                {sub2section.hasOwnProperty("results") && selectedCriterias[index] && <CriteriaResults sub2section={sub2section} />}
+                {criteria.hasOwnProperty("results") && selectedCriterias[index] ? 
+                    <CriteriaResults criteriaResults={criteria.results} mantainExtended={mantainExtended} />
+                : null }
         
-            </> }
+            </> : null }
 
         </>))} 
     </>);
@@ -171,23 +179,23 @@ function Criterias({subsection, activeLevels, mantainExtended}:any){
 
 
 
-function CriteriaResults({sub2section}:any){  
+function CriteriaResults({criteriaResults, mantainExtended}:any){  
 
-    const [selectedResults, setSelectedResults] = useState(Array(sub2section.results.length).fill(false));
+    const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
 
-    function handleResultClick (index:any){
-        let newSelectedPointer = Array(sub2section.results.length).fill(false);
-        newSelectedPointer[index] = !selectedResults[index];
-        setSelectedResults(newSelectedPointer);
+    function handleCriteriaResultStateChange (index:any){
+        const newStates = mantainExtended ? [...selectedCriteriaResults] : Array(criteriaResults.length).fill(false);
+        newStates[index] = !selectedCriteriaResults[index];
+        setSelectedCriteriaResults(newStates);
     }
 
 
     return(<>
-        {sub2section.results.map((result:any, index:any) => (<>
+        {criteriaResults.map((result:any, index:any) => (<>
             
-            <tr className="collapsible criteriaResult" onClick={() => handleResultClick(index)}>
+            <tr className="collapsible criteriaResult" onClick={() => handleCriteriaResultStateChange(index)}>
                 <td>
-                    <img src={ selectedResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                    <img src={ selectedCriteriaResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                     {result.assertor}
                 </td>
                 <td colSpan={5}>
@@ -195,14 +203,13 @@ function CriteriaResults({sub2section}:any){
                 </td>
             </tr>
 
-            {selectedResults[index] && <>
+            {selectedCriteriaResults[index] && <>
 
-                <tr><td style={{textAlign:"left"}}><u>Analizer</u>:  </td><td colSpan={5}>{result.assertor}</td></tr>
-                <tr><td style={{textAlign:"left"}}><u>Result</u>:  </td><td colSpan={5}>{result.outcome}</td></tr>
-                <tr><td style={{textAlign:"left"}}><u>Message:</u></td></tr>
                 <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(result.description)}</td></tr>
 
-                {result.hasOwnProperty("pointers") && <CriteriaResultPointers result={result} />}
+                {result.hasOwnProperty("pointers") ? 
+                    <CriteriaResultPointers resultPointers={result.pointers}  mantainExtended={mantainExtended} />
+                : null }
                 
             </>}
             
@@ -212,12 +219,12 @@ function CriteriaResults({sub2section}:any){
 }
 
 
-function CriteriaResultPointers({result}:any){  
+function CriteriaResultPointers({resultPointers, mantainExtended}:any){  
 
-    const [selectedPointers, setSelectedPointers] = useState(Array(result.pointers.length).fill(false));
+    const [selectedPointers, setSelectedPointers] = useState(Array(resultPointers.length).fill(false));
 
     function handlePointerClick (index:any){
-        let newSelectedPointer = Array(result.pointers.length).fill(false);
+        let newSelectedPointer = mantainExtended ? [...selectedPointers] : Array(resultPointers.length).fill(false);
         newSelectedPointer[index] = !selectedPointers[index];
         setSelectedPointers(newSelectedPointer);
     }
@@ -230,24 +237,28 @@ function CriteriaResultPointers({result}:any){
         cursor: "pointer"
     };
 
-    useEffect(() => { 
-        
-    });
+    /*useEffect(() => { 
+        for(const pointer of result.pointers){
+            console.log(pointer.xpath);
+            const element:any = document.evaluate(pointer.pointed_xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            console.log(element);
+            //element.style.border = "1px solid #005a6a";
+        }
+    });*/
 
     return(<>
 
         <tr><td style={{textAlign:"left"}}><u>Code pointers</u>:</td></tr>
         
-        {result.pointers.map((pointer:any, index:any) => (<>
+        {resultPointers.map((pointer:any, index:any) => (<>
 
             <tr><td colSpan={6} style={{textAlign:"left"}}>
                 <pre
                     className="codigo_analisis"
                     style={selectedPointers[index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }}
-                    data-pointed-xpath={pointer.pointed_xpath}
                     onClick={() => handlePointerClick(index)}
                 >
-                    {index + 1}. {parse(pointer.pointed_html)}
+                    {index + 1}. {parse(pointer.html)}
                 </pre>       
             </td></tr>
         

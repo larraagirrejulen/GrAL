@@ -19,7 +19,7 @@ export default function Extension() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    //removeStoredReport();
+    removeStoredReport();
 
     (async () => {
       const shiftWebpage = await getOptions("shiftWebpage");
@@ -163,7 +163,7 @@ function ResultSection() {
             </div>
           </div>
 
-          <ResultsTable activeLevels={activeLevels}/>
+          <ResultsTable activeConformanceLevels={activeLevels}/>
         
         </> : 
           <div style={{textAlign: "center", padding:"15px 0"}}>No data stored</div>

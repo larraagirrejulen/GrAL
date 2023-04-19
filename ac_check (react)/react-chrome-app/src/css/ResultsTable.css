@@ -7,12 +7,12 @@
 
 
 /* SUMMARY TABLE */
-.results_container .summary{
+.results_container .reportSummary{
   border: 2px solid #005a6a;
   margin-bottom: 15px;
   display: inline-block;
 }
-.results_container .summary th, .results_container .summary td{
+.results_container .reportSummary th, .results_container .reportSummary td{
   width: 45px;
   border: none;
   border-right: 1px solid #c6c6c6;
@@ -20,10 +20,10 @@
   text-align: center;
   font-weight: bold;
 }
-.results_container .summary tr:first-of-type{
+.results_container .reportSummary tr:first-of-type{
   border-bottom: 1px solid #c6c6c6;
 }
-.results_container .summary th:last-of-type, .results_container .summary td:last-of-type{
+.results_container .reportSummary th:last-of-type, .results_container .reportSummary td:last-of-type{
   border-right: 0;
 }
 
@@ -84,7 +84,7 @@
   border-left: 1px solid #c0c0c0;
   padding: 10px 0;
 }
-.results_container .table_container tbody .collapsible.section td{
+.results_container .table_container tbody .collapsible.mainCategory td{
   font-weight: bold;
 }
 .results_container .table_container tbody .collapsible td:first-of-type{
@@ -98,12 +98,12 @@
   background-color: #00B4D5;
 }
 
-.results_container .table_container tbody .collapsible.table1 td{
+.results_container .table_container tbody .collapsible.subCategory td{
   font-size: 12px;
   background-color: #d3dcde;
 }
 
-.results_container .table_container tbody .collapsible.table2 td{
+.results_container .table_container tbody .collapsible.criteria td{
   font-size: 10px;
 }
   

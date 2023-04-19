@@ -1,12 +1,12 @@
 
-import { load_result_table } from './displayReportData.js';
+import { mapResults2TableData } from './mapReport2Table.js';
 import { storeOnChrome, getFromChromeStorage, removeFromChromeStorage } from './extensionUtils.js';
 
 
 
 export function storeReport(report){
     storeOnChrome("report", report);
-    load_result_table();
+    mapResults2TableData();
     localStorage.setItem("evaluated", "true");
     window.location.reload();
 }
