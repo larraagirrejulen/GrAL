@@ -106,3 +106,18 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+
+
+
+
+.react_chrome_extension::-webkit-scrollbar {
+  width: 3px;
+}
+.react_chrome_extension::-webkit-scrollbar-track {
+  background: transparent;
+}
+.react_chrome_extension::-webkit-scrollbar-thumb {
+  background: #005a6aaa;
+  border-radius: 50px;
+}

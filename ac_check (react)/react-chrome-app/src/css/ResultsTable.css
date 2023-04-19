@@ -1,134 +1,144 @@
 
 
-.results_container{
+.resultsContainer{
   text-align: center;
 }
 
 
 
 /* SUMMARY TABLE */
-.results_container .reportSummary{
+.resultsContainer .summaryTable{
   border: 2px solid #005a6a;
   margin-bottom: 15px;
   display: inline-block;
 }
-.results_container .reportSummary th, .results_container .reportSummary td{
+.resultsContainer .summaryTable th, .resultsContainer .summaryTable td{
   width: 45px;
   border: none;
   border-right: 1px solid #c6c6c6;
   font-size: 14px;
   text-align: center;
   font-weight: bold;
+  cursor: default;
 }
-.results_container .reportSummary tr:first-of-type{
+.resultsContainer .summaryTable tr:first-of-type{
   border-bottom: 1px solid #c6c6c6;
 }
-.results_container .reportSummary th:last-of-type, .results_container .reportSummary td:last-of-type{
+.resultsContainer .summaryTable th:last-of-type, .resultsContainer .summaryTable td:last-of-type{
   border-right: 0;
 }
 
   
 
 /* RESULTS TABLE */
-.results_container .table_container{
+.resultsContainer .resultsTable{
   border: 2px solid #005a6a;
   overflow-y: auto;
   max-height: 50vh;
 }
-
-.results_container .table_container::-webkit-scrollbar {
+.resultsContainer .resultsTable::-webkit-scrollbar {
   width: 3px;
 }
-.results_container .table_container::-webkit-scrollbar-track {
+.resultsContainer .resultsTable::-webkit-scrollbar-track {
   background: transparent;
-
 }
-.results_container .table_container::-webkit-scrollbar-thumb {
-  background: #005a6a;
+.resultsContainer .resultsTable::-webkit-scrollbar-thumb {
+  background: #005a6aaa;
   border-radius: 50px;
 }
 
 
 
 /* RESULTS TABLE HEADER */
-.results_container .table_container thead tr{
+.resultsContainer .resultsTable thead tr{
   padding: 10px 0;
 }
-.results_container .table_container thead th{
+.resultsContainer .resultsTable thead th{
   width: 6%;
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
+  font-weight: bold;
   cursor: default; 
   position: sticky;
   top: 0px;
   border-bottom: 2px solid #005a6a;
   background-color: white;
+  border-left: 1px solid #c0c0c0;
 }
-.results_container .table_container thead th:first-of-type{
+.resultsContainer .resultsTable thead th:first-of-type{
   width: 70%;
-  font-weight: bold;
+  border-left: none;
 }
 
 
 
 /* RESULTS TABLE BODY */
-.results_container .table_container tbody .collapsible{
+.resultsContainer .resultsTable tbody .collapsible{
   text-align: center;
-  background-color: #f4f4f4;
+  background-color: white;
   color:black;
   cursor: pointer;
   border: none;
   border-top: 1px solid #c0c0c0;
 }
-.results_container .table_container tbody .collapsible td{
+.resultsContainer .resultsTable tbody .collapsible td{
   border-left: 1px solid #c0c0c0;
   padding: 10px 0;
 }
-.results_container .table_container tbody .collapsible.mainCategory td{
-  font-weight: bold;
-}
-.results_container .table_container tbody .collapsible td:first-of-type{
+.resultsContainer .resultsTable tbody .collapsible td:first-of-type{
   text-align: left;
-  padding-left: 5px;
-  border-left: 0;
+  padding-left: 6px;
+  border-left: none;
 }
 
-.results_container .table_container tbody .collapsible:hover {
-  color: white;
-  background-color: #00B4D5;
+
+
+.resultsContainer .resultsTable tbody .mainCategory td{
+  font-weight: bold;
+  font-size: 14px;
+}
+.resultsContainer .resultsTable tbody .mainCategory{
+  border-top: 2px solid #005a6a;
+}
+.resultsContainer .resultsTable tbody .mainCategory:hover {
+  background-color: #e7e7e7;
 }
 
-.results_container .table_container tbody .collapsible.subCategory td{
+
+
+
+.resultsContainer .resultsTable tbody .subCategory td{
+  font-weight: bold;
+  font-size: 14px;
+}
+.resultsContainer .resultsTable tbody .subCategory{
+  background-color: #e7e7e7;
+}
+.resultsContainer .resultsTable tbody .subCategory:hover {
+  background-color: #c7c7c7;
+}
+
+
+.resultsContainer .resultsTable tbody .criteria td{
+  font-weight: bold;
   font-size: 12px;
-  background-color: #d3dcde;
+  padding: 8px 0;
 }
 
-.results_container .table_container tbody .collapsible.criteria td{
+.resultsContainer .resultsTable tbody .criteriaResult td{
   font-size: 10px;
+  padding: 6px 0;
 }
   
+
   
   
   
-  .tabla_resultados {
-    width:100%;
-    font-size:12px;
-    overflow-wrap: anywhere;
-  }
-  .tabla_resultados td{
-    padding-left:10px;
-    font-size: 12px;
-    overflow-wrap: anywhere;
-  
-  }
-  
-  
-  
-  .codigo_analisis{
-    white-space: normal;
-    overflow-wrap: anywhere;
-    background-color: #f7f7f9;
-    color: #d14;
-    cursor: pointer;
-    border: 1px solid #e1e1e8;
-  }
+.codigo_analisis{
+  white-space: normal;
+  overflow-wrap: anywhere;
+  background-color: #f7f7f9;
+  color: #d14;
+  cursor: pointer;
+  border: 1px solid #e1e1e8;
+}

@@ -36,9 +36,9 @@ export default function ResultsTable({activeConformanceLevels}:any){
 
     
     return(
-      <div className = "results_container">
+      <div className = "resultsContainer">
         <Summary activeConformanceLevels={activeConformanceLevels} />
-        <div className="table_container">
+        <div className="resultsTable">
             <table>
                 <thead>
                     <tr> <th>Standard</th> <OutcomeHeaders/> </tr>
@@ -93,7 +93,7 @@ function Summary({activeConformanceLevels}:any){
     },[activeConformanceLevels]);
 
     return(
-        <table className="reportSummary">
+        <table className="summaryTable">
             <tr> <OutcomeHeaders /> </tr>
             <tr> {outcomesCount.map((count:any) => ( <td>{count}</td> ))} </tr>
         </table>
