@@ -7,6 +7,14 @@ import parse from 'html-react-parser';
 import { getFromChromeStorage } from './js/extensionUtils.js';
 
 
+const outcome2Background:any = {
+    "passed": {backgroundColor: "#C8FA8C"},
+    "failed": {backgroundColor: "#FA8C8C"},
+    "cantTell": {backgroundColor: "#F5FA8C"},
+    "inapplicable": {backgroundColor: "#FFFFFF"},
+    "untested": {backgroundColor: "#8CFAFA"}
+}
+
 
 export default function ResultsTable({activeConformanceLevels}:any){
 
@@ -57,15 +65,15 @@ export default function ResultsTable({activeConformanceLevels}:any){
 
 function OutcomeHeaders(){
     return(<>
-        <th className="passed" title='Passed' style={{backgroundColor:"#C8FA8C"}}>P</th>
-        <th className="failed" title='Failed' style={{backgroundColor:"#FA8C8C"}}>F</th>
-        <th className="cantTell" title='Can&#39;t tell' style={{backgroundColor:"#F5FA8C"}}>CT</th>
-        <th className="inapplicable" title='Not Present' style={{backgroundColor:"#FFFFFF"}}>NP</th>
-        <th className="untested" title='Not checked' style={{backgroundColor:"#8CFAFA"}}>NC</th>
+        <th className="passed" title='Passed' style={{...outcome2Background["passed"]}}>P</th>
+        <th className="failed" title='Failed' style={{...outcome2Background["failed"]}}>F</th>
+        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["cantTell"]}}>CT</th>
+        <th className="inapplicable" title='Not Present' style={{...outcome2Background["inapplicable"]}}>NP</th>
+        <th className="untested" title='Not checked' style={{...outcome2Background["untested"]}}>NC</th>
     </>);
 }
 
-function Summary(activeConformanceLevels:any){
+function Summary({activeConformanceLevels}:any){
 
     const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
 
@@ -73,7 +81,6 @@ function Summary(activeConformanceLevels:any){
         (async ()=>{
             const reportSummary = await getFromChromeStorage("reportSummary");
             let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-
             for(const conformanceLevel of activeConformanceLevels){
                 passed += reportSummary["earl:passed"][conformanceLevel];
                 failed += reportSummary["earl:failed"][conformanceLevel];
@@ -83,7 +90,7 @@ function Summary(activeConformanceLevels:any){
             }
             setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
         })();
-    });
+    },[activeConformanceLevels]);
 
     return(
         <table className="reportSummary">
@@ -151,21 +158,23 @@ function Criterias({criterias, mantainExtended, activeConformanceLevels}:any){
         setSelectedCriterias(newStates);
     };
 
+    
+
     return(<> 
         {criterias.map((criteria:any, index:any) => (<>
 
             { activeConformanceLevels.includes(criteria.conformanceLevel) ? <>
             
-                <tr className={"collapsible criteria " + criteria.outcome} onClick={() => {handleCriteriaStateChange(index)}}>
-                    {criteria.hasOwnProperty("results") ? <>
-                        <td colSpan={6}>
+                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleCriteriaStateChange(index)}}>
+                    <td colSpan={2}>
+                        {criteria.hasOwnProperty("results") ? <>
+                            
                             <img src={ selectedCriterias[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                             {criteria.criteria}
-                        </td>
-                    </>: <>
-                        <td>{criteria.criteria}</td>
-                        <td colSpan={5}>{criteria.outcome}</td>
-                    </>}
+                            
+                        </> : <> {criteria.criteria} </> }
+                    </td>
+                    <td colSpan={4}>{criteria.outcome}</td>
                 </tr>
                 {criteria.hasOwnProperty("results") && selectedCriterias[index] ? 
                     <CriteriaResults criteriaResults={criteria.results} mantainExtended={mantainExtended} />
@@ -189,16 +198,15 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
         setSelectedCriteriaResults(newStates);
     }
 
-
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
             
             <tr className="collapsible criteriaResult" onClick={() => handleCriteriaResultStateChange(index)}>
-                <td>
+                <td colSpan={2}>
                     <img src={ selectedCriteriaResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                     {result.assertor}
                 </td>
-                <td colSpan={5}>
+                <td colSpan={4} style={{...outcome2Background[result.outcome]}}>
                     {result.outcome}
                 </td>
             </tr>
