@@ -1,5 +1,6 @@
 
 const JsonLd = require('./jsonLd');
+const pa11y = require('pa11y');
 
 
 class Scraper {
@@ -13,7 +14,7 @@ class Scraper {
 
     constructor(page, evaluator, evaluationUrl, evaluatedPageTitle){
 
-        if (!['am', 'ac', 'mv'].includes(evaluator)) {
+        if (!['am', 'ac', 'mv', 'pa'].includes(evaluator)) {
             throw new Error(evaluator.toUpperCase() + " is not a valid evaluator !!!");
         }
 
@@ -31,7 +32,8 @@ class Scraper {
         const evaluators = {
             'am': async () => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/results/', this.#puppeteer_page),
             'ac': async () => this.acScraper('https://achecker.achecks.ca/checker/index.php', this.#puppeteer_page),
-            'mv': async () => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', this.#puppeteer_page)
+            'mv': async () => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', this.#puppeteer_page),
+            'pa': async () => this.pa11yScraper()
         };
 
         console.log("\nInitiating " + this.#evaluator.toUpperCase() + " scraping process ...");
@@ -46,7 +48,21 @@ class Scraper {
     }
 
 
-
+    async pa11yScraper(){
+        pa11y(this.#evaluationUrl, {
+            standard: 'WCAG2AAA', // Set the standard to WCAG 2.1 AAA,
+            includeWarnings: true,
+            timeout: 30000, // Set the timeout to 30 seconds (default is 10 seconds)
+            //hideElements: '.my-accessibility-issue', // Hide any elements that are causing false positives
+            log: {
+                debug: console.log, // Output debug logs to the console
+                error: console.error, // Output error logs to the console
+                info: console.info // Output info logs to the console
+            }
+        }).then((results) => {
+            console.log(results);
+        });
+    }
 
 
     async amScraper(evaluatorUrl, page){

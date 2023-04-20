@@ -47,15 +47,15 @@ export async function performEvaluation(){
     const AC = checkboxes[1].checked;
     const MV = checkboxes[2].checked;
     const A11Y = checkboxes[3].checked;
-    const TA11Y = checkboxes[4].checked;
+    const PA = checkboxes[4].checked;
         
-    if(AM || AC || MV){
+    if(AM || AC || MV || PA){
 
-        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "url": window.location.href, "title": window.document.title});
+        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "pa":PA, "url": window.location.href, "title": window.document.title});
         let fetchEvaluationReport = await fetchEvaluation(bodyData);
 
-        if (A11Y || TA11Y){
-            chrome.runtime.sendMessage({ action: "performEvaluation", "a11y":A11Y, "ta11y":TA11Y }, (response)=>{
+        if (A11Y){
+            chrome.runtime.sendMessage({ action: "performA11yEvaluation"}, (response)=>{
                 const localEvaluationReport = response.report[0].result;
                 merge(fetchEvaluationReport, localEvaluationReport);
                 storeReport(fetchEvaluationReport);
@@ -65,9 +65,9 @@ export async function performEvaluation(){
         }
         
 
-    }else if(A11Y || TA11Y){
+    }else if(A11Y){
 
-        chrome.runtime.sendMessage({ action: "performEvaluation", "a11y":A11Y, "ta11y":TA11Y }, (response)=>{
+        chrome.runtime.sendMessage({ action: "performA11yEvaluation"}, (response)=>{
             const evaluationReport = response.report[0].result;
             storeReport(evaluationReport);
         });

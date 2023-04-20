@@ -59,8 +59,8 @@ function EvaluatorSelectionSection () {
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
     { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
-    { checked: false, label: "A11Y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
-    { checked: false, label: "Tota11y", href: "https://khan.github.io/tota11y/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub"}
+    { checked: false, label: "A11y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
+    { checked: false, label: "Pa11y", href: "https://github.com/pa11y/pa11y/blob/master/lib/pa11y.js"}
   ]);
 
   const handleCheckboxChange = (index:any) => {

@@ -69,18 +69,18 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "19/4/2023, 9:07:59",
+  "dct:date": "20/4/2023, 8:01:16",
   "assertors": [
     {
-      "id": "_:AccessMonitor",
+      "id": "_:Pa11y",
       "type": "earl:Assertor",
-      "xmlns:name": "AccessMonitor",
-      "description": "https://accessmonitor.acessibilidade.gov.pt"
+      "xmlns:name": "Pa11y",
+      "description": ""
     }
   ],
   "creator": {
     "id": "_:assertors",
-    "xmlns:name": "AccessMonitor"
+    "xmlns:name": "Pa11y"
   },
   "evaluationScope": {
     "website": {
@@ -118,243 +118,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:non-text-content",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\nUseCSS to include decorative images\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/article[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img class=\"col-4\" s...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"htt...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"htt...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/div[1]/figure[1]/img[1]",
-                "description": "<img class=\"col-4\" a...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]/img[1]",
-                "description": "<img alt=\"\" src=\"htt...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[3]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[4]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[7]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[10]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[11]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[13]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[14]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[15]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[16]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[17]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[18]/div[3]/div[1]/aside[1]/div[1]/a[1]/figure[1]/img[1]",
-                "description": "<img src=\"https://ww...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:non-text-content",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -461,203 +228,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:info-and-relationships",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n //html/body[2]/nav[3]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-acce...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1>¡Síguenos!</h1>...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:info-and-relationships",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]\n //html/body[2]/nav[3]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-acce...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1>¡Síguenos!</h1>...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -742,78 +316,10 @@
       "conformanceLevel": "AA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:contrast-minimum",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nAccording to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.\n\nEnsure a contrast ratio of at least 3\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[1]/span[2]/span[1]",
-                "description": "<span class=\"hide-ac...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[2]/span[2]/span[1]",
-                "description": "<span class=\"hide-ac...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[3]/span[2]/span[1]",
-                "description": "<span class=\"hide-ac...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[4]/span[2]/span[1]",
-                "description": "<span class=\"hide-ac...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/ul[3]/li[5]/span[2]/span[1]",
-                "description": "<span class=\"hide-ac...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1074,48 +580,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:bypass-blocks",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\nAdda link at the top of each page to directly access the main content area\n\n Found cases locations: \n\n //html/body[2]/nav[3]/ul[2]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/ul[2]/li[1]/a[1]",
-                "description": "<a href=\"#main-conte...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]",
-                "description": "<div class=\"upv-ehu-...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1123,38 +591,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:page-titled",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nTake note that the <title> element should only appear once in the webpage.\n\nProvide a title using the title element\n\n Found cases locations: \n\n //html/head[1]/title[7]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/head[1]/title[7]",
-                "description": "<title>Inicio - UPV/...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1173,98 +613,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:link-purpose-in-context",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                "description": "<a class=\"breadcrumb...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                "description": "<a class=\"twitter\" h...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                "description": "<a class=\"facebook\" ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                "description": "<a class=\"instagram\"...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                "description": "<a class=\"linkedin\" ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                "description": "<a class=\"youtube\" h...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-                "description": "<a class=\"vimeo\" hre...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1316,143 +668,10 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:link-purpose-link-only",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[2]/nav[1]/nav[1]/ol[1]/li[1]/a[1]",
-                "description": "<a class=\"breadcrumb...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[1]/a[1]",
-                "description": "<a class=\"twitter\" h...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[2]/a[1]",
-                "description": "<a class=\"facebook\" ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[3]/a[1]",
-                "description": "<a class=\"instagram\"...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[4]/a[1]",
-                "description": "<a class=\"linkedin\" ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[5]/a[1]",
-                "description": "<a class=\"youtube\" h...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[2]/div[1]/div[1]/ul[1]/li[6]/a[1]",
-                "description": "<a class=\"vimeo\" hre...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:link-purpose-link-only",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nIt is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.\n\nFailure of Success Criterion 2.4.9 due to the use of a non-specific link, such as \"click here\" or \"more\" without a mechanism to change link text to specific text\n\n Found cases locations: \n\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[7]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-ico...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[10]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-ico...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[5]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/section[1]/div[1]/div[1]/div[1]/span[1]/a[1]",
-                "description": "<a class=\"taglib-ico...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1460,98 +679,10 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:section-headings",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n //html/body[2]/nav[3]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/nav[3]/h1[1]",
-                "description": "<h1 class=\"hide-acce...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]/nav[1]/div[2]/h2[1]",
-                "description": "<h2 class=\"menu-item...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/div[1]/div[1]/article[1]/header[1]/h1[1]",
-                "description": "<h1>¡Síguenos!</h1>...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[6]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[8]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[9]/section[2]/div[1]/div[1]/div[1]/h2[1]",
-                "description": "<h2 class=\"portlet-t...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1625,38 +756,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:cantTell",
-        "description": "Found possible applicable issue, but not sure..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:language-of-page",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:cantTell",
-            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found: \n\nThe HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.\n\nUse language attributes in html element\n\n Found cases locations: \n\n //html",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html",
-                "description": "<html class=\"ltr aui...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1730,48 +833,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:on-input",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nAfter being filled, it is necessary to submit the form data to the server. This is the function of the submit button.\n\nProvide Submit buttons\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]\n //html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]",
-                "description": "<form action=\"https:...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/section[2]/div[1]/div[1]/form[2]",
-                "description": "<form action=\"#\" cla...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1823,48 +888,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:labels-or-instructions",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1916,27 +943,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:failed",
-        "description": "Found a violation ..."
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:parsing",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:failed",
-            "description": "*************@AccessMonitor************* \n\nAn ERROR was found: \n\nHTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.\n\nValidate web pages",
-            "locationPointersGroup": []
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1944,48 +954,10 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:passed",
-        "description": "No violations found"
+        "outcome": "earl:untested",
+        "description": ""
       },
-      "hasPart": [
-        {
-          "type": "Assertion",
-          "testcase": "wcag2:name-role-value",
-          "assertedBy": [
-            "_:AccessMonitor"
-          ],
-          "subject": "_:webpage",
-          "mode": "earl:automatic",
-          "result": {
-            "outcome": "earl:passed",
-            "description": "*************@AccessMonitor************* \n\nPASSED: \n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]\n //html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-            "locationPointersGroup": [
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[9]/input[1]",
-                "description": "<input class=\"field ...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              },
-              {
-                "id": "_:pointer",
-                "type": [
-                  "ptr:groupPointer",
-                  "ptr:XPathPointer"
-                ],
-                "ptr:expression": "//html/body[2]/div[4]/header[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/section[2]/div[1]/div[2]/div[1]/form[1]/fieldset[1]/div[10]/select[1]",
-                "description": "<select class=\"form-...",
-                "namespace": "http://www.w3.org/1999/xhtml"
-              }
-            ]
-          }
-        }
-      ],
-      "assertedBy": "_:AccessMonitor",
-      "mode": "earl:automatic"
+      "hasPart": []
     },
     {
       "type": "Assertion",
@@ -1999,5 +971,5 @@
       "hasPart": []
     }
   ],
-  "dct:summary": "Some errors where found..."
+  "dct:summary": "No errors where found!!!"
 }

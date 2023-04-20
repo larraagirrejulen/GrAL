@@ -11,7 +11,8 @@ class JsonLd{
         const evaluators = {
             "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
             "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
-            "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"}
+            "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
+            "pa": { "name": "Pa11y", "url": ""}
         };
 
         this.#evaluator = evaluators[evaluator];

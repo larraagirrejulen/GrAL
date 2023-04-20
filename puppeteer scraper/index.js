@@ -29,7 +29,7 @@ http.createServer((request, response) => {
         try{
 
             const requestJson = JSON.parse(requestBody);
-            const body = await scraperController(requestJson["am"], requestJson["ac"], requestJson["mv"], requestJson["url"], requestJson["title"]);
+            const body = await scraperController(requestJson["am"], requestJson["ac"], requestJson["mv"], requestJson["pa"], requestJson["url"], requestJson["title"]);
             response.writeHead(200, {'Content-Type': 'application/json'});
             response.end(JSON.stringify( { headers, method, url, body } ));
             console.log("\n### ----- Request SUCCESS  ----- ###");

@@ -28,10 +28,10 @@ const withPage = (browser) => async (fn) => {
 }
 
 
-async function scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle){
+async function scrapeSelected(AM, AC, MV, PA, evaluationUrl, evaluatedPageTitle){
 
-	const evaluators = ["am", "ac", "mv"];
-	const selectedEvaluators = [AM, AC, MV];
+	const evaluators = ["am", "ac", "mv", "pa"];
+	const selectedEvaluators = [AM, AC, MV, PA];
 	
 	for(var i=evaluators.length-1; i>=0; i--) if(!selectedEvaluators[i]) evaluators.splice(i,1);
 
@@ -102,4 +102,4 @@ function merge(jsonLd1, jsonLd2){
 
 
 
-module.exports = (AM, AC, MV, evaluationUrl, evaluatedPageTitle) => scrapeSelected(AM, AC, MV, evaluationUrl, evaluatedPageTitle)
+module.exports = (AM, AC, MV, PA, evaluationUrl, evaluatedPageTitle) => scrapeSelected(AM, AC, MV, PA, evaluationUrl, evaluatedPageTitle)
