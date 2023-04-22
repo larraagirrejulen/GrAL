@@ -51,10 +51,6 @@
     },
     "locationPointersGroup": "ptr:PointersGroup",
     "elementPointersGroup": "ptr:PointersGroup",
-    "namespace": {
-      "@id": "ptr:namespace",
-      "@type": "ptr:NamespaceMapping"
-    },
     "title": "dct:title",
     "description": "dct:description",
     "hasPart": "dct:hasPart",
@@ -69,18 +65,24 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "20/4/2023, 8:01:16",
+  "dct:date": "22/4/2023, 9:53:12",
   "assertors": [
+    {
+      "id": "_:AccessMonitor",
+      "type": "earl:Assertor",
+      "xmlns:name": "AccessMonitor",
+      "description": "https://accessmonitor.acessibilidade.gov.pt"
+    },
     {
       "id": "_:Pa11y",
       "type": "earl:Assertor",
       "xmlns:name": "Pa11y",
-      "description": ""
+      "description": "https://github.com/pa11y/pa11y"
     }
   ],
   "creator": {
     "id": "_:assertors",
-    "xmlns:name": "Pa11y"
+    "xmlns:name": "AccessMonitor & Pa11y"
   },
   "evaluationScope": {
     "website": {
@@ -94,7 +96,7 @@
     },
     "conformanceTarget": "wai:WCAG2AAA-Conformance",
     "accessibilitySupportBaseline": "Google Chrome latest version",
-    "additionalEvalRequirement": "The report will include XPath expressions or line & column locations as pointers to the cases found for each result"
+    "additionalEvalRequirement": "The report will include location pointers to the cases found for each result"
   },
   "structuredSample": {
     "webpage": [
@@ -118,10 +120,267 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:non-text-content",
+          "assertedBy": [
+            "_:AccessMonitor",
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nThe use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\nUseCSS to include decorative images\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(9) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1) > div:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(10) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(11) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(13) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(14) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(15) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(16) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(17) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(18) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)Img element is marked so that it is ignored by Assistive Technology.",
+            "descriptions": [
+              "The use of null or empty alternative texts in HTML is a common practice for images classified as decorative. However, all images classified as decorative must be affixed via CSS and not via HTML.\n\nUseCSS to include decorative images",
+              "Img element is marked so that it is ignored by Assistive Technology."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img class='col-4' src='https://www.ehu.eus/documents/10136/42694446/dest_liburu_astea_2023.jpg/a91d7722-1d93-cbbd-450f-162d99cfc7fc?t=1681985635383'/documents/10136/42694446/dest_liburu_astea_2023.jpg/a91d7722-1d93-cbbd-450f-162d99cfc7fc?t=1681985635383' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img class='col-4' src='https://www.ehu.eus/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4cd7-d4ce-f07093afcba7?t=1679574657378'/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4cd7-d4ce-f07093afcba7?t=1679574657378' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1) > img:nth-child(1)",
+                "description": "<img alt='' src='https://www.ehu.eus/o/ehu-theme/images/common/rss.png' style='background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(9) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1) > div:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img class='col-4' alt='' src='https://www.ehu.eus/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000'/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803'/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420'/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000'/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956'/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(10) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000'/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(11) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000'/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(13) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000'/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(14) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754'/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(15) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000'/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(16) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000'/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(17) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000'/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(18) > div:nth-child(3) > div:nth-child(1) > aside:nth-child(1) > div:nth-child(1) > a:nth-child(1) > figure:nth-child(1) > img:nth-child(1)",
+                "description": "<img src='https://www.ehu.eus/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000'/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img",
+                "description": "<img class='col-4' src='/documents/10136/42694446/dest_liburu_astea_2023.jpg/a91d7722-1d93-cbbd-450f-162d99cfc7fc?t=1681985635383' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_mtcBNnX67IL5 > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img",
+                "description": "<img class='col-4' src='/documents/10136/42192610/dest_becas-ministerio-2023_02.jpg/ca430bfd-9bd7-4cd7-d4ce-f07093afcba7?t=1679574657378' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > img",
+                "description": "<img alt='' src='https://www.ehu.eus/o/ehu-theme/images/common/rss.png' style='background-image: url('https://www.ehu.eus/o/ehu-theme/images/common/rss.png'); background-position: 50% -1326px; background-repeat: no-repeat; height: 16px; width: 16px;'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_8Pr2BR9oRFZO > div > div:nth-child(2) > div > div > div > div:nth-child(2) > a > div > figure > img",
+                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(3) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(4) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(7) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(10) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(11) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(13) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(14) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(15) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(16) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(17) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000' alt=''>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(18) > div:nth-child(3) > div > aside > div > a > figure > img",
+                "description": "<img src='/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000' alt=''>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:non-text-content",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+            "descriptions": [
+              "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)",
+                "description": "<input class='field search-input search-portlet-keywords-input form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' placeholder='Buscar' title='Escribe aquí el término de búsqueda' type='text' value='' size='30'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -228,10 +487,153 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:info-and-relationships",
+          "assertedBy": [
+            "_:AccessMonitor",
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)If this selection list contains groups of related options, they should be grouped with optgroup.",
+            "descriptions": [
+              "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers",
+              "If this selection list contains groups of related options, they should be grouped with optgroup."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)",
+                "description": "<h1 class='hide-accessible'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)",
+                "description": "<h2 class='menu-item_h2'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)",
+                "description": "<h1>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+                "description": "<h2 class='portlet-title-text'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1)",
+                "description": "<p class='card-title'>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:info-and-relationships",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)\n html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "descriptions": [
+              "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)",
+                "description": "<input class='field search-input search-portlet-keywords-input form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' placeholder='Buscar' title='Escribe aquí el término de búsqueda' type='text' value='' size='30'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)",
+                "description": "<h1 class='hide-accessible'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)",
+                "description": "<h2 class='menu-item_h2'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)",
+                "description": "<h1>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+                "description": "<h2 class='portlet-title-text'>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:info-and-relationships",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@Pa11y************* \n\nAn ERROR was found:\n\nThis element's role is \"presentation\" but contains child elements with semantic meaning.\n\n Found cases locations: \n\n #menu-campus > div > div > ul > li:nth-child(1)\n #menu-campus > div > div > ul > li:nth-child(4)",
+            "descriptions": [
+              "This element's role is \"presentation\" but contains child elements with semantic meaning."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(1)",
+                "description": "<li role='presentation'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(4)",
+                "description": "<li class='sign-in btn btn-info' role='presentation'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -316,10 +718,37 @@
       "conformanceLevel": "AA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:contrast-minimum",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found:\n\nAccording to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.\n\nEnsure a contrast ratio of at least 3\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(1) > span:nth-child(2) > span:nth-child(1)",
+            "descriptions": [
+              "According to the success criteria 1.4.3, the ratio 3 to 1 corresponds to the minimum for text \"in large size\" (18pt or 14 pt bold, or larger). I remind that for the size of normal font the minimum ratio is 4,5 to 1.\n\nEnsure a contrast ratio of at least 3"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > ul:nth-child(3) > li:nth-child(1) > span:nth-child(2) > span:nth-child(1)",
+                "description": "<span class='hide-accessible'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -349,10 +778,295 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:contrast-enhanced",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nThis element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)\n #navParent65 > span > span\n #social-network > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(17) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #footer > div > div > ul > li:nth-child(1) > a\n #footer > div > div > ul > li:nth-child(2) > a\n #footer > div > div > ul > li:nth-child(3) > a\n #footer > div > div > ul > li:nth-child(4) > a\n #footer > div > div > ul > li:nth-child(5) > a\n #footer > div > div > p\n #menu-campus > div > div > ul > li:nth-child(1) > a\n #menu-campus > div > div > ul > li:nth-child(2) > a\n #menu-campus > div > div > ul > li:nth-child(3) > a\n #menu-languages > div > div > ul > li:nth-child(1) > a > span\n #menu-languages > div > div > ul > li:nth-child(2) > a > span\n #menu-languages > div > div > ul > li:nth-child(3) > a > span\n #menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
+            "descriptions": [
+              "This element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend",
+                "description": "<legend class='sr-only'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)",
+                "description": "<option class='' value='everything'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)",
+                "description": "<option class='' value='this-site'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#navParent65 > span > span",
+                "description": "<span class='hide-accessible'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#social-network > ul > li:nth-child(1) > a > span",
+                "description": "<span class='hide-text'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span",
+                "description": "<span class='news'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)",
+                "description": "<p>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span",
+                "description": "<span class='date'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
+                "description": "<span class='city'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(17) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
+                "description": "<span class='province'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > ul > li:nth-child(1) > a",
+                "description": "<a href='/es/irisgarritasuna'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > ul > li:nth-child(2) > a",
+                "description": "<a href='/es/lege-oharra'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > ul > li:nth-child(3) > a",
+                "description": "<a href='/es/web/guest/contact'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > ul > li:nth-child(4) > a",
+                "description": "<a href='/es/web/guest/sitemap'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > ul > li:nth-child(5) > a",
+                "description": "<a href='/es/laguntza'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#footer > div > div > p",
+                "description": "<p class='pull-right'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(1) > a",
+                "description": "<a href='/es/web/araba'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(2) > a",
+                "description": "<a href='/es/web/bizkaia'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(3) > a",
+                "description": "<a href='/es/web/gipuzkoa'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(1) > a > span",
+                "description": "<span lang='eu'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(2) > a > span",
+                "description": "<span lang='es'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(3) > a > span",
+                "description": "<span lang='en'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
+                "description": "<span>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:contrast-enhanced",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@Pa11y************* \n\nAn ERROR was found:\n\nThis element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 7:1, but text in this element has a contrast ratio of 5.1:1. Recommendation:  change text colour to #00518f.\n\n Found cases locations: \n\n #_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_mMOguJKw8zO1_breadcrumbs-defaultScreen > ol > li:nth-child(1) > a > span\n #side-menu-head > h2 > a > span\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1) > strong\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > span:nth-child(2)\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > span:nth-child(3)\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_idZuCqX2qvSs > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_07ZinY8rSgV0 > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3) > div > aside > div > a > figure > figcaption > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) > div > aside > div > a > figure > figcaption\n #menu-main > div > div > ul > li:nth-child(1) > a\n #menu-main > div > div > ul > li:nth-child(2) > a\n #menu-main > div > div > ul > li:nth-child(3) > a\n #menu-main > div > div > ul > li:nth-child(4) > a\n #menu-main > div > div > ul > li:nth-child(5) > a\n #menu-main > div > div > ul > li:nth-child(6) > a\n #menu-main > div > div > ul > li:nth-child(7) > a\n #menu-main > div > div > ul > li:nth-child(8) > a",
+            "descriptions": [
+              "This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 7:1, but text in this element has a contrast ratio of 5.1:1. Recommendation:  change text colour to #00518f."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_mMOguJKw8zO1_breadcrumbs-defaultScreen > ol > li:nth-child(1) > a > span",
+                "description": "<span class='breadcrumb-text-truncate'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#side-menu-head > h2 > a > span",
+                "description": "<span>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1) > strong",
+                "description": "<strong>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > span:nth-child(2)",
+                "description": "<span class='taglib-text'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > span:nth-child(3)",
+                "description": "<span class='opens-new-window-accessible'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a",
+                "description": "<a href='https://www.ehu.eus/es/campusa'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_idZuCqX2qvSs > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a",
+                "description": "<a href='https://www.ehu.eus/es/campusa/cathedra'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_07ZinY8rSgV0 > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(2) > p > a",
+                "description": "<a href='https://www.ehu.eus/es/campusa/eventos'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3) > div > aside > div > a > figure > figcaption > span",
+                "description": "<span lang='es'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) > div > aside > div > a > figure > figcaption",
+                "description": "<figcaption>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(1) > a",
+                "description": "<a role='menuitem' href='/es/erabiltzaileak'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(2) > a",
+                "description": "<a role='menuitem' href='/es/web/ikasi'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(3) > a",
+                "description": "<a role='menuitem' href='/es/egitura'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(4) > a",
+                "description": "<a role='menuitem' href='/es/web/ikerkuntza'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(5) > a",
+                "description": "<a role='menuitem' href='/es/web/unibertsitaterako-sarbidea'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(6) > a",
+                "description": "<a role='menuitem' href='/es/alorrak'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(7) > a",
+                "description": "<a role='menuitem' href='/es/zerbitzuak'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#menu-main > div > div > ul > li:nth-child(8) > a",
+                "description": "<a role='menuitem' href='https://www.ehu.eus/bilatu/buscar/bilatu.php?lang=es'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:Pa11y",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -580,10 +1294,43 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:bypass-blocks",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nMake available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\nAdda link at the top of each page to directly access the main content area\n\n Found cases locations: \n\n html > body:nth-child(2) > nav:nth-child(3) > ul:nth-child(2) > li:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+            "descriptions": [
+              "Make available at the top of the webpage a link that allows skipping directly to the main content of the webpage. This link facilitates the navigation to many users, namely those who use scanning selection software. These users use vision to read information so the links must be always visible ou become visible when receiving the focus.\n\nAdda link at the top of each page to directly access the main content area"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > nav:nth-child(3) > ul:nth-child(2) > li:nth-child(1) > a:nth-child(1)",
+                "description": "<a href='#main-content'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+                "description": "<div class='upv-ehu-3-cols columns-3 container' id='main-content' role='main'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -591,10 +1338,37 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:passed",
+        "description": "No violations found"
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:page-titled",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nTake note that the <title> element should only appear once in the webpage.\n\nProvide a title using the title element\n\n Found cases locations: \n\n html > head:nth-child(1) > title:nth-child(7)",
+            "descriptions": [
+              "Take note that the <title> element should only appear once in the webpage.\n\nProvide a title using the title element"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > head:nth-child(1) > title:nth-child(7)",
+                "description": "<title>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -613,10 +1387,73 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:link-purpose-in-context",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found:\n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > nav:nth-child(1) > nav:nth-child(1) > ol:nth-child(1) > li:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)",
+            "descriptions": [
+              "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > nav:nth-child(1) > nav:nth-child(1) > ol:nth-child(1) > li:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='breadcrumb-link' href='https://www.ehu.eus/es' title='UPV/EHU'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='twitter' href='https://twitter.com/upvehu' target='blank' title='Twitter'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)",
+                "description": "<a class='facebook' href='https://www.facebook.com/upv.ehu' target='blank' title='Facebook'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)",
+                "description": "<a class='instagram' href='https://www.instagram.com/upvehu_gara/' target='blank' title='Instagram'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)",
+                "description": "<a class='linkedin' href='https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title' target='blank' title='Linkedin'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)",
+                "description": "<a class='youtube' href='https://www.youtube.com/@upvehu' target='blank' title='Youtube'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)",
+                "description": "<a class='vimeo' href='https://vimeo.com/UPVEHU/ALBUMS' target='blank' title='Vimeo'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -668,10 +1505,109 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:link-purpose-link-only",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found:\n\nThe title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > nav:nth-child(1) > nav:nth-child(1) > ol:nth-child(1) > li:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)",
+            "descriptions": [
+              "The title attribute is used to provide additional information to that one existent in the text link. The attribute title and the text of the link should be sufficient to understand the link purpose.\n\nProviding add-ins to link text with the title attribute"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > nav:nth-child(1) > nav:nth-child(1) > ol:nth-child(1) > li:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='breadcrumb-link' href='https://www.ehu.eus/es' title='UPV/EHU'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='twitter' href='https://twitter.com/upvehu' target='blank' title='Twitter'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)",
+                "description": "<a class='facebook' href='https://www.facebook.com/upv.ehu' target='blank' title='Facebook'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)",
+                "description": "<a class='instagram' href='https://www.instagram.com/upvehu_gara/' target='blank' title='Instagram'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)",
+                "description": "<a class='linkedin' href='https://www.linkedin.com/edu/school?id=12231&amp;trk=edu-cp-title' target='blank' title='Linkedin'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)",
+                "description": "<a class='youtube' href='https://www.youtube.com/@upvehu' target='blank' title='Youtube'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)",
+                "description": "<a class='vimeo' href='https://vimeo.com/UPVEHU/ALBUMS' target='blank' title='Vimeo'>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:link-purpose-link-only",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nIt is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.\n\nFailure of Success Criterion 2.4.9 due to the use of a non-specific link, such as \"click here\" or \"more\" without a mechanism to change link text to specific text\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(8) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(11) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)",
+            "descriptions": [
+              "It is important that the users be able to determine the link purpose and destiny without the need to access to content where is located. There are users whose Assistive Technologies provide them all the webpage links presented in list, without any content.\n\nFailure of Success Criterion 2.4.9 due to the use of a non-specific link, such as \"click here\" or \"more\" without a mechanism to change link text to specific text"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(8) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/cathedra/-/asset_publisher/MICMqglnC3fZ/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(11) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > section:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/noticias/-/asset_publisher/MICMqglnC3fZ/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -679,10 +1615,55 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:section-headings",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nThe web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers\n\n Found cases locations: \n\n html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+            "descriptions": [
+              "The web pages must be marked with a hierarchical structure of headers and subheadings. Each page should have, at least, one header level 1. The level 2 should mark the sections and the level 3 the subsections of these. This same logic must be applied until to the subsections of level 6.\n\nOrganize a page using headers"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > nav:nth-child(3) > h1:nth-child(1)",
+                "description": "<h1 class='hide-accessible'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > nav:nth-child(1) > div:nth-child(2) > h2:nth-child(1)",
+                "description": "<h2 class='menu-item_h2'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > article:nth-child(1) > header:nth-child(1) > h1:nth-child(1)",
+                "description": "<h1>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(5) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)",
+                "description": "<h2 class='portlet-title-text'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -756,10 +1737,37 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:language-of-page",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@AccessMonitor************* \n\nA POSSIBLE ISSUE was found:\n\nThe HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.\n\nUse language attributes in html element\n\n Found cases locations: \n\n html",
+            "descriptions": [
+              "The HTML just has the lang attribute. The XHTML 1.1 just allows the xml:lang. The XHTML 1.0 (as a transitional measure) allows both attributes. The XHTML served as text/html uses the lang and xml:lang attributes of the html element.\n\nUse language attributes in html element"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html",
+                "description": "<html class='ltr aui yui3-js-enabled webkit js chrome chrome101 chrome101-0 win secure' dir='ltr' lang='es-ES'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -833,10 +1841,43 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:passed",
+        "description": "No violations found"
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:on-input",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nAfter being filled, it is necessary to submit the form data to the server. This is the function of the submit button.\n\nProvide Submit buttons\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > form:nth-child(2)",
+            "descriptions": [
+              "After being filled, it is necessary to submit the form data to the server. This is the function of the submit button.\n\nProvide Submit buttons"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1)",
+                "description": "<form action='https://www.ehu.eus/es/home?p_p_id=com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70&amp;p_p_lifecycle=0&amp;p_p_state=maximized&amp;p_p_mode=view&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_mvcPath=%2Fsearch.jsp&amp;_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_redirect=https%3A%2F%2Fwww.ehu.eus%2Fes%2Fhome%3Fp_p_id%3Dcom_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview' class='form  ' data-fm-namespace='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm' method='get' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > section:nth-child(2) > div:nth-child(1) > div:nth-child(1) > form:nth-child(2)",
+                "description": "<form action='#' class='hide' id='hrefFm' method='post' name='hrefFm' aria-hidden='true'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -866,10 +1907,55 @@
       "conformanceLevel": "AAA",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:cantTell",
+        "description": "Found possible applicable issue, but not sure..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:change-on-request",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nCheck that this link's link text contains information indicating that the link will open in a new window.\n\n Found cases locations: \n\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_idZuCqX2qvSs > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_07ZinY8rSgV0 > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(9) > div:nth-child(3) > div > aside > div > a",
+            "descriptions": [
+              "Check that this link's link text contains information indicating that the link will open in a new window."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/noticias/-/asset_publisher/MICMqglnC3fZ/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_idZuCqX2qvSs > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/cathedra/-/asset_publisher/MICMqglnC3fZ/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_07ZinY8rSgV0 > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a",
+                "description": "<a class='taglib-icon' href='https://www.ehu.eus/es/campusa/eventos/-/asset_publisher/R1IzQ2fpQypi/rss' target='_blank' title='(Abre una nueva ventana)'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(9) > div:nth-child(3) > div > aside > div > a",
+                "description": "<a href='https://www.ehu.eus/es/web/kontratazioa' title='pagina web de patrimonio y contratación' target='_blank'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:Pa11y",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -888,10 +1974,43 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:passed",
+        "description": "No violations found"
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:labels-or-instructions",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+            "descriptions": [
+              "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)",
+                "description": "<input class='field search-input search-portlet-keywords-input form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' placeholder='Buscar' title='Escribe aquí el término de búsqueda' type='text' value='' size='30'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -943,10 +2062,30 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:parsing",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@AccessMonitor************* \n\nAn ERROR was found:\n\nHTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.\n\nValidate web pages",
+            "descriptions": [
+              "HTML errors are one of the causes of the webpages be presented in a inconsistent way in the different browsers. To meet a specification and to validate the syntax according to that specification enhances the consistency and the correct interpretation from the technologies, namely the Assistive Technologies.\n\nValidate web pages"
+            ],
+            "locationPointersGroup": []
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -954,10 +2093,103 @@
       "conformanceLevel": "A",
       "subject": "_:website",
       "result": {
-        "outcome": "earl:untested",
-        "description": ""
+        "outcome": "earl:failed",
+        "description": "Found a violation ..."
       },
-      "hasPart": []
+      "hasPart": [
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:name-role-value",
+          "assertedBy": [
+            "_:AccessMonitor"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:passed",
+            "description": "*************@AccessMonitor************* \n\nPASSED:\n\nThe <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls\n\n Found cases locations: \n\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)\n html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+            "descriptions": [
+              "The <label> elements associated to the <input> elements allow the Assistive Technologies users to identify the label that contextualize an edition field. The explicit association is done by the pair of id and dor attributes, respectively, from the <input> and <label> elements.\n\nUsing label elements to associate text labels with form controls"
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(9) > input:nth-child(1)",
+                "description": "<input class='field search-input search-portlet-keywords-input form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_keywords' placeholder='Buscar' title='Escribe aquí el término de búsqueda' type='text' value='' size='30'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "html > body:nth-child(2) > div:nth-child(4) > header:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > section:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > form:nth-child(1) > fieldset:nth-child(1) > div:nth-child(10) > select:nth-child(1)",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:name-role-value",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:cantTell",
+            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nAnchor elements should not be used for defining in-page link targets. If not using the ID for other purposes (such as CSS or scripting), consider moving it to a parent element.\n\n Found cases locations: \n\n #btn-responsive\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\n #side-btn",
+            "descriptions": [
+              "Anchor elements should not be used for defining in-page link targets. If not using the ID for other purposes (such as CSS or scripting), consider moving it to a parent element."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#btn-responsive",
+                "description": "<a class='btn btn-navbar' id='btn-responsive'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope",
+                "description": "<select class='form-control search-select' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope' title='Ámbito'>"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#side-btn",
+                "description": "<a class='btn btn-navbar' id='side-btn'>"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Assertion",
+          "testcase": "wcag2:name-role-value",
+          "assertedBy": [
+            "_:Pa11y"
+          ],
+          "subject": "_:webpage",
+          "mode": "earl:automatic",
+          "result": {
+            "outcome": "earl:failed",
+            "description": "*************@Pa11y************* \n\nAn ERROR was found:\n\nThis button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > div:nth-child(12) > button",
+            "descriptions": [
+              "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined."
+            ],
+            "locationPointersGroup": [
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "ptr:expression": "#_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > div:nth-child(12) > button",
+                "description": "<button class='btn btn-light btn-unstyled' onclick='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_search();' type='submit'>"
+              }
+            ]
+          }
+        }
+      ],
+      "assertedBy": "_:AccessMonitor",
+      "mode": "earl:automatic"
     },
     {
       "type": "Assertion",
@@ -971,5 +2203,5 @@
       "hasPart": []
     }
   ],
-  "dct:summary": "No errors where found!!!"
+  "dct:summary": "Some errors where found..."
 }

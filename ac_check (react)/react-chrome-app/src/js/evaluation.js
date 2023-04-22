@@ -111,10 +111,40 @@ function merge(jsonLd1, jsonLd2){
 	
 			}
 
-            jsonLd1.auditSample[i].hasPart.push(...assertion2.hasPart);
+            mergeHasParts(jsonLd1.auditSample[i].hasPart, assertion2.hasPart);
+            //jsonLd1.auditSample[i].hasPart.push(...assertion2.hasPart);
 
 		}
 
 	}
+
+}
+
+function mergeHasParts(hasPart1, hasPart2){
+
+    for(const foundCase2 of hasPart2){
+        const foundCase1 = hasPart1.find(foundCase => foundCase.result.outcome === foundCase2.result.outcome);
+        if(foundCase1){
+            for(const assertor of foundCase2.assertedBy){
+                foundCase1.assertedBy.push(assertor);
+            }
+            
+            for(const description of foundCase2.result.descriptions){
+                foundCase1.result.descriptions.push(description);
+                foundCase1.result.description += description;
+            }
+            
+
+            for(const pointer of foundCase2.result.locationPointersGroup){
+
+                //FALTA CHECKEAR SI HTML SUJETO YA EXISTE
+                foundCase1.result.locationPointersGroup.push(pointer);
+            }
+           
+
+        }else{
+            hasPart1.push(foundCase2);
+        }
+    }
 
 }

@@ -19,8 +19,6 @@ export default function Extension() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    //removeStoredReport();
-
     (async () => {
       const shiftWebpage = await getOptions("shiftWebpage");
       if(shiftWebpage){
@@ -60,7 +58,7 @@ function EvaluatorSelectionSection () {
     { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
     { checked: false, label: "A11y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
-    { checked: false, label: "Pa11y", href: "https://github.com/pa11y/pa11y/blob/master/lib/pa11y.js"}
+    { checked: false, label: "Pa11y", href: "https://github.com/pa11y/pa11y"}
   ]);
 
   const handleCheckboxChange = (index:any) => {

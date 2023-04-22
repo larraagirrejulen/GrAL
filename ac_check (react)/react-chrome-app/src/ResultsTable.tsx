@@ -167,7 +167,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
             
                 <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleCriteriaStateChange(index)}}>
                     <td colSpan={2}>
-                        {criteria.hasOwnProperty("results") ? <>
+                        {criteria.hasOwnProperty("hasPart") ? <>
                             
                             <img src={ selectedCriterias[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
                             {criteria.criteria}
@@ -176,8 +176,8 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                     </td>
                     <td colSpan={4}>{criteria.outcome}</td>
                 </tr>
-                {criteria.hasOwnProperty("results") && selectedCriterias[index] ? 
-                    <CriteriaResults criteriaResults={criteria.results} mantainExtended={mantainExtended} />
+                {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] ? 
+                    <CriteriaResults criteriaResults={criteria.hasPart} mantainExtended={mantainExtended} />
                 : null }
         
             </> : null }
@@ -202,37 +202,38 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
         {criteriaResults.map((result:any, index:any) => (<>
             
             <tr className="collapsible criteriaResult" onClick={() => handleCriteriaResultStateChange(index)}>
-                <td colSpan={2}>
+                <td colSpan={6} style={{...outcome2Background[result.outcome]}}>
                     <img src={ selectedCriteriaResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
-                    {result.assertor}
-                </td>
-                <td colSpan={4} style={{...outcome2Background[result.outcome]}}>
                     {result.outcome}
                 </td>
             </tr>
 
-            {selectedCriteriaResults[index] && <>
+            {selectedCriteriaResults[index] && (<>
+            
+                {result.descriptions.map((element:any, index:any) => (<>
 
-                <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(result.description)}</td></tr>
+                    <tr><td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}</td></tr>
+                    <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
+                
+                </>))}
 
-                {result.hasOwnProperty("pointers") ? 
-                    <CriteriaResultPointers resultPointers={result.pointers}  mantainExtended={mantainExtended} />
+                { result.hasOwnProperty("pointers") ? 
+                    <CriteriaResultPointers resultPointers={result.pointers} />
                 : null }
                 
-            </>}
-            
+            </>)}
 
         </>))} 
     </>);
 }
 
 
-function CriteriaResultPointers({resultPointers, mantainExtended}:any){  
+function CriteriaResultPointers({resultPointers}:any){  
 
     const [selectedPointers, setSelectedPointers] = useState(Array(resultPointers.length).fill(false));
 
     function handlePointerClick (index:any){
-        let newSelectedPointer = mantainExtended ? [...selectedPointers] : Array(resultPointers.length).fill(false);
+        let newSelectedPointer = Array(resultPointers.length).fill(false);
         newSelectedPointer[index] = !selectedPointers[index];
         setSelectedPointers(newSelectedPointer);
     }
@@ -256,7 +257,7 @@ function CriteriaResultPointers({resultPointers, mantainExtended}:any){
 
     return(<>
 
-        <tr><td style={{textAlign:"left"}}><u>Code pointers</u>:</td></tr>
+        <tr><td style={{textAlign:"left", paddingTop:"10px"}}><u>Code pointers</u>:</td></tr>
         
         {resultPointers.map((pointer:any, index:any) => (<>
 
@@ -266,7 +267,7 @@ function CriteriaResultPointers({resultPointers, mantainExtended}:any){
                     style={selectedPointers[index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }}
                     onClick={() => handlePointerClick(index)}
                 >
-                    {index + 1}. {parse(pointer.html)}
+                    {index + 1}. {parse(pointer.html.substring(0, 25) + " ...")}
                 </pre>       
             </td></tr>
         

@@ -50,7 +50,7 @@ class JsonLd{
                 },
                 "conformanceTarget": "wai:WCAG2AAA-Conformance",
                 "accessibilitySupportBaseline": "Google Chrome latest version",
-                "additionalEvalRequirement": "The report will include XPath expressions or line & column locations as pointers to the cases found for each result"
+                "additionalEvalRequirement": "The report will include location pointers to the cases found for each result"
             },
     
             "structuredSample":
@@ -96,15 +96,15 @@ class JsonLd{
         const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
 
         const outcomeDescriptions = {
-            "earl:passed": "No violations found",
-            "earl:failed": "Found a violation ...",
-            "earl:cantTell": "Found possible applicable issue, but not sure...",
-            "earl:inapplicable": "SC is not applicable"
+            "earl:passed": ["No violations found", "PASSED:"],
+            "earl:failed": ["Found a violation ...", "An ERROR was found:"],
+            "earl:cantTell": ["Found possible applicable issue, but not sure...", "A POSSIBLE ISSUE was found:"],
+            "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
         };
 
         function newGeneralOutcome(){
             webSiteAssertion.result.outcome = newOutcome;
-            webSiteAssertion.result.description = outcomeDescriptions[newOutcome];
+            webSiteAssertion.result.description = outcomeDescriptions[newOutcome][0];
         }
 
         switch (webSiteAssertion.result.outcome) {  // Current general outcome
@@ -132,26 +132,30 @@ class JsonLd{
         const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.result.outcome === newOutcome);
         
         const locationPointersGroup = [];
-        let description = "*************@" + this.#evaluator.name + "************* \n\n" + newDescription;
+        let description = "*************@" + this.#evaluator.name + "************* \n\n"
+        description += outcomeDescriptions[newOutcome][1] + "\n\n" + newDescription;
 
         if(path){
+            
+            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'");
+
+            if(correctedHtml.indexOf(">") >= 0){
+                correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
+            }
 
             const newPointer = {
                 "id": "_:pointer",
-                "type": [
-                    "ptr:groupPointer",
-                    "ptr:XPathPointer"
-                ],
+                "type": "ptr:groupPointer",
                 "ptr:expression": path, 
-                "description": html.replace(/[\n\t]/g, "").replace(/^(.{0,20}).*$/, '$1...'),
-                "namespace" : "http://www.w3.org/1999/xhtml"
+                "description": correctedHtml
             };
 
             if(webPageAssertion){
 
                 if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
-                && webPageAssertion.result.locationPointersGroup.length < 30){
-                    webPageAssertion.result.description += "\n\n " + path;
+                && webPageAssertion.result.locationPointersGroup.length < 30
+                && webPageAssertion.result.locationPointersGroup.every(pointer => pointer.description !== correctedHtml)){
+                    webPageAssertion.result.description += "\n " + path;
                     webPageAssertion.result.locationPointersGroup.push(newPointer);
                 }
                 return;
@@ -172,6 +176,7 @@ class JsonLd{
             {
                 "outcome": newOutcome,
                 "description": description,
+                "descriptions": [newDescription],
                 "locationPointersGroup": locationPointersGroup
             }
         });

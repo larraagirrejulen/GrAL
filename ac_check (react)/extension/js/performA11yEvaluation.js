@@ -37,8 +37,7 @@
 
             if (!outcome || !ruleResult.isRuleRequired()) continue;
 
-            let description = outcome === "earl:failed" ? 'An ERROR was found' : outcome === "earl:cantTell" ? 'A POSSIBLE ISSUE was found' : outcome === "earl:inapplicable" ? "Cannot apply" : 'PASSED'
-            description += ":\n\n" + ruleResult.getRuleSummary() + "\n\n";
+            let description = ruleResult.getRuleSummary() + "\n\n";
             description += ruleResult.getResultMessagesArray().filter(message => message !== "N/A").join("\n\n");
 
             const successCriteria = ruleResult.getRule().getPrimarySuccessCriterion().id;
@@ -51,7 +50,7 @@
                     let xpath = result.getDOMElement().xpath;
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
-                    const html = result.getDOMElement().node.outerHTML;
+                    const html = result.getDOMElement().node.outerHTML.replace(/[\n\t]/g, "");
                     jsonld.addNewAssertion(successCriteria, outcome, description, xpath, html);
                 }
             }

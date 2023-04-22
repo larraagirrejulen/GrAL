@@ -2,6 +2,8 @@
 const JsonLd = require('./jsonLd');
 const pa11y = require('pa11y');
 
+const fs = require("fs");
+
 
 class Scraper {
 
@@ -45,23 +47,6 @@ class Scraper {
         } catch(error) { throw new Error("\nThe next error was found on " + this.#evaluator.toUpperCase()  + " scraping process: " + error) }
 
         return this.#jsonld.getJsonLd();
-    }
-
-
-    async pa11yScraper(){
-        pa11y(this.#evaluationUrl, {
-            standard: 'WCAG2AAA', // Set the standard to WCAG 2.1 AAA,
-            includeWarnings: true,
-            timeout: 30000, // Set the timeout to 30 seconds (default is 10 seconds)
-            //hideElements: '.my-accessibility-issue', // Hide any elements that are causing false positives
-            log: {
-                debug: console.log, // Output debug logs to the console
-                error: console.error, // Output error logs to the console
-                info: console.info // Output info logs to the console
-            }
-        }).then((results) => {
-            console.log(results);
-        });
     }
 
 
@@ -109,7 +94,7 @@ class Scraper {
                 results.push({
                     "outcome": outcome,
                     "criteriaNumbers": criteriaNumbers,
-                    "description": (outcome === "earl:failed" ? 'An ERROR was found: \n\n' : outcome === "earl:cantTell" ? 'A POSSIBLE ISSUE was found: \n\n' : 'PASSED: \n\n') + description,
+                    "description": description,
                     "casesLink": casesLink
                 });
             }
@@ -135,7 +120,7 @@ class Scraper {
 
                     for (const foundCase of foundCases){
                         const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
-                        const caseCode = caseElements[1].querySelector("td code").textContent.replaceAll('\n','').replaceAll('\t','');
+                        const caseCode = caseElements[1].querySelector("td code").textContent;
                         casesHtmls.push(caseCode);
                         casesLocations.push(caseElements[3].querySelector('td span').textContent);
                     }
@@ -143,8 +128,7 @@ class Scraper {
                 });
 
                 for (let k = 0, path; path = casesLocations[k]; k++){
-                    const correctPath = "//" + path.replace(/ \> /g, "/").replace(/:nth-child\(/g, "[").replaceAll(")", "]")
-                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, correctPath, casesHtmls[k]);
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, path, casesHtmls[k]);
                 }
 
             }
@@ -201,7 +185,7 @@ class Scraper {
                         results.push({
                             "criteriaNumber": criteria.textContent.match(/(\d\.\d\.\d)/)[0],
                             "outcome": id === "#AC_errors" ? "earl:failed": "earl:cantTell",
-                            "description": id === "#AC_errors" ? 'An ERROR was found: \n\n' + problem + '\n\n' + solution : 'A POSSIBLE ISSUE was found: \n\n' + problem,
+                            "description": id === "#AC_errors" ? problem + '\n\n' + solution : problem,
                             "targetPath": foundCase.querySelector("em").textContent,
                             "targetHtml": foundCase.querySelector("pre code").textContent
                         });
@@ -279,7 +263,7 @@ class Scraper {
                         results.push({
                             "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
                             "outcome": outcomeType === "error" ? "earl:failed" : "earl:cantTell",
-                            "description": (outcomeType === "error" ? 'An ERROR was found: \n\n' : 'A POSSIBLE ISSUE was found: \n\n') + description,
+                            "description": description,
                             "location": location,
                             "target_html": occurrence.textContent.substring(11)
                         });
@@ -321,6 +305,26 @@ class Scraper {
                 }
             }
   
+        }
+
+    }
+
+    
+    async pa11yScraper(){
+
+        const results = await pa11y(this.#evaluationUrl, {
+            standard: 'WCAG2AAA',
+            includeWarnings: true,
+            timeout: 30000
+        });
+
+        for(const issue of results.issues){
+
+            const criteria = issue.code.match(/(\d\_\d\_\d)/)[0].replaceAll("_", ".")
+
+            const outcome = issue.typeCode === 1 ? "earl:failed" : "earl:cantTell"
+
+            this.#jsonld.addNewAssertion(criteria, outcome, issue.message, issue.selector, issue.context);
         }
 
     }

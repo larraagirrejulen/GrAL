@@ -110,8 +110,7 @@ function getCriteriaResults(subCategoryKey){
         }
 
         if(criteriaResult['foundCases'].length > 0){
-            const criteriaResult = getFoundCases(criteriaKey)
-            results["results"] = criteriaResult;
+            results["hasPart"] = getFoundCases(criteriaKey);
         }
 
         criteriaResults.push(results);
@@ -132,39 +131,63 @@ function getFoundCases(criteriaKey){
 
         const outcome = foundCase.result.outcome.replace("earl:", "");
 
-        let description = foundCase.result.description;
-        description = description.replaceAll('<','&lt;');
-        description = description.replaceAll('>','&gt;');
-        description = description.replaceAll('&lt;','<pre>&lt;');
-        description = description.replaceAll('&gt;','&gt;</pre>');
-        description = outcome === "inapplicable" ? description.substring(31) : description.substring(31, description.indexOf("Found cases locations:"));
+        const assertorDescriptions = [];
 
-        const results = {
-            "assertor": foundCase.assertedBy[0].replace("_:", ""),
+        for(let i = 0; i < foundCase.assertedBy.length; i++){
+
+            let description = foundCase.result.descriptions[i];
+            description = description.replaceAll('<','&lt;').replaceAll('>','&gt;');
+            description = description.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
+
+            assertorDescriptions.push({"assertor": foundCase.assertedBy[i].replace("_:", ""), "description": description})
+        }
+
+        const hasPart = {
             "outcome": outcome,
-            "description": description
+            "descriptions": assertorDescriptions
         }
 
         const foundCasePointers = foundCase.result.locationPointersGroup;
 
         if(foundCasePointers.length > 0){
 
-            results["pointers"] = []
+            hasPart["pointers"] = []
 
             for (const pointer of foundCasePointers) {
                 
                 let html = pointer['description'].replaceAll('<','&lt;');
                 html = html.replaceAll('>','&gt;');
 
-                results["pointers"].push({
+                hasPart["pointers"].push({
                     "html": html,
                     "xpath": pointer['ptr:expression']
                 })
             }
         }
 
-        foundCasesResults.push(results);
+        foundCasesResults.push(hasPart);
     }
+
+    foundCasesResults.sort(function(a, b) {
+        if (a.outcome === "failed") {
+            return -1; // a should come before b
+        } else if (a.outcome === "cantTell") {
+            if (b.outcome === "failed") {
+                return 1; // b should come before a
+            } else {
+                return -1; // a should come before b
+            }
+        } else if(a.outcome === "passed"){ // a.outcome === "pass"
+            if (b.outcome === "failed" || b.outcome === "cantTell") {
+                return 1; // b should come before a
+            } 
+        } else{ // a.outcome === "inapplicable"
+            if (b.outcome === "failed" || b.outcome === "cantTell" || b.outcome === "passed") {
+                return 1; // b should come before a
+            } 
+        }
+        return 0;
+      });
 
     return foundCasesResults;
 }
