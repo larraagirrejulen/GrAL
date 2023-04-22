@@ -137,7 +137,7 @@ class JsonLd{
 
         if(path){
             
-            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'");
+            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');
 
             if(correctedHtml.indexOf(">") >= 0){
                 correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
@@ -146,6 +146,7 @@ class JsonLd{
             const newPointer = {
                 "id": "_:pointer",
                 "type": "ptr:groupPointer",
+                "assertedBy": [this.#evaluator.name],
                 "ptr:expression": path, 
                 "description": correctedHtml
             };
@@ -166,17 +167,19 @@ class JsonLd{
 
         }else if (webPageAssertion) return;
 
+        let assertorDescription = newDescription.replaceAll('<','&lt;').replaceAll('>','&gt;');
+        assertorDescription.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
+
         webSiteAssertion.hasPart.push({
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
-            "assertedBy": ["_:" + this.#evaluator.name],
+            "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
             "subject": "_:webpage",
             "mode": "earl:automatic",
             "result":
             {
                 "outcome": newOutcome,
                 "description": description,
-                "descriptions": [newDescription],
                 "locationPointersGroup": locationPointersGroup
             }
         });

@@ -131,20 +131,9 @@ function getFoundCases(criteriaKey){
 
         const outcome = foundCase.result.outcome.replace("earl:", "");
 
-        const assertorDescriptions = [];
-
-        for(let i = 0; i < foundCase.assertedBy.length; i++){
-
-            let description = foundCase.result.descriptions[i];
-            description = description.replaceAll('<','&lt;').replaceAll('>','&gt;');
-            description = description.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
-
-            assertorDescriptions.push({"assertor": foundCase.assertedBy[i].replace("_:", ""), "description": description})
-        }
-
         const hasPart = {
             "outcome": outcome,
-            "descriptions": assertorDescriptions
+            "descriptions": foundCase.assertedBy
         }
 
         const foundCasePointers = foundCase.result.locationPointersGroup;

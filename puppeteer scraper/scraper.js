@@ -112,23 +112,29 @@ class Scraper {
                 await page.goto(result.casesLink);
                 await page.waitForSelector('#list_tab');
 
-                const [casesLocations, casesHtmls] = await page.evaluate(async () => {
+                const casesLocations = await page.evaluate(async () => {
                     
                     const casesLocations = [];
-                    const casesHtmls = [];
                     const foundCases = Array.from(document.querySelectorAll('ol > li'));
 
                     for (const foundCase of foundCases){
                         const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
-                        const caseCode = caseElements[1].querySelector("td code").textContent;
-                        casesHtmls.push(caseCode);
                         casesLocations.push(caseElements[3].querySelector('td span').textContent);
                     }
-                    return [casesLocations, casesHtmls];  
+                    return casesLocations;  
                 });
 
-                for (let k = 0, path; path = casesLocations[k]; k++){
-                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, path, casesHtmls[k]);
+                await page.goto(this.#evaluationUrl);
+
+                for (const path of casesLocations){
+
+                    await page.waitForSelector(path);
+
+                    const targetElement = await page.$(path);
+
+                    const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
+
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, path, targetHtml);
                 }
 
             }
@@ -264,8 +270,7 @@ class Scraper {
                             "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
                             "outcome": outcomeType === "error" ? "earl:failed" : "earl:cantTell",
                             "description": description,
-                            "location": location,
-                            "target_html": occurrence.textContent.substring(11)
+                            "xpath": location
                         });
                     }
     
@@ -295,13 +300,22 @@ class Scraper {
             return results;
         });
 
+        await page.goto(this.#evaluationUrl);
+
         for (const result of results){
 
             if(result.outcome === "earl:passed"){
                 this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description);
             }else{
+
+                await page.waitForXPath(result.xpath);
+
+                const [targetElement] = await page.$x(result.xpath);
+
+                const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
+
                 for (const criteria of result.criterias){
-                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, result.location, result.target_html);
+                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, result.xpath, targetHtml);
                 }
             }
   
@@ -315,7 +329,7 @@ class Scraper {
         const results = await pa11y(this.#evaluationUrl, {
             standard: 'WCAG2AAA',
             includeWarnings: true,
-            timeout: 30000
+            timeout: 90000
         });
 
         for(const issue of results.issues){

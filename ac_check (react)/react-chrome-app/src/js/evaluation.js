@@ -129,16 +129,21 @@ function mergeHasParts(hasPart1, hasPart2){
                 foundCase1.assertedBy.push(assertor);
             }
             
-            for(const description of foundCase2.result.descriptions){
-                foundCase1.result.descriptions.push(description);
-                foundCase1.result.description += description;
-            }
+            foundCase1.result.description += "\n\n" + foundCase2.result.description;
             
 
-            for(const pointer of foundCase2.result.locationPointersGroup){
+            for(const pointer2 of foundCase2.result.locationPointersGroup){
 
-                //FALTA CHECKEAR SI HTML SUJETO YA EXISTE
-                foundCase1.result.locationPointersGroup.push(pointer);
+                const pointer1 = foundCase1.result.locationPointersGroup.find(pointer1 => pointer1.description === pointer2.description);
+
+                if(pointer1){
+                    for(const assertor of pointer2.assertedBy){
+                        pointer1.assertedBy.push(assertor);
+                    }
+                }else{
+                    foundCase1.result.locationPointersGroup.push(pointer2);
+                }
+                
             }
            
 

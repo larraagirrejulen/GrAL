@@ -51,6 +51,7 @@
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
                     xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
                     const html = result.getDOMElement().node.outerHTML.replace(/[\n\t]/g, "");
+
                     jsonld.addNewAssertion(successCriteria, outcome, description, xpath, html);
                 }
             }
