@@ -157,6 +157,7 @@ class Scraper {
         // Configure to include AAA level, type the url to evaluate and submit
         await page.click('h2[align="left"] a');
         await page.click("#radio_gid_9");
+        await page.click("#show_source");
         await page.focus('#checkuri');
         await page.keyboard.type(this.#evaluationUrl);
         await page.click('#validate_uri');
@@ -188,12 +189,20 @@ class Scraper {
     
                     for (const foundCase of foundCases){
 
+                        const path = foundCase.querySelector("em").textContent;
+
+                        const regex = /Line (\d+), Column (\d+)/;
+                        const match = regex.exec(path);
+
+                        const line = document.querySelector("#line-" + parseInt(match[1]));
+                        const html = line.textContent.substring(parseInt(match[2])-1);
+
                         results.push({
                             "criteriaNumber": criteria.textContent.match(/(\d\.\d\.\d)/)[0],
                             "outcome": id === "#AC_errors" ? "earl:failed": "earl:cantTell",
                             "description": id === "#AC_errors" ? problem + '\n\n' + solution : problem,
-                            "targetPath": foundCase.querySelector("em").textContent,
-                            "targetHtml": foundCase.querySelector("pre code").textContent
+                            "targetPath": path,
+                            "targetHtml": html
                         });
                     }
                 }

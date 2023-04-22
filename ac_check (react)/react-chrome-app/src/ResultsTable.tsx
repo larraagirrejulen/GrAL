@@ -236,6 +236,22 @@ function CriteriaResultPointers({resultPointers}:any){
         let newSelectedPointer = Array(resultPointers.length).fill(false);
         newSelectedPointer[index] = !selectedPointers[index];
         setSelectedPointers(newSelectedPointer);
+
+        for(let i = 0; i < resultPointers.length; i++){
+            
+
+            const path = resultPointers[i].path;
+            if(path.startsWith("Line")) continue;
+
+            let element:any;
+            if(path.startsWith("/")){
+                element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            }else{
+                element = document.querySelector(path);
+            }
+            element.style.border = index === i ? (!selectedPointers[index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
+
+        }
     }
 
     const preStyles:any = {
@@ -246,14 +262,23 @@ function CriteriaResultPointers({resultPointers}:any){
         cursor: "pointer"
     };
 
-    /*useEffect(() => { 
-        for(const pointer of result.pointers){
-            console.log(pointer.xpath);
-            const element:any = document.evaluate(pointer.pointed_xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    useEffect(() => { 
+        for(const pointer of resultPointers){
+
+            const path = pointer.path;
+            if(path.startsWith("Line")) continue;
+
+            let element:any;
+            if(path.startsWith("/")){
+                element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            }else{
+                element = document.querySelector(path);
+            }
             console.log(element);
-            //element.style.border = "1px solid #005a6a";
+            element.style.border = "3px solid #005a6a";
+
         }
-    });*/
+    }, [resultPointers]);
 
     return(<>
 
@@ -270,7 +295,7 @@ function CriteriaResultPointers({resultPointers}:any){
                     {index + 1}. {parse(pointer.html.substring(0, 25) + " ...")}
                 </pre>       
             </td></tr>
-        
+            
         </>))}
 
     </>);

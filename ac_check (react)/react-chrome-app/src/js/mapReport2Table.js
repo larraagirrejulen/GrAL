@@ -149,7 +149,7 @@ function getFoundCases(criteriaKey){
 
                 hasPart["pointers"].push({
                     "html": html,
-                    "xpath": pointer['ptr:expression']
+                    "path": pointer['ptr:expression']
                 })
             }
         }
