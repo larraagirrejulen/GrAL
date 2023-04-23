@@ -2,8 +2,6 @@
 const JsonLd = require('./jsonLd');
 const pa11y = require('pa11y');
 
-const fs = require("fs");
-
 
 class Scraper {
 

@@ -217,8 +217,8 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
                 
                 </>))}
 
-                { result.hasOwnProperty("pointers") ? 
-                    <CriteriaResultPointers resultPointers={result.pointers} />
+                { result.hasOwnProperty("groupedPointers") ? 
+                    <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} />
                 : null }
                 
             </>)}
@@ -228,29 +228,48 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
 }
 
 
-function CriteriaResultPointers({resultPointers}:any){  
+function CriteriaResultPointers({resultGroupedPointers}:any){  
 
-    const [selectedPointers, setSelectedPointers] = useState(Array(resultPointers.length).fill(false));
+    const [selectedPointers, setSelectedPointers] = useState(
+        Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
+            groupKey,
+            pointers.map(() => false)
+        ]))
+    );
+    const [hiddenElements, setHiddenElements] = useState(
+        Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
+            groupKey,
+            pointers.map(() => false)
+        ]))
+    );
 
-    function handlePointerClick (index:any){
-        let newSelectedPointer = Array(resultPointers.length).fill(false);
-        newSelectedPointer[index] = !selectedPointers[index];
+    
+
+    function handlePointerClick (groupKey:any, index:any){
+        let newSelectedPointer =  Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
+            groupKey,
+            pointers.map(() => false)
+        ]));
+        newSelectedPointer[groupKey][index] = !selectedPointers[groupKey][index];
         setSelectedPointers(newSelectedPointer);
 
-        for(let i = 0; i < resultPointers.length; i++){
-            
+        if(hiddenElements[groupKey][index]) return;
 
-            const path = resultPointers[i].path;
-            if(path.startsWith("Line")) continue;
+        for (const group in resultGroupedPointers) {
+            for(let i = 0; i < resultGroupedPointers[group].length; i++){
+                if(hiddenElements[group][i]) continue;
 
-            let element:any;
-            if(path.startsWith("/")){
-                element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            }else{
-                element = document.querySelector(path);
+                const path = resultGroupedPointers[group][i].path;
+                if(path.startsWith("Line")) continue;
+
+                let element:any;
+                if(path.startsWith("/")){
+                    element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                }else{
+                    element = document.querySelector(path);
+                }
+                element.style.border = index === i && groupKey === group ? (!selectedPointers[group][index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
             }
-            element.style.border = index === i ? (!selectedPointers[index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
-
         }
     }
 
@@ -263,39 +282,69 @@ function CriteriaResultPointers({resultPointers}:any){
     };
 
     useEffect(() => { 
-        for(const pointer of resultPointers){
 
-            const path = pointer.path;
-            if(path.startsWith("Line")) continue;
+        const hidden = Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
+            groupKey, []
+        ]))
 
-            let element:any;
-            if(path.startsWith("/")){
-                element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            }else{
-                element = document.querySelector(path);
+        for (const groupKey in resultGroupedPointers) {
+            for(const pointer of resultGroupedPointers[groupKey]){
+
+                const path = pointer.path;
+                let element:any;
+
+                if(path.startsWith("Line")){
+                    console.log("nope => continue");
+                    hidden[groupKey].push(false);
+                    continue;
+                }else if(path.startsWith("/")){
+                    element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                }else{
+                    element = document.querySelector(path);
+                }
+                
+                if(!element) continue;
+
+                if(element.getAttribute('type') === "hidden"){
+                    hidden[groupKey].push(true);
+                    console.log("hidden");
+                }else{
+                    hidden[groupKey].push(false);
+                    console.log(element);
+                    element.style.border = "3px solid #005a6a";
+                }
+
             }
-            console.log(element);
-            element.style.border = "3px solid #005a6a";
-
         }
-    }, [resultPointers]);
+
+        setHiddenElements(hidden);
+
+    }, [resultGroupedPointers]);
+      
 
     return(<>
-
-        <tr><td style={{textAlign:"left", paddingTop:"10px"}}><u>Code pointers</u>:</td></tr>
         
-        {resultPointers.map((pointer:any, index:any) => (<>
+        {Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => (<>
 
             <tr><td colSpan={6} style={{textAlign:"left"}}>
-                <pre
-                    className="codigo_analisis"
-                    style={selectedPointers[index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }}
-                    onClick={() => handlePointerClick(index)}
-                >
-                    {index + 1}. {parse(pointer.html.substring(0, 25) + " ...")}
-                </pre>       
+
+                <span style={{fontWeight: "bold"}}>{"[ " + groupKey + " ]"}</span>
+                {pointers.map((pointer:any, index:any) => (
+                    <pre
+                        className="codigo_analisis"
+                        style={!hiddenElements[groupKey][index] ? 
+                            (selectedPointers[groupKey][index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }) 
+                            : { ...preStyles, color:"black" }}
+                        onClick={() => handlePointerClick(groupKey, index)}
+                    >
+                        {index + 1}. {selectedPointers[groupKey][index] ? parse(pointer.html) : parse(pointer.html.substring(0, 25) + " ... ")} {hiddenElements[groupKey][index] && "(HIDDEN)"}
+                    </pre> 
+                ))}
+                
+
             </td></tr>
-            
+
+
         </>))}
 
     </>);

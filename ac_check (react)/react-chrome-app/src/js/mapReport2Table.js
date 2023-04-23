@@ -140,18 +140,31 @@ function getFoundCases(criteriaKey){
 
         if(foundCasePointers.length > 0){
 
-            hasPart["pointers"] = []
+            const pointers = []
 
             for (const pointer of foundCasePointers) {
                 
                 let html = pointer['description'].replaceAll('<','&lt;');
                 html = html.replaceAll('>','&gt;');
 
-                hasPart["pointers"].push({
+                pointers.push({
                     "html": html,
-                    "path": pointer['ptr:expression']
+                    "path": pointer['ptr:expression'],
+                    "assertedBy": pointer.assertedBy.sort()
                 })
             }
+
+
+            const groupedPointers = pointers.reduce((acc, pointer) => {
+                const key = pointer.assertedBy.sort().join(", ");
+                if (!acc[key]) {
+                    acc[key] = [];
+                }
+                acc[key].push(pointer);
+                return acc;
+            }, {});
+
+            hasPart["groupedPointers"] = groupedPointers;
         }
 
         foundCasesResults.push(hasPart);

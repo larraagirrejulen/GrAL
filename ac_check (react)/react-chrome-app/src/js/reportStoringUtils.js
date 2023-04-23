@@ -8,7 +8,7 @@ export function storeReport(report){
     storeOnChrome("report", report);
     mapResults2TableData();
     localStorage.setItem("evaluated", "true");
-    window.location.reload();
+    //window.location.reload();
 }
 
 
