@@ -1,7 +1,7 @@
 
 import './css/resultsTable.css';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getArrowSrc, getArrowUpSrc, getOptions } from './js/extensionUtils.js';
 import parse from 'html-react-parser';
 import { getFromChromeStorage } from './js/extensionUtils.js';
@@ -190,13 +190,82 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 function CriteriaResults({criteriaResults, mantainExtended}:any){  
 
+    const getStructureObject = useCallback((empty = false) => {
+        return criteriaResults.map((result:any) => (
+            Object.fromEntries(Object.entries(result.groupedPointers).map(([groupKey, pointers]:any) => [
+                groupKey,
+                empty ? [] : Array(pointers.length).fill("none")
+            ]))
+        ))
+    }, [criteriaResults]);
+
+
+    const [pointerDefaultStyles, setPointerDefaultStyles] = useState(getStructureObject());
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
+
+    
+    function getHtmlElement(path:any){
+
+        let element:any;
+
+        if(path.startsWith("Line")){
+            element = null;
+        }else if(path.startsWith("/")){
+            element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        }else{
+            element = document.querySelector(path);
+        }
+
+        return element;
+    }
+
 
     function handleCriteriaResultStateChange (index:any){
         const newStates = mantainExtended ? [...selectedCriteriaResults] : Array(criteriaResults.length).fill(false);
         newStates[index] = !selectedCriteriaResults[index];
         setSelectedCriteriaResults(newStates);
+
+        if(selectedCriteriaResults[index]){
+            for (const groupKey in criteriaResults[index].groupedPointers) {
+                for(let i = 0; i<criteriaResults[index].groupedPointers[groupKey].length; i++){
+                    
+                    const pointer = criteriaResults[index].groupedPointers[groupKey][i];
+
+                    const element = getHtmlElement(pointer.path);
+
+                    if(element){
+                        element.style.border = pointerDefaultStyles[index][groupKey][i];
+                    }
+                    
+                }
+            }
+        }
     }
+
+    
+    useEffect(() => { 
+
+        const defaultStyles = getStructureObject(true);
+
+        for(let i = 0; i < criteriaResults.length; i++){
+            for (const groupKey in criteriaResults[i].groupedPointers) {
+                for(const pointer of criteriaResults[i].groupedPointers[groupKey]){
+
+                    const element = getHtmlElement(pointer.path);
+
+                    if(element){
+                        defaultStyles[i][groupKey].push(element.style.border);
+                    }else{
+                        defaultStyles[i][groupKey].push("none");
+                    }
+                    
+                }
+            }
+        }
+        setPointerDefaultStyles(defaultStyles);
+
+    }, [criteriaResults, getStructureObject]);
+
 
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
@@ -230,26 +299,37 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
 
 function CriteriaResultPointers({resultGroupedPointers}:any){  
 
-    const [selectedPointers, setSelectedPointers] = useState(
-        Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
-            groupKey,
-            pointers.map(() => false)
-        ]))
-    );
-    const [hiddenElements, setHiddenElements] = useState(
-        Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
-            groupKey,
-            pointers.map(() => false)
-        ]))
-    );
 
+    const getStructureObject = useCallback((empty = false) => {
+        return Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
+            groupKey, 
+            empty ? [] : pointers.map(() => false)
+        ]))
+    }, [resultGroupedPointers]);    // The function will be redefined when resultGroupedPointers is updated
+
+
+    const [selectedPointers, setSelectedPointers] = useState( getStructureObject() );
+    const [hiddenElements, setHiddenElements] = useState( getStructureObject() );
     
 
+    function getHtmlElement(path:any){
+
+        let element:any;
+
+        if(path.startsWith("Line")){
+            element = null;
+        }else if(path.startsWith("/")){
+            element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        }else{
+            element = document.querySelector(path);
+        }
+
+        return element;
+    }
+
+
     function handlePointerClick (groupKey:any, index:any){
-        let newSelectedPointer =  Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
-            groupKey,
-            pointers.map(() => false)
-        ]));
+        let newSelectedPointer =  getStructureObject();
         newSelectedPointer[groupKey][index] = !selectedPointers[groupKey][index];
         setSelectedPointers(newSelectedPointer);
 
@@ -257,68 +337,47 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
         for (const group in resultGroupedPointers) {
             for(let i = 0; i < resultGroupedPointers[group].length; i++){
+                
                 if(hiddenElements[group][i]) continue;
 
-                const path = resultGroupedPointers[group][i].path;
-                if(path.startsWith("Line")) continue;
+                const element = getHtmlElement(resultGroupedPointers[group][i].path);
 
-                let element:any;
-                if(path.startsWith("/")){
-                    element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                }else{
-                    element = document.querySelector(path);
+                if(element){
+                    element.style.border = index === i && groupKey === group ? (!selectedPointers[group][index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
                 }
-                element.style.border = index === i && groupKey === group ? (!selectedPointers[group][index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
+
             }
         }
     }
 
-    const preStyles:any = {
-        backgroundColor: "#f4f4f4",
-        padding: "10px",
-        borderRadius: "5px",
-        fontSize: "14px",
-        cursor: "pointer"
-    };
 
     useEffect(() => { 
 
-        const hidden = Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
-            groupKey, []
-        ]))
+        const hidden = getStructureObject(true);
 
         for (const groupKey in resultGroupedPointers) {
             for(const pointer of resultGroupedPointers[groupKey]){
 
-                const path = pointer.path;
-                let element:any;
+                const element = getHtmlElement(pointer.path);
 
-                if(path.startsWith("Line")){
-                    console.log("nope => continue");
-                    hidden[groupKey].push(false);
-                    continue;
-                }else if(path.startsWith("/")){
-                    element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                }else{
-                    element = document.querySelector(path);
-                }
-
-                if(element.getAttribute('type') === "hidden"){
-                    hidden[groupKey].push(true);
-                    console.log("hidden");
+                if(element){
+                    if(element.getAttribute('type') === "hidden"){
+                        hidden[groupKey].push(true);
+                    }else{
+                        hidden[groupKey].push(false);
+                        element.style.border = "3px solid #005a6a";
+                    }
                 }else{
                     hidden[groupKey].push(false);
-                    console.log(element);
-                    element.style.border = "3px solid #005a6a";
                 }
-
+                
             }
         }
-
         setHiddenElements(hidden);
 
-    }, [resultGroupedPointers]);
+    }, [getStructureObject, resultGroupedPointers]);    // The use effect will rerun when getStructureObject or resultGroupedPointers is updated
       
+    
 
     return(<>
         
@@ -331,17 +390,15 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                     <pre
                         className="codigo_analisis"
                         style={!hiddenElements[groupKey][index] ? 
-                            (selectedPointers[groupKey][index] ? { ...preStyles, border: "3px solid #FF3633" } : { ...preStyles, border: "1px solid #005a6a" }) 
-                            : { ...preStyles, color:"black" }}
+                            (selectedPointers[groupKey][index] ? { border: "3px solid #FF3633" } : { border: "1px solid #005a6a" }) 
+                            : { color:"black" }}
                         onClick={() => handlePointerClick(groupKey, index)}
                     >
                         {index + 1}. {selectedPointers[groupKey][index] ? parse(pointer.html) : parse(pointer.html.substring(0, 30) + " ... ")} {hiddenElements[groupKey][index] && "(HIDDEN)"}
                     </pre> 
                 ))}
                 
-
             </td></tr>
-
 
         </>))}
 

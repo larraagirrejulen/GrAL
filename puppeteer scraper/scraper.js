@@ -237,7 +237,7 @@ class Scraper {
 
         // Wait for results to be loaded
         await page.waitForSelector('#livepreview_link');
-        await page.waitForTimeout(1000);    // Ez dakit bestela nola egin daitekeen
+        await page.waitForTimeout(3000);    // Ez dakit bestela nola egin daitekeen
         await page.click('#livepreview_link');
 
         // Wait for the loader to disappear
