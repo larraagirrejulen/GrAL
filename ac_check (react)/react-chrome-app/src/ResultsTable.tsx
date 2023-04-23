@@ -191,19 +191,22 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 function CriteriaResults({criteriaResults, mantainExtended}:any){  
 
     const getStructureObject = useCallback((empty = false) => {
-        return criteriaResults.map((result:any) => (
-            Object.fromEntries(Object.entries(result.groupedPointers).map(([groupKey, pointers]:any) => [
+        return criteriaResults.map((result:any) => {
+            
+            if(!result.groupedPointers) return {};
+
+            return Object.fromEntries(Object.entries(result.groupedPointers).map(([groupKey, pointers]:any) => [
                 groupKey,
                 empty ? [] : Array(pointers.length).fill("none")
             ]))
-        ))
+        })
     }, [criteriaResults]);
 
 
     const [pointerDefaultStyles, setPointerDefaultStyles] = useState(getStructureObject());
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
 
-    
+
     function getHtmlElement(path:any){
 
         let element:any;
@@ -225,7 +228,7 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
         newStates[index] = !selectedCriteriaResults[index];
         setSelectedCriteriaResults(newStates);
 
-        if(selectedCriteriaResults[index]){
+        if(selectedCriteriaResults[index] && criteriaResults[index].groupedPointers){
             for (const groupKey in criteriaResults[index].groupedPointers) {
                 for(let i = 0; i<criteriaResults[index].groupedPointers[groupKey].length; i++){
                     
@@ -248,6 +251,9 @@ function CriteriaResults({criteriaResults, mantainExtended}:any){
         const defaultStyles = getStructureObject(true);
 
         for(let i = 0; i < criteriaResults.length; i++){
+
+            if(!criteriaResults[i].groupedPointers) return;
+
             for (const groupKey in criteriaResults[i].groupedPointers) {
                 for(const pointer of criteriaResults[i].groupedPointers[groupKey]){
 
@@ -377,7 +383,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
     }, [getStructureObject, resultGroupedPointers]);    // The use effect will rerun when getStructureObject or resultGroupedPointers is updated
       
-    
+
 
     return(<>
         
