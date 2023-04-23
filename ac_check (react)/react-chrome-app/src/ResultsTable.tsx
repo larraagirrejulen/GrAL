@@ -275,7 +275,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
     const preStyles:any = {
         backgroundColor: "#f4f4f4",
-        padding: "1rem",
+        padding: "10px",
         borderRadius: "5px",
         fontSize: "14px",
         cursor: "pointer"
@@ -302,8 +302,6 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                 }else{
                     element = document.querySelector(path);
                 }
-                
-                if(!element) continue;
 
                 if(element.getAttribute('type') === "hidden"){
                     hidden[groupKey].push(true);
@@ -328,7 +326,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
             <tr><td colSpan={6} style={{textAlign:"left"}}>
 
-                <span style={{fontWeight: "bold"}}>{"[ " + groupKey + " ]"}</span>
+                <span style={{fontWeight: "bold", paddingTop:"10px"}}>{"[ " + groupKey + " ]"}</span>
                 {pointers.map((pointer:any, index:any) => (
                     <pre
                         className="codigo_analisis"
@@ -337,7 +335,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                             : { ...preStyles, color:"black" }}
                         onClick={() => handlePointerClick(groupKey, index)}
                     >
-                        {index + 1}. {selectedPointers[groupKey][index] ? parse(pointer.html) : parse(pointer.html.substring(0, 25) + " ... ")} {hiddenElements[groupKey][index] && "(HIDDEN)"}
+                        {index + 1}. {selectedPointers[groupKey][index] ? parse(pointer.html) : parse(pointer.html.substring(0, 30) + " ... ")} {hiddenElements[groupKey][index] && "(HIDDEN)"}
                     </pre> 
                 ))}
                 

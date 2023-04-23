@@ -48,8 +48,10 @@
             }else{
                 for(const result of results) {
                     let xpath = result.getDOMElement().xpath;
-                    xpath = xpath.replace(/\[@id='(.+?)'\]\[@class='(.+?)'\]/g, "[@id='$1']");
-                    xpath = xpath.replace(/\[@id='(.+?)'\]\[@role='(.+?)'\]/g, "[@id='$1']");
+                    xpath = "/" + xpath.substring(xpath.indexOf("]/")+1)
+                    xpath = xpath.replace(/\[@id='([\w\s-]+?)'\]\[@role='([\w\s-]+?)'\]/g, "[@id='$1']");
+                    xpath = xpath.replace(/\[@class='([\w\s-]+?)'\]/g, "");
+
                     const html = result.getDOMElement().node.outerHTML.replace(/[\n\t]/g, "");
 
                     jsonld.addNewAssertion(successCriteria, outcome, description, xpath, html);

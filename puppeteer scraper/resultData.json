@@ -65,7 +65,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "23/4/2023, 8:22:21",
+  "dct:date": "23/4/2023, 9:20:47",
   "assertors": [
     {
       "id": "_:AChecker",
@@ -745,7 +745,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
-                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682230956611'>"
+                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682234459151'>"
               },
               {
                 "id": "_:pointer",
@@ -907,7 +907,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='xgsj_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -1250,7 +1250,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='xgsj_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -1781,7 +1781,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_7475070egld();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_rjus__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_7475070uvvm();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_rjus__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1799,7 +1799,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[2]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_2949777kxhr();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_ctvk__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_2949777dedk();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_ctvk__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1817,7 +1817,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[3]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_5541562aecf();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_suxb__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_5541562urpa();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_suxb__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1835,7 +1835,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[4]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_13059473qxgk();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_gezi__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_13059473bujw();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_gezi__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1853,7 +1853,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[5]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_31132876ltgt();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_fmzi__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_31132876queu();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_fmzi__column3__0'>"
               }
             ]
           }
@@ -2898,7 +2898,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='xgsj_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -3743,7 +3743,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='xgsj_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -4264,7 +4264,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 187, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810767917&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808613874&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4282,7 +4282,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 599, Column 1",
-                "description": "<script src='/o/js_loader_config?t=1681810767813' type='text/javascript'>"
+                "description": "<script src='/o/js_loader_config?t=1681808613795' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4291,7 +4291,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 600, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4300,7 +4300,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 601, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4309,7 +4309,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 602, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4318,7 +4318,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 609, Column 2",
-                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681810782027' type='text/javascript'>"
+                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681808626319' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -4345,7 +4345,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 15511, Column 1",
-                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681810694000' type='text/javascript'>"
+                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
           }
@@ -5682,7 +5682,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 187, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810767917&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808613874&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5700,7 +5700,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 599, Column 1",
-                "description": "<script src='/o/js_loader_config?t=1681810767813' type='text/javascript'>"
+                "description": "<script src='/o/js_loader_config?t=1681808613795' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5709,7 +5709,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 600, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5718,7 +5718,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 601, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5727,7 +5727,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 602, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5736,7 +5736,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 609, Column 2",
-                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681810782027' type='text/javascript'>"
+                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681808626319' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5763,7 +5763,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 15511, Column 1",
-                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681810694000' type='text/javascript'>"
+                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
           }
@@ -5822,7 +5822,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 187, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810767917&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808613874&/o/frontend-js-jquery-web/jquery/jquery.min.js&/o/frontend-js-jquery-web/jquery/bootstrap.bundle.min.js&/o/frontend-js-jquery-web/jquery/collapsible_search.js&/o/frontend-js-jquery-web/jquery/fm.js&/o/frontend-js-jquery-web/jquery/form.js&/o/frontend-js-jquery-web/jquery/popper.min.js&/o/frontend-js-jquery-web/jquery/side_navigation.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5840,7 +5840,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 599, Column 1",
-                "description": "<script src='/o/js_loader_config?t=1681810767813' type='text/javascript'>"
+                "description": "<script src='/o/js_loader_config?t=1681808613795' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5849,7 +5849,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 600, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/loader/config.js&/o/frontend-js-web/loader/loader.js&/o/frontend-js-web/aui/aui/aui.js&/o/frontend-js-web/aui/aui-base-html5-shiv/aui-base-html5-shiv.js&/o/frontend-js-web/liferay/browser_selectors.js&/o/frontend-js-web/liferay/modules.js&/o/frontend-js-web/liferay/aui_sandbox.js&/o/frontend-js-web/misc/svg4everybody.js&/o/frontend-js-web/aui/arraylist-add/arraylist-add.js&/o/frontend-js-web/aui/arraylist-filter/arraylist-filter.js&/o/frontend-js-web/aui/arraylist/arraylist.js&/o/frontend-js-web/aui/array-extras/array-extras.js&/o/frontend-js-web/aui/array-invoke/array-invoke.js&/o/frontend-js-web/aui/attribute-base/attribute-base.js&/o/frontend-js-web/aui/attribute-complex/attribute-complex.js&/o/frontend-js-web/aui/attribute-core/attribute-core.js&/o/frontend-js-web/aui/attribute-observable/attribute-observable.js&/o/frontend-js-web/aui/attribute-extras/attribute-extras.js&/o/frontend-js-web/aui/base-base/base-base.js&/o/frontend-js-web/aui/base-pluginhost/base-pluginhost.js&/o/frontend-js-web/aui/classnamemanager/classnamemanager.js&/o/frontend-js-web/aui/datatype-xml-format/datatype-xml-format.js&/o/frontend-js-web/aui/datatype-xml-parse/datatype-xml-parse.js&/o/frontend-js-web/aui/dom-base/dom-base.js&/o/frontend-js-web/aui/dom-core/dom-core.js&/o/frontend-js-web/aui/dom-screen/dom-screen.js&/o/frontend-js-web/aui/dom-style/dom-style.js&/o/frontend-js-web/aui/event-base/event-base.js&/o/frontend-js-web/aui/event-custom-base/event-custom-base.js&/o/frontend-js-web/aui/event-custom-complex/event-custom-complex.js&/o/frontend-js-web/aui/event-delegate/event-delegate.js&/o/frontend-js-web/aui/event-focus/event-focus.js&/o/frontend-js-web/aui/event-hover/event-hover.js&/o/frontend-js-web/aui/event-key/event-key.js&/o/frontend-js-web/aui/event-mouseenter/event-mouseenter.js&/o/frontend-js-web/aui/event-mousewheel/event-mousewheel.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5858,7 +5858,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 601, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/event-outside/event-outside.js&/o/frontend-js-web/aui/event-resize/event-resize.js&/o/frontend-js-web/aui/event-simulate/event-simulate.js&/o/frontend-js-web/aui/event-synthetic/event-synthetic.js&/o/frontend-js-web/aui/intl/intl.js&/o/frontend-js-web/aui/io-base/io-base.js&/o/frontend-js-web/aui/io-form/io-form.js&/o/frontend-js-web/aui/io-queue/io-queue.js&/o/frontend-js-web/aui/io-upload-iframe/io-upload-iframe.js&/o/frontend-js-web/aui/io-xdr/io-xdr.js&/o/frontend-js-web/aui/json-parse/json-parse.js&/o/frontend-js-web/aui/json-stringify/json-stringify.js&/o/frontend-js-web/aui/node-base/node-base.js&/o/frontend-js-web/aui/node-core/node-core.js&/o/frontend-js-web/aui/node-event-delegate/node-event-delegate.js&/o/frontend-js-web/aui/node-event-simulate/node-event-simulate.js&/o/frontend-js-web/aui/node-focusmanager/node-focusmanager.js&/o/frontend-js-web/aui/node-pluginhost/node-pluginhost.js&/o/frontend-js-web/aui/node-screen/node-screen.js&/o/frontend-js-web/aui/node-style/node-style.js&/o/frontend-js-web/aui/oop/oop.js&/o/frontend-js-web/aui/plugin/plugin.js&/o/frontend-js-web/aui/pluginhost-base/pluginhost-base.js&/o/frontend-js-web/aui/pluginhost-config/pluginhost-config.js&/o/frontend-js-web/aui/querystring-stringify-simple/querystring-stringify-simple.js&/o/frontend-js-web/aui/queue-promote/queue-promote.js&/o/frontend-js-web/aui/selector-css2/selector-css2.js&/o/frontend-js-web/aui/selector-css3/selector-css3.js&/o/frontend-js-web/aui/selector-native/selector-native.js&/o/frontend-js-web/aui/selector/selector.js&/o/frontend-js-web/aui/widget-base/widget-base.js&/o/frontend-js-web/aui/widget-htmlparser/widget-htmlparser.js&/o/frontend-js-web/aui/widget-skin/widget-skin.js&/o/frontend-js-web/aui/widget-uievents/widget-uievents.js&/o/frontend-js-web/aui/yui-throttle/yui-throttle.js&/o/frontend-js-web/aui/aui-base-core/aui-base-core.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5867,7 +5867,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 602, Column 1",
-                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681810647050&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
+                "description": "<script data-senna-track='permanent' src='/combo?browserId=other&minifierType=js&languageId=es_ES&b=7210&t=1681808370293&/o/frontend-js-web/aui/aui-base-lang/aui-base-lang.js&/o/frontend-js-web/aui/aui-classnamemanager/aui-classnamemanager.js&/o/frontend-js-web/aui/aui-component/aui-component.js&/o/frontend-js-web/aui/aui-debounce/aui-debounce.js&/o/frontend-js-web/aui/aui-delayed-task-deprecated/aui-delayed-task-deprecated.js&/o/frontend-js-web/aui/aui-event-base/aui-event-base.js&/o/frontend-js-web/aui/aui-event-input/aui-event-input.js&/o/frontend-js-web/aui/aui-form-validator/aui-form-validator.js&/o/frontend-js-web/aui/aui-node-base/aui-node-base.js&/o/frontend-js-web/aui/aui-node-html5/aui-node-html5.js&/o/frontend-js-web/aui/aui-selector/aui-selector.js&/o/frontend-js-web/aui/aui-timer/aui-timer.js&/o/frontend-js-web/liferay/dependency.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/language.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/util.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portal.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js&/o/frontend-js-web/liferay/form.js&/o/frontend-js-web/liferay/form_placeholders.js&/o/frontend-js-web/liferay/icon.js&/o/frontend-js-web/liferay/menu.js&/o/frontend-js-web/liferay/notice.js&/o/frontend-js-web/liferay/poller.js' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5876,7 +5876,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 609, Column 2",
-                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681810782027' type='text/javascript'>"
+                "description": "<script data-senna-track='temporary' src='/o/js_bundle_config?t=1681808626319' type='text/javascript'>"
               },
               {
                 "id": "_:pointer",
@@ -5903,7 +5903,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 15511, Column 1",
-                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681810694000' type='text/javascript'>"
+                "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
           }
@@ -7248,7 +7248,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
-                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682230956611'>"
+                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682234459151'>"
               },
               {
                 "id": "_:pointer",
