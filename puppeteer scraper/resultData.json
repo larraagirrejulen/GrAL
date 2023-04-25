@@ -65,7 +65,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "23/4/2023, 9:20:47",
+  "dct:date": "24/4/2023, 20:54:45",
   "assertors": [
     {
       "id": "_:AChecker",
@@ -272,7 +272,7 @@
                   "AChecker",
                   "MAUVE"
                 ],
-                "ptr:expression": "Line 1490, Column 6",
+                "ptr:expression": "//html/body/div/header/div[2]/div/div/img",
                 "description": "<img class='logo-guest' src='https://www.ehu.eus/o/ehu-theme/images/custom/logo-ucrania.png' alt='UPV/EHU con Ucrania'>"
               },
               {
@@ -372,7 +372,7 @@
                   "Pa11y"
                 ],
                 "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_8Pr2BR9oRFZO > div > div:nth-child(2) > div > div > div > div:nth-child(2) > a > div > figure > img",
-                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44192609/camisetas-2030_web.jpg/c4260973-7ab5-4a7d-3629-d6754de060fb?t=1681819052498'>"
               },
               {
                 "id": "_:pointer",
@@ -745,7 +745,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
-                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682234459151'>"
+                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682362516121'>"
               },
               {
                 "id": "_:pointer",
@@ -789,7 +789,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\np element may be misused (could be a header).\n\n Found cases locations: \n\n Line 4106, Column 9\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4828, Column 8\n Line 11062, Column 5\n Line 11312, Column 5\n Line 11814, Column 5\n Line 12064, Column 5\n Line 12816, Column 5\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found:\n\nUsing ARIA landmarks to identify regions of a page\n\n Found cases locations: \n\n //html/body/div/header\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header\n //html/body/div/footer\n //html/body/nav\n //html/body/div/header/div[1]/div[1]/div/nav[1]\n //html/body/div/header/div[1]/div[1]/div/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[1]\n //html/body/div/header/div[1]/div[2]/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[3]\n //html/body/div/header/div[3]/div/div/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav/nav\n //html/body/div/section/div/div/div/div/div[1]/nav\n //html/body/div/header/div[1]/div[2]\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[2]/div/aside\n //html/body/div/section/div/div/div\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n\n*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nIf this selection list contains groups of related options, they should be grouped with optgroup.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1)",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\np element may be misused (could be a header).\n\n Found cases locations: \n\n Line 4106, Column 9\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4828, Column 8\n Line 11119, Column 5\n Line 11369, Column 5\n Line 11871, Column 5\n Line 12121, Column 5\n Line 12873, Column 5\n\n*************@MAUVE************* \n\nA POSSIBLE ISSUE was found:\n\nUsing ARIA landmarks to identify regions of a page\n\n Found cases locations: \n\n //html/body/div/header\n //html/body/div/section/div/div/div/div/div[2]/div/div[1]/section/div/div[2]/div/div[1]/div/article/header\n //html/body/div/footer\n //html/body/nav\n //html/body/div/header/div[1]/div[1]/div/nav[1]\n //html/body/div/header/div[1]/div[1]/div/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[1]\n //html/body/div/header/div[1]/div[2]/nav[2]\n //html/body/div/header/div[1]/div[2]/nav[3]\n //html/body/div/header/div[3]/div/div/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav\n //html/body/div/header/div[4]/div/div/div[2]/nav/nav\n //html/body/div/section/div/div/div/div/div[1]/nav\n //html/body/div/header/div[1]/div[2]\n //html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[2]/div/aside\n //html/body/div/section/div/div/div\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form\n //html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/div[1]/input\n\n*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nIf this selection list contains groups of related options, they should be grouped with optgroup.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1)",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -798,7 +798,7 @@
                   "AChecker",
                   "Pa11y"
                 ],
-                "ptr:expression": "Line 4106, Column 9",
+                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > figcaption > p:nth-child(1)",
                 "description": "<p class='card-title'>"
               },
               {
@@ -834,7 +834,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11062, Column 5",
+                "ptr:expression": "Line 11119, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179' alt='Enlight' />"
               },
               {
@@ -843,7 +843,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11312, Column 5",
+                "ptr:expression": "Line 11369, Column 5",
                 "description": "<img src='/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481' alt='Convocatoria LTC abierta' />"
               },
               {
@@ -852,7 +852,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11814, Column 5",
+                "ptr:expression": "Line 11871, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000' alt='EHUagenda 2030' />"
               },
               {
@@ -861,7 +861,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12064, Column 5",
+                "ptr:expression": "Line 12121, Column 5",
                 "description": "<img src='/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000' alt='Contratación administrativa' />"
               },
               {
@@ -870,7 +870,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12816, Column 5",
+                "ptr:expression": "Line 12873, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000' alt='campusa' />"
               },
               {
@@ -907,7 +907,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='jjin_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -1121,7 +1121,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 7372, Column 13",
-                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44192609/camisetas-2030_web.jpg/c4260973-7ab5-4a7d-3629-d6754de060fb?t=1681819052498'>"
               }
             ]
           }
@@ -1250,7 +1250,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='jjin_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -1646,7 +1646,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[1]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/la-exposicion-la-upv/ehu-investiga-en-cancer-visita-la-carcel'>"
+                "description": "<a href='https://www.ehu.eus/es/-/premio-orfeon-xxii-entrega'>"
               },
               {
                 "id": "_:pointer",
@@ -1655,7 +1655,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[2]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/desarrollan-metodologia-soluciones-naturales-desprendimientos-rocas-playas'>"
+                "description": "<a href='https://www.ehu.eus/es/-/la-exposicion-la-upv/ehu-investiga-en-cancer-visita-la-carcel'>"
               },
               {
                 "id": "_:pointer",
@@ -1664,7 +1664,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[3]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/cursos-verano-42'>"
+                "description": "<a href='https://www.ehu.eus/es/-/desarrollan-metodologia-soluciones-naturales-desprendimientos-rocas-playas'>"
               },
               {
                 "id": "_:pointer",
@@ -1673,7 +1673,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[4]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/el-consejo-de-gobierno-de-la-upv/ehu-aprueba-un-proyecto-de-presupuesto-de-494-5-m-%E2%82%AC-para-el-2023'>"
+                "description": "<a href='https://www.ehu.eus/es/-/cursos-verano-42'>"
               },
               {
                 "id": "_:pointer",
@@ -1682,7 +1682,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[5]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/asua-premio-leloir'>"
+                "description": "<a href='https://www.ehu.eus/es/-/el-consejo-de-gobierno-de-la-upv/ehu-aprueba-un-proyecto-de-presupuesto-de-494-5-m-%E2%82%AC-para-el-2023'>"
               },
               {
                 "id": "_:pointer",
@@ -1691,7 +1691,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[5]/section/div/div[2]/div/ul/li[6]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/arantzazulab-estudio-democracia'>"
+                "description": "<a href='https://www.ehu.eus/es/-/asua-premio-leloir'>"
               },
               {
                 "id": "_:pointer",
@@ -1709,7 +1709,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/ul/li[1]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/el-regimen-juridico-de-la-proteccion-de-los-animales-1'>"
+                "description": "<a href='https://www.ehu.eus/es/-/por-que-algunos-arboles-frutales-florecen-antes-que-otros'>"
               },
               {
                 "id": "_:pointer",
@@ -1718,7 +1718,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/ul/li[2]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/como-facilitar-la-igualdad-en-los-trabajos-universitarios'>"
+                "description": "<a href='https://www.ehu.eus/es/-/el-regimen-juridico-de-la-proteccion-de-los-animales-1'>"
               },
               {
                 "id": "_:pointer",
@@ -1727,7 +1727,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/ul/li[3]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/turbulencias-en-el-sector-bancario-1'>"
+                "description": "<a href='https://www.ehu.eus/es/-/como-facilitar-la-igualdad-en-los-trabajos-universitarios'>"
               },
               {
                 "id": "_:pointer",
@@ -1736,7 +1736,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/ul/li[4]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/soy-mujer-y-tengo-parkinson-que-puedo-esperar'>"
+                "description": "<a href='https://www.ehu.eus/es/-/turbulencias-en-el-sector-bancario-1'>"
               },
               {
                 "id": "_:pointer",
@@ -1745,7 +1745,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[2]/div/div[7]/section/div/div[2]/div/ul/li[5]/a",
-                "description": "<a href='https://www.ehu.eus/es/-/nos-hacemos-mayores-y-nuestras-bacterias-tambien'>"
+                "description": "<a href='https://www.ehu.eus/es/-/soy-mujer-y-tengo-parkinson-que-puedo-esperar'>"
               },
               {
                 "id": "_:pointer",
@@ -1781,7 +1781,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[1]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_7475070uvvm();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_rjus__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_7475070pfod();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_rjus__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1799,7 +1799,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[2]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_2949777dedk();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_ctvk__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_2949777zgwy();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_ctvk__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1817,7 +1817,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[3]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_5541562urpa();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_suxb__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_5541562kzlt();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_suxb__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1835,7 +1835,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[4]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_13059473bujw();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_gezi__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_13059473qywb();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_gezi__column3__0'>"
               },
               {
                 "id": "_:pointer",
@@ -1853,7 +1853,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/section/div/div/div/div/div[3]/div/div/section/div/div[2]/div/div[5]/div[4]/div/span/a",
-                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_31132876queu();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_fmzi__column3__0'>"
+                "description": "<a href='javascript:_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_printPage_31132876ekmc();' target='_self' class='btn btn-monospaced btn-outline-borderless btn-outline-secondary btn-sm lfr-icon-item taglib-icon' id='_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN_fmzi__column3__0'>"
               }
             ]
           }
@@ -2269,7 +2269,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nVisual lists may not be properly marked.\n\n Found cases locations: \n\n Line 1106, Column 1\n\n*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nThis element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)\n #navParent65 > span > span\n #social-network > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(17) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #footer > div > div > ul > li:nth-child(1) > a\n #footer > div > div > ul > li:nth-child(2) > a\n #footer > div > div > ul > li:nth-child(3) > a\n #footer > div > div > ul > li:nth-child(4) > a\n #footer > div > div > ul > li:nth-child(5) > a\n #footer > div > div > p\n #menu-campus > div > div > ul > li:nth-child(1) > a\n #menu-campus > div > div > ul > li:nth-child(2) > a\n #menu-campus > div > div > ul > li:nth-child(3) > a\n #menu-languages > div > div > ul > li:nth-child(1) > a > span\n #menu-languages > div > div > ul > li:nth-child(2) > a > span\n #menu-languages > div > div > ul > li:nth-child(3) > a > span\n #menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nVisual lists may not be properly marked.\n\n Found cases locations: \n\n Line 1106, Column 1\n\n*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nThis element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)\n #navParent65 > span > span\n #social-network > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(18) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #footer > div > div > ul > li:nth-child(1) > a\n #footer > div > div > ul > li:nth-child(2) > a\n #footer > div > div > ul > li:nth-child(3) > a\n #footer > div > div > ul > li:nth-child(4) > a\n #footer > div > div > ul > li:nth-child(5) > a\n #footer > div > div > p\n #menu-campus > div > div > ul > li:nth-child(1) > a\n #menu-campus > div > div > ul > li:nth-child(2) > a\n #menu-campus > div > div > ul > li:nth-child(3) > a\n #menu-languages > div > div > ul > li:nth-child(1) > a > span\n #menu-languages > div > div > ul > li:nth-child(2) > a > span\n #menu-languages > div > div > ul > li:nth-child(3) > a > span\n #menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -2367,7 +2367,7 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(17) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(18) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
                 "description": "<span class='province'>"
               },
               {
@@ -2898,7 +2898,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='jjin_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -3743,7 +3743,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/nav",
-                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='qgns_quickAccessNav'>"
+                "description": "<nav aria-label='Enlaces rápidos' class='quick-access-nav' id='jjin_quickAccessNav'>"
               },
               {
                 "id": "_:pointer",
@@ -3892,7 +3892,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nImage may contain text with poor contrast.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 5871, Column 184\n Line 7372, Column 13\n Line 10058, Column 5\n Line 10310, Column 5\n Line 10560, Column 5\n Line 10812, Column 5\n Line 11062, Column 5\n Line 11312, Column 5\n Line 11564, Column 5\n Line 11814, Column 5\n Line 12064, Column 5\n Line 12316, Column 5\n Line 12566, Column 5\n Line 12816, Column 5\n Line 13068, Column 5\n Line 13318, Column 5\n Line 13568, Column 5\n Line 13818, Column 5\n Line 14068, Column 5\n Line 14318, Column 5",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nImage may contain text with poor contrast.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 5871, Column 184\n Line 7372, Column 13\n Line 10115, Column 5\n Line 10367, Column 5\n Line 10617, Column 5\n Line 10869, Column 5\n Line 11119, Column 5\n Line 11369, Column 5\n Line 11621, Column 5\n Line 11871, Column 5\n Line 12121, Column 5\n Line 12373, Column 5\n Line 12623, Column 5\n Line 12873, Column 5\n Line 13125, Column 5\n Line 13375, Column 5\n Line 13625, Column 5\n Line 13875, Column 5\n Line 14125, Column 5\n Line 14375, Column 5",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -3955,7 +3955,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 7372, Column 13",
-                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44192609/camisetas-2030_web.jpg/c4260973-7ab5-4a7d-3629-d6754de060fb?t=1681819052498'>"
               },
               {
                 "id": "_:pointer",
@@ -3963,7 +3963,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10058, Column 5",
+                "ptr:expression": "Line 10115, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000' alt='' />"
               },
               {
@@ -3972,7 +3972,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10310, Column 5",
+                "ptr:expression": "Line 10367, Column 5",
                 "description": "<img src='/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803' alt='' />"
               },
               {
@@ -3981,7 +3981,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10560, Column 5",
+                "ptr:expression": "Line 10617, Column 5",
                 "description": "<img src='/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420' alt='' />"
               },
               {
@@ -3990,7 +3990,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10812, Column 5",
+                "ptr:expression": "Line 10869, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000' alt='' />"
               },
               {
@@ -3999,7 +3999,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11062, Column 5",
+                "ptr:expression": "Line 11119, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179' alt='Enlight' />"
               },
               {
@@ -4008,7 +4008,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11312, Column 5",
+                "ptr:expression": "Line 11369, Column 5",
                 "description": "<img src='/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481' alt='Convocatoria LTC abierta' />"
               },
               {
@@ -4017,7 +4017,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11564, Column 5",
+                "ptr:expression": "Line 11621, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956' alt='' />"
               },
               {
@@ -4026,7 +4026,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11814, Column 5",
+                "ptr:expression": "Line 11871, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000' alt='EHUagenda 2030' />"
               },
               {
@@ -4035,7 +4035,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12064, Column 5",
+                "ptr:expression": "Line 12121, Column 5",
                 "description": "<img src='/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000' alt='Contratación administrativa' />"
               },
               {
@@ -4044,7 +4044,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12316, Column 5",
+                "ptr:expression": "Line 12373, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000' alt='' />"
               },
               {
@@ -4053,7 +4053,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12566, Column 5",
+                "ptr:expression": "Line 12623, Column 5",
                 "description": "<img src='/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000' alt='' />"
               },
               {
@@ -4062,7 +4062,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12816, Column 5",
+                "ptr:expression": "Line 12873, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000' alt='campusa' />"
               },
               {
@@ -4071,7 +4071,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13068, Column 5",
+                "ptr:expression": "Line 13125, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000' alt='' />"
               },
               {
@@ -4080,7 +4080,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13318, Column 5",
+                "ptr:expression": "Line 13375, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754' alt='' />"
               },
               {
@@ -4089,7 +4089,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13568, Column 5",
+                "ptr:expression": "Line 13625, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000' alt='' />"
               },
               {
@@ -4098,7 +4098,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13818, Column 5",
+                "ptr:expression": "Line 13875, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000' alt='' />"
               },
               {
@@ -4107,7 +4107,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14068, Column 5",
+                "ptr:expression": "Line 14125, Column 5",
                 "description": "<img src='/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000' alt='' />"
               },
               {
@@ -4116,7 +4116,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14318, Column 5",
+                "ptr:expression": "Line 14375, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000' alt='' />"
               }
             ]
@@ -4160,7 +4160,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\ninput possibly using color alone.\n\n Found cases locations: \n\n Line 2001, Column 5\n Line 14509, Column 103",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\ninput possibly using color alone.\n\n Found cases locations: \n\n Line 2001, Column 5\n Line 14566, Column 103",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -4177,7 +4177,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14509, Column 103",
+                "ptr:expression": "Line 14566, Column 103",
                 "description": "<input hidden type='submit'/>"
               }
             ]
@@ -4237,7 +4237,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript may use color alone.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15511, Column 1",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript may use color alone.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15568, Column 1",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -4344,7 +4344,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 15511, Column 1",
+                "ptr:expression": "Line 15568, Column 1",
                 "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
@@ -4377,7 +4377,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nImage may contain text that is not in Alt text.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 7372, Column 13\n Line 10058, Column 5\n Line 10310, Column 5\n Line 10560, Column 5\n Line 10812, Column 5\n Line 11062, Column 5\n Line 11312, Column 5\n Line 11564, Column 5\n Line 11814, Column 5\n Line 12064, Column 5\n Line 12316, Column 5\n Line 12566, Column 5\n Line 12816, Column 5\n Line 13068, Column 5\n Line 13318, Column 5\n Line 13568, Column 5\n Line 13818, Column 5\n Line 14068, Column 5\n Line 14318, Column 5",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nImage may contain text that is not in Alt text.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 7372, Column 13\n Line 10115, Column 5\n Line 10367, Column 5\n Line 10617, Column 5\n Line 10869, Column 5\n Line 11119, Column 5\n Line 11369, Column 5\n Line 11621, Column 5\n Line 11871, Column 5\n Line 12121, Column 5\n Line 12373, Column 5\n Line 12623, Column 5\n Line 12873, Column 5\n Line 13125, Column 5\n Line 13375, Column 5\n Line 13625, Column 5\n Line 13875, Column 5\n Line 14125, Column 5\n Line 14375, Column 5",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -4431,7 +4431,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 7372, Column 13",
-                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44192609/camisetas-2030_web.jpg/c4260973-7ab5-4a7d-3629-d6754de060fb?t=1681819052498'>"
               },
               {
                 "id": "_:pointer",
@@ -4439,7 +4439,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10058, Column 5",
+                "ptr:expression": "Line 10115, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000' alt='' />"
               },
               {
@@ -4448,7 +4448,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10310, Column 5",
+                "ptr:expression": "Line 10367, Column 5",
                 "description": "<img src='/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803' alt='' />"
               },
               {
@@ -4457,7 +4457,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10560, Column 5",
+                "ptr:expression": "Line 10617, Column 5",
                 "description": "<img src='/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420' alt='' />"
               },
               {
@@ -4466,7 +4466,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10812, Column 5",
+                "ptr:expression": "Line 10869, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000' alt='' />"
               },
               {
@@ -4475,7 +4475,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11062, Column 5",
+                "ptr:expression": "Line 11119, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179' alt='Enlight' />"
               },
               {
@@ -4484,7 +4484,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11312, Column 5",
+                "ptr:expression": "Line 11369, Column 5",
                 "description": "<img src='/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481' alt='Convocatoria LTC abierta' />"
               },
               {
@@ -4493,7 +4493,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11564, Column 5",
+                "ptr:expression": "Line 11621, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956' alt='' />"
               },
               {
@@ -4502,7 +4502,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11814, Column 5",
+                "ptr:expression": "Line 11871, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000' alt='EHUagenda 2030' />"
               },
               {
@@ -4511,7 +4511,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12064, Column 5",
+                "ptr:expression": "Line 12121, Column 5",
                 "description": "<img src='/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000' alt='Contratación administrativa' />"
               },
               {
@@ -4520,7 +4520,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12316, Column 5",
+                "ptr:expression": "Line 12373, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000' alt='' />"
               },
               {
@@ -4529,7 +4529,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12566, Column 5",
+                "ptr:expression": "Line 12623, Column 5",
                 "description": "<img src='/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000' alt='' />"
               },
               {
@@ -4538,7 +4538,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12816, Column 5",
+                "ptr:expression": "Line 12873, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000' alt='campusa' />"
               },
               {
@@ -4547,7 +4547,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13068, Column 5",
+                "ptr:expression": "Line 13125, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000' alt='' />"
               },
               {
@@ -4556,7 +4556,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13318, Column 5",
+                "ptr:expression": "Line 13375, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754' alt='' />"
               },
               {
@@ -4565,7 +4565,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13568, Column 5",
+                "ptr:expression": "Line 13625, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000' alt='' />"
               },
               {
@@ -4574,7 +4574,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13818, Column 5",
+                "ptr:expression": "Line 13875, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000' alt='' />"
               },
               {
@@ -4583,7 +4583,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14068, Column 5",
+                "ptr:expression": "Line 14125, Column 5",
                 "description": "<img src='/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000' alt='' />"
               },
               {
@@ -4592,7 +4592,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14318, Column 5",
+                "ptr:expression": "Line 14375, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000' alt='' />"
               }
             ]
@@ -4927,7 +4927,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nThis image may contain text with poor contrast.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 5871, Column 184\n Line 7372, Column 13\n Line 10058, Column 5\n Line 10310, Column 5\n Line 10560, Column 5\n Line 10812, Column 5\n Line 11062, Column 5\n Line 11312, Column 5\n Line 11564, Column 5\n Line 11814, Column 5\n Line 12064, Column 5\n Line 12316, Column 5\n Line 12566, Column 5\n Line 12816, Column 5\n Line 13068, Column 5\n Line 13318, Column 5\n Line 13568, Column 5\n Line 13818, Column 5\n Line 14068, Column 5\n Line 14318, Column 5",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nThis image may contain text with poor contrast.\n\n Found cases locations: \n\n Line 1485, Column 6\n Line 1490, Column 6\n Line 4104, Column 8\n Line 4466, Column 8\n Line 4828, Column 8\n Line 5871, Column 184\n Line 7372, Column 13\n Line 10115, Column 5\n Line 10367, Column 5\n Line 10617, Column 5\n Line 10869, Column 5\n Line 11119, Column 5\n Line 11369, Column 5\n Line 11621, Column 5\n Line 11871, Column 5\n Line 12121, Column 5\n Line 12373, Column 5\n Line 12623, Column 5\n Line 12873, Column 5\n Line 13125, Column 5\n Line 13375, Column 5\n Line 13625, Column 5\n Line 13875, Column 5\n Line 14125, Column 5\n Line 14375, Column 5",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -4990,7 +4990,7 @@
                   "AChecker"
                 ],
                 "ptr:expression": "Line 7372, Column 13",
-                "description": "<img class='col-4' alt='' src='/documents/10136/44218491/maite_maguregui_dest.jpg/a2158aa8-e554-314a-be39-44018687ad08?t=1681905449057'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44192609/camisetas-2030_web.jpg/c4260973-7ab5-4a7d-3629-d6754de060fb?t=1681819052498'>"
               },
               {
                 "id": "_:pointer",
@@ -4998,7 +4998,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10058, Column 5",
+                "ptr:expression": "Line 10115, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-transparencia.jpg/0d1d3ccb-8762-4feb-adb0-d10727171982?t=1505904032000' alt='' />"
               },
               {
@@ -5007,7 +5007,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10310, Column 5",
+                "ptr:expression": "Line 10367, Column 5",
                 "description": "<img src='/documents/10136/1002378/sede-electronica-2021_banner.jpg/7f623d5b-9e70-5472-0fac-5fa284008576?t=1623148446803' alt='' />"
               },
               {
@@ -5016,7 +5016,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10560, Column 5",
+                "ptr:expression": "Line 10617, Column 5",
                 "description": "<img src='/documents/10136/0/banner-cursos-verano-2022-web.jpg/6f218d6a-ff86-d74f-81c6-be86abf8e94c?t=1651745342420' alt='' />"
               },
               {
@@ -5025,7 +5025,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 10812, Column 5",
+                "ptr:expression": "Line 10869, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_plan_estrategico_2019.jpg/7cd0b568-c46d-857d-60ab-26dd27d8f4d3?t=1570007113000' alt='' />"
               },
               {
@@ -5034,7 +5034,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11062, Column 5",
+                "ptr:expression": "Line 11119, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_enlight-2021.gif/d7af04e7-5534-82bf-875b-17c607b19c2d?t=1626155371179' alt='Enlight' />"
               },
               {
@@ -5043,7 +5043,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11312, Column 5",
+                "ptr:expression": "Line 11369, Column 5",
                 "description": "<img src='/documents/10136/39782053/MicrosoftTeams-image.png/39740b3c-c091-6743-775d-609256a11c9d?t=1673252440481' alt='Convocatoria LTC abierta' />"
               },
               {
@@ -5052,7 +5052,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11564, Column 5",
+                "ptr:expression": "Line 11621, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-ADAGIO2.jpg/fb3fe9d3-377e-31ab-08aa-1b48b678a932?t=1646987281956' alt='' />"
               },
               {
@@ -5061,7 +5061,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 11814, Column 5",
+                "ptr:expression": "Line 11871, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_ehuagenda+2030_2.jpg/09a2d35b-648a-0b3b-2cae-dd5820862cca?t=1561117076000' alt='EHUagenda 2030' />"
               },
               {
@@ -5070,7 +5070,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12064, Column 5",
+                "ptr:expression": "Line 12121, Column 5",
                 "description": "<img src='/documents/10136/1002378/Contrataci%C3%B3n+y+compras.jpg/b46271e8-6cc4-50c1-5428-73b97f65a2bb?t=1522240229000' alt='Contratación administrativa' />"
               },
               {
@@ -5079,7 +5079,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12316, Column 5",
+                "ptr:expression": "Line 12373, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-empleo-practicas.png/c12bf422-f4d9-4242-a144-7834d5afc2e5?t=1412689849000' alt='' />"
               },
               {
@@ -5088,7 +5088,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12566, Column 5",
+                "ptr:expression": "Line 12623, Column 5",
                 "description": "<img src='/documents/10136/1002378/ehualumni.jpg/b4c83411-f367-49d8-a3cb-30d7e215e7df?t=1494941545000' alt='' />"
               },
               {
@@ -5097,7 +5097,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 12816, Column 5",
+                "ptr:expression": "Line 12873, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-campusa.jpg/102e03d3-3212-4d7f-8193-9cbc1184757d?t=1421251115000' alt='campusa' />"
               },
               {
@@ -5106,7 +5106,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13068, Column 5",
+                "ptr:expression": "Line 13125, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-consejo-estudiantes-es.png/e80ca8dd-3619-4a62-92a0-f17c46073b6c?t=1412689815000' alt='' />"
               },
               {
@@ -5115,7 +5115,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13318, Column 5",
+                "ptr:expression": "Line 13375, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner_escuela_doctorado.jpg/d93bee73-2431-c4c9-3a82-6c920e411aea?t=1594983278754' alt='' />"
               },
               {
@@ -5124,7 +5124,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13568, Column 5",
+                "ptr:expression": "Line 13625, Column 5",
                 "description": "<img src='/documents/10136/1002378/banner-birretes.png/29164d50-c728-4ebd-8f48-ec0d575bedf3?t=1412689808000' alt='' />"
               },
               {
@@ -5133,7 +5133,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 13818, Column 5",
+                "ptr:expression": "Line 13875, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehudenda.jpg/e5483a92-f918-46eb-878a-c4cfc56a1a16?t=1422368804000' alt='' />"
               },
               {
@@ -5142,7 +5142,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14068, Column 5",
+                "ptr:expression": "Line 14125, Column 5",
                 "description": "<img src='/documents/10136/1002378/EHUsfera_2.jpg/bfcbc44f-0e9a-4aa4-af8f-044ded707eda?t=1443006941000' alt='' />"
               },
               {
@@ -5151,7 +5151,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 14318, Column 5",
+                "ptr:expression": "Line 14375, Column 5",
                 "description": "<img src='/documents/522485/1339603/ehutb.jpg/5207a004-2837-41a3-ac72-9159f8291735?t=1422368773000' alt='' />"
               }
             ]
@@ -5655,7 +5655,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript user interface may not be accessible.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15511, Column 1",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript user interface may not be accessible.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15568, Column 1",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -5762,7 +5762,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 15511, Column 1",
+                "ptr:expression": "Line 15568, Column 1",
                 "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
@@ -5795,7 +5795,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript may cause screen flicker.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15511, Column 1",
+            "description": "*************@AChecker************* \n\nA POSSIBLE ISSUE was found:\n\nscript may cause screen flicker.\n\n Found cases locations: \n\n Line 108, Column 2\n Line 109, Column 2\n Line 187, Column 1\n Line 276, Column 1\n Line 599, Column 1\n Line 600, Column 1\n Line 601, Column 1\n Line 602, Column 1\n Line 609, Column 2\n Line 635, Column 5\n Line 981, Column 1\n Line 15568, Column 1",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -5902,7 +5902,7 @@
                 "assertedBy": [
                   "AChecker"
                 ],
-                "ptr:expression": "Line 15511, Column 1",
+                "ptr:expression": "Line 15568, Column 1",
                 "description": "<script src='https://www.ehu.eus/o/ehu-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=es_ES&amp;b=7210&amp;t=1681808416000' type='text/javascript'>"
               }
             ]
@@ -7248,7 +7248,7 @@
                   "MAUVE"
                 ],
                 "ptr:expression": "//html/body/div/header/div[4]/div/div/div[1]/div/div/section/div/div[2]/div/form/fieldset/input[1]",
-                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682234459151'>"
+                "description": "<input class='field form-control' id='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' name='_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_formDate' type='hidden' value='1682362516121'>"
               },
               {
                 "id": "_:pointer",

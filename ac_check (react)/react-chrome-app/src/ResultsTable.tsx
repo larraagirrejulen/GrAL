@@ -15,6 +15,49 @@ const outcome2Background:any = {
     "untested": {backgroundColor: "#8CFAFA"}
 }
 
+function getHtmlElement(path:any){
+
+    let element:any;
+
+    if(path.startsWith("Line")){
+        element = null;
+    }else if(path.startsWith("/")){
+        element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    }else{
+        element = document.querySelector(path);
+    }
+
+    return element;
+}
+
+function clearHighlights(){
+    let pointerDefaultStyles:any = sessionStorage.getItem("defaultStyles");
+
+    if(pointerDefaultStyles){
+
+        pointerDefaultStyles = JSON.parse(pointerDefaultStyles);
+
+        for (const groupKey in pointerDefaultStyles) {
+            for(let i = 0; i<pointerDefaultStyles[groupKey].length; i++){
+                
+                const pointer = pointerDefaultStyles[groupKey][i];
+
+                if(!pointer) continue;
+
+                const element = getHtmlElement(pointer.path);
+
+                if(element){
+                    element.removeAttribute("tabindex");
+                    element.style.border = pointer.style;
+                } 
+                
+            }
+        }
+        sessionStorage.removeItem("defaultStyles");
+    }
+}
+
+
 
 export default function ResultsTable({conformanceLevels}:any){
 
@@ -25,6 +68,9 @@ export default function ResultsTable({conformanceLevels}:any){
             setMantainExtended(await getOptions("mantainExtended"));
             setReportTableContent(await getFromChromeStorage("reportTableContent")); 
         })();
+
+        sessionStorage.removeItem("defaultStyles");
+
     }, []);
    
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
@@ -32,6 +78,8 @@ export default function ResultsTable({conformanceLevels}:any){
         const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
         newStates[index] = !selectedMainCategories[index];
         setSelectedMainCategories(newStates);
+
+        clearHighlights();
     };
 
     
@@ -128,6 +176,8 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
         const newStates = mantainExtended ? [...selectedSubCategories] : Array(subCategories.length).fill(false);
         newStates[index] = !selectedSubCategories[index];
         setSelectedSubCategories(newStates);
+
+        clearHighlights();
     };
 
     return(<> 
@@ -156,6 +206,8 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
         const newStates = mantainExtended ? [...selectedCriterias] : Array(criterias.length).fill(false);
         newStates[index] = !selectedCriterias[index];
         setSelectedCriterias(newStates);
+
+        clearHighlights();
     };
 
     
@@ -188,90 +240,44 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 
-function CriteriaResults({criteriaResults, mantainExtended}:any){  
+function CriteriaResults({criteriaResults}:any){  
 
-    const getStructureObject = useCallback((empty = false) => {
-        return criteriaResults.map((result:any) => {
-            
-            if(!result.groupedPointers) return {};
-
-            return Object.fromEntries(Object.entries(result.groupedPointers).map(([groupKey, pointers]:any) => [
-                groupKey,
-                empty ? [] : Array(pointers.length).fill("none")
-            ]))
-        })
-    }, [criteriaResults]);
-
-
-    const [pointerDefaultStyles, setPointerDefaultStyles] = useState(getStructureObject());
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
 
-
-    function getHtmlElement(path:any){
-
-        let element:any;
-
-        if(path.startsWith("Line")){
-            element = null;
-        }else if(path.startsWith("/")){
-            element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        }else{
-            element = document.querySelector(path);
-        }
-
-        return element;
-    }
-
-
     function handleCriteriaResultStateChange (index:any){
-        const newStates = mantainExtended ? [...selectedCriteriaResults] : Array(criteriaResults.length).fill(false);
+        const newStates = Array(criteriaResults.length).fill(false);
         newStates[index] = !selectedCriteriaResults[index];
         setSelectedCriteriaResults(newStates);
 
-        if(selectedCriteriaResults[index] && criteriaResults[index].groupedPointers){
+        clearHighlights();
+
+        if(!selectedCriteriaResults[index] && criteriaResults[index].groupedPointers){
+
+            const defaultStyles = Object.fromEntries(
+                Object.entries(criteriaResults[index].groupedPointers).map(([groupKey, pointers]:any) => [
+                    groupKey, []
+                ])
+            );
+
             for (const groupKey in criteriaResults[index].groupedPointers) {
-                for(let i = 0; i<criteriaResults[index].groupedPointers[groupKey].length; i++){
-                    
-                    const pointer = criteriaResults[index].groupedPointers[groupKey][i];
+                for(const pointer of criteriaResults[index].groupedPointers[groupKey]){
 
                     const element = getHtmlElement(pointer.path);
 
                     if(element){
-                        element.style.border = pointerDefaultStyles[index][groupKey][i];
-                    }
-                    
-                }
-            }
-        }
-    }
-
-    
-    useEffect(() => { 
-
-        const defaultStyles = getStructureObject(true);
-
-        for(let i = 0; i < criteriaResults.length; i++){
-
-            if(!criteriaResults[i].groupedPointers) return;
-
-            for (const groupKey in criteriaResults[i].groupedPointers) {
-                for(const pointer of criteriaResults[i].groupedPointers[groupKey]){
-
-                    const element = getHtmlElement(pointer.path);
-
-                    if(element){
-                        defaultStyles[i][groupKey].push(element.style.border);
+                        element.setAttribute("tabindex", "0");
+                        defaultStyles[groupKey].push({"style": element.style.border, "path": pointer.path});
                     }else{
-                        defaultStyles[i][groupKey].push("none");
+                        defaultStyles[groupKey].push(null);
                     }
                     
                 }
             }
+
+            sessionStorage.setItem("defaultStyles", JSON.stringify(defaultStyles));
         }
-        setPointerDefaultStyles(defaultStyles);
 
-    }, [criteriaResults, getStructureObject]);
-
+    }
 
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
@@ -313,27 +319,10 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
         ]))
     }, [resultGroupedPointers]);    // The function will be redefined when resultGroupedPointers is updated
 
-
     const [selectedPointers, setSelectedPointers] = useState( getStructureObject() );
     const [hiddenElements, setHiddenElements] = useState( getStructureObject() );
+
     
-
-    function getHtmlElement(path:any){
-
-        let element:any;
-
-        if(path.startsWith("Line")){
-            element = null;
-        }else if(path.startsWith("/")){
-            element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        }else{
-            element = document.querySelector(path);
-        }
-
-        return element;
-    }
-
-
     function handlePointerClick (groupKey:any, index:any){
         let newSelectedPointer =  getStructureObject();
         newSelectedPointer[groupKey][index] = !selectedPointers[groupKey][index];
@@ -349,9 +338,27 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                 const element = getHtmlElement(resultGroupedPointers[group][i].path);
 
                 if(element){
-                    element.style.border = index === i && groupKey === group ? (!selectedPointers[group][index] ? "3px solid #FF3633" : "3px solid #005a6a") : "3px solid #005a6a";
-                }
 
+                    const highlightAnimation = (repeat:any) => {
+                        setTimeout(() => {
+                            element.style.border = "3px solid white";
+                            setTimeout(() => {
+                                element.style.border = "3px solid #FF3633";
+                                if(repeat > 0) highlightAnimation (repeat - 1);
+                            }, 120);
+                        }, 120);
+                    }
+
+                    if(index === i && groupKey === group && !selectedPointers[group][index]){
+                        element.focus();
+                        element.blur();
+                        element.style.border = "3px solid #FF3633";
+                        highlightAnimation(1);
+                        continue;
+                    }
+                    element.style.border = "3px solid #005a6a";
+
+                }
             }
         }
     }

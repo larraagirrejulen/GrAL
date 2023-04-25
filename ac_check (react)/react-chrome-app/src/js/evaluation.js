@@ -57,8 +57,8 @@ export async function performEvaluation(){
         if (A11Y){
             chrome.runtime.sendMessage({ action: "performA11yEvaluation"}, (response)=>{
                 const localEvaluationReport = response.report[0].result;
-                merge(fetchEvaluationReport, localEvaluationReport);
-                storeReport(fetchEvaluationReport);
+                merge(localEvaluationReport, fetchEvaluationReport);
+                storeReport(localEvaluationReport);
             });
         }else{
             storeReport(fetchEvaluationReport);

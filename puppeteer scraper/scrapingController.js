@@ -120,6 +120,9 @@ function mergeHasParts(hasPart1, hasPart2){
                     for(const assertor of pointer2.assertedBy){
                         pointer1.assertedBy.push(assertor);
                     }
+					if(pointer1["ptr:expression"].startsWith("Line")){
+						pointer1["ptr:expression"] = pointer2["ptr:expression"];
+					}
                 }else{
                     foundCase1.result.locationPointersGroup.push(pointer2);
                 }
