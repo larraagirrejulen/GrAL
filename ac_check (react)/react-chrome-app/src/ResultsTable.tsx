@@ -63,14 +63,13 @@ export default function ResultsTable({conformanceLevels}:any){
 
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
+
     useEffect(() => {
         (async ()=>{ 
             setMantainExtended(await getOptions("mantainExtended"));
             setReportTableContent(await getFromChromeStorage("reportTableContent")); 
         })();
-
         sessionStorage.removeItem("defaultStyles");
-
     }, []);
    
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
@@ -124,21 +123,29 @@ function OutcomeHeaders(){
 function Summary({conformanceLevels}:any){
 
     const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
+    const [reportSummary, setReportSummary] = useState(null);
 
     useEffect(() => { 
         (async ()=>{
-            const reportSummary = await getFromChromeStorage("reportSummary");
-            let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-            for(const conformanceLevel of conformanceLevels){
-                passed += reportSummary["earl:passed"][conformanceLevel];
-                failed += reportSummary["earl:failed"][conformanceLevel];
-                cantTell += reportSummary["earl:cantTell"][conformanceLevel];
-                inapplicable += reportSummary["earl:inapplicable"][conformanceLevel];
-                untested += reportSummary["earl:untested"][conformanceLevel];
-            }
-            setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
+            setReportSummary(await getFromChromeStorage("reportSummary"));
         })();
-    },[conformanceLevels]);
+    },[]);
+
+    useEffect(() => { 
+        if(reportSummary){
+            (async ()=>{
+                let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
+                for(const conformanceLevel of conformanceLevels){
+                    passed += reportSummary["earl:passed"][conformanceLevel];
+                    failed += reportSummary["earl:failed"][conformanceLevel];
+                    cantTell += reportSummary["earl:cantTell"][conformanceLevel];
+                    inapplicable += reportSummary["earl:inapplicable"][conformanceLevel];
+                    untested += reportSummary["earl:untested"][conformanceLevel];
+                }
+                setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
+            })();
+        }
+    },[conformanceLevels, reportSummary]);
 
     return(
         <table className="summaryTable">
@@ -383,7 +390,6 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                 }else{
                     hidden[groupKey].push(false);
                 }
-                
             }
         }
         setHiddenElements(hidden);

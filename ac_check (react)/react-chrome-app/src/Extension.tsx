@@ -16,16 +16,22 @@ import ResultsTable from './ResultsTable';
 
 export default function Extension() {
 
+  const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
+
+  useEffect( ()=>{
+    (async () => {
+      setShiftWebpage(await getOptions("shiftWebpage"));
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
-      const shiftWebpage = await getOptions("shiftWebpage");
       if(shiftWebpage){
         hidden ? document.body.classList.remove('extension-active') : document.body.classList.add('extension-active');
       }
     })();
-  }, [hidden]);
+  }, [hidden, shiftWebpage]);
 
   return (<>
     
@@ -146,9 +152,9 @@ function ResultSection() {
   };
 
   useEffect(() => {
-    const storedActiveLevels = localStorage.getItem("conformanceLevels");
-    if(storedActiveLevels !== null){
-      setConformanceLevels(JSON.parse(storedActiveLevels));
+    const storedConformanceLevels = localStorage.getItem("conformanceLevels");
+    if(storedConformanceLevels !== null){
+      setConformanceLevels(JSON.parse(storedConformanceLevels));
     }else{
       localStorage.setItem("conformanceLevels", JSON.stringify(conformanceLevels));
     }
