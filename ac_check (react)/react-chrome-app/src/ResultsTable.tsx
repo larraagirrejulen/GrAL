@@ -2,9 +2,8 @@
 import './css/resultsTable.css';
 
 import { useState, useEffect, useCallback } from "react";
-import { getArrowSrc, getArrowUpSrc, getOptions } from './js/extensionUtils.js';
+import { getImgSrc, getFromChromeStorage, sendMessageToBackground } from './js/chromeUtils.js';
 import parse from 'html-react-parser';
-import { getFromChromeStorage } from './js/extensionUtils.js';
 
 
 const outcome2Background:any = {
@@ -15,22 +14,38 @@ const outcome2Background:any = {
     "untested": {backgroundColor: "#8CFAFA"}
 }
 
-function getHtmlElement(path:any){
+function getHtmlElement(path:any, innerText:any){
 
     let element:any;
 
-    if(path.startsWith("Line")){
-        element = null;
-    }else if(path.startsWith("/")){
+    if(path.startsWith("/")){
         element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     }else{
-        element = document.querySelector(path);
+        const elements = document.querySelectorAll(path);
+
+        if (elements.length === 1){
+            element = elements[0];
+        }
+
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].textContent === innerText) {
+                element = elements[i];
+            }
+        }
+
     }
 
     return element;
 }
 
 function clearHighlights(){
+
+    const lastPopup = document.querySelector("#highlightPopup");
+
+    if(lastPopup){
+        lastPopup.remove();
+    } 
+
     let pointerDefaultStyles:any = sessionStorage.getItem("defaultStyles");
 
     if(pointerDefaultStyles){
@@ -44,7 +59,7 @@ function clearHighlights(){
 
                 if(!pointer) continue;
 
-                const element = getHtmlElement(pointer.path);
+                const element = getHtmlElement(pointer.path, pointer.innerText);
 
                 if(element){
                     element.removeAttribute("tabindex");
@@ -66,7 +81,7 @@ export default function ResultsTable({conformanceLevels}:any){
 
     useEffect(() => {
         (async ()=>{ 
-            setMantainExtended(await getOptions("mantainExtended"));
+            setMantainExtended(await getFromChromeStorage("mantainExtended", true));
             setReportTableContent(await getFromChromeStorage("reportTableContent")); 
         })();
         sessionStorage.removeItem("defaultStyles");
@@ -228,7 +243,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                     <td colSpan={2}>
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
-                            <img src={ selectedCriterias[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                            <img src={ selectedCriterias[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
                             {criteria.criteria}
                             
                         </> : <> {criteria.criteria} </> }
@@ -269,7 +284,7 @@ function CriteriaResults({criteriaResults}:any){
             for (const groupKey in criteriaResults[index].groupedPointers) {
                 for(const pointer of criteriaResults[index].groupedPointers[groupKey]){
 
-                    const element = getHtmlElement(pointer.path);
+                    const element = getHtmlElement(pointer.path, pointer.innerText);
 
                     if(element){
                         element.setAttribute("tabindex", "0");
@@ -291,7 +306,7 @@ function CriteriaResults({criteriaResults}:any){
             
             <tr className="collapsible criteriaResult" onClick={() => handleCriteriaResultStateChange(index)}>
                 <td colSpan={6} style={{...outcome2Background[result.outcome]}}>
-                    <img src={ selectedCriteriaResults[index] ? getArrowUpSrc() : getArrowSrc() } alt="Show information" height="20px"/>
+                    <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
                     {result.outcome}
                 </td>
             </tr>
@@ -331,18 +346,25 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
     
     function handlePointerClick (groupKey:any, index:any){
+        
         let newSelectedPointer =  getStructureObject();
         newSelectedPointer[groupKey][index] = !selectedPointers[groupKey][index];
         setSelectedPointers(newSelectedPointer);
 
-        if(hiddenElements[groupKey][index]) return;
+        if(hiddenElements[groupKey][index]){
+
+            if(!selectedPointers[groupKey][index]) {
+                sendMessageToBackground("showHiddenElement");
+            }
+            return;
+        } 
 
         for (const group in resultGroupedPointers) {
             for(let i = 0; i < resultGroupedPointers[group].length; i++){
-                
+
                 if(hiddenElements[group][i]) continue;
 
-                const element = getHtmlElement(resultGroupedPointers[group][i].path);
+                const element = getHtmlElement(resultGroupedPointers[group][i].path, resultGroupedPointers[group][i].innerText);
 
                 if(element){
 
@@ -357,6 +379,9 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                     }
 
                     if(index === i && groupKey === group && !selectedPointers[group][index]){
+
+                        sendMessageToBackground("createElementPopup", resultGroupedPointers[group][i].path);
+
                         element.focus();
                         element.blur();
                         element.style.border = "3px solid #FF3633";
@@ -368,6 +393,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                 }
             }
         }
+
     }
 
 
@@ -378,10 +404,10 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
         for (const groupKey in resultGroupedPointers) {
             for(const pointer of resultGroupedPointers[groupKey]){
 
-                const element = getHtmlElement(pointer.path);
+                const element = getHtmlElement(pointer.path, pointer.innerText);
 
                 if(element){
-                    if(element.getAttribute('type') === "hidden"){
+                    if(element.getAttribute('type') === "hidden" || element.getAttribute("hidden")!==null){
                         hidden[groupKey].push(true);
                     }else{
                         hidden[groupKey].push(false);

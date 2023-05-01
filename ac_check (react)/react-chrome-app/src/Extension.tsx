@@ -5,12 +5,11 @@ import './css/evaluationSection.css';
 import './css/resultSection.css';
 
 import { useEffect, useState } from "react";
-import { getLogoSrc, getArrowSrc, getArrowUpSrc, getConfigImgSrc, openOptionsPage, getOptions } from './js/extensionUtils.js';
-import { removeStoredReport, downloadStoredReport, uploadAndStoreReport } from './js/reportStoringUtils.js';
+import { getImgSrc, sendMessageToBackground, getFromChromeStorage } from './js/chromeUtils.js';
+import { removeStoredReport, downloadStoredReport, uploadNewReport } from './js/reportStoringUtils.js';
 import { performEvaluation } from './js/evaluation.js';
 import { BeatLoader } from 'react-spinners';  // Loading animation
 import ResultsTable from './ResultsTable';
-
 
 
 
@@ -20,8 +19,9 @@ export default function Extension() {
   const [hidden, setHidden] = useState(false);
 
   useEffect( ()=>{
+    removeStoredReport();
     (async () => {
-      setShiftWebpage(await getOptions("shiftWebpage"));
+      setShiftWebpage(await getFromChromeStorage("shiftWebpage", true));
     })();
   }, []);
 
@@ -35,13 +35,13 @@ export default function Extension() {
 
   return (<>
     
-    {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={getLogoSrc()} onClick={()=>setHidden(!hidden)} /> : ""}
+    {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={getImgSrc("icon128")} onClick={()=>setHidden(!hidden)} /> : ""}
     
     <div className= {`react_chrome_extension ${hidden && 'hidden'}`}>
-      <img className="options_icon" src={getConfigImgSrc()} alt="open configuration options window" onClick={()=>openOptionsPage()} />
+      <img className="options_icon" src={getImgSrc("settingsGear")} alt="open configuration options window" onClick={()=>sendMessageToBackground("openOptionsPage")} />
       <span className="close_icon" onClick={()=>setHidden(!hidden)}>&times;</span>
       <div className="img_container">
-        <img alt="extension logo" src={getLogoSrc()} onClick={() => {
+        <img alt="extension logo" src={getImgSrc("icon128")} onClick={() => {
           window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
           window.open("https://github.com/Itusil/TFG", '_blank')
         }} />
@@ -86,7 +86,7 @@ function EvaluatorSelectionSection () {
   return ( <div className="evaluator_selection_section">
 
       <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
-        <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
+        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
         <span>Select evaluators</span>
       </div>
 
@@ -113,27 +113,20 @@ function EvaluationSection () {
   const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
   const [isLoading, setIsLoading] = useState(false);
 
-  function evaluateCurrentPage(){
-    setIsLoading(true);
-    performEvaluation().catch(
-      (error)=>console.log("@evaluation.js: ERROR evaluating the page => " + error)
-    ).finally(()=>setIsLoading(false));
-  }
-
   return ( <div className="evaluation_section">
 
       <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
-        <img src = { isOpen ? getArrowUpSrc() : getArrowSrc() } alt="dropdown_arrow" />
+        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
         <span>Evaluation options</span>
       </div>
 
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
-        <button id="btn_get_data" className="button primary" onClick={evaluateCurrentPage} disabled={isLoading}>
+        <button id="btn_get_data" className="button primary" onClick={()=>{performEvaluation(setIsLoading)}} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Evaluate current page"}
         </button><br/>
         <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
         <label id="btn_download" className="button primary" onClick={downloadStoredReport}>Download report</label><br/>
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadAndStoreReport(event)} />Upload Report</label>
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />Upload Report</label>
       </div>
     
   </div> );

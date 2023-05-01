@@ -52,6 +52,24 @@ try{
         sendResponse({report: jsonld});
       })();
 
+    }else if(request.action === "createElementPopup"){
+      
+      const path = request.path;
+      chrome.storage.local.set({path}, () => {
+        chrome.scripting.executeScript({
+          files: ["/js/createElementPopup.js"],
+          target: { tabId: sender.tab.id }
+        });
+      });
+
+    }else if(request.action === "showHiddenElement"){
+      
+      chrome.windows.create({ 
+        url: "chrome://inspect/#devices", 
+        type: "popup", 
+        focused: true 
+      });
+
     }
     return true;  // for asynchronous response
   });

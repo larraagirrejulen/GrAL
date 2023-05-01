@@ -145,3 +145,21 @@
   border: 1px solid #e1e1e8;
   border-radius: 5px;
 }
+
+.highlightPopup{
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #f4f4f4;
+  border: 2px solid #d14;
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+.highlightPopup span{
+  color: black;
+}
+
+.highlightPopup u{
+  color:#005a6a;
+  cursor: pointer;
+}

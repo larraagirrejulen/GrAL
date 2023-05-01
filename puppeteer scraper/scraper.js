@@ -1,5 +1,5 @@
 
-const JsonLd = require('./jsonLd');
+const JsonLd = require('../jsonLd/jsonLd');
 const pa11y = require('pa11y');
 
 
@@ -195,11 +195,40 @@ class Scraper {
                         const line = document.querySelector("#line-" + parseInt(match[1]));
                         const html = line.textContent.substring(parseInt(match[2])-1);
 
+                        let querySelector = html.replace(/[\n\t]/g, '').replace(/\n\s*/g, '').replace(/\"/g, "'");
+
+                        querySelector = querySelector.substring(0, querySelector.indexOf(">")+1);
+
+                        if(querySelector.substring(0, querySelector.indexOf(">")+1).indexOf(" ") > -1){
+                        
+                            querySelector = querySelector.replace(/<|>/g, "")
+                            
+                            querySelector = querySelector.substring(0, querySelector.indexOf(" ")) + "[" + querySelector.substring(querySelector.indexOf(" ")+1) + "]"
+                            querySelector = querySelector.replaceAll("/]", "]").replace(/\s+]/g, "]").replaceAll("' ", "'][");
+
+                            if(querySelector.indexOf("[style='") > 0){
+                                const querySelector1 = querySelector.substring(0, querySelector.indexOf("[style='"))
+                                const querySelector2 = querySelector.substring(querySelector.indexOf("[style='"))
+
+                                querySelector = querySelector1 + querySelector2.substring(querySelector2.indexOf("']")+2)
+                            }
+
+                            querySelector = querySelector.replace("hidden ", "hidden][");
+                            querySelector = querySelector.replace("async ", "async][");
+
+                        }else{
+                            querySelector = querySelector.replace(/<|>/g, "")
+                        }
+
+                        
+
+                        
+
                         results.push({
                             "criteriaNumber": criteria.textContent.match(/(\d\.\d\.\d)/)[0],
                             "outcome": id === "#AC_errors" ? "earl:failed": "earl:cantTell",
                             "description": id === "#AC_errors" ? problem + '\n\n' + solution : problem,
-                            "targetPath": path,
+                            "targetPath": querySelector,
                             "targetHtml": html
                         });
                     }

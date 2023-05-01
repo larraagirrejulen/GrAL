@@ -140,10 +140,21 @@ class JsonLd{
 
         if(path){
 
+            let innerText;
+
             let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');
 
-            if(correctedHtml.indexOf(">") >= 0){
-                correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
+            
+
+            if(correctedHtml.indexOf(">") > -1){
+
+                if(html.indexOf("</") > -1){
+                    innerText = html.substring(html.indexOf(">")+1, html.indexOf("</"));
+                }
+
+                if(correctedHtml.substring(0, correctedHtml.indexOf(">")+1).indexOf(" ")>0){
+                    correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
+                }
             }
 
             const newPointer = {
@@ -151,7 +162,8 @@ class JsonLd{
                 "type": "ptr:groupPointer",
                 "assertedBy": [this.#evaluator.name],
                 "ptr:expression": path, 
-                "description": correctedHtml
+                "description": correctedHtml,
+                "innerText": innerText
             };
 
             if(webPageAssertion){

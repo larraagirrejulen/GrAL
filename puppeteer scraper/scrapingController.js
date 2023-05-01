@@ -2,6 +2,7 @@
 const puppeteer = require('puppeteer');
 const Scraper = require('./scraper');
 const fs = require("fs");
+const mergeJsonLds = require('../jsonLd/jsonLdUtils');
 
 
 const withBrowser = async (fn) => {
@@ -49,7 +50,7 @@ async function scrapeSelected(AM, AC, MV, PA, evaluationUrl, evaluatedPageTitle)
 	});
 
 	for(var i = 1; i<results.length; i++){
-		merge(results[0], results[i]);
+		mergeJsonLds(results[0], results[i]);
 	}
 
 	fs.writeFile('./resultData.json', JSON.stringify(results[0], null, 2), err => {
@@ -57,83 +58,6 @@ async function scrapeSelected(AM, AC, MV, PA, evaluationUrl, evaluatedPageTitle)
 	});
 
 	return JSON.stringify(results[0]);
-
-}
-
-
-function merge(jsonLd1, jsonLd2){
-
-	if(jsonLd2["dct:date"] > jsonLd1["dct:date"]) jsonLd1["dct:date"] = jsonLd2["dct:date"];
-
-	jsonLd1.assertors.push(...jsonLd2.assertors);
-
-	jsonLd1.creator["xmlns:name"] += " & " + jsonLd2.creator["xmlns:name"];
-
-	for (let i = 0; i < jsonLd1.auditSample.length; i++) {
-
-        let assertion1 = jsonLd1.auditSample[i];
-        let assertion2 = jsonLd2.auditSample[i];
-		
-		if(assertion2.result.outcome === "earl:untested"){ 
-			continue; 
-
-		} else if(assertion1.result.outcome === "earl:untested"){
-
-            jsonLd1.auditSample[i] = assertion2;
-
-        } else {
-
-			if((assertion1.result.outcome === "earl:inapplicable" && assertion2.result.outcome !== "earl:inapplicable") 
-			|| (assertion1.result.outcome === "earl:passed" && (assertion2.result.outcome === "earl:cantTell" || assertion2.result.outcome === "earl:failed"))
-            || (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
-
-				jsonLd1.auditSample[i].result = assertion2.result;
-	
-			}
-
-			mergeHasParts(jsonLd1.auditSample[i].hasPart, assertion2.hasPart);
-            //jsonLd1.auditSample[i].hasPart.push(...assertion2.hasPart);
-
-		}
-
-	}
-
-}
-
-function mergeHasParts(hasPart1, hasPart2){
-
-    for(const foundCase2 of hasPart2){
-        const foundCase1 = hasPart1.find(foundCase => foundCase.result.outcome === foundCase2.result.outcome);
-        if(foundCase1){
-            for(const assertor of foundCase2.assertedBy){
-                foundCase1.assertedBy.push(assertor);
-            }
-            
-            foundCase1.result.description += "\n\n" + foundCase2.result.description;
-            
-
-            for(const pointer2 of foundCase2.result.locationPointersGroup){
-
-                const pointer1 = foundCase1.result.locationPointersGroup.find(pointer1 => pointer1.description === pointer2.description);
-
-                if(pointer1){
-                    for(const assertor of pointer2.assertedBy){
-                        pointer1.assertedBy.push(assertor);
-                    }
-					if(pointer1["ptr:expression"].startsWith("Line")){
-						pointer1["ptr:expression"] = pointer2["ptr:expression"];
-					}
-                }else{
-                    foundCase1.result.locationPointersGroup.push(pointer2);
-                }
-                
-            }
-           
-
-        }else{
-            hasPart1.push(foundCase2);
-        }
-    }
 
 }
 

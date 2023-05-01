@@ -1,79 +1,89 @@
-/* eslint-disable no-undef */
 
-import { storeReport } from './reportStoringUtils.js';
+import { storeNewReport } from './reportStoringUtils.js';
+import { sendMessageToBackground } from './chromeUtils.js';
+import mergeJsonLds from '../../../../jsonLd/jsonLdUtils.js';
 
 
 
+/**
+ * Perform an evaluation based on selected analyzers.
+ * @async
+ * @function performEvaluation
+ * @param {function} setIsLoading - Function to enable and disable loading animation.
+ * @throws {Error} Throws an error if an error occurs during the evaluation process.
+ * @returns {void}
+ */
+export async function performEvaluation(setIsLoading){
+
+    try{
+
+        setIsLoading(true);
+        const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+        const [AM, AC, MV, A11Y, PA] = checkboxes.map(({ checked }) => checked);
+
+        if([AM, AC, MV, A11Y, PA].every(val => val === false)) {
+            alert("You need to choose at least one analizer");
+            return;
+        }
+
+        let evaluationReport;
+
+        if(AM || AC || MV || PA){
+            const bodyData = JSON.stringify({ am: AM, ac: AC, mv: MV, pa: PA, url: window.location.href, title: window.document.title });
+            evaluationReport = await fetchEvaluation(bodyData);
+        }
+        
+        if(A11Y){
+            const response = await sendMessageToBackground("performA11yEvaluation");
+            evaluationReport ? mergeJsonLds(evaluationReport, response.report[0].result) : evaluationReport = response.report[0].result;
+        }
+
+        storeNewReport(evaluationReport);
+
+    } catch (error) {
+        console.error("Error during evaluation process => ", error);
+        alert("An error occurred during evaluation. Please try again.");
+    } finally {
+        setIsLoading(false);
+    }
+
+}
+
+
+
+
+/**
+ * Fetches the evaluation report from a server using a JSON body.
+ * @async
+ * @function fetchEvaluation
+ * @param {string} bodyData - The JSON body containing the parameters for the evaluation report.
+ * @param {number} [timeout=120000] - The timeout for the fetch request, in milliseconds.
+ * @returns {Promise<object>} The evaluation report as an object.
+ * @throws {Error} If there was an error with the fetch request, or if the request timed out.
+ */
 async function fetchEvaluation(bodyData, timeout = 120000) {
 
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeout);
-
     try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+
         const response = await fetch('http://localhost:8080/http://localhost:7070/getEvaluationJson', {
             body: bodyData,
-            mode: 'cors',
-            method: 'POST', 
+            method: "POST",
             headers: {"Content-Type": "application/json"},
             signal: controller.signal
         });
         
         clearTimeout(timer);
 
-        if (!response.ok){
-            throw new Error("HTTP error! Status: " + response.status);
-        } 
-
+        if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+        
         const json = await response.json();
 
         return JSON.parse(json["body"]);
 
     } catch (error) {
-        if (error.name === 'AbortError') {
-            throw new Error('Request timed out');
-        } else {
-            throw new Error(`Error: ${error.message}`);
-        }
-    }
-}
-
-
-
-export async function performEvaluation(){
-
-    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
-
-    const AM = checkboxes[0].checked;
-    const AC = checkboxes[1].checked;
-    const MV = checkboxes[2].checked;
-    const A11Y = checkboxes[3].checked;
-    const PA = checkboxes[4].checked;
-        
-    if(AM || AC || MV || PA){
-
-        const bodyData = JSON.stringify({ "am": AM, "ac": AC, "mv":MV, "pa":PA, "url": window.location.href, "title": window.document.title});
-        let fetchEvaluationReport = await fetchEvaluation(bodyData);
-
-        if (A11Y){
-            chrome.runtime.sendMessage({ action: "performA11yEvaluation"}, (response)=>{
-                const localEvaluationReport = response.report[0].result;
-                merge(localEvaluationReport, fetchEvaluationReport);
-                storeReport(localEvaluationReport);
-            });
-        }else{
-            storeReport(fetchEvaluationReport);
-        }
-        
-
-    }else if(A11Y){
-
-        chrome.runtime.sendMessage({ action: "performA11yEvaluation"}, (response)=>{
-            const evaluationReport = response.report[0].result;
-            storeReport(evaluationReport);
-        });
-
-    }else{
-        alert("You need to choose at least one analizer");
+        throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
     }
 
 }
@@ -81,75 +91,3 @@ export async function performEvaluation(){
 
 
 
-function merge(jsonLd1, jsonLd2){
-
-	if(jsonLd2["dct:date"] > jsonLd1["dct:date"]) jsonLd1["dct:date"] = jsonLd2["dct:date"];
-
-	jsonLd1.assertors.push(...jsonLd2.assertors);
-
-	jsonLd1.creator["xmlns:name"] += " & " + jsonLd2.creator["xmlns:name"];
-
-	for (let i = 0; i < jsonLd1.auditSample.length; i++) {
-
-        let assertion1 = jsonLd1.auditSample[i];
-        let assertion2 = jsonLd2.auditSample[i];
-		
-		if(assertion2.result.outcome === "earl:untested"){ 
-			continue; 
-
-		} else if(assertion1.result.outcome === "earl:untested"){
-
-            jsonLd1.auditSample[i] = assertion2;
-
-        } else {
-
-			if((assertion1.result.outcome === "earl:inapplicable" && assertion2.result.outcome !== "earl:inapplicable") 
-			|| (assertion1.result.outcome === "earl:passed" && (assertion2.result.outcome === "earl:cantTell" || assertion2.result.outcome === "earl:failed"))
-            || (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
-
-				jsonLd1.auditSample[i].result = assertion2.result;
-	
-			}
-
-            mergeHasParts(jsonLd1.auditSample[i].hasPart, assertion2.hasPart);
-            //jsonLd1.auditSample[i].hasPart.push(...assertion2.hasPart);
-
-		}
-
-	}
-
-}
-
-function mergeHasParts(hasPart1, hasPart2){
-
-    for(const foundCase2 of hasPart2){
-        const foundCase1 = hasPart1.find(foundCase => foundCase.result.outcome === foundCase2.result.outcome);
-        if(foundCase1){
-            for(const assertor of foundCase2.assertedBy){
-                foundCase1.assertedBy.push(assertor);
-            }
-            
-            foundCase1.result.description += "\n\n" + foundCase2.result.description;
-            
-
-            for(const pointer2 of foundCase2.result.locationPointersGroup){
-
-                const pointer1 = foundCase1.result.locationPointersGroup.find(pointer1 => pointer1.description === pointer2.description);
-
-                if(pointer1){
-                    for(const assertor of pointer2.assertedBy){
-                        pointer1.assertedBy.push(assertor);
-                    }
-                }else{
-                    foundCase1.result.locationPointersGroup.push(pointer2);
-                }
-                
-            }
-           
-
-        }else{
-            hasPart1.push(foundCase2);
-        }
-    }
-
-}

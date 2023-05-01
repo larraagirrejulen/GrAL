@@ -1,6 +1,6 @@
 
 import { getSuccessCriterias, getWcagHierarchy } from './wcagUtils.js'
-import { getFromChromeStorage, storeOnChrome }  from './extensionUtils.js';
+import { getFromChromeStorage, storeOnChromeStorage }  from './chromeUtils.js';
 
 
 const dataByCriteria = {};
@@ -18,7 +18,7 @@ function initialiceOutcomeVariables(){
 
 
 
-export async function mapResults2TableData(){
+export async function mapReportData(){
 
     const storedReport = await getFromChromeStorage("report");
     const resultsByCriteria = storedReport.auditSample;
@@ -40,7 +40,7 @@ export async function mapResults2TableData(){
             "foundCases": criteriaResult.hasPart
         };
     }
-    storeOnChrome("reportSummary", reportSummary);
+    storeOnChromeStorage("reportSummary", reportSummary);
     
     const reportTableContent = [];
     const mainCategories = getWcagHierarchy("mainCategories");
@@ -61,7 +61,7 @@ export async function mapResults2TableData(){
         });
 
     }
-    storeOnChrome("reportTableContent", reportTableContent);
+    storeOnChromeStorage("reportTableContent", reportTableContent);
 }
 
 
@@ -150,6 +150,7 @@ function getFoundCases(criteriaKey){
                 pointers.push({
                     "html": html,
                     "path": pointer['ptr:expression'],
+                    "innerText": pointer.innerText,
                     "assertedBy": pointer.assertedBy.sort()
                 })
             }
