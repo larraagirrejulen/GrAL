@@ -1,8 +1,11 @@
 
-const JsonLd = require('../jsonLd/jsonLd');
+const JsonLd = require('../ac_check (react)/extension/jsonLd/jsonLd');
 const pa11y = require('pa11y');
 
 
+/**
+ * Class representing a web page scraper to evaluate a pages accesibility.
+*/
 class Scraper {
 
     #puppeteer_page;
@@ -10,8 +13,15 @@ class Scraper {
     #evaluationUrl;
     #jsonld;
 
-
-
+    /** 
+     * Constructor to create a new Scraper instance.
+     * 
+     * @param {Page} page - A Puppeteer page object.
+     * @param {string} evaluator - The selected evaluator: 'am', 'ac', 'mv' or 'pa'.
+     * @param {string} evaluationUrl - The URL of the page being evaluated.
+     * @param {string} evaluatedPageTitle - The title of the page being evaluated.
+     * @throws Will throw an error if the evaluator is not valid.
+    */
     constructor(page, evaluator, evaluationUrl, evaluatedPageTitle){
 
         if (!['am', 'ac', 'mv', 'pa'].includes(evaluator)) {
@@ -25,9 +35,13 @@ class Scraper {
     }
 
 
-    
-
-    async initiateScrapingProcess(){
+    /**
+     * Performs the scraping process.
+     * 
+     * @returns {object} - The JSON-LD evaluation report resulting of the scraping process.
+     * @throws Will throw an error if an error occurs during the scraping process.
+    */
+    async performScraping(){
 
         const evaluators = {
             'am': async () => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/results/', this.#puppeteer_page),
@@ -48,6 +62,15 @@ class Scraper {
     }
 
 
+
+    /**
+     * Scrapes results from the Access Monitor evaluator and loads them into the jsonLd..
+     * @async
+     * @function amScraper
+     * @param {string} evaluatorUrl - The URL of the Access Monitor evaluator.
+     * @param {Page} page - The puppeteer page object to be used for scraping.
+     * @returns {void}
+    */
     async amScraper(evaluatorUrl, page){
 
         await page.goto(evaluatorUrl + this.#evaluationUrl.replaceAll("/",'%2f'));
@@ -142,14 +165,18 @@ class Scraper {
 
 
 
-
-
+    /**
+     * Scrapes results from the AChecker evaluator and loads them into the jsonLd..
+     * @async
+     * @function amScraper
+     * @param {string} evaluatorUrl - The URL of the AChecker evaluator.
+     * @param {object} page - The Puppeteer page object to use for web scraping.
+     * @returns {void}
+     */
     async acScraper(evaluatorUrl, page){
 
-        // Navigate to url
         await page.goto(evaluatorUrl);
 
-        // Wait for input element to load
         await page.waitForSelector('#checkuri');
 
         // Configure to include AAA level, type the url to evaluate and submit
@@ -163,7 +190,6 @@ class Scraper {
         // Wait for results to be loaded
         await page.waitForSelector('fieldset[class="group_form"]', {timeout: 120000});
 
-        // Get evaluation data
         const results = await page.evaluate(() => {
 
             var results = [];
@@ -248,8 +274,14 @@ class Scraper {
 
 
 
-
-
+    /**
+     * Scrapes results from the Mauve evaluator and loads them into the jsonLd..
+     * @async
+     * @function mvScraper
+     * @param {string} evaluatorUrl - The URL of the Mauve evaluator.
+     * @param {object} page - The Puppeteer page object to use for web scraping.
+     * @returns {void}
+     */
     async mvScraper(evaluatorUrl, page){
 
         // Navigate to url
@@ -360,6 +392,13 @@ class Scraper {
     }
 
     
+    
+    /**
+     * Scrapes results from the Pa11y library and loads them into the jsonLd.
+     * @async
+     * @function pa11yScraper
+     * @returns {void}
+     */
     async pa11yScraper(){
 
         const results = await pa11y(this.#evaluationUrl, {
@@ -379,5 +418,7 @@ class Scraper {
 
     }
 }
+
+
 
 module.exports = Scraper;

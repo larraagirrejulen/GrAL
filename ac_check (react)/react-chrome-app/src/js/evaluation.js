@@ -1,8 +1,7 @@
 
-import { storeNewReport } from './reportStoringUtils.js';
-import { sendMessageToBackground } from './chromeUtils.js';
-import mergeJsonLds from '../../../../jsonLd/jsonLdUtils.js';
-
+import { storeNewReport } from './reportStorage.js';
+import { sendMessageToBackground } from './utils/chromeUtils.js';
+import mergeJsonLds from '../../../extension/jsonLd/jsonLdUtils.js';
 
 
 /**
@@ -50,15 +49,13 @@ export async function performEvaluation(setIsLoading){
 }
 
 
-
-
 /**
  * Fetches the evaluation report from a server using a JSON body.
  * @async
  * @function fetchEvaluation
  * @param {string} bodyData - The JSON body containing the parameters for the evaluation report.
  * @param {number} [timeout=120000] - The timeout for the fetch request, in milliseconds.
- * @returns {Promise<object>} The evaluation report as an object.
+ * @returns {Promise<object>} - The evaluation report as an object.
  * @throws {Error} If there was an error with the fetch request, or if the request timed out.
  */
 async function fetchEvaluation(bodyData, timeout = 120000) {
@@ -78,16 +75,12 @@ async function fetchEvaluation(bodyData, timeout = 120000) {
 
         if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
         
-        const json = await response.json();
+        const report = await response.json();
 
-        return JSON.parse(json["body"]);
+        return JSON.parse(report);
 
     } catch (error) {
         throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
     }
 
 }
-
-
-
-

@@ -2,8 +2,11 @@
 import './css/resultsTable.css';
 
 import { useState, useEffect, useCallback } from "react";
-import { getImgSrc, getFromChromeStorage, sendMessageToBackground } from './js/chromeUtils.js';
+import { getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
+import { setUseStateFromStorage } from './js/utils/reactUtils.js';
+import { getElementByPath, clearHighlights } from './js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
+
 
 
 const outcome2Background:any = {
@@ -14,88 +17,40 @@ const outcome2Background:any = {
     "untested": {backgroundColor: "#8CFAFA"}
 }
 
-function getHtmlElement(path:any, innerText:any){
 
-    let element:any;
 
-    if(path.startsWith("/")){
-        element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    }else{
-        const elements = document.querySelectorAll(path);
+/**
+ * Handles changes to a boolean state value in an array of state values.
+ *
+ * @param {Array<boolean>} useState - The current array of boolean state values.
+ * @param {function} setUseState - The React `useState` hook function to update the state with the new array of boolean values.
+ * @param {number} index - The index of the state value to change.
+ * @param {boolean} mantainExtended - Whether to maintain the other values of the array.
+ * @param {number} arrayLength - The length of the array to fill when adding a new state value.
+ * @returns {void}
+ */
+function handleStateChange(useState:any, setUseState:any, index:any, mantainExtended:any, arrayLength:any): void{
 
-        if (elements.length === 1){
-            element = elements[0];
-        }
+    const newStates = mantainExtended ? [...useState] : Array(arrayLength).fill(false);
+    newStates[index] = !useState[index];
+    setUseState(newStates);
 
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i].textContent === innerText) {
-                element = elements[i];
-            }
-        }
-
-    }
-
-    return element;
+    clearHighlights();
 }
-
-function clearHighlights(){
-
-    const lastPopup = document.querySelector("#highlightPopup");
-
-    if(lastPopup){
-        lastPopup.remove();
-    } 
-
-    let pointerDefaultStyles:any = sessionStorage.getItem("defaultStyles");
-
-    if(pointerDefaultStyles){
-
-        pointerDefaultStyles = JSON.parse(pointerDefaultStyles);
-
-        for (const groupKey in pointerDefaultStyles) {
-            for(let i = 0; i<pointerDefaultStyles[groupKey].length; i++){
-                
-                const pointer = pointerDefaultStyles[groupKey][i];
-
-                if(!pointer) continue;
-
-                const element = getHtmlElement(pointer.path, pointer.innerText);
-
-                if(element){
-                    element.removeAttribute("tabindex");
-                    element.style.border = pointer.style;
-                } 
-                
-            }
-        }
-        sessionStorage.removeItem("defaultStyles");
-    }
-}
-
 
 
 export default function ResultsTable({conformanceLevels}:any){
 
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
+    const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
 
     useEffect(() => {
         (async ()=>{ 
-            setMantainExtended(await getFromChromeStorage("mantainExtended", true));
-            setReportTableContent(await getFromChromeStorage("reportTableContent")); 
+            setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
+            setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
         })();
-        sessionStorage.removeItem("defaultStyles");
     }, []);
-   
-    const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
-    const handleMainCategoryStateChange = (index:any) => {
-        const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
-        newStates[index] = !selectedMainCategories[index];
-        setSelectedMainCategories(newStates);
-
-        clearHighlights();
-    };
-
     
     return(
       <div className = "resultsContainer">
@@ -107,7 +62,7 @@ export default function ResultsTable({conformanceLevels}:any){
                 </thead>
                 <tbody>
                     {reportTableContent.map((mainCategory:any, index:any) => (<>
-                        <tr className="collapsible mainCategory" onClick={()=>handleMainCategoryStateChange(index)}>
+                        <tr className="collapsible mainCategory" onClick={()=>handleStateChange(selectedMainCategories, setSelectedMainCategories, index, mantainExtended, reportTableContent.length)}>
                             <td>{mainCategory.categoryTitle}</td>
                             <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
                         </tr>
@@ -125,15 +80,7 @@ export default function ResultsTable({conformanceLevels}:any){
 }
 
 
-function OutcomeHeaders(){
-    return(<>
-        <th className="passed" title='Passed' style={{...outcome2Background["passed"]}}>P</th>
-        <th className="failed" title='Failed' style={{...outcome2Background["failed"]}}>F</th>
-        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["cantTell"]}}>CT</th>
-        <th className="inapplicable" title='Not Present' style={{...outcome2Background["inapplicable"]}}>NP</th>
-        <th className="untested" title='Not checked' style={{...outcome2Background["untested"]}}>NC</th>
-    </>);
-}
+
 
 function Summary({conformanceLevels}:any){
 
@@ -142,7 +89,7 @@ function Summary({conformanceLevels}:any){
 
     useEffect(() => { 
         (async ()=>{
-            setReportSummary(await getFromChromeStorage("reportSummary"));
+            setUseStateFromStorage("reportSummary", false, setReportSummary, "'reportSummary' is null or undefined!");
         })();
     },[]);
 
@@ -170,6 +117,16 @@ function Summary({conformanceLevels}:any){
     );
 }
 
+function OutcomeHeaders(){
+    return(<>
+        <th className="passed" title='Passed' style={{...outcome2Background["passed"]}}>P</th>
+        <th className="failed" title='Failed' style={{...outcome2Background["failed"]}}>F</th>
+        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["cantTell"]}}>CT</th>
+        <th className="inapplicable" title='Not Present' style={{...outcome2Background["inapplicable"]}}>NP</th>
+        <th className="untested" title='Not checked' style={{...outcome2Background["untested"]}}>NC</th>
+    </>);
+}
+
 function ResultCount({category, conformanceLevels}:any){
 
     let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
@@ -194,18 +151,10 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
     const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
 
-    const handleSubCategoryStateChange = (index:any) => {
-        const newStates = mantainExtended ? [...selectedSubCategories] : Array(subCategories.length).fill(false);
-        newStates[index] = !selectedSubCategories[index];
-        setSelectedSubCategories(newStates);
-
-        clearHighlights();
-    };
-
     return(<> 
         {subCategories.map((subCategory:any, index:any) => (<>
 
-            <tr className="collapsible subCategory" onClick={()=>handleSubCategoryStateChange(index)}>
+            <tr className="collapsible subCategory" onClick={()=>handleStateChange(selectedSubCategories, setSelectedSubCategories, index, mantainExtended, subCategories.length)}>
                 <td>{subCategory.subCategoryTitle}</td>
                 <ResultCount category={subCategory} conformanceLevels={conformanceLevels} />
             </tr>
@@ -224,22 +173,12 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
 
-    const handleCriteriaStateChange = (index:any) => {
-        const newStates = mantainExtended ? [...selectedCriterias] : Array(criterias.length).fill(false);
-        newStates[index] = !selectedCriterias[index];
-        setSelectedCriterias(newStates);
-
-        clearHighlights();
-    };
-
-    
-
     return(<> 
         {criterias.map((criteria:any, index:any) => (<>
 
             { conformanceLevels.includes(criteria.conformanceLevel) ? <>
             
-                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleCriteriaStateChange(index)}}>
+                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleStateChange(selectedCriterias, setSelectedCriterias, index, mantainExtended, criterias.length)}}>
                     <td colSpan={2}>
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
@@ -267,11 +206,8 @@ function CriteriaResults({criteriaResults}:any){
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
 
     function handleCriteriaResultStateChange (index:any){
-        const newStates = Array(criteriaResults.length).fill(false);
-        newStates[index] = !selectedCriteriaResults[index];
-        setSelectedCriteriaResults(newStates);
 
-        clearHighlights();
+        handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length);
 
         if(!selectedCriteriaResults[index] && criteriaResults[index].groupedPointers){
 
@@ -284,7 +220,7 @@ function CriteriaResults({criteriaResults}:any){
             for (const groupKey in criteriaResults[index].groupedPointers) {
                 for(const pointer of criteriaResults[index].groupedPointers[groupKey]){
 
-                    const element = getHtmlElement(pointer.path, pointer.innerText);
+                    const element = getElementByPath(pointer.path, pointer.innerText);
 
                     if(element){
                         element.setAttribute("tabindex", "0");
@@ -364,7 +300,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
                 if(hiddenElements[group][i]) continue;
 
-                const element = getHtmlElement(resultGroupedPointers[group][i].path, resultGroupedPointers[group][i].innerText);
+                const element = getElementByPath(resultGroupedPointers[group][i].path, resultGroupedPointers[group][i].innerText);
 
                 if(element){
 
@@ -404,7 +340,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
         for (const groupKey in resultGroupedPointers) {
             for(const pointer of resultGroupedPointers[groupKey]){
 
-                const element = getHtmlElement(pointer.path, pointer.innerText);
+                const element = getElementByPath(pointer.path, pointer.innerText);
 
                 if(element){
                     if(element.getAttribute('type') === "hidden" || element.getAttribute("hidden")!==null){

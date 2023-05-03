@@ -1,38 +1,30 @@
 
-import { mapReportData } from './mapReport2Table.js';
-import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './chromeUtils.js';
-
-
+import { mapReportData } from './mapReportData.js';
+import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils.js';
 
 
 /**
  * Stores a new report in the Chrome storage, maps the report data for the extension table, sets a flag in localStorage and reloads the page.
- * 
+ * @async
  * @function storeNewReport
  * @param {Object} newReport - The report object to be stored in the Chrome storage.
  * @throws {Error} If there was an error storing the new report.
-*/
+ */
 export function storeNewReport(newReport){
-   
     try{
         storeOnChromeStorage("report", newReport);
-        mapReportData();
-        localStorage.setItem("evaluated", "true");
-        window.location.reload();
-
+        mapReportData(newReport);
     } catch(error) {
-        throw new Error("Error storing the new report => " + error);
+        ["report", "reportSummary", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+        throw new Error("Error when storing or mapping the report => " + error);
     }
 }
 
 
-
-
 /**
  * Removes all stored report data from Chrome storage, clears the evaluated flag from localStorage and reloads the page.
- * 
  * @function removeStoredReport
-*/
+ */
 export function removeStoredReport(){
     
     if (!window.confirm("Are you sure you want to permanently delete current stored evaluation data?")) return;
@@ -45,45 +37,36 @@ export function removeStoredReport(){
 }
 
 
-
-
 /**
  * Reads and stores the contents of the uploaded report file, and stores it as a new report object.
- * 
  * @function uploadNewReport
  * @param {Object} uploadEvent - The upload event object, containing the file to be read.
-*/
+ */
 export function uploadNewReport(uploadEvent){
+
+    if(localStorage.getItem("evaluated")) {
+        if (!window.confirm("The upload will overwrite the current stored report. You want to continue?")) return;
+    }
 
     const reader = new FileReader();
 
     reader.readAsText(uploadEvent.target.files[0], "UTF-8");
     
     reader.onload = async (uploadEvent) => {
-        //const storedReport = await getFromChromeStorage("report");
-        const report = JSON.parse(uploadEvent.target.result);
-        //if (savedJson != null) merge(report,storedReport);
-        storeNewReport(report);
+        const newReport = JSON.parse(uploadEvent.target.result);
+        storeNewReport(newReport);
     }
 
 }
 
 
-
-
 /**
  * Downloads the stored report data from Chrome storage, modifies it according to the active conformance levels and downloads it as a JSON file.
- * 
  * If there is no stored report data, it shows an alert message and does nothing.
- * 
+ * @async
  * @function downloadStoredReport
-*/
+ */
 export async function downloadStoredReport(){
-
-    if(localStorage.getItem("evaluated") !== "true"){
-        alert("There is currently no evaluation data stored! Start by evaluating the page or uploading an existing report.");
-        return;
-    }
 
     const storedReport = await getFromChromeStorage("report");
     const activeConformanceLevels = JSON.parse(localStorage.getItem("conformanceLevels"));

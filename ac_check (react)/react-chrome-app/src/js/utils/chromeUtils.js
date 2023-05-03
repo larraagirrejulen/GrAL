@@ -3,7 +3,6 @@
 
 /**
  * Returns the URL of an image from the 'images' folder.
- *
  * @function getImgSrc
  * @param {string} name - The name of the image.
  * @returns {string} - The URL of the image.
@@ -15,7 +14,6 @@ export function getImgSrc(name){
 
 /**
  * Stores a key-value pair in Chrome's local storage.
- *
  * @function storeOnChromeStorage
  * @param {string} key - The key to store the value under.
  * @param {*} value - The value to store.
@@ -30,7 +28,6 @@ export function storeOnChromeStorage(key, value){
 
 /**
  * Removes a value from Chrome's local storage.
- *
  * @function removeFromChromeStorage
  * @param {string} key - The key to remove the value of.
  * @returns {void}
@@ -42,16 +39,16 @@ export function removeFromChromeStorage(key) {
 
 /**
  * Retrieves a value from Chrome's storage.
- *
+ * @async
  * @function getFromChromeStorage
- * @param {string} option - The key to retrieve the value of.
+ * @param {string} key - The key to retrieve the value of.
  * @param {boolean} [isSync=true] - Whether to retrieve the value from Chrome's 'sync' storage or 'local' storage.
  * @returns {Promise<*>} - A Promise that resolves with the retrieved value.
  */
-export async function getFromChromeStorage(option, isSync = true) {
+export async function getFromChromeStorage(key, isSync = true) {
     return await new Promise((resolve) => {
-        chrome.storage[isSync ? 'sync' : 'local'].get(option, (result) => {
-            resolve(result[option]);
+        chrome.storage[isSync ? 'sync' : 'local'].get(key, (result) => {
+            resolve(result[key]);
         });
     });
 }
@@ -59,7 +56,7 @@ export async function getFromChromeStorage(option, isSync = true) {
 
 /**
  * Sends a message to the background script of a Chrome extension.
- *
+ * @async
  * @function sendMessageToBackground
  * @param {string} action - The action to perform.
  * @param {string|null} [path=null] - The path to perform the action on.

@@ -12,7 +12,8 @@ class JsonLd{
             "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
             "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
             "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
-            "pa": { "name": "Pa11y", "url": "https://github.com/pa11y/pa11y"}
+            "pa": { "name": "Pa11y", "url": "https://github.com/pa11y/pa11y"},
+            "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
         };
 
         this.#evaluator = evaluators[evaluator];
@@ -589,5 +590,9 @@ class JsonLd{
 }
 
 
-module.exports = JsonLd;
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = JsonLd;
+}
+
 

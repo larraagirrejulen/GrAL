@@ -1,29 +1,32 @@
 
-import { getSuccessCriterias, getWcagHierarchy } from './wcagUtils.js'
-import { getFromChromeStorage, storeOnChromeStorage }  from './chromeUtils.js';
+import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js'
+import { storeOnChromeStorage }  from './utils/chromeUtils.js';
 
 
-const dataByCriteria = {};
+let dataByCriteria = {};
 
-
-function initialiceOutcomeVariables(){
-    return {
-        "earl:passed": { "A": 0, "AA": 0, "AAA": 0 },
-        "earl:failed": { "A": 0, "AA": 0, "AAA": 0 },
-        "earl:cantTell": { "A": 0, "AA": 0, "AAA": 0 },
-        "earl:inapplicable": { "A": 0, "AA": 0, "AAA": 0 },
-        "earl:untested": { "A": 0, "AA": 0, "AAA": 0 }
-    }
+const outcomeVariables = {
+    "earl:passed": { "A": 0, "AA": 0, "AAA": 0 },
+    "earl:failed": { "A": 0, "AA": 0, "AAA": 0 },
+    "earl:cantTell": { "A": 0, "AA": 0, "AAA": 0 },
+    "earl:inapplicable": { "A": 0, "AA": 0, "AAA": 0 },
+    "earl:untested": { "A": 0, "AA": 0, "AAA": 0 }
 }
 
 
 
-export async function mapReportData(){
+/**
+ * Maps the report data from Chrome storage to a format suitable for displaying in the extension UI table
+ * and stores the resulting data in Chrome storage.
+ * @async
+ * @function mapReportData
+ * @returns {void}
+ */
+export async function mapReportData(report){
 
-    const storedReport = await getFromChromeStorage("report");
-    const resultsByCriteria = storedReport.auditSample;
+    const resultsByCriteria = report.auditSample;
     const criterias = getSuccessCriterias();
-    const reportSummary = initialiceOutcomeVariables();
+    const reportSummary = { ...outcomeVariables };
 
     for (var i = 0; i < resultsByCriteria.length; i++){
 
@@ -62,6 +65,10 @@ export async function mapReportData(){
 
     }
     storeOnChromeStorage("reportTableContent", reportTableContent);
+
+    localStorage.setItem("evaluated", "true");
+    window.location.reload();
+    
 }
 
 
@@ -200,7 +207,7 @@ function getFoundCases(criteriaKey){
 
 function getOutcomesByCategory(categoryKey){
     
-    const outcomes = initialiceOutcomeVariables();
+    const outcomes = { ...outcomeVariables };
 
     for (const criteriaNumber in dataByCriteria) {
         if (criteriaNumber.startsWith(categoryKey)){

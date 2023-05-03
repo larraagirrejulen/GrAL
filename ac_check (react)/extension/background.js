@@ -27,7 +27,7 @@ try{
     chrome.storage.sync.get(['toggle'], function(result) {
       if(changeInfo.status == 'complete' && result.toggle){
         chrome.scripting.executeScript({
-          files: ["content.js", "/libraries/a11yAinspector.js", "/libraries/jquery.min.js", "/js/jsonLd.js", '/js/jquery_find_elements.js'],
+          files: ["content.js", "/libraries/a11yAinspector.js", "/libraries/jquery.min.js", "/jsonLd/jsonLd.js", '/js/jquery_find_elements.js'],
           target: {tabId: tabId}
         });
       }

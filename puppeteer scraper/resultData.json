@@ -65,7 +65,7 @@
   "@language": "en",
   "title": "Accessibility Evaluation Report for ehu.eus website",
   "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
-  "dct:date": "1/5/2023, 20:38:04",
+  "dct:date": "3/5/2023, 8:50:06",
   "assertors": [
     {
       "id": "_:Pa11y",
@@ -131,7 +131,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nImg element is marked so that it is ignored by Assistive Technology.\n\n Found cases locations: \n\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_2A6Ctd0yzsts > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_KNhnMeTdwyvT > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_IrCxodJb6DKc > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_LNQJzKspXamG > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_mtcBNnX67IL5 > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_8Pr2BR9oRFZO > div > div:nth-child(2) > div > div > div > div:nth-child(2) > a > div > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(3) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(4) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(7) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(10) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(11) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(13) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(14) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(15) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(16) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(17) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(18) > div:nth-child(3) > div > aside > div > a > figure > img",
+            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nImg element is marked so that it is ignored by Assistive Technology.\n\n Found cases locations: \n\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_2A6Ctd0yzsts > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_KNhnMeTdwyvT > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_Piw5A6VY7qsR > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_LNQJzKspXamG > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_mtcBNnX67IL5 > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img\n #portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_qiaLdKKJKlIB > div > div:nth-child(2) > div > div > div > article > section > div > div:nth-child(1) > div > span > a > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_8Pr2BR9oRFZO > div > div:nth-child(2) > div > div > div > div:nth-child(2) > a > div > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(3) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(4) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(7) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(10) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(11) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(13) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(14) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(15) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(16) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(17) > div:nth-child(3) > div > aside > div > a > figure > img\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_72rN > div > div:nth-child(2) > div > div:nth-child(18) > div:nth-child(3) > div > aside > div > a > figure > img",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -150,15 +150,6 @@
                 ],
                 "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_KNhnMeTdwyvT > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img",
                 "description": "<img class='col-4' src='/documents/10136/7516423/masteres-propios-2023_home_ehu+%281%29.jpg/e9ff80b9-8cec-b83f-97ab-0b06ad2244d2?t=1682604389827' alt=''>"
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_IrCxodJb6DKc > div > div:nth-child(2) > div > div > div > div > article > div > a > figure > img",
-                "description": "<img class='col-4' src='/documents/10136/42694446/dest_liburu_astea_2023.jpg/a91d7722-1d93-cbbd-450f-162d99cfc7fc?t=1681985635383' alt=''>"
               },
               {
                 "id": "_:pointer",
@@ -203,7 +194,7 @@
                   "Pa11y"
                 ],
                 "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_8Pr2BR9oRFZO > div > div:nth-child(2) > div > div > div > div:nth-child(2) > a > div > figure > img",
-                "description": "<img class='col-4' alt='' src='/documents/10136/42006033/ruben-belandia_dest.jpg/39755a7b-1437-f511-f5ff-5ef3cf1106e4?t=1682507490833'>"
+                "description": "<img class='col-4' alt='' src='/documents/10136/44488818/entrega-diplomas-AEB-2023.jpg/0eb56aec-f88d-78f8-cc6f-902ca98476ab?t=1683027046702'>"
               },
               {
                 "id": "_:pointer",
@@ -650,7 +641,7 @@
           "mode": "earl:automatic",
           "result": {
             "outcome": "earl:cantTell",
-            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nThis element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)\n #navParent65 > span > span\n #social-network > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(3) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(4) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(5) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(6) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(7) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(9) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(10) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(11) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(11) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #footer > div > div > ul > li:nth-child(1) > a\n #footer > div > div > ul > li:nth-child(2) > a\n #footer > div > div > ul > li:nth-child(3) > a\n #footer > div > div > ul > li:nth-child(4) > a\n #footer > div > div > ul > li:nth-child(5) > a\n #footer > div > div > p\n #menu-campus > div > div > ul > li:nth-child(1) > a\n #menu-campus > div > div > ul > li:nth-child(2) > a\n #menu-campus > div > div > ul > li:nth-child(3) > a\n #menu-languages > div > div > ul > li:nth-child(1) > a > span",
+            "description": "*************@Pa11y************* \n\nA POSSIBLE ISSUE was found:\n\nThis element is absolutely positioned and the background color can not be determined. Ensure the contrast ratio between the text and all covered parts of the background are at least 4.5:1.\n\n Found cases locations: \n\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_fm > fieldset > legend\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(1)\n #_com_liferay_portal_search_web_portlet_SearchPortlet_INSTANCE_E3j70_scope > option:nth-child(2)\n #navParent65 > span > span\n #social-network > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(3) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(4) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(5) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(6) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(7) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(1)\n #portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(2) > small > span:nth-child(2) > span\n #footer > div > div > ul > li:nth-child(1) > a\n #footer > div > div > ul > li:nth-child(2) > a\n #footer > div > div > ul > li:nth-child(3) > a\n #footer > div > div > ul > li:nth-child(4) > a\n #footer > div > div > ul > li:nth-child(5) > a\n #footer > div > div > p\n #menu-campus > div > div > ul > li:nth-child(1) > a\n #menu-campus > div > div > ul > li:nth-child(2) > a\n #menu-campus > div > div > ul > li:nth-child(3) > a\n #menu-languages > div > div > ul > li:nth-child(1) > a > span\n #menu-languages > div > div > ul > li:nth-child(2) > a > span\n #menu-languages > div > div > ul > li:nth-child(3) > a > span\n #menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
             "locationPointersGroup": [
               {
                 "id": "_:pointer",
@@ -710,7 +701,7 @@
                 ],
                 "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_FwyH9kgBu4El > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > span",
                 "description": "<span class='news'>",
-                "innerText": " \n        Formación Permanente:..."
+                "innerText": " \n        La UPV/EHU lidera un ..."
               },
               {
                 "id": "_:pointer",
@@ -719,56 +710,6 @@
                   "Pa11y"
                 ],
                 "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(1)",
-                "description": "<p>Una semana para celebrar e...</p>",
-                "innerText": "\n\t\t\t\tUna semana para celebrar e..."
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span",
-                "description": "<span class='date'>",
-                "innerText": "\n\t\t\t\t\t\t\t19/04/2023 - 28/04/2023..."
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(1)",
-                "description": "<p>Festival de música ‘Ekkofe...</p>",
-                "innerText": "\n\t\t\t\tFestival de música ‘Ekkofe..."
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
-                "description": "<span class='city'>",
-                "innerText": "Leioa-Erandio"
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(3) > a > div > p:nth-child(1)",
-                "description": "<p>Entrega de diplomas al alu...</p>",
-                "innerText": "\n\t\t\t\tEntrega de diplomas al alu..."
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(4) > a > div > p:nth-child(1)",
                 "description": "<p>XXIX Congreso Internaciona...</p>",
                 "innerText": "\n\t\t\t\tXXIX Congreso Internaciona..."
               },
@@ -778,7 +719,37 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(5) > a > div > p:nth-child(1)",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span:nth-child(1)",
+                "description": "<span class='date'>",
+                "innerText": "\n\t\t\t\t\t\t\t04/05/2023 - 05/05/2023..."
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(1) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
+                "description": "<span class='city'>",
+                "innerText": " Bilbao"
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(2) > a > div > p:nth-child(1)",
+                "description": "<p>Ciclo: ‘El talento; reto y...</p>",
+                "innerText": "\n\t\t\t\tCiclo: ‘El talento; reto y..."
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(3) > a > div > p:nth-child(1)",
                 "description": "<p>Taller con Paul Urkijo: ‘S...</p>",
                 "innerText": "\n\t\t\t\tTaller con Paul Urkijo: ‘S..."
               },
@@ -788,27 +759,7 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(6) > a > div > p:nth-child(1)",
-                "description": "<p>Exposición: Arquitecton</p>",
-                "innerText": "\n\t\t\t\tExposición: Arquitecton\n\t\t"
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(7) > a > div > p:nth-child(1)",
-                "description": "<p>Exposición: FOTCIENCIA18: ...</p>",
-                "innerText": "\n\t\t\t\tExposición: FOTCIENCIA18: ..."
-              },
-              {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [
-                  "Pa11y"
-                ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(1)",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(4) > a > div > p:nth-child(1)",
                 "description": "<p>Exposición: 'Camisetas que...</p>",
                 "innerText": "\n\t\t\t\tExposición: 'Camisetas que..."
               },
@@ -818,7 +769,17 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(9) > a > div > p:nth-child(1)",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(5) > a > div > p:nth-child(1)",
+                "description": "<p>Exposición: FOTCIENCIA18: ...</p>",
+                "innerText": "\n\t\t\t\tExposición: FOTCIENCIA18: ..."
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(6) > a > div > p:nth-child(1)",
                 "description": "<p>Exposición: Mujeres vascas...</p>",
                 "innerText": "\n\t\t\t\tExposición: Mujeres vascas..."
               },
@@ -828,7 +789,7 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(10) > a > div > p:nth-child(1)",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(7) > a > div > p:nth-child(1)",
                 "description": "<p>Exposición: ‘Estudiantes q...</p>",
                 "innerText": "\n\t\t\t\tExposición: ‘Estudiantes q..."
               },
@@ -838,7 +799,7 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(11) > a > div > p:nth-child(1)",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(1)",
                 "description": "<p>Exposición: ‘Gazte artea e...</p>",
                 "innerText": "\n\t\t\t\tExposición: ‘Gazte artea e..."
               },
@@ -848,7 +809,7 @@
                 "assertedBy": [
                   "Pa11y"
                 ],
-                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(11) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
+                "ptr:expression": "#portlet_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_1MM8Xlt2aJEZ > div > div:nth-child(2) > div > ul > li:nth-child(8) > a > div > p:nth-child(2) > small > span:nth-child(2) > span",
                 "description": "<span class='province'>",
                 "innerText": "Bizkaia"
               },
@@ -951,6 +912,36 @@
                 "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(1) > a > span",
                 "description": "<span lang='eu'>",
                 "innerText": " Euskara "
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(2) > a > span",
+                "description": "<span lang='es'>",
+                "innerText": " Español "
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#menu-languages > div > div > ul > li:nth-child(3) > a > span",
+                "description": "<span lang='en'>",
+                "innerText": " English "
+              },
+              {
+                "id": "_:pointer",
+                "type": "ptr:groupPointer",
+                "assertedBy": [
+                  "Pa11y"
+                ],
+                "ptr:expression": "#menu-campus > div > div > ul > li:nth-child(4) > a > span:nth-child(1)",
+                "description": "<span>Iniciar sesión</span>",
+                "innerText": "Iniciar sesión"
               }
             ]
           }

@@ -5,26 +5,40 @@ import './css/evaluationSection.css';
 import './css/resultSection.css';
 
 import { useEffect, useState } from "react";
-import { getImgSrc, sendMessageToBackground, getFromChromeStorage } from './js/chromeUtils.js';
-import { removeStoredReport, downloadStoredReport, uploadNewReport } from './js/reportStoringUtils.js';
+import { getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
+import { removeStoredReport, downloadStoredReport, uploadNewReport } from './js/reportStorage.js';
+import { setUseStateFromStorage } from './js/utils/reactUtils.js';
 import { performEvaluation } from './js/evaluation.js';
-import { BeatLoader } from 'react-spinners';  // Loading animation
+import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
 
 
 
-export default function Extension() {
+
+/**
+ * A React component that represents the accessibility evaluator Chrome extension.
+ * 
+ * @function Extension
+ * @exports Extension
+ * @returns {JSX.Element} JSX representation of the Extension component.
+*/
+export default function Extension(): JSX.Element {
 
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
 
+  /**
+   * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
+  */
   useEffect( ()=>{
-    removeStoredReport();
     (async () => {
-      setShiftWebpage(await getFromChromeStorage("shiftWebpage", true));
+      setUseStateFromStorage("shiftWebpage", true, setShiftWebpage, "could not get 'shiftWebpage' option!");
     })();
   }, []);
 
+  /**
+   * Toggles the extension's active class on the webpage when the "hidden" or "shiftWebpage" state variables change.
+  */
   useEffect(() => {
     (async () => {
       if(shiftWebpage){
@@ -56,7 +70,14 @@ export default function Extension() {
 
 
 
-function EvaluatorSelectionSection () {
+/**
+ * A React component that allows the user to select which accessibility evaluators to use.
+ * 
+ * @function EvaluatorSelectionSection
+ * @returns {JSX.Element} The JSX code for rendering the component.  
+*/
+function EvaluatorSelectionSection (): JSX.Element {
+
   const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
   const [checkboxes, setCheckboxes] = useState([
@@ -74,6 +95,12 @@ function EvaluatorSelectionSection () {
     localStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
   };
 
+  /**
+   * useEffect hook that sets the state of checkboxes based on the values stored in localStorage.
+   * If no values are found in localStorage, the initial state of checkboxes is stored in localStorage.
+   * 
+   * @param {array} checkboxes - The current state of the checkboxes
+  */
   useEffect(() => { 
     const storedCheckboxes = localStorage.getItem("checkboxes");
     if(storedCheckboxes !== null){
@@ -108,10 +135,22 @@ function EvaluatorSelectionSection () {
 
 
 
-function EvaluationSection () {
+/**
+ * A React component that allows the user to make a new accesibility evaluation, remove a stored report,
+ * download a stored report, or upload a new report
+ * 
+ * @function EvaluationSection
+ * @returns {JSX.Element} - The EvaluationSection component.
+*/
+function EvaluationSection (): JSX.Element {
 
   const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
   const [isLoading, setIsLoading] = useState(false);
+  const [evaluated, setEvaluated] = useState(false);
+
+  useEffect(() => { 
+    setEvaluated(localStorage.getItem("evaluated") === "true");   
+  }, []);
 
   return ( <div className="evaluation_section">
 
@@ -124,9 +163,13 @@ function EvaluationSection () {
         <button id="btn_get_data" className="button primary" onClick={()=>{performEvaluation(setIsLoading)}} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Evaluate current page"}
         </button><br/>
-        <label id="btn_clear_data" className="button secondary" onClick={removeStoredReport}>Clear stored data</label><br/>
-        <label id="btn_download" className="button primary" onClick={downloadStoredReport}>Download report</label><br/>
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />Upload Report</label>
+
+        {evaluated ? <>
+          <button id="btn_clear_data" className="button secondary" onClick={removeStoredReport} disabled={isLoading}>Clear stored data</button><br/>
+          <button id="btn_download" className="button primary" onClick={downloadStoredReport} disabled={isLoading}>Download report</button><br/>
+        </> : null}
+        
+        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={isLoading}/>Upload Report</label>
       </div>
     
   </div> );
@@ -135,7 +178,13 @@ function EvaluationSection () {
 
 
 
-function ResultSection() {
+/**
+ * A React component that allows the user to see and manipulate the results of the current stored report
+ * 
+ * @function ResultSection
+ * @returns {JSX.Element} - React component
+*/
+function ResultSection(): JSX.Element {
   
   const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
@@ -144,6 +193,13 @@ function ResultSection() {
     localStorage.setItem("conformanceLevels", JSON.stringify(levels));
   };
 
+  /**
+   * React hook that runs after every render of the component and sets the conformance levels
+   * from the stored value in local storage if it exists. If not, it sets the initial value of
+   * conformance levels and stores it in local storage.
+   * 
+   * @param {array} conformanceLevels - an array of strings representing the selected conformance levels
+  */
   useEffect(() => {
     const storedConformanceLevels = localStorage.getItem("conformanceLevels");
     if(storedConformanceLevels !== null){
