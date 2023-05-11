@@ -1,7 +1,6 @@
 .evaluator_selection_section{
-  margin: 20px 0 0 0;
   padding: 0 20px;
-  border-top: 2px solid #c0c0c0;
+  border-top: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
   box-sizing:unset;
 }

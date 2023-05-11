@@ -5,17 +5,18 @@ class JsonLd{
     #jsonld; 
     #evaluator;
 
-    constructor(evaluator, pageUrl, pageTitle){
+    constructor(evaluator, evaluationScope){
 
-        const siteName = (new URL(pageUrl)).hostname.replace('www.','');
+        const siteName = (new URL(evaluationScope[0].url)).hostname.replace('www.','');
+
         const evaluators = {
             "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
             "am": { "name": "AccessMonitor", "url": "https://accessmonitor.acessibilidade.gov.pt"},
             "ac": { "name": "AChecker", "url": "https://achecker.achecks.ca/checker/index.php"},
             "pa": { "name": "Pa11y", "url": "https://github.com/pa11y/pa11y"},
-            "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"}
+            "a11y": { "name": "A11Y", "url": "https://github.com/ainspector/a11y-evaluation-library"},
+            "lh": { "name": "Lighthouse", "url": "https://github.com/GoogleChrome/lighthouse#readme"}
         };
-
         this.#evaluator = evaluators[evaluator];
 
         this.#jsonld = {
@@ -50,7 +51,7 @@ class JsonLd{
                         "sch:WebSite"
                     ],
                     "siteName": siteName,
-                    "siteScope": "Single page: " + pageUrl
+                    "siteScope": evaluationScope.map(obj => obj.url).join(', ')
                 },
                 "conformanceTarget": "wai:WCAG2AAA-Conformance",
                 "accessibilitySupportBaseline": "Google Chrome latest version",
@@ -59,18 +60,22 @@ class JsonLd{
     
             "structuredSample":
             {
-                "webpage": [{
-                    "id": "_:webpage",
-                    "type": ["earl:TestSubject", "sch:WebPage"],
-                    "description": pageUrl,
-                    "source": "_:website",
-                    "title": pageTitle,
-                    "tested": true
-                }]
+                "webpage": []
             },
     
             "auditSample": []
         };
+
+        for(const webPage of evaluationScope){
+            this.#jsonld.structuredSample.webpage.push({
+                "id": webPage.url,
+                "type": ["earl:TestSubject", "sch:WebPage"],
+                "description": webPage.url,
+                "source": "_:website",
+                "title": webPage.name,
+                "tested": true
+            });
+        }
 
         for (const key in this.#successCriterias){
             this.#jsonld.auditSample.push(
@@ -93,7 +98,7 @@ class JsonLd{
 
 
 
-    addNewAssertion(criteriaNumber, newOutcome, newDescription, path = null, html = null){
+    addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null){
 
         const criteriaId = this.#successCriterias[criteriaNumber].id;
 
@@ -132,20 +137,18 @@ class JsonLd{
                 break;
             default:
         }
-
-        const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.result.outcome === newOutcome);
         
         const locationPointersGroup = [];
         let description = "*************@" + this.#evaluator.name + "************* \n\n"
         description += outcomeDescriptions[newOutcome][1] + "\n\n" + newDescription;
 
+        const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.subject === webPageURL && pageAssertion.result.outcome === newOutcome);
+
         if(path){
 
             let innerText;
 
-            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');
-
-            
+            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');            
 
             if(correctedHtml.indexOf(">") > -1){
 
@@ -190,7 +193,7 @@ class JsonLd{
             "type": "Assertion",
             "testcase": "wcag2:" + criteriaId,
             "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
-            "subject": "_:webpage",
+            "subject": webPageURL,
             "mode": "earl:automatic",
             "result":
             {

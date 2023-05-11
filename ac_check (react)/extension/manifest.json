@@ -34,7 +34,7 @@
 
   "web_accessible_resources": [
     {
-      "resources": ["/images/icon128.png", "/images/contractedArrow.png", "/images/extendedArrow.png", "/images/settingsGear.png"],
+      "resources": ["/images/icon128.png", "/images/contractedArrow.png", "/images/extendedArrow.png", "/images/settingsGear.png", "/images/delete.png", "/images/edit.png"],
       "matches": ["<all_urls>"]
     }
   ]

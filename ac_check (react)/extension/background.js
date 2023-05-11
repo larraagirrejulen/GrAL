@@ -27,7 +27,7 @@ try{
     chrome.storage.sync.get(['toggle'], function(result) {
       if(changeInfo.status == 'complete' && result.toggle){
         chrome.scripting.executeScript({
-          files: ["content.js", "/libraries/a11yAinspector.js", "/libraries/jquery.min.js", "/jsonLd/jsonLd.js", '/js/jquery_find_elements.js'],
+          files: ["content.js"],
           target: {tabId: tabId}
         });
       }
@@ -41,16 +41,6 @@ try{
       
       chrome.storage.session.set({ tabId: sender.tab.id }); // store the tab ID for the options page to reload the tab when saving options
       chrome.runtime.openOptionsPage();
-
-    }else if(request.action === "performA11yEvaluation"){
-
-      (async () => {
-        const jsonld = await chrome.scripting.executeScript({
-          files: ["/js/performA11yEvaluation.js"],
-          target: {tabId: sender.tab.id}
-        });
-        sendResponse({report: jsonld});
-      })();
 
     }else if(request.action === "createElementPopup"){
       

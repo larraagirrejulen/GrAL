@@ -1,0 +1,100 @@
+.scope_section{
+  margin: 20px 0 0 0;
+  padding: 0 20px;
+  border-top: 2px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  box-sizing:unset;
+}
+
+.scope_section .header {
+  align-items: center;
+  display: inline-flex;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.scope_section .header img{
+  height: 30px;
+}
+
+.scope_section .header span{
+  width: 160px;
+}
+
+.scope_section .scopeInputList{
+  border-top: 1px solid #c6c6c6;
+  padding: 0 20px;
+  padding-top: 20px;
+}
+
+.scope_section .scopeInputList .scopeInput{
+  margin-bottom: 10px;
+}
+
+.scope_section .body{
+  padding-bottom: 20px;
+}
+
+.scope_section .scopeInput button{
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 300;
+  border-radius: 5px;
+  border: 2px solid #005a6a;
+  filter: drop-shadow(0 0 0 #005a6a) brightness(1);
+  transition: 0.2s ease;
+}
+
+.scope_section .scopeInput button:hover{
+  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
+  transition: 0.2s ease;
+}
+
+.scope_section .addWebPageBtn{
+  cursor: pointer;
+  padding: 8px 12px;
+  font-weight: bold;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 300;
+  border-radius: 5px;
+  border: 2px solid #005a6a;
+  filter: drop-shadow(0 0 0 #005a6a) brightness(1);
+  transition: 0.2s ease;
+  background-color: #005a6a;
+  color: white;
+}
+
+.scope_section .addWebPageBtn:hover{
+  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
+  transition: 0.2s ease;
+}
+
+.scope_section .icon{
+  margin-left: 8px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.scope_section .edit:hover{
+  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
+}
+
+.scope_section .delete:hover{
+  filter: drop-shadow(0 0 1px red) brightness(1.1);
+}
+
+.scope_section .scopeInput span{
+  cursor: pointer;
+  color: rgb(0, 147, 147);
+}
+
+.scope_section .scopeInput span:hover{
+  text-decoration: underline;
+}
+
+

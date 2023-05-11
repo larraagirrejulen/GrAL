@@ -62,7 +62,7 @@ function mergeFoundCases(hasPart1, hasPart2){
 
     for(const foundCase2 of hasPart2){
 
-        const foundCase1 = hasPart1.find(foundCase => foundCase.result.outcome === foundCase2.result.outcome);
+        const foundCase1 = hasPart1.find(foundCase => foundCase.subject === foundCase2.subject && foundCase.result.outcome === foundCase2.result.outcome);
         
         if(foundCase1){
 

@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 const Scraper = require('./scraper');
 const fs = require("fs");
-const mergeJsonLds = require('../ac_check (react)/extension/jsonLd/jsonLdUtils');
+const mergeJsonLds = require('../jsonLd/jsonLdUtils');
 
 
 /**
@@ -15,7 +15,7 @@ const withBrowser = async (fn) => {
 	try {
 		browser = await puppeteer.launch({ 
 			headless: true,
-			args: ["--disable-setuid-sandbox", "--lang=en"],
+			args: ["--disable-setuid-sandbox", "--lang=en", '--start-maximized'],
 			'ignoreHTTPSErrors': true
 		});
 		return await fn(browser);
@@ -34,6 +34,7 @@ const withPage = (browser) => async (fn) => {
 	let page;
 	try {
 		page = await browser.newPage();
+		await page.setViewport({ width: 1920, height: 1080});
 		return await fn(page);
 	} finally {
 		if(page) await page.close();
@@ -50,7 +51,7 @@ const withPage = (browser) => async (fn) => {
  */
 async function scrapeSelected(request){
 
-	const activeEvaluators = ["am", "ac", "mv", "pa"].filter((evaluator) => request[evaluator]);
+	const activeEvaluators = ["am", "ac", "mv", "a11y", "pa", "lh"].filter((evaluator) => request[evaluator]);
 
 	const results = await withBrowser(async (browser) => {
 
@@ -58,7 +59,7 @@ async function scrapeSelected(request){
 
 			return await withPage(browser)(async (page) => {
 
-				const scraper = new Scraper(page, evaluator, request.url, request.title);
+				const scraper = new Scraper(page, evaluator, request.scope, browser);
 
 				return await scraper.performScraping();
 

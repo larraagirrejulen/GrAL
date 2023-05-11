@@ -1,5 +1,6 @@
 
 import './css/extension.css';
+import './css/evaluationScopeSection.css';
 import './css/evaluatorSelectionSection.css';
 import './css/evaluationSection.css';
 import './css/resultSection.css';
@@ -31,20 +32,16 @@ export default function Extension(): JSX.Element {
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
   */
   useEffect( ()=>{
-    (async () => {
-      setUseStateFromStorage("shiftWebpage", true, setShiftWebpage, "could not get 'shiftWebpage' option!");
-    })();
+    setUseStateFromStorage("shiftWebpage", true, setShiftWebpage, "could not get 'shiftWebpage' option!");
   }, []);
 
   /**
    * Toggles the extension's active class on the webpage when the "hidden" or "shiftWebpage" state variables change.
   */
   useEffect(() => {
-    (async () => {
-      if(shiftWebpage){
-        hidden ? document.body.classList.remove('extension-active') : document.body.classList.add('extension-active');
-      }
-    })();
+    if(shiftWebpage){
+      hidden ? document.body.classList.remove('extension-active') : document.body.classList.add('extension-active');
+    }
   }, [hidden, shiftWebpage]);
 
   return (<>
@@ -52,8 +49,10 @@ export default function Extension(): JSX.Element {
     {hidden ? <img className="hidden_extension_logo" alt="extension logo when hidden" src={getImgSrc("icon128")} onClick={()=>setHidden(!hidden)} /> : ""}
     
     <div className= {`react_chrome_extension ${hidden && 'hidden'}`}>
+
       <img className="options_icon" src={getImgSrc("settingsGear")} alt="open configuration options window" onClick={()=>sendMessageToBackground("openOptionsPage")} />
       <span className="close_icon" onClick={()=>setHidden(!hidden)}>&times;</span>
+
       <div className="img_container">
         <img alt="extension logo" src={getImgSrc("icon128")} onClick={() => {
           window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
@@ -61,10 +60,132 @@ export default function Extension(): JSX.Element {
         }} />
       </div>
 
-      <EvaluatorSelectionSection /> <EvaluationSection /> <ResultSection />
+      <EvaluationScope /> 
+      <EvaluatorSelectionSection /> 
+      <EvaluationSection /> 
+      <ResultSection />
+
     </div>
 
   </>);
+}
+
+
+
+
+
+function EvaluationScope (): JSX.Element {
+
+  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
+
+  const [webPageList, setWebPageList] = useState([{name: window.document.title, url: window.location.href}]);
+
+  const [newWebPage, setNewWebPage] = useState({ name: "", url: "" });
+  const [editItemIndex, setEditItemIndex] = useState(-1);
+
+  const handleAddItem = () => {
+    setEditItemIndex(webPageList.length);
+    const newListItem = { name: "", url: "" }
+    setNewWebPage(newListItem);
+    const newList = [...webPageList, newListItem];
+    setWebPageList(newList);
+    localStorage.setItem("scope", JSON.stringify(newList));
+  };
+
+  const handleEditItem = (index:any) => {
+    setEditItemIndex(index);
+    setNewWebPage(webPageList[index]);
+  };
+
+  const handleUpdateItem = () => {
+
+    const url = new URL(window.location.href);
+    const baseUrl = url.origin + "/";
+    if(newWebPage.name === ""){
+      alert("Wrong web page name");
+      return;
+    }else if(!newWebPage.url.startsWith(baseUrl)){
+      alert("URL must start with: " + baseUrl);
+      return;
+    }
+
+    const newList = [...webPageList];
+    newList[editItemIndex] = newWebPage;
+    setWebPageList(newList);
+    localStorage.setItem("scope", JSON.stringify(newList));
+    setNewWebPage({ name: "", url: "" });
+    setEditItemIndex(-1);
+  };
+
+  const handleDeleteItem = (index:any) => {
+    const newList = [...webPageList];
+    newList.splice(index, 1);
+    setWebPageList(newList);
+    localStorage.setItem("scope", JSON.stringify(newList));
+  };
+
+  useEffect(() => { 
+    const storedScope = localStorage.getItem("scope");
+    if(storedScope !== null){
+      if(JSON.parse(storedScope).length > 0){
+        setWebPageList(JSON.parse(storedScope));
+      }
+    }else{
+      localStorage.setItem("scope", JSON.stringify(webPageList));
+    }     
+  }, [webPageList]);
+
+  return ( <div className="scope_section">
+
+      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
+        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
+        <span>Evaluation scope</span>
+      </div>
+
+      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
+        <ul className="scopeInputList">
+          {webPageList.map((webPage:any, index:any)=>(
+            <li className="scopeInput">
+                {editItemIndex === index ? (
+                  <div>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={newWebPage.name}
+                    onChange={(e) =>
+                      setNewWebPage({ ...newWebPage, name: e.target.value })
+                    }
+                  />
+                  <input
+                    type="text"
+                    placeholder="URL"
+                    value={newWebPage.url}
+                    onChange={(e) =>
+                      setNewWebPage({ ...newWebPage, url: e.target.value })
+                    }
+                  />
+                  <button onClick={handleUpdateItem}>Save</button>
+                  {newWebPage.name === "" && newWebPage.url === ""  ? 
+                    <button onClick={() => handleDeleteItem(index)}>Cancel</button> 
+                  : null}
+                  
+                </div>
+              ) : (
+                <div>
+                  <span onClick={() => { window.open(webPage.url, '_blank'); }}>{webPage.name}</span>
+                  <img className="edit icon" alt="edit web page data" src={getImgSrc("edit")} onClick={() => handleEditItem(index)} />
+                  <img className="delete icon" alt="remove web page from list" src={getImgSrc("delete")} onClick={() => handleDeleteItem(index)} />
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+        <div>
+          <button className='addWebPageBtn' onClick={handleAddItem}>Add web page</button>
+        </div>
+      </div>
+    
+  </div> );
 }
 
 
@@ -85,7 +206,8 @@ function EvaluatorSelectionSection (): JSX.Element {
     { checked: false, label: "AChecker", href: "https://achecker.achecks.ca/checker/index.php"},
     { checked: false, label: "Mauve", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
     { checked: false, label: "A11y library", href: "https://github.com/ainspector/a11y-evaluation-library"},
-    { checked: false, label: "Pa11y", href: "https://github.com/pa11y/pa11y"}
+    { checked: false, label: "Pa11y", href: "https://github.com/pa11y/pa11y"},
+    { checked: false, label: "Lighthouse", href: "https://developer.chrome.com/docs/lighthouse/overview/"}
   ]);
 
   const handleCheckboxChange = (index:any) => {
@@ -101,13 +223,13 @@ function EvaluatorSelectionSection (): JSX.Element {
    * 
    * @param {array} checkboxes - The current state of the checkboxes
   */
-  useEffect(() => { 
+  useEffect(() => {
     const storedCheckboxes = localStorage.getItem("checkboxes");
     if(storedCheckboxes !== null){
       setCheckboxes(JSON.parse(storedCheckboxes));
     }else{
       localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
-    }     
+    } 
   }, [checkboxes]);
 
   return ( <div className="evaluator_selection_section">
@@ -158,8 +280,8 @@ function EvaluationSection (): JSX.Element {
         <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
         <span>Evaluation options</span>
       </div>
-
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
+
         <button id="btn_get_data" className="button primary" onClick={()=>{performEvaluation(setIsLoading)}} disabled={isLoading}>
           {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Evaluate current page"}
         </button><br/>
@@ -170,6 +292,7 @@ function EvaluationSection (): JSX.Element {
         </> : null}
         
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={isLoading}/>Upload Report</label>
+      
       </div>
     
   </div> );

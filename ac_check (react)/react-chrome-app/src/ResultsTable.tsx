@@ -1,12 +1,11 @@
 
 import './css/resultsTable.css';
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect} from "react";
 import { getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
-import { setUseStateFromStorage } from './js/utils/reactUtils.js';
-import { getElementByPath, clearHighlights } from './js/utils/highlightUtils.js';
+import { setUseStateFromStorage, getElementByPath, handleStateChange } from './js/utils/reactUtils.js';
+import { highlightElement, selectHighlightedElement } from './js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
-
 
 
 const outcome2Background:any = {
@@ -19,26 +18,6 @@ const outcome2Background:any = {
 
 
 
-/**
- * Handles changes to a boolean state value in an array of state values.
- *
- * @param {Array<boolean>} useState - The current array of boolean state values.
- * @param {function} setUseState - The React `useState` hook function to update the state with the new array of boolean values.
- * @param {number} index - The index of the state value to change.
- * @param {boolean} mantainExtended - Whether to maintain the other values of the array.
- * @param {number} arrayLength - The length of the array to fill when adding a new state value.
- * @returns {void}
- */
-function handleStateChange(useState:any, setUseState:any, index:any, mantainExtended:any, arrayLength:any): void{
-
-    const newStates = mantainExtended ? [...useState] : Array(arrayLength).fill(false);
-    newStates[index] = !useState[index];
-    setUseState(newStates);
-
-    clearHighlights();
-}
-
-
 export default function ResultsTable({conformanceLevels}:any){
 
     const [mantainExtended, setMantainExtended] = useState(false);
@@ -46,10 +25,8 @@ export default function ResultsTable({conformanceLevels}:any){
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
 
     useEffect(() => {
-        (async ()=>{ 
-            setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
-            setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
-        })();
+        setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
+        setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
     }, []);
     
     return(
@@ -88,9 +65,7 @@ function Summary({conformanceLevels}:any){
     const [reportSummary, setReportSummary] = useState(null);
 
     useEffect(() => { 
-        (async ()=>{
-            setUseStateFromStorage("reportSummary", false, setReportSummary, "'reportSummary' is null or undefined!");
-        })();
+        setUseStateFromStorage("reportSummary", false, setReportSummary, "'reportSummary' is null or undefined!");
     },[]);
 
     useEffect(() => { 
@@ -139,9 +114,7 @@ function ResultCount({category, conformanceLevels}:any){
         untested += category.untested[conformanceLevel];
     }
 
-    return(<>
-        <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td>
-    </>);
+    return(<> <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td> </>);
 }
 
 
@@ -201,46 +174,15 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 
+
 function CriteriaResults({criteriaResults}:any){  
 
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
 
-    function handleCriteriaResultStateChange (index:any){
-
-        handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length);
-
-        if(!selectedCriteriaResults[index] && criteriaResults[index].groupedPointers){
-
-            const defaultStyles = Object.fromEntries(
-                Object.entries(criteriaResults[index].groupedPointers).map(([groupKey, pointers]:any) => [
-                    groupKey, []
-                ])
-            );
-
-            for (const groupKey in criteriaResults[index].groupedPointers) {
-                for(const pointer of criteriaResults[index].groupedPointers[groupKey]){
-
-                    const element = getElementByPath(pointer.path, pointer.innerText);
-
-                    if(element){
-                        element.setAttribute("tabindex", "0");
-                        defaultStyles[groupKey].push({"style": element.style.border, "path": pointer.path});
-                    }else{
-                        defaultStyles[groupKey].push(null);
-                    }
-                    
-                }
-            }
-
-            sessionStorage.setItem("defaultStyles", JSON.stringify(defaultStyles));
-        }
-
-    }
-
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
             
-            <tr className="collapsible criteriaResult" onClick={() => handleCriteriaResultStateChange(index)}>
+            <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length)}>
                 <td colSpan={6} style={{...outcome2Background[result.outcome]}}>
                     <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
                     {result.outcome}
@@ -269,113 +211,83 @@ function CriteriaResults({criteriaResults}:any){
 
 function CriteriaResultPointers({resultGroupedPointers}:any){  
 
+    const [selectedPointer, setSelectedPointer] = useState<{ [groupKey: string]: number | null }>({});
 
-    const getStructureObject = useCallback((empty = false) => {
-        return Object.fromEntries(Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => [
-            groupKey, 
-            empty ? [] : pointers.map(() => false)
-        ]))
-    }, [resultGroupedPointers]);    // The function will be redefined when resultGroupedPointers is updated
-
-    const [selectedPointers, setSelectedPointers] = useState( getStructureObject() );
-    const [hiddenElements, setHiddenElements] = useState( getStructureObject() );
+    const [hiddenElements, setHiddenElements] = useState<{ [groupKey: string]: number[] }>({});
 
     
-    function handlePointerClick (groupKey:any, index:any){
-        
-        let newSelectedPointer =  getStructureObject();
-        newSelectedPointer[groupKey][index] = !selectedPointers[groupKey][index];
-        setSelectedPointers(newSelectedPointer);
+    function handlePointerClick (groupKey:string, index:number){
 
-        if(hiddenElements[groupKey][index]){
-
-            if(!selectedPointers[groupKey][index]) {
-                sendMessageToBackground("showHiddenElement");
-            }
-            return;
-        } 
-
-        for (const group in resultGroupedPointers) {
-            for(let i = 0; i < resultGroupedPointers[group].length; i++){
-
-                if(hiddenElements[group][i]) continue;
-
-                const element = getElementByPath(resultGroupedPointers[group][i].path, resultGroupedPointers[group][i].innerText);
-
-                if(element){
-
-                    const highlightAnimation = (repeat:any) => {
-                        setTimeout(() => {
-                            element.style.border = "3px solid white";
-                            setTimeout(() => {
-                                element.style.border = "3px solid #FF3633";
-                                if(repeat > 0) highlightAnimation (repeat - 1);
-                            }, 120);
-                        }, 120);
-                    }
-
-                    if(index === i && groupKey === group && !selectedPointers[group][index]){
-
-                        sendMessageToBackground("createElementPopup", resultGroupedPointers[group][i].path);
-
-                        element.focus();
-                        element.blur();
-                        element.style.border = "3px solid #FF3633";
-                        highlightAnimation(1);
-                        continue;
-                    }
-                    element.style.border = "3px solid #005a6a";
-
-                }
-            }
+        const previousSelected:any = document.querySelector(".acCheckHighlighter.selected");
+        if(previousSelected){
+            previousSelected.classList.remove("selected");
+            previousSelected.style.border = "3px solid #00FFF7";
         }
+
+        if (selectedPointer[groupKey] === index) {
+
+            setSelectedPointer({});
+
+        } else {
+
+            setSelectedPointer({ [groupKey]: index });
+
+            if(hiddenElements[groupKey]?.includes(index)){
+                //sendMessageToBackground("showHiddenElement");
+                return;
+            }
+
+            selectHighlightedElement(groupKey, index);
+        
+        } 
 
     }
 
-
-    useEffect(() => { 
-
-        const hidden = getStructureObject(true);
+    useEffect(() => {
+        const newHiddenElements: { [groupKey: string]: number[] } = {};
 
         for (const groupKey in resultGroupedPointers) {
-            for(const pointer of resultGroupedPointers[groupKey]){
+            for (let i = 0; i < resultGroupedPointers[groupKey].length; i++) {
 
-                const element = getElementByPath(pointer.path, pointer.innerText);
+                const pointer = resultGroupedPointers[groupKey][i];
+                const pointedElement = getElementByPath(pointer.path, pointer.innerText);
 
-                if(element){
-                    if(element.getAttribute('type') === "hidden" || element.getAttribute("hidden")!==null){
-                        hidden[groupKey].push(true);
+                if(pointedElement){
+                    if(pointedElement.getAttribute('type') === "hidden" || pointedElement.getAttribute("hidden")!==null){
+                        
+                        if (!newHiddenElements[groupKey]) {
+                            newHiddenElements[groupKey] = [];
+                        }
+                        newHiddenElements[groupKey].push(i);
+
                     }else{
-                        hidden[groupKey].push(false);
-                        element.style.border = "3px solid #005a6a";
+                        highlightElement(pointedElement, groupKey, i);
                     }
-                }else{
-                    hidden[groupKey].push(false);
                 }
             }
         }
-        setHiddenElements(hidden);
-
-    }, [getStructureObject, resultGroupedPointers]);    // The use effect will rerun when getStructureObject or resultGroupedPointers is updated
+        setHiddenElements(newHiddenElements);
+    }, [resultGroupedPointers]);
       
 
 
     return(<>
         
-        {Object.entries(resultGroupedPointers).map(([groupKey, pointers]:any) => (<>
+        {Object.entries(resultGroupedPointers).map(([groupKey, groupPointers]:any) => (<>
 
             <tr><td colSpan={6} style={{textAlign:"left"}}>
 
                 <span style={{fontWeight: "bold", paddingTop:"10px"}}>{"[ " + groupKey + " ]"}</span>
-                {pointers.map((pointer:any, index:any) => (
-                    <pre
-                        className="codigo_analisis"
-                        style={!hiddenElements[groupKey][index] ? 
-                            (selectedPointers[groupKey][index] ? { border: "3px solid #FF3633" } : { border: "1px solid #005a6a" }) 
+
+                {groupPointers.map((pointer:any, index:any) => (
+                    <pre className="codigo_analisis"
+                        style={!hiddenElements[groupKey]?.includes(index) ? 
+                            (selectedPointer[groupKey] === index ? { border: "3px solid #FF3633" } : { border: "1px solid #005a6a" }) 
                             : { color:"black" }}
                         onClick={() => handlePointerClick(groupKey, index)}
                     >
-                        {index + 1}. {selectedPointers[groupKey][index] ? parse(pointer.html) : parse(pointer.html.substring(0, 30) + " ... ")} {hiddenElements[groupKey][index] && "(HIDDEN)"}
+                        {index + 1}. {selectedPointer[groupKey] === index ? parse(pointer.html) : 
+                            parse(pointer.html.substring(0, 30) + " ... ")} {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
                     </pre> 
                 ))}
                 
@@ -385,6 +297,23 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
     </>);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

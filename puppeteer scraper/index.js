@@ -1,5 +1,5 @@
 const http = require('http');
-const scraperController = require('./scrapingController');
+const scraperController = require('./scraping/scrapingController');
 
 
 /**

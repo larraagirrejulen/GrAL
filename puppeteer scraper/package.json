@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "crypto": "^1.0.1",
+    "lighthouse": "^10.2.0",
     "pa11y": "^6.2.3",
     "puppeteer": "^19.7.1"
   }

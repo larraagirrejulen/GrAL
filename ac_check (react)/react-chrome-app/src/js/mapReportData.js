@@ -3,14 +3,22 @@ import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js'
 import { storeOnChromeStorage }  from './utils/chromeUtils.js';
 
 
-let dataByCriteria = {};
+const assertions = {};
 
-const outcomeVariables = {
-    "earl:passed": { "A": 0, "AA": 0, "AAA": 0 },
-    "earl:failed": { "A": 0, "AA": 0, "AAA": 0 },
-    "earl:cantTell": { "A": 0, "AA": 0, "AAA": 0 },
-    "earl:inapplicable": { "A": 0, "AA": 0, "AAA": 0 },
-    "earl:untested": { "A": 0, "AA": 0, "AAA": 0 }
+/**
+ * Returns an object containing keys for each possible outcome type (passed, failed, cannotTell,
+ * inapplicable, and untested), each with nested objects for accessibility levels A, AA, and AAA
+ * with default values of 0.
+ * @function getOutcomeVariables
+*/
+function getOutcomeVariables () {
+    return{
+        "earl:passed": { "A": 0, "AA": 0, "AAA": 0 },
+        "earl:failed": { "A": 0, "AA": 0, "AAA": 0 },
+        "earl:cantTell": { "A": 0, "AA": 0, "AAA": 0 },
+        "earl:inapplicable": { "A": 0, "AA": 0, "AAA": 0 },
+        "earl:untested": { "A": 0, "AA": 0, "AAA": 0 }
+    };
 }
 
 
@@ -22,25 +30,25 @@ const outcomeVariables = {
  * @function mapReportData
  * @returns {void}
  */
-export async function mapReportData(report){
+export async function mapReportData(evaluationReport){
 
-    const resultsByCriteria = report.auditSample;
-    const criterias = getSuccessCriterias();
-    const reportSummary = { ...outcomeVariables };
+    const auditSample = evaluationReport.auditSample;
+    const successCriterias = getSuccessCriterias();
+    const reportSummary = getOutcomeVariables();
 
-    for (var i = 0; i < resultsByCriteria.length; i++){
+    for (var i = 0; i < auditSample.length; i++){
 
-        const conformanceLevel = criterias[i].conformanceLevel;
-        const criteriaResult = resultsByCriteria[i];
-        const outcome = criteriaResult.result.outcome;
+        const criteriaAssertion = auditSample[i];
+        const conformanceLevel = criteriaAssertion.conformanceLevel;
+        const outcome = criteriaAssertion.result.outcome;
 
         reportSummary[outcome][conformanceLevel]++;
 
-        dataByCriteria[criterias[i].num] = {
+        assertions[successCriterias[i].num] = {
             "conformanceLevel": conformanceLevel,
             "outcome" : outcome,
-            "description": criteriaResult.result.description,
-            "foundCases": criteriaResult.hasPart
+            "description": criteriaAssertion.result.description,
+            "hasPart": criteriaAssertion.hasPart
         };
     }
     storeOnChromeStorage("reportSummary", reportSummary);
@@ -49,18 +57,18 @@ export async function mapReportData(report){
     const mainCategories = getWcagHierarchy("mainCategories");
 
     for(const categoryKey in mainCategories){
-        
-        const categoryData = getOutcomesByCategory(categoryKey);
+
+        const outcomes = getOutcomesByCategory(categoryKey);
         const subCategoryResults = getSubCategoryResults(categoryKey);
 
         reportTableContent.push({
             "categoryTitle": mainCategories[categoryKey],
             "subCategories": subCategoryResults,
-            "passed": categoryData["earl:passed"],
-            "failed": categoryData["earl:failed"],
-            "cantTell": categoryData["earl:cantTell"],
-            "inapplicable": categoryData["earl:inapplicable"],
-            "untested": categoryData["earl:untested"]
+            "passed": outcomes["earl:passed"],
+            "failed": outcomes["earl:failed"],
+            "cantTell": outcomes["earl:cantTell"],
+            "inapplicable": outcomes["earl:inapplicable"],
+            "untested": outcomes["earl:untested"]
         });
 
     }
@@ -68,7 +76,7 @@ export async function mapReportData(report){
 
     localStorage.setItem("evaluated", "true");
     window.location.reload();
-    
+
 }
 
 
@@ -81,17 +89,17 @@ function getSubCategoryResults(categoryKey){
 
     for(const subCategoryKey in subCategories){
 
-        const subCategoryData = getOutcomesByCategory(subCategoryKey);
+        const outcomes = getOutcomesByCategory(subCategoryKey);
         const criteriaResults = getCriteriaResults(subCategoryKey);
 
         subCategoryResults.push({
             "subCategoryTitle": subCategories[subCategoryKey],
             "criterias": criteriaResults,
-            "passed": subCategoryData["earl:passed"],
-            "failed": subCategoryData["earl:failed"],
-            "cantTell": subCategoryData["earl:cantTell"],
-            "inapplicable": subCategoryData["earl:inapplicable"],
-            "untested": subCategoryData["earl:untested"]
+            "passed": outcomes["earl:passed"],
+            "failed": outcomes["earl:failed"],
+            "cantTell": outcomes["earl:cantTell"],
+            "inapplicable": outcomes["earl:inapplicable"],
+            "untested": outcomes["earl:untested"]
         });
 
     }
@@ -108,16 +116,16 @@ function getCriteriaResults(subCategoryKey){
 
     for(const criteriaKey in criterias){
 
-        const criteriaResult = dataByCriteria[criteriaKey]; 
+        const criteriaResult = assertions[criteriaKey]; 
 
         const results = {
             "criteria": criterias[criteriaKey],
             "outcome": criteriaResult.outcome.replace("earl:", ""),
-            "conformanceLevel": dataByCriteria[criteriaKey].conformanceLevel
+            "conformanceLevel": assertions[criteriaKey].conformanceLevel
         }
 
-        if(criteriaResult['foundCases'].length > 0){
-            results["hasPart"] = getFoundCases(criteriaKey);
+        if(criteriaResult.hasPart.length > 0){
+            results.hasPart = getHasPart(criteriaKey);
         }
 
         criteriaResults.push(results);
@@ -129,12 +137,17 @@ function getCriteriaResults(subCategoryKey){
 
 
 
-function getFoundCases(criteriaKey){
+function getHasPart(criteriaKey){
 
     const foundCasesResults = [];
-    const foundCases = dataByCriteria[criteriaKey]['foundCases'];
+    const hasPart = assertions[criteriaKey].hasPart;
 
-    for (const foundCase of foundCases) {
+    for (const foundCase of hasPart) {
+
+        // Ignorar los que no son de la página en la que se encuentra
+        if(foundCase.subject !== window.location.href){
+            continue;
+        }
 
         const outcome = foundCase.result.outcome.replace("earl:", "");
 
@@ -207,12 +220,14 @@ function getFoundCases(criteriaKey){
 
 function getOutcomesByCategory(categoryKey){
     
-    const outcomes = { ...outcomeVariables };
+    const outcomes = getOutcomeVariables();
 
-    for (const criteriaNumber in dataByCriteria) {
+    for (const criteriaNumber in assertions) {
+
         if (criteriaNumber.startsWith(categoryKey)){
-            const data = dataByCriteria[criteriaNumber];
-            outcomes[data.outcome][data.conformanceLevel]++;
+
+            const assertion = assertions[criteriaNumber];
+            outcomes[assertion.outcome][assertion.conformanceLevel]++;
         }
     }
 

@@ -1,11 +1,9 @@
 
 import { storeNewReport } from './reportStorage.js';
-import { sendMessageToBackground } from './utils/chromeUtils.js';
-import mergeJsonLds from '../../../extension/jsonLd/jsonLdUtils.js';
 
 
 /**
- * Perform an evaluation based on selected analyzers.
+ * Perform an evaluation based on given scope and selected analyzers.
  * @async
  * @function performEvaluation
  * @param {function} setIsLoading - Function to enable and disable loading animation.
@@ -17,25 +15,24 @@ export async function performEvaluation(setIsLoading){
     try{
 
         setIsLoading(true);
-        const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
-        const [AM, AC, MV, A11Y, PA] = checkboxes.map(({ checked }) => checked);
 
-        if([AM, AC, MV, A11Y, PA].every(val => val === false)) {
+        const storedScope = JSON.parse(localStorage.getItem("scope"));
+        if(storedScope.length === 0){
+            alert("You need to set at least a web page as a scope");
+            return;
+        }
+
+        const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+        const [AM, AC, MV, A11Y, PA, LH] = checkboxes.map(({ checked }) => checked);
+
+        if([AM, AC, MV, A11Y, PA, LH].every(val => val === false)) {
             alert("You need to choose at least one analizer");
             return;
         }
 
-        let evaluationReport;
+        const bodyData = JSON.stringify({ am: AM, ac: AC, mv: MV, a11y: A11Y, pa: PA, lh: LH, scope: storedScope });
 
-        if(AM || AC || MV || PA){
-            const bodyData = JSON.stringify({ am: AM, ac: AC, mv: MV, pa: PA, url: window.location.href, title: window.document.title });
-            evaluationReport = await fetchEvaluation(bodyData);
-        }
-        
-        if(A11Y){
-            const response = await sendMessageToBackground("performA11yEvaluation");
-            evaluationReport ? mergeJsonLds(evaluationReport, response.report[0].result) : evaluationReport = response.report[0].result;
-        }
+        const evaluationReport = await fetchEvaluation(bodyData);
 
         storeNewReport(evaluationReport);
 
