@@ -4,8 +4,11 @@ class JsonLd{
     
     #jsonld; 
     #evaluator;
+    #lock;
 
     constructor(evaluator, evaluationScope){
+
+        this.#lock = false;
 
         const siteName = (new URL(evaluationScope[0].url)).hostname.replace('www.','');
 
@@ -98,110 +101,122 @@ class JsonLd{
 
 
 
-    addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null){
+    async addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null){
 
-        const criteriaId = this.#successCriterias[criteriaNumber].id;
-
-        const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
-
-        const outcomeDescriptions = {
-            "earl:passed": ["No violations found", "PASSED:"],
-            "earl:failed": ["Found a violation ...", "An ERROR was found:"],
-            "earl:cantTell": ["Found possible applicable issue, but not sure...", "A POSSIBLE ISSUE was found:"],
-            "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
-        };
-
-        function newGeneralOutcome(){
-            webSiteAssertion.result.outcome = newOutcome;
-            webSiteAssertion.result.description = outcomeDescriptions[newOutcome][0];
+        while (this.#lock) {
+            await new Promise(resolve => setTimeout(resolve, 100)); // Wait for a short period
+            console.log("I'm locked: " + webPageURL);
         }
 
-        switch (webSiteAssertion.result.outcome) {  // Current general outcome
-            case "earl:untested":
-                newGeneralOutcome();
-                webSiteAssertion.assertedBy = "_:" + this.#evaluator.name;
-                webSiteAssertion.mode = "earl:automatic";
-                break;  
-            case "earl:inapplicable":
-                newGeneralOutcome();
-                break;  
-            case "earl:passed":
-                if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:passed"){
-                    newGeneralOutcome();
-                }
-                break;
-            case "earl:cantTell":
-                if(newOutcome === "earl:failed"){
-                    newGeneralOutcome();
-                }
-                break;
-            default:
-        }
-        
-        const locationPointersGroup = [];
-        let description = "*************@" + this.#evaluator.name + "************* \n\n"
-        description += outcomeDescriptions[newOutcome][1] + "\n\n" + newDescription;
+        try{
+            this.#lock = true;
 
-        const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.subject === webPageURL && pageAssertion.result.outcome === newOutcome);
+            const criteriaId = this.#successCriterias[criteriaNumber].id;
+            const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
 
-        if(path){
-
-            let innerText;
-
-            let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');            
-
-            if(correctedHtml.indexOf(">") > -1){
-
-                if(html.indexOf("</") > -1){
-                    innerText = html.substring(html.indexOf(">")+1, html.indexOf("</"));
-                }
-
-                if(correctedHtml.substring(0, correctedHtml.indexOf(">")+1).indexOf(" ")>0){
-                    correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
-                }
-            }
-
-            const newPointer = {
-                "id": "_:pointer",
-                "type": "ptr:groupPointer",
-                "assertedBy": [this.#evaluator.name],
-                "ptr:expression": path, 
-                "description": correctedHtml,
-                "innerText": innerText
+            const outcomeDescriptions = {
+                "earl:passed": ["No violations found", "PASSED:"],
+                "earl:failed": ["Found a violation ...", "An ERROR was found:"],
+                "earl:cantTell": ["Found possible applicable issue, but not sure...", "A POSSIBLE ISSUE was found:"],
+                "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
             };
 
-            if(webPageAssertion){
+            function newGeneralOutcome(){
+                webSiteAssertion.result.outcome = newOutcome;
+                webSiteAssertion.result.description = outcomeDescriptions[newOutcome][0];
+            }
 
-                if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
-                && webPageAssertion.result.locationPointersGroup.length < 30
-                && webPageAssertion.result.locationPointersGroup.every(pointer => pointer.description !== correctedHtml)){
-                    webPageAssertion.result.description += "\n " + path;
-                    webPageAssertion.result.locationPointersGroup.push(newPointer);
+            switch (webSiteAssertion.result.outcome) {  // Current general outcome
+                case "earl:untested":
+                    newGeneralOutcome();
+                    webSiteAssertion.assertedBy = "_:" + this.#evaluator.name;
+                    webSiteAssertion.mode = "earl:automatic";
+                    break;  
+                case "earl:inapplicable":
+                    newGeneralOutcome();
+                    break;  
+                case "earl:passed":
+                    if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:passed"){
+                        newGeneralOutcome();
+                    }
+                    break;
+                case "earl:cantTell":
+                    if(newOutcome === "earl:failed"){
+                        newGeneralOutcome();
+                    }
+                    break;
+                default:
+            }
+            
+            const locationPointersGroup = [];
+            let description = "*************@" + this.#evaluator.name + "************* \n\n"
+            description += outcomeDescriptions[newOutcome][1] + "\n\n" + newDescription;
+
+            const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.subject === webPageURL && pageAssertion.result.outcome === newOutcome);
+
+            if(path){
+
+                let innerText;
+
+                let correctedHtml = html.replace(/[\n\t]/g, '').replace(/\"/g, "'").replace(/\n\s*/g, '');            
+
+                if(correctedHtml.indexOf(">") > -1){
+
+                    if(html.indexOf("</") > -1){
+                        innerText = html.substring(html.indexOf(">")+1, html.indexOf("</"));
+                    }
+
+                    if(correctedHtml.substring(0, correctedHtml.indexOf(">")+1).indexOf(" ")>0){
+                        correctedHtml = correctedHtml.substring(0, correctedHtml.indexOf(">")+1);
+                    }
                 }
-                return;
-            }
 
-            description += "\n\n Found cases locations: \n\n " + path;
-            locationPointersGroup.push(newPointer);
+                const newPointer = {
+                    "id": "_:pointer",
+                    "type": "ptr:groupPointer",
+                    "assertedBy": [this.#evaluator.name],
+                    "ptr:expression": path, 
+                    "description": correctedHtml,
+                    "innerText": innerText
+                };
 
-        }else if (webPageAssertion) return;
+                if(webPageAssertion){
 
-        let assertorDescription = newDescription.replaceAll('<','&lt;').replaceAll('>','&gt;');
-        assertorDescription.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
+                    if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
+                    && webPageAssertion.result.locationPointersGroup.length < 30
+                    && webPageAssertion.result.locationPointersGroup.every(pointer => pointer.description !== correctedHtml)){
+                        webPageAssertion.result.description += "\n " + path;
+                        webPageAssertion.result.locationPointersGroup.push(newPointer);
+                    }
+                    return;
+                }
 
-        webSiteAssertion.hasPart.push({
-            "type": "Assertion",
-            "testcase": "wcag2:" + criteriaId,
-            "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
-            "subject": webPageURL,
-            "mode": "earl:automatic",
-            "result":
-            {
-                "outcome": newOutcome,
-                "description": description,
-                "locationPointersGroup": locationPointersGroup
-            }
-        });
+                description += "\n\n Found cases locations: \n\n " + path;
+                locationPointersGroup.push(newPointer);
+
+            }else if (webPageAssertion) return;
+
+            let assertorDescription = newDescription.replaceAll('<','&lt;').replaceAll('>','&gt;');
+            assertorDescription.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
+
+            webSiteAssertion.hasPart.push({
+                "type": "Assertion",
+                "testcase": "wcag2:" + criteriaId,
+                "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
+                "subject": webPageURL,
+                "mode": "earl:automatic",
+                "result":
+                {
+                    "outcome": newOutcome,
+                    "description": description,
+                    "locationPointersGroup": locationPointersGroup
+                }
+            });
+
+        }finally{
+            this.#lock = false;
+        }
+        
         
     }
 

@@ -26,23 +26,6 @@ const withBrowser = async (fn) => {
 
 
 /**
- * Wraps a function that requires a page instance and returns its result after closing the page.
- * @param {Object} browser - The browser instance to create the page on.
- * @returns {Function} - A function that accepts a function to be wrapped and returns a promise that resolves with the result of the wrapped function.
- */
-const withPage = (browser) => async (fn) => {
-	let page;
-	try {
-		page = await browser.newPage();
-		await page.setViewport({ width: 1920, height: 1080});
-		return await fn(page);
-	} finally {
-		if(page) await page.close();
-	}
-}
-
-
-/**
  * Scrapes the selected webpages based on the request object.
  * 
  * @function scrapeSelected
@@ -57,13 +40,10 @@ async function scrapeSelected(request){
 
 		return await Promise.all(activeEvaluators.map(async (evaluator) => {
 
-			return await withPage(browser)(async (page) => {
+			const scraper = new Scraper(evaluator, request.scope, browser);
 
-				const scraper = new Scraper(page, evaluator, request.scope, browser);
+			return await scraper.performScraping();
 
-				return await scraper.performScraping();
-
-			});
 		}));
 	});
 

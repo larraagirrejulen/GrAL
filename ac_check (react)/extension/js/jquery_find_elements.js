@@ -4,7 +4,6 @@ $(document).ready(function(){
   * Listener for clicking on a code from the results
   */
   $(".codigo_analisis").click(function(){
-    console.log("aaaaaaaaa")
     let alt = $(this).attr('alt');
     let pintado = false;
     if (typeof alt !== 'undefined' && alt !== false) {

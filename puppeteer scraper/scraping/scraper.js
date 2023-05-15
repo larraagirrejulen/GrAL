@@ -8,7 +8,6 @@ const { URL } = require('url');
 */
 class Scraper {
 
-    #puppeteer_page;
     #evaluator;
     #evaluationScope;
     #jsonld;
@@ -22,18 +21,18 @@ class Scraper {
      * @param {string} evaluationScope - The URL of the web pages to evaluate.
      * @throws Will throw an error if the evaluator is not valid.
     */
-    constructor(page, evaluator, evaluationScope, browser){
+    constructor(evaluator, evaluationScope, browser){
 
         if (!['am', 'ac', 'mv', 'a11y', 'pa', 'lh'].includes(evaluator)) {
             throw new Error(evaluator.toUpperCase() + " is not a valid evaluator !!!");
         }
 
-        this.#puppeteer_page = page;
         this.#evaluator = evaluator;
         this.#evaluationScope = evaluationScope;
         this.#jsonld = new JsonLd(evaluator, evaluationScope);
         this.#browser = browser;
     }
+
 
 
     /**
@@ -44,24 +43,49 @@ class Scraper {
     */
     async performScraping(){
 
+        /**
+         * Wraps a function that requires a page instance and returns its result after closing the page.
+         * @param {Object} browser - The browser instance to create the page on.
+         * @returns {Function} - A function that accepts a function to be wrapped and returns a promise that resolves with the result of the wrapped function.
+         */
+        const withPage = (browser) => async (fn) => {
+            let page;
+            try {
+                page = await browser.newPage();
+                await page.setViewport({ width: 1920, height: 1080});
+                return await fn(page);
+            } finally {
+                if(page) await page.close();
+            }
+        }
+
         const evaluators = {
-            'am': async (webPage) => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/', this.#puppeteer_page, webPage),
-            'ac': async (webPage) => this.acScraper('https://achecker.achecks.ca/checker/index.php', this.#puppeteer_page, webPage),
-            'mv': async (webPage) => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', this.#puppeteer_page, webPage),
-            'a11y': async (webPage) => this.a11yScraper(this.#puppeteer_page, webPage),
-            'pa': async (webPage) => this.pa11yScraper(webPage),
-            'lh': async (webPage) => this.lhScraper(this.#puppeteer_page, webPage)
+            'am': async (webPage, page) => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/', webPage, page),
+            'ac': async (webPage, page) => this.acScraper('https://achecker.achecks.ca/checker/index.php', webPage, page),
+            'mv': async (webPage, page) => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', webPage, page),
+            'a11y': async (webPage, page) => this.a11yScraper(webPage, page),
+            'pa': async (webPage, page) => this.pa11yScraper(webPage),
+            'lh': async (webPage, page) => this.lhScraper(webPage, page)
         };
 
         console.log("\nInitiating " + this.#evaluator.toUpperCase() + " scraping process ...");
 
         try{
-            for(const webPage of this.#evaluationScope){
-                console.log("\n  Starting with " + webPage.url + " ...");
-                await evaluators[this.#evaluator](webPage);
-            }
-            console.log(`\n${this.#evaluator.toUpperCase()} scraping successfully finished !!!`);
+
+            await Promise.all(this.#evaluationScope.map(async (webPage) => {
+
+                return await withPage(this.#browser)(async (page) => {
+    
+                    console.log("\n  " + this.#evaluator.toUpperCase() + ": Starting with " + webPage.url + " ...");
+                    await evaluators[this.#evaluator](webPage, page);
+                    console.log("\n  " + this.#evaluator.toUpperCase() + ": " + webPage.url + " scraping finished.");
+                    
+                });
+
+            }));
             
+            console.log(`\n${this.#evaluator.toUpperCase()} scraping successfully finished !!!`);
+
         } catch(error) { throw new Error("\nThe next error was found on " + this.#evaluator.toUpperCase()  + " scraping process: " + error) }
 
         return this.#jsonld.getJsonLd();
@@ -77,7 +101,7 @@ class Scraper {
      * @param {Page} page - The puppeteer page object to be used for scraping.
      * @returns {void}
     */
-    async amScraper(evaluatorUrl, page, webPage){
+    async amScraper(evaluatorUrl, webPage, page){
 
         await page.goto(evaluatorUrl);
         await page.waitForSelector('#url', {timeout: 30000});
@@ -86,8 +110,6 @@ class Scraper {
         await page.click('.card_actions button');
 
         await page.waitForSelector('table.evaluation-table > tbody', {timeout: 60000});
-
-        console.log("\n    Getting data ...");
 
         const results = await page.evaluate(() => {
 
@@ -163,8 +185,6 @@ class Scraper {
 
         await page.goto(webPage.url);
 
-        console.log("\n    Loading data into Json-LD ...");
-
         for(const result of results){
             if(result.casesLocations){
                 for (const path of result.casesLocations){
@@ -173,19 +193,23 @@ class Scraper {
                         continue;
                     }
 
-                    await page.waitForSelector(path);
+                    try{
+                        await page.waitForSelector(path);
+                    }catch(error){
+                        continue;
+                    }
     
                     const targetElement = await page.$(path);
     
                     const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
     
                     for (const criteria of result.criteriaNumbers){
-                        this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, path, targetHtml);
+                        await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, path, targetHtml);
                     } 
                 }
             }else{
                 for (const criteria of result.criteriaNumbers){
-                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url);
+                    await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url);
                 }
             }
             
@@ -202,7 +226,7 @@ class Scraper {
      * @param {object} page - The Puppeteer page object to use for web scraping.
      * @returns {void}
      */
-    async acScraper(evaluatorUrl, page, webPage){
+    async acScraper(evaluatorUrl, webPage, page){
 
         await page.goto(evaluatorUrl);
 
@@ -218,8 +242,6 @@ class Scraper {
 
         // Wait for results to be loaded
         await page.waitForSelector('fieldset[class="group_form"]', {timeout: 120000});
-
-        console.log("\n    Getting data ...");
 
         const results = await page.evaluate(() => {
 
@@ -260,6 +282,9 @@ class Scraper {
                                     const match = regex.exec(path);
 
                                     const line = document.querySelector("#line-" + parseInt(match[1]));
+
+                                    if(!line) continue;
+                                        
                                     const html = line.textContent.substring(parseInt(match[2])-1);
 
                                     let querySelector = html.replace(/[\n\t]/g, '').replace(/\n\s*/g, '').replace(/\"/g, "'");
@@ -310,10 +335,8 @@ class Scraper {
 
         });
 
-        console.log("\n    Loading data into Json-LD ...");
-
         for (const result of results){
-            this.#jsonld.addNewAssertion(result.criteriaNumber, result.outcome, result.description, webPage.url, result.targetPath, result.targetHtml);
+            await this.#jsonld.addNewAssertion(result.criteriaNumber, result.outcome, result.description, webPage.url, result.targetPath, result.targetHtml);
         }
     }
 
@@ -327,7 +350,7 @@ class Scraper {
      * @param {object} page - The Puppeteer page object to use for web scraping.
      * @returns {void}
      */
-    async mvScraper(evaluatorUrl, page, webPage){
+    async mvScraper(evaluatorUrl, webPage, page){
 
         // Navigate to url
         await page.goto(evaluatorUrl);
@@ -351,8 +374,6 @@ class Scraper {
             const loader = document.querySelector('#loader');
             return loader && loader.classList.contains('display_none');
         });
-
-        console.log("\n    Getting data ...");
 
         // Get evaluation data
         const results = await page.evaluate(() => {
@@ -417,12 +438,10 @@ class Scraper {
 
         await page.goto(webPage.url);
 
-        console.log("\n    Loading data into Json-LD ...");
-
         for (const result of results){
 
             if(result.outcome === "earl:passed"){
-                this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description, webPage.url);
+                await this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description, webPage.url);
             }else{
 
                 await page.waitForXPath(result.xpath);
@@ -432,7 +451,7 @@ class Scraper {
                 const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
 
                 for (const criteria of result.criterias){
-                    this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, result.xpath, targetHtml);
+                    await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, result.xpath, targetHtml);
                 }
             }
 
@@ -447,14 +466,12 @@ class Scraper {
      * @function a11yScraper
      * @returns {void}
      */
-    async a11yScraper(page, webPage){
+    async a11yScraper(webPage, page){
 
         await page.goto(webPage.url);
         await page.waitForTimeout(5000);
 
         await page.addScriptTag({ path: './scraping/a11yAinspector.js' });
-
-        console.log("\n    Getting data ...");
 
         const results = await page.evaluate(() => {
 
@@ -526,11 +543,11 @@ class Scraper {
             return a11yResults;
         })
 
-        console.log("\n    Loading data into Json-LD ...");
-
+        //console.log("\nStarting loading data: " + webPage.url);
         for(const result of results) {
-            this.#jsonld.addNewAssertion(result.successCriteria, result.outcome, result.description, result.url, result.xpath, result.html);
+            await this.#jsonld.addNewAssertion(result.successCriteria, result.outcome, result.description, result.url, result.xpath, result.html);
         }
+        //console.log("Loading data finished: " + webPage.url);
         
     }
 
@@ -544,24 +561,21 @@ class Scraper {
      */
     async pa11yScraper(webPage){
 
-        console.log("\n    Getting data ...");
-
         const results = await pa11y(webPage.url, {
             standard: 'WCAG2AAA',
             includeWarnings: true,
             timeout: 90000
         });
-
-        console.log("\n    Loading data into Json-LD ...");
-
+        //console.log("\nStarting loading data: " + webPage.url);
         for(const issue of results.issues){
 
             const criteria = issue.code.match(/(\d\_\d\_\d)/)[0].replaceAll("_", ".")
 
             const outcome = issue.typeCode === 1 ? "earl:failed" : "earl:cantTell"
 
-            this.#jsonld.addNewAssertion(criteria, outcome, issue.message, webPage.url, issue.selector, issue.context);
+            await this.#jsonld.addNewAssertion(criteria, outcome, issue.message, webPage.url, issue.selector, issue.context);
         }
+        //console.log("Loading data finished: " + webPage.url);
     }
 
 
@@ -574,14 +588,12 @@ class Scraper {
      * @param {object} page - The Puppeteer page object to use for web scraping.
      * @returns {void}
      */
-    async lhScraper(page, webPage){
+    async lhScraper(webPage, page){
 
         await page.goto(webPage.url);
 
         const lighthouseModule = await import('lighthouse');
         const lighthouse = lighthouseModule.default;
-
-        console.log("\n    Getting data ...");
 
         // Generate the Lighthouse report
         const report = await lighthouse(webPage.url, {
@@ -609,8 +621,6 @@ class Scraper {
         });
 
         const accessibilityResults = report.lhr.audits;
-
-        console.log("\n    Loading data into Json-LD ...");
 
         const criteria = {
             "aria-allowed-attr": "4.1.2",
@@ -667,7 +677,7 @@ class Scraper {
                     const html = item.node.snippet;
                     const description = audit.description + "\n\n" + item.node.explanation;
 
-                    this.#jsonld.addNewAssertion(criteria, "earl:failed", description, webPage.url, path, html);
+                    await this.#jsonld.addNewAssertion(criteria, "earl:failed", description, webPage.url, path, html);
                 }
             }else{
 
@@ -691,7 +701,7 @@ class Scraper {
     
                 }
 
-                this.#jsonld.addNewAssertion(criteria[audit.id], outcome, description, webPage.url);
+                await this.#jsonld.addNewAssertion(criteria[audit.id], outcome, description, webPage.url);
 
             } 
         }
