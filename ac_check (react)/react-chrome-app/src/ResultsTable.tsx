@@ -2,18 +2,18 @@
 import './css/resultsTable.css';
 
 import { useState, useEffect} from "react";
-import { getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
+import { getImgSrc } from './js/utils/chromeUtils.js';
 import { setUseStateFromStorage, getElementByPath, handleStateChange } from './js/utils/reactUtils.js';
-import { highlightElement, selectHighlightedElement } from './js/utils/highlightUtils.js';
+import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from './js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
 
 
 const outcome2Background:any = {
-    "passed": {backgroundColor: "#C8FA8C"},
-    "failed": {backgroundColor: "#FA8C8C"},
-    "cantTell": {backgroundColor: "#F5FA8C"},
-    "inapplicable": {backgroundColor: "#FFFFFF"},
-    "untested": {backgroundColor: "#8CFAFA"}
+    "earl:passed": {backgroundColor: "#C8FA8C"},
+    "earl:failed": {backgroundColor: "#FA8C8C"},
+    "earl:cantTell": {backgroundColor: "#F5FA8C"},
+    "earl:inapplicable": {backgroundColor: "#FFFFFF"},
+    "earl:untested": {backgroundColor: "#8CFAFA"}
 }
 
 
@@ -31,26 +31,27 @@ export default function ResultsTable({conformanceLevels}:any){
     
     return(
       <div className = "resultsContainer">
-        <Summary conformanceLevels={conformanceLevels} />
-        <div className="resultsTable">
-            <table>
-                <thead>
-                    <tr> <th>Standard</th> <OutcomeHeaders/> </tr>
-                </thead>
-                <tbody>
-                    {reportTableContent.map((mainCategory:any, index:any) => (<>
-                        <tr className="collapsible mainCategory" onClick={()=>handleStateChange(selectedMainCategories, setSelectedMainCategories, index, mantainExtended, reportTableContent.length)}>
-                            <td>{mainCategory.categoryTitle}</td>
-                            <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
-                        </tr>
-                        { selectedMainCategories[index] ? 
-                            <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels} /> 
-                        : null }
-                    </>))}
-                </tbody>
-            </table>
-        </div>
-        
+        <Summaries conformanceLevels={conformanceLevels} />
+        {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? 
+            <div className="resultsTable">
+                <table>
+                    <thead>
+                        <tr> <th>Standard</th> <OutcomeHeaders/> </tr>
+                    </thead>
+                    <tbody>
+                        {reportTableContent.map((mainCategory:any, index:any) => (<>
+                            <tr className="collapsible mainCategory" onClick={()=>handleStateChange(selectedMainCategories, setSelectedMainCategories, index, mantainExtended, reportTableContent.length)}>
+                                <td>{mainCategory.categoryTitle}</td>
+                                <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
+                            </tr>
+                            { selectedMainCategories[index] ? 
+                                <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels} /> 
+                            : null }
+                        </>))}
+                    </tbody>
+                </table>
+            </div>
+        : null}
       </div>
     );
     
@@ -59,46 +60,71 @@ export default function ResultsTable({conformanceLevels}:any){
 
 
 
-function Summary({conformanceLevels}:any){
+function Summaries({conformanceLevels}:any){
 
-    const [outcomesCount, setOutcomesCount] = useState([0, 0, 0, 0, 0]);
-    const [reportSummary, setReportSummary] = useState(null);
+    const [webSiteOutcomes, setWebSiteOutcomes] = useState([0, 0, 0, 0, 0]);
+    const [siteSummary, setSiteSummary] = useState(null);
+    
+    const [webPageOutcomes, setWebPageOutcomes] = useState([0, 0, 0, 0, 0]);
+    const [pageSummaries, setPageSummaries] = useState(null);
+
+    const countOutcomes = async (summary:any, setOutcomes:any) => {
+        let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
+        for(const conformanceLevel of conformanceLevels){
+            passed += summary["earl:passed"][conformanceLevel];
+            failed += summary["earl:failed"][conformanceLevel];
+            cantTell += summary["earl:cantTell"][conformanceLevel];
+            inapplicable += summary["earl:inapplicable"][conformanceLevel];
+            untested += summary["earl:untested"][conformanceLevel];
+        }
+        setOutcomes([passed, failed, cantTell, inapplicable, untested]);
+    };
 
     useEffect(() => { 
-        setUseStateFromStorage("reportSummary", false, setReportSummary, "'reportSummary' is null or undefined!");
+        setUseStateFromStorage("siteSummary", false, setSiteSummary, "'siteSummary' is null or undefined!");
+        setUseStateFromStorage("pageSummaries", false, setPageSummaries, "'pageSummaries' is null or undefined!");
     },[]);
 
     useEffect(() => { 
-        if(reportSummary){
-            (async ()=>{
-                let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-                for(const conformanceLevel of conformanceLevels){
-                    passed += reportSummary["earl:passed"][conformanceLevel];
-                    failed += reportSummary["earl:failed"][conformanceLevel];
-                    cantTell += reportSummary["earl:cantTell"][conformanceLevel];
-                    inapplicable += reportSummary["earl:inapplicable"][conformanceLevel];
-                    untested += reportSummary["earl:untested"][conformanceLevel];
-                }
-                setOutcomesCount([passed, failed, cantTell, inapplicable, untested]);
-            })();
+        if(siteSummary){
+            countOutcomes(siteSummary, setWebSiteOutcomes);
         }
-    },[conformanceLevels, reportSummary]);
+        if(pageSummaries){
+            const webPageSummary = pageSummaries[window.location.href];
+            
+            if(webPageSummary){
+                countOutcomes(webPageSummary, setWebPageOutcomes);
+            }
+            
+        }
+    },[conformanceLevels, siteSummary, pageSummaries]);
 
-    return(
+    return(<>
+        <p>Website summary:</p>
         <table className="summaryTable">
             <tr> <OutcomeHeaders /> </tr>
-            <tr> {outcomesCount.map((count:any) => ( <td>{count}</td> ))} </tr>
+            <tr> {webSiteOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
         </table>
-    );
+
+        {pageSummaries && pageSummaries[window.location.href] ? <>
+            <p>Current webpage summary:</p>
+            <table className="summaryTable">
+                <tr> <OutcomeHeaders /> </tr>
+                <tr> {webPageOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
+            </table>
+        </> : <div style={{textAlign: "center", padding:"15px 0"}}>Current webpage has not been evaluated</div>}
+        
+    </>);
 }
+
 
 function OutcomeHeaders(){
     return(<>
-        <th className="passed" title='Passed' style={{...outcome2Background["passed"]}}>P</th>
-        <th className="failed" title='Failed' style={{...outcome2Background["failed"]}}>F</th>
-        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["cantTell"]}}>CT</th>
-        <th className="inapplicable" title='Not Present' style={{...outcome2Background["inapplicable"]}}>NP</th>
-        <th className="untested" title='Not checked' style={{...outcome2Background["untested"]}}>NC</th>
+        <th className="passed" title='Passed' style={{...outcome2Background["earl:passed"]}}>P</th>
+        <th className="failed" title='Failed' style={{...outcome2Background["earl:failed"]}}>F</th>
+        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["earl:cantTell"]}}>CT</th>
+        <th className="inapplicable" title='Not Present' style={{...outcome2Background["earl:inapplicable"]}}>NP</th>
+        <th className="untested" title='Not checked' style={{...outcome2Background["earl:untested"]}}>NC</th>
     </>);
 }
 
@@ -106,12 +132,16 @@ function ResultCount({category, conformanceLevels}:any){
 
     let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
 
-    for(const conformanceLevel of conformanceLevels){
-        passed += category.passed[conformanceLevel];
-        failed += category.failed[conformanceLevel];
-        cantTell += category.cantTell[conformanceLevel];
-        inapplicable += category.inapplicable[conformanceLevel];
-        untested += category.untested[conformanceLevel];
+    const outcomes = category.webPageOutcomes[window.location.href];
+
+    if(outcomes){
+        for(const conformanceLevel of conformanceLevels){
+            passed += outcomes["earl:passed"][conformanceLevel];
+            failed += outcomes["earl:failed"][conformanceLevel];
+            cantTell += outcomes["earl:cantTell"][conformanceLevel];
+            inapplicable += outcomes["earl:inapplicable"][conformanceLevel];
+            untested += outcomes["earl:untested"][conformanceLevel];
+        }
     }
 
     return(<> <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td> </>);
@@ -151,7 +181,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
             { conformanceLevels.includes(criteria.conformanceLevel) ? <>
             
-                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcome]}} onClick={() => {handleStateChange(selectedCriterias, setSelectedCriterias, index, mantainExtended, criterias.length)}}>
+                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcomes[window.location.href]]}} onClick={() => {handleStateChange(selectedCriterias, setSelectedCriterias, index, mantainExtended, criterias.length)}}>
                     <td colSpan={2}>
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
@@ -160,7 +190,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                             
                         </> : <> {criteria.criteria} </> }
                     </td>
-                    <td colSpan={4}>{criteria.outcome}</td>
+                    <td colSpan={4}>{criteria.outcomes[window.location.href]}</td>
                 </tr>
                 {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] ? 
                     <CriteriaResults criteriaResults={criteria.hasPart} mantainExtended={mantainExtended} />
@@ -181,28 +211,32 @@ function CriteriaResults({criteriaResults}:any){
 
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
-            
-            <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length)}>
-                <td colSpan={6} style={{...outcome2Background[result.outcome]}}>
-                    <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
-                    {result.outcome}
-                </td>
-            </tr>
 
-            {selectedCriteriaResults[index] && (<>
-            
-                {result.descriptions.map((element:any, index:any) => (<>
+            {result.webPage === window.location.href ? <>
+                <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length)}>
+                    <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
+                        <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
+                        {result.outcome}
+                    </td>
+                </tr>
 
-                    <tr><td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}</td></tr>
-                    <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
+                {selectedCriteriaResults[index] && (<>
                 
-                </>))}
+                    {result.descriptions.map((element:any, index:any) => (<>
 
-                { result.hasOwnProperty("groupedPointers") ? 
-                    <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} />
-                : null }
-                
-            </>)}
+                        <tr><td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}</td></tr>
+                        <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
+                    
+                    </>))}
+
+                    { result.hasOwnProperty("groupedPointers") ? 
+                        <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} />
+                    : null }
+                    
+                </>)}
+            </> : null }
+            
+            
 
         </>))} 
     </>);
@@ -218,11 +252,7 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
     
     function handlePointerClick (groupKey:string, index:number){
 
-        const previousSelected:any = document.querySelector(".acCheckHighlighter.selected");
-        if(previousSelected){
-            previousSelected.classList.remove("selected");
-            previousSelected.style.border = "3px solid #00FFF7";
-        }
+        unselectHighlightedElement(); // If previously selected
 
         if (selectedPointer[groupKey] === index) {
 
@@ -232,12 +262,9 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
             setSelectedPointer({ [groupKey]: index });
 
-            if(hiddenElements[groupKey]?.includes(index)){
-                //sendMessageToBackground("showHiddenElement");
-                return;
-            }
+            const pointer = resultGroupedPointers[groupKey][index];
 
-            selectHighlightedElement(groupKey, index);
+            selectHighlightedElement(groupKey, index, pointer.documentation);
         
         } 
 

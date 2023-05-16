@@ -147,12 +147,17 @@
 }
 
 .highlightPopup{
-  padding: 10px;
-  margin-top: 5px;
+  width: 160px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
   background-color: #f4f4f4;
   border: 2px solid #d14;
-  z-index: 9999;
-  border-radius: 5px;
 }
 
 .highlightPopup span{

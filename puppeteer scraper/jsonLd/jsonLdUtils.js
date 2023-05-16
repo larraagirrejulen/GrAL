@@ -17,27 +17,27 @@ function mergeJsonLds(jsonLd1, jsonLd2){
 
         for (let i = 0; i < jsonLd1.auditSample.length; i++) {
 
-            let assertion1 = jsonLd1.auditSample[i];
-            let assertion2 = jsonLd2.auditSample[i];
+            const newOutcome = jsonLd2.auditSample[i].result.outcome;
+
+            if(newOutcome === "earl:untested") continue; 
             
-            if(assertion2.result.outcome === "earl:untested"){ 
-                continue; 
+            const currentOutcome = jsonLd1.auditSample[i].result.outcome;
 
-            } else if(assertion1.result.outcome === "earl:untested"){
+            if(currentOutcome === "earl:untested"){
 
-                jsonLd1.auditSample[i] = assertion2;
+                jsonLd1.auditSample[i] = jsonLd2.auditSample[i];
 
             } else {
 
-                if((assertion1.result.outcome === "earl:inapplicable" && assertion2.result.outcome !== "earl:inapplicable") 
-                || (assertion1.result.outcome === "earl:passed" && (assertion2.result.outcome === "earl:cantTell" || assertion2.result.outcome === "earl:failed"))
-                || (assertion1.result.outcome === "earl:cantTell" && assertion2.result.outcome === "earl:failed")){
+                if((currentOutcome === "earl:inapplicable" && newOutcome !== "earl:inapplicable") 
+                || (currentOutcome === "earl:passed" && (newOutcome === "earl:cantTell" || newOutcome === "earl:failed"))
+                || (currentOutcome === "earl:cantTell" && newOutcome === "earl:failed")){
 
-                    jsonLd1.auditSample[i].result = assertion2.result;
+                    jsonLd1.auditSample[i].result = jsonLd2.auditSample[i].result;
         
                 }
 
-                mergeFoundCases(jsonLd1.auditSample[i].hasPart, assertion2.hasPart);
+                mergeFoundCases(jsonLd1.auditSample[i].hasPart, jsonLd2.auditSample[i].hasPart);
 
             }
         }
@@ -54,40 +54,42 @@ function mergeJsonLds(jsonLd1, jsonLd2){
 /**
  * Merges the "hasPart" array of two EARL reports, updating the first report with any new or modified assertions from the second report.
  * @function mergeFoundCases
- * @param {Array} hasPart1 - The "hasPart" array of the first EARL report.
- * @param {Array} hasPart2 - The "hasPart" array of the second EARL report.
+ * @param {Array} currentHasPart - The "hasPart" array of the first EARL report.
+ * @param {Array} newHasPart - The "hasPart" array of the second EARL report.
  * @returns {undefined}
  */
-function mergeFoundCases(hasPart1, hasPart2){
+function mergeFoundCases(currentHasPart, newHasPart){
 
-    for(const foundCase2 of hasPart2){
+    for(const newFoundCase of newHasPart){
 
-        const foundCase1 = hasPart1.find(foundCase => foundCase.subject === foundCase2.subject && foundCase.result.outcome === foundCase2.result.outcome);
+        const currentFoundCase = currentHasPart.find(currentCase => currentCase.subject === newFoundCase.subject && currentCase.result.outcome === newFoundCase.result.outcome);
         
-        if(foundCase1){
+        if(currentFoundCase){
 
-            for(const assertor of foundCase2.assertedBy){
-                foundCase1.assertedBy.push(assertor);
+            for(const newAssertor of newFoundCase.assertedBy){
+                currentFoundCase.assertedBy.push(newAssertor);
             }
             
-            foundCase1.result.description += "\n\n" + foundCase2.result.description;
+            currentFoundCase.result.description += "\n\n" + newFoundCase.result.description;
             
-            for(const pointer2 of foundCase2.result.locationPointersGroup){
+            const newPointers = newFoundCase.result.locationPointersGroup
 
-                const pointer1 = foundCase1.result.locationPointersGroup.find(pointer1 => pointer1.description === pointer2.description);
+            for(const newPointer of newPointers){
 
-                if(pointer1){
-                    for(const assertor of pointer2.assertedBy){
-                        pointer1.assertedBy.push(assertor);
+                const currentPointer = currentFoundCase.result.locationPointersGroup.find(pointer => pointer.description === newPointer.description);
+
+                if(currentPointer){
+                    for(const newAssertor of newPointer.assertedBy){
+                        currentPointer.assertedBy.push(newAssertor);
                     }
                 }else{
-                    foundCase1.result.locationPointersGroup.push(pointer2);
+                    currentFoundCase.result.locationPointersGroup.push(newPointer);
                 }
                 
             }
 
         }else{
-            hasPart1.push(foundCase2);
+            currentHasPart.push(newFoundCase);
         }
     }
 }

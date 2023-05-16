@@ -10,7 +10,8 @@ class JsonLd{
 
         this.#lock = false;
 
-        const siteName = (new URL(evaluationScope[0].url)).hostname.replace('www.','');
+        const url = new URL(evaluationScope[0].url);
+        const webSite = url.origin + "/";
 
         const evaluators = {
             "mv": { "name": "MAUVE", "url": "https://mauve.isti.cnr.it/singleValidation.jsp"},
@@ -28,7 +29,7 @@ class JsonLd{
 
             "type": "Evaluation",
             "@language": "en",
-            "title": "Accessibility Evaluation Report for " + siteName + " website",
+            "title": "Accessibility Evaluation Report for " + webSite + " website",
             "commissioner": "https://github.com/larraagirrejulen/GrAL/tree/main/ac_check%20(react)",
             "dct:date": new Date().toLocaleString(),
 
@@ -53,7 +54,7 @@ class JsonLd{
                         "earl:TestSubject",
                         "sch:WebSite"
                     ],
-                    "siteName": siteName,
+                    "siteName": webSite,
                     "siteScope": evaluationScope.map(obj => obj.url).join(', ')
                 },
                 "conformanceTarget": "wai:WCAG2AAA-Conformance",
@@ -101,17 +102,20 @@ class JsonLd{
 
 
 
-    async addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null){
+    async addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null, documentationUrl=null){
 
         while (this.#lock) {
             await new Promise(resolve => setTimeout(resolve, 100)); // Wait for a short period
-            console.log("I'm locked: " + webPageURL);
         }
 
         try{
             this.#lock = true;
 
             const criteriaId = this.#successCriterias[criteriaNumber].id;
+            let docUrl = documentationUrl;
+            if(docUrl === null){
+                docUrl = "https://www.w3.org/TR/WCAG21/#" + criteriaId
+            }
             const webSiteAssertion = this.#jsonld.auditSample.find(siteAssertion => siteAssertion.test === "wcag2:" + criteriaId);
 
             const outcomeDescriptions = {
@@ -133,10 +137,12 @@ class JsonLd{
                     webSiteAssertion.mode = "earl:automatic";
                     break;  
                 case "earl:inapplicable":
-                    newGeneralOutcome();
+                    if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:untested"){
+                        newGeneralOutcome();
+                    }
                     break;  
                 case "earl:passed":
-                    if(newOutcome !== "earl:inapplicable" || newOutcome !== "earl:passed"){
+                    if(newOutcome === "earl:cantTell" || newOutcome === "earl:failed"){
                         newGeneralOutcome();
                     }
                     break;
@@ -151,6 +157,7 @@ class JsonLd{
             const locationPointersGroup = [];
             let description = "*************@" + this.#evaluator.name + "************* \n\n"
             description += outcomeDescriptions[newOutcome][1] + "\n\n" + newDescription;
+            description += "\n\n [Success criteria documentation](https://www.w3.org/TR/WCAG21/#" + criteriaId +")";
 
             const webPageAssertion = webSiteAssertion.hasPart.find(pageAssertion => pageAssertion.subject === webPageURL && pageAssertion.result.outcome === newOutcome);
 
@@ -177,7 +184,8 @@ class JsonLd{
                     "assertedBy": [this.#evaluator.name],
                     "ptr:expression": path, 
                     "description": correctedHtml,
-                    "innerText": innerText
+                    "innerText": innerText,
+                    "documentation": docUrl
                 };
 
                 if(webPageAssertion){
@@ -185,13 +193,24 @@ class JsonLd{
                     if(webPageAssertion.result.locationPointersGroup.every(pointer => pointer["ptr:expression"] !== path) 
                     && webPageAssertion.result.locationPointersGroup.length < 30
                     && webPageAssertion.result.locationPointersGroup.every(pointer => pointer.description !== correctedHtml)){
-                        webPageAssertion.result.description += "\n " + path;
+
+                        if(docUrl.startsWith("https://www.w3.org/TR/WCAG21/")){
+                            webPageAssertion.result.description += "\n " + path;
+                        }else{
+                            webPageAssertion.result.description += "\n [" + path + "](" + docUrl + ")";
+                        }
+                        
                         webPageAssertion.result.locationPointersGroup.push(newPointer);
                     }
                     return;
                 }
 
-                description += "\n\n Found cases locations: \n\n " + path;
+                if(docUrl.startsWith("https://www.w3.org/TR/WCAG21/")){
+                    description += "\n\n Found cases locations: \n\n " + path;
+                }else{
+                    description += "\n\n Found cases locations: \n\n [" + path + "](" + docUrl + ")";
+                }
+                
                 locationPointersGroup.push(newPointer);
 
             }else if (webPageAssertion) return;

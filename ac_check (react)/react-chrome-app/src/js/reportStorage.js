@@ -15,7 +15,7 @@ export function storeNewReport(newReport){
         storeOnChromeStorage("report", newReport);
         mapReportData(newReport);
     } catch(error) {
-        ["report", "reportSummary", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+        ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
         throw new Error("Error when storing or mapping the report => " + error);
     }
 }
@@ -31,7 +31,7 @@ export function removeStoredReport(){
 
     localStorage.removeItem("evaluated");
 
-    ["report", "reportSummary", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+    ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
 
     window.location.reload();
 }

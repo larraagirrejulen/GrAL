@@ -1,7 +1,7 @@
 
-const JsonLd = require('../jsonLd/jsonLd');
 const pa11y = require('pa11y');
 const { URL } = require('url');
+
 
 /**
  * Class representing a web page scraper to evaluate a pages accesibility.
@@ -9,7 +9,7 @@ const { URL } = require('url');
 class Scraper {
 
     #evaluator;
-    #evaluationScope;
+    #Evaluator;
     #jsonld;
     #browser;
     
@@ -21,15 +21,15 @@ class Scraper {
      * @param {string} evaluationScope - The URL of the web pages to evaluate.
      * @throws Will throw an error if the evaluator is not valid.
     */
-    constructor(evaluator, evaluationScope, browser){
+    constructor(evaluator, jsonLd, browser){
 
         if (!['am', 'ac', 'mv', 'a11y', 'pa', 'lh'].includes(evaluator)) {
             throw new Error(evaluator.toUpperCase() + " is not a valid evaluator !!!");
         }
 
         this.#evaluator = evaluator;
-        this.#evaluationScope = evaluationScope;
-        this.#jsonld = new JsonLd(evaluator, evaluationScope);
+        this.#Evaluator = evaluator.toUpperCase();
+        this.#jsonld = jsonLd;
         this.#browser = browser;
     }
 
@@ -41,54 +41,20 @@ class Scraper {
      * @returns {object} - The JSON-LD evaluation report resulting of the scraping process.
      * @throws Will throw an error if an error occurs during the scraping process.
     */
-    async performScraping(){
-
-        /**
-         * Wraps a function that requires a page instance and returns its result after closing the page.
-         * @param {Object} browser - The browser instance to create the page on.
-         * @returns {Function} - A function that accepts a function to be wrapped and returns a promise that resolves with the result of the wrapped function.
-         */
-        const withPage = (browser) => async (fn) => {
-            let page;
-            try {
-                page = await browser.newPage();
-                await page.setViewport({ width: 1920, height: 1080});
-                return await fn(page);
-            } finally {
-                if(page) await page.close();
-            }
-        }
-
-        const evaluators = {
-            'am': async (webPage, page) => this.amScraper('https://accessmonitor.acessibilidade.gov.pt/', webPage, page),
-            'ac': async (webPage, page) => this.acScraper('https://achecker.achecks.ca/checker/index.php', webPage, page),
-            'mv': async (webPage, page) => this.mvScraper('https://mauve.isti.cnr.it/singleValidation.jsp', webPage, page),
-            'a11y': async (webPage, page) => this.a11yScraper(webPage, page),
-            'pa': async (webPage, page) => this.pa11yScraper(webPage),
-            'lh': async (webPage, page) => this.lhScraper(webPage, page)
-        };
-
-        console.log("\nInitiating " + this.#evaluator.toUpperCase() + " scraping process ...");
+    async performScraping(webPage, page = null){
 
         try{
 
-            await Promise.all(this.#evaluationScope.map(async (webPage) => {
+            console.log("\n  " + this.#Evaluator + ": Starting with " + webPage.url + " ...");
 
-                return await withPage(this.#browser)(async (page) => {
-    
-                    console.log("\n  " + this.#evaluator.toUpperCase() + ": Starting with " + webPage.url + " ...");
-                    await evaluators[this.#evaluator](webPage, page);
-                    console.log("\n  " + this.#evaluator.toUpperCase() + ": " + webPage.url + " scraping finished.");
-                    
-                });
-
-            }));
+            await this[this.#evaluator + "Scraper"](webPage, page);
             
-            console.log(`\n${this.#evaluator.toUpperCase()} scraping successfully finished !!!`);
+            console.log("\n  " + this.#Evaluator + ": " + webPage.url + " scraping finished."); 
 
-        } catch(error) { throw new Error("\nThe next error was found on " + this.#evaluator.toUpperCase()  + " scraping process: " + error) }
+        } catch(error) { 
+            throw new Error("\nThe next error was found on " + this.#Evaluator  + " scraping process: " + error); 
+        }
 
-        return this.#jsonld.getJsonLd();
     }
 
 
@@ -101,25 +67,26 @@ class Scraper {
      * @param {Page} page - The puppeteer page object to be used for scraping.
      * @returns {void}
     */
-    async amScraper(evaluatorUrl, webPage, page){
+    async amScraper(webPage, page){
 
-        await page.goto(evaluatorUrl);
-        await page.waitForSelector('#url', {timeout: 30000});
+        // Go to the evaluator page and perform the evaluation
+        await page.goto("https://accessmonitor.acessibilidade.gov.pt/");
+        await page.waitForSelector('#url');
         await page.focus('#url');
         await page.keyboard.type(webPage.url);
         await page.click('.card_actions button');
 
+        // Wait for results to be loaded and scrape the results
         await page.waitForSelector('table.evaluation-table > tbody', {timeout: 60000});
-
         const results = await page.evaluate(() => {
-
-            const results = [];
 
             const status2Outcome = {
                 "Non acceptable practice": "earl:failed",
                 " Practice to view manually ": "earl:cantTell",
                 "Acceptable practice": "earl:passed"
             };
+
+            const results = [];
 
             const foundTechniques = Array.from(document.querySelectorAll('table.evaluation-table > tbody > tr'));
 
@@ -132,17 +99,23 @@ class Scraper {
                 if (!outcome) continue;
 
                 const techniqueInfo = cols[1].querySelector('.collapsible-content');
+                const documentation = techniqueInfo.querySelector("div:nth-child(2) > span > strong > a").getAttribute("href");
                 const criteriaNumbers = Array.from(techniqueInfo.querySelectorAll('li')).map(li => li.textContent.substring(18,24).replaceAll(' ',''));
                 let description = techniqueInfo.querySelector("p").textContent.replace(/\u00A0/g, " ");
                 description += "\n\n" + techniqueInfo.querySelector("div > span > strong > a").textContent.replace(/\u00A0/g, " ").substring(4).replace(":", "").replace(" ", "");
 
-                results.push({
-                    "outcome": outcome,
-                    "criteriaNumbers": criteriaNumbers,
-                    "description": description
-                });
+                for(const criteria of criteriaNumbers){
+                    results.push({ 
+                        outcome, 
+                        criteria, 
+                        description, 
+                        documentation 
+                    });
+                }
+                
             }
-            return results;  
+            return results; 
+
         });
 
         const rows = await page.$$("table.evaluation-table > tbody > tr");
@@ -151,66 +124,59 @@ class Scraper {
 
             const link = await rows[i].$('td > a');
             
-            if(link){
+            if(!link) continue;
 
-                await page.evaluate(el => el.scrollIntoView(), link);
+            await page.evaluate(el => el.scrollIntoView(), link);
 
-                const href = await link.evaluate(el => el.getAttribute('href'));
+            const href = await link.evaluate(el => el.getAttribute('href'));
 
-                if(href.startsWith("/results") || href.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
+            if(href.startsWith("/results") || href.startsWith("https://accessmonitor.acessibilidade.gov.pt/")){
+                
+                const tr = i + 1
+
+                await page.click("table.evaluation-table > tbody > tr:nth-child("+ tr +") > td:nth-child(4) > a");
+                await page.waitForSelector('#list_tab');
+
+                const casesLocations = await page.evaluate(() => {
                     
-                    const tr = i + 1
+                    const casesLocations = [];
+                    const foundCases = Array.from(document.querySelectorAll('ol > li'));
 
-                    await page.click("table.evaluation-table > tbody > tr:nth-child("+ tr +") > td:nth-child(4) > a");
-                    await page.waitForSelector('#list_tab');
+                    for (const foundCase of foundCases){
+                        const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
+                        casesLocations.push(caseElements[3].querySelector('td span').textContent);
+                    }
+                    return casesLocations;  
+                });
 
-                    const casesLocations = await page.evaluate(async () => {
-                        
-                        const casesLocations = [];
-                        const foundCases = Array.from(document.querySelectorAll('ol > li'));
+                results[i]["casesLocations"] = casesLocations;
 
-                        for (const foundCase of foundCases){
-                            const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
-                            casesLocations.push(caseElements[3].querySelector('td span').textContent);
-                        }
-                        return casesLocations;  
-                    });
-
-                    results[i]["casesLocations"] = casesLocations;
-
-                    await page.click('section > nav > a[href^="/results/"]');
-                }
+                await page.click('section > nav > a[href^="/results/"]');
             }
         }
 
         await page.goto(webPage.url);
 
         for(const result of results){
-            if(result.casesLocations){
+
+            const { casesLocations, criteria, outcome, description, documentation } = result;
+
+            if(casesLocations){
                 for (const path of result.casesLocations){
 
-                    if(path.startsWith("html > head")){
-                        continue;
-                    }
-
-                    try{
-                        await page.waitForSelector(path);
-                    }catch(error){
-                        continue;
-                    }
+                    if(path.startsWith("html > head")) continue;
     
                     const targetElement = await page.$(path);
+
+                    if(!targetElement) continue;
     
-                    const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
+                    const html = await page.evaluate(el => el.outerHTML, targetElement);
     
-                    for (const criteria of result.criteriaNumbers){
-                        await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, path, targetHtml);
-                    } 
+                    await this.#jsonld.addNewAssertion(criteria, outcome, description, webPage.url, path, html, documentation);
+                    
                 }
             }else{
-                for (const criteria of result.criteriaNumbers){
-                    await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url);
-                }
+                await this.#jsonld.addNewAssertion(criteria, outcome, description, webPage.url, null, null, documentation);
             }
             
         }
@@ -222,17 +188,14 @@ class Scraper {
      * Scrapes results from the AChecker evaluator and loads them into the jsonLd..
      * @async
      * @function amScraper
-     * @param {string} evaluatorUrl - The URL of the AChecker evaluator.
      * @param {object} page - The Puppeteer page object to use for web scraping.
      * @returns {void}
      */
-    async acScraper(evaluatorUrl, webPage, page){
+    async acScraper(webPage, page){
 
-        await page.goto(evaluatorUrl);
-
+        // Go to the evaluator page, configure it, and perform the evaluation
+        await page.goto("https://achecker.achecks.ca/checker/index.php");
         await page.waitForSelector('#checkuri');
-
-        // Configure to include AAA level, type the url to evaluate and submit
         await page.click('h2[align="left"] a');
         await page.click("#radio_gid_9");
         await page.click("#show_source");
@@ -240,17 +203,15 @@ class Scraper {
         await page.keyboard.type(webPage.url);
         await page.click('#validate_uri');
 
-        // Wait for results to be loaded
+        // Wait for results to be loaded and scrape the results
         await page.waitForSelector('fieldset[class="group_form"]', {timeout: 120000});
-
         const results = await page.evaluate(() => {
 
             var results = [];
 
             function pushResults(id){
 
-                const cases = document.querySelector(id);
-                const children = cases.children;
+                const children = document.querySelector(id).children;
 
                 for(const child of children){
                     if (child.tagName === 'H4') {
@@ -261,16 +222,9 @@ class Scraper {
 
                         while (nextSibling){
 
-                            if(nextSibling.tagName === 'H3'){
-                                break;
-                            }else if(nextSibling.tagName === 'DIV'){
-
-                                const problem = nextSibling.querySelector("span > a").textContent;
-                                
-                                let solution;
-                                if(id === "#AC_errors"){
-                                    solution = nextSibling.querySelector("div").textContent.substring(9).trim();
-                                }
+                            if(nextSibling.tagName === 'H3') break;
+                            
+                            if(nextSibling.tagName === 'DIV'){
                                 
                                 const foundCases = Array.from(nextSibling.querySelectorAll("table > tbody > tr > td"));
                 
@@ -278,8 +232,7 @@ class Scraper {
 
                                     const path = foundCase.querySelector("em").textContent;
 
-                                    const regex = /Line (\d+), Column (\d+)/;
-                                    const match = regex.exec(path);
+                                    const match = /Line (\d+), Column (\d+)/.exec(path);
 
                                     const line = document.querySelector("#line-" + parseInt(match[1]));
 
@@ -287,6 +240,8 @@ class Scraper {
                                         
                                     const html = line.textContent.substring(parseInt(match[2])-1);
 
+
+                                    // Conseguir el path modificando el html
                                     let querySelector = html.replace(/[\n\t]/g, '').replace(/\n\s*/g, '').replace(/\"/g, "'");
 
                                     querySelector = querySelector.substring(0, querySelector.indexOf(">")+1);
@@ -312,12 +267,16 @@ class Scraper {
                                         querySelector = querySelector.replace(/<|>/g, "")
                                     }
 
+
+                                    const outcome = id === "#AC_errors" ? "earl:failed": "earl:cantTell";
+                                    const description = nextSibling.querySelector("span > a").textContent;
+
                                     results.push({
-                                        "criteriaNumber": criteria,
-                                        "outcome": id === "#AC_errors" ? "earl:failed": "earl:cantTell",
-                                        "description": id === "#AC_errors" ? problem + '\n\n' + solution : problem,
-                                        "targetPath": querySelector,
-                                        "targetHtml": html
+                                        criteria,
+                                        outcome,
+                                        description,
+                                        "path": querySelector,
+                                        html
                                     });
                                 }
 
@@ -336,7 +295,7 @@ class Scraper {
         });
 
         for (const result of results){
-            await this.#jsonld.addNewAssertion(result.criteriaNumber, result.outcome, result.description, webPage.url, result.targetPath, result.targetHtml);
+            await this.#jsonld.addNewAssertion(result.criteria, result.outcome, result.description, webPage.url, result.path, result.html);
         }
     }
 
@@ -346,36 +305,27 @@ class Scraper {
      * Scrapes results from the Mauve evaluator and loads them into the jsonLd..
      * @async
      * @function mvScraper
-     * @param {string} evaluatorUrl - The URL of the Mauve evaluator.
      * @param {object} page - The Puppeteer page object to use for web scraping.
      * @returns {void}
      */
-    async mvScraper(evaluatorUrl, webPage, page){
+    async mvScraper(webPage, page){
 
-        // Navigate to url
-        await page.goto(evaluatorUrl);
-
-        // Wait for input element to load
+        // Go to the evaluator page, configure it, and perform the evaluation
+        await page.goto("https://mauve.isti.cnr.it/singleValidation.jsp");
         await page.waitForSelector('#uri');
-
-        // Load the url we want to evaluate and submit
         await page.focus('#uri');
         await page.keyboard.type(webPage.url);
         await page.select('#Level_of_Conformance', 'AAA');
         await page.click('#validate');
-
-        // Wait for results to be loaded
         await page.waitForSelector('#livepreview_link');
-        await page.waitForTimeout(3000);    // Ez dakit bestela nola egin daitekeen
+        await page.waitForTimeout(3000);
         await page.click('#livepreview_link');
 
-        // Wait for the loader to disappear
+        // Wait for results to be loaded and scrape the results
         await page.waitForFunction(() => {
             const loader = document.querySelector('#loader');
             return loader && loader.classList.contains('display_none');
         });
-
-        // Get evaluation data
         const results = await page.evaluate(() => {
             
             var results = [];
@@ -396,17 +346,16 @@ class Scraper {
         
                         let location = occurrence.querySelector("button");
     
-                        try{
-                            location = location.getAttribute("data-x");
-                        }catch(error){
-                            continue;
-                        }
+                        if(!location) continue;
+                        
+                        location = location.getAttribute("data-x");
         
                         results.push({
                             "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
                             "outcome": outcomeType === "error" ? "earl:failed" : "earl:cantTell",
                             "description": description,
-                            "xpath": location
+                            "xpath": location,
+                            "documentation": foundCase.querySelector("div > a").getAttribute("href")
                         });
                     }
     
@@ -451,7 +400,7 @@ class Scraper {
                 const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
 
                 for (const criteria of result.criterias){
-                    await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, result.xpath, targetHtml);
+                    await this.#jsonld.addNewAssertion(criteria, result.outcome, result.description, webPage.url, result.xpath, targetHtml, result.documentation);
                 }
             }
 
@@ -473,7 +422,7 @@ class Scraper {
 
         await page.addScriptTag({ path: './scraping/a11yAinspector.js' });
 
-        const results = await page.evaluate(() => {
+        const results = await page.evaluate(async () => {
 
             a11yResults = [];
 
@@ -504,6 +453,7 @@ class Scraper {
                 if (!outcome || !ruleResult.isRuleRequired()) continue;
 
                 let description = ruleResult.getRuleSummary() + "\n\n";
+
                 description += ruleResult.getResultMessagesArray().filter(message => message !== "N/A").join("\n\n");
 
                 const successCriteria = ruleResult.getRule().getPrimarySuccessCriterion().id;
@@ -543,11 +493,9 @@ class Scraper {
             return a11yResults;
         })
 
-        //console.log("\nStarting loading data: " + webPage.url);
         for(const result of results) {
             await this.#jsonld.addNewAssertion(result.successCriteria, result.outcome, result.description, result.url, result.xpath, result.html);
         }
-        //console.log("Loading data finished: " + webPage.url);
         
     }
 
@@ -559,23 +507,22 @@ class Scraper {
      * @function pa11yScraper
      * @returns {void}
      */
-    async pa11yScraper(webPage){
+    async paScraper(webPage, page){
 
         const results = await pa11y(webPage.url, {
             standard: 'WCAG2AAA',
             includeWarnings: true,
             timeout: 90000
         });
-        //console.log("\nStarting loading data: " + webPage.url);
+
         for(const issue of results.issues){
 
-            const criteria = issue.code.match(/(\d\_\d\_\d)/)[0].replaceAll("_", ".")
+            const criteria = issue.code.match(/(\d\_\d\_\d)/)[0].replaceAll("_", ".");
 
-            const outcome = issue.typeCode === 1 ? "earl:failed" : "earl:cantTell"
+            const outcome = issue.typeCode === 1 ? "earl:failed" : "earl:cantTell";
 
             await this.#jsonld.addNewAssertion(criteria, outcome, issue.message, webPage.url, issue.selector, issue.context);
         }
-        //console.log("Loading data finished: " + webPage.url);
     }
 
 
@@ -590,11 +537,9 @@ class Scraper {
      */
     async lhScraper(webPage, page){
 
-        await page.goto(webPage.url);
-
         const lighthouseModule = await import('lighthouse');
         const lighthouse = lighthouseModule.default;
-
+        
         // Generate the Lighthouse report
         const report = await lighthouse(webPage.url, {
             port: (new URL(this.#browser.wsEndpoint())).port,
@@ -667,6 +612,13 @@ class Scraper {
             
             const audit = accessibilityResults[key];
 
+            let description = audit.description;
+
+            if(description.indexOf("(https://") === -1) continue;
+            
+            let documentation = description.substring(description.indexOf("(https://") + 1);
+            documentation = documentation.substring(0, documentation.indexOf(")"));
+
             if(audit.score === 0){
                 
                 const tag = audit.details.debugData.tags[2].slice(4);
@@ -675,13 +627,11 @@ class Scraper {
                 for(const item of audit.details.items){
                     const path = item.node.selector;
                     const html = item.node.snippet;
-                    const description = audit.description + "\n\n" + item.node.explanation;
+                    description += "\n\n" + item.node.explanation;
 
-                    await this.#jsonld.addNewAssertion(criteria, "earl:failed", description, webPage.url, path, html);
+                    await this.#jsonld.addNewAssertion(criteria, "earl:failed", description, webPage.url, path, html, documentation);
                 }
             }else{
-
-                const description = audit.description;
 
                 if(!criteria[audit.id]) continue;
 
@@ -701,7 +651,7 @@ class Scraper {
     
                 }
 
-                await this.#jsonld.addNewAssertion(criteria[audit.id], outcome, description, webPage.url);
+                await this.#jsonld.addNewAssertion(criteria[audit.id], outcome, description, webPage.url, null, null, documentation);
 
             } 
         }
@@ -712,3 +662,4 @@ class Scraper {
 
 
 module.exports = Scraper;
+

@@ -352,7 +352,7 @@ function ResultSection(): JSX.Element {
           <ResultsTable conformanceLevels={conformanceLevels}/>
         
         </> : 
-          <div style={{textAlign: "center", padding:"15px 0"}}>No data stored</div>
+          <div style={{textAlign: "center", padding:"15px 0"}}>Website has not been evaluated</div>
         }
       </div>
 

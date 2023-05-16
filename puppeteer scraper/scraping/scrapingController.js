@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const Scraper = require('./scraper');
 const fs = require("fs");
 const mergeJsonLds = require('../jsonLd/jsonLdUtils');
+const JsonLd = require('../jsonLd/jsonLd');
 
 
 /**
@@ -26,6 +27,23 @@ const withBrowser = async (fn) => {
 
 
 /**
+ * Wraps a function that requires a page instance and returns its result after closing the page.
+ * @param {Object} browser - The browser instance to create the page on.
+ * @returns {Function} - A function that accepts a function to be wrapped and returns a promise that resolves with the result of the wrapped function.
+ */
+const withPage = (browser) => async (fn) => {
+	let page;
+	try {
+		page = await browser.newPage();
+		await page.setViewport({ width: 1920, height: 1080});
+		return await fn(page);
+	} finally {
+		if(page) await page.close();
+	}
+}
+
+
+/**
  * Scrapes the selected webpages based on the request object.
  * 
  * @function scrapeSelected
@@ -36,16 +54,46 @@ async function scrapeSelected(request){
 
 	const activeEvaluators = ["am", "ac", "mv", "a11y", "pa", "lh"].filter((evaluator) => request[evaluator]);
 
-	const results = await withBrowser(async (browser) => {
+	const results = await Promise.all(activeEvaluators.map(async (evaluator) => {
 
-		return await Promise.all(activeEvaluators.map(async (evaluator) => {
+		console.log("\nInitiating " + evaluator.toUpperCase() + " scraping process ...");
 
-			const scraper = new Scraper(evaluator, request.scope, browser);
+		const jsonLd = new JsonLd(evaluator, request.scope);
 
-			return await scraper.performScraping();
+		await withBrowser(async (browser) => {
 
-		}));
-	});
+			const scraper = new Scraper(evaluator, jsonLd, browser);
+
+			if(evaluator === "lh"){
+
+				for(const webPage of request.scope){
+
+					await scraper.performScraping(webPage);
+
+				}
+
+			}else{
+
+				await Promise.all(request.scope.map(async (webPage) => {
+
+					await withPage(browser)(async (page) => {
+
+						await scraper.performScraping(webPage, page);
+
+					});
+
+				}));
+
+			}
+			
+		});
+
+		console.log(`\n${evaluator.toUpperCase()} scraping successfully finished !!!`);
+
+		return jsonLd.getJsonLd();
+
+	}));
+
 
 	for(let i = 1; i<results.length; i++){
 		mergeJsonLds(results[0], results[i]);

@@ -35,22 +35,12 @@ try{
   });
 
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { 
+  chrome.runtime.onMessage.addListener((request, sender) => { 
 
     if(request.action === "openOptionsPage"){
       
       chrome.storage.session.set({ tabId: sender.tab.id }); // store the tab ID for the options page to reload the tab when saving options
       chrome.runtime.openOptionsPage();
-
-    }else if(request.action === "createElementPopup"){
-      
-      const path = request.path;
-      chrome.storage.local.set({path}, () => {
-        chrome.scripting.executeScript({
-          files: ["/js/createElementPopup.js"],
-          target: { tabId: sender.tab.id }
-        });
-      });
 
     }else if(request.action === "showHiddenElement"){
       
