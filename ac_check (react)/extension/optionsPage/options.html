@@ -8,7 +8,7 @@
     
     <div class="option">
       <span>
-        Shift the webpage to the right <br/> so the extension doesn't cover it
+        Shift the webpage to the right so the extension doesn't cover it
       </span>
       <label class="switch">
         <input type="checkbox" id="shiftWebpage">
@@ -18,20 +18,38 @@
 
     <div class="option">
       <span>
-        Mantain extended elements <br/> when opening a new element
+        Mantain extended elements when opening a new element
       </span>
       <label class="switch">
         <input type="checkbox" id="mantainExtended">
         <span class="slider round"></span>
       </label>
     </div>
-   
+
+    <div class="blacklistOption">
+      <div class="option">
+        <span>
+          Ignore blacklisted evaluation results
+        </span>
+        <label class="switch">
+          <input type="checkbox" id="enableBlacklist">
+          <span class="slider round"></span>
+        </label>
+      </div><br>
+      <table>
+        <thead>
+          <tr><th width="15%">Evaluator</th><th width="20%">Criteria</th><th width="10%">Outcome</th><th>Message</th><th width="10%"><img id="emptyList" src="../images/delete.png"/></th></tr>
+        </thead>
+        <tbody id="blacklist"></tbody>
+      </table>
+    </div>
+    
     <div>
       <button id="saveOptions">Save</button>
       <span id="saveStatus"></span><br/>
     </div><br/>
 
-    <span>In case the page you are evaluating does not reload automatically, you may need to do it manually</span>
+    <span>In case the page you are evaluating does not reload automatically when saving the configuration, you may need to do it manually</span>
     
     <script src="options.js"></script>
   </body>

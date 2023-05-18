@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-
+import { mapReportData } from '../mapReportData.js';
 
 /**
  * Returns the URL of an image from the 'images' folder.
@@ -32,8 +32,8 @@ export function storeOnChromeStorage(key, value){
  * @param {string} key - The key to remove the value of.
  * @returns {void}
  */
-export function removeFromChromeStorage(key) {
-    chrome.storage.local.remove(key);
+export function removeFromChromeStorage(key, sync = false) {
+    chrome.storage[sync ? "sync" : "local"].remove(key);
 }
 
 
@@ -54,17 +54,29 @@ export async function getFromChromeStorage(key, isSync = true) {
 }
 
 
+
+export async function blackListElement(newListElement) {
+
+    const blacklist = await getFromChromeStorage("blacklist") ?? [];
+    blacklist.push(newListElement);
+
+    chrome.storage.sync.set({ blacklist }, async () => { 
+        mapReportData(null, blacklist); 
+    });
+
+}
+
+
 /**
  * Sends a message to the background script of a Chrome extension.
  * @async
  * @function sendMessageToBackground
  * @param {string} action - The action to perform.
- * @param {string|null} [path=null] - The path to perform the action on.
  * @returns {Promise<*>} - A Promise that resolves with the response from the background script.
  */
-export async function sendMessageToBackground( action, path = null ){
+export async function sendMessageToBackground( action){
     return await new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage({ action: action, path: path}, response => {
+        chrome.runtime.sendMessage({action}, response => {
             chrome.runtime.lastError ? reject(chrome.runtime.lastError) : resolve(response);
         });
     });

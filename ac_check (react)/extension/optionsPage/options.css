@@ -1,6 +1,7 @@
  
 body{
     padding: 15px;
+    width: 500px;
 }
 
 .option{
@@ -12,7 +13,42 @@ body{
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 13px;
-    width: 75%;
+    width: 90%;
+}
+
+.blacklistOption .option{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.blacklistOption{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 90%;
+}
+
+.blacklistOption table{
+    border: 2px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.blacklistOption table img{
+    cursor: pointer;
+    height: 18px;
+}
+
+.blacklistOption table img:hover{
+    filter: drop-shadow(0 0 1px red) brightness(1.1);
+}
+
+.blacklistOption table th, .blacklistOption table td{
+    border: 2px solid #ccc;
+    padding: 5px;
 }
 
 #saveStatus{
@@ -30,7 +66,7 @@ body{
  
  /* The switch - the box around the slider */
 .switch {
-    right: 25%;
+    right: 10%;
     position: absolute;
     display: inline-block;
     width: 30px;

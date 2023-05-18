@@ -16,21 +16,21 @@ export async function performEvaluation(setIsLoading){
 
         setIsLoading(true);
 
-        const storedScope = JSON.parse(localStorage.getItem("scope"));
-        if(storedScope.length === 0){
+        const scope = JSON.parse(localStorage.getItem("scope"));
+        if(scope.length === 0){
             alert("You need to set at least a web page as a scope");
             return;
         }
 
         const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
-        const [AM, AC, MV, A11Y, PA, LH] = checkboxes.map(({ checked }) => checked);
+        const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
 
-        if([AM, AC, MV, A11Y, PA, LH].every(val => val === false)) {
+        if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
             alert("You need to choose at least one analizer");
             return;
         }
 
-        const bodyData = JSON.stringify({ am: AM, ac: AC, mv: MV, a11y: A11Y, pa: PA, lh: LH, scope: storedScope });
+        const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
 
         const evaluationReport = await fetchEvaluation(bodyData);
 

@@ -2,10 +2,11 @@
 import './css/resultsTable.css';
 
 import { useState, useEffect} from "react";
-import { getImgSrc } from './js/utils/chromeUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from './js/utils/chromeUtils.js';
 import { setUseStateFromStorage, getElementByPath, handleStateChange } from './js/utils/reactUtils.js';
 import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from './js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
+import { mapReportData } from './js/mapReportData';
 
 
 const outcome2Background:any = {
@@ -25,6 +26,13 @@ export default function ResultsTable({conformanceLevels}:any){
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
 
     useEffect(() => {
+        (async ()=>{
+            const update = await getFromChromeStorage("blackListUpdated");
+            if(update){
+                removeFromChromeStorage("blackListUpdated", true);
+                mapReportData();
+            }
+        })();
         setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
         setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
     }, []);
@@ -193,7 +201,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                     <td colSpan={4}>{criteria.outcomes[window.location.href]}</td>
                 </tr>
                 {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] ? 
-                    <CriteriaResults criteriaResults={criteria.hasPart} mantainExtended={mantainExtended} />
+                    <CriteriaResults criteriaResults={criteria.hasPart} criteria={criteria.criteria} />
                 : null }
         
             </> : null }
@@ -205,9 +213,15 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 
-function CriteriaResults({criteriaResults}:any){  
+function CriteriaResults({criteriaResults, criteria}:any){  
 
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
+
+    const onBlacklistClick = async (evaluator:any, message:any, outcome:any) => {
+        if (window.confirm("Blacklist selected evaluator message?\n(You can remove blacklisted elements from the configuration)")){
+            blackListElement({evaluator, criteria, outcome, message});
+        } 
+    };
 
     return(<>
         {criteriaResults.map((result:any, index:any) => (<>
@@ -224,7 +238,11 @@ function CriteriaResults({criteriaResults}:any){
                 
                     {result.descriptions.map((element:any, index:any) => (<>
 
-                        <tr><td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}</td></tr>
+                        <tr>
+                            <td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}
+                                <img className='blacklistIcon' src={ getImgSrc("blacklist") } alt="Add message to blacklist" height="18px" onClick={() => onBlacklistClick(element.assertor, element.description, result.outcome)}/>
+                            </td>
+                        </tr>
                         <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
                     
                     </>))}

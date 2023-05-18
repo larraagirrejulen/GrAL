@@ -104,6 +104,9 @@ class JsonLd{
 
     async addNewAssertion(criteriaNumber, newOutcome, newDescription, webPageURL, path = null, html = null, documentationUrl=null){
 
+        let assertorDescription = newDescription.replaceAll('<','&lt;').replaceAll('>','&gt;');
+        assertorDescription.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
+
         while (this.#lock) {
             await new Promise(resolve => setTimeout(resolve, 100)); // Wait for a short period
         }
@@ -214,9 +217,6 @@ class JsonLd{
                 locationPointersGroup.push(newPointer);
 
             }else if (webPageAssertion) return;
-
-            let assertorDescription = newDescription.replaceAll('<','&lt;').replaceAll('>','&gt;');
-            assertorDescription.replaceAll('&lt;','<pre>&lt;').replaceAll('&gt;','&gt;</pre>');
 
             webSiteAssertion.hasPart.push({
                 "type": "Assertion",

@@ -130,6 +130,14 @@
   padding: 6px 0;
 }
   
+.resultsContainer .resultsTable tbody .blacklistIcon{
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.resultsContainer .resultsTable tbody .blacklistIcon:hover{
+  filter: drop-shadow(0 0 1px red) brightness(1.1);
+}
 
   
   

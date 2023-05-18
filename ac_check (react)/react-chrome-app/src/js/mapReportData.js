@@ -1,9 +1,10 @@
 
 import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js'
-import { storeOnChromeStorage }  from './utils/chromeUtils.js';
+import { storeOnChromeStorage, getFromChromeStorage }  from './utils/chromeUtils.js';
 
 
 const assertions = {};
+var blacklist;
 
 /**
  * Returns an object containing keys for each possible outcome type (passed, failed, cannotTell,
@@ -30,7 +31,16 @@ function getOutcomeVariables () {
  * @function mapReportData
  * @returns {void}
  */
-export async function mapReportData(evaluationReport){
+export async function mapReportData(evaluationreport = null, blackList = null){
+
+    const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage("report", false);
+
+    const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+    if(enableBlacklist){
+        blacklist = blackList ? blackList : await getFromChromeStorage("blacklist") ?? [];
+    }else{
+        blacklist = [];
+    }
 
     const auditSample = evaluationReport.auditSample;
     const successCriterias = getSuccessCriterias();
@@ -48,10 +58,11 @@ export async function mapReportData(evaluationReport){
         const assertion = auditSample[i];
         const conformanceLevel = assertion.conformanceLevel;
         const hasPart = assertion.hasPart;
-
-        siteSummary[assertion.result.outcome][conformanceLevel]++;
+        const criteriaNumber = successCriterias[i].num;
 
         const pageOutcomes = {};
+
+        let siteOutcome = "earl:untested";
 
         for(const webPage of evaluationReport.structuredSample.webpage){
 
@@ -60,6 +71,16 @@ export async function mapReportData(evaluationReport){
             for(const foundCase of hasPart){
 
                 if(foundCase.subject !== webPage.id) continue;
+
+                const blacklisteds = blacklist.filter(item => "earl:" + item.outcome === foundCase.result.outcome && item.criteria.startsWith(criteriaNumber));
+
+                if(blacklisteds.length > 0 && foundCase.assertedBy.length === 1){
+                    const assertor = foundCase.assertedBy[0];
+                    const blacklisted = blacklisteds.find(elem => elem.evaluator === assertor.assertor && elem.message === assertor.description);
+                    if(blacklisted){
+                        continue;
+                    }
+                }
                 
                 if(pageOutcome === "earl:failed") break;
 
@@ -77,9 +98,18 @@ export async function mapReportData(evaluationReport){
             pageSummaries[webPage.id][pageOutcome][conformanceLevel]++;
 
             pageOutcomes[webPage.id] = pageOutcome;
+
+            if(siteOutcome === "earl:untested" ||
+              (siteOutcome === "earl:inapplicable" && pageOutcome !== "earl:untested") ||
+              (siteOutcome === "earl:passed" && (pageOutcome === "earl:failed" || pageOutcome === "earl:cantTell")) ||
+              (siteOutcome === "earl:cantTell" && pageOutcome === "earl:failed")){
+                siteOutcome = pageOutcome;
+            }
         }
 
-        assertions[successCriterias[i].num] = {
+        siteSummary[siteOutcome][conformanceLevel]++;
+
+        assertions[criteriaNumber] = {
             conformanceLevel,
             pageOutcomes,
             "description": assertion.result.description,
@@ -170,9 +200,34 @@ function getHasPart(criteriaKey){
 
     for (const foundCase of assertionHasPart) {
 
+        const descriptions = foundCase.assertedBy;
+
+        const blacklisteds = blacklist.filter(item => "earl:" + item.outcome === foundCase.result.outcome && item.criteria.startsWith(criteriaKey));
+
+        if(blacklisteds.length > 0 && foundCase.assertedBy.length === 1){
+
+            let next = false;
+
+            for(const listed of blacklisteds){
+                const index = descriptions.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
+                if(index > -1){
+                    if(descriptions.length === 1){
+                        next = true;
+                        continue;
+                    }
+                    descriptions.splice(index, 1);
+                }
+            }
+
+            if(next){
+                continue;
+            }
+
+        }
+
         const hasPart = {
             "outcome": foundCase.result.outcome.replace("earl:", ""),
-            "descriptions": foundCase.assertedBy,
+            descriptions,
             "webPage": foundCase.subject
         }
 
@@ -224,7 +279,7 @@ function getHasPart(criteriaKey){
 
 
 function getPageOutcomesByCategory(categoryKey){
-    
+
     const outcomes = {};
     for(const webPage in assertions["1.1.1"].pageOutcomes){
         outcomes[webPage] = getOutcomeVariables(); 
