@@ -19,10 +19,10 @@ export function getImgSrc(name){
  * @param {*} value - The value to store.
  * @returns {void}
  */
-export function storeOnChromeStorage(key, value){
+export function storeOnChromeStorage(key, value, sync = false){
     let obj = {};
     obj[key] = value;
-    chrome.storage.local.set(obj);
+    chrome.storage[sync ? "sync" : "local"].set(obj);
 }
 
 

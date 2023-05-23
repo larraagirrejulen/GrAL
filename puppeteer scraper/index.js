@@ -1,6 +1,13 @@
 const http = require('http');
 const scraperController = require('./scraping/scrapingController');
+const UserController = require('./userController');
+const ReportController = require('./reportController');
 
+
+function sendResponse(body, response){
+    response.writeHead(200, {'Content-Type': 'application/json'}).end(JSON.stringify(body));
+    console.log("\n### ----- Request SUCCESS  ----- ###");
+}
 
 /**
  * HTTP server instance to handle incoming requests.
@@ -16,8 +23,10 @@ const server = http.createServer(async (request, response) => {
 
     const { method, url } = request;
 
+    const functions = ["/scrapeAccessibilityResults", "/userAuthentication", "/reportStoring"];
+
     // Return a 404 response if the request method or URL is not supported.
-    if (method !== 'POST' || url !== '/getEvaluationJson') response.writeHead(404).end();
+    if (method !== 'POST' || !functions.includes(url)) response.writeHead(404).end();
 
     let requestBody = [];
     
@@ -30,15 +39,31 @@ const server = http.createServer(async (request, response) => {
 
                 // Get the requests evaluation parameters.
                 requestBody = Buffer.concat(requestBody).toString();
+
                 requestBody = JSON.parse(requestBody);
-                console.log("\n### ----- New Scraping Request ----- ###");
 
-                // Process the request using the scraperController.
-                const body = await scraperController(requestBody);
+                console.log("\n### ----- New Request ----- ###");
 
-                // Send a successful response and the evaluation report back to the client.
-                response.writeHead(200, {'Content-Type': 'application/json'}).end(JSON.stringify(body));
-                console.log("\n### ----- Request SUCCESS  ----- ###");
+                if(url === "/scrapeAccessibilityResults"){
+
+                    // Process the request using the scraperController.
+                    sendResponse(await scraperController(requestBody), response);
+
+                } else if(url === "/userAuthentication"){
+
+                    userController.handleUserRequest(requestBody.email, requestBody.username, requestBody.password)
+                    .then((body) => {
+                        sendResponse(body, response);
+                    });
+
+                } else if(url === "/reportStoring"){
+
+                    reportController.handleReportRequest(requestBody.report, requestBody.uploadedBy)
+                    .then((body) => {
+                        sendResponse(body, response);
+                    });
+
+                }
 
             } catch(error) { 
 
@@ -52,6 +77,9 @@ const server = http.createServer(async (request, response) => {
     
 });
 
+const userController = new UserController();
+
+const reportController = new ReportController();
 
 // Start the server listening on the specified port.
 const PORT = 7070;

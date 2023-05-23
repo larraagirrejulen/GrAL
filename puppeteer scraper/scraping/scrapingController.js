@@ -2,8 +2,8 @@
 const puppeteer = require('puppeteer');
 const Scraper = require('./scraper');
 const fs = require("fs");
-const mergeJsonLds = require('../jsonLd/jsonLdUtils');
-const JsonLd = require('../jsonLd/jsonLd');
+const mergeJsonLds = require('./jsonLd/jsonLdUtils');
+const JsonLd = require('./jsonLd/jsonLd');
 
 
 /**

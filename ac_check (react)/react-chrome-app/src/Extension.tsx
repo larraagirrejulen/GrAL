@@ -6,12 +6,13 @@ import './css/evaluationSection.css';
 import './css/resultSection.css';
 
 import { useEffect, useState } from "react";
-import { getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
+import { getFromChromeStorage, getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
 import { removeStoredReport, downloadStoredReport, uploadNewReport } from './js/reportStorage.js';
 import { setUseStateFromStorage } from './js/utils/reactUtils.js';
-import { performEvaluation } from './js/evaluation.js';
+import { fetchServer, performEvaluation } from './js/evaluation.js';
 import { BeatLoader } from 'react-spinners';
 import ResultsTable from './ResultsTable';
+import UserAuthentication from './UserAuthentication';
 
 
 
@@ -27,12 +28,13 @@ export default function Extension(): JSX.Element {
 
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [authenticationState, setAuthenticationState] = useState("notLogged");
 
   /**
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
   */
   useEffect( ()=>{
-    setUseStateFromStorage("shiftWebpage", true, setShiftWebpage, "could not get 'shiftWebpage' option!");
+      setUseStateFromStorage("shiftWebpage", true, setShiftWebpage, "could not get 'shiftWebpage' option!");
   }, []);
 
   /**
@@ -60,10 +62,15 @@ export default function Extension(): JSX.Element {
         }} />
       </div>
 
-      <EvaluationScope /> 
-      <EvaluatorSelectionSection /> 
-      <EvaluationSection /> 
-      <ResultSection />
+      <UserAuthentication authenticationState={authenticationState} setAuthenticationState={setAuthenticationState} />
+      
+      {authenticationState === "logging" || authenticationState === "registering" 
+      ? null : <>
+        <EvaluationScope /> 
+        <EvaluatorSelectionSection /> 
+        <EvaluationSection /> 
+        <ResultSection authenticationState={authenticationState}/>
+      </> }
 
     </div>
 
@@ -307,13 +314,41 @@ function EvaluationSection (): JSX.Element {
  * @function ResultSection
  * @returns {JSX.Element} - React component
 */
-function ResultSection(): JSX.Element {
+function ResultSection({authenticationState}:any): JSX.Element {
   
   const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
     const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
     setConformanceLevels(levels);
     localStorage.setItem("conformanceLevels", JSON.stringify(levels));
+  };
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleStoreReport = async () => {
+
+    setIsLoading(true);
+
+    const report = await getFromChromeStorage("report", false);
+
+    const bodyData:any = JSON.stringify({report, uploadedBy: authenticationState});
+
+    try{
+
+        const storeResults:any = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+          window.alert("Report successfully stored!");
+        } else {
+          window.alert("Could not store the report, try again later...");
+        }
+
+    }catch(error){
+        console.log(error);
+    }finally{
+        setIsLoading(false);
+    }
+
   };
 
   /**
@@ -339,6 +374,14 @@ function ResultSection(): JSX.Element {
 
       <div className="body">
         {localStorage.getItem("evaluated") === "true" ? <>
+
+          {authenticationState !== "notLogged" ?
+          <div className='storeReportButton'>
+            <button className="button primary" onClick={handleStoreReport} disabled={isLoading}>
+              {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Store Report"}
+            </button>
+          </div>
+          : null}
 
           <div className='conformanceLevelSelector'>
             <p>Select conformace level:</p>

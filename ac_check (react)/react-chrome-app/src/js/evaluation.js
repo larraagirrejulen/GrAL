@@ -32,7 +32,7 @@ export async function performEvaluation(setIsLoading){
 
         const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
 
-        const evaluationReport = await fetchEvaluation(bodyData);
+        const evaluationReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
 
         storeNewReport(evaluationReport);
 
@@ -55,13 +55,13 @@ export async function performEvaluation(setIsLoading){
  * @returns {Promise<object>} - The evaluation report as an object.
  * @throws {Error} If there was an error with the fetch request, or if the request timed out.
  */
-async function fetchEvaluation(bodyData, timeout = 120000) {
+export async function fetchServer(bodyData, action, timeout = 120000) {
 
     try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeout);
 
-        const response = await fetch('http://localhost:8080/http://localhost:7070/getEvaluationJson', {
+        const response = await fetch('http://localhost:8080/http://localhost:7070/' + action, {
             body: bodyData,
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -72,9 +72,9 @@ async function fetchEvaluation(bodyData, timeout = 120000) {
 
         if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
         
-        const report = await response.json();
+        const fetchData = await response.json();
 
-        return JSON.parse(report);
+        return JSON.parse(fetchData);
 
     } catch (error) {
         throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
