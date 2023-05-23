@@ -8,7 +8,7 @@ class UserController{
 
     constructor(){
 
-        this.#db = new sqlite3.Database('users.db');
+        this.#db = new sqlite3.Database('database.db');
 
         this.#db.run(`CREATE TABLE IF NOT EXISTS users (
             email TEXT PRIMARY KEY,
@@ -19,16 +19,16 @@ class UserController{
     }
 
     // Request handler
-    async handleUserRequest(email, username, password) { 
+    async handleUserRequest(request) { 
 
         let response;
 
-        if (username) {
+        if (request.username) {
             console.log("\n  Registering new user...");
-            response =  await this.#registerUser(email, username, password);
+            response =  await this.#registerUser(request.email, request.username, request.password);
         } else {
             console.log("\n  Logging user...");
-            response = await this.#loginUser(email, password); 
+            response = await this.#loginUser(request.email, request.password); 
         }
 
         console.log("\n  Response: " + JSON.stringify(response));

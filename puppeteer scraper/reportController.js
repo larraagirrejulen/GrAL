@@ -8,7 +8,7 @@ class ReportController{
 
     constructor(){
 
-        this.#db = new sqlite3.Database('reports.db');
+        this.#db = new sqlite3.Database('database.db');
 
         /*this.#db.run(`
             DROP TABLE reports;
@@ -27,12 +27,12 @@ class ReportController{
     }
 
     // Request handler
-    async handleReportRequest(report, uploadedBy) { 
+    async handleReportRequest(request) { 
 
         let response;
 
         console.log("\n  Storing new report...");
-        response = await this.#insertNewEvaluationReport(report, uploadedBy); 
+        response = await this.#insertNewEvaluationReport(request.report, request.uploadedBy); 
 
         console.log("\n  Response: " + JSON.stringify(response));
         return JSON.stringify(response);

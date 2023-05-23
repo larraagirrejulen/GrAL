@@ -61,7 +61,7 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeout);
 
-        const response = await fetch('http://localhost:8080/http://localhost:7070/' + action, {
+        const response = await fetch('http://localhost:7070/' + action, {
             body: bodyData,
             method: "POST",
             headers: {"Content-Type": "application/json"},
