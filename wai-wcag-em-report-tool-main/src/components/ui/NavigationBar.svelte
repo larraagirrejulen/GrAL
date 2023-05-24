@@ -12,7 +12,26 @@
         <Link to="{navigationItem.path}">{navigationItem.title}</Link>
       </li>
     {/each}
+    <li class="nav__item">
+      <span>-------</span>
+    </li>
+    {#if $isLoggedIn}
+      <li class="nav__item">
+        <Link to="">{"@" + $loggedUser}</Link>
+      </li>
+      <li class="nav__item">
+        <Link to="/" on:click="{handleLogout}">Logout</Link>
+      </li>
+    {:else}
+      <li class="nav__item" class:current="{"/login" === currentPath}">
+        <Link to="/login">Login</Link>
+      </li>
+      <li class="nav__item" class:current="{"/register" === currentPath}">
+        <Link to="/register">Register</Link>
+      </li>
+    {/if}
   </ol>
+
 </nav>
 <!-- /component -->
 
@@ -32,6 +51,11 @@
     overflow-x: auto;
   }
 
+  .nav__item span {
+    color: #d0e1f1;
+    color: var(--cloudy-subtle);
+  }
+
   .nav__item.current {
     background-color: #fff;
   }
@@ -46,6 +70,13 @@
 <script>
   import { getContext } from 'svelte';
   import { Link, useLocation } from 'svelte-navigator';
+  import { isLoggedIn, loggedUser } from '@app/stores/authStore.js';
+
+  function handleLogout() {
+    isLoggedIn.set(false);
+    localStorage.setItem('isLoggedIn', 'false');
+    navigate("/", { replace: true });
+  }
 
   const { translate } = getContext('app');
 

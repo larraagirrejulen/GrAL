@@ -34,24 +34,6 @@ import subjects, {
 } from '@app/stores/earl/subjectStore/index.js';
 import tests from '@app/stores/earl/testStore/index.js';
 
-// ------- Start ------- //
-
-// Import the required modules
-import sqlite3 from 'sqlite3';
-
-// Connect to the SQLite database
-const db = new sqlite3.Database('path/to/database.sqlite');
-
-// Create a table (if it doesn't exist)
-db.run(`
-  CREATE TABLE IF NOT EXISTS reports (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    data TEXT
-  )
-`);
-
-// ------- End ------- //
-
 const evaluationContext = {
   // Dublin Core Terms
   dcterms: 'http://purl.org/dc/terms/',
@@ -221,19 +203,6 @@ class EvaluationModel {
     }
 
     await this.reset();
-
-    // ------- Start ------- //
-
-    const serializedReport = JSON.stringify(openedEvaluation);
-    db.run('INSERT INTO reports (data) VALUES (?)', serializedReport, (err) => {
-      if (err) {
-        console.error('Error saving report:', err);
-      } else {
-        console.log('Report saved successfully!');
-      }
-    });
-    
-    // ------- End ------- //
 
     /**
      *  Frame the Evaluation object
