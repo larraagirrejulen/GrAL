@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Extension from './Extension';
+import Extension from './components/Extension';
 
 /**
  * The root element to render the "ac-check-extension" component into.
@@ -19,7 +19,7 @@ rootElement.id = "ac-check-extension";
  * List of URLs for which the extension will not be rendered.
  * @constant {string[]}
  */
-const exceptionsList = ["https://www.w3.org", "https://accessmonitor.acessibilidade.gov.pt", "https://achecker.achecks.ca", "https://github.com", "https://mauve.isti.cnr.it", "https://www.google.com/"];
+const exceptionsList = ["https://www.w3.org", "https://accessmonitor.acessibilidade.gov.pt", "https://achecker.achecks.ca", "https://github.com", "https://mauve.isti.cnr.it", "https://www.google.com"];
 
 if (!exceptionsList.includes(String(window.location.origin))){
 

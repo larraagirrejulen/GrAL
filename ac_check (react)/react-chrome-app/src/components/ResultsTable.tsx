@@ -1,12 +1,12 @@
 
-import './css/resultsTable.css';
+import '../styles/resultsTable.css';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from './js/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, handleStateChange } from './js/utils/reactUtils.js';
-import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from './js/utils/highlightUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../js/utils/chromeUtils.js';
+import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../js/utils/reactUtils.js';
+import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from '../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
-import { mapReportData } from './js/mapReportData';
+import { mapReportData } from '../js/mapReportData';
 
 
 const outcome2Background:any = {
@@ -66,8 +66,6 @@ export default function ResultsTable({conformanceLevels}:any){
 }
 
 
-
-
 function Summaries({conformanceLevels}:any){
 
     const [webSiteOutcomes, setWebSiteOutcomes] = useState([0, 0, 0, 0, 0]);
@@ -75,6 +73,10 @@ function Summaries({conformanceLevels}:any){
     
     const [webPageOutcomes, setWebPageOutcomes] = useState([0, 0, 0, 0, 0]);
     const [pageSummaries, setPageSummaries] = useState(null);
+
+    const [webpage, setWebpage] = useState(null);
+
+    const [activeTab, setActiveTab] = useState('website');
 
     const countOutcomes = async (summary:any, setOutcomes:any) => {
         let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
@@ -91,6 +93,7 @@ function Summaries({conformanceLevels}:any){
     useEffect(() => { 
         setUseStateFromStorage("siteSummary", false, setSiteSummary, "'siteSummary' is null or undefined!");
         setUseStateFromStorage("pageSummaries", false, setPageSummaries, "'pageSummaries' is null or undefined!");
+        
     },[]);
 
     useEffect(() => { 
@@ -98,6 +101,15 @@ function Summaries({conformanceLevels}:any){
             countOutcomes(siteSummary, setWebSiteOutcomes);
         }
         if(pageSummaries){
+
+            let scope:any = localStorage.getItem("scope");
+
+            scope = JSON.parse(scope);
+
+            const currentWebpage:any = scope.find((elem:any) => elem.url === window.location.href)
+
+            setWebpage(currentWebpage ? currentWebpage.name : null)
+
             const webPageSummary = pageSummaries[window.location.href];
             
             if(webPageSummary){
@@ -108,19 +120,45 @@ function Summaries({conformanceLevels}:any){
     },[conformanceLevels, siteSummary, pageSummaries]);
 
     return(<>
-        <p>Website summary:</p>
-        <table className="summaryTable">
-            <tr> <OutcomeHeaders /> </tr>
-            <tr> {webSiteOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
-        </table>
 
-        {pageSummaries && pageSummaries[window.location.href] ? <>
-            <p>Current webpage summary:</p>
+        <div className="tabs">
+            <button
+                className={activeTab === 'website' ? 'active' : ''}
+                onClick={() => setActiveTab('website')}
+                style={{width: "90px"}}
+            >
+                Website
+            </button>
+            <button
+                className={activeTab === 'webpage' ? 'active' : ''}
+                onClick={() => setActiveTab('webpage')}
+                style={{width: "136px"}}
+            >
+                {pageSummaries && pageSummaries[window.location.href] && webpage ? 
+                    webpage
+                : "Current webpage"}
+            </button>
+        </div>
+
+        {activeTab === 'website' && (<>
             <table className="summaryTable">
                 <tr> <OutcomeHeaders /> </tr>
-                <tr> {webPageOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
+                <tr> {webSiteOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
             </table>
-        </> : <div style={{textAlign: "center", padding:"15px 0"}}>Current webpage has not been evaluated</div>}
+        </>)}
+
+        {activeTab === 'webpage' && (<>
+            {pageSummaries && pageSummaries[window.location.href] ? (
+                <table className="summaryTable">
+                    <tr> <OutcomeHeaders /> </tr>
+                    <tr> {webPageOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
+                </table>
+            ) : (
+                <div style={{ textAlign: 'center', padding: '15px 0' }}>
+                    Current webpage has not been evaluated
+                </div>
+            )}
+        </>)}
         
     </>);
 }

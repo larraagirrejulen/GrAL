@@ -1,18 +1,18 @@
 
-import './css/extension.css';
-import './css/evaluationScopeSection.css';
-import './css/evaluatorSelectionSection.css';
-import './css/evaluationSection.css';
-import './css/resultSection.css';
+import '../styles/extension.css';
+import '../styles/evaluationScopeSection.scss';
+import '../styles/evaluatorSelectionSection.css';
+import '../styles/evaluationSection.scss';
+import '../styles/resultSection.css';
 
 import { useEffect, useState } from "react";
-import { getFromChromeStorage, getImgSrc, sendMessageToBackground } from './js/utils/chromeUtils.js';
-import { removeStoredReport, downloadStoredReport, uploadNewReport } from './js/reportStorage.js';
-import { setUseStateFromStorage } from './js/utils/reactUtils.js';
-import { fetchServer, performEvaluation } from './js/evaluation.js';
-import { BeatLoader } from 'react-spinners';
+import { getFromChromeStorage, getImgSrc, sendMessageToBackground } from '../js/utils/chromeUtils.js';
+import { removeStoredReport, downloadStoredReport, uploadNewReport } from '../js/reportStorage.js';
+import { setUseStateFromStorage } from '../js/utils/reactUtils.js';
+import { fetchServer, performEvaluation } from '../js/evaluation.js';
 import ResultsTable from './ResultsTable';
 import UserAuthentication from './UserAuthentication';
+import ExtensionButton from './Button';
 
 
 
@@ -171,9 +171,19 @@ function EvaluationScope (): JSX.Element {
                       setNewWebPage({ ...newWebPage, url: e.target.value })
                     }
                   />
-                  <button onClick={handleUpdateItem}>Save</button>
+                  <ExtensionButton 
+                      classList={"primary small lineSpaced"} 
+                      onClickHandler={handleUpdateItem} 
+                      innerText={"Save"}   
+                      small={true} 
+                  />
                   {newWebPage.name === "" && newWebPage.url === ""  ? 
-                    <button onClick={() => handleDeleteItem(index)}>Cancel</button> 
+                    <ExtensionButton 
+                      classList={"secondary small spaced lineSpaced"} 
+                        onClickHandler={() => handleDeleteItem(index)} 
+                        innerText={"Cancel"}  
+                        small={true}  
+                    />
                   : null}
                   
                 </div>
@@ -188,7 +198,11 @@ function EvaluationScope (): JSX.Element {
           ))}
         </ul>
         <div>
-          <button className='addWebPageBtn' onClick={handleAddItem}>Add web page</button>
+          <ExtensionButton 
+              classList={"primary"} 
+              onClickHandler={handleAddItem} 
+              innerText={"Add web page"}    
+          />
         </div>
       </div>
     
@@ -289,13 +303,26 @@ function EvaluationSection (): JSX.Element {
       </div>
       <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
 
-        <button id="btn_get_data" className="button primary" onClick={()=>{performEvaluation(setIsLoading)}} disabled={isLoading}>
-          {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Evaluate current page"}
-        </button><br/>
+        <ExtensionButton 
+          classList={"primary"} 
+          onClickHandler={()=>{performEvaluation(setIsLoading)}}
+          innerText={"Evaluate current page"}  
+          isLoading={isLoading}  
+        /><br/>
 
         {evaluated ? <>
-          <button id="btn_clear_data" className="button secondary" onClick={removeStoredReport} disabled={isLoading}>Clear stored data</button><br/>
-          <button id="btn_download" className="button primary" onClick={downloadStoredReport} disabled={isLoading}>Download report</button><br/>
+          <ExtensionButton 
+            classList={"secondary spaced lineSpaced"} 
+            onClickHandler={removeStoredReport} 
+            innerText={"Clear stored data"}   
+            isLoading={isLoading}  
+          /><br/>
+          <ExtensionButton 
+            classList={"secondary lineSpaced"} 
+            onClickHandler={downloadStoredReport}
+            innerText={"Download report"}  
+            isLoading={isLoading}  
+          /><br/>
         </> : null}
         
         <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={isLoading}/>Upload Report</label>
@@ -376,10 +403,13 @@ function ResultSection({authenticationState}:any): JSX.Element {
         {localStorage.getItem("evaluated") === "true" ? <>
 
           {authenticationState !== "notLogged" ?
-          <div className='storeReportButton'>
-            <button className="button primary" onClick={handleStoreReport} disabled={isLoading}>
-              {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Store Report"}
-            </button>
+          <div className='extensionButtonContainer'>
+            <ExtensionButton 
+              classList={"primary"} 
+              onClickHandler={handleStoreReport}
+              innerText={"Store Report"}  
+              isLoading={isLoading}  
+            />
           </div>
           : null}
 

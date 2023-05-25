@@ -16,38 +16,9 @@
   border-top: 1px solid #c6c6c6;
 }
 
-.result_section .storeReportButton{
+.result_section .extensionButtonContainer{
   text-align: center;
   padding-bottom: 15px;
-}
-
-.result_section .button{
-  cursor: pointer;
-  padding: 8px 12px;
-  font-weight: bold;
-  margin: 0;
-  font-size: 13px;
-  font-weight: 300;
-  border-radius: 5px;
-  border: 2px solid #005a6a;
-  filter: drop-shadow(0 0 0 #005a6a) brightness(1);
-  transition: 0.2s ease;
-}
-
-.result_section .button:hover {
-  filter: drop-shadow(0 0 1px #005a6a) brightness(1.1);
-  transition: 0.2s ease;
-}
-
-.result_section .primary{
-  background-color: #005a6a;
-  color: white;
-}
-
-.result_section .secondary{
-  background-color: white;
-  color: #005a6a;
-  font-style: italic;
 }
 
 .conformanceLevelSelector{

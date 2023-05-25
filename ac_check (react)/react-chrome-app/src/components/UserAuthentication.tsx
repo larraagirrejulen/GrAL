@@ -1,9 +1,10 @@
-import './css/UserAuthentication.css';
+
+import '../styles/UserAuthentication.css';
 
 import { useState, useEffect} from "react";
-import { BeatLoader } from 'react-spinners';
-import { fetchServer } from './js/evaluation.js';
-import { getFromChromeStorage, storeOnChromeStorage } from "./js/utils/chromeUtils.js";
+import { fetchServer } from '../js/evaluation.js';
+import { getFromChromeStorage, storeOnChromeStorage } from "../js/utils/chromeUtils.js";
+import ExtensionButton from "./Button";
 
 
 
@@ -35,8 +36,16 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
   
       {authenticationState === "notLogged" ? <>
       
-        <button className="button primary" onClick={() => setAuthenticationState("logging")}>Login</button>
-        <button className="button secondary" onClick={() => setAuthenticationState("registering")}>Register</button>
+        <ExtensionButton 
+            classList={"primary"} 
+            onClickHandler={() => setAuthenticationState("logging")} 
+            innerText={"Login"}    
+        />
+        <ExtensionButton 
+            classList={"secondary spaced"} 
+            onClickHandler={() => setAuthenticationState("registering")} 
+            innerText={"Register"}    
+        />
       
       </> : authenticationState === "logging" ? 
   
@@ -49,7 +58,11 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
       : <>
       
         <label className='userNameLabel'>{"@" + authenticationState}</label>
-        <button className="button secondary" onClick={onLogoutHandler}>Logout</button>
+        <ExtensionButton 
+            classList={"secondary"} 
+            onClickHandler={onLogoutHandler} 
+            innerText={"Logout"}    
+        />
   
       </> }
       
@@ -110,13 +123,26 @@ function LoginForm({setAuthState}:any) {
         </div>
         <div className='options'>
             <div className='leftDiv'>
-                <button className="button primary" onClick={handleSubmit} disabled={isLoading}>
-                    {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Login"}
-                </button>
+                <ExtensionButton 
+                    classList={"primary"} 
+                    onClickHandler={handleSubmit} 
+                    innerText={"Login"}
+                    isLoading={isLoading}    
+                />
             </div>
             <div className='rightDiv'>
-                <button className="button secondary" onClick={() => setAuthState("registering")} disabled={isLoading}>Register</button>
-                <button className="button secondary" onClick={() => setAuthState("notLogged")} disabled={isLoading}>Cancel</button>
+                <ExtensionButton 
+                    classList={"secondary"} 
+                    onClickHandler={() => setAuthState("registering")} 
+                    innerText={"Register"} 
+                    isLoading={isLoading}    
+                />
+                <ExtensionButton 
+                    classList={"secondary spaced"} 
+                    onClickHandler={() => setAuthState("notLogged")} 
+                    innerText={"Cancel"}  
+                    isLoading={isLoading}   
+                />
             </div>
         </div>
     </div>
@@ -190,13 +216,26 @@ function RegisterForm({setAuthState}:any) {
             </div>
             <div className='options'>
                 <div className='leftDiv'>
-                    <button className="button primary" onClick={handleSubmit} disabled={isLoading}>
-                        {isLoading ? <BeatLoader size={8} color="#ffffff" /> : "Register"}
-                    </button>
+                    <ExtensionButton 
+                        classList={"primary"} 
+                        onClickHandler={handleSubmit} 
+                        innerText={"Register"}
+                        isLoading={isLoading}    
+                    />
                 </div>
                 <div className='rightDiv'>
-                    <button className="button secondary" onClick={() => setAuthState("logging")} disabled={isLoading}>Login</button>
-                    <button className="button secondary" onClick={() => setAuthState("notLogged")} disabled={isLoading}>Cancel</button>
+                    <ExtensionButton 
+                        classList={"secondary"} 
+                        onClickHandler={() => setAuthState("logging")} 
+                        innerText={"Login"} 
+                        isLoading={isLoading}    
+                    />
+                    <ExtensionButton 
+                        classList={"secondary spaced"} 
+                        onClickHandler={() => setAuthState("notLogged")} 
+                        innerText={"Cancel"}  
+                        isLoading={isLoading}   
+                    />
                 </div>
             </div>
         </div>

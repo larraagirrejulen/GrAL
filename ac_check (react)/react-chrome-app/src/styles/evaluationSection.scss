@@ -1,0 +1,55 @@
+
+@import 'colors';
+
+.evaluation_section{
+  padding: 0 20px;
+  border-top: 1px solid $gray-borders;
+  border-bottom: 1px solid $gray-borders;
+
+  & .header{
+    align-items: center;
+    display: inline-flex;
+    cursor: pointer;
+    padding: 10px 0;
+
+    & img{
+      height: 30px;
+    }
+
+    & span{
+      width: 170px;
+    }
+  }
+
+  & .body{
+    border-top: 1px solid $gray-borders;
+    padding: 20px 0;
+  }
+}
+
+#btn_upload{
+  margin: 12px 0 0 0;
+  padding: 8px 12px;
+
+  border: 2px solid $primary-color;
+  border-radius: 6px;
+  
+  font-size: 13px;
+  font-weight: 300;
+
+  background-color: $secondary-color;
+  color: $primary-color;
+  font-style: italic;
+
+  &:hover{
+    background-color: $intermediate-color;
+    color: $secondary-color;
+    font-style: italic;
+  }
+
+  & input{
+    display: none;
+  }
+}
+
+
