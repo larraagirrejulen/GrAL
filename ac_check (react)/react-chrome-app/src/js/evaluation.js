@@ -10,11 +10,12 @@ import { storeNewReport } from './reportStorage.js';
  * @throws {Error} Throws an error if an error occurs during the evaluation process.
  * @returns {void}
  */
-export async function performEvaluation(setIsLoading){
+export async function performEvaluation(setIsLoading, setAnimateBtn){
 
     try{
 
         setIsLoading(true);
+        setAnimateBtn(true);
 
         const scope = JSON.parse(localStorage.getItem("scope"));
         if(scope.length === 0){
@@ -40,6 +41,7 @@ export async function performEvaluation(setIsLoading){
         console.error("Error during evaluation process => ", error);
         alert("An error occurred during evaluation. Please try again.");
     } finally {
+        setAnimateBtn(false);
         setIsLoading(false);
     }
 

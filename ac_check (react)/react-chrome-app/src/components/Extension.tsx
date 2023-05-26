@@ -1,8 +1,8 @@
 
 import '../styles/extension.css';
-import '../styles/evaluationScopeSection.scss';
-import '../styles/evaluatorSelectionSection.css';
-import '../styles/evaluationSection.scss';
+import '../styles/evaluationScope.scss';
+import '../styles/selectEvaluators.scss';
+import '../styles/evaluationOptions.scss';
 import '../styles/resultSection.css';
 
 import { useEffect, useState } from "react";
@@ -12,7 +12,8 @@ import { setUseStateFromStorage } from '../js/utils/reactUtils.js';
 import { fetchServer, performEvaluation } from '../js/evaluation.js';
 import ResultsTable from './ResultsTable';
 import UserAuthentication from './UserAuthentication';
-import ExtensionButton from './Button';
+import Button from './reusables/Button';
+import Dropdown from './reusables/Dropdown';
 
 
 
@@ -29,6 +30,8 @@ export default function Extension(): JSX.Element {
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [authenticationState, setAuthenticationState] = useState("notLogged");
+
+  const [btnIsLoading, setBtnIsLoading] = useState(false);
 
   /**
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
@@ -62,14 +65,14 @@ export default function Extension(): JSX.Element {
         }} />
       </div>
 
-      <UserAuthentication authenticationState={authenticationState} setAuthenticationState={setAuthenticationState} />
+      <UserAuthentication authenticationState={authenticationState} setAuthenticationState={setAuthenticationState} btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading}/>
       
       {authenticationState === "logging" || authenticationState === "registering" 
       ? null : <>
         <EvaluationScope /> 
         <EvaluatorSelectionSection /> 
-        <EvaluationSection /> 
-        <ResultSection authenticationState={authenticationState}/>
+        <EvaluationSection btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading}/> 
+        <ResultSection authenticationState={authenticationState} btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading}/>
       </> }
 
     </div>
@@ -82,8 +85,6 @@ export default function Extension(): JSX.Element {
 
 
 function EvaluationScope (): JSX.Element {
-
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
   const [webPageList, setWebPageList] = useState([{name: window.document.title, url: window.location.href}]);
 
@@ -142,71 +143,66 @@ function EvaluationScope (): JSX.Element {
     }     
   }, [webPageList]);
 
-  return ( <div className="scope_section">
+  return ( 
+    <Dropdown headerText={"Evaluation scope"} classList={"first lineSpaced"}>
 
-      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
-        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
-        <span>Evaluation scope</span>
-      </div>
-
-      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
-        <ul className="scopeInputList">
-          {webPageList.map((webPage:any, index:any)=>(
-            <li className="scopeInput">
-                {editItemIndex === index ? (
-                  <div>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    value={newWebPage.name}
-                    onChange={(e) =>
-                      setNewWebPage({ ...newWebPage, name: e.target.value })
-                    }
-                  />
-                  <input
-                    type="text"
-                    placeholder="URL"
-                    value={newWebPage.url}
-                    onChange={(e) =>
-                      setNewWebPage({ ...newWebPage, url: e.target.value })
-                    }
-                  />
-                  <ExtensionButton 
-                      classList={"primary small lineSpaced"} 
-                      onClickHandler={handleUpdateItem} 
-                      innerText={"Save"}   
-                      small={true} 
-                  />
-                  {newWebPage.name === "" && newWebPage.url === ""  ? 
-                    <ExtensionButton 
-                      classList={"secondary small spaced lineSpaced"} 
-                        onClickHandler={() => handleDeleteItem(index)} 
-                        innerText={"Cancel"}  
-                        small={true}  
-                    />
-                  : null}
-                  
-                </div>
-              ) : (
+      <ul id="extensionScopeInputList">
+        {webPageList.map((webPage:any, index:any)=>(
+          <li className="scopeInput">
+              {editItemIndex === index ? (
                 <div>
-                  <span onClick={() => { window.open(webPage.url, '_blank'); }}>{webPage.name}</span>
-                  <img className="edit icon" alt="edit web page data" src={getImgSrc("edit")} onClick={() => handleEditItem(index)} />
-                  <img className="delete icon" alt="remove web page from list" src={getImgSrc("delete")} onClick={() => handleDeleteItem(index)} />
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-        <div>
-          <ExtensionButton 
-              classList={"primary"} 
-              onClickHandler={handleAddItem} 
-              innerText={"Add web page"}    
-          />
-        </div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={newWebPage.name}
+                  onChange={(e) =>
+                    setNewWebPage({ ...newWebPage, name: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="URL"
+                  value={newWebPage.url}
+                  onChange={(e) =>
+                    setNewWebPage({ ...newWebPage, url: e.target.value })
+                  }
+                />
+                <Button 
+                    classList={"primary small lineSpaced"} 
+                    onClickHandler={handleUpdateItem} 
+                    innerText={"Save"}   
+                    small={true} 
+                />
+                {newWebPage.name === "" && newWebPage.url === ""  ? 
+                  <Button 
+                    classList={"secondary small spaced lineSpaced"} 
+                    onClickHandler={() => handleDeleteItem(index)} 
+                    innerText={"Cancel"}  
+                    small={true}  
+                  />
+                : null}
+                
+              </div>
+            ) : (
+              <div>
+                <span onClick={() => { window.open(webPage.url, '_blank'); }}>{webPage.name}</span>
+                <img className="edit icon" alt="edit web page data" src={getImgSrc("edit")} onClick={() => handleEditItem(index)} />
+                <img className="delete icon" alt="remove web page from list" src={getImgSrc("delete")} onClick={() => handleDeleteItem(index)} />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div>
+        <Button 
+            classList={"primary"} 
+            onClickHandler={handleAddItem} 
+            innerText={"New web page"}    
+        />
       </div>
-    
-  </div> );
+
+    </Dropdown>
+   );
 }
 
 
@@ -219,8 +215,6 @@ function EvaluationScope (): JSX.Element {
  * @returns {JSX.Element} The JSX code for rendering the component.  
 */
 function EvaluatorSelectionSection (): JSX.Element {
-
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
   const [checkboxes, setCheckboxes] = useState([
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -253,26 +247,21 @@ function EvaluatorSelectionSection (): JSX.Element {
     } 
   }, [checkboxes]);
 
-  return ( <div className="evaluator_selection_section">
+  return ( 
+    <Dropdown headerText={"Select evaluators"} classList={""}>
 
-      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
-        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
-        <span>Select evaluators</span>
-      </div>
-
-      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
-        {checkboxes.map((checkbox:any, index:any) => (
-          <div className="checkbox-wrapper">
-            <div className="checkbox">
-              <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index)} className={checkbox.checked && "checked" } />
-              <span onClick={() => { window.open(checkbox.href, '_blank'); }}>{checkbox.label}</span>
-            </div><br/>
-            <span>{checkbox.checked ? "Selected" : "Unchecked"}</span>
-          </div>
-        ))}
-      </div>
-    
-  </div> );
+      {checkboxes.map((checkbox:any, index:any) => (
+        <div className="checkbox-wrapper">
+          <div className="checkbox">
+            <input type="checkbox" checked={checkbox.checked} onChange={()=>handleCheckboxChange(index)} className={checkbox.checked && "checked" } />
+            <span onClick={() => { window.open(checkbox.href, '_blank'); }}>{checkbox.label}</span>
+          </div><br/>
+          <span>{checkbox.checked ? "Selected" : "Unchecked"}</span>
+        </div>
+      ))}
+      
+    </Dropdown>
+  );
 }
 
 
@@ -285,51 +274,48 @@ function EvaluatorSelectionSection (): JSX.Element {
  * @function EvaluationSection
  * @returns {JSX.Element} - The EvaluationSection component.
 */
-function EvaluationSection (): JSX.Element {
+function EvaluationSection ({btnIsLoading, setBtnIsLoading}:any): JSX.Element {
 
-  const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
-  const [isLoading, setIsLoading] = useState(false);
   const [evaluated, setEvaluated] = useState(false);
+  const [animateBtn, setAnimateBtn] = useState(false);
 
   useEffect(() => { 
     setEvaluated(localStorage.getItem("evaluated") === "true");   
   }, []);
 
-  return ( <div className="evaluation_section">
+  return ( 
+    <Dropdown headerText={"Evaluation options"} classList={"last"}>
 
-      <div className="header" onClick={() => setIsOpen((prev:any) => !prev) }>
-        <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
-        <span>Evaluation options</span>
-      </div>
-      <div className="body" style={isOpen ? {display: "block"} : {display: "none"}}>
+      <Button 
+        classList={"primary"} 
+        onClickHandler={()=>{performEvaluation(setBtnIsLoading, setAnimateBtn)}}
+        innerText={"Evaluate current page"}  
+        isLoading={btnIsLoading}  
+        animate={animateBtn}
+      /><br/>
 
-        <ExtensionButton 
-          classList={"primary"} 
-          onClickHandler={()=>{performEvaluation(setIsLoading)}}
-          innerText={"Evaluate current page"}  
-          isLoading={isLoading}  
+      {evaluated ? <>
+        <Button 
+          classList={"secondary spaced lineSpaced"} 
+          onClickHandler={removeStoredReport} 
+          innerText={"Clear stored data"}   
+          isLoading={btnIsLoading}  
         /><br/>
-
-        {evaluated ? <>
-          <ExtensionButton 
-            classList={"secondary spaced lineSpaced"} 
-            onClickHandler={removeStoredReport} 
-            innerText={"Clear stored data"}   
-            isLoading={isLoading}  
-          /><br/>
-          <ExtensionButton 
-            classList={"secondary lineSpaced"} 
-            onClickHandler={downloadStoredReport}
-            innerText={"Download report"}  
-            isLoading={isLoading}  
-          /><br/>
-        </> : null}
-        
-        <label id="btn_upload" className="button secondary"><input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={isLoading}/>Upload Report</label>
+        <Button 
+          classList={"secondary lineSpaced"} 
+          onClickHandler={downloadStoredReport}
+          innerText={"Download report"}  
+          isLoading={btnIsLoading}  
+        /><br/>
+      </> : null}
       
-      </div>
-    
-  </div> );
+      <label id="btn_upload" className="button secondary">
+        <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={btnIsLoading}/>
+        Upload Report
+      </label>
+
+    </Dropdown>
+  );
 }
 
 
@@ -341,7 +327,7 @@ function EvaluationSection (): JSX.Element {
  * @function ResultSection
  * @returns {JSX.Element} - React component
 */
-function ResultSection({authenticationState}:any): JSX.Element {
+function ResultSection({authenticationState, btnIsLoading, setBtnIsLoading}:any): JSX.Element {
   
   const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
   function handleLevelClick (level:any) {
@@ -350,11 +336,12 @@ function ResultSection({authenticationState}:any): JSX.Element {
     localStorage.setItem("conformanceLevels", JSON.stringify(levels));
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [animateBtn, setAnimateBtn] = useState(false);
 
   const handleStoreReport = async () => {
 
-    setIsLoading(true);
+    setBtnIsLoading(true);
+    setAnimateBtn(true);
 
     const report = await getFromChromeStorage("report", false);
 
@@ -373,7 +360,8 @@ function ResultSection({authenticationState}:any): JSX.Element {
     }catch(error){
         console.log(error);
     }finally{
-        setIsLoading(false);
+      setAnimateBtn(false);
+      setBtnIsLoading(false);
     }
 
   };
@@ -404,11 +392,12 @@ function ResultSection({authenticationState}:any): JSX.Element {
 
           {authenticationState !== "notLogged" ?
           <div className='extensionButtonContainer'>
-            <ExtensionButton 
+            <Button 
               classList={"primary"} 
               onClickHandler={handleStoreReport}
               innerText={"Store Report"}  
-              isLoading={isLoading}  
+              isLoading={btnIsLoading}
+              animate={animateBtn}  
             />
           </div>
           : null}

@@ -1,10 +1,10 @@
 
-import '../styles/button.scss';
+import '../../styles/button.scss';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 
-export default function ExtensionButton(
-    { classList, onClickHandler, innerText, isLoading = false }:any
+export default function Button(
+    { classList, onClickHandler, innerText, isLoading = false, animate = false }:any
 ){
 
     return(
@@ -13,7 +13,7 @@ export default function ExtensionButton(
             onClick={onClickHandler}
             disabled={isLoading}
         >
-            {isLoading && classList.includes("primary") ?
+            {animate && isLoading ?
                 <BeatLoader size={8} color="#ffffff" />
             : 
                 innerText

@@ -1,0 +1,48 @@
+
+@import 'colors';
+
+.extensionDropdown {
+    margin: 0;
+    padding: 0 40px;
+    border-top: 1px solid $gray-borders;
+    border-bottom: 1px solid $gray-borders;
+
+    & .header{
+        align-items: center;
+        display: inline-flex;
+        cursor: pointer;
+        padding: 10px 0;
+    
+        & img{
+            height: 30px;
+        }
+    
+        & span{
+            width: 170px;
+        }
+
+        &:hover {
+            font-weight: 300;
+            font-style: italic;
+        }
+    }
+
+    & .body{
+        border-top: 1px solid $gray-borders;
+        padding: 20px 0;
+    }
+
+    &.lineSpaced{
+        margin-top: 20px;
+    }
+
+    &.first{
+        border-top: 2px solid $gray-borders;
+    }
+
+    &.last{
+        border-bottom: 2px solid $gray-borders;
+    }
+    
+}
+

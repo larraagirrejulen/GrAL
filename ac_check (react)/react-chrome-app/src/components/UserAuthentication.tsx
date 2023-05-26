@@ -4,13 +4,13 @@ import '../styles/UserAuthentication.css';
 import { useState, useEffect} from "react";
 import { fetchServer } from '../js/evaluation.js';
 import { getFromChromeStorage, storeOnChromeStorage } from "../js/utils/chromeUtils.js";
-import ExtensionButton from "./Button";
+import Button from "./reusables/Button";
 
 
 
 
-export default function UserAuthentication ({authenticationState, setAuthenticationState}:any): JSX.Element {
-  
+export default function UserAuthentication ({authenticationState, setAuthenticationState, btnIsLoading}:any): JSX.Element {
+
     useEffect( ()=>{
 
         (async ()=>{
@@ -36,15 +36,17 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
   
       {authenticationState === "notLogged" ? <>
       
-        <ExtensionButton 
+        <Button 
             classList={"primary"} 
             onClickHandler={() => setAuthenticationState("logging")} 
-            innerText={"Login"}    
+            innerText={"Login"}
+            isLoading={btnIsLoading}    
         />
-        <ExtensionButton 
+        <Button 
             classList={"secondary spaced"} 
             onClickHandler={() => setAuthenticationState("registering")} 
-            innerText={"Register"}    
+            innerText={"Register"}
+            isLoading={btnIsLoading}    
         />
       
       </> : authenticationState === "logging" ? 
@@ -58,10 +60,11 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
       : <>
       
         <label className='userNameLabel'>{"@" + authenticationState}</label>
-        <ExtensionButton 
+        <Button 
             classList={"secondary"} 
             onClickHandler={onLogoutHandler} 
-            innerText={"Logout"}    
+            innerText={"Logout"}
+            isLoading={btnIsLoading}    
         />
   
       </> }
@@ -72,20 +75,19 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
 
 
 
-
 function LoginForm({setAuthState}:any) {
 
+    const [btnIsLoading, setBtnIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async () => {
 
-        setIsLoading(true);
+        setBtnIsLoading(true);
 
         if(email === "" || password === ""){
             alert("You must fill all input fields!!");
-            setIsLoading(false);
+            setBtnIsLoading(false);
             return;
         }
 
@@ -105,7 +107,7 @@ function LoginForm({setAuthState}:any) {
         }catch(error){
             console.log(error);
         }finally{
-            setIsLoading(false);
+            setBtnIsLoading(false);
         }
 
     };
@@ -121,30 +123,7 @@ function LoginForm({setAuthState}:any) {
             <label htmlFor="password">Password:</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <div className='options'>
-            <div className='leftDiv'>
-                <ExtensionButton 
-                    classList={"primary"} 
-                    onClickHandler={handleSubmit} 
-                    innerText={"Login"}
-                    isLoading={isLoading}    
-                />
-            </div>
-            <div className='rightDiv'>
-                <ExtensionButton 
-                    classList={"secondary"} 
-                    onClickHandler={() => setAuthState("registering")} 
-                    innerText={"Register"} 
-                    isLoading={isLoading}    
-                />
-                <ExtensionButton 
-                    classList={"secondary spaced"} 
-                    onClickHandler={() => setAuthState("notLogged")} 
-                    innerText={"Cancel"}  
-                    isLoading={isLoading}   
-                />
-            </div>
-        </div>
+        <FormButtons authState={"logging"} setAuthState={setAuthState} submitHandler={handleSubmit} btnIsLoading={btnIsLoading}/>
     </div>
   );
 }
@@ -154,23 +133,23 @@ function LoginForm({setAuthState}:any) {
 
 function RegisterForm({setAuthState}:any) {
 
+    const [btnIsLoading, setBtnIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async () => {
 
-        setIsLoading(true);
+        setBtnIsLoading(true);
 
         if(password !== repeatPassword){
             alert("Passwords do not match!!");
-            setIsLoading(false);
+            setBtnIsLoading(false);
             return;
         } else if(email === "" || username === "" || password === ""){
             alert("You must fill all input fields!!");
-            setIsLoading(false);
+            setBtnIsLoading(false);
             return;
         }
 
@@ -190,7 +169,7 @@ function RegisterForm({setAuthState}:any) {
         }catch(error){
             console.log(error);
         }finally{
-            setIsLoading(false);
+            setBtnIsLoading(false);
         }
 
     };
@@ -214,31 +193,46 @@ function RegisterForm({setAuthState}:any) {
                 <label htmlFor="repeatPassword">Repeat password:</label>
                 <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
             </div>
-            <div className='options'>
-                <div className='leftDiv'>
-                    <ExtensionButton 
-                        classList={"primary"} 
-                        onClickHandler={handleSubmit} 
-                        innerText={"Register"}
-                        isLoading={isLoading}    
-                    />
-                </div>
-                <div className='rightDiv'>
-                    <ExtensionButton 
-                        classList={"secondary"} 
-                        onClickHandler={() => setAuthState("logging")} 
-                        innerText={"Login"} 
-                        isLoading={isLoading}    
-                    />
-                    <ExtensionButton 
-                        classList={"secondary spaced"} 
-                        onClickHandler={() => setAuthState("notLogged")} 
-                        innerText={"Cancel"}  
-                        isLoading={isLoading}   
-                    />
-                </div>
-            </div>
+            <FormButtons authState={"registering"} setAuthState={setAuthState} submitHandler={handleSubmit} btnIsLoading={btnIsLoading}/>
         </div>
     );
 }
 
+
+
+
+function FormButtons({authState, setAuthState, submitHandler, btnIsLoading}:any){
+
+    const stateBtnData:any = {
+        "logging":[ "Login", "Register", "registering" ],
+        "registering":[ "Register", "Login", "logging" ]
+    };
+
+    return (
+        <div className='options'>
+            <div className='leftDiv'>
+                <Button 
+                    classList={"primary"} 
+                    onClickHandler={submitHandler} 
+                    innerText={stateBtnData[authState][0]}
+                    isLoading={btnIsLoading}    
+                />
+            </div>
+            <div className='rightDiv'>
+                <Button 
+                    classList={"secondary"} 
+                    onClickHandler={() => setAuthState(stateBtnData[authState][2])} 
+                    innerText={stateBtnData[authState][1]} 
+                    isLoading={btnIsLoading}    
+                />
+                <Button 
+                    classList={"secondary spaced"} 
+                    onClickHandler={() => setAuthState("notLogged")} 
+                    innerText={"Cancel"}  
+                    isLoading={btnIsLoading}   
+                />
+            </div>
+        </div>
+    );
+
+}
