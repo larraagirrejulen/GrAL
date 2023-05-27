@@ -27,7 +27,7 @@ export function storeNewReport(newReport){
  */
 export function removeStoredReport(){
     
-    if (!window.confirm("Are you sure you want to permanently delete current stored evaluation data?")) return;
+    if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
 
     localStorage.removeItem("evaluated");
 

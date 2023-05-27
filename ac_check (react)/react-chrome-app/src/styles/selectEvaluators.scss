@@ -4,7 +4,7 @@
 .checkbox-wrapper {
 
   border-top: 1px solid #c6c6c6;
-  padding: 20px 0;
+  padding: 12px 0;
 
   &:first-of-type{
     border-top: 0;
@@ -19,8 +19,7 @@
     align-items: center;
     display: inline-flex;
     padding: 0 20px;
-    margin: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
 
     & input[type="checkbox"] {
       -webkit-appearance: none;

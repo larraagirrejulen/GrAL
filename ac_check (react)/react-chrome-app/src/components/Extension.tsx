@@ -1,19 +1,20 @@
 
-import '../styles/extension.css';
+import '../styles/extension.scss';
 import '../styles/evaluationScope.scss';
 import '../styles/selectEvaluators.scss';
 import '../styles/evaluationOptions.scss';
-import '../styles/resultSection.css';
+import '../styles/resultSection/evaluationResults.scss';
 
 import { useEffect, useState } from "react";
 import { getFromChromeStorage, getImgSrc, sendMessageToBackground } from '../js/utils/chromeUtils.js';
 import { removeStoredReport, downloadStoredReport, uploadNewReport } from '../js/reportStorage.js';
 import { setUseStateFromStorage } from '../js/utils/reactUtils.js';
 import { fetchServer, performEvaluation } from '../js/evaluation.js';
-import ResultsTable from './ResultsTable';
+import ResultsTable from './resultSection/ResultsTable';
 import UserAuthentication from './UserAuthentication';
 import Button from './reusables/Button';
-import Dropdown from './reusables/Dropdown';
+import Dropdown from './reusables/DropdownSection';
+import SummaryTable from './resultSection/SummaryTable';
 
 
 
@@ -30,8 +31,8 @@ export default function Extension(): JSX.Element {
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [authenticationState, setAuthenticationState] = useState("notLogged");
-
   const [btnIsLoading, setBtnIsLoading] = useState(false);
+
 
   /**
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
@@ -70,9 +71,9 @@ export default function Extension(): JSX.Element {
       {authenticationState === "logging" || authenticationState === "registering" 
       ? null : <>
         <EvaluationScope /> 
-        <EvaluatorSelectionSection /> 
-        <EvaluationSection btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading}/> 
-        <ResultSection authenticationState={authenticationState} btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading}/>
+        <EvaluatorSelection /> 
+        <EvaluationOptions btnIsLoading={btnIsLoading} setBtnIsLoading={setBtnIsLoading} authenticationState={authenticationState} /> 
+        <ResultSection />
       </> }
 
     </div>
@@ -214,7 +215,7 @@ function EvaluationScope (): JSX.Element {
  * @function EvaluatorSelectionSection
  * @returns {JSX.Element} The JSX code for rendering the component.  
 */
-function EvaluatorSelectionSection (): JSX.Element {
+function EvaluatorSelection (): JSX.Element {
 
   const [checkboxes, setCheckboxes] = useState([
     { checked: false, label: "AccessMonitor", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -248,7 +249,7 @@ function EvaluatorSelectionSection (): JSX.Element {
   }, [checkboxes]);
 
   return ( 
-    <Dropdown headerText={"Select evaluators"} classList={""}>
+    <Dropdown headerText={"Select evaluators"} classList={"last"}>
 
       {checkboxes.map((checkbox:any, index:any) => (
         <div className="checkbox-wrapper">
@@ -274,74 +275,25 @@ function EvaluatorSelectionSection (): JSX.Element {
  * @function EvaluationSection
  * @returns {JSX.Element} - The EvaluationSection component.
 */
-function EvaluationSection ({btnIsLoading, setBtnIsLoading}:any): JSX.Element {
+function EvaluationOptions ({btnIsLoading, setBtnIsLoading, authenticationState}:any): JSX.Element {
 
-  const [evaluated, setEvaluated] = useState(false);
-  const [animateBtn, setAnimateBtn] = useState(false);
-
-  useEffect(() => { 
-    setEvaluated(localStorage.getItem("evaluated") === "true");   
-  }, []);
-
-  return ( 
-    <Dropdown headerText={"Evaluation options"} classList={"last"}>
-
-      <Button 
-        classList={"primary"} 
-        onClickHandler={()=>{performEvaluation(setBtnIsLoading, setAnimateBtn)}}
-        innerText={"Evaluate current page"}  
-        isLoading={btnIsLoading}  
-        animate={animateBtn}
-      /><br/>
-
-      {evaluated ? <>
-        <Button 
-          classList={"secondary spaced lineSpaced"} 
-          onClickHandler={removeStoredReport} 
-          innerText={"Clear stored data"}   
-          isLoading={btnIsLoading}  
-        /><br/>
-        <Button 
-          classList={"secondary lineSpaced"} 
-          onClickHandler={downloadStoredReport}
-          innerText={"Download report"}  
-          isLoading={btnIsLoading}  
-        /><br/>
-      </> : null}
-      
-      <label id="btn_upload" className="button secondary">
-        <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} disabled={btnIsLoading}/>
-        Upload Report
-      </label>
-
-    </Dropdown>
-  );
-}
+  const [animateBtn, setAnimateBtn] = useState("none");
+  const [isOpen, setIsOpen] = useState(false);
 
 
 
+  const handleOpenDropdown = () => {
+    
+    setIsOpen(!isOpen);
 
-/**
- * A React component that allows the user to see and manipulate the results of the current stored report
- * 
- * @function ResultSection
- * @returns {JSX.Element} - React component
-*/
-function ResultSection({authenticationState, btnIsLoading, setBtnIsLoading}:any): JSX.Element {
-  
-  const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
-  function handleLevelClick (level:any) {
-    const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
-    setConformanceLevels(levels);
-    localStorage.setItem("conformanceLevels", JSON.stringify(levels));
   };
 
-  const [animateBtn, setAnimateBtn] = useState(false);
+
 
   const handleStoreReport = async () => {
 
     setBtnIsLoading(true);
-    setAnimateBtn(true);
+    setAnimateBtn("store");
 
     const report = await getFromChromeStorage("report", false);
 
@@ -360,11 +312,90 @@ function ResultSection({authenticationState, btnIsLoading, setBtnIsLoading}:any)
     }catch(error){
         console.log(error);
     }finally{
-      setAnimateBtn(false);
+      setAnimateBtn("none");
       setBtnIsLoading(false);
     }
 
   };
+
+
+  
+  return ( 
+    <>
+        <div id="mainOptions">
+
+          <Button 
+            classList={"primary"} 
+            onClickHandler={()=>{performEvaluation(setBtnIsLoading, setAnimateBtn)}}
+            innerText={"Evaluate scope"}  
+            isLoading={btnIsLoading}  
+            animate={animateBtn === "evaluate"}
+          />
+
+          <div className='dropdownBtn'>
+
+            <div className={"dropdownHead" + (isOpen ? " active" : "")} onClick={handleOpenDropdown}>
+              <label>Report options</label>
+              <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
+            </div>
+            
+            {isOpen && (
+              <div className='dropdownBody'>
+                <label onClick={removeStoredReport}>Remove</label>
+                <label onClick={downloadStoredReport}>Export</label>
+                <label id="importReport">
+                  <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />
+                  Import
+                </label>
+              </div>
+            )}
+
+          </div>
+
+          {authenticationState !== "notLogged" ? 
+            
+            <div className='loggedOptions'>
+              <Button 
+                classList={"primary"} 
+                onClickHandler={handleStoreReport}
+                innerText={"Save report"}  
+                isLoading={btnIsLoading}
+                animate={animateBtn === "store"}
+              />
+              <Button 
+                classList={"secondary spaced"} 
+                onClickHandler={()=>alert("hey")}
+                innerText={"Load saved report"}  
+                isLoading={btnIsLoading}
+                animate={animateBtn === "load"}
+              />
+            </div>
+            
+
+          : null}
+          
+        </div>
+    </>
+  );
+}
+
+
+
+/**
+ * A React component that allows the user to see and manipulate the results of the current stored report
+ * 
+ * @function ResultSection
+ * @returns {JSX.Element} - React component
+*/
+function ResultSection(): JSX.Element {
+  
+  const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
+  function handleLevelClick (level:any) {
+    const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
+    setConformanceLevels(levels);
+    localStorage.setItem("conformanceLevels", JSON.stringify(levels));
+  };
+
 
   /**
    * React hook that runs after every render of the component and sets the conformance levels
@@ -385,31 +416,21 @@ function ResultSection({authenticationState, btnIsLoading, setBtnIsLoading}:any)
   return ( 
     <div className="result_section">
 
-      <div className="header"><span>Evaluation Results</span></div>
+      <div className="header"><span>Report Results</span></div>
 
       <div className="body">
         {localStorage.getItem("evaluated") === "true" ? <>
 
-          {authenticationState !== "notLogged" ?
-          <div className='extensionButtonContainer'>
-            <Button 
-              classList={"primary"} 
-              onClickHandler={handleStoreReport}
-              innerText={"Store Report"}  
-              isLoading={btnIsLoading}
-              animate={animateBtn}  
-            />
-          </div>
-          : null}
-
-          <div className='conformanceLevelSelector'>
-            <p>Select conformace level:</p>
+          <div id="conformanceLevelSelector">
+            <p>Conformace level:</p>
             <div className="level-container">
               {["A", "AA", "AAA"].map((level:any) => (
                 <div className={`conformanceLevels ${conformanceLevels.includes(level) ? 'selected' : ''}`} onClick={() => handleLevelClick(level)}>{level}</div>
               ))}
             </div>
           </div>
+
+          <SummaryTable conformanceLevels={conformanceLevels}/>
 
           <ResultsTable conformanceLevels={conformanceLevels}/>
         

@@ -1,12 +1,12 @@
 
-import '../styles/resultsTable.css';
+import '../../styles/resultSection/resultsTable.scss';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../js/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../js/utils/reactUtils.js';
-import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from '../js/utils/highlightUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../js/utils/chromeUtils.js';
+import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../../js/utils/reactUtils.js';
+import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
-import { mapReportData } from '../js/mapReportData';
+import { mapReportData } from '../../js/mapReportData';
 
 
 const outcome2Background:any = {
@@ -21,6 +21,7 @@ const outcome2Background:any = {
 
 export default function ResultsTable({conformanceLevels}:any){
 
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
@@ -36,19 +37,30 @@ export default function ResultsTable({conformanceLevels}:any){
         setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
         setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
     }, []);
+
+    const clickHandler = (index:any) => {
+        const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
+        newStates[index] = !selectedMainCategories[index];
+        setSelectedMainCategories(newStates);
     
-    return(
-      <div className = "resultsContainer">
-        <Summaries conformanceLevels={conformanceLevels} />
-        {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? 
-            <div className="resultsTable">
+        removeElementHighlights();
+
+        setSelectedIndex(selectedIndex === index ? -1 : index);
+    }
+    
+    return(<>
+        {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? <>
+            <p>Current webage evaluation results:</p>
+            <div id="resultsTable">
                 <table>
                     <thead>
                         <tr> <th>Standard</th> <OutcomeHeaders/> </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="resultsTableContent">
                         {reportTableContent.map((mainCategory:any, index:any) => (<>
-                            <tr className="collapsible mainCategory" onClick={()=>handleStateChange(selectedMainCategories, setSelectedMainCategories, index, mantainExtended, reportTableContent.length)}>
+                            <tr 
+                                className={"collapsible mainCategory" + (index === selectedIndex ? " active" : "") }
+                                onClick={()=>clickHandler(index)}>
                                 <td>{mainCategory.categoryTitle}</td>
                                 <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
                             </tr>
@@ -59,151 +71,38 @@ export default function ResultsTable({conformanceLevels}:any){
                     </tbody>
                 </table>
             </div>
-        : null}
-      </div>
-    );
+        </> : null}
+    </>);
     
 }
 
 
-function Summaries({conformanceLevels}:any){
 
-    const [webSiteOutcomes, setWebSiteOutcomes] = useState([0, 0, 0, 0, 0]);
-    const [siteSummary, setSiteSummary] = useState(null);
-    
-    const [webPageOutcomes, setWebPageOutcomes] = useState([0, 0, 0, 0, 0]);
-    const [pageSummaries, setPageSummaries] = useState(null);
-
-    const [webpage, setWebpage] = useState(null);
-
-    const [activeTab, setActiveTab] = useState('website');
-
-    const countOutcomes = async (summary:any, setOutcomes:any) => {
-        let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-        for(const conformanceLevel of conformanceLevels){
-            passed += summary["earl:passed"][conformanceLevel];
-            failed += summary["earl:failed"][conformanceLevel];
-            cantTell += summary["earl:cantTell"][conformanceLevel];
-            inapplicable += summary["earl:inapplicable"][conformanceLevel];
-            untested += summary["earl:untested"][conformanceLevel];
-        }
-        setOutcomes([passed, failed, cantTell, inapplicable, untested]);
-    };
-
-    useEffect(() => { 
-        setUseStateFromStorage("siteSummary", false, setSiteSummary, "'siteSummary' is null or undefined!");
-        setUseStateFromStorage("pageSummaries", false, setPageSummaries, "'pageSummaries' is null or undefined!");
-        
-    },[]);
-
-    useEffect(() => { 
-        if(siteSummary){
-            countOutcomes(siteSummary, setWebSiteOutcomes);
-        }
-        if(pageSummaries){
-
-            let scope:any = localStorage.getItem("scope");
-
-            scope = JSON.parse(scope);
-
-            const currentWebpage:any = scope.find((elem:any) => elem.url === window.location.href)
-
-            setWebpage(currentWebpage ? currentWebpage.name : null)
-
-            const webPageSummary = pageSummaries[window.location.href];
-            
-            if(webPageSummary){
-                countOutcomes(webPageSummary, setWebPageOutcomes);
-            }
-            
-        }
-    },[conformanceLevels, siteSummary, pageSummaries]);
-
-    return(<>
-
-        <div className="tabs">
-            <button
-                className={activeTab === 'website' ? 'active' : ''}
-                onClick={() => setActiveTab('website')}
-                style={{width: "90px"}}
-            >
-                Website
-            </button>
-            <button
-                className={activeTab === 'webpage' ? 'active' : ''}
-                onClick={() => setActiveTab('webpage')}
-                style={{width: "136px"}}
-            >
-                {pageSummaries && pageSummaries[window.location.href] && webpage ? 
-                    webpage
-                : "Current webpage"}
-            </button>
-        </div>
-
-        {activeTab === 'website' && (<>
-            <table className="summaryTable">
-                <tr> <OutcomeHeaders /> </tr>
-                <tr> {webSiteOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
-            </table>
-        </>)}
-
-        {activeTab === 'webpage' && (<>
-            {pageSummaries && pageSummaries[window.location.href] ? (
-                <table className="summaryTable">
-                    <tr> <OutcomeHeaders /> </tr>
-                    <tr> {webPageOutcomes.map((count:any) => ( <td>{count}</td> ))} </tr>
-                </table>
-            ) : (
-                <div style={{ textAlign: 'center', padding: '15px 0' }}>
-                    Current webpage has not been evaluated
-                </div>
-            )}
-        </>)}
-        
-    </>);
-}
-
-
-function OutcomeHeaders(){
-    return(<>
-        <th className="passed" title='Passed' style={{...outcome2Background["earl:passed"]}}>P</th>
-        <th className="failed" title='Failed' style={{...outcome2Background["earl:failed"]}}>F</th>
-        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["earl:cantTell"]}}>CT</th>
-        <th className="inapplicable" title='Not Present' style={{...outcome2Background["earl:inapplicable"]}}>NP</th>
-        <th className="untested" title='Not checked' style={{...outcome2Background["earl:untested"]}}>NC</th>
-    </>);
-}
-
-function ResultCount({category, conformanceLevels}:any){
-
-    let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
-
-    const outcomes = category.webPageOutcomes[window.location.href];
-
-    if(outcomes){
-        for(const conformanceLevel of conformanceLevels){
-            passed += outcomes["earl:passed"][conformanceLevel];
-            failed += outcomes["earl:failed"][conformanceLevel];
-            cantTell += outcomes["earl:cantTell"][conformanceLevel];
-            inapplicable += outcomes["earl:inapplicable"][conformanceLevel];
-            untested += outcomes["earl:untested"][conformanceLevel];
-        }
-    }
-
-    return(<> <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td> </>);
-}
 
 
 
 
 function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
+
+    const clickHandler = (index:any) => {
+        const newStates = mantainExtended ? [...selectedSubCategories] : Array(subCategories.length).fill(false);
+        newStates[index] = !selectedSubCategories[index];
+        setSelectedSubCategories(newStates);
+    
+        removeElementHighlights();
+
+        setSelectedIndex(selectedIndex === index ? -1 : index);
+    }
 
     return(<> 
         {subCategories.map((subCategory:any, index:any) => (<>
 
-            <tr className="collapsible subCategory" onClick={()=>handleStateChange(selectedSubCategories, setSelectedSubCategories, index, mantainExtended, subCategories.length)}>
+            <tr 
+                className={"collapsible subCategory" + (index === selectedIndex ? " active" : "") }
+                onClick={()=>clickHandler(index)}>
                 <td>{subCategory.subCategoryTitle}</td>
                 <ResultCount category={subCategory} conformanceLevels={conformanceLevels} />
             </tr>
@@ -386,7 +285,34 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
 
 
 
+export function OutcomeHeaders(){
+    return(<>
+        <th className="passed" title='Passed' style={{...outcome2Background["earl:passed"]}}>P</th>
+        <th className="failed" title='Failed' style={{...outcome2Background["earl:failed"]}}>F</th>
+        <th className="cantTell" title='Can&#39;t tell' style={{...outcome2Background["earl:cantTell"]}}>CT</th>
+        <th className="inapplicable" title='Not Present' style={{...outcome2Background["earl:inapplicable"]}}>NP</th>
+        <th className="untested" title='Not checked' style={{...outcome2Background["earl:untested"]}}>NC</th>
+    </>);
+}
 
+function ResultCount({category, conformanceLevels}:any){
+
+    let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;
+
+    const outcomes = category.webPageOutcomes[window.location.href];
+
+    if(outcomes){
+        for(const conformanceLevel of conformanceLevels){
+            passed += outcomes["earl:passed"][conformanceLevel];
+            failed += outcomes["earl:failed"][conformanceLevel];
+            cantTell += outcomes["earl:cantTell"][conformanceLevel];
+            inapplicable += outcomes["earl:inapplicable"][conformanceLevel];
+            untested += outcomes["earl:untested"][conformanceLevel];
+        }
+    }
+
+    return(<> <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td> </>);
+}
 
 
 

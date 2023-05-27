@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import '../../styles/dropdown.scss';
+import '../../styles/reusables/dropdownSection.scss';
 import { getImgSrc } from '../../js/utils/chromeUtils';
 
 

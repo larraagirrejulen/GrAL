@@ -1,29 +1,94 @@
 
 @import 'colors';
 
-#btn_upload{
-  margin: 12px 0 0 0;
-  padding: 8px 12px;
+#mainOptions{
+  margin: 0;
+  padding: 18px 0;
+  border-bottom: 2px solid $gray-borders;
+  text-align: center;
 
-  border: 2px solid $primary-color;
-  border-radius: 6px;
+  & .dropdownBtn{
+
+    display: inline-block;
+
+    & .dropdownHead {
+
+      background-color: $secondary-color;
+      border: 2px solid $primary-color;
+      border-radius: 6px;
+      color: $primary-color;
+      padding: 4px 0 0 9px;
+      margin-left: 12px;
+      cursor: pointer;
+
+      & label{
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      & img{
+        height: 24px;
+        cursor: pointer;
+      }
+
+      &:hover{
+        background-color: $intermediate-color;
+        color: $secondary-color;
+        font-style: italic;
+      }
+
+      &.active{
+        background-color: $intermediate-color;
+        color: $secondary-color;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
   
-  font-size: 13px;
-  font-weight: 300;
-
-  background-color: $secondary-color;
-  color: $primary-color;
-  font-style: italic;
-
-  &:hover{
-    background-color: $intermediate-color;
-    color: $secondary-color;
-    font-style: italic;
+    & .dropdownBody{
+      background-color: $secondary-color;
+      border: 2px solid $primary-color;
+      border-top: 0;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      position: absolute;
+      right: 31px;
+  
+      & label{
+        display: block;
+        padding: 6px 0;
+        width: 111px;
+        border-top: 1px solid $gray-borders;
+        font-size: 13px;
+        font-weight: 300;
+        color: $primary-color;
+        margin: 0;
+        cursor: pointer;
+      
+        &:hover{
+          background-color: $intermediate-color;
+          color: $secondary-color;
+          font-style: italic;
+        }
+      
+        & input{
+          display: none;
+        }
+      }
+    }
   }
+  
+    
+  
+  
 
-  & input{
-    display: none;
+  
+
+  & .loggedOptions{
+    padding: 0 24px;
+    padding-top: 18px;
   }
 }
+
 
 
