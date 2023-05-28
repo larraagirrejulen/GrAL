@@ -1,0 +1,44 @@
+
+@import '../colors';
+
+#extensionScopeInputList{
+
+  & .scopeInput{
+    margin-bottom: 10px;
+
+    & .inputWrapper{
+
+      & span{
+        cursor: pointer;
+        color: $primary-color;
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+  
+      & .icon{
+        position: static;
+        margin-left: 8px;
+        height: 20px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    
+        &.edit:hover{
+          filter: drop-shadow(0 0 1px $primary-color) brightness(1.1);
+        }
+    
+        &.delete:hover{
+          filter: drop-shadow(0 0 1px $red-color) brightness(1.1);
+        }
+      }
+    }
+  }
+}
+
+

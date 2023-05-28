@@ -1,20 +1,35 @@
 
 @import "colors";
 
-.extension-active {
+body.extension-active {
   position: relative;
   left: 300px;
 }
 
-.react_chrome_extension *{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+#hidden_extension_logo{
+  all: initial;
+  position: fixed;
+  top: calc(50vh - 25px);
+  left: -25px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid $intermediate-color;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0) brightness(0.6);
+  transition: 0.2s ease;
+  z-index:99999;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    filter: drop-shadow(0 0 2px $primary-color) brightness(1);
+    transition: 0.2s ease;
+  }
 }
 
-.react_chrome_extension{
+#react_chrome_extension{
   all: initial;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -23,27 +38,74 @@
   left: -300px;
   width: 300px;
   height: 100%;
-  background-color: white;
+  background-color: $secondary-color;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   animation: slide-in 0.3s forwards;
   z-index:99998;
-}
 
-.react_chrome_extension.hidden {
-  animation: slide-out 0.3s forwards;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-}
+  &.hidden {
+    animation: slide-out 0.3s forwards;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  }
 
-.react_chrome_extension .close_icon {
-  font-size: 25px;
-  font-weight: bold;
-  color: black;
-  position: absolute;
-  top: 10px;
-  left: 270px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
+  & .icon{
+    all:initial;
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.options{
+      height: 15px;
+      top: 20px;
+      left: 20px;
+    }
+
+    &.close{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: black;
+      top: 10px;
+      left: 270px;
+    }
+  }
+
+  & .img_container{
+    all: initial;
+    display: block;
+    align-self: center;
+    text-align: center;
+    height: 104px;
+
+    & img{
+      all: initial;
+      height: 100px;
+      border-radius: 18px;
+      border: 2px solid $primary-color;
+      overflow: hidden;
+      cursor: pointer;
+      filter: drop-shadow(0 0 0) brightness(1);
+      transition: 0.2s ease;
+
+      &:hover{
+        filter: drop-shadow(0 0 2px $intermediate-color) brightness(1.1);
+        transition: 0.2s ease;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #005a6aaa;
+    border-radius: 50px;
+  }
+  
 }
 
 @keyframes slide-in {
@@ -56,71 +118,3 @@
   to { left: -295px; }
 }
 
-.hidden_extension_logo{
-  all: initial;
-  position: fixed;
-  top: calc(50vh - 25px);
-  left: -25px;
-  height: 50px;
-  border-radius: 50px;
-  border: 2px solid cyan;
-  overflow: hidden;
-  cursor: pointer;
-  filter: drop-shadow(0 0 0) brightness(0.6);
-  transition: 0.2s ease;
-  z-index:99999;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-}
-
-.hidden_extension_logo:hover {
-  filter: drop-shadow(0 0 2px #005a6a) brightness(1);
-  transition: 0.2s ease;
-}
-
-.react_chrome_extension .img_container{
-  all: initial;
-  display: block;
-  align-self: center;
-  text-align: center;
-}
-
-.react_chrome_extension .img_container img{
-  all: initial;
-  height: 100px;
-  border-radius: 20px;
-  border: 2px solid #005a6a;
-  overflow: hidden;
-  cursor: pointer;
-  filter: drop-shadow(0 0 0) brightness(1);
-  transition: 0.2s ease;
-}
-
-.react_chrome_extension .img_container img:hover {
-  filter: drop-shadow(0 0 2px #005a6a) brightness(1.1);
-  transition: 0.2s ease;
-}
-
-.react_chrome_extension .options_icon{
-  height: 15px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-
-
-
-
-.react_chrome_extension::-webkit-scrollbar {
-  width: 3px;
-}
-.react_chrome_extension::-webkit-scrollbar-track {
-  background: transparent;
-}
-.react_chrome_extension::-webkit-scrollbar-thumb {
-  background: #005a6aaa;
-  border-radius: 50px;
-}

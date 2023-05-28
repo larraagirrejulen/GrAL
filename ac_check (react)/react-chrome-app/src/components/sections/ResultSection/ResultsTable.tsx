@@ -1,12 +1,12 @@
 
-import '../../styles/resultSection/resultsTable.scss';
+import '../../../styles/sections/resultSection/resultsTable.scss';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../js/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../../js/utils/reactUtils.js';
-import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../js/utils/highlightUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../js/utils/chromeUtils.js';
+import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../../../js/utils/reactUtils.js';
+import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
-import { mapReportData } from '../../js/mapReportData';
+import { mapReportData } from '../../../js/mapReportData';
 
 
 const outcome2Background:any = {
@@ -50,7 +50,7 @@ export default function ResultsTable({conformanceLevels}:any){
     
     return(<>
         {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? <>
-            <p>Current webage evaluation results:</p>
+            <p>Current webpage evaluation results:</p>
             <div id="resultsTable">
                 <table>
                     <thead>
@@ -60,7 +60,8 @@ export default function ResultsTable({conformanceLevels}:any){
                         {reportTableContent.map((mainCategory:any, index:any) => (<>
                             <tr 
                                 className={"collapsible mainCategory" + (index === selectedIndex ? " active" : "") }
-                                onClick={()=>clickHandler(index)}>
+                                onClick={()=>clickHandler(index)}
+                            >
                                 <td>{mainCategory.categoryTitle}</td>
                                 <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
                             </tr>

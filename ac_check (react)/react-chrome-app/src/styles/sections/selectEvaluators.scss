@@ -1,10 +1,11 @@
 
-@import 'colors';
+@import '../colors';
 
 .checkbox-wrapper {
 
-  border-top: 1px solid #c6c6c6;
-  padding: 12px 0;
+  border-top: 1px solid $gray-borders;
+  padding: 12px 24px;
+  text-align: left;
 
   &:first-of-type{
     border-top: 0;
@@ -17,8 +18,7 @@
 
   & .checkbox{
     align-items: center;
-    display: inline-flex;
-    padding: 0 20px;
+    display: inline-block;
     margin: 0 0 10px 0;
 
     & input[type="checkbox"] {
@@ -68,4 +68,11 @@
 
   }
 
+  & span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
 }
+

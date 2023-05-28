@@ -1,5 +1,5 @@
 
-import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js'
+import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js';
 import { storeOnChromeStorage, getFromChromeStorage }  from './utils/chromeUtils.js';
 
 
@@ -74,12 +74,19 @@ export async function mapReportData(evaluationreport = null, blackList = null){
 
                 const blacklisteds = blacklist.filter(item => "earl:" + item.outcome === foundCase.result.outcome && item.criteria.startsWith(criteriaNumber));
 
-                if(blacklisteds.length > 0 && foundCase.assertedBy.length === 1){
-                    const assertor = foundCase.assertedBy[0];
-                    const blacklisted = blacklisteds.find(elem => elem.evaluator === assertor.assertor && elem.message === assertor.description);
-                    if(blacklisted){
-                        continue;
+                if(blacklisteds.length > 0){
+                    const assertors = foundCase.assertedBy;
+
+                    for(const listed of blacklisteds){
+                        const index = assertors.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
+                        if(index > -1){
+                            assertors.splice(index, 1);
+                            if(assertors.length === 0){
+                                break;
+                            }
+                        }
                     }
+                    if(assertors.length === 0) continue;
                 }
                 
                 if(pageOutcome === "earl:failed") break;
@@ -204,26 +211,17 @@ function getHasPart(criteriaKey){
 
         const blacklisteds = blacklist.filter(item => "earl:" + item.outcome === foundCase.result.outcome && item.criteria.startsWith(criteriaKey));
 
-        if(blacklisteds.length > 0 && foundCase.assertedBy.length === 1){
-
-            let next = false;
-
-            for(const listed of blacklisteds){
-                const index = descriptions.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
-                if(index > -1){
-                    if(descriptions.length === 1){
-                        next = true;
-                        continue;
-                    }
-                    descriptions.splice(index, 1);
+        for(const listed of blacklisteds){
+            const index = descriptions.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
+            if(index > -1){
+                descriptions.splice(index, 1);
+                if(descriptions.length === 0){
+                    break;
                 }
             }
-
-            if(next){
-                continue;
-            }
-
         }
+
+        if(descriptions.length === 0) continue;
 
         const hasPart = {
             "outcome": foundCase.result.outcome.replace("earl:", ""),
@@ -238,14 +236,30 @@ function getHasPart(criteriaKey){
             const pointers = []
 
             for (const pointer of foundCasePointers) {
-                pointers.push({
-                    "html": pointer['description'].replaceAll('<','&lt;').replaceAll('>','&gt;'),
-                    "path": pointer['ptr:expression'],
-                    "innerText": pointer.innerText,
-                    "assertedBy": pointer.assertedBy.sort(),
-                    "documentation": pointer.documentation
-                })
+
+                for(const listed of blacklisteds){
+                    const index = pointer.assertedBy.findIndex(item => item === listed.evaluator);
+                    if(index > -1){
+                        pointer.assertedBy.splice(index, 1);
+                        if(pointer.assertedBy.length === 0){
+                            break;
+                        }
+                    }
+                }
+
+                if(pointer.assertedBy.length > 0){
+                    pointers.push({
+                        "html": pointer['description'].replaceAll('<','&lt;').replaceAll('>','&gt;'),
+                        "path": pointer['ptr:expression'],
+                        "innerText": pointer.innerText,
+                        "assertedBy": pointer.assertedBy.sort(),
+                        "documentation": pointer.documentation
+                    });
+                }
+                
             }
+ 
+            if(pointers.length === 0) continue;
 
             const groupedPointers = pointers.reduce((acc, pointer) => {
                 const key = pointer.assertedBy.sort().join(", ");

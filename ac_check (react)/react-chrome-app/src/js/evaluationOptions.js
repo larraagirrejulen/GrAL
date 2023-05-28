@@ -1,0 +1,244 @@
+
+import { mapReportData } from './mapReportData.js';
+import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils.js';
+import { getSuccessCriterias } from './utils/wcagUtils.js';
+
+
+/**
+ * Stores a new report in the Chrome storage, maps the report data for the extension table, sets a flag in localStorage and reloads the page.
+ * @async
+ * @function storeNewReport
+ * @param {Object} newReport - The report object to be stored in the Chrome storage.
+ * @throws {Error} If there was an error storing the new report.
+ */
+export function storeNewReport(newReport){
+    try{
+        storeOnChromeStorage("report", newReport);
+        mapReportData(newReport);
+    } catch(error) {
+        ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+        throw new Error("Error when storing or mapping the report => " + error);
+    }
+}
+
+
+/**
+ * Removes all stored report data from Chrome storage, clears the evaluated flag from localStorage and reloads the page.
+ * @function removeStoredReport
+ */
+export function removeStoredReport(){
+    
+    if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
+
+    localStorage.removeItem("evaluated");
+
+    ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+
+    window.location.reload();
+}
+
+
+/**
+ * Reads and stores the contents of the uploaded report file, and stores it as a new report object.
+ * @function uploadNewReport
+ * @param {Object} uploadEvent - The upload event object, containing the file to be read.
+ */
+export function uploadNewReport(uploadEvent){
+
+    if(localStorage.getItem("evaluated")) {
+        if (!window.confirm("The upload will overwrite the current stored report. You want to continue?")) return;
+    }
+
+    const reader = new FileReader();
+
+    reader.readAsText(uploadEvent.target.files[0], "UTF-8");
+    
+    reader.onload = async (uploadEvent) => {
+        const newReport = JSON.parse(uploadEvent.target.result);
+        storeNewReport(newReport);
+    }
+
+}
+
+
+/**
+ * Downloads the stored report data from Chrome storage, modifies it according to the active conformance levels and downloads it as a JSON file.
+ * If there is no stored report data, it shows an alert message and does nothing.
+ * @async
+ * @function downloadStoredReport
+ */
+export async function downloadStoredReport(){
+
+    const currentReport = await getFromChromeStorage("report", false);
+    const activeConformanceLevels = JSON.parse(localStorage.getItem("conformanceLevels"));
+
+    currentReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeConformanceLevels[activeConformanceLevels.length - 1] + "-Conformance";
+
+    const untestedOutcome = {
+        outcome: "earl:untested",
+        description: "",
+    };
+
+    currentReport.auditSample.forEach((criteria) => {
+
+        const conformanceLevel = criteria.conformanceLevel;
+
+        if(!activeConformanceLevels.includes(conformanceLevel)){
+
+            criteria.result = untestedOutcome;
+            criteria.hasPart = [];
+            delete criteria.assertedBy;
+            delete criteria.mode;
+
+        }else if(criteria.result.outcome === "earl:untested"){
+
+            criteria.result.description += "\n\n----------------------------------\n\n";
+            criteria.hasPart.forEach((elem) => {
+                elem.result.description += "\n\n----------------------------------\n\n";
+            });
+        
+        }
+    });
+
+    const fileName = currentReport.title + ".json";
+    const fileType = "text/json";
+    const blob = new Blob([JSON.stringify(currentReport)], { type: fileType })
+
+    const a = document.createElement('a');
+    a.download = fileName;
+    a.href = window.URL.createObjectURL(blob)
+    a.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+    }))
+    a.remove()
+
+    if (window.confirm("Do you want to upload the report on W3C?")){
+        window.open("https://www.w3.org/WAI/eval/report-tool/", '_blank');
+    } 
+}
+
+
+/**
+ * Perform an evaluation based on given scope and selected analyzers.
+ * @async
+ * @function performEvaluation
+ * @param {function} setIsLoading - Function to enable and disable loading animation.
+ * @throws {Error} Throws an error if an error occurs during the evaluation process.
+ * @returns {void}
+ */
+export async function performEvaluation(setAnimateBtn){
+
+    try{
+        setAnimateBtn("evaluate");
+
+        const scope = JSON.parse(localStorage.getItem("scope"));
+        if(scope.length === 0){
+            alert("You need to set at least a web page as a scope");
+            return;
+        }
+
+        const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+        const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
+
+        if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
+            alert("You need to choose at least one analizer");
+            return;
+        }
+
+        const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
+
+        const evaluationReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
+
+        storeNewReport(evaluationReport);
+
+    } catch (error) {
+        console.error("Error during evaluation process => ", error);
+        alert("An error occurred during evaluation. Please try again.");
+    } finally {
+        setAnimateBtn("none");
+    }
+
+}
+
+
+export async function storeReport(setAnimateBtn, authenticationState){
+
+    setAnimateBtn("store");
+
+    const currentReport = await getFromChromeStorage("report", false);
+
+    const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+
+    if(enableBlacklist){
+        const blacklist = await getFromChromeStorage("blacklist") ?? [];
+
+        if(blacklist.length > 0){
+            currentReport.auditSample.forEach((criteria, index) => {
+
+                // TODO
+
+            });
+        }
+
+        
+    }
+    
+
+    const bodyData = JSON.stringify({report: currentReport, uploadedBy: authenticationState});
+
+    try{
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+          window.alert("Report successfully stored!");
+        } else {
+          window.alert("Could not store the report, try again later...");
+        }
+
+    }catch(error){
+        console.log(error);
+    }finally{
+      setAnimateBtn("none");
+    }
+
+  };
+
+
+/**
+ * Fetches the evaluation report from a server using a JSON body.
+ * @async
+ * @function fetchEvaluation
+ * @param {string} bodyData - The JSON body containing the parameters for the evaluation report.
+ * @param {number} [timeout=120000] - The timeout for the fetch request, in milliseconds.
+ * @returns {Promise<object>} - The evaluation report as an object.
+ * @throws {Error} If there was an error with the fetch request, or if the request timed out.
+ */
+export async function fetchServer(bodyData, action, timeout = 120000) {
+
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+
+        const response = await fetch('http://localhost:7070/' + action, {
+            body: bodyData,
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            signal: controller.signal
+        });
+        
+        clearTimeout(timer);
+
+        if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+        
+        const fetchData = await response.json();
+
+        return JSON.parse(fetchData);
+
+    } catch (error) {
+        throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
+    }
+
+}

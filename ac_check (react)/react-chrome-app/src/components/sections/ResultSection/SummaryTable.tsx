@@ -1,8 +1,8 @@
 
-import '../../styles/resultSection/summaryTable.scss';
+import '../../../styles/sections/resultSection/summaryTable.scss';
 
 import { useState, useEffect} from "react";
-import { setUseStateFromStorage } from '../../js/utils/reactUtils.js';
+import { setUseStateFromStorage } from '../../../js/utils/reactUtils.js';
 import { OutcomeHeaders } from './ResultsTable';
 
 
@@ -61,7 +61,7 @@ export default function SummaryTable({conformanceLevels}:any){
     return(
         <div id="evaluationSummary">
 
-            <p>Site/Page summary:</p>
+            <p>Current Site/Page summary:</p>
             <div className="tabs">
                 <div
                     className={activeTab === 'website' ? 'active' : ''}

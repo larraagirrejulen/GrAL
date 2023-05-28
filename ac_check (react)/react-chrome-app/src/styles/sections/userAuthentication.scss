@@ -1,0 +1,49 @@
+
+@import '../colors';
+
+#extension_authentication_section{
+    all: initial;
+    display: block;
+    text-align: center;
+    margin: 10px 0 0 0;
+    padding: 0 20px;
+
+    & .userNameLabel{
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    & .form{
+        border-top: 2px solid $gray-borders;
+        border-bottom: 2px solid $gray-borders;
+        padding: 20px 0;
+        text-align: left;
+
+        & h2{
+            text-align: center;
+        }
+
+        & .field{
+            margin: 5px 0;
+
+            & input{
+                width: 100%;
+            }
+        }
+
+        & .options{
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & .leftDiv{
+                display: inline-flex;
+            }
+
+            & .rightDiv{
+                text-align: right;
+            }
+        }
+    }
+}

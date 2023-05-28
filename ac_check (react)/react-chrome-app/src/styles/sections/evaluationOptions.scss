@@ -1,7 +1,9 @@
 
-@import 'colors';
+@import '../colors';
 
-#mainOptions{
+#evaluationOptions{
+  all:initial;
+  display: block;
   margin: 0;
   padding: 18px 0;
   border-bottom: 2px solid $gray-borders;
@@ -9,7 +11,9 @@
 
   & .dropdownBtn{
 
+    all:initial;
     display: inline-block;
+    height: 40px;
 
     & .dropdownHead {
 
@@ -22,12 +26,16 @@
       cursor: pointer;
 
       & label{
-        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        display: inline-block;
         cursor: pointer;
       }
 
       & img{
-        height: 24px;
+        height: 18px;
+        display: inline-block;
         cursor: pointer;
       }
 
@@ -52,15 +60,18 @@
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px;
       position: absolute;
-      right: 31px;
+      right: 26px;
   
       & label{
         display: block;
         padding: 6px 0;
-        width: 111px;
+        width: 112px;
         border-top: 1px solid $gray-borders;
+
+        font-family: Arial, Helvetica, sans-serif;
         font-size: 13px;
-        font-weight: 300;
+        font-weight: 400;
+
         color: $primary-color;
         margin: 0;
         cursor: pointer;
@@ -77,12 +88,6 @@
       }
     }
   }
-  
-    
-  
-  
-
-  
 
   & .loggedOptions{
     padding: 0 24px;
