@@ -183,6 +183,7 @@ function getCriteriaResults(subCategoryKey){
 
         const results = {
             "criteria": criterias[criteriaKey],
+            "criteriaNumber": criteriaKey,
             "outcomes": assertion.pageOutcomes,
             "conformanceLevel": assertion.conformanceLevel
         }

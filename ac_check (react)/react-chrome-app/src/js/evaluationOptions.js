@@ -165,30 +165,18 @@ export async function performEvaluation(setAnimateBtn){
 
 export async function storeReport(setAnimateBtn, authenticationState){
 
-    setAnimateBtn("store");
+    try{
+        setAnimateBtn("store");
 
-    const currentReport = await getFromChromeStorage("report", false);
+        const currentReport = await getFromChromeStorage("report", false);
 
-    const enableBlacklist = await getFromChromeStorage('enableBlacklist');
-
-    if(enableBlacklist){
-        const blacklist = await getFromChromeStorage("blacklist") ?? [];
-
-        if(blacklist.length > 0){
-            currentReport.auditSample.forEach((criteria, index) => {
-
-                // TODO
-
-            });
+        const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+        
+        if(enableBlacklist){
+            await removeBlackListeds(currentReport);
         }
 
-        
-    }
-    
-
-    const bodyData = JSON.stringify({report: currentReport, uploadedBy: authenticationState});
-
-    try{
+        const bodyData = JSON.stringify({report: currentReport, uploadedBy: authenticationState});
 
         const storeResults = await fetchServer(bodyData, "reportStoring");
 
@@ -241,4 +229,93 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
         throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
     }
 
+}
+
+
+async function removeBlackListeds(currentReport){
+
+    const successCriterias = getSuccessCriterias();
+    const blacklist = await getFromChromeStorage("blacklist") ?? [];
+
+    if(blacklist.length === 0){
+        return;
+    }
+
+    currentReport.auditSample.forEach((criteria, index) => {
+
+        const criteriaNumber = successCriterias[index].num;
+
+        let outcome = "earl:untested";
+
+        for (let i = 0; i < criteria.hasPart.length; i++) {
+
+            const foundCase = criteria.hasPart[i];
+
+            const blacklisteds = blacklist.filter(item => item.criteria.startsWith(criteriaNumber) && "earl:" + item.outcome === foundCase.result.outcome);
+
+            if(blacklisteds.length > 0){
+
+                for(const listed of blacklisteds){
+                    const index = foundCase.assertedBy.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
+                    if(index > -1){
+                        foundCase.assertedBy.splice(index, 1);
+                        if(foundCase.assertedBy.length === 0){
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if(foundCase.assertedBy.length > 0){
+
+                const newOutcome = foundCase.result.outcome;
+
+                if(outcome === "earl:untested" ||
+                (outcome === "earl:inapplicable" && newOutcome !== "earl:untested") ||
+                (outcome === "earl:passed" && (newOutcome === "earl:failed" || newOutcome === "earl:cantTell")) ||
+                (outcome === "earl:cantTell" && newOutcome === "earl:failed")){
+                    outcome = newOutcome;
+                }
+
+                for (let j = 0; j < foundCase.result.locationPointersGroup.length; j++) {
+
+                    const pointer = foundCase.result.locationPointersGroup[j];
+
+                    for(const listed of blacklisteds){
+                        const index = pointer.assertedBy.findIndex(item => item === listed.evaluator);
+                        if(index > -1){
+                            pointer.assertedBy.splice(index, 1);
+                            if(pointer.assertedBy.length === 0){
+                                break;
+                            }
+                        }
+                    }  
+
+                    if(pointer.assertedBy.length === 0){
+                        foundCase.result.locationPointersGroup.splice(j, 1);
+                        j--;
+                    }
+                };
+
+            }else{
+
+                criteria.hasPart.splice(i, 1);
+                i--;
+
+            }
+
+            
+        };
+
+        if(criteria.hasPart.length === 0){
+            criteria.result = {
+                "outcome": "earl:untested",
+                "description": ""
+            }
+            delete criteria.assertedBy;
+            delete criteria.mode;
+        } else {
+            criteria.result.outcome = outcome;
+        }
+    }); 
 }

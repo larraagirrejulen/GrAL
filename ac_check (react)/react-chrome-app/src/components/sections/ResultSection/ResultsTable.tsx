@@ -2,11 +2,14 @@
 import '../../../styles/sections/resultSection/resultsTable.scss';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../js/utils/chromeUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage, storeOnChromeStorage } from '../../../js/utils/chromeUtils.js';
 import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../../../js/utils/reactUtils.js';
 import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
 import { mapReportData } from '../../../js/mapReportData';
+import Button from '../../reusables/Button';
+import { getSuccessCriterias } from '../../../js/utils/wcagUtils';
+import { storeNewReport } from '../../../js/evaluationOptions';
 
 
 const outcome2Background:any = {
@@ -36,12 +39,21 @@ export default function ResultsTable({conformanceLevels}:any){
         })();
         setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
         setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
+        
+        const storedValue = sessionStorage.getItem("selectedMainCategories");
+        if(storedValue){
+            setSelectedMainCategories(JSON.parse(storedValue));
+            sessionStorage.removeItem("selectedMainCategories");
+        }
+
     }, []);
 
     const clickHandler = (index:any) => {
         const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
         newStates[index] = !selectedMainCategories[index];
         setSelectedMainCategories(newStates);
+
+        sessionStorage.setItem("selectedMainCategories", JSON.stringify(newStates));
     
         removeElementHighlights();
 
@@ -93,10 +105,20 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
         newStates[index] = !selectedSubCategories[index];
         setSelectedSubCategories(newStates);
     
+        sessionStorage.setItem("selectedSubCategories", JSON.stringify(newStates));
+
         removeElementHighlights();
 
         setSelectedIndex(selectedIndex === index ? -1 : index);
     }
+
+    useEffect(() => {
+        const storedValue = sessionStorage.getItem("selectedSubCategories");
+        if(storedValue){
+            setSelectedSubCategories(JSON.parse(storedValue));
+            sessionStorage.removeItem("selectedSubCategories");
+        }
+    }, []);
 
     return(<> 
         {subCategories.map((subCategory:any, index:any) => (<>
@@ -122,12 +144,30 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
 
+    const clickHandler = (index:any) => {
+        const newStates = mantainExtended ? [...selectedCriterias] : Array(criterias.length).fill(false);
+        newStates[index] = !selectedCriterias[index];
+        setSelectedCriterias(newStates);
+    
+        sessionStorage.setItem("selectedCriterias", JSON.stringify(newStates));
+
+        removeElementHighlights();
+    }
+
+    useEffect(() => {
+        const storedValue = sessionStorage.getItem("selectedCriterias");
+        if(storedValue){
+            setSelectedCriterias(JSON.parse(storedValue));
+            sessionStorage.removeItem("selectedCriterias");
+        }
+    }, []);
+
     return(<> 
         {criterias.map((criteria:any, index:any) => (<>
 
             { conformanceLevels.includes(criteria.conformanceLevel) ? <>
             
-                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcomes[window.location.href]]}} onClick={() => {handleStateChange(selectedCriterias, setSelectedCriterias, index, mantainExtended, criterias.length)}}>
+                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcomes[window.location.href]]}} onClick={() => {clickHandler(index)}}>
                     <td colSpan={2}>
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
@@ -139,7 +179,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                     <td colSpan={4}>{criteria.outcomes[window.location.href]}</td>
                 </tr>
                 {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] ? 
-                    <CriteriaResults criteriaResults={criteria.hasPart} criteria={criteria.criteria} />
+                    <CriteriaResults criteria={criteria} />
                 : null }
         
             </> : null }
@@ -151,34 +191,137 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 
-function CriteriaResults({criteriaResults, criteria}:any){  
+function CriteriaResults({criteria}:any){  
 
-    const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteriaResults.length).fill(false));
+    const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteria.hasPart.length).fill(false));
+    const [editIndex, setEditIndex] = useState(-1);
 
     const onBlacklistClick = async (evaluator:any, message:any, outcome:any) => {
         if (window.confirm("Blacklist selected evaluator message?\n(You can remove blacklisted elements from the configuration)")){
-            blackListElement({evaluator, criteria, outcome, message});
+            blackListElement({evaluator, criteria: criteria.criteria, outcome, message});
         } 
     };
 
+    const saveChanges = () => {
+        
+    };
+
+    const cancelChanges = () => {
+        setEditIndex(-1);
+    };
+
+    const confirmCase = () => {
+        
+    };
+
+    const removeCase = async (index:any) => {
+
+        if(!window.confirm("Are you sure you want to remove this found case?")) return;
+
+        const evaluationReport = await getFromChromeStorage("report", false);
+
+        const criteriaTxt = getSuccessCriterias().find((elem:any) => elem.num === criteria.criteriaNumber);
+
+        const reportCriteria = evaluationReport.auditSample.find((elem:any) => elem.test.includes(criteriaTxt.id));
+
+        const reportHasPart = reportCriteria.hasPart;
+
+        const removingFoundCase = criteria.hasPart[index];
+
+        const foundCaseIndex = reportHasPart.indexOf((elem:any) => elem.subject === removingFoundCase.webPage && elem.result.outcome.replace("earl:", "") === removingFoundCase.outcome)
+
+        reportHasPart.splice(foundCaseIndex, 1);
+
+        criteria.hasPart.splice(index, 1);
+
+        let newOutcome = "untested";
+
+        for(let i = 0; i < criteria.hasPart.length; i++){
+            const foundCase = criteria.hasPart[i];
+            if(foundCase.webPage === window.location.href){
+                newOutcome = foundCase.outcome;
+                break;
+            }
+        };
+
+        criteria.outcomes[window.location.href] = "earl:" + newOutcome;
+
+        if(reportHasPart.length === 0){
+            reportCriteria.result.outcome = "earl:untested";
+            reportCriteria.result.description = "";
+            delete reportCriteria.assertedBy;
+            delete reportCriteria.mode;
+        }else{
+            const outcomeDescriptions:any = {
+                "earl:passed": ["No violations found", "PASSED:"],
+                "earl:failed": ["Found a violation ...", "An ERROR was found:"],
+                "earl:cantTell": ["Found possible applicable issue, but not sure...", "A POSSIBLE ISSUE was found:"],
+                "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
+            };
+    
+            reportCriteria.result.outcome = "earl:" + newOutcome;
+            reportCriteria.result.description = outcomeDescriptions["earl:" + newOutcome];
+        }
+
+        storeNewReport(evaluationReport);
+
+    };
+
+
     return(<>
-        {criteriaResults.map((result:any, index:any) => (<>
+        {criteria.hasPart.map((result:any, index:any) => (<>
 
             {result.webPage === window.location.href ? <>
-                <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteriaResults.length)}>
+                <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteria.hasPart.length)}>
                     <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
                         <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
                         {result.outcome}
+
+                        {editIndex === index ? <>
+                            <Button 
+                                classList={"primary small"} 
+                                onClickHandler={saveChanges}
+                                innerText={"Save"}
+                            />
+                            <Button 
+                                classList={"secondary small"} 
+                                onClickHandler={cancelChanges}
+                                innerText={"Cancel"}
+                            />
+                        </> : <>
+                            <img src={ getImgSrc("ok") } alt="Confirm found case" height="18px" onClick={confirmCase}/>
+                            <img src={ getImgSrc("edit") } alt="Edit found case" height="16px" onClick={()=>setEditIndex(index)}/>
+                            <img src={ getImgSrc("remove") } alt="Remove found case" height="16px" onClick={()=>removeCase(index)}/>
+                        </>}
+                        
                     </td>
                 </tr>
 
-                {selectedCriteriaResults[index] && (<>
+                {(selectedCriteriaResults[index] || editIndex === index) && (<>
                 
-                    {result.descriptions.map((element:any, index:any) => (<>
+                    {result.descriptions.map((element:any, i:any) => (<>
 
                         <tr>
                             <td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}
-                                <img className='blacklistIcon' src={ getImgSrc("blacklist") } alt="Add message to blacklist" height="18px" onClick={() => onBlacklistClick(element.assertor, element.description, result.outcome)}/>
+                                {editIndex === index ? <>
+                                    <img 
+                                        className='removeIcon' 
+                                        src={ getImgSrc("remove") } 
+                                        alt="Remove message" 
+                                        title="Remove message"
+                                        height="18px"
+                                    />
+                                </> : <>
+                                    <img 
+                                        className='blacklistIcon' 
+                                        src={ getImgSrc("blacklist") } 
+                                        alt="Add message to blacklist" 
+                                        title="Add message to blacklist"
+                                        height="18px" 
+                                        onClick={() => onBlacklistClick(element.assertor, element.description, result.outcome)}
+                                    />
+                                </>}
+                                
                             </td>
                         </tr>
                         <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
@@ -186,7 +329,7 @@ function CriteriaResults({criteriaResults, criteria}:any){
                     </>))}
 
                     { result.hasOwnProperty("groupedPointers") ? 
-                        <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} />
+                        <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} edit={editIndex === index} />
                     : null }
                     
                 </>)}
@@ -199,7 +342,7 @@ function CriteriaResults({criteriaResults, criteria}:any){
 }
 
 
-function CriteriaResultPointers({resultGroupedPointers}:any){  
+function CriteriaResultPointers({resultGroupedPointers, edit}:any){  
 
     const [selectedPointer, setSelectedPointer] = useState<{ [groupKey: string]: number | null }>({});
 
@@ -223,6 +366,12 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
             selectHighlightedElement(groupKey, index, pointer.documentation);
         
         } 
+
+    }
+
+    function handleRemovePointerClick(groupKey:string, index:any){
+
+        resultGroupedPointers[groupKey].splice(index, 1);
 
     }
 
@@ -269,8 +418,24 @@ function CriteriaResultPointers({resultGroupedPointers}:any){
                             : { color:"black" }}
                         onClick={() => handlePointerClick(groupKey, index)}
                     >
-                        {index + 1}. {selectedPointer[groupKey] === index ? parse(pointer.html) : 
-                            parse(pointer.html.substring(0, 30) + " ... ")} {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
+
+                        {index + 1}. {selectedPointer[groupKey] === index ? 
+                            parse(pointer.html) 
+                        : 
+                            parse(pointer.html.substring(0, 27) + " ... ")} 
+                        {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
+                        
+                        {edit && (
+                            <img 
+                                className='removePointerIcon' 
+                                src={ getImgSrc("remove") } 
+                                alt="Remove pointer from list" 
+                                title="Remove pointer" 
+                                height="16px" 
+                                onClick={() => handleRemovePointerClick(groupKey, index)}
+                            />
+                        )}
+                        
                     </pre> 
                 ))}
                 
