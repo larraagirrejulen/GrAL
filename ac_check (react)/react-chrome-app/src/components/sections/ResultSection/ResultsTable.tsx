@@ -2,15 +2,15 @@
 import '../../../styles/sections/resultSection/resultsTable.scss';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage, storeOnChromeStorage } from '../../../js/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, handleStateChange } from '../../../js/utils/reactUtils.js';
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../js/utils/chromeUtils.js';
+import { setUseStateFromStorage, getElementByPath, collapsibleClickHandler } from '../../../js/utils/reactUtils.js';
 import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
 import { mapReportData } from '../../../js/mapReportData';
 import Button from '../../reusables/Button';
 import { getSuccessCriterias } from '../../../js/utils/wcagUtils';
 import { storeNewReport } from '../../../js/evaluationOptions';
-import { removeCase } from '../../../js/resultsTableOptions';
+
 
 
 const outcome2Background:any = {
@@ -21,11 +21,18 @@ const outcome2Background:any = {
     "earl:untested": {backgroundColor: "#8CFAFA"}
 }
 
+const outcome2Description:any = {
+    "earl:passed": ["No violations found", "PASSED:"],
+    "earl:failed": ["Found a violation ...", "An ERROR was found:"],
+    "earl:cantTell": ["Found possible applicable issue, but not sure...", "A POSSIBLE ISSUE was found:"],
+    "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
+};
+
+const wcagCriterias = getSuccessCriterias();
 
 
 export default function ResultsTable({conformanceLevels}:any){
 
-    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
@@ -38,28 +45,20 @@ export default function ResultsTable({conformanceLevels}:any){
                 mapReportData();
             }
         })();
-        setUseStateFromStorage("mantainExtended", true, setMantainExtended, "could not get 'mantainExtended' option!");
-        setUseStateFromStorage("reportTableContent", false, setReportTableContent, "'reportTableContent' is null or undefined!");
+
+        setUseStateFromStorage("mantainExtended", true, setMantainExtended);
+        setUseStateFromStorage("reportTableContent", false, setReportTableContent);
         
         const storedValue = sessionStorage.getItem("selectedMainCategories");
         if(storedValue){
             setSelectedMainCategories(JSON.parse(storedValue));
-            sessionStorage.removeItem("selectedMainCategories");
         }
-
     }, []);
 
-    const clickHandler = (index:any) => {
-        const newStates = mantainExtended ? [...selectedMainCategories] : Array(reportTableContent.length).fill(false);
-        newStates[index] = !selectedMainCategories[index];
-        setSelectedMainCategories(newStates);
-
-        sessionStorage.setItem("selectedMainCategories", JSON.stringify(newStates));
-    
+    useEffect(() => {
+        sessionStorage.setItem("selectedMainCategories", JSON.stringify(selectedMainCategories));
         removeElementHighlights();
-
-        setSelectedIndex(selectedIndex === index ? -1 : index);
-    }
+    }, [selectedMainCategories]);
     
     return(<>
         {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? <>
@@ -72,15 +71,28 @@ export default function ResultsTable({conformanceLevels}:any){
                     <tbody id="resultsTableContent">
                         {reportTableContent.map((mainCategory:any, index:any) => (<>
                             <tr 
-                                className={"collapsible mainCategory" + (index === selectedIndex ? " active" : "") }
-                                onClick={()=>clickHandler(index)}
+                                className={"collapsible mainCategory" + (selectedMainCategories[index] ? " active" : "") }
+                                onClick={() => collapsibleClickHandler(
+                                            selectedMainCategories, 
+                                            setSelectedMainCategories, 
+                                            index, 
+                                            mantainExtended, 
+                                            reportTableContent.length
+                                        )}
                             >
                                 <td>{mainCategory.categoryTitle}</td>
-                                <ResultCount category={mainCategory} conformanceLevels={conformanceLevels}/>
+                                <ResultCount 
+                                    category={mainCategory} 
+                                    conformanceLevels={conformanceLevels}
+                                />
                             </tr>
-                            { selectedMainCategories[index] ? 
-                                <SubCategory subCategories={mainCategory.subCategories} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels} /> 
-                            : null }
+                            { selectedMainCategories[index] && ( 
+                                <SubCategory 
+                                    subCategories={mainCategory.subCategories} 
+                                    mantainExtended={mantainExtended} 
+                                    conformanceLevels={conformanceLevels} 
+                                /> 
+                            )}
                         </>))}
                     </tbody>
                 </table>
@@ -98,92 +110,103 @@ export default function ResultsTable({conformanceLevels}:any){
 
 function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
-    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
-
-    const clickHandler = (index:any) => {
-        const newStates = mantainExtended ? [...selectedSubCategories] : Array(subCategories.length).fill(false);
-        newStates[index] = !selectedSubCategories[index];
-        setSelectedSubCategories(newStates);
-    
-        sessionStorage.setItem("selectedSubCategories", JSON.stringify(newStates));
-
-        removeElementHighlights();
-
-        setSelectedIndex(selectedIndex === index ? -1 : index);
-    }
 
     useEffect(() => {
         const storedValue = sessionStorage.getItem("selectedSubCategories");
         if(storedValue){
             setSelectedSubCategories(JSON.parse(storedValue));
-            sessionStorage.removeItem("selectedSubCategories");
         }
     }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem("selectedSubCategories", JSON.stringify(selectedSubCategories));
+        removeElementHighlights();
+    }, [selectedSubCategories]);
 
     return(<> 
         {subCategories.map((subCategory:any, index:any) => (<>
 
             <tr 
-                className={"collapsible subCategory" + (index === selectedIndex ? " active" : "") }
-                onClick={()=>clickHandler(index)}>
+                className={"collapsible subCategory" + (selectedSubCategories[index] ? " active" : "") }
+                onClick={() => collapsibleClickHandler(
+                    selectedSubCategories, 
+                    setSelectedSubCategories, 
+                    index, 
+                    mantainExtended, 
+                    subCategories.length
+                )}
+            >
                 <td>{subCategory.subCategoryTitle}</td>
                 <ResultCount category={subCategory} conformanceLevels={conformanceLevels} />
             </tr>
-            { selectedSubCategories[index] ? 
-                <Criterias criterias={subCategory.criterias} mantainExtended={mantainExtended} conformanceLevels={conformanceLevels}/> 
-            : null }
+            { selectedSubCategories[index] && ( 
+                <Criterias 
+                    criterias={subCategory.criterias} 
+                    mantainExtended={mantainExtended} 
+                    conformanceLevels={conformanceLevels}
+                /> 
+            )}
         
         </>))} 
     </>);
 }
 
 
-
-
 function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
-
-    const clickHandler = (index:any) => {
-        const newStates = mantainExtended ? [...selectedCriterias] : Array(criterias.length).fill(false);
-        newStates[index] = !selectedCriterias[index];
-        setSelectedCriterias(newStates);
-    
-        sessionStorage.setItem("selectedCriterias", JSON.stringify(newStates));
-
-        removeElementHighlights();
-    }
 
     useEffect(() => {
         const storedValue = sessionStorage.getItem("selectedCriterias");
         if(storedValue){
             setSelectedCriterias(JSON.parse(storedValue));
-            sessionStorage.removeItem("selectedCriterias");
-        }
+        } 
     }, []);
+
+    useEffect(() => {
+        sessionStorage.setItem("selectedCriterias", JSON.stringify(selectedCriterias));
+        removeElementHighlights();
+    }, [selectedCriterias]);
 
     return(<> 
         {criterias.map((criteria:any, index:any) => (<>
 
-            { conformanceLevels.includes(criteria.conformanceLevel) ? <>
+            { conformanceLevels.includes(criteria.conformanceLevel) && (<>
             
-                <tr className={"collapsible criteria"} style={{...outcome2Background[criteria.outcomes[window.location.href]]}} onClick={() => {clickHandler(index)}}>
+                <tr 
+                    className={"collapsible criteria"} 
+                    style={{...outcome2Background[criteria.outcomes[window.location.href]]}} 
+                    onClick={() => collapsibleClickHandler(
+                        selectedCriterias, 
+                        setSelectedCriterias, 
+                        index, 
+                        mantainExtended, 
+                        criterias.length, 
+                    )}
+                >
                     <td colSpan={2}>
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
-                            <img src={ selectedCriterias[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
+                            <img 
+                                src={ selectedCriterias[index] ? 
+                                        getImgSrc("extendedArrow") 
+                                    : 
+                                        getImgSrc("contractedArrow") 
+                                    } 
+                                alt="Show information" height="20px"
+                            />
                             {criteria.criteria}
                             
                         </> : <> {criteria.criteria} </> }
                     </td>
                     <td colSpan={4}>{criteria.outcomes[window.location.href]}</td>
                 </tr>
-                {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] ? 
+                {criteria.hasOwnProperty("hasPart") && selectedCriterias[index] && ( 
                     <CriteriaResults criteria={criteria} />
-                : null }
+                )}
         
-            </> : null }
+            </>)}
 
         </>))} 
     </>);
@@ -196,93 +219,133 @@ function CriteriaResults({criteria}:any){
 
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteria.hasPart.length).fill(false));
     const [editIndex, setEditIndex] = useState(-1);
+
     const [removedPointers, setRemovedPointers] = useState([]);
     const [removedDescriptions, setRemovedDescriptions] = useState([]);
     const [editedPointersGroup, setEditedPointersGroup] = useState([]);
+    const [editedDescriptions, setEditedDescriptions] = useState([]);
 
-    const onBlacklistClick = async (evaluator:any, message:any, outcome:any) => {
-        if (window.confirm("Blacklist selected evaluator message?\n(You can remove blacklisted elements from the configuration)")){
-            blackListElement({evaluator, criteria: criteria.criteria, outcome, message});
-        } 
-    };
+    useEffect(() => {
+        removeElementHighlights();
+    }, [selectedCriteriaResults]);
+
+    async function getFoundCaseFromReport(index:any){
+
+        const evaluationReport = await getFromChromeStorage("report", false);
+
+        const criteriaTxt = wcagCriterias.find((elem:any) => elem.num === criteria.criteriaNumber);
+
+        const reportCriteria = evaluationReport.auditSample.find(
+            (elem:any) => elem.test.includes(criteriaTxt.id)
+        );
+    
+        const foundCaseIndex = reportCriteria.hasPart.findIndex(
+            (elem:any) => elem.subject === criteria.hasPart[index].webPage && 
+                elem.result.outcome.replace("earl:", "") === criteria.hasPart[index].outcome
+        );
+
+        return [evaluationReport, reportCriteria, foundCaseIndex];
+
+    }
+
+    function removeFoundCaseFromReport(reportCriteria:any){
+
+        reportCriteria.result.outcome = "earl:untested";
+        reportCriteria.result.description = "";
+        delete reportCriteria.assertedBy;
+        delete reportCriteria.mode;
+
+    }
 
     const saveChanges = async () => {
         
-        const evaluationReport = await getFromChromeStorage("report", false);
-
-        const criteriaTxt = getSuccessCriterias().find((elem) => elem.num === criteria.criteriaNumber);
+        const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(editIndex);
     
-        const reportCriteria = evaluationReport.auditSample.find((elem:any) => elem.test.includes(criteriaTxt.id));
+        if(criteria.hasPart[editIndex].descriptions.length === 0){
     
-        const editedFoundCase = criteria.hasPart[editIndex];
-
-        const foundCaseIndex = reportCriteria.hasPart.findIndex((elem:any) => elem.subject === window.location.href && elem.result.outcome.replace("earl:", "") === editedFoundCase.outcome);
-
-        if(editedFoundCase.descriptions.length === 0){
-
             reportCriteria.hasPart.splice(foundCaseIndex, 1);
-
+    
+            if(reportCriteria.hasPart.length === 0){
+                removeFoundCaseFromReport(reportCriteria);
+            }
+    
         } else {
-
+    
             const foundCase = reportCriteria.hasPart[foundCaseIndex];
-
+            const locationPointersGroup = foundCase.result.locationPointersGroup;
+    
             removedDescriptions.forEach((desc:any) => {
 
-                const assertorIndex = foundCase.assertedBy.findIndex((elem:any) => elem === desc.description);
-
+                const removedDescAssertor = desc.description.assertor;
+    
+                const assertorIndex = foundCase.assertedBy.findIndex(
+                    (elem:any) => elem.assertor === removedDescAssertor
+                );
                 foundCase.assertedBy.splice(assertorIndex, 1);
-
-                const locationPointersGroup = foundCase.result.locationPointersGroup
-
+    
                 for(let i = 0; i < locationPointersGroup.length; i++){
+    
+                    const pointerAssertors = locationPointersGroup[i].assertedBy;
+    
+                    if(pointerAssertors.includes(removedDescAssertor)){
 
-                    const pointer = locationPointersGroup[i];
-
-                    if(pointer.assertedBy.includes(desc.description.assertor)){
-                        if(pointer.assertedBy.length === 1){
+                        if(pointerAssertors.length === 1){
                             locationPointersGroup.splice(i, 1);
                             i--;
                         }else{
-                            const index = pointer.assertedBy.indexOf(desc.description.assertor);
-                            pointer.assertedBy.splice(index, 1);
+                            const index = pointerAssertors.indexOf(removedDescAssertor);
+                            pointerAssertors.splice(index, 1);
                         }
+
                     }
                 }
+
             }); 
+    
+            editedDescriptions.forEach((desc:any) => {
 
-            removedPointers.forEach((pointer:any) => {
+                const removed = removedDescriptions.findIndex(
+                    (removedDesc:any) => removedDesc.description.assertor === desc.assertor
+                );
 
-                const index = foundCase.result.locationPointersGroup.findIndex((elem:any) => elem["ptr:expression"] === pointer.pointer.path);
+                if(removed === -1){
+                    const edited = criteria.hasPart[editIndex].descriptions.find(
+                        (elem:any) => elem.assertor === desc.assertor
+                    );
+                    const assertorDescription = foundCase.assertedBy.find(
+                        (elem:any) => elem.assertor === desc.assertor
+                    );
+                    assertorDescription.description = edited.description;
+                }
 
-                foundCase.result.locationPointersGroup.splice(index, 1);
+            });
+
+            removedPointers.forEach((ptr:any) => {
+    
+                const index = locationPointersGroup.findIndex(
+                    (elem:any) => elem["ptr:expression"] === ptr.pointer.path
+                );
+    
+                if(index !== -1){
+                    locationPointersGroup.splice(index, 1);
+                }
             
             });
 
+            const modifier = await getFromChromeStorage("authenticationState");
+
+            if(!foundCase.modifiedBy.includes(modifier)){
+                foundCase.modifiedBy.push(modifier);
+            }
+
+            foundCase.lastModifier = modifier;
+            
         }
 
         storeNewReport(evaluationReport);
     };
 
     const cancelChanges = () => {
-
-        revertChanges();
-        setEditIndex(-1);
-
-    };
-
-    const editCase = (index:any) => {
-
-        if(editIndex !== -1){
-            revertChanges();
-        }
-        setEditIndex(index);
-
-    };
-
-    function revertChanges(){
-        removedPointers.forEach((elem:any) => {
-            criteria.hasPart[editIndex].groupedPointers[elem.groupKey].splice(elem.index, 0, elem.pointer);
-        }); 
 
         removedDescriptions.forEach((elem:any) => {
             criteria.hasPart[editIndex].descriptions.splice(elem.index, 0, elem.description);
@@ -292,55 +355,71 @@ function CriteriaResults({criteria}:any){
             criteria.hasPart[editIndex].groupedPointers[elem.key] = elem.pointers;
         });
 
+        editedDescriptions.forEach((oldValues:any) => {
+            const assertorDescription = criteria.hasPart[editIndex].descriptions.find(
+                (desc:any) => desc.assertor === oldValues.assertor
+            );
+            assertorDescription.description = oldValues.description;
+        });
+
+        removedPointers.forEach((ptr:any) => {
+            criteria.hasPart[editIndex].groupedPointers[ptr.groupKey].splice(ptr.index, 0, ptr.pointer);
+        }); 
+
         setEditedPointersGroup([]);
         setRemovedDescriptions([]);
         setRemovedPointers([]);
-    }
+        setEditedDescriptions([]);
+        setEditIndex(-1);
 
-    const handleRemoveMessage = (index:any) => {
+    };
+
+    const removeDescription = async (index:any) => {
 
         const newRemovedDescriptions:any = [...removedDescriptions];
-
+    
         const description = criteria.hasPart[editIndex].descriptions[index];
-
+    
         newRemovedDescriptions.push({
             description,
             index
         });
         setRemovedDescriptions(newRemovedDescriptions);
-
+    
         criteria.hasPart[editIndex].descriptions.splice(index, 1);
-
+    
         const groupedPointers = criteria.hasPart[editIndex].groupedPointers;
-
+    
         const edited:any = [...editedPointersGroup];
-
+    
         for (const key in groupedPointers) {
 
+            const pointers = groupedPointers[key];
+    
             if(key === description.assertor){
-
+    
                 if(edited.find((elem:any) => elem.key === key) === undefined){
-                    edited.push({pointers: groupedPointers[key], key});
+                    edited.push({pointers, key});
                 }
                 delete groupedPointers[key];
-
+    
             }else if(key.includes(description.assertor)){
-
+    
                 if(edited.find((elem:any) => elem.key === key) === undefined){
-                    edited.push({pointers: groupedPointers[key], key});
+                    edited.push({pointers, key});
                 }
-                let updatedKey:any = key.replace(description.assertor, "");
-
+                let updatedKey = key.replace(description.assertor, "");
+    
                 updatedKey = updatedKey.replace(", , ", ", ");
-
+    
                 if(updatedKey.startsWith(", ")){
                     updatedKey = updatedKey.replace(", ", "");
                 }else if(updatedKey.endsWith(", ")){
                     updatedKey = updatedKey.substring(0, updatedKey.length-2);
                 }
-
+    
                 if(updatedKey in groupedPointers){
-
+    
                     if(edited.find((elem:any) => elem.key === updatedKey) === undefined){
                         edited.push({pointers: [...groupedPointers[updatedKey]], key:updatedKey});
                     }
@@ -356,39 +435,87 @@ function CriteriaResults({criteria}:any){
                 
             }
         }
-
+    
         setEditedPointersGroup(edited);
     };
 
+    const updateDescription = async (newValue:any, index:any) => {
+
+        const edited:any = [...editedDescriptions];
+
+        const editedAssertorDesc:any = criteria.hasPart[editIndex].descriptions[index];
+
+        if(edited.findIndex((elem:any) => elem.assertor === editedAssertorDesc.assertor) === -1){
+            edited.push({
+                assertor: editedAssertorDesc.assertor, 
+                description: editedAssertorDesc.description
+            });
+        }
+
+        editedAssertorDesc.description = newValue;
+
+        setEditedDescriptions(edited);
+
+    };
+
+
+
+    const removeFoundCase = async (index:any) =>{
+
+        if(!window.confirm("Are you sure you want to remove this found case?")) return;
     
-    const confirmCase = async (index:any) => {
-        
-        const evaluationReport = await getFromChromeStorage("report", false);
-
-        const caseToConfirm = criteria.hasPart[index];
-
-        const criteriaTxt = getSuccessCriterias().find((elem:any) => elem.num === criteria.criteriaNumber);
-
-        const reportCriteria = evaluationReport.auditSample.find((elem:any) => elem.test.includes(criteriaTxt.id));
-
-        const foundCaseIndex = reportCriteria.hasPart.indexOf((elem:any) => elem.subject === caseToConfirm.webPage && elem.result.outcome.replace("earl:", "") === caseToConfirm.outcome)
-
-        reportCriteria.hasPart[foundCaseIndex].assertedBy.push({assertor: getFromChromeStorage("authenticationState"), description:""})
-
+        const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(index);
+    
+        reportCriteria.hasPart.splice(foundCaseIndex, 1);
+    
+        criteria.hasPart.splice(index, 1);
+    
+        let newOutcome = "untested";
+    
+        for(let i = 0; i < criteria.hasPart.length; i++){
+            const foundCase = criteria.hasPart[i];
+            if(foundCase.webPage === window.location.href){
+                newOutcome = foundCase.outcome;
+                break;
+            }
+        };
+    
+        criteria.outcomes[window.location.href] = "earl:" + newOutcome;
+    
+        if(reportCriteria.hasPart.length === 0){
+            removeFoundCaseFromReport(reportCriteria);
+        }else{
+            reportCriteria.result.outcome = "earl:" + newOutcome;
+            reportCriteria.result.description = outcome2Description["earl:" + newOutcome];
+        }
+    
         storeNewReport(evaluationReport);
-
+    
     };
 
 
     return(<>
         {criteria.hasPart.map((result:any, index:any) => (<>
 
-            {result.webPage === window.location.href ? <>
-                <tr className="collapsible criteriaResult" onClick={() => handleStateChange(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteria.hasPart.length)}>
+            {result.webPage === window.location.href && (<>
+                <tr 
+                    className="collapsible criteriaResult" 
+                    onClick={
+                        () => collapsibleClickHandler(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteria.hasPart.length)
+                    }
+                >
                     <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
-                        <img src={ selectedCriteriaResults[index] ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="Show information" height="20px"/>
+                        <img 
+                            src={ selectedCriteriaResults[index] ? 
+                                    getImgSrc("extendedArrow") 
+                                : 
+                                    getImgSrc("contractedArrow") 
+                                } 
+                            alt="Show information" 
+                            height="20px"
+                        />
                         {result.outcome}
-
+                        
                         {editIndex === index ? <>
                             <Button 
                                 classList={"primary small"} 
@@ -401,10 +528,33 @@ function CriteriaResults({criteria}:any){
                                 innerText={"Cancel"}
                             />
                         </> : <>
-                            <img src={ getImgSrc("ok") } alt="Confirm found case" height="18px" onClick={()=>confirmCase(index)}/>
-                            <img src={ getImgSrc("edit") } alt="Edit found case" height="16px" onClick={()=>editCase(index)}/>
-                            <img src={ getImgSrc("remove") } alt="Remove found case" height="16px" onClick={()=>removeCase(index)}/>
+                            <span>
+                                {result.modifiedBy.length > 0 ? <>  
+                                    {" - Last modifier: @" + result.lastModifier} 
+                                </> : <>
+                                    {" - Unmodified "}
+                                </>}
+                            </span>
+                            <img 
+                                src={ getImgSrc("edit") } 
+                                alt="Edit found case" 
+                                title="Edit found case" 
+                                height="16px" 
+                                onClick={()=>{
+                                    if(editIndex !== -1) cancelChanges();
+                                    setEditIndex(index);
+                                }}
+                            />
+                            <img 
+                                src={ getImgSrc("remove") } 
+                                alt="Remove found case"
+                                title="Remove found case"
+                                height="16px" 
+                                onClick={()=>removeFoundCase(index)}
+                            />
                         </>}
+
+                        
                         
                     </td>
                 </tr>
@@ -414,7 +564,9 @@ function CriteriaResults({criteria}:any){
                     {result.descriptions.map((element:any, i:any) => (<>
 
                         <tr>
-                            <td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>{parse("@" + element.assertor)}
+                            <td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>
+                                {parse("@" + element.assertor)}
+
                                 {editIndex === index ? <>
                                     <img 
                                         className='removeIcon' 
@@ -422,7 +574,7 @@ function CriteriaResults({criteria}:any){
                                         alt="Remove message" 
                                         title="Remove message"
                                         height="18px"
-                                        onClick={() => handleRemoveMessage(i)}
+                                        onClick={() => removeDescription(i)}
                                     />
                                 </> : <>
                                     <img 
@@ -431,22 +583,41 @@ function CriteriaResults({criteria}:any){
                                         alt="Add message to blacklist" 
                                         title="Add message to blacklist"
                                         height="18px" 
-                                        onClick={() => onBlacklistClick(element.assertor, element.description, result.outcome)}
+                                        onClick={() => blackListElement({
+                                            evaluator: element.assertor, 
+                                            criteria: criteria.criteria, 
+                                            outcome: result.outcome, 
+                                            message: element.description
+                                        })}
                                     />
                                 </>}
-                                
                             </td>
                         </tr>
-                        <tr><td style={{textAlign:"left"}} colSpan={6}>{parse(element.description)}</td></tr>
+                        <tr>
+                            {editIndex === index ?
+                                <textarea 
+                                    style={{textAlign:"left"}} 
+                                    value={element.description} 
+                                    onChange={(e:any) => updateDescription(e.target.value, i)} 
+                                />
+                            :
+                                <td style={{textAlign:"left"}} colSpan={6}>{element.description}</td>
+                            }
+                        </tr>
                     
                     </>))}
 
-                    { result.hasOwnProperty("groupedPointers") ? 
-                        <CriteriaResultPointers resultGroupedPointers={result.groupedPointers} edit={editIndex === index} removedPointers={removedPointers} setRemovedPointers={setRemovedPointers} />
-                    : null }
+                    { result.hasOwnProperty("groupedPointers") && (
+                        <CriteriaResultPointers 
+                            resultGroupedPointers={result.groupedPointers} 
+                            edit={editIndex === index} 
+                            removedPointers={removedPointers} 
+                            setRemovedPointers={setRemovedPointers} 
+                        />
+                    )}
                     
                 </>)}
-            </> : null }
+            </>)}
             
             
 
@@ -461,8 +632,33 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 
     const [hiddenElements, setHiddenElements] = useState<{ [groupKey: string]: number[] }>({});
 
-    
-    function handlePointerClick (groupKey:string, index:number){
+    useEffect(() => {
+        const newHiddenElements: { [groupKey: string]: number[] } = {};
+
+        for (const groupKey in resultGroupedPointers) {
+            for (let i = 0; i < resultGroupedPointers[groupKey].length; i++) {
+
+                const pointer = resultGroupedPointers[groupKey][i];
+                const pointedElement = getElementByPath(pointer.path, pointer.innerText);
+
+                if(pointedElement){
+                    if(pointedElement.getAttribute('type') === "hidden" || pointedElement.getAttribute("hidden")!==null){
+                        
+                        if (!newHiddenElements[groupKey]) {
+                            newHiddenElements[groupKey] = [];
+                        }
+                        newHiddenElements[groupKey].push(i);
+
+                    }else{
+                        highlightElement(pointedElement, groupKey, i);
+                    }
+                }
+            }
+        }
+        setHiddenElements(newHiddenElements);
+    }, [resultGroupedPointers]);
+
+    function handlePointerClick(groupKey:string, index:number){
 
         unselectHighlightedElement(); // If previously selected
 
@@ -495,34 +691,6 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
         resultGroupedPointers[groupKey].splice(index, 1);
 
     }
-
-    useEffect(() => {
-        const newHiddenElements: { [groupKey: string]: number[] } = {};
-
-        for (const groupKey in resultGroupedPointers) {
-            for (let i = 0; i < resultGroupedPointers[groupKey].length; i++) {
-
-                const pointer = resultGroupedPointers[groupKey][i];
-                const pointedElement = getElementByPath(pointer.path, pointer.innerText);
-
-                if(pointedElement){
-                    if(pointedElement.getAttribute('type') === "hidden" || pointedElement.getAttribute("hidden")!==null){
-                        
-                        if (!newHiddenElements[groupKey]) {
-                            newHiddenElements[groupKey] = [];
-                        }
-                        newHiddenElements[groupKey].push(i);
-
-                    }else{
-                        highlightElement(pointedElement, groupKey, i);
-                    }
-                }
-            }
-        }
-        setHiddenElements(newHiddenElements);
-    }, [resultGroupedPointers]);
-      
-
 
     return(<>
         
@@ -569,9 +737,6 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 
 
 
-
-
-
 export function OutcomeHeaders(){
     return(<>
         <th className="passed" title='Passed' style={{...outcome2Background["earl:passed"]}}>P</th>
@@ -600,16 +765,4 @@ function ResultCount({category, conformanceLevels}:any){
 
     return(<> <td>{passed}</td><td>{failed}</td><td>{cantTell}</td><td>{inapplicable}</td><td>{untested}</td> </>);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

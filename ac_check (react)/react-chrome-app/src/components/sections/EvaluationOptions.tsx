@@ -8,7 +8,6 @@ import { removeStoredReport, downloadStoredReport, uploadNewReport, performEvalu
 import Button from '../reusables/Button';
 
 
-
 /**
  * Renders the EvaluationOptions component.
  *
@@ -32,12 +31,14 @@ export default function EvaluationOptions ({authenticationState}:any): JSX.Eleme
       />
 
       <div className='dropdownBtn'>
-
         <div className={"dropdownHead" + (isOpen ? " active" : "")} onClick={()=>setIsOpen(!isOpen)}>
           <label>Report options</label>
-          <img src = { isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } alt="dropdown_arrow" />
+          <img 
+            src={ isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } 
+            alt="dropdown_arrow" 
+          />
         </div>
-        
+
         {isOpen && (
           <div className='dropdownBody'>
             <label onClick={removeStoredReport}>Remove</label>
@@ -48,11 +49,9 @@ export default function EvaluationOptions ({authenticationState}:any): JSX.Eleme
             </label>
           </div>
         )}
-
       </div>
 
       {authenticationState !== "notLogged" && ( 
-        
         <div className='loggedOptions'>
           <Button 
             classList={"primary"} 
@@ -69,7 +68,6 @@ export default function EvaluationOptions ({authenticationState}:any): JSX.Eleme
             animate={animateBtn === "load"}
           />
         </div>
-        
       )}
       
     </div>

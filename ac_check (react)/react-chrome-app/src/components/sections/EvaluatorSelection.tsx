@@ -5,6 +5,14 @@ import { useEffect, useState } from "react";
 
 import Dropdown from '../reusables/DropdownSection';
 
+const defaultCheckboxes = [
+  { checked: false, label: "AccessMonitor - Website", href: "https://accessmonitor.acessibilidade.gov.pt/"},
+  { checked: false, label: "AChecker - Website", href: "https://achecker.achecks.ca/checker/index.php"},
+  { checked: false, label: "Mauve - Website", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
+  { checked: false, label: "A11y - Library", href: "https://github.com/ainspector/a11y-evaluation-library"},
+  { checked: false, label: "Pa11y - Library", href: "https://www.npmjs.com/package/pa11y"},
+  { checked: false, label: "Lighthouse - Library", href: "https://developer.chrome.com/docs/lighthouse/overview/"}
+];
 
 /**
  * A React component that allows the user to select which accessibility evaluators to use.
@@ -14,21 +22,7 @@ import Dropdown from '../reusables/DropdownSection';
 */
 export default function EvaluatorSelection (): JSX.Element {
 
-  const [checkboxes, setCheckboxes] = useState([
-    { checked: false, label: "AccessMonitor - Website", href: "https://accessmonitor.acessibilidade.gov.pt/"},
-    { checked: false, label: "AChecker - Website", href: "https://achecker.achecks.ca/checker/index.php"},
-    { checked: false, label: "Mauve - Website", href: "https://mauve.isti.cnr.it/singleValidation.jsp"},
-    { checked: false, label: "A11y - Library", href: "https://github.com/ainspector/a11y-evaluation-library"},
-    { checked: false, label: "Pa11y - Library", href: "https://www.npmjs.com/package/pa11y"},
-    { checked: false, label: "Lighthouse - Library", href: "https://developer.chrome.com/docs/lighthouse/overview/"}
-  ]);
-
-  const handleCheckboxChange = (index:any) => {
-    const newCheckboxes = [...checkboxes];
-    newCheckboxes[index].checked = !newCheckboxes[index].checked;
-    setCheckboxes(newCheckboxes);
-    localStorage.setItem("checkboxes", JSON.stringify(newCheckboxes));
-  };
+  const [checkboxes, setCheckboxes] = useState(defaultCheckboxes);
 
   /**
    * useEffect hook that sets the state of checkboxes based on the values stored in localStorage.
@@ -38,12 +32,20 @@ export default function EvaluatorSelection (): JSX.Element {
   */
   useEffect(() => {
     const storedCheckboxes = localStorage.getItem("checkboxes");
-    if(storedCheckboxes !== null){
+    if(storedCheckboxes){
       setCheckboxes(JSON.parse(storedCheckboxes));
-    }else{
-      localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
-    } 
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
   }, [checkboxes]);
+
+  const handleCheckboxChange = (index:any) => {
+    const newCheckboxes = [...checkboxes];
+    newCheckboxes[index].checked = !newCheckboxes[index].checked;
+    setCheckboxes(newCheckboxes);
+  };
 
   return ( 
     <Dropdown headerText={"Select evaluators"} classList={"last"}>
@@ -52,7 +54,6 @@ export default function EvaluatorSelection (): JSX.Element {
         <div className="checkbox-wrapper">
 
           <div className="checkbox">
-
             <input 
               type="checkbox" 
               checked={checkbox.checked} 

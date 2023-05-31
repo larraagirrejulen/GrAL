@@ -55,6 +55,11 @@ export function uploadNewReport(uploadEvent){
     
     reader.onload = async (uploadEvent) => {
         const newReport = JSON.parse(uploadEvent.target.result);
+
+        const currentReport = await getFromChromeStorage("report", false);
+
+        includeEditedFoundCases(newReport, currentReport);
+
         storeNewReport(newReport);
     }
 
@@ -99,6 +104,12 @@ export async function downloadStoredReport(){
         
         }
     });
+
+    const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+        
+    if(enableBlacklist){
+        await applyBlackList(currentReport);
+    }
 
     const fileName = currentReport.title + ".json";
     const fileType = "text/json";
@@ -149,15 +160,84 @@ export async function performEvaluation(setAnimateBtn){
 
         const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
 
-        const evaluationReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
+        const newReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
 
-        storeNewReport(evaluationReport);
+        const currentReport = await getFromChromeStorage("report", false);
+
+        includeEditedFoundCases(newReport, currentReport);
+
+        storeNewReport(newReport);
 
     } catch (error) {
         console.error("Error during evaluation process => ", error);
         alert("An error occurred during evaluation. Please try again.");
     } finally {
         setAnimateBtn("none");
+    }
+
+}
+
+
+function includeEditedFoundCases(newReport, currentReport){
+
+    for(let index = 0; index < currentReport.auditSample.length; index++){
+
+        const editedCases = currentReport.auditSample[index].hasPart.filter(
+            (foundCase) => foundCase.modifiedBy.length > 0
+        );
+
+        if(editedCases.length > 0){
+
+            let worstOutcome = "earl:inapplicable";
+
+            for(const editedCase of editedCases){
+
+                newReport.auditSample[index].hasPart.push(editedCase);
+
+                // Include assertor
+                for(const assertor of editedCase.assertedBy){
+                    if(newReport.assertors.findIndex(elem => elem["xmlns:name"] === assertor.assertor) === -1){
+                        newReport.assertors.push(currentReport.assertors.find(
+                            elem => elem["xmlns:name"] === assertor.assertor
+                        ));
+                    }
+                }
+
+                // Include scope
+                if(newReport.structuredSample.webpage.findIndex(elem => elem.id === editedCase.subject) === -1){
+                    newReport.structuredSample.webpage.push(currentReport.structuredSample.webpage.find(elem => elem.id === editedCase.subject))
+                }
+
+                const caseOutcome = editedCase.result.outcome;
+
+                if((worstOutcome === "earl:inapplicable" && caseOutcome !== "earl:inapplicable") 
+                || (worstOutcome === "earl:passed" && (caseOutcome === "earl:cantTell" || caseOutcome === "earl:failed"))
+                || (worstOutcome === "earl:cantTell" && caseOutcome === "earl:failed")){
+
+                    worstOutcome = caseOutcome;
+        
+                }
+    
+            }
+            
+            const newOutcome = newReport.auditSample[index].result.outcome;
+
+            if(newOutcome === "earl:untested"){
+
+                newReport.auditSample[index] = currentReport.auditSample[index];
+
+            } else {
+
+                if((newOutcome === "earl:inapplicable" && worstOutcome !== "earl:inapplicable") 
+                || (newOutcome === "earl:passed" && (worstOutcome === "earl:cantTell" || worstOutcome === "earl:failed"))
+                || (newOutcome === "earl:cantTell" && worstOutcome === "earl:failed")){
+
+                    newReport.auditSample[index].result = currentReport.auditSample[index].result;
+        
+                }
+            }
+
+        }
     }
 
 }
@@ -173,7 +253,7 @@ export async function storeReport(setAnimateBtn, authenticationState){
         const enableBlacklist = await getFromChromeStorage('enableBlacklist');
         
         if(enableBlacklist){
-            await removeBlackListeds(currentReport);
+            await applyBlackList(currentReport);
         }
 
         const bodyData = JSON.stringify({report: currentReport, uploadedBy: authenticationState});
@@ -232,7 +312,7 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
 }
 
 
-async function removeBlackListeds(currentReport){
+async function applyBlackList(currentReport){
 
     const successCriterias = getSuccessCriterias();
     const blacklist = await getFromChromeStorage("blacklist") ?? [];
@@ -241,7 +321,9 @@ async function removeBlackListeds(currentReport){
         return;
     }
 
-    currentReport.auditSample.forEach((criteria, index) => {
+    for(let index = 0; index < currentReport.auditSample.length; index++){
+
+        const criteria = currentReport.auditSample[index];
 
         const criteriaNumber = successCriterias[index].num;
 
@@ -251,71 +333,77 @@ async function removeBlackListeds(currentReport){
 
             const foundCase = criteria.hasPart[i];
 
-            const blacklisteds = blacklist.filter(item => item.criteria.startsWith(criteriaNumber) && "earl:" + item.outcome === foundCase.result.outcome);
+            const blacklisteds = blacklist.filter(
+                item => item.criteria.startsWith(criteriaNumber) && "earl:" + item.outcome === foundCase.result.outcome
+            );
 
             if(blacklisteds.length > 0){
 
                 for(const listed of blacklisteds){
-                    const index = foundCase.assertedBy.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
-                    if(index > -1){
+                    const index = foundCase.assertedBy.findIndex(
+                        item => item.assertor === listed.evaluator && item.description === listed.message
+                    );
+                    if(index !== -1){
                         foundCase.assertedBy.splice(index, 1);
                         if(foundCase.assertedBy.length === 0){
                             break;
                         }
                     }
                 }
-            }
 
-            if(foundCase.assertedBy.length > 0){
+                if(foundCase.assertedBy.length > 0){
 
-                const newOutcome = foundCase.result.outcome;
-
-                if(outcome === "earl:untested" ||
-                (outcome === "earl:inapplicable" && newOutcome !== "earl:untested") ||
-                (outcome === "earl:passed" && (newOutcome === "earl:failed" || newOutcome === "earl:cantTell")) ||
-                (outcome === "earl:cantTell" && newOutcome === "earl:failed")){
-                    outcome = newOutcome;
-                }
-
-                for (let j = 0; j < foundCase.result.locationPointersGroup.length; j++) {
-
-                    const pointer = foundCase.result.locationPointersGroup[j];
-
-                    for(const listed of blacklisteds){
-                        const index = pointer.assertedBy.findIndex(item => item === listed.evaluator);
-                        if(index > -1){
-                            pointer.assertedBy.splice(index, 1);
-                            if(pointer.assertedBy.length === 0){
-                                break;
-                            }
-                        }
-                    }  
-
-                    if(pointer.assertedBy.length === 0){
-                        foundCase.result.locationPointersGroup.splice(j, 1);
-                        j--;
+                    const newOutcome = foundCase.result.outcome;
+    
+                    if(outcome === "earl:untested" ||
+                    (outcome === "earl:inapplicable" && newOutcome !== "earl:untested") ||
+                    (outcome === "earl:passed" && (newOutcome === "earl:failed" || newOutcome === "earl:cantTell")) ||
+                    (outcome === "earl:cantTell" && newOutcome === "earl:failed")){
+                        outcome = newOutcome;
                     }
-                };
+    
+                    for (let j = 0; j < foundCase.result.locationPointersGroup.length; j++) {
+    
+                        const pointer = foundCase.result.locationPointersGroup[j];
+    
+                        for(const listed of blacklisteds){
+                            const index = pointer.assertedBy.findIndex(item => item === listed.evaluator);
+                            if(index !== -1){
+                                pointer.assertedBy.splice(index, 1);
+                                if(pointer.assertedBy.length === 0){
+                                    break;
+                                }
+                            }
+                        }  
+    
+                        if(pointer.assertedBy.length === 0){
+                            foundCase.result.locationPointersGroup.splice(j, 1);
+                            j--;
+                        }
+                    };
+    
+                }else{
+    
+                    criteria.hasPart.splice(i, 1);
+                    i--;
 
-            }else{
-
-                criteria.hasPart.splice(i, 1);
-                i--;
-
+                }
             }
-
-            
-        };
+        }
 
         if(criteria.hasPart.length === 0){
+
             criteria.result = {
                 "outcome": "earl:untested",
                 "description": ""
             }
             delete criteria.assertedBy;
             delete criteria.mode;
+
         } else {
+
             criteria.result.outcome = outcome;
+            
         }
-    }); 
+    }
 }

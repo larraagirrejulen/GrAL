@@ -212,22 +212,28 @@ function getHasPart(criteriaKey){
 
         const blacklisteds = blacklist.filter(item => "earl:" + item.outcome === foundCase.result.outcome && item.criteria.startsWith(criteriaKey));
 
-        for(const listed of blacklisteds){
-            const index = descriptions.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
-            if(index > -1){
-                descriptions.splice(index, 1);
-                if(descriptions.length === 0){
-                    break;
+        if(blacklisteds.length > 0){
+
+            for(const listed of blacklisteds){
+                const index = descriptions.findIndex(item => item.assertor === listed.evaluator && item.description === listed.message);
+                if(index > -1){
+                    descriptions.splice(index, 1);
+                    if(descriptions.length === 0){
+                        break;
+                    }
                 }
             }
+
+            if(descriptions.length === 0) continue;
+
         }
 
-        if(descriptions.length === 0) continue;
-
         const hasPart = {
-            "outcome": foundCase.result.outcome.replace("earl:", ""),
+            outcome: foundCase.result.outcome.replace("earl:", ""),
             descriptions,
-            "webPage": foundCase.subject
+            modifiedBy: foundCase.modifiedBy,
+            lastModifier: foundCase.lastModifier,
+            webPage: foundCase.subject
         }
 
         const foundCasePointers = foundCase.result.locationPointersGroup;

@@ -16,12 +16,6 @@ import SummaryTable from './SummaryTable';
 export default function ReportResults(): JSX.Element {
   
   const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
-  function handleLevelClick (level:any) {
-    const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
-    setConformanceLevels(levels);
-    localStorage.setItem("conformanceLevels", JSON.stringify(levels));
-  };
-
 
   /**
    * React hook that runs after every render of the component and sets the conformance levels
@@ -32,12 +26,19 @@ export default function ReportResults(): JSX.Element {
   */
   useEffect(() => {
     const storedConformanceLevels = localStorage.getItem("conformanceLevels");
-    if(storedConformanceLevels !== null){
+    if(storedConformanceLevels){
       setConformanceLevels(JSON.parse(storedConformanceLevels));
-    }else{
-      localStorage.setItem("conformanceLevels", JSON.stringify(conformanceLevels));
     }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("conformanceLevels", JSON.stringify(conformanceLevels));
   }, [conformanceLevels]);
+
+  function handleLevelClick (level:any) {
+    const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
+    setConformanceLevels(levels);
+  };
 
   return ( 
     <div id="resultSection">
@@ -51,7 +52,12 @@ export default function ReportResults(): JSX.Element {
             <p>Select conformace level:</p>
             <div className="level-container">
               {["A", "AA", "AAA"].map((level:any) => (
-                <div className={`conformanceLevels ${conformanceLevels.includes(level) ? 'selected' : ''}`} onClick={() => handleLevelClick(level)}>{level}</div>
+                <div 
+                  className={`conformanceLevels ${conformanceLevels.includes(level) ? 'selected' : ''}`} 
+                  onClick={() => handleLevelClick(level)}
+                >
+                  {level}
+                </div>
               ))}
             </div>
           </div>
@@ -61,7 +67,9 @@ export default function ReportResults(): JSX.Element {
           <ResultsTable conformanceLevels={conformanceLevels}/>
         
         </> : 
-          <div style={{textAlign: "center", padding:"15px 0"}}>Website has not been evaluated</div>
+          <div style={{textAlign: "center", padding:"15px 0"}}>
+            Website has not been evaluated
+          </div>
         }
       </div>
 

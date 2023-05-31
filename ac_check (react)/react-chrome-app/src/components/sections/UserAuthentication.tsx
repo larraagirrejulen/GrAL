@@ -3,10 +3,10 @@ import '../../styles/sections/UserAuthentication.scss';
 
 import { useState, useEffect} from "react";
 import { fetchServer } from '../../js/evaluationOptions.js';
-import { getFromChromeStorage, storeOnChromeStorage } from "../../js/utils/chromeUtils.js";
+import { removeFromChromeStorage, storeOnChromeStorage } from "../../js/utils/chromeUtils.js";
+import { setUseStateFromStorage } from '../../js/utils/reactUtils';
 
 import Button from "../reusables/Button";
-
 
 
 /**
@@ -21,23 +21,13 @@ import Button from "../reusables/Button";
 export default function UserAuthentication ({authenticationState, setAuthenticationState}:any): JSX.Element {
 
     const onLogoutHandler = () => {
-        storeOnChromeStorage("authenticationState", "notLogged", true);
+        removeFromChromeStorage("authenticationState", true);
         setAuthenticationState("notLogged");
     }
 
     useEffect( ()=>{
-        (async ()=>{
-        
-            const storedValue = await getFromChromeStorage("authenticationState", true);
-
-            if(storedValue){
-                setAuthenticationState(storedValue);
-            }else{
-                storeOnChromeStorage("authenticationState", "notLogged", true);
-            }
-        
-        })();
-    }, [setAuthenticationState]);
+        setUseStateFromStorage("authenticationState", true, setAuthenticationState);
+    });
   
     return ( 
         <div id="extension_authentication_section">
@@ -65,7 +55,9 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
             
             : <>
             
-                <label className='userNameLabel'>{"@" + authenticationState}</label>
+                <label className='userNameLabel'>
+                    {"@" + authenticationState}
+                    </label>
                 <Button 
                     classList={"secondary"} 
                     onClickHandler={onLogoutHandler} 
@@ -271,7 +263,6 @@ function FormButtons({authState, setAuthState, submitHandler}:any): JSX.Element 
     };
 
     const onSubmit = () => {
-
         setBtnIsLoading(true);
         try{
             submitHandler();
@@ -280,25 +271,21 @@ function FormButtons({authState, setAuthState, submitHandler}:any): JSX.Element 
         }finally{
             setBtnIsLoading(false);
         }
-
     }
 
     return (
         <div className='options'>
 
             <div className='leftDiv'>
-
                 <Button 
                     classList={"primary"} 
                     onClickHandler={onSubmit} 
                     innerText={stateBtnData[authState][0]}
                     isLoading={btnIsLoading}    
                 />
-
             </div>
 
             <div className='rightDiv'>
-
                 <Button 
                     classList={"secondary"} 
                     onClickHandler={() => setAuthState(stateBtnData[authState][2])} 
@@ -311,7 +298,6 @@ function FormButtons({authState, setAuthState, submitHandler}:any): JSX.Element 
                     innerText={"Cancel"}  
                     isLoading={btnIsLoading}   
                 />
-
             </div>
 
         </div>

@@ -7,7 +7,8 @@ import { getImgSrc } from '../../js/utils/chromeUtils.js';
 import Button from '../reusables/Button';
 import Dropdown from '../reusables/DropdownSection';
 
-
+const defaultScope = [{name: window.document.title, url: window.location.href}];
+const defaultNewWebPage = { name: "", url: "" };
 
 /**
  * Renders the EvaluationScope component.
@@ -16,26 +17,29 @@ import Dropdown from '../reusables/DropdownSection';
  */
 export default function EvaluationScope (): JSX.Element {
 
-  const [webPageList, setWebPageList] = useState([{name: window.document.title, url: window.location.href}]);
-
-  const [newWebPage, setNewWebPage] = useState({ name: "", url: "" });
+  const [scope, setScope] = useState(defaultScope);
+  const [newWebPage, setNewWebPage] = useState(defaultNewWebPage);
   const [editItemIndex, setEditItemIndex] = useState(-1);
 
+  useEffect(() => { 
+    const storedScope = localStorage.getItem("scope");
+    if(storedScope){
+      setScope(JSON.parse(storedScope));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("scope", JSON.stringify(scope));
+  }, [scope]);
 
   /**
    * Handles adding a new item to the evaluation scope.
    */
   const handleAddItem = () => {
-    setEditItemIndex(webPageList.length);
-
-    const newListItem = { name: "", url: "" }
-    setNewWebPage(newListItem);
-
-    const newList = [...webPageList, newListItem];
-    setWebPageList(newList);
-    localStorage.setItem("scope", JSON.stringify(newList));
+    setNewWebPage(defaultNewWebPage);
+    setEditItemIndex(scope.length);
+    setScope([...scope, defaultNewWebPage]);
   };
-
 
   /**
    * Handles editing an item in the evaluation scope.
@@ -43,34 +47,28 @@ export default function EvaluationScope (): JSX.Element {
    * @param {number} index - The index of the item to be edited.
    */
   const handleEditItem = (index:any) => {
+    setNewWebPage(scope[index]);
     setEditItemIndex(index);
-    setNewWebPage(webPageList[index]);
   };
 
-
-  /**
+ /**
    * Handles updating an item in the evaluation scope.
    */
-  const handleUpdateItem = () => {
+  const handleSaveChanges = () => {
 
     const baseUrl = new URL(window.location.href).origin + "/";
 
     if(newWebPage.name === ""){
       alert("Wrong web page name");
-      return;
     }else if(!newWebPage.url.startsWith(baseUrl)){
       alert("URL must start with: " + baseUrl);
-      return;
-    }
-
-    const newList = [...webPageList];
-    newList[editItemIndex] = newWebPage;
-    setWebPageList(newList);
-    localStorage.setItem("scope", JSON.stringify(newList));
-    setNewWebPage({ name: "", url: "" });
-    setEditItemIndex(-1);
+    }else{
+      const newScope = [...scope];
+      newScope[editItemIndex] = newWebPage;
+      setScope(newScope);
+      setEditItemIndex(-1);
+    }    
   };
-
 
   /**
    * Handles deleting an item from the evaluation scope.
@@ -78,31 +76,18 @@ export default function EvaluationScope (): JSX.Element {
    * @param {number} index - The index of the item to be deleted.
    */
   const handleDeleteItem = (index:any) => {
-    const newList = [...webPageList];
-    newList.splice(index, 1);
-    setWebPageList(newList);
-    localStorage.setItem("scope", JSON.stringify(newList));
+    const newScope = [...scope];
+    newScope.splice(index, 1);
+    
+    setScope(newScope.length === 0 ? defaultScope : newScope);
   };
 
-  useEffect(() => { 
-    const storedScope = localStorage.getItem("scope");
-
-    if(storedScope === null){
-      localStorage.setItem("scope", JSON.stringify(webPageList));
-      return;
-    }
-
-    if(JSON.parse(storedScope).length > 0){
-      setWebPageList(JSON.parse(storedScope));
-    }
-    
-  }, [webPageList]);
 
   return ( 
     <Dropdown headerText={"Evaluation scope"} classList={"first lineSpaced"}>
 
       <ul id="extensionScopeInputList">
-        {webPageList.map((webPage:any, index:any)=>(
+        {scope.map((webPage:any, index:any) => (
           <li className="scopeInput" key={index}>
             {editItemIndex === index ? (
 
@@ -121,7 +106,7 @@ export default function EvaluationScope (): JSX.Element {
                 /><br/>
                 <Button 
                     classList={"primary small lineSpaced"} 
-                    onClickHandler={handleUpdateItem} 
+                    onClickHandler={handleSaveChanges} 
                     innerText={"Save"}   
                     small={true} 
                 />
@@ -139,7 +124,11 @@ export default function EvaluationScope (): JSX.Element {
 
               <div className="inputWrapper">
                 <span onClick={() => { window.open(webPage.url, '_blank'); }}>
-                  {webPage.name.length > 20 ?  webPage.name.substring(0, 20) + "... " : webPage.name}
+                  {webPage.name.length > 20 ?  
+                    webPage.name.substring(0, 20) + "... " 
+                  : 
+                    webPage.name
+                  }
                 </span>
                 <img 
                   className="icon edit" 
@@ -147,12 +136,16 @@ export default function EvaluationScope (): JSX.Element {
                   src={getImgSrc("edit")} 
                   onClick={() => handleEditItem(index)} 
                 />
-                <img 
-                  className="icon delete" 
-                  alt="remove web page from list" 
-                  src={getImgSrc("delete")} 
-                  onClick={() => handleDeleteItem(index)} 
-                />
+                {(scope.length > 1 || 
+                  scope[0].name !== defaultScope[0].name || 
+                  scope[0].url !== defaultScope[0].url) && ( 
+                  <img 
+                    className="icon delete" 
+                    alt="remove web page from list" 
+                    src={getImgSrc("delete")} 
+                    onClick={() => handleDeleteItem(index)} 
+                  />
+                )}
               </div>
 
             )}

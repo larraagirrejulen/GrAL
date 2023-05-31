@@ -57,6 +57,10 @@ export async function getFromChromeStorage(key, isSync = true) {
 
 export async function blackListElement(newListElement) {
 
+    if(!window.confirm("Blacklist selected evaluator message?\n(You can remove blacklisted elements from the configuration)")){
+        return;
+    } 
+
     const blacklist = await getFromChromeStorage("blacklist") ?? [];
     blacklist.push(newListElement);
 

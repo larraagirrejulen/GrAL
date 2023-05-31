@@ -2,7 +2,8 @@
 import '../styles/extension.scss';
 
 import { useEffect, useState } from "react";
-import { getFromChromeStorage, getImgSrc, sendMessageToBackground } from '../js/utils/chromeUtils.js';
+import { getImgSrc, sendMessageToBackground } from '../js/utils/chromeUtils.js';
+import { setUseStateFromStorage } from '../js/utils/reactUtils';
 
 import UserAuthentication from './sections/UserAuthentication';
 import EvaluationScope from './sections/EvaluationScope';
@@ -24,40 +25,33 @@ export default function Extension(): JSX.Element {
   const [hidden, setHidden] = useState(false);
   const [authenticationState, setAuthenticationState] = useState("notLogged");
 
-
   /**
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
   */
   useEffect( ()=>{
-    (async ()=>{
-
-      const storedValue = await getFromChromeStorage("shiftWebpage", true);
-
-      if(storedValue != null) setShiftWebpage(storedValue);
-
-    })();
+    setUseStateFromStorage("shiftWebpage", true, setShiftWebpage);
   }, []);
+
 
   /**
    * Toggles the extension's active class on the webpage when the "hidden" or "shiftWebpage" state variables change.
   */
   useEffect(() => {
-    
-    if(shiftWebpage) document.body.classList[hidden ? "remove" : "add"]('extension-active');
-
+    if(shiftWebpage){
+      document.body.classList[hidden ? "remove" : "add"]('extension-active');
+    } 
   }, [hidden, shiftWebpage]);
     
-
   return (<>
     
-    {hidden ? 
+    {hidden && (
       <img 
         id="hidden_extension_logo" 
         alt="extension logo when hidden" 
         src={getImgSrc("icon128")} 
         onClick={()=>setHidden(!hidden)} 
       /> 
-    : null}
+    )}
     
     <div id="react_chrome_extension" className= {`${hidden && 'hidden'}`}>
       <img 
@@ -81,7 +75,7 @@ export default function Extension(): JSX.Element {
         setAuthenticationState={setAuthenticationState} 
       />
 
-      {authenticationState !== "logging" && authenticationState !== "registering" && (<>
+      { !["logging, registering"].includes(authenticationState) && (<>
         <EvaluationScope /> 
         <EvaluatorSelection /> 
         <EvaluationOptions authenticationState={authenticationState} /> 

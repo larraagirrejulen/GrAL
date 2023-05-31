@@ -224,6 +224,8 @@ class JsonLd{
                 "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
                 "subject": webPageURL,
                 "mode": "earl:automatic",
+                "modifiedBy": [],
+                "lastModifier": "",
                 "result":
                 {
                     "outcome": newOutcome,
