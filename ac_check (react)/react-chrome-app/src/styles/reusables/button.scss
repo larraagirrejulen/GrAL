@@ -44,6 +44,17 @@
         margin-bottom: 6px;
     }
 
+    &.delete{
+        border-color: $red-color;
+        color: $red-color;
+
+        &:hover{
+            background-color: rgb(255, 140, 140);
+            color: $secondary-color;
+            font-style: italic;
+        }
+    }
+
     &:hover {
         background-color: $intermediate-color;
         color: $secondary-color;

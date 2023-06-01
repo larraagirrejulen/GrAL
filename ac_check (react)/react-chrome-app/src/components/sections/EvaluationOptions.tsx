@@ -14,7 +14,7 @@ import Button from '../reusables/Button';
  * @param {Object} authenticationState - The authentication state.
  * @returns {JSX.Element} The rendered EvaluationOptions component.
  */
-export default function EvaluationOptions ({authenticationState}:any): JSX.Element {
+export default function EvaluationOptions ({authenticationState, setLoadingReports}:any): JSX.Element {
 
   const [animateBtn, setAnimateBtn] = useState("none");
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ export default function EvaluationOptions ({authenticationState}:any): JSX.Eleme
           />
           <Button 
             classList={"secondary spaced"} 
-            onClickHandler={()=>alert("hey")}
+            onClickHandler={()=>setLoadingReports(true)}
             innerText={"Load saved report"}  
             isLoading={animateBtn !== "none"}
             animate={animateBtn === "load"}

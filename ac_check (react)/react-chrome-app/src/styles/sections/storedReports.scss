@@ -1,0 +1,89 @@
+
+
+@import '../colors';
+
+#reportLoadingWrapper{
+
+    padding: 30px;
+
+    & p{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    & .tableWrapper{
+        
+        border: 2px solid $primary-color;
+        border-radius: 6px;
+        background-color: $primary-color;
+        overflow-y: auto;
+        max-height: 50vh;
+    
+        & table{
+
+            width: 250px;
+            text-align: center;
+            background-color: $secondary-color;
+        
+            & tr{
+
+                &:hover{
+                    background-color: $intermediate-color;
+                    color: $secondary-color;
+                }
+
+                cursor: default;
+                border-bottom: 1px solid $primary-color;
+
+                &:last-of-type{
+                    border-bottom: none;
+                }
+
+                &.selected{
+                    background-color: $intermediate-color;
+                    color: $secondary-color;
+                }
+            
+                & th{
+                    padding: 6px 0;
+                    font-size: 13px;
+                    text-align: center;
+                    font-weight: 300;
+                    position: sticky;
+                    top: 0px;
+                    border-right: 1px solid $gray-borders;
+                    background-color: $primary-color;
+                    color: $secondary-color;
+                
+                    &:last-of-type{
+                        border-right: none;
+                    }
+                }
+        
+                & td{
+                    padding: 6px 0;
+                    font-size: 12px;
+                    border-right: 1px solid $gray-borders;
+
+                    &:last-of-type{
+                        border-right: none;
+                    }
+                }
+
+
+            }
+        }
+        
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #005a6aaa;
+            border-radius: 50px;
+        }
+    }
+}

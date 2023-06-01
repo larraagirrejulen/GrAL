@@ -118,6 +118,23 @@
     }
   }
 
+  & .criteriaResult{
+
+    & .editIcon{
+      margin-left: 6px;
+    }
+
+    & .removeIcon{
+      margin-left: 6px;
+    }
+
+  }
+
+  & .textInput{
+    width: 250px;
+    height: 100px;
+  }
+
 }
   
 tbody .blacklistIcon{

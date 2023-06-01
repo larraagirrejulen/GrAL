@@ -31,6 +31,7 @@ export function removeStoredReport(){
     if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
 
     localStorage.removeItem("evaluated");
+    localStorage.removeItem("parentId");
 
     ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
 
@@ -162,9 +163,12 @@ export async function performEvaluation(setAnimateBtn){
 
         const newReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
 
-        const currentReport = await getFromChromeStorage("report", false);
+        const alreadyEvaluated = localStorage.getItem("evaluated");
 
-        includeEditedFoundCases(newReport, currentReport);
+        if(alreadyEvaluated){
+            const currentReport = await getFromChromeStorage("report", false);
+            includeEditedFoundCases(newReport, currentReport);
+        }
 
         storeNewReport(newReport);
 
@@ -248,20 +252,29 @@ export async function storeReport(setAnimateBtn, authenticationState){
     try{
         setAnimateBtn("store");
 
-        const currentReport = await getFromChromeStorage("report", false);
+        const report = await getFromChromeStorage("report", false);
 
         const enableBlacklist = await getFromChromeStorage('enableBlacklist');
         
         if(enableBlacklist){
-            await applyBlackList(currentReport);
+            await applyBlackList(report);
         }
 
-        const bodyData = JSON.stringify({report: currentReport, uploadedBy: authenticationState});
+        let parentId = localStorage.getItem("parentId");
+
+        if(parentId){
+            parentId = JSON.parse(parentId);
+        }else{
+            parentId = null;
+        }
+
+        const bodyData = JSON.stringify({report, uploadedBy: authenticationState, parentId});
 
         const storeResults = await fetchServer(bodyData, "reportStoring");
 
         if(storeResults.success){
           window.alert("Report successfully stored!");
+          localStorage.setItem("parentId", storeResults.newParentId);
         } else {
           window.alert("Could not store the report, try again later...");
         }
@@ -269,10 +282,109 @@ export async function storeReport(setAnimateBtn, authenticationState){
     }catch(error){
         console.log(error);
     }finally{
-      setAnimateBtn("none");
+        setAnimateBtn("none");
     }
 
-  };
+};
+
+function transformArray(array) {
+
+    const result = [];
+  
+    function findDescendants(parentId, branchElements) {
+        const descendants = array.filter((item) => item.parentId === parentId);
+    
+        descendants.forEach((descendant) => {
+            branchElements.push(descendant);
+            findDescendants(descendant.id, branchElements);
+        });
+    }
+  
+    const rootElements = array.filter((item) => item.parentId === null);
+    rootElements.forEach((rootElement) => {
+
+        const branchElements = []
+
+        branchElements.push(rootElement);
+
+        findDescendants(rootElement.id, branchElements);
+
+        result.push(branchElements);
+
+    });
+  
+    return result;
+}
+
+export async function getStoredReports(setPaginatedData){
+
+    try{
+
+        const domain = new URL(window.location.href).origin + "/";
+
+        const bodyData = JSON.stringify({domain});
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            setPaginatedData(transformArray(storeResults.reports));
+        } else {
+            window.alert("Could not get the stored reports, try again later...");
+        }        
+
+    }catch(error){
+        console.log(error);
+    }
+};
+
+export async function getReport(id){
+
+    try{
+
+        const bodyData = JSON.stringify({action: "getReport", id});
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            storeNewReport(storeResults.report);
+        } else {
+            window.alert("Could not get the report, try again later...");
+        }        
+
+    }catch(error){
+        console.log(error);
+    }
+};
+
+export async function removeReport(id, setPaginatedData){
+
+    try{
+
+        let bodyData = JSON.stringify({action: "remove", id});
+
+        let storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            window.alert("succesfully deleted");
+        } else {
+            window.alert("Could not remove the report, try again later...");
+        } 
+        
+
+        const domain = new URL(window.location.href).origin + "/";
+
+        bodyData = JSON.stringify({domain});
+
+        storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            setPaginatedData(transformArray(storeResults.reports));
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+};
 
 
 /**

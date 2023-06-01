@@ -515,10 +515,9 @@ function CriteriaResults({criteria}:any){
                             height="20px"
                         />
                         {result.outcome}
-                        
                         {editIndex === index ? <>
                             <Button 
-                                classList={"primary small"} 
+                                classList={"primary small spaced"} 
                                 onClickHandler={saveChanges}
                                 innerText={"Save"}
                             />
@@ -536,6 +535,7 @@ function CriteriaResults({criteria}:any){
                                 </>}
                             </span>
                             <img 
+                                className='editIcon'
                                 src={ getImgSrc("edit") } 
                                 alt="Edit found case" 
                                 title="Edit found case" 
@@ -546,6 +546,7 @@ function CriteriaResults({criteria}:any){
                                 }}
                             />
                             <img 
+                                className='removeIcon'
                                 src={ getImgSrc("remove") } 
                                 alt="Remove found case"
                                 title="Remove found case"
@@ -553,9 +554,6 @@ function CriteriaResults({criteria}:any){
                                 onClick={()=>removeFoundCase(index)}
                             />
                         </>}
-
-                        
-                        
                     </td>
                 </tr>
 
@@ -573,7 +571,7 @@ function CriteriaResults({criteria}:any){
                                         src={ getImgSrc("remove") } 
                                         alt="Remove message" 
                                         title="Remove message"
-                                        height="18px"
+                                        height="16px"
                                         onClick={() => removeDescription(i)}
                                     />
                                 </> : <>
@@ -582,7 +580,7 @@ function CriteriaResults({criteria}:any){
                                         src={ getImgSrc("blacklist") } 
                                         alt="Add message to blacklist" 
                                         title="Add message to blacklist"
-                                        height="18px" 
+                                        height="16px" 
                                         onClick={() => blackListElement({
                                             evaluator: element.assertor, 
                                             criteria: criteria.criteria, 
@@ -596,6 +594,7 @@ function CriteriaResults({criteria}:any){
                         <tr>
                             {editIndex === index ?
                                 <textarea 
+                                    className='textInput'
                                     style={{textAlign:"left"}} 
                                     value={element.description} 
                                     onChange={(e:any) => updateDescription(e.target.value, i)} 
@@ -704,15 +703,18 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                     <pre className="codigo_analisis"
                         style={!hiddenElements[groupKey]?.includes(index) ? 
                             (selectedPointer[groupKey] === index ? { border: "3px solid #FF3633" } : { border: "1px solid #005a6a" }) 
-                            : { color:"black" }}
-                        onClick={() => handlePointerClick(groupKey, index)}
+                            : { color:"black" }
+                        }
                     >
-
-                        {index + 1}. {selectedPointer[groupKey] === index ? 
-                            parse(pointer.html) 
-                        : 
-                            parse(pointer.html.substring(0, 27) + " ... ")} 
-                        {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
+                        <span onClick={() => handlePointerClick(groupKey, index)}>
+                            {index + 1}. {selectedPointer[groupKey] === index ? 
+                                parse(pointer.html) 
+                            : 
+                                parse(pointer.html.substring(0, 27) + " ... ")
+                            } 
+                            {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
+                        </span>
+                        
                         
                         {edit && (
                             <img 

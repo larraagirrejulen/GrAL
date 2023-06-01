@@ -10,6 +10,7 @@ import EvaluationScope from './sections/EvaluationScope';
 import EvaluatorSelection from './sections/EvaluatorSelection';
 import EvaluationOptions from './sections/EvaluationOptions';
 import ReportResults from './sections/ResultSection/ReportResults';
+import StoredReportsLoading from './sections/StoredReportsLoading';
 
 
 /**
@@ -24,6 +25,7 @@ export default function Extension(): JSX.Element {
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [authenticationState, setAuthenticationState] = useState("notLogged");
+  const [loadingReports, setLoadingReports] = useState(false);
 
   /**
    * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
@@ -70,17 +72,24 @@ export default function Extension(): JSX.Element {
         }} />
       </div>
 
-      <UserAuthentication 
-        authenticationState={authenticationState} 
-        setAuthenticationState={setAuthenticationState} 
-      />
+      {loadingReports ? <>
+      
+        <StoredReportsLoading setLoadingReports={setLoadingReports} authenticationState={authenticationState} />
 
-      { !["logging, registering"].includes(authenticationState) && (<>
-        <EvaluationScope /> 
-        <EvaluatorSelection /> 
-        <EvaluationOptions authenticationState={authenticationState} /> 
-        <ReportResults />
-      </> )}
+      </> : <>
+        <UserAuthentication 
+          authenticationState={authenticationState} 
+          setAuthenticationState={setAuthenticationState} 
+        />
+
+        { !["logging, registering"].includes(authenticationState) && (<>
+          <EvaluationScope /> 
+          <EvaluatorSelection /> 
+          <EvaluationOptions authenticationState={authenticationState} setLoadingReports={setLoadingReports} /> 
+          <ReportResults />
+        </> )}
+      </>}
+      
     </div>
 
   </>);
