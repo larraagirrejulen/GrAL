@@ -1,21 +1,22 @@
 
-import '../../styles/sections/evaluationScope.scss';
+import '../../styles/sections/scopeDefinition.scss';
 
 import { useEffect, useState } from "react";
-import { getImgSrc } from '../../js/utils/chromeUtils.js';
-
 import Button from '../reusables/Button';
 import Dropdown from '../reusables/DropdownSection';
+
+import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
+
 
 const defaultScope = [{name: window.document.title, url: window.location.href}];
 const defaultNewWebPage = { name: "", url: "" };
 
+
 /**
- * Renders the EvaluationScope component.
- *
- * @returns {JSX.Element} The rendered EvaluationScope component.
+ * Component for managing the evaluation scope and defining web pages.
+ * @returns {JSX.Element} ScopeDefinition component.
  */
-export default function EvaluationScope (): JSX.Element {
+export default function ScopeDefinition (): JSX.Element {
 
   const [scope, setScope] = useState(defaultScope);
   const [newWebPage, setNewWebPage] = useState(defaultNewWebPage);
@@ -33,7 +34,7 @@ export default function EvaluationScope (): JSX.Element {
   }, [scope]);
 
   /**
-   * Handles adding a new item to the evaluation scope.
+   * Adds a new web page item to the scope list.
    */
   const handleAddItem = () => {
     setNewWebPage(defaultNewWebPage);
@@ -42,20 +43,18 @@ export default function EvaluationScope (): JSX.Element {
   };
 
   /**
-   * Handles editing an item in the evaluation scope.
-   *
-   * @param {number} index - The index of the item to be edited.
+   * Sets the selected web page item for editing.
+   * @param {number} index - The index of the web page item to edit.
    */
   const handleEditItem = (index:any) => {
     setNewWebPage(scope[index]);
     setEditItemIndex(index);
   };
 
- /**
-   * Handles updating an item in the evaluation scope.
+  /**
+   * Saves the changes made to the edited web page item.
    */
   const handleSaveChanges = () => {
-
     const baseUrl = new URL(window.location.href).origin + "/";
 
     if(newWebPage.name === ""){
@@ -71,14 +70,12 @@ export default function EvaluationScope (): JSX.Element {
   };
 
   /**
-   * Handles deleting an item from the evaluation scope.
-   *
-   * @param {number} index - The index of the item to be deleted.
+   * Deletes a web page item from the scope list.
+   * @param {number} index - The index of the web page item to delete.
    */
   const handleDeleteItem = (index:any) => {
     const newScope = [...scope];
     newScope.splice(index, 1);
-    
     setScope(newScope.length === 0 ? defaultScope : newScope);
   };
 

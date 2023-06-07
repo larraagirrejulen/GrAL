@@ -43,8 +43,7 @@ try{
       chrome.runtime.openOptionsPage();
 
     }
-    
-    return true;  // for asynchronous response
+
   });
 
 } catch(error) { console.error(" @Background ERROR => " + error); }

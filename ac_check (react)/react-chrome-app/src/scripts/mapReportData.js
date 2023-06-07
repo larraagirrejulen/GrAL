@@ -6,12 +6,6 @@ import { storeOnChromeStorage, getFromChromeStorage }  from './utils/chromeUtils
 const assertions = {};
 var blacklist;
 
-/**
- * Returns an object containing keys for each possible outcome type (passed, failed, cannotTell,
- * inapplicable, and untested), each with nested objects for accessibility levels A, AA, and AAA
- * with default values of 0.
- * @function getOutcomeVariables
-*/
 function getOutcomeVariables () {
     return{
         "earl:passed": { "A": 0, "AA": 0, "AAA": 0 },
@@ -24,13 +18,6 @@ function getOutcomeVariables () {
 
 
 
-/**
- * Maps the report data from Chrome storage to a format suitable for displaying in the extension UI table
- * and stores the resulting data in Chrome storage.
- * @async
- * @function mapReportData
- * @returns {void}
- */
 export async function mapReportData(evaluationreport = null, blackList = null){
 
     const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage("report", false);

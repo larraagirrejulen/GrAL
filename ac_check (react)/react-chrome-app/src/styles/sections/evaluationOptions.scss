@@ -11,9 +11,9 @@
 
   & .dropdownBtn{
 
-    all:initial;
     display: inline-block;
-    height: 40px;
+    position: relative;
+    text-align: center;
 
     & .dropdownHead {
 
@@ -21,14 +21,12 @@
       border: 2px solid $primary-color;
       border-radius: 6px;
       color: $primary-color;
-      padding: 4px 0 0 9px;
-      margin-left: 12px;
+      width: 170px;
+      height: 32px;
+      padding-top: 4px;
       cursor: pointer;
 
       & label{
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 13px;
-        font-weight: 400;
         display: inline-block;
         cursor: pointer;
       }
@@ -54,23 +52,21 @@
     }
   
     & .dropdownBody{
+      text-align: center;
       background-color: $secondary-color;
       border: 2px solid $primary-color;
       border-top: 0;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px;
+      display: block;
       position: absolute;
-      right: 26px;
+      left: 0;
+      width: 170px;
   
       & label{
         display: block;
         padding: 6px 0;
-        width: 112px;
         border-top: 1px solid $gray-borders;
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 13px;
-        font-weight: 400;
 
         color: $primary-color;
         margin: 0;

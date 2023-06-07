@@ -230,14 +230,18 @@ class Scraper {
                 
                                 for (const foundCase of foundCases){
 
+                                    if(foundCase.querySelector("em") == null) continue;
+
                                     const path = foundCase.querySelector("em").textContent;
 
                                     const match = /Line (\d+), Column (\d+)/.exec(path);
 
+                                    if(match == null) continue;
+
                                     const line = document.querySelector("#line-" + parseInt(match[1]));
 
                                     if(!line) continue;
-                                        
+
                                     const html = line.textContent.substring(parseInt(match[2])-1);
 
 
@@ -269,6 +273,9 @@ class Scraper {
 
 
                                     const outcome = id === "#AC_errors" ? "earl:failed": "earl:cantTell";
+
+                                    if(nextSibling.querySelector("span > a") == null) continue;
+
                                     const description = nextSibling.querySelector("span > a").textContent;
 
                                     results.push({
@@ -349,6 +356,10 @@ class Scraper {
                         if(!location) continue;
                         
                         location = location.getAttribute("data-x");
+
+                        if(location.startsWith(".")){
+                            location = location.replace(".", "");
+                        }
         
                         results.push({
                             "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
@@ -393,8 +404,12 @@ class Scraper {
                 await this.#jsonld.addNewAssertion(result.criterias, result.outcome, result.description, webPage.url);
             }else{
 
-                await page.waitForXPath(result.xpath);
-
+                try{
+                    await page.waitForXPath(result.xpath);
+                }catch(err){
+                    continue;
+                }
+                
                 const [targetElement] = await page.$x(result.xpath);
 
                 const targetHtml = await page.evaluate(el => el.outerHTML, targetElement);
@@ -621,6 +636,10 @@ class Scraper {
 
             if(audit.score === 0){
                 
+                if(audit.details.debugData.tags[2] === undefined){
+                    continue;
+                }
+
                 const tag = audit.details.debugData.tags[2].slice(4);
                 const criteria = tag.slice(0, 1) + "." + tag.slice(1, 2) + "." + tag.slice(2);
 

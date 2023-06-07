@@ -1,20 +1,20 @@
 
-import { getReport, getStoredReports, removeReport } from '../../js/evaluationOptions';
-import '../../styles/sections/storedReports.scss';
+import '../../styles/sections/storedReportManagement.scss';
 
 import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
+import { loadStoredReport, getStoredReports, removeStoredReport } from '../../scripts/reportStorageOptions.js';
 
 
 /**
- * A React component that represents the accessibility evaluator Chrome extension.
- * 
- * @function Extension
- * @exports Extension
- * @returns {JSX.Element} JSX representation of the Extension component.
-*/
-export default function StoredReportsLoading({setLoadingReports, authenticationState}:any): JSX.Element {
+ * Component for managing stored reports.
+ * @param {Object} props - The component props.
+ * @param {Function} props.setManageStoredReports - Function to set the manageStoredReports state.
+ * @param {string} props.authenticationState - The authentication state.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
+export default function StoredReportManagement({setManageStoredReports, authenticationState}:any) : JSX.Element {
 
   const [paginatedData, setPaginatedData] = useState([[]]);
 
@@ -22,34 +22,30 @@ export default function StoredReportsLoading({setLoadingReports, authenticationS
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  /**
-   * Retrieves the "shiftWebpage" setting from Chrome storage and sets it as a state variable.
-  */
+
   useEffect( ()=>{
     getStoredReports(setPaginatedData);
   }, []);
 
+  /**
+    * Event handler for loading the selected stored report.
+    */
   const loadHandler = () => {
-
     const selected:any = paginatedData[currentPage][selectedIndex];
-
     localStorage.setItem("parentId", selected.id);
-
-    getReport(selected.id);
-
+    loadStoredReport(selected.id);
   }
 
+  /**
+    * Event handler for deleting the selected stored report.
+    */
   const deleteHandler = () => {
-
     const selected:any = paginatedData[currentPage][selectedIndex];
-
     if(authenticationState !== selected.uploadedBy){
       alert("You can not delete reports uploaded by other users");
       return;
     }
-
-    removeReport(selected.id, setPaginatedData);
-
+    removeStoredReport(selected.id, setPaginatedData);
   }
     
   return (
@@ -72,7 +68,7 @@ export default function StoredReportsLoading({setLoadingReports, authenticationS
                 <tr
                   className={`${selectedIndex === index && 'selected'}`}
                   onClick={() => setSelectedIndex(selectedIndex === index ? -1 : index)}
-                  key={report.id} // Add a unique key for each row
+                  key={report.id}
                 >
                   <td>{report.id}</td>
                   <td>{report.version}</td>
@@ -166,7 +162,7 @@ export default function StoredReportsLoading({setLoadingReports, authenticationS
 
         <Button 
           classList={"secondary spaced"} 
-          onClickHandler={() => setLoadingReports(false)} 
+          onClickHandler={() => setManageStoredReports(false)} 
           innerText={"Cancel"}  
         />
 

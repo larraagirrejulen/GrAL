@@ -9,9 +9,6 @@
   & .header{
     padding-top: 12px;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
   }
 
   & .body {
@@ -19,18 +16,6 @@
     padding: 12px 0;
     border-top: 1px solid $gray-borders;
     text-align: center;
-
-    & div{
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-    }
-  }
-
-  & p{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
   }
 }
 

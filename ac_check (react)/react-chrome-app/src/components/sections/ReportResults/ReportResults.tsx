@@ -6,24 +6,14 @@ import ResultsTable from './ResultsTable';
 import SummaryTable from './SummaryTable';
 
 
-
 /**
- * A React component that allows the user to see and manipulate the results of the current stored report
- * 
- * @function ResultSection
- * @returns {JSX.Element} - React component
-*/
+ * Component for displaying the report results.
+ * @returns {JSX.Element} ReportResults component.
+ */
 export default function ReportResults(): JSX.Element {
   
   const [conformanceLevels, setConformanceLevels] = useState(['A', 'AA']);
 
-  /**
-   * React hook that runs after every render of the component and sets the conformance levels
-   * from the stored value in local storage if it exists. If not, it sets the initial value of
-   * conformance levels and stores it in local storage.
-   * 
-   * @param {array} conformanceLevels - an array of strings representing the selected conformance levels
-  */
   useEffect(() => {
     const storedConformanceLevels = localStorage.getItem("conformanceLevels");
     if(storedConformanceLevels){
@@ -35,6 +25,10 @@ export default function ReportResults(): JSX.Element {
     localStorage.setItem("conformanceLevels", JSON.stringify(conformanceLevels));
   }, [conformanceLevels]);
 
+  /**
+   * Handles the click event on a conformance level.
+   * @param {string} level - The selected conformance level.
+   */
   function handleLevelClick (level:any) {
     const levels = level === 'A' ? ['A'] : (level === 'AA' ? ['A', 'AA'] : ['A', 'AA', 'AAA']);
     setConformanceLevels(levels);
@@ -43,7 +37,7 @@ export default function ReportResults(): JSX.Element {
   return ( 
     <div id="resultSection">
 
-      <div className="header"><span>Report Results</span></div>
+      <div className="header"><span>Current report results</span></div>
 
       <div className="body">
         {localStorage.getItem("evaluated") === "true" ? <>

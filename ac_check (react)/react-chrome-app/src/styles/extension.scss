@@ -28,6 +28,13 @@ body.extension-active {
 }
 
 #react_chrome_extension{
+
+  & *{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
   all: initial;
   padding: 20px 0 0 0;
   box-sizing: border-box;
@@ -62,7 +69,6 @@ body.extension-active {
     }
 
     &.close{
-      font-family: Arial, Helvetica, sans-serif;
       font-size: 25px;
       font-weight: 700;
       color: black;

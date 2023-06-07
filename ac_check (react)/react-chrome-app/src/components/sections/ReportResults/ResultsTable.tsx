@@ -2,15 +2,15 @@
 import '../../../styles/sections/resultSection/resultsTable.scss';
 
 import { useState, useEffect} from "react";
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../js/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, collapsibleClickHandler } from '../../../js/utils/reactUtils.js';
-import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../js/utils/highlightUtils.js';
 import parse from 'html-react-parser';
-import { mapReportData } from '../../../js/mapReportData';
 import Button from '../../reusables/Button';
-import { getSuccessCriterias } from '../../../js/utils/wcagUtils';
-import { storeNewReport } from '../../../js/evaluationOptions';
 
+import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../scripts/utils/chromeUtils.js';
+import { setUseStateFromStorage, getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils.js';
+import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils.js';
+import { mapReportData } from '../../../scripts/mapReportData';
+import { getSuccessCriterias } from '../../../scripts/utils/wcagUtils';
+import { loadReport } from '../../../scripts/reportLoadingOptions';
 
 
 const outcome2Background:any = {
@@ -31,12 +31,20 @@ const outcome2Description:any = {
 const wcagCriterias = getSuccessCriterias();
 
 
-export default function ResultsTable({conformanceLevels}:any){
+/**
+ * ResultsTable component displays the evaluation results in a table format.
+ * @param {Object} conformanceLevels - Object containing the conformance levels.
+ * @returns {JSX.Element|null} - JSX element representing the ResultsTable component.
+ */
+export default function ResultsTable({conformanceLevels}:any): JSX.Element {
 
     const [mantainExtended, setMantainExtended] = useState(false);
     const [reportTableContent, setReportTableContent] = useState([]);
     const [selectedMainCategories, setSelectedMainCategories] = useState(Array(reportTableContent.length).fill(false));
 
+    /**
+     * useEffect hook to handle component initialization and state updates.
+     */
     useEffect(() => {
         (async ()=>{
             const update = await getFromChromeStorage("blackListUpdated");
@@ -55,13 +63,22 @@ export default function ResultsTable({conformanceLevels}:any){
         }
     }, []);
 
+    /**
+     * useEffect hook to handle changes in selectedMainCategories state.
+     * Updates the sessionStorage with the selectedMainCategories value and removes element highlights.
+     */
     useEffect(() => {
         sessionStorage.setItem("selectedMainCategories", JSON.stringify(selectedMainCategories));
         removeElementHighlights();
     }, [selectedMainCategories]);
     
+
+    /**
+     * Renders the ResultsTable component.
+     * @returns {JSX.Element|null} - JSX element representing the ResultsTable component.
+     */
     return(<>
-        {localStorage.getItem("evaluationScope")?.includes(window.location.href) ? <>
+        {localStorage.getItem("evaluationScope")?.includes(window.location.href) && (<>
             <p>Current webpage evaluation results:</p>
             <div id="resultsTable">
                 <table>
@@ -97,21 +114,24 @@ export default function ResultsTable({conformanceLevels}:any){
                     </tbody>
                 </table>
             </div>
-        </> : null}
+        </>)}
     </>);
     
 }
 
 
-
-
-
-
-
+/**
+ * SubCategory component displays the sub-categories in the ResultsTable.
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} - JSX element representing the SubCategory component.
+ */
 function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
     const [selectedSubCategories, setSelectedSubCategories] = useState(Array(subCategories.length).fill(false));
 
+    /**
+     * useEffect hook to handle component initialization and state updates.
+     */
     useEffect(() => {
         const storedValue = sessionStorage.getItem("selectedSubCategories");
         if(storedValue){
@@ -119,6 +139,10 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
         }
     }, []);
 
+    /**
+     * useEffect hook to handle changes in selectedSubCategories state.
+     * Updates the sessionStorage with the selectedSubCategories value and removes element highlights.
+     */
     useEffect(() => {
         sessionStorage.setItem("selectedSubCategories", JSON.stringify(selectedSubCategories));
         removeElementHighlights();
@@ -153,6 +177,11 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 }
 
 
+/**
+ * Criteria component displays the criteria in the ResultsTable.
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} - JSX element representing the Criteria component.
+ */
 function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     const [selectedCriterias, setSelectedCriterias] = useState(Array(criterias.length).fill(false));
@@ -214,7 +243,12 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 
-
+/**
+ * Renders the criteria results component.
+ * @param {object} props - The component props.
+ * @param {any} props.criteria - The criteria object.
+ * @returns {JSX.Element} The criteria results component.
+ */
 function CriteriaResults({criteria}:any){  
 
     const [selectedCriteriaResults, setSelectedCriteriaResults] = useState(Array(criteria.hasPart.length).fill(false));
@@ -225,10 +259,18 @@ function CriteriaResults({criteria}:any){
     const [editedPointersGroup, setEditedPointersGroup] = useState([]);
     const [editedDescriptions, setEditedDescriptions] = useState([]);
 
+    /**
+     * useEffect hook to remove element highlights.
+     */
     useEffect(() => {
         removeElementHighlights();
     }, [selectedCriteriaResults]);
 
+    /**
+     * Retrieves the found case from the evaluation report.
+     * @param {number} index - The index of the criteria result.
+     * @returns {Promise<Array<any>>} A promise that resolves to the evaluation report, report criteria, and found case index.
+     */
     async function getFoundCaseFromReport(index:any){
 
         const evaluationReport = await getFromChromeStorage("report", false);
@@ -248,15 +290,20 @@ function CriteriaResults({criteria}:any){
 
     }
 
+    /**
+     * Removes the found case from the evaluation report.
+     * @param {object} reportCriteria - The report criteria object.
+     */
     function removeFoundCaseFromReport(reportCriteria:any){
-
         reportCriteria.result.outcome = "earl:untested";
         reportCriteria.result.description = "";
         delete reportCriteria.assertedBy;
         delete reportCriteria.mode;
-
     }
 
+    /**
+     * Saves the changes made to the criteria result.
+     */
     const saveChanges = async () => {
         
         const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(editIndex);
@@ -342,9 +389,12 @@ function CriteriaResults({criteria}:any){
             
         }
 
-        storeNewReport(evaluationReport);
+        loadReport(evaluationReport);
     };
 
+    /**
+     * Cancels the changes made to the found case.
+     */
     const cancelChanges = () => {
 
         removedDescriptions.forEach((elem:any) => {
@@ -374,6 +424,10 @@ function CriteriaResults({criteria}:any){
 
     };
 
+    /**
+     * Removes a description from the found case.
+     * @param {number} index - The index of the description to remove.
+     */
     const removeDescription = async (index:any) => {
 
         const newRemovedDescriptions:any = [...removedDescriptions];
@@ -439,6 +493,11 @@ function CriteriaResults({criteria}:any){
         setEditedPointersGroup(edited);
     };
 
+    /**
+     * Updates a description in the found case.
+     * @param {string} newValue - The new value of the description.
+     * @param {number} index - The index of the description to update.
+     */
     const updateDescription = async (newValue:any, index:any) => {
 
         const edited:any = [...editedDescriptions];
@@ -458,8 +517,10 @@ function CriteriaResults({criteria}:any){
 
     };
 
-
-
+    /**
+     * Removes a found case from the report.
+     * @param {number} index - The index of the found case to remove.
+     */
     const removeFoundCase = async (index:any) =>{
 
         if(!window.confirm("Are you sure you want to remove this found case?")) return;
@@ -489,7 +550,7 @@ function CriteriaResults({criteria}:any){
             reportCriteria.result.description = outcome2Description["earl:" + newOutcome];
         }
     
-        storeNewReport(evaluationReport);
+        loadReport(evaluationReport);
     
     };
 
@@ -624,7 +685,13 @@ function CriteriaResults({criteria}:any){
     </>);
 }
 
-
+/**
+ * Renders the pointers for the criteria result.
+ * @param {object} resultGroupedPointers - The grouped pointers for the criteria result.
+ * @param {boolean} edit - Flag indicating if the pointers are editable.
+ * @param {array} removedPointers - Array of removed pointers.
+ * @param {function} setRemovedPointers - Function to set the removed pointers.
+ */
 function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, setRemovedPointers}:any){  
 
     const [selectedPointer, setSelectedPointer] = useState<{ [groupKey: string]: number | null }>({});
@@ -657,6 +724,11 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
         setHiddenElements(newHiddenElements);
     }, [resultGroupedPointers]);
 
+    /**
+     * Handles the click event on a pointer.
+     * @param {string} groupKey - The group key of the pointer.
+     * @param {number} index - The index of the pointer.
+     */
     function handlePointerClick(groupKey:string, index:number){
 
         unselectHighlightedElement(); // If previously selected
@@ -677,6 +749,11 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 
     }
 
+    /**
+     * Handles the click event on the remove pointer icon.
+     * @param {string} groupKey - The group key of the pointer.
+     * @param {number} index - The index of the pointer.
+     */
     function handleRemovePointerClick(groupKey:string, index:any){
 
         const newEditedPointers = [...removedPointers];
@@ -738,7 +815,9 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 }
 
 
-
+/**
+ * Renders the outcome headers for the criteria result.
+ */
 export function OutcomeHeaders(){
     return(<>
         <th className="passed" title='Passed' style={{...outcome2Background["earl:passed"]}}>P</th>
@@ -749,6 +828,12 @@ export function OutcomeHeaders(){
     </>);
 }
 
+
+/**
+ * Renders the result count for the criteria category.
+ * @param {object} category - The category object.
+ * @param {array} conformanceLevels - The conformance levels.
+ */
 function ResultCount({category, conformanceLevels}:any){
 
     let passed = 0, failed = 0, cantTell = 0, inapplicable = 0, untested = 0;

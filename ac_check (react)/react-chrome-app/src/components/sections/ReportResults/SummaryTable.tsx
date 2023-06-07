@@ -2,10 +2,16 @@
 import '../../../styles/sections/resultSection/summaryTable.scss';
 
 import { useState, useEffect} from "react";
-import { setUseStateFromStorage } from '../../../js/utils/reactUtils.js';
 import { OutcomeHeaders } from './ResultsTable';
 
+import { setUseStateFromStorage } from '../../../scripts/utils/moreUtils.js';
 
+
+/**
+ * Component for displaying the summary table of website and webpage outcomes.
+ * @param {Object} conformanceLevels - The conformance levels.
+ * @returns {JSX.Element} SummaryTable component.
+ */
 export default function SummaryTable({conformanceLevels}:any){
 
     const [webSiteOutcomes, setWebSiteOutcomes] = useState([0, 0, 0, 0, 0]);
@@ -18,6 +24,11 @@ export default function SummaryTable({conformanceLevels}:any){
 
     const [activeTab, setActiveTab] = useState('website');
 
+    /**
+     * Counts the outcomes based on the summary and updates the state.
+     * @param {Object} summary - The summary object.
+     * @param {function} setOutcomes - The state setter function.
+     */
     const countOutcomes = (summary:any, setOutcomes:any) => {
         let outcomes = [0, 0, 0, 0, 0];
         for(const conformanceLevel of conformanceLevels){
@@ -104,7 +115,3 @@ export default function SummaryTable({conformanceLevels}:any){
         </div>
     );
 }
-
-
-
-

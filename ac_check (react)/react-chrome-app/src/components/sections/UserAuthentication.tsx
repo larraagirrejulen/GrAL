@@ -2,20 +2,17 @@
 import '../../styles/sections/UserAuthentication.scss';
 
 import { useState, useEffect} from "react";
-import { fetchServer } from '../../js/evaluationOptions.js';
-import { removeFromChromeStorage, storeOnChromeStorage } from "../../js/utils/chromeUtils.js";
-import { setUseStateFromStorage } from '../../js/utils/reactUtils';
-
 import Button from "../reusables/Button";
+
+import { fetchServer, setUseStateFromStorage } from '../../scripts/utils/moreUtils.js';
+import { removeFromChromeStorage, storeOnChromeStorage } from "../../scripts/utils/chromeUtils.js";
 
 
 /**
- * Renders the UserAuthentication component.
- *
- * @param {Object} props - The component props.
+ * UserAuthentication component.
+ * @param {Object} props - Component properties.
  * @param {string} props.authenticationState - The current authentication state.
- * @param {function} props.setAuthenticationState - The function to update the authentication state.
- * @param {boolean} props.btnIsLoading - Indicates if the buttons are in loading state.
+ * @param {Function} props.setAuthenticationState - Function to set the authentication state.
  * @returns {JSX.Element} The rendered UserAuthentication component.
  */
 export default function UserAuthentication ({authenticationState, setAuthenticationState}:any): JSX.Element {
@@ -71,12 +68,10 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
 }
 
 
-
 /**
- * Renders the LoginForm component.
- *
- * @param {Object} props - The component props.
- * @param {function} props.setAuthState - The function to update the authentication state.
+ * LoginForm component.
+ * @param {Object} props - Component properties.
+ * @param {Function} props.setAuthState - Function to set the authentication state.
  * @returns {JSX.Element} The rendered LoginForm component.
  */
 function LoginForm({setAuthState}:any): JSX.Element {
@@ -132,12 +127,10 @@ function LoginForm({setAuthState}:any): JSX.Element {
 }
 
 
-
 /**
- * Renders the RegisterForm component.
- *
- * @param {Object} props - The component props.
- * @param {function} props.setAuthState - The function to update the authentication state.
+ * RegisterForm component.
+ * @param {Object} props - Component properties.
+ * @param {Function} props.setAuthState - Function to set the authentication state.
  * @returns {JSX.Element} The rendered RegisterForm component.
  */
 function RegisterForm({setAuthState}:any): JSX.Element {
@@ -210,14 +203,12 @@ function RegisterForm({setAuthState}:any): JSX.Element {
 }
 
 
-
 /**
- * Renders an input field component.
- *
- * @param {Object} props - The component props.
+ * InputField component.
+ * @param {Object} props - Component properties.
  * @param {string} props.value - The current value of the input field.
- * @param {string} props.htmlFor - The identifier for the input field.
- * @param {function} props.onChangeHandler - The function to handle changes in the input field.
+ * @param {string} props.htmlFor - The HTML 'for' attribute of the input field.
+ * @param {Function} props.onChangeHandler - Function to handle input field changes.
  * @returns {JSX.Element} The rendered InputField component.
  */
 function InputField({value, htmlFor, onChangeHandler}:any): JSX.Element {
@@ -243,14 +234,12 @@ function InputField({value, htmlFor, onChangeHandler}:any): JSX.Element {
 }
 
 
-
 /**
- * Renders the FormButtons component.
- *
- * @param {Object} props - The component props.
+ * FormButtons component.
+ * @param {Object} props - Component properties.
  * @param {string} props.authState - The current authentication state.
- * @param {function} props.setAuthState - The function to update the authentication state.
- * @param {function} props.submitHandler - The function to handle form submission.
+ * @param {Function} props.setAuthState - Function to set the authentication state.
+ * @param {Function} props.submitHandler - Function to handle form submission.
  * @returns {JSX.Element} The rendered FormButtons component.
  */
 function FormButtons({authState, setAuthState, submitHandler}:any): JSX.Element {

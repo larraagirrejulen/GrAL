@@ -2,17 +2,18 @@
 import '../../styles/sections/evaluationOptions.scss';
 
 import { useState } from "react";
-import { getImgSrc } from '../../js/utils/chromeUtils.js';
-import { removeStoredReport, downloadStoredReport, uploadNewReport, performEvaluation, storeReport } from '../../js/evaluationOptions.js';
-
 import Button from '../reusables/Button';
+
+import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
+import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope } from '../../scripts/reportLoadingOptions.js';
+import { storeNewReport } from '../../scripts/reportStorageOptions.js';
 
 
 /**
- * Renders the EvaluationOptions component.
- *
+ * Component for displaying evaluation options.
  * @param {Object} authenticationState - The authentication state.
- * @returns {JSX.Element} The rendered EvaluationOptions component.
+ * @param {Function} setLoadingReports - The function to set the loading reports state.
+ * @returns {JSX.Element} EvaluationOptions component.
  */
 export default function EvaluationOptions ({authenticationState, setLoadingReports}:any): JSX.Element {
 
@@ -23,16 +24,16 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
     <div id="evaluationOptions">
 
       <Button 
-        classList={"primary"} 
-        onClickHandler={()=>{performEvaluation(setAnimateBtn)}}
-        innerText={"Evaluate scope"}  
+        classList={"primary br"} 
+        onClickHandler={()=>{evaluateScope(setAnimateBtn)}}
+        innerText={"Evaluate selected scope"}  
         isLoading={animateBtn !== "none"}  
         animate={animateBtn === "evaluate"}
-      />
+      /><br/>
 
       <div className='dropdownBtn'>
         <div className={"dropdownHead" + (isOpen ? " active" : "")} onClick={()=>setIsOpen(!isOpen)}>
-          <label>Report options</label>
+          <label>Current report options</label>
           <img 
             src={ isOpen ? getImgSrc("extendedArrow") : getImgSrc("contractedArrow") } 
             alt="dropdown_arrow" 
@@ -41,34 +42,35 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
 
         {isOpen && (
           <div className='dropdownBody'>
-            <label onClick={removeStoredReport}>Remove</label>
-            <label onClick={downloadStoredReport}>Export</label>
+            <label onClick={removeLoadedReport}>Remove report</label>
+            <label onClick={downloadLoadedReport}>Export report</label>
             <label id="importReport">
               <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />
-              Import
+              Import new report
             </label>
           </div>
         )}
       </div>
 
-      {authenticationState !== "notLogged" && ( 
+      {authenticationState !== "notLogged" && ( <>
         <div className='loggedOptions'>
+          <p>Server storage options:</p>
           <Button 
-            classList={"primary"} 
-            onClickHandler={()=>storeReport(setAnimateBtn, authenticationState)}
-            innerText={"Save report"}  
+            classList={"primary br"} 
+            onClickHandler={()=>storeNewReport(setAnimateBtn, authenticationState)}
+            innerText={"Store current report"}  
             isLoading={animateBtn !== "none"}
             animate={animateBtn === "store"}
           />
           <Button 
-            classList={"secondary spaced"} 
+            classList={"secondary"} 
             onClickHandler={()=>setLoadingReports(true)}
-            innerText={"Load saved report"}  
+            innerText={"Load report from storage"}  
             isLoading={animateBtn !== "none"}
             animate={animateBtn === "load"}
           />
         </div>
-      )}
+      </> )}
       
     </div>
   );

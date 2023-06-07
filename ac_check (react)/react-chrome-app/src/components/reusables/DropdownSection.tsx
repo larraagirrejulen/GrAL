@@ -1,12 +1,20 @@
 
-import { useState } from 'react';
 import '../../styles/reusables/dropdownSection.scss';
-import { getImgSrc } from '../../js/utils/chromeUtils';
+
+import { useState } from 'react';
+
+import { getImgSrc } from '../../scripts/utils/chromeUtils';
 
 
-export default function Dropdown(
-    { headerText, children, classList }:any
-){
+/**
+ * Dropdown component.
+ * @param {Object} props - Component properties.
+ * @param {string} props.headerText - Text content for the dropdown header.
+ * @param {React.ReactNode} props.children - Content of the dropdown body.
+ * @param {string} [props.classList] - Additional CSS classes for the dropdown.
+ * @returns {JSX.Element} The rendered dropdown component.
+ */
+export default function Dropdown({ headerText, children, classList }:any) : JSX.Element {
 
     const [isOpen, setIsOpen] = useState(localStorage.getItem("evaluated") !== "true");
 
