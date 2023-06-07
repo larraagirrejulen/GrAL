@@ -45,120 +45,151 @@ export default function StoredReportManagement({setManageStoredReports, authenti
       alert("You can not delete reports uploaded by other users");
       return;
     }
-    removeStoredReport(selected.id, setPaginatedData);
+    removeStoredReport(selected.id, setPaginatedData, setCurrentPage);
   }
+
+  const handleHelpClick = () => {
+    alert(`On this page, you can view a table containing all the stored reports that evaluate the website ${new URL(window.location.href).origin}.
+  
+    Each page of the table consists of a root report without a parentId, along with all its descendants. The parentId value refers to the ID of the parent report that has been loaded and modified by a user to store it as a new version.
+    
+    The root element doesn't have a parentId because it was generated through automatic evaluation without previously loading a stored report.
+    
+    You can select any report from the table to load it into the extension or remove it from storage. You can only remove reports that you have uploaded, and the descendants of a removed report are not deleted; they are simply modified by changing the parentId.`);
+  };
+  
     
   return (
       <div id="reportLoadingWrapper">
       
-        <p>Stored reports for {new URL(window.location.href).origin + "/"} website:</p>
-
-        <div className='tableWrapper'>
-          <table className='websiteStoredReports'>
-            <thead>
-              <tr>
-                <th style={{width: "50px"}}>Id</th>
-                <th style={{width: "60px"}}>Version</th>
-                <th style={{width: "80px"}}>Uploaded by</th>
-                <th style={{width: "60px"}}>Parent Id</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData[currentPage].map((report: any, index: number) => (
-                <tr
-                  className={`${selectedIndex === index && 'selected'}`}
-                  onClick={() => setSelectedIndex(selectedIndex === index ? -1 : index)}
-                  key={report.id}
-                >
-                  <td>{report.id}</td>
-                  <td>{report.version}</td>
-                  <td>{report.uploadedBy}</td>
-                  <td>{report.parentId}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="pagination">
+        <p>
+          Stored reports for {new URL(window.location.href).origin + "/"} website:
           <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 0}
+            onClick={handleHelpClick}
+            style={{
+              background: '#005a6a',
+              color: 'white',
+              borderRadius: '25px',
+              padding: '3px 6px',
+              fontSize: '13px',
+              marginLeft: '6px',
+            }}
           >
-            Previous
+            ?
           </button>
-          {paginatedData.length > 3 ? <>
+        </p>
+
+        {paginatedData[currentPage] ? <>
+          <div className='tableWrapper'>
+            <table className='websiteStoredReports'>
+              <thead>
+                <tr>
+                  <th style={{width: "50px"}}>Id</th>
+                  <th style={{width: "60px"}}>Version</th>
+                  <th style={{width: "80px"}}>Uploaded by</th>
+                  <th style={{width: "60px"}}>Parent Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData[currentPage].map((report: any, index: number) => (
+                  <tr
+                    className={`${selectedIndex === index && 'selected'}`}
+                    onClick={() => setSelectedIndex(selectedIndex === index ? -1 : index)}
+                    key={report.id}
+                  >
+                    <td>{report.id}</td>
+                    <td>{report.version}</td>
+                    <td>{report.uploadedBy}</td>
+                    <td>{report.parentId}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="pagination">
             <button
-              key={0}
-              onClick={() => setCurrentPage(0)}
+              onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 0}
             >
-              1
+              Previous
             </button>
-
-            {currentPage === 0 ? <>
+            {paginatedData.length > 3 ? <>
               <button
-                key={1}
-                onClick={() => setCurrentPage(1)}
+                key={0}
+                onClick={() => setCurrentPage(0)}
+                disabled={currentPage === 0}
               >
-                2
+                1
               </button>
-              <span>...</span>
-            </>:<>
-              {currentPage === paginatedData.length-1 ? <>
-                <span>...</span>
+
+              {currentPage === 0 ? <>
                 <button
-                  key={paginatedData.length-2}
-                  onClick={() => setCurrentPage(paginatedData.length-2)}
+                  key={1}
+                  onClick={() => setCurrentPage(1)}
                 >
-                  {paginatedData.length-1}
+                  2
                 </button>
+                <span>...</span>
               </>:<>
-                <span> ... {currentPage+1} ... </span>
+                {currentPage === paginatedData.length-1 ? <>
+                  <span>...</span>
+                  <button
+                    key={paginatedData.length-2}
+                    onClick={() => setCurrentPage(paginatedData.length-2)}
+                  >
+                    {paginatedData.length-1}
+                  </button>
+                </>:<>
+                  <span> ... {currentPage+1} ... </span>
+                </>}
               </>}
-            </>}
 
-            <button
-              key={0}
-              onClick={() => setCurrentPage(paginatedData.length-1)}
-              disabled={currentPage === paginatedData.length-1}
-            >
-              {paginatedData.length}
-            </button>
-          </> : <>
-            {Array.from({ length: paginatedData.length }).map((_, index) => (
               <button
-                key={index}
-                onClick={() => setCurrentPage(index)}
-                disabled={currentPage === index}
+                key={0}
+                onClick={() => setCurrentPage(paginatedData.length-1)}
+                disabled={currentPage === paginatedData.length-1}
               >
-                {index + 1}
+                {paginatedData.length}
               </button>
-            ))}
-          </>}
-          
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === paginatedData.length - 1}
-          >
-            Next
-          </button>
-        </div>
+            </> : <>
+              {Array.from({ length: paginatedData.length }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index)}
+                  disabled={currentPage === index}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </>}
+            
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === paginatedData.length - 1}
+            >
+              Next
+            </button>
+          </div>
+
+          {selectedIndex !== -1 && (<>
+            <Button 
+              classList={"primary"} 
+              onClickHandler={loadHandler} 
+              innerText={"Load"} 
+              disabled={selectedIndex === -1}
+            />
+            <Button 
+              classList={"secondary spaced delete"} 
+              onClickHandler={deleteHandler} 
+              innerText={"Delete"} 
+              disabled={selectedIndex === -1}
+            />
+          </>)}
+
+        </> : 
+          <p>There are no stored reports for this website...</p>
+        }
         
-        {selectedIndex !== -1 && (<>
-          <Button 
-            classList={"primary"} 
-            onClickHandler={loadHandler} 
-            innerText={"Load"} 
-            disabled={selectedIndex === -1}
-          />
-          <Button 
-            classList={"secondary spaced delete"} 
-            onClickHandler={deleteHandler} 
-            innerText={"Delete"} 
-            disabled={selectedIndex === -1}
-          />
-        </>)}
 
         <Button 
           classList={"secondary spaced"} 

@@ -67,7 +67,7 @@ class ReportController{
                 if(parentId !== null){
                     this.#db.run(`
                         INSERT INTO reports (domain, version, uploadedBy, report, parentId)
-                        VALUES (?, (SELECT version + 1 FROM reports WHERE id = ?), ?, ?, ?)
+                        VALUES (?, (SELECT COALESCE(version , 0) + 1 FROM reports WHERE id = ?), ?, ?, ?)
                     `, [domain, parentId, uploadedBy, JSON.stringify(report), parentId], function(err) {
                         if (err) {
                             reject(err);

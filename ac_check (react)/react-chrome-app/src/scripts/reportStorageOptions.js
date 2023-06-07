@@ -60,7 +60,7 @@ export async function loadStoredReport(id){
  * @param {string} id - The ID of the stored report to remove.
  * @param {Function} setPaginatedData - Function to update the paginated data state.
  */
-export async function removeStoredReport(id, setPaginatedData){
+export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
 
     try{
 
@@ -82,6 +82,11 @@ export async function removeStoredReport(id, setPaginatedData){
 
         if(storeResults.success){
             setPaginatedData(transformArray(storeResults.reports));
+            setCurrentPage(0);
+        }
+
+        if(JSON.parse(localStorage.getItem("parentId")) === id){
+            localStorage.removeItem("parentId");
         }
 
     }catch(error){

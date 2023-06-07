@@ -61,7 +61,8 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
             innerText={"Store current report"}  
             isLoading={animateBtn !== "none"}
             animate={animateBtn === "store"}
-          />
+            disabled={localStorage.getItem("evaluated") !== "true"}
+          /><br/>
           <Button 
             classList={"secondary"} 
             onClickHandler={()=>setLoadingReports(true)}
