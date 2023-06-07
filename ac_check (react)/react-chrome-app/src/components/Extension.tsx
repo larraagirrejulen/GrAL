@@ -13,6 +13,7 @@ import { getImgSrc, openOptionsPage } from '../scripts/utils/chromeUtils.js';
 import { setUseStateFromStorage } from '../scripts/utils/moreUtils.js';
 
 
+
 /**
  * Extension main component that wraps all other functionalities.
  * @returns {JSX.Element} The rendered JSX element.
@@ -27,6 +28,7 @@ export default function Extension() : JSX.Element {
 
   useEffect( ()=>{
     setUseStateFromStorage("shiftWebpage", true, setShiftWebpage);
+    sessionStorage.setItem("currentWebsite", new URL(window.location.href).origin);
   }, []);
 
 
@@ -38,7 +40,7 @@ export default function Extension() : JSX.Element {
     
 
   return (<>
-    
+
     {extensionHidden && (
       <img 
         id="hidden_extension_logo" 
@@ -59,10 +61,11 @@ export default function Extension() : JSX.Element {
       <span className="icon close" onClick={()=>setExtensionHidden(!extensionHidden)}>&times;</span>
 
       <div className="img_container">
-        <img alt="extension logo" src={getImgSrc("icon128")} onClick={() => {
-          window.open("https://github.com/larraagirrejulen/GrAL", '_blank');
-          window.open("https://github.com/Itusil/TFG", '_blank')
-        }} />
+        <img 
+          alt="extension logo" 
+          src={getImgSrc("icon128")} 
+          onClick={() => window.open("https://github.com/larraagirrejulen/GrAL", '_blank')} 
+        />
       </div>
 
       {manageStoredReports ? <>

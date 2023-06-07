@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
 import { loadStoredReport, getStoredReports, removeStoredReport } from '../../scripts/reportStorageOptions.js';
+import { setDomainValue } from '../../scripts/utils/chromeUtils';
 
 
 /**
@@ -32,7 +33,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
     */
   const loadHandler = () => {
     const selected:any = paginatedData[currentPage][selectedIndex];
-    localStorage.setItem("parentId", selected.id);
+    setDomainValue("parentId", selected.id);
     loadStoredReport(selected.id);
   }
 
@@ -49,7 +50,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
   }
 
   const handleHelpClick = () => {
-    alert(`On this page, you can view a table containing all the stored reports that evaluate the website ${new URL(window.location.href).origin}.
+    alert(`On this page, you can view a table containing all the stored reports that evaluate the website ${sessionStorage.getItem("currentWebsite")}.
   
     Each page of the table consists of a root report without a parentId, along with all its descendants. The parentId value refers to the ID of the parent report that has been loaded and modified by a user to store it as a new version.
     
@@ -63,7 +64,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
       <div id="reportLoadingWrapper">
       
         <p>
-          Stored reports for {new URL(window.location.href).origin + "/"} website:
+          Stored reports for {sessionStorage.getItem("currentWebsite")} website:
           <button
             onClick={handleHelpClick}
             style={{

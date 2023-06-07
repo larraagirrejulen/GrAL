@@ -55,7 +55,7 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
         })();
 
         setUseStateFromStorage("mantainExtended", true, setMantainExtended);
-        setUseStateFromStorage("reportTableContent", false, setReportTableContent);
+        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".reportTableContent", false, setReportTableContent);
         
         const storedValue = sessionStorage.getItem("selectedMainCategories");
         if(storedValue){
@@ -272,8 +272,9 @@ function CriteriaResults({criteria}:any){
      * @returns {Promise<Array<any>>} A promise that resolves to the evaluation report, report criteria, and found case index.
      */
     async function getFoundCaseFromReport(index:any){
+        
 
-        const evaluationReport = await getFromChromeStorage("report", false);
+        const evaluationReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
 
         const criteriaTxt = wcagCriterias.find((elem:any) => elem.num === criteria.criteriaNumber);
 

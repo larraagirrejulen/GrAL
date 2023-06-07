@@ -100,7 +100,7 @@ class ReportController{
                 SELECT id, version, uploadedBy, parentId
                 FROM reports
                 WHERE domain = (?)
-            `, [domain], function(err, rows) {
+            `, [domain + "/"], function(err, rows) {
                 if (err) {
                     reject(err);
                 } else {

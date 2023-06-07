@@ -4,6 +4,7 @@ import '../../styles/sections/selectEvaluators.scss';
 import { useEffect, useState } from "react";
 
 import Dropdown from '../reusables/DropdownSection';
+import { getDomainValue, setDomainValue } from '../../scripts/utils/chromeUtils';
 
 const defaultCheckboxes = [
   { checked: false, label: "AccessMonitor - Website", href: "https://accessmonitor.acessibilidade.gov.pt/"},
@@ -31,14 +32,15 @@ export default function EvaluatorSelection (): JSX.Element {
    * @param {array} checkboxes - The current state of the checkboxes
   */
   useEffect(() => {
-    const storedCheckboxes = localStorage.getItem("checkboxes");
+    
+    const storedCheckboxes = getDomainValue("checkboxes");
     if(storedCheckboxes){
       setCheckboxes(JSON.parse(storedCheckboxes));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+    setDomainValue("checkboxes", JSON.stringify(checkboxes));
   }, [checkboxes]);
 
   const handleCheckboxChange = (index:any) => {

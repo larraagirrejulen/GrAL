@@ -64,3 +64,19 @@ export async function blackListElement(newListElement) {
 }
 
 
+// Function to set a value in localStorage with a domain-specific prefix
+export function setDomainValue(key, value) {
+    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
+    localStorage.setItem(prefixedKey, value);
+}
+  
+// Function to get a value from localStorage with a domain-specific prefix
+export function getDomainValue(key) {
+    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
+    return localStorage.getItem(prefixedKey);
+}
+
+export function removeDomainValue(key) {
+    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
+    return localStorage.removeItem(prefixedKey);
+}

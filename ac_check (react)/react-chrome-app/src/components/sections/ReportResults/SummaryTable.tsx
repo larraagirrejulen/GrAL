@@ -42,8 +42,9 @@ export default function SummaryTable({conformanceLevels}:any){
     };
 
     useEffect(() => { 
-        setUseStateFromStorage("siteSummary", false, setSiteSummary);
-        setUseStateFromStorage("pageSummaries", false, setPageSummaries);
+        
+        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".siteSummary", false, setSiteSummary);
+        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".pageSummaries", false, setPageSummaries);
     },[]);
 
     useEffect(() => { 

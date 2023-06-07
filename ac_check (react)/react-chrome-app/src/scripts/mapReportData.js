@@ -1,6 +1,6 @@
 
 import { getSuccessCriterias, getWcagHierarchy } from './utils/wcagUtils.js';
-import { storeOnChromeStorage, getFromChromeStorage }  from './utils/chromeUtils.js';
+import { storeOnChromeStorage, getFromChromeStorage, setDomainValue }  from './utils/chromeUtils.js';
 
 
 const assertions = {};
@@ -20,7 +20,7 @@ function getOutcomeVariables () {
 
 export async function mapReportData(evaluationreport = null, blackList = null){
 
-    const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage("report", false);
+    const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
 
     const enableBlacklist = await getFromChromeStorage('enableBlacklist');
     if(enableBlacklist){
@@ -110,13 +110,12 @@ export async function mapReportData(evaluationreport = null, blackList = null){
             hasPart
         };
     }
-    storeOnChromeStorage("siteSummary", siteSummary);
-    storeOnChromeStorage("pageSummaries", pageSummaries);
+    storeOnChromeStorage(sessionStorage.getItem("currentWebsite") + ".siteSummary", siteSummary);
+    storeOnChromeStorage(sessionStorage.getItem("currentWebsite") + ".pageSummaries", pageSummaries);
+    storeOnChromeStorage(sessionStorage.getItem("currentWebsite") + ".reportTableContent", getCategoryResults());
 
-    storeOnChromeStorage("reportTableContent", getCategoryResults());
-
-    localStorage.setItem("evaluated", "true");
-    localStorage.setItem("evaluationScope", evaluationScope);
+    setDomainValue("reportIsLoaded", "true");
+    setDomainValue("evaluationScope", evaluationScope);
     window.location.reload();
 
 }

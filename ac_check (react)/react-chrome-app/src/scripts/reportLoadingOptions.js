@@ -1,15 +1,17 @@
 
 import { mapReportData } from './mapReportData.js';
-import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils.js';
+import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage, getDomainValue, removeDomainValue } from './utils/chromeUtils.js';
 import { applyBlackList, fetchServer } from "./utils/moreUtils.js";
 
 
 export function loadReport(newReport){
+
     try{
-        storeOnChromeStorage("report", newReport);
+        storeOnChromeStorage(sessionStorage.getItem("currentWebsite"), newReport);
         mapReportData(newReport);
     } catch(error) {
-        ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+        const currentWebsite = sessionStorage.getItem("currentWebsite");
+        [currentWebsite, currentWebsite + ".siteSummary", currentWebsite + ".pageSummaries", currentWebsite + ".reportTableContent"].map((key) => removeFromChromeStorage(key));
         throw new Error("Error when storing or mapping the report => " + error);
     }
 }
@@ -18,17 +20,19 @@ export function removeLoadedReport(){
     
     if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
 
-    localStorage.removeItem("evaluated");
-    localStorage.removeItem("parentId");
+    removeDomainValue("parentId");
+    removeDomainValue("reportIsLoaded");
 
-    ["report", "siteSummary", "pageSummaries", "reportTableContent"].map((key) => removeFromChromeStorage(key));
+    const currentWebsite = sessionStorage.getItem("currentWebsite");
+
+    [currentWebsite, currentWebsite + ".siteSummary", currentWebsite + ".pageSummaries", currentWebsite + ".reportTableContent"].map((key) => removeFromChromeStorage(key));
 
     window.location.reload();
 }
 
-export function uploadNewReport(uploadEvent){
+export async function uploadNewReport(uploadEvent){
 
-    if(localStorage.getItem("evaluated")) {
+    if(getDomainValue("reportIsLoaded")) {
         if (!window.confirm("The upload will overwrite the current stored report. You want to continue?")) return;
     }
 
@@ -39,7 +43,7 @@ export function uploadNewReport(uploadEvent){
     reader.onload = async (uploadEvent) => {
         const newReport = JSON.parse(uploadEvent.target.result);
 
-        const currentReport = await getFromChromeStorage("report", false);
+        const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
 
         includeEditedFoundCases(newReport, currentReport);
 
@@ -50,8 +54,8 @@ export function uploadNewReport(uploadEvent){
 
 export async function downloadLoadedReport(){
 
-    const currentReport = await getFromChromeStorage("report", false);
-    const activeConformanceLevels = JSON.parse(localStorage.getItem("conformanceLevels"));
+    const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
+    const activeConformanceLevels = JSON.parse(getDomainValue("conformanceLevels"));
 
     currentReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeConformanceLevels[activeConformanceLevels.length - 1] + "-Conformance";
 
@@ -111,13 +115,13 @@ export async function evaluateScope(setAnimateBtn){
     try{
         setAnimateBtn("evaluate");
 
-        const scope = JSON.parse(localStorage.getItem("scope"));
+        const scope = JSON.parse(getDomainValue("scope"));
         if(scope.length === 0){
             alert("You need to set at least a web page as a scope");
             return;
         }
 
-        const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+        const checkboxes = JSON.parse(getDomainValue("checkboxes"));
         const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
 
         if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
@@ -129,10 +133,8 @@ export async function evaluateScope(setAnimateBtn){
 
         const newReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
 
-        const alreadyEvaluated = localStorage.getItem("evaluated");
-
-        if(alreadyEvaluated){
-            const currentReport = await getFromChromeStorage("report", false);
+        if(getDomainValue("reportIsLoaded")){
+            const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
             includeEditedFoundCases(newReport, currentReport);
         }
 

@@ -1,6 +1,6 @@
 
 import { fetchServer, applyBlackList } from "./utils/moreUtils.js";
-import { getFromChromeStorage } from "./utils/chromeUtils";
+import { getDomainValue, getFromChromeStorage, removeDomainValue, setDomainValue } from "./utils/chromeUtils";
 import { loadReport } from "./reportLoadingOptions";
 
 
@@ -12,9 +12,7 @@ export async function getStoredReports(setPaginatedData){
 
     try{
 
-        const domain = new URL(window.location.href).origin + "/";
-
-        const bodyData = JSON.stringify({domain});
+        const bodyData = JSON.stringify({domain: sessionStorage.getItem("currentWebsite")});
 
         const storeResults = await fetchServer(bodyData, "reportStoring");
 
@@ -74,9 +72,7 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
             window.alert("Could not remove the report, try again later...");
         } 
 
-        const domain = new URL(window.location.href).origin + "/";
-
-        bodyData = JSON.stringify({domain});
+        bodyData = JSON.stringify({domain: sessionStorage.getItem("currentWebsite")});
 
         storeResults = await fetchServer(bodyData, "reportStoring");
 
@@ -85,8 +81,8 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
             setCurrentPage(0);
         }
 
-        if(JSON.parse(localStorage.getItem("parentId")) === id){
-            localStorage.removeItem("parentId");
+        if(JSON.parse(getDomainValue("parentId")) === id){
+            removeDomainValue("parentId");
         }
 
     }catch(error){
@@ -140,7 +136,7 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
     try{
         setAnimateBtn("store");
 
-        const report = await getFromChromeStorage("report", false);
+        const report = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
 
         const enableBlacklist = await getFromChromeStorage('enableBlacklist');
         
@@ -148,7 +144,7 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
             await applyBlackList(report);
         }
 
-        let parentId = localStorage.getItem("parentId");
+        let parentId = getDomainValue("parentId");
 
         if(parentId){
             parentId = JSON.parse(parentId);
@@ -162,7 +158,7 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
 
         if(storeResults.success){
           window.alert("Report successfully stored!");
-          localStorage.setItem("parentId", storeResults.newParentId);
+          setDomainValue("parentId", storeResults.newParentId);
         } else {
           window.alert("Could not store the report, try again later...");
         }

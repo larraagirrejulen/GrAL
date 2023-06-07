@@ -4,7 +4,7 @@ import '../../styles/sections/evaluationOptions.scss';
 import { useState } from "react";
 import Button from '../reusables/Button';
 
-import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
+import { getDomainValue, getImgSrc } from '../../scripts/utils/chromeUtils.js';
 import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope } from '../../scripts/reportLoadingOptions.js';
 import { storeNewReport } from '../../scripts/reportStorageOptions.js';
 
@@ -61,7 +61,7 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
             innerText={"Store current report"}  
             isLoading={animateBtn !== "none"}
             animate={animateBtn === "store"}
-            disabled={localStorage.getItem("evaluated") !== "true"}
+            disabled={getDomainValue("reportIsLoaded") !== "true"}
           /><br/>
           <Button 
             classList={"secondary"} 

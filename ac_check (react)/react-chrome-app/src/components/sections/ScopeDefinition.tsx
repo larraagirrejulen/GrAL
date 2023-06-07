@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 import Dropdown from '../reusables/DropdownSection';
 
-import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
+import { getDomainValue, getImgSrc, setDomainValue } from '../../scripts/utils/chromeUtils.js';
 
 
 const defaultScope = [{name: window.document.title, url: window.location.href}];
@@ -23,14 +23,14 @@ export default function ScopeDefinition (): JSX.Element {
   const [editItemIndex, setEditItemIndex] = useState(-1);
 
   useEffect(() => { 
-    const storedScope = localStorage.getItem("scope");
+    const storedScope = getDomainValue("scope");
     if(storedScope){
       setScope(JSON.parse(storedScope));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("scope", JSON.stringify(scope));
+    setDomainValue("scope", JSON.stringify(scope));
   }, [scope]);
 
   /**
@@ -55,7 +55,7 @@ export default function ScopeDefinition (): JSX.Element {
    * Saves the changes made to the edited web page item.
    */
   const handleSaveChanges = () => {
-    const baseUrl = new URL(window.location.href).origin + "/";
+    const baseUrl:any = sessionStorage.getItem("currentWebsite");
 
     if(newWebPage.name === ""){
       alert("Wrong web page name");

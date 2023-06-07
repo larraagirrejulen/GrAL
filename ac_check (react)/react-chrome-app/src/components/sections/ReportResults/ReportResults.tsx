@@ -4,6 +4,7 @@ import '../../../styles/sections/resultSection/reportResults.scss';
 import { useEffect, useState } from "react";
 import ResultsTable from './ResultsTable';
 import SummaryTable from './SummaryTable';
+import { getDomainValue } from '../../../scripts/utils/chromeUtils';
 
 
 /**
@@ -40,7 +41,7 @@ export default function ReportResults(): JSX.Element {
       <div className="header"><span>Current report results</span></div>
 
       <div className="body">
-        {localStorage.getItem("evaluated") === "true" ? <>
+        {getDomainValue("reportIsLoaded") ? <>
 
           <div id="conformanceLevelSelector">
             <p>Select conformace level:</p>
