@@ -2,7 +2,6 @@
 const pa11y = require('pa11y');
 const { URL } = require('url');
 
-
 /**
  * Class representing a web page scraper to evaluate a pages accesibility.
 */
@@ -77,7 +76,7 @@ class Scraper {
         await page.click('.card_actions button');
 
         // Wait for results to be loaded and scrape the results
-        await page.waitForSelector('table.evaluation-table > tbody', {timeout: 60000});
+        await page.waitForSelector('.evaluation-table > tbody', {timeout: 60000});
         const results = await page.evaluate(() => {
 
             const status2Outcome = {
@@ -88,7 +87,7 @@ class Scraper {
 
             const results = [];
 
-            const foundTechniques = Array.from(document.querySelectorAll('table.evaluation-table > tbody > tr'));
+            const foundTechniques = Array.from(document.querySelectorAll('.evaluation-table > tbody > tr'));
 
             for (const technique of foundTechniques){
 
@@ -144,7 +143,11 @@ class Scraper {
 
                     for (const foundCase of foundCases){
                         const caseElements = Array.from(foundCase.querySelectorAll('table > tr'));
-                        casesLocations.push(caseElements[3].querySelector('td span').textContent);
+
+                        if(caseElements[3]){
+                            casesLocations.push(caseElements[3].querySelector('td span').textContent);
+                        }
+                        
                     }
                     return casesLocations;  
                 });
@@ -209,9 +212,11 @@ class Scraper {
 
             var results = [];
 
-            function pushResults(id){
+            async function pushResults(id){
 
-                const children = document.querySelector(id).children;
+                const wrapper = await document.querySelector(id)
+
+                const children = wrapper.children;
 
                 for(const child of children){
                     if (child.tagName === 'H4') {
@@ -295,7 +300,7 @@ class Scraper {
                 }
             }
 
-            ["#AC_errors", "#AC_likely_problems", "#AC_potential_problems"].map((id) => pushResults(id));
+            ["#AC_errors", "#AC_likely_problems", "#AC_potential_problems"].map(async (id) => await pushResults(id));
 
             return results;
 
@@ -401,10 +406,11 @@ class Scraper {
             }else{
 
                 try{
-                    await page.waitForXPath(result.xpath, {timeout: 1000});
+                    await page.waitForXPath(result.xpath, {timeout: 10});
                 }catch(err){
                     continue;
                 }
+                
                 
                 const [targetElement] = await page.$x(result.xpath);
 
@@ -547,10 +553,10 @@ class Scraper {
      * @returns {void}
      */
     async lhScraper(webPage, page){
-
+        
         const lighthouseModule = await import('lighthouse');
         const lighthouse = lighthouseModule.default;
-        
+
         // Generate the Lighthouse report
         const report = await lighthouse(webPage.url, {
             port: (new URL(this.#browser.wsEndpoint())).port,
@@ -568,8 +574,8 @@ class Scraper {
             screenEmulation: {
                 // Set screen emulation options for desktop
                 mobile: false,
-                width: 1920,
-                height: 1080,
+                width: 1280,
+                height: 720,
                 deviceScaleFactor: 1,
                 disabled: false,
             },

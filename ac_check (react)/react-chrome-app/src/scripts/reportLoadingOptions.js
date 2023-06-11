@@ -144,26 +144,31 @@ export async function evaluateScope(setAnimateBtn){
 }
 
 
-function fetchServer(bodyData, action, timeout = 120000) {
+function fetchServer(bodyData, action, timeout = 180000) {
 
-    return new Promise(async (resolve) => {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), timeout);
+    return new Promise(async (resolve, reject) => {
+        try{
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeout);
 
-        const response = await fetch('http://localhost:7070/' + action, {
-            body: bodyData,
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            signal: controller.signal
-        });
+            const response = await fetch('http://localhost:7070/' + action, {
+                body: bodyData,
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                signal: controller.signal
+            });
+            
+            clearTimeout(timer);
+
+            if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+            
+            const fetchData = await response.json();
+
+            resolve(JSON.parse(fetchData));
+        }catch(err){
+            reject(err);
+        }
         
-        clearTimeout(timer);
-
-        if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
-        
-        const fetchData = await response.json();
-
-        resolve(JSON.parse(fetchData));
     });
 
 }
