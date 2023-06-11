@@ -1,17 +1,15 @@
 
 import { mapReportData } from './mapReportData.js';
-import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage, getDomainValue, removeDomainValue } from './utils/chromeUtils.js';
-import { applyBlackList, fetchServer } from "./utils/moreUtils.js";
+import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils.js';
+import { applyBlackList } from "./utils/moreUtils.js";
 
 
 export function loadReport(newReport){
 
     try{
-        storeOnChromeStorage(sessionStorage.getItem("currentWebsite"), newReport);
+        storeOnChromeStorage(window.location.hostname, newReport);
         mapReportData(newReport);
     } catch(error) {
-        const currentWebsite = sessionStorage.getItem("currentWebsite");
-        [currentWebsite, currentWebsite + ".siteSummary", currentWebsite + ".pageSummaries", currentWebsite + ".reportTableContent"].map((key) => removeFromChromeStorage(key));
         throw new Error("Error when storing or mapping the report => " + error);
     }
 }
@@ -20,10 +18,10 @@ export function removeLoadedReport(){
     
     if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
 
-    removeDomainValue("parentId");
-    removeDomainValue("reportIsLoaded");
+    removeFromChromeStorage(window.location.hostname + ".parentId");
+    removeFromChromeStorage(window.location.hostname + ".reportIsLoaded");
 
-    const currentWebsite = sessionStorage.getItem("currentWebsite");
+    const currentWebsite = window.location.hostname;
 
     [currentWebsite, currentWebsite + ".siteSummary", currentWebsite + ".pageSummaries", currentWebsite + ".reportTableContent"].map((key) => removeFromChromeStorage(key));
 
@@ -32,7 +30,9 @@ export function removeLoadedReport(){
 
 export async function uploadNewReport(uploadEvent){
 
-    if(getDomainValue("reportIsLoaded")) {
+    const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+
+    if(reportLoaded === "true") {
         if (!window.confirm("The upload will overwrite the current stored report. You want to continue?")) return;
     }
 
@@ -43,7 +43,7 @@ export async function uploadNewReport(uploadEvent){
     reader.onload = async (uploadEvent) => {
         const newReport = JSON.parse(uploadEvent.target.result);
 
-        const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
+        const currentReport = await getFromChromeStorage(window.location.hostname, false);
 
         includeEditedFoundCases(newReport, currentReport);
 
@@ -54,8 +54,8 @@ export async function uploadNewReport(uploadEvent){
 
 export async function downloadLoadedReport(){
 
-    const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
-    const activeConformanceLevels = JSON.parse(getDomainValue("conformanceLevels"));
+    const currentReport = await getFromChromeStorage(window.location.hostname, false);
+    const activeConformanceLevels = JSON.parse(localStorage.getItem("conformanceLevels"));
 
     currentReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeConformanceLevels[activeConformanceLevels.length - 1] + "-Conformance";
 
@@ -112,40 +112,59 @@ export async function downloadLoadedReport(){
 
 export async function evaluateScope(setAnimateBtn){
 
-    try{
-        setAnimateBtn("evaluate");
+    const scope = JSON.parse(localStorage.getItem("scope"));
 
-        const scope = JSON.parse(getDomainValue("scope"));
-        if(scope.length === 0){
-            alert("You need to set at least a web page as a scope");
-            return;
-        }
+    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
 
-        const checkboxes = JSON.parse(getDomainValue("checkboxes"));
-        const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
-
-        if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
-            alert("You need to choose at least one analizer");
-            return;
-        }
-
-        const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
-
-        const newReport = await fetchServer(bodyData, "scrapeAccessibilityResults");
-
-        if(getDomainValue("reportIsLoaded")){
-            const currentReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
-            includeEditedFoundCases(newReport, currentReport);
-        }
-
-        loadReport(newReport);
-
-    } catch (error) {
-        console.error("Error during evaluation process => ", error);
-        alert("An error occurred during evaluation. Please try again.");
-    } finally {
-        setAnimateBtn("none");
+    if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
+        alert("You need to choose at least one analizer");
+        return;
     }
+
+    setAnimateBtn("evaluate");
+
+    const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
+
+    fetchServer(bodyData, "scrapeAccessibilityResults")
+    .then( async (result) => {
+        const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+        if(reportLoaded === "true"){
+            const currentReport = await getFromChromeStorage(window.location.hostname, false);
+            includeEditedFoundCases(result, currentReport);
+        }
+        loadReport(result);
+    })
+    .catch((err) => {
+        console.error("Error during evaluation process => ", err);
+        alert("An error occurred during evaluation. Please try again.");
+    })
+    .finally(() => setAnimateBtn("none"));
+
+}
+
+
+function fetchServer(bodyData, action, timeout = 120000) {
+
+    return new Promise(async (resolve) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+
+        const response = await fetch('http://localhost:7070/' + action, {
+            body: bodyData,
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            signal: controller.signal
+        });
+        
+        clearTimeout(timer);
+
+        if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+        
+        const fetchData = await response.json();
+
+        resolve(JSON.parse(fetchData));
+    });
 
 }
 

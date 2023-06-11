@@ -4,7 +4,7 @@ import '../../../styles/sections/resultSection/summaryTable.scss';
 import { useState, useEffect} from "react";
 import { OutcomeHeaders } from './ResultsTable';
 
-import { setUseStateFromStorage } from '../../../scripts/utils/moreUtils.js';
+import { getFromChromeStorage } from '../../../scripts/utils/chromeUtils';
 
 
 /**
@@ -42,9 +42,10 @@ export default function SummaryTable({conformanceLevels}:any){
     };
 
     useEffect(() => { 
-        
-        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".siteSummary", false, setSiteSummary);
-        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".pageSummaries", false, setPageSummaries);
+        getFromChromeStorage(window.location.hostname + ".siteSummary", false)
+        .then( value => value != null && setSiteSummary(value) );
+        getFromChromeStorage(window.location.hostname + ".pageSummaries", false)
+        .then( value => value != null && setPageSummaries(value) );
     },[]);
 
     useEffect(() => { 

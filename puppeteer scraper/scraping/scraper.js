@@ -356,10 +356,6 @@ class Scraper {
                         if(!location) continue;
                         
                         location = location.getAttribute("data-x");
-
-                        if(location.startsWith(".")){
-                            location = location.replace(".", "");
-                        }
         
                         results.push({
                             "criterias": foundCase.querySelector("div > span").textContent.match(/(\d\.\d\.\d)/g),
@@ -405,7 +401,7 @@ class Scraper {
             }else{
 
                 try{
-                    await page.waitForXPath(result.xpath);
+                    await page.waitForXPath(result.xpath, {timeout: 1000});
                 }catch(err){
                     continue;
                 }

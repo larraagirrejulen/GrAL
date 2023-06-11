@@ -11,6 +11,9 @@
 
   & .dropdownBtn{
 
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
     display: inline-block;
     position: relative;
     text-align: center;
@@ -27,11 +30,15 @@
       cursor: pointer;
 
       & label{
+        padding: 0;
+        margin: 0;
         display: inline-block;
         cursor: pointer;
       }
 
       & img{
+        padding: 0;
+        margin: 0;
         height: 18px;
         display: inline-block;
         cursor: pointer;

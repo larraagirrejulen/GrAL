@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import Button from '../../reusables/Button';
 
 import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../scripts/utils/chromeUtils.js';
-import { setUseStateFromStorage, getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils.js';
+import { getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils.js';
 import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils.js';
 import { mapReportData } from '../../../scripts/mapReportData';
 import { getSuccessCriterias } from '../../../scripts/utils/wcagUtils';
@@ -54,8 +54,14 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
             }
         })();
 
-        setUseStateFromStorage("mantainExtended", true, setMantainExtended);
-        setUseStateFromStorage(sessionStorage.getItem("currentWebsite") + ".reportTableContent", false, setReportTableContent);
+        getFromChromeStorage("mantainExtended")
+        .then( value => {
+            if(value != null) setMantainExtended(value) 
+        });
+        getFromChromeStorage(window.location.hostname + ".reportTableContent", false)
+        .then( value => {
+            if(value != null) setReportTableContent(value)  
+        });
         
         const storedValue = sessionStorage.getItem("selectedMainCategories");
         if(storedValue){
@@ -78,7 +84,7 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
      * @returns {JSX.Element|null} - JSX element representing the ResultsTable component.
      */
     return(<>
-        {localStorage.getItem("evaluationScope")?.includes(window.location.href) && (<>
+        {localStorage.getItem("scope")?.includes(window.location.href) && (<>
             <p>Current webpage evaluation results:</p>
             <div id="resultsTable">
                 <table>
@@ -218,6 +224,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                         {criteria.hasOwnProperty("hasPart") ? <>
                             
                             <img 
+                                className='arrow'
                                 src={ selectedCriterias[index] ? 
                                         getImgSrc("extendedArrow") 
                                     : 
@@ -274,7 +281,7 @@ function CriteriaResults({criteria}:any){
     async function getFoundCaseFromReport(index:any){
         
 
-        const evaluationReport = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
+        const evaluationReport = await getFromChromeStorage(window.location.hostname, false);
 
         const criteriaTxt = wcagCriterias.find((elem:any) => elem.num === criteria.criteriaNumber);
 
@@ -568,6 +575,7 @@ function CriteriaResults({criteria}:any){
                 >
                     <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
                         <img 
+                            className='arrow'
                             src={ selectedCriteriaResults[index] ? 
                                     getImgSrc("extendedArrow") 
                                 : 

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
 import { loadStoredReport, getStoredReports, removeStoredReport } from '../../scripts/reportStorageOptions.js';
-import { setDomainValue } from '../../scripts/utils/chromeUtils';
+import { storeOnChromeStorage } from '../../scripts/utils/chromeUtils';
 
 
 /**
@@ -33,7 +33,8 @@ export default function StoredReportManagement({setManageStoredReports, authenti
     */
   const loadHandler = () => {
     const selected:any = paginatedData[currentPage][selectedIndex];
-    setDomainValue("parentId", selected.id);
+
+    storeOnChromeStorage(window.location.hostname + ".parentId", selected.id);
     loadStoredReport(selected.id);
   }
 
@@ -50,7 +51,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
   }
 
   const handleHelpClick = () => {
-    alert(`On this page, you can view a table containing all the stored reports that evaluate the website ${sessionStorage.getItem("currentWebsite")}.
+    alert(`On this page, you can view a table containing all the stored reports that evaluate the website ${window.location.hostname}.
   
     Each page of the table consists of a root report without a parentId, along with all its descendants. The parentId value refers to the ID of the parent report that has been loaded and modified by a user to store it as a new version.
     
@@ -64,7 +65,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
       <div id="reportLoadingWrapper">
       
         <p>
-          Stored reports for {sessionStorage.getItem("currentWebsite")} website:
+          Stored reports for {window.location.hostname} website:
           <button
             onClick={handleHelpClick}
             style={{
@@ -74,6 +75,8 @@ export default function StoredReportManagement({setManageStoredReports, authenti
               padding: '3px 6px',
               fontSize: '13px',
               marginLeft: '6px',
+              cursor: "pointer",
+              marginBottom: "6px"
             }}
           >
             ?

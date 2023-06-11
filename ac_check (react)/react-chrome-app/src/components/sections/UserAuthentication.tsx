@@ -4,8 +4,8 @@ import '../../styles/sections/UserAuthentication.scss';
 import { useState, useEffect} from "react";
 import Button from "../reusables/Button";
 
-import { fetchServer, setUseStateFromStorage } from '../../scripts/utils/moreUtils.js';
-import { removeFromChromeStorage, storeOnChromeStorage } from "../../scripts/utils/chromeUtils.js";
+import { fetchServer } from '../../scripts/utils/moreUtils.js';
+import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "../../scripts/utils/chromeUtils.js";
 
 
 /**
@@ -23,7 +23,8 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
     }
 
     useEffect( ()=>{
-        setUseStateFromStorage("authenticationState", true, setAuthenticationState);
+        getFromChromeStorage("authenticationState", true)
+        .then( value => value != null && setAuthenticationState(value) );
     });
   
     return ( 
@@ -54,9 +55,9 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
             
                 <label className='userNameLabel'>
                     {"@" + authenticationState}
-                    </label>
+                </label>
                 <Button 
-                    classList={"secondary"} 
+                    classList={"secondary spaced"} 
                     onClickHandler={onLogoutHandler} 
                     innerText={"Logout"}
                 />

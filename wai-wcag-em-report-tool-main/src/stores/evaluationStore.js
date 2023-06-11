@@ -19,6 +19,9 @@ import scopeStore, { initialScopeStore } from '@app/stores/scopeStore.js';
 import exploreStore, { initialExploreStore, webTechnologyStore } from '@app/stores/exploreStore.js';
 import sampleStore, { initialSampleStore } from '@app/stores/sampleStore.js';
 import summaryStore, { initialSummaryStore } from '@app/stores/summaryStore.js';
+
+import { loadedReport } from '@app/stores/authStore.js';
+
 import {
   DEFAULT_WCAG_VERSION,
   DEFAULT_CONFORMANCE_LEVEL,
@@ -174,6 +177,12 @@ class EvaluationModel {
     let openedJsonld;
     let language;
     let wcagVersion;
+
+
+    loadedReport.set(JSON.stringify(openedEvaluation));
+
+
+    alert(JSON.stringify(openedEvaluation));
 
     /**
      *  Apply jsonld conversion to make sure

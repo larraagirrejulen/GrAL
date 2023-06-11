@@ -12,6 +12,17 @@
 
   & table{
     background-color: $secondary-color;
+    border-collapse: collapse;
+
+    & img{
+      all: initial;
+      height: 18px;
+      display:inline;
+
+      &.arrow{
+        height: 24px;
+      }
+    }
 
     & tr{
 

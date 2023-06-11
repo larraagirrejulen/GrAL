@@ -9,8 +9,7 @@ import EvaluatorSelection from './sections/EvaluatorSelection';
 import EvaluationOptions from './sections/EvaluationOptions';
 import ReportResults from './sections/ReportResults/ReportResults';
 
-import { getImgSrc, openOptionsPage } from '../scripts/utils/chromeUtils.js';
-import { setUseStateFromStorage } from '../scripts/utils/moreUtils.js';
+import { getFromChromeStorage, getImgSrc, openOptionsPage } from '../scripts/utils/chromeUtils.js';
 
 
 
@@ -27,15 +26,13 @@ export default function Extension() : JSX.Element {
 
 
   useEffect( ()=>{
-    setUseStateFromStorage("shiftWebpage", true, setShiftWebpage);
-    sessionStorage.setItem("currentWebsite", new URL(window.location.href).origin);
+    getFromChromeStorage("shiftWebpage", true)
+    .then( value => value != null && setShiftWebpage(value) );
   }, []);
 
 
   useEffect(() => {
-    if(shiftWebpage){
-      document.body.classList[extensionHidden ? "remove" : "add"]('extension-active');
-    } 
+    document.body.classList.toggle('extension-active', shiftWebpage && !extensionHidden);
   }, [extensionHidden, shiftWebpage]);
     
 

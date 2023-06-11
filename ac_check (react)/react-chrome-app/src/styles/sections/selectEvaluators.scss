@@ -3,6 +3,8 @@
 
 .checkbox-wrapper {
 
+  margin: 0;
+  border: 0;
   border-top: 1px solid $gray-borders;
   padding: 12px 24px;
   text-align: left;
@@ -20,8 +22,11 @@
     align-items: center;
     display: inline-block;
     margin: 0 0 10px 0;
+    padding: 0;
 
     & input[type="checkbox"] {
+      margin: 0;
+      padding: 0;
       -webkit-appearance: none;
       appearance: none;
       width: 1.3em;
@@ -34,17 +39,16 @@
       display: inline-block;
       filter: drop-shadow(0 0 0);
       transition: 0.2s ease;
+      position: absolute;
 
       &.checked {
-        background-color: $primary-color;
-        position: relative;
+        background-color: $primary-color !important;
       }
 
       &.checked::before {
         content: "\2714";
         font-size: 1.1em;
         color: $secondary-color;
-        position: absolute;
         right: 1px;
         top: -2px;
       }
@@ -58,7 +62,7 @@
     & span{
       cursor: pointer;
       color: $primary-color;
-      margin-left: 10px;
+      margin-left: 18px;
 
       &:hover{
         text-decoration: underline;

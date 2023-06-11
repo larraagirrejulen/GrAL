@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 import Dropdown from '../reusables/DropdownSection';
 
-import { getDomainValue, getImgSrc, setDomainValue } from '../../scripts/utils/chromeUtils.js';
+import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
 
 
 const defaultScope = [{name: window.document.title, url: window.location.href}];
@@ -23,14 +23,14 @@ export default function ScopeDefinition (): JSX.Element {
   const [editItemIndex, setEditItemIndex] = useState(-1);
 
   useEffect(() => { 
-    const storedScope = getDomainValue("scope");
+    const storedScope = localStorage.getItem("scope");
     if(storedScope){
       setScope(JSON.parse(storedScope));
     }
   }, []);
 
   useEffect(() => {
-    setDomainValue("scope", JSON.stringify(scope));
+    localStorage.setItem("scope", JSON.stringify(scope));
   }, [scope]);
 
   /**
@@ -55,11 +55,11 @@ export default function ScopeDefinition (): JSX.Element {
    * Saves the changes made to the edited web page item.
    */
   const handleSaveChanges = () => {
-    const baseUrl:any = sessionStorage.getItem("currentWebsite");
+    const baseUrl:any = window.location.hostname;
 
     if(newWebPage.name === ""){
       alert("Wrong web page name");
-    }else if(!newWebPage.url.startsWith(baseUrl)){
+    }else if(!newWebPage.url.includes(baseUrl)){
       alert("URL must start with: " + baseUrl);
     }else{
       const newScope = [...scope];

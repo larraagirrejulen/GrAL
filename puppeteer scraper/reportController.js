@@ -34,7 +34,7 @@ class ReportController{
 
         let response;
 
-        if(request.domain){
+        if(request.action === undefined){
             console.log("\n  Getting domain reports...");
             response = await this.#getEvaluationReports(request.domain); 
         } else if(request.action === "getReport"){
@@ -43,9 +43,9 @@ class ReportController{
         } else if(request.action === "remove"){
             console.log("\n  Removing report...");
             response = await this.#removeReport(request.id);
-        } else {
+        } else if(request.action === "storeNewReport") {
             console.log("\n  Storing new report...");
-            response = await this.#insertNewEvaluationReport(request.report, request.uploadedBy, request.parentId); 
+            response = await this.#insertNewEvaluationReport(request.domain, request.report, request.uploadedBy, request.parentId); 
         }
 
         console.log("\n  Response: " + JSON.stringify(response));
@@ -54,9 +54,7 @@ class ReportController{
     }
     
     // Function to check if a user exists
-    #insertNewEvaluationReport(report, uploadedBy, parentId) {
-
-        const domain = report.evaluationScope.website.siteName;
+    #insertNewEvaluationReport(domain, report, uploadedBy, parentId) {
 
         fs.writeFile('./filteredReport.json', JSON.stringify(report, null, 2), err => {
             if (err) console.log('Error writing file', err)
@@ -100,7 +98,7 @@ class ReportController{
                 SELECT id, version, uploadedBy, parentId
                 FROM reports
                 WHERE domain = (?)
-            `, [domain + "/"], function(err, rows) {
+            `, [domain], function(err, rows) {
                 if (err) {
                     reject(err);
                 } else {

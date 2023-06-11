@@ -11,8 +11,8 @@ export function openOptionsPage(){
     chrome.runtime.sendMessage({action: "openOptionsPage"});
 }
 
-export async function getFromChromeStorage(key, isSync = true) {
-    return await new Promise((resolve) => {
+export function getFromChromeStorage(key, isSync = true) {
+    return new Promise((resolve) => {
         chrome.storage[isSync ? 'sync' : 'local'].get(key, (result) => {
             resolve(result[key]);
         });
@@ -61,22 +61,4 @@ export async function blackListElement(newListElement) {
         mapReportData(null, blacklist); 
     });
 
-}
-
-
-// Function to set a value in localStorage with a domain-specific prefix
-export function setDomainValue(key, value) {
-    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
-    localStorage.setItem(prefixedKey, value);
-}
-  
-// Function to get a value from localStorage with a domain-specific prefix
-export function getDomainValue(key) {
-    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
-    return localStorage.getItem(prefixedKey);
-}
-
-export function removeDomainValue(key) {
-    const prefixedKey = sessionStorage.getItem("currentWebpage") + '.' + key;
-    return localStorage.removeItem(prefixedKey);
 }

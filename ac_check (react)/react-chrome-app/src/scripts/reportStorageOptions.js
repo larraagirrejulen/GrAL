@@ -1,6 +1,6 @@
 
 import { fetchServer, applyBlackList } from "./utils/moreUtils.js";
-import { getDomainValue, getFromChromeStorage, removeDomainValue, setDomainValue } from "./utils/chromeUtils";
+import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "./utils/chromeUtils";
 import { loadReport } from "./reportLoadingOptions";
 
 
@@ -12,7 +12,7 @@ export async function getStoredReports(setPaginatedData){
 
     try{
 
-        const bodyData = JSON.stringify({domain: sessionStorage.getItem("currentWebsite")});
+        const bodyData = JSON.stringify({domain: window.location.hostname});
 
         const storeResults = await fetchServer(bodyData, "reportStoring");
 
@@ -72,7 +72,7 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
             window.alert("Could not remove the report, try again later...");
         } 
 
-        bodyData = JSON.stringify({domain: sessionStorage.getItem("currentWebsite")});
+        bodyData = JSON.stringify({domain: window.location.hostname});
 
         storeResults = await fetchServer(bodyData, "reportStoring");
 
@@ -81,8 +81,10 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
             setCurrentPage(0);
         }
 
-        if(JSON.parse(getDomainValue("parentId")) === id){
-            removeDomainValue("parentId");
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false);
+
+        if(parentId === id){
+            removeFromChromeStorage(window.location.hostname + ".parentId")
         }
 
     }catch(error){
@@ -136,7 +138,7 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
     try{
         setAnimateBtn("store");
 
-        const report = await getFromChromeStorage(sessionStorage.getItem("currentWebsite"), false);
+        const report = await getFromChromeStorage(window.location.hostname, false);
 
         const enableBlacklist = await getFromChromeStorage('enableBlacklist');
         
@@ -144,21 +146,15 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
             await applyBlackList(report);
         }
 
-        let parentId = getDomainValue("parentId");
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false) ?? null;
 
-        if(parentId){
-            parentId = JSON.parse(parentId);
-        }else{
-            parentId = null;
-        }
-
-        const bodyData = JSON.stringify({report, uploadedBy: authenticationState, parentId});
+        const bodyData = JSON.stringify({action: "storeNewReport", domain: window.location.hostname, report, uploadedBy: authenticationState, parentId});
 
         const storeResults = await fetchServer(bodyData, "reportStoring");
 
         if(storeResults.success){
           window.alert("Report successfully stored!");
-          setDomainValue("parentId", storeResults.newParentId);
+          storeOnChromeStorage(window.location.hostname + ".parentId", storeResults.newParentId);
         } else {
           window.alert("Could not store the report, try again later...");
         }
@@ -170,6 +166,3 @@ export async function storeNewReport(setAnimateBtn, authenticationState){
     }
 
 };
-
-
-

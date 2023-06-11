@@ -3,7 +3,7 @@ import '../../styles/reusables/dropdownSection.scss';
 
 import { useState } from 'react';
 
-import { getDomainValue, getImgSrc } from '../../scripts/utils/chromeUtils';
+import { getImgSrc } from '../../scripts/utils/chromeUtils';
 
 
 /**
@@ -16,7 +16,7 @@ import { getDomainValue, getImgSrc } from '../../scripts/utils/chromeUtils';
  */
 export default function Dropdown({ headerText, children, classList }:any) : JSX.Element {
 
-    const [isOpen, setIsOpen] = useState(getDomainValue("reportIsLoaded") !== "true");
+    const [isOpen, setIsOpen] = useState(false);
 
     return(
         <div className={"extensionDropdown " + classList}>

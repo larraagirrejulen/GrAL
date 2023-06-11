@@ -4,3 +4,5 @@ import { writable } from 'svelte/store';
 export const isLoggedIn = writable(localStorage.getItem('isLoggedIn') === 'true');
 
 export const loggedUser = writable(localStorage.getItem('loggedUser') || '');
+
+export const loadedReport = writable(undefined);

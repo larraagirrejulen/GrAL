@@ -99,9 +99,9 @@ async function scrapeSelected(request){
 		mergeJsonLds(results[0], results[i]);
 	}
 
-	/*fs.writeFile('./resultData.json', JSON.stringify(results[0], null, 2), err => {
+	fs.writeFile('./resultData.json', JSON.stringify(results[0], null, 2), err => {
 		if (err) console.log('Error writing file', err)
-	});*/
+	});
 
 	return JSON.stringify(results[0]);
 }

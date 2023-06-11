@@ -4,16 +4,6 @@ import { getSuccessCriterias } from './wcagUtils.js';
 
 
 
-export async function setUseStateFromStorage(key, isSync, setState){
-    
-    const storedValue = await getFromChromeStorage(key, isSync);
-    if(storedValue != null){
-        setState(storedValue);
-    }
-
-}
-
-
 /**
  * Fetches the evaluation report from a server using a JSON body.
  * @async
