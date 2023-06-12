@@ -40,7 +40,7 @@ class Scraper {
      * @returns {object} - The JSON-LD evaluation report resulting of the scraping process.
      * @throws Will throw an error if an error occurs during the scraping process.
     */
-    async performScraping(webPage, page = null){
+    async performScraping(webPage, page){
 
         try{
 
@@ -307,6 +307,11 @@ class Scraper {
         });
 
         for (const result of results){
+            try{
+                result.path && await page.$(result.path)
+            }catch(err){
+                continue;
+            }
             await this.#jsonld.addNewAssertion(result.criteria, result.outcome, result.description, webPage.url, result.path, result.html);
         }
     }
@@ -511,6 +516,11 @@ class Scraper {
         })
 
         for(const result of results) {
+
+            if (result.xpath && (await page.$x(result.xpath)).length === 0) {
+                continue;
+            }
+
             await this.#jsonld.addNewAssertion(result.successCriteria, result.outcome, result.description, result.url, result.xpath, result.html);
         }
         
@@ -526,6 +536,9 @@ class Scraper {
      */
     async paScraper(webPage, page){
 
+        await page.goto(webPage.url);
+        await page.waitForTimeout(5000);
+
         const results = await pa11y(webPage.url, {
             standard: 'WCAG2AAA',
             includeWarnings: true,
@@ -537,6 +550,10 @@ class Scraper {
             const criteria = issue.code.match(/(\d\_\d\_\d)/)[0].replaceAll("_", ".");
 
             const outcome = issue.typeCode === 1 ? "earl:failed" : "earl:cantTell";
+
+            if (await page.$(issue.selector) === null) {
+                continue;
+            }
 
             await this.#jsonld.addNewAssertion(criteria, outcome, issue.message, webPage.url, issue.selector, issue.context);
         }
@@ -553,7 +570,8 @@ class Scraper {
      * @returns {void}
      */
     async lhScraper(webPage, page){
-        
+
+        await page.goto(webPage.url);
         const lighthouseModule = await import('lighthouse');
         const lighthouse = lighthouseModule.default;
 
@@ -649,6 +667,10 @@ class Scraper {
                     const path = item.node.selector;
                     const html = item.node.snippet;
                     description += "\n\n" + item.node.explanation;
+
+                    if (await page.$(path) === null) {
+                        continue;
+                    }
 
                     await this.#jsonld.addNewAssertion(criteria, "earl:failed", description, webPage.url, path, html, documentation);
                 }

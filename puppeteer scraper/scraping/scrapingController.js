@@ -1,7 +1,6 @@
 
 const puppeteer = require('puppeteer');
 const Scraper = require('./scraper');
-const fs = require("fs");
 const mergeJsonLds = require('./jsonLd/jsonLdUtils');
 const JsonLd = require('./jsonLd/jsonLd');
 
@@ -68,8 +67,12 @@ async function scrapeSelected(request){
 
 				for(const webPage of request.scope){
 
-					await scraper.performScraping(webPage);
+					await withPage(browser)(async (page) => {
 
+						await scraper.performScraping(webPage, page);
+
+					});
+					
 				}
 
 			}else{
@@ -98,10 +101,6 @@ async function scrapeSelected(request){
 	for(let i = 1; i<results.length; i++){
 		mergeJsonLds(results[0], results[i]);
 	}
-
-	/*fs.writeFile('./resultData.json', JSON.stringify(results[0], null, 2), err => {
-		if (err) console.log('Error writing file', err)
-	});*/
 
 	return JSON.stringify(results[0]);
 }

@@ -52,7 +52,7 @@ export function getElementByPath(path, innerText) {
         element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     } else {
         // Use a CSS selector to find the elements
-        const elements = document.querySelectorAll(path);
+        const elements = window.document.querySelectorAll(path);
 
         if (elements.length > 0) {
             

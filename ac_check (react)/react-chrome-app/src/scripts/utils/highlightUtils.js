@@ -2,15 +2,21 @@
 
 export function highlightElement(element, groupKey, index){
 
-    const highlightDiv = document.createElement("div");
-    highlightDiv.id = "acCheckHighlighter_" + groupKey + "_" + index;
-    highlightDiv.classList.add("acCheckHighlighter");
-    highlightDiv.style.border = "3px solid #00FFF7";
-    highlightDiv.style.cursor = "pointer";
-    
-    const parent = element.parentElement;
-    parent.replaceChild(highlightDiv, element);
-    highlightDiv.appendChild(element);
+    var wrapper = document.createElement('div');
+    wrapper.id = "acCheckHighlighter_" + groupKey + "_" + index;
+    wrapper.className = "highlighted-wrapper";
+    wrapper.style.border = '3px solid aqua'; // Change the color and size as desired
+    wrapper.style.display = 'inline-block';
+    wrapper.style.padding = '3px'; // Optional: Add padding to create some space around the highlighted element
+    wrapper.style.cursor = "pointer";
+    wrapper.style.borderRadius = "6px";
+    wrapper.style.verticalAlign = "middle";
+    wrapper.style.display = "inline-block";
+    wrapper.style.position = "relative";
+    wrapper.style.textAlign = "center";
+
+    element.replaceWith(wrapper);
+    wrapper.appendChild(element);
 
 }
 
@@ -20,18 +26,18 @@ function onMouseOver(popup){
 
 export function selectHighlightedElement(groupKey, index, documentation){
 
-    const highlightElement = document.querySelector("#acCheckHighlighter_" + groupKey + "_" + index);
-    highlightElement.style.border = "3px solid #FF3633";
-    highlightElement.classList.add("selected");
-    highlightElement.setAttribute("tabindex", "0");
-    highlightElement.focus();
-    highlightElement.blur();
+    const wrapper = document.querySelector("#acCheckHighlighter_" + groupKey + "_" + index);
+    wrapper.style.border = "3px solid #FF3633";
+    wrapper.classList.add("selected");
+    wrapper.setAttribute("tabindex", "0");
+    wrapper.focus();
+    wrapper.blur();
 
     const highlightAnimation = (repeat) => {
         setTimeout(() => {
-            highlightElement.style.border = "3px solid white";
+            wrapper.style.border = "3px solid white";
             setTimeout(() => {
-                highlightElement.style.border = "3px solid #FF3633";
+                wrapper.style.border = "3px solid #FF3633";
                 if(repeat > 0) highlightAnimation (repeat - 1);
             }, 120);
         }, 120);
@@ -41,8 +47,8 @@ export function selectHighlightedElement(groupKey, index, documentation){
 
     const popup = createPopup(documentation);
 
-    highlightElement.appendChild(popup);
-    highlightElement.addEventListener('mouseover', () => onMouseOver(popup));
+    wrapper.appendChild(popup);
+    wrapper.addEventListener('mouseover', () => onMouseOver(popup));
 
 }
 
@@ -53,11 +59,11 @@ export function selectHighlightedElement(groupKey, index, documentation){
 
 export function unselectHighlightedElement(){
 
-    const previousSelected = document.querySelector(".acCheckHighlighter.selected");
+    const previousSelected = document.querySelector(".highlighted-wrapper.selected");
 
     if(previousSelected){
 
-        const popup = document.querySelector(".acCheckHighlighter.selected .highlightPopup");
+        const popup = document.querySelector(".highlighted-wrapper.selected .highlightPopup");
 
         if(popup) popup.remove();
 
@@ -75,14 +81,12 @@ export function unselectHighlightedElement(){
 
 export function removeElementHighlights(){
 
-    const highlighters = document.querySelectorAll(".acCheckHighlighter");
+    const wrappers = document.querySelectorAll(".highlighted-wrapper");
 
-    for(const highlighter of highlighters){
+    for(const wrapper of wrappers){
 
-        const parent = highlighter.parentElement;
-        const child = highlighter.children[0];
-
-        parent.replaceChild(child, highlighter);
+        var element = wrapper.firstChild;
+        wrapper.parentNode.replaceChild(element, wrapper);
 
     }
 
@@ -107,7 +111,8 @@ function createPopup(documentation){
     docLink.textContent = "Documentation";
     popup.appendChild(docLink);
 
-    docLink.addEventListener('click', () => {
+    docLink.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent event propagation to underlying elements
         window.open(documentation, '_blank');
     });
 
@@ -118,12 +123,16 @@ function createPopup(documentation){
     closeLink.textContent = "Close";
     popup.appendChild(closeLink);
 
-    closeLink.addEventListener('click', () => {
+    closeLink.addEventListener('click', (event) => {
         popup.remove();
+        event.stopPropagation(); // Prevent event propagation to underlying elements
     });
 
     popup.classList.add("highlightPopup");
     popup.style.visibility = "hidden";
+    popup.style.display = "block";
+    popup.style.position = "absolute";
+    popup.style.bottom = "-84px";
 
     return popup;
 }

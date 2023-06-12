@@ -1,6 +1,5 @@
 
 const sqlite3 = require('sqlite3').verbose();
-const fs = require("fs");
 
 
 class ReportController{
@@ -55,10 +54,6 @@ class ReportController{
     
     // Function to check if a user exists
     #insertNewEvaluationReport(domain, report, uploadedBy, parentId) {
-
-        /*fs.writeFile('./filteredReport.json', JSON.stringify(report, null, 2), err => {
-            if (err) console.log('Error writing file', err)
-        });*/
 
         return new Promise((resolve, reject) => { 
             this.#db.serialize(() => {

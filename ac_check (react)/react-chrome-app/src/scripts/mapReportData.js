@@ -18,6 +18,9 @@ function getOutcomeVariables () {
 
 
 
+
+
+
 export async function mapReportData(evaluationreport = null, blackList = null){
 
     const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage(window.location.hostname, false);

@@ -96,12 +96,12 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
                             <tr 
                                 className={"collapsible mainCategory" + (selectedMainCategories[index] ? " active" : "") }
                                 onClick={() => collapsibleClickHandler(
-                                            selectedMainCategories, 
-                                            setSelectedMainCategories, 
-                                            index, 
-                                            mantainExtended, 
-                                            reportTableContent.length
-                                        )}
+                                    selectedMainCategories, 
+                                    setSelectedMainCategories, 
+                                    index, 
+                                    mantainExtended, 
+                                    reportTableContent.length
+                                )}
                             >
                                 <td>{mainCategory.categoryTitle}</td>
                                 <ResultCount 
@@ -267,13 +267,6 @@ function CriteriaResults({criteria}:any){
     const [editedDescriptions, setEditedDescriptions] = useState([]);
 
     /**
-     * useEffect hook to remove element highlights.
-     */
-    useEffect(() => {
-        removeElementHighlights();
-    }, [selectedCriteriaResults]);
-
-    /**
      * Retrieves the found case from the evaluation report.
      * @param {number} index - The index of the criteria result.
      * @returns {Promise<Array<any>>} A promise that resolves to the evaluation report, report criteria, and found case index.
@@ -303,10 +296,12 @@ function CriteriaResults({criteria}:any){
      * @param {object} reportCriteria - The report criteria object.
      */
     function removeFoundCaseFromReport(reportCriteria:any){
+
         reportCriteria.result.outcome = "earl:untested";
         reportCriteria.result.description = "";
         delete reportCriteria.assertedBy;
         delete reportCriteria.mode;
+        
     }
 
     /**
@@ -707,8 +702,14 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 
     const [hiddenElements, setHiddenElements] = useState<{ [groupKey: string]: number[] }>({});
 
+    const [ignoredElements, setIgnoredElements] = useState<{ [groupKey: string]: number[] }>({});
+
     useEffect(() => {
+
+        removeElementHighlights();
+
         const newHiddenElements: { [groupKey: string]: number[] } = {};
+        const newIgnoredElements: { [groupKey: string]: number[] } = {};
 
         for (const groupKey in resultGroupedPointers) {
             for (let i = 0; i < resultGroupedPointers[groupKey].length; i++) {
@@ -724,13 +725,19 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                         }
                         newHiddenElements[groupKey].push(i);
 
-                    }else{
+                    }else if(!pointer.html.startsWith("<body")){
                         highlightElement(pointedElement, groupKey, i);
                     }
+                }else{
+                    if (!newIgnoredElements[groupKey]) {
+                        newIgnoredElements[groupKey] = [];
+                    }
+                    newIgnoredElements[groupKey].push(i);
                 }
             }
         }
         setHiddenElements(newHiddenElements);
+        setIgnoredElements(newIgnoredElements);
     }, [resultGroupedPointers]);
 
     /**
@@ -746,14 +753,19 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
 
             setSelectedPointer({});
 
-        } else {
+        } else{
 
             setSelectedPointer({ [groupKey]: index });
 
             const pointer = resultGroupedPointers[groupKey][index];
 
-            selectHighlightedElement(groupKey, index, pointer.documentation);
-        
+            if(!hiddenElements[groupKey]?.includes(index) 
+            && !ignoredElements[groupKey]?.includes(index) 
+            && !pointer.html.startsWith("<body")) {
+    
+                selectHighlightedElement(groupKey, index, pointer.documentation);
+            
+            }
         } 
 
     }
@@ -786,8 +798,9 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                 <span style={{fontWeight: "bold", paddingTop:"10px"}}>{"[ " + groupKey + " ]"}</span>
 
                 {groupPointers.map((pointer:any, index:any) => (
+
                     <pre className="codigo_analisis"
-                        style={!hiddenElements[groupKey]?.includes(index) ? 
+                        style={!hiddenElements[groupKey]?.includes(index) && !ignoredElements[groupKey]?.includes(index) ? 
                             (selectedPointer[groupKey] === index ? { border: "3px solid #FF3633" } : { border: "1px solid #005a6a" }) 
                             : { color:"black" }
                         }
@@ -801,7 +814,6 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                             {hiddenElements[groupKey]?.includes(index) && "(HIDDEN)"}
                         </span>
                         
-                        
                         {edit && (
                             <img 
                                 className='removePointerIcon' 
@@ -814,8 +826,9 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                         )}
                         
                     </pre> 
+                    
                 ))}
-                
+ 
             </td></tr>
 
         </>))}

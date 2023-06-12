@@ -52,6 +52,8 @@ export async function uploadNewReport(uploadEvent){
 
 }
 
+
+
 export async function downloadLoadedReport(){
 
     const currentReport = await getFromChromeStorage(window.location.hostname, false);
