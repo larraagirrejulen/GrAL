@@ -132,9 +132,11 @@ export async function evaluateScope(setAnimateBtn){
     .then( async (result) => {
         const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
         if(reportLoaded === "true"){
+            console.log("aaaaaaaaaaa")
             const currentReport = await getFromChromeStorage(window.location.hostname, false);
             includeEditedFoundCases(result, currentReport);
         }
+        console.log("zzzzzzzzzz")
         loadReport(result);
     })
     .catch((err) => {
@@ -180,64 +182,130 @@ function includeEditedFoundCases(newReport, currentReport){
 
     for(let index = 0; index < currentReport.auditSample.length; index++){
 
-        const editedCases = currentReport.auditSample[index].hasPart.filter(
-            (foundCase) => foundCase.modifiedBy.length > 0
-        );
+        const currentCriteriaResult = currentReport.auditSample[index];
 
-        if(editedCases.length > 0){
+        for(let j = 0; j < currentCriteriaResult.hasPart.length; j++){
 
-            let worstOutcome = "earl:inapplicable";
+            const currentFoundCase = currentCriteriaResult.hasPart[j];
 
-            for(const editedCase of editedCases){
+            const editedAssertors = currentFoundCase.assertedBy.filter(
+                (assertor) => assertor.modifiedBy.length > 0
+            );
 
-                newReport.auditSample[index].hasPart.push(editedCase);
+            if(editedAssertors.length > 0){
+                
+                const newFoundCase = newReport.auditSample[index].hasPart.find((elem) => 
+                    elem.subject === currentFoundCase.subject && elem.result.outcome === currentFoundCase.result.outcome
+                );
+
+                const foundCaseTemplate = {
+                    "type": "Assertion",
+                    "testcase": currentFoundCase.testcase,
+                    "assertedBy": [],
+                    "subject": currentFoundCase.subject,
+                    "mode": "earl:automatic",
+                    "result":
+                    {
+                        "outcome": currentFoundCase.result.outcome,
+                        "description": currentFoundCase.result.description,
+                        "locationPointersGroup": []
+                    }
+                };
+
+
+
+                const currentPointers = currentFoundCase.result.locationPointersGroup;
 
                 // Include assertor
-                for(const assertor of editedCase.assertedBy){
+                for(const assertor of editedAssertors){
                     if(newReport.assertors.findIndex(elem => elem["xmlns:name"] === assertor.assertor) === -1){
                         newReport.assertors.push(currentReport.assertors.find(
                             elem => elem["xmlns:name"] === assertor.assertor
                         ));
                     }
+
+                    if(!newFoundCase){
+
+                        foundCaseTemplate.assertedBy.push(assertor);
+
+                        for(const pointer of currentPointers){
+
+                            if(!pointer.assertedBy.includes(assertor.assertor)) continue;
+
+                            const templatePointer = foundCaseTemplate.result.locationPointersGroup.find((elem) => 
+                                elem["ptr:expression"] === pointer["ptr:expression"]
+                            )
+
+                            if(templatePointer){
+                                templatePointer.assertedBy.push(assertor)
+                            }else{
+                                foundCaseTemplate.result.locationPointersGroup.push(pointer);
+                            }
+
+                        }
+
+                    }else{
+
+                        const assertorIndex = newFoundCase.assertedBy.findIndex((elem) => elem.assertor === assertor.assertor);
+
+                        if(assertorIndex !== -1){
+                            const newAssertor = newFoundCase.assertedBy[assertorIndex];
+                            newAssertor.description = assertor.description;
+                            newAssertor.modifiedBy = assertor.modifiedBy;
+                            newAssertor.lastModifier = assertor.lastModifier;
+                        }else{
+                            newFoundCase.assertedBy.push(assertor);
+                        }
+
+                        const newPointers = newFoundCase.result.locationPointersGroup;
+
+                        for(const pointer of currentPointers){
+
+                            if(!pointer.assertedBy.includes(assertor.assertor)) continue;
+
+                            const newPointerIndex = newPointers.findIndex((elem) => 
+                                elem["ptr:expression"] === pointer["ptr:expression"] || elem.description === pointer.description
+                            )
+
+                            if(newPointerIndex !== -1){
+                                const newPointerAssertors = newFoundCase.result.locationPointersGroup[newPointerIndex].assertedBy;
+
+                                if(!newPointerAssertors.includes(assertor.assertor)){
+                                    newFoundCase.result.locationPointersGroup[newPointerIndex].assertedBy.push(assertor.assertor);
+                                }
+                            }else{
+                                newFoundCase.result.locationPointersGroup.push(pointer);
+                            }
+
+                        }
+
+                    }
+                    
+                }
+
+                if(!newFoundCase){
+
+                    newReport.auditSample[index].hasPart.push(foundCaseTemplate);
+
+                    const currentOutcome = currentFoundCase.result.outcome;
+                    const newOutcome = newReport.auditSample[index].result.outcome;
+
+                    if(newOutcome === "earl:untested"
+                    ||(newOutcome === "earl:inapplicable" && currentOutcome !== "earl:inapplicable") 
+                    ||(newOutcome === "earl:passed" && (currentOutcome === "earl:cantTell" || currentOutcome === "earl:failed"))
+                    ||(newOutcome === "earl:cantTell" && currentOutcome === "earl:failed")){
+
+                        newReport.auditSample[index].result.outcome = currentOutcome;
+                    }
                 }
 
                 // Include scope
-                if(newReport.structuredSample.webpage.findIndex(elem => elem.id === editedCase.subject) === -1){
-                    newReport.structuredSample.webpage.push(currentReport.structuredSample.webpage.find(elem => elem.id === editedCase.subject))
-                }
-
-                const caseOutcome = editedCase.result.outcome;
-
-                if((worstOutcome === "earl:inapplicable" && caseOutcome !== "earl:inapplicable") 
-                || (worstOutcome === "earl:passed" && (caseOutcome === "earl:cantTell" || caseOutcome === "earl:failed"))
-                || (worstOutcome === "earl:cantTell" && caseOutcome === "earl:failed")){
-
-                    worstOutcome = caseOutcome;
-        
-                }
-    
-            }
-            
-            const newOutcome = newReport.auditSample[index].result.outcome;
-
-            if(newOutcome === "earl:untested"){
-
-                newReport.auditSample[index] = currentReport.auditSample[index];
-
-            } else {
-
-                if((newOutcome === "earl:inapplicable" && worstOutcome !== "earl:inapplicable") 
-                || (newOutcome === "earl:passed" && (worstOutcome === "earl:cantTell" || worstOutcome === "earl:failed"))
-                || (newOutcome === "earl:cantTell" && worstOutcome === "earl:failed")){
-
-                    newReport.auditSample[index].result = currentReport.auditSample[index].result;
-        
+                if(newReport.structuredSample.webpage.findIndex(elem => elem.id === currentFoundCase.subject) === -1){
+                    newReport.structuredSample.webpage.push(currentReport.structuredSample.webpage.find(elem => elem.id === currentFoundCase.subject))
                 }
             }
-
         }
     }
-
 }
 
 

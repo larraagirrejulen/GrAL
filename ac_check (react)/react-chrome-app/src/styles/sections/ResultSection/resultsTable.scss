@@ -76,6 +76,10 @@
 
 #resultsTableContent{
 
+  & img{
+    cursor: pointer;
+  }
+
   & .collapsible{
     text-align: center;
     background-color: white;

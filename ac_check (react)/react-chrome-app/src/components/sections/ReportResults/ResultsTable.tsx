@@ -7,7 +7,7 @@ import Button from '../../reusables/Button';
 
 import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../scripts/utils/chromeUtils.js';
 import { getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils.js';
-import { highlightElement, removeElementHighlights, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils.js';
+import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils.js';
 import { mapReportData } from '../../../scripts/mapReportData';
 import { getSuccessCriterias } from '../../../scripts/utils/wcagUtils';
 import { loadReport } from '../../../scripts/reportLoadingOptions';
@@ -75,7 +75,6 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
      */
     useEffect(() => {
         sessionStorage.setItem("selectedMainCategories", JSON.stringify(selectedMainCategories));
-        removeElementHighlights();
     }, [selectedMainCategories]);
     
 
@@ -151,7 +150,6 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
      */
     useEffect(() => {
         sessionStorage.setItem("selectedSubCategories", JSON.stringify(selectedSubCategories));
-        removeElementHighlights();
     }, [selectedSubCategories]);
 
     return(<> 
@@ -201,7 +199,6 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
     useEffect(() => {
         sessionStorage.setItem("selectedCriterias", JSON.stringify(selectedCriterias));
-        removeElementHighlights();
     }, [selectedCriterias]);
 
     return(<> 
@@ -262,7 +259,6 @@ function CriteriaResults({criteria}:any){
     const [editIndex, setEditIndex] = useState(-1);
 
     const [removedPointers, setRemovedPointers] = useState([]);
-    const [removedDescriptions, setRemovedDescriptions] = useState([]);
     const [editedPointersGroup, setEditedPointersGroup] = useState([]);
     const [editedDescriptions, setEditedDescriptions] = useState([]);
 
@@ -291,18 +287,6 @@ function CriteriaResults({criteria}:any){
 
     }
 
-    /**
-     * Removes the found case from the evaluation report.
-     * @param {object} reportCriteria - The report criteria object.
-     */
-    function removeFoundCaseFromReport(reportCriteria:any){
-
-        reportCriteria.result.outcome = "earl:untested";
-        reportCriteria.result.description = "";
-        delete reportCriteria.assertedBy;
-        delete reportCriteria.mode;
-        
-    }
 
     /**
      * Saves the changes made to the criteria result.
@@ -310,87 +294,52 @@ function CriteriaResults({criteria}:any){
     const saveChanges = async () => {
         
         const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(editIndex);
-    
-        if(criteria.hasPart[editIndex].descriptions.length === 0){
-    
-            reportCriteria.hasPart.splice(foundCaseIndex, 1);
-    
-            if(reportCriteria.hasPart.length === 0){
-                removeFoundCaseFromReport(reportCriteria);
+
+        const foundCase = reportCriteria.hasPart[foundCaseIndex];
+        const locationPointersGroup = foundCase.result.locationPointersGroup;
+
+        const modifier = await getFromChromeStorage("authenticationState");
+
+        editedDescriptions.forEach((desc:any) => {
+
+
+            const editedDescription = criteria.hasPart[editIndex].descriptions.find(
+                (elem:any) => elem.assertor === desc.assertor
+            );
+            const assertorDescription = foundCase.assertedBy.find(
+                (elem:any) => elem.assertor === desc.assertor
+            );
+            assertorDescription.description = editedDescription.description;
+
+            if(!assertorDescription.modifiedBy.includes(modifier)){
+                assertorDescription.modifiedBy.push(modifier);
             }
-    
-        } else {
-    
-            const foundCase = reportCriteria.hasPart[foundCaseIndex];
-            const locationPointersGroup = foundCase.result.locationPointersGroup;
-    
-            removedDescriptions.forEach((desc:any) => {
 
-                const removedDescAssertor = desc.description.assertor;
-    
-                const assertorIndex = foundCase.assertedBy.findIndex(
-                    (elem:any) => elem.assertor === removedDescAssertor
-                );
-                foundCase.assertedBy.splice(assertorIndex, 1);
-    
-                for(let i = 0; i < locationPointersGroup.length; i++){
-    
-                    const pointerAssertors = locationPointersGroup[i].assertedBy;
-    
-                    if(pointerAssertors.includes(removedDescAssertor)){
+            assertorDescription.lastModifier = modifier;
 
-                        if(pointerAssertors.length === 1){
-                            locationPointersGroup.splice(i, 1);
-                            i--;
-                        }else{
-                            const index = pointerAssertors.indexOf(removedDescAssertor);
-                            pointerAssertors.splice(index, 1);
-                        }
+        });
 
+        removedPointers.forEach((ptr:any) => {
+
+            const index = locationPointersGroup.findIndex(
+                (elem:any) => elem["ptr:expression"] === ptr.pointer.path
+            );
+
+            if(index !== -1){
+                locationPointersGroup.splice(index, 1);
+            }
+
+            for(const assertor of foundCase.assertedBy){
+                if(ptr.groupKey.includes(assertor.assertor)){
+                    if(!assertor.modifiedBy.includes(modifier)){
+                        assertor.modifiedBy.push(modifier);
                     }
+        
+                    assertor.lastModifier = modifier;
                 }
-
-            }); 
-    
-            editedDescriptions.forEach((desc:any) => {
-
-                const removed = removedDescriptions.findIndex(
-                    (removedDesc:any) => removedDesc.description.assertor === desc.assertor
-                );
-
-                if(removed === -1){
-                    const edited = criteria.hasPart[editIndex].descriptions.find(
-                        (elem:any) => elem.assertor === desc.assertor
-                    );
-                    const assertorDescription = foundCase.assertedBy.find(
-                        (elem:any) => elem.assertor === desc.assertor
-                    );
-                    assertorDescription.description = edited.description;
-                }
-
-            });
-
-            removedPointers.forEach((ptr:any) => {
-    
-                const index = locationPointersGroup.findIndex(
-                    (elem:any) => elem["ptr:expression"] === ptr.pointer.path
-                );
-    
-                if(index !== -1){
-                    locationPointersGroup.splice(index, 1);
-                }
-            
-            });
-
-            const modifier = await getFromChromeStorage("authenticationState");
-
-            if(!foundCase.modifiedBy.includes(modifier)){
-                foundCase.modifiedBy.push(modifier);
             }
-
-            foundCase.lastModifier = modifier;
-            
-        }
+        
+        });
 
         loadReport(evaluationReport);
     };
@@ -399,10 +348,6 @@ function CriteriaResults({criteria}:any){
      * Cancels the changes made to the found case.
      */
     const cancelChanges = () => {
-
-        removedDescriptions.forEach((elem:any) => {
-            criteria.hasPart[editIndex].descriptions.splice(elem.index, 0, elem.description);
-        }); 
 
         editedPointersGroup.forEach((elem:any) => {
             criteria.hasPart[editIndex].groupedPointers[elem.key] = elem.pointers;
@@ -420,80 +365,10 @@ function CriteriaResults({criteria}:any){
         }); 
 
         setEditedPointersGroup([]);
-        setRemovedDescriptions([]);
         setRemovedPointers([]);
         setEditedDescriptions([]);
         setEditIndex(-1);
 
-    };
-
-    /**
-     * Removes a description from the found case.
-     * @param {number} index - The index of the description to remove.
-     */
-    const removeDescription = async (index:any) => {
-
-        const newRemovedDescriptions:any = [...removedDescriptions];
-    
-        const description = criteria.hasPart[editIndex].descriptions[index];
-    
-        newRemovedDescriptions.push({
-            description,
-            index
-        });
-        setRemovedDescriptions(newRemovedDescriptions);
-    
-        criteria.hasPart[editIndex].descriptions.splice(index, 1);
-    
-        const groupedPointers = criteria.hasPart[editIndex].groupedPointers;
-    
-        const edited:any = [...editedPointersGroup];
-    
-        for (const key in groupedPointers) {
-
-            const pointers = groupedPointers[key];
-    
-            if(key === description.assertor){
-    
-                if(edited.find((elem:any) => elem.key === key) === undefined){
-                    edited.push({pointers, key});
-                }
-                delete groupedPointers[key];
-    
-            }else if(key.includes(description.assertor)){
-    
-                if(edited.find((elem:any) => elem.key === key) === undefined){
-                    edited.push({pointers, key});
-                }
-                let updatedKey = key.replace(description.assertor, "");
-    
-                updatedKey = updatedKey.replace(", , ", ", ");
-    
-                if(updatedKey.startsWith(", ")){
-                    updatedKey = updatedKey.replace(", ", "");
-                }else if(updatedKey.endsWith(", ")){
-                    updatedKey = updatedKey.substring(0, updatedKey.length-2);
-                }
-    
-                if(updatedKey in groupedPointers){
-    
-                    if(edited.find((elem:any) => elem.key === updatedKey) === undefined){
-                        edited.push({pointers: [...groupedPointers[updatedKey]], key:updatedKey});
-                    }
-                    
-                    groupedPointers[key].forEach((pointer:any) => {
-                        groupedPointers[updatedKey].push(pointer);
-                    })
-                }else{
-                    groupedPointers[updatedKey] = groupedPointers[key];
-                }
-                
-                delete groupedPointers[key];
-                
-            }
-        }
-    
-        setEditedPointersGroup(edited);
     };
 
     /**
@@ -520,6 +395,9 @@ function CriteriaResults({criteria}:any){
 
     };
 
+
+
+
     /**
      * Removes a found case from the report.
      * @param {number} index - The index of the found case to remove.
@@ -530,31 +408,94 @@ function CriteriaResults({criteria}:any){
     
         const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(index);
     
-        reportCriteria.hasPart.splice(foundCaseIndex, 1);
-    
-        criteria.hasPart.splice(index, 1);
-    
-        let newOutcome = "untested";
-    
-        for(let i = 0; i < criteria.hasPart.length; i++){
-            const foundCase = criteria.hasPart[i];
-            if(foundCase.webPage === window.location.href){
-                newOutcome = foundCase.outcome;
-                break;
-            }
-        };
-    
-        criteria.outcomes[window.location.href] = "earl:" + newOutcome;
-    
-        if(reportCriteria.hasPart.length === 0){
-            removeFoundCaseFromReport(reportCriteria);
-        }else{
-            reportCriteria.result.outcome = "earl:" + newOutcome;
-            reportCriteria.result.description = outcome2Description["earl:" + newOutcome];
-        }
+        removeFoundCaseFromReport(reportCriteria, foundCaseIndex);
     
         loadReport(evaluationReport);
     
+    };
+
+
+
+
+    function removeFoundCaseFromReport(reportCriteria:any, foundCaseIndex:any){
+
+        reportCriteria.hasPart.splice(foundCaseIndex, 1);
+    
+        if(reportCriteria.hasPart.length === 0){
+
+            reportCriteria.result.outcome = "earl:untested";
+            reportCriteria.result.description = "";
+            delete reportCriteria.assertedBy;
+            delete reportCriteria.mode;
+
+        }else{
+
+            let newOutcome = "earl:untested";
+    
+            for(const foundCase of reportCriteria.hasPart){
+                if(newOutcome === "earl:untested" 
+                ||(newOutcome === "earl:inapplicable" && foundCase.result.outcome !== "earl:untested") 
+                ||(newOutcome === "earl:passed" && (foundCase.result.outcome === "earl:failed" || foundCase.result.outcome === "earl:cantTell")) 
+                ||(newOutcome === "earl:cantTell" && foundCase.result.outcome === "earl:failed")){
+                    newOutcome = foundCase.result.outcome;
+                }
+            }
+
+            reportCriteria.result.outcome = newOutcome;
+            reportCriteria.result.description = outcome2Description[newOutcome];
+        }
+
+    }
+
+
+
+
+    /**
+     * Removes a description from the found case.
+     * @param {number} index - The index of the description to remove.
+     */
+    const removeDescription = async (index:any) => {
+
+        if(!window.confirm("Are you sure you want to remove this assertors results?")) return;
+
+        const [evaluationReport, reportCriteria, foundCaseIndex] = await getFoundCaseFromReport(index[0]);
+
+        const foundCase = reportCriteria.hasPart[foundCaseIndex];
+
+        const description2remove = criteria.hasPart[index[0]].descriptions[index[1]].assertor;
+
+        const assertorIndex = foundCase.assertedBy.findIndex(
+            (elem:any) => elem.assertor === description2remove
+        );
+        foundCase.assertedBy.splice(assertorIndex, 1);
+
+        if(foundCase.assertedBy.length === 0){
+
+            removeFoundCaseFromReport(reportCriteria, foundCaseIndex);
+
+        }else{
+
+            const locationPointersGroup = foundCase.result.locationPointersGroup;
+
+            for(let i = 0; i < locationPointersGroup.length; i++){
+    
+                const pointerAssertors = locationPointersGroup[i].assertedBy;
+    
+                if(pointerAssertors.includes(description2remove)){
+    
+                    if(pointerAssertors.length === 1){
+                        locationPointersGroup.splice(i, 1);
+                        i--;
+                    }else{
+                        pointerAssertors.splice(pointerAssertors.indexOf(description2remove), 1);
+                    }
+    
+                }
+            }
+
+        }
+
+        loadReport(evaluationReport);
     };
 
 
@@ -569,6 +510,7 @@ function CriteriaResults({criteria}:any){
                     }
                 >
                     <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
+
                         <img 
                             className='arrow'
                             src={ selectedCriteriaResults[index] ? 
@@ -579,7 +521,9 @@ function CriteriaResults({criteria}:any){
                             alt="Show information" 
                             height="20px"
                         />
+
                         {result.outcome}
+
                         {editIndex === index ? <>
                             <Button 
                                 classList={"primary small spaced"} 
@@ -592,13 +536,6 @@ function CriteriaResults({criteria}:any){
                                 innerText={"Cancel"}
                             />
                         </> : <>
-                            <span>
-                                {result.modifiedBy.length > 0 ? <>  
-                                    {" - Last modifier: @" + result.lastModifier} 
-                                </> : <>
-                                    {" - Unmodified "}
-                                </>}
-                            </span>
                             <img 
                                 className='editIcon'
                                 src={ getImgSrc("edit") } 
@@ -619,27 +556,25 @@ function CriteriaResults({criteria}:any){
                                 onClick={()=>removeFoundCase(index)}
                             />
                         </>}
+                        
                     </td>
                 </tr>
 
-                {(selectedCriteriaResults[index] || editIndex === index) && (<>
+                {selectedCriteriaResults[index] && (<>
                 
                     {result.descriptions.map((element:any, i:any) => (<>
 
                         <tr>
                             <td style={{textAlign:"left", fontWeight:"bold", paddingTop:"10px"}} colSpan={6}>
+                                
                                 {parse("@" + element.assertor)}
 
-                                {editIndex === index ? <>
-                                    <img 
-                                        className='removeIcon' 
-                                        src={ getImgSrc("remove") } 
-                                        alt="Remove message" 
-                                        title="Remove message"
-                                        height="16px"
-                                        onClick={() => removeDescription(i)}
-                                    />
-                                </> : <>
+                                {editIndex !== index && (<>
+
+                                    {element.modifiedBy.length > 0 && (<>
+                                        {" - modifier: @" + element.lastModifier} 
+                                    </>)}
+
                                     <img 
                                         className='blacklistIcon' 
                                         src={ getImgSrc("blacklist") } 
@@ -653,7 +588,18 @@ function CriteriaResults({criteria}:any){
                                             message: element.description
                                         })}
                                     />
-                                </>}
+                                    
+                                    <img 
+                                        className='removeIcon' 
+                                        src={ getImgSrc("remove") } 
+                                        alt="Remove message" 
+                                        title="Remove message"
+                                        height="16px"
+                                        onClick={() => removeDescription([index, i])}
+                                    />
+
+                                </>)}
+
                             </td>
                         </tr>
                         <tr>
@@ -689,6 +635,8 @@ function CriteriaResults({criteria}:any){
     </>);
 }
 
+
+
 /**
  * Renders the pointers for the criteria result.
  * @param {object} resultGroupedPointers - The grouped pointers for the criteria result.
@@ -705,8 +653,6 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
     const [ignoredElements, setIgnoredElements] = useState<{ [groupKey: string]: number[] }>({});
 
     useEffect(() => {
-
-        removeElementHighlights();
 
         const newHiddenElements: { [groupKey: string]: number[] } = {};
         const newIgnoredElements: { [groupKey: string]: number[] } = {};
@@ -777,13 +723,13 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
      */
     function handleRemovePointerClick(groupKey:string, index:any){
 
-        const newEditedPointers = [...removedPointers];
-        newEditedPointers.push({
+        const newRemovedPointers = [...removedPointers];
+        newRemovedPointers.push({
             pointer: resultGroupedPointers[groupKey][index],
             groupKey,
             index
         });
-        setRemovedPointers(newEditedPointers);
+        setRemovedPointers(newRemovedPointers);
 
         resultGroupedPointers[groupKey].splice(index, 1);
 

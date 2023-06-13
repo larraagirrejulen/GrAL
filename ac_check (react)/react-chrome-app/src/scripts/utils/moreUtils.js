@@ -1,7 +1,7 @@
 
 import { getFromChromeStorage } from './chromeUtils.js';
 import { getSuccessCriterias } from './wcagUtils.js';
-
+import {  removeElementHighlights } from './highlightUtils.js';
 
 
 /**
@@ -73,6 +73,8 @@ export function getElementByPath(path, innerText) {
 
 
 export function collapsibleClickHandler(useState, setUseState, index, mantainExtended, arrayLength){
+
+    removeElementHighlights();
 
     const newStates = mantainExtended ? [...useState] : Array(arrayLength).fill(false);
     newStates[index] = !useState[index];

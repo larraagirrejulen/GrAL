@@ -221,11 +221,14 @@ class JsonLd{
             webSiteAssertion.hasPart.push({
                 "type": "Assertion",
                 "testcase": "wcag2:" + criteriaId,
-                "assertedBy": [{"assertor": this.#evaluator.name, "description": assertorDescription}],
+                "assertedBy": [{
+                    "assertor": this.#evaluator.name, 
+                    "description": assertorDescription,
+                    "modifiedBy": [],
+                    "lastModifier": "",
+                }],
                 "subject": webPageURL,
                 "mode": "earl:automatic",
-                "modifiedBy": [],
-                "lastModifier": "",
                 "result":
                 {
                     "outcome": newOutcome,

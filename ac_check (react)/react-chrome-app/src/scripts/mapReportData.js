@@ -114,7 +114,7 @@ export async function mapReportData(evaluationreport = null, blackList = null){
             hasPart
         };
     }
-    
+
     storeOnChromeStorage(window.location.hostname + ".siteSummary", siteSummary);
     storeOnChromeStorage(window.location.hostname + ".pageSummaries", pageSummaries);
     storeOnChromeStorage(window.location.hostname + ".reportTableContent", getCategoryResults());
@@ -222,8 +222,6 @@ function getHasPart(criteriaKey){
         const hasPart = {
             outcome: foundCase.result.outcome.replace("earl:", ""),
             descriptions,
-            modifiedBy: foundCase.modifiedBy,
-            lastModifier: foundCase.lastModifier,
             webPage: foundCase.subject
         }
 
