@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "EARLER",
+  "version": "1.0.0",
+  "description": "An accessibility evaluation extension",
+  "author": "Julen Larrañaga",
+  
+  "action": {
+    "default_title": "Click to turn on/off"
+  },
+
+  "icons": { 
+    "16": "/images/icon16.png",
+    "32": "/images/icon32.png",
+    "48": "/images/icon48.png",
+    "128": "/images/icon128.png" 
+  },
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "permissions": ["scripting","storage","activeTab","unlimitedStorage","tabs"],
+
+  "background":{
+    "service_worker": "/background.js"
+  },
+
+  "options_ui": {
+    "page": "/optionsPage/options.html",
+    "open_in_tab": false
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["/images/icon128.png", "/images/contractedArrow.png", "/images/extendedArrow.png", "/images/settingsGear.png", "/images/delete.png", "/images/edit.png", "/images/blacklist.png", "/images/remove.png", "/images/ok.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+ 
+}
