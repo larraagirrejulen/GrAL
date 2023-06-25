@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/chromeUtils.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/chromeUtils.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-undef */
+import { mapReportData } from '../mapReportData.js';
+
+
+/**
+ * Retrieves the image source URL for a given image name.
+ *
+ * @param {string} name - The name of the image.
+ * @returns {string} The image source URL.
+ */
+export function getImgSrc(name){
+    return chrome.runtime.getURL('/images/' + name + '.png');
+}
+
+/**
+ * Opens the options page by sending a message to the background script.
+ */
+export function openOptionsPage(){
+    chrome.runtime.sendMessage({action: "openOptionsPage"});
+}
+
+/**
+ * Retrieves a value from Chrome storage.
+ * @param {string} key - The key to retrieve the value for.
+ * @param {boolean} [isSync=true] - Indicates whether to use the sync storage or local storage. Default is sync storage.
+ * @returns {Promise&lt;any>} A promise that resolves with the retrieved value.
+ */
+export function getFromChromeStorage(key, isSync = true) {
+    return new Promise((resolve) => {
+        chrome.storage[isSync ? 'sync' : 'local'].get(key, (result) => {
+            resolve(result[key]);
+        });
+    });
+}
+
+/**
+ * Stores a value in Chrome storage.
+ * @param {string} key - The key to store the value under.
+ * @param {any} value - The value to store.
+ * @param {boolean} [sync=false] - Indicates whether to use the sync storage or local storage. Default is local storage.
+ */
+export function storeOnChromeStorage(key, value, sync = false){
+    let obj = {};
+    obj[key] = value;
+    chrome.storage[sync ? "sync" : "local"].set(obj);
+}
+
+/**
+ * Removes a value from Chrome storage.
+ * @param {string} key - The key to remove from storage.
+ * @param {boolean} [sync=false] - Indicates whether to remove the value from sync storage or local storage. Default is local storage.
+ */
+export function removeFromChromeStorage(key, sync = false) {
+    chrome.storage[sync ? "sync" : "local"].remove(key);
+}
+
+/**
+ * Adds an element to the blacklist and updates the storage.
+ * @param {any} newListElement - The element to add to the blacklist.
+ * @returns {Promise&lt;void>} A promise that resolves when the blacklist is updated.
+ */
+export async function blackListElement(newListElement) {
+
+    if(!window.confirm("Blacklist selected evaluator message?\n(You can remove blacklisted elements from the configuration)")){
+        return;
+    } 
+
+    const blacklist = await getFromChromeStorage("blacklist") ?? [];
+    blacklist.push(newListElement);
+
+    chrome.storage.sync.set({ blacklist }, async () => { 
+        mapReportData(null, blacklist); 
+    });
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#applyBlackList">applyBlackList</a></li><li><a href="global.html#blackListElement">blackListElement</a></li><li><a href="global.html#collapsibleClickHandler">collapsibleClickHandler</a></li><li><a href="global.html#createPopup">createPopup</a></li><li><a href="global.html#downloadLoadedReport">downloadLoadedReport</a></li><li><a href="global.html#evaluateScope">evaluateScope</a></li><li><a href="global.html#fetchServer">fetchServer</a></li><li><a href="global.html#getCategoryResults">getCategoryResults</a></li><li><a href="global.html#getCriteriaResults">getCriteriaResults</a></li><li><a href="global.html#getElementByPath">getElementByPath</a></li><li><a href="global.html#getFromChromeStorage">getFromChromeStorage</a></li><li><a href="global.html#getHasPart">getHasPart</a></li><li><a href="global.html#getImgSrc">getImgSrc</a></li><li><a href="global.html#getPageOutcomesByCategory">getPageOutcomesByCategory</a></li><li><a href="global.html#getStoredReports">getStoredReports</a></li><li><a href="global.html#getSubCategoryResults">getSubCategoryResults</a></li><li><a href="global.html#getSuccessCriterias">getSuccessCriterias</a></li><li><a href="global.html#getWcagHierarchy">getWcagHierarchy</a></li><li><a href="global.html#highlightElement">highlightElement</a></li><li><a href="global.html#includeEditedFoundCases">includeEditedFoundCases</a></li><li><a href="global.html#loadReport">loadReport</a></li><li><a href="global.html#loadStoredReport">loadStoredReport</a></li><li><a href="global.html#mapReportData">mapReportData</a></li><li><a href="global.html#onMouseOver">onMouseOver</a></li><li><a href="global.html#openOptionsPage">openOptionsPage</a></li><li><a href="global.html#removeElementHighlights">removeElementHighlights</a></li><li><a href="global.html#removeFromChromeStorage">removeFromChromeStorage</a></li><li><a href="global.html#removeLoadedReport">removeLoadedReport</a></li><li><a href="global.html#removeStoredReport">removeStoredReport</a></li><li><a href="global.html#selectHighlightedElement">selectHighlightedElement</a></li><li><a href="global.html#storeNewReport">storeNewReport</a></li><li><a href="global.html#storeOnChromeStorage">storeOnChromeStorage</a></li><li><a href="global.html#testEvaluators">testEvaluators</a></li><li><a href="global.html#transformArray">transformArray</a></li><li><a href="global.html#unselectHighlightedElement">unselectHighlightedElement</a></li><li><a href="global.html#uploadNewReport">uploadNewReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Jun 24 2023 17:10:12 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: reportStorageOptions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: reportStorageOptions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { fetchServer, applyBlackList } from "./utils/moreUtils.js";
+import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "./utils/chromeUtils";
+import { loadReport, includeEditedFoundCases } from "./reportLoadingOptions";
+
+
+/**
+ * Retrieves the stored reports, adapts them, and sets them on the paginatedData useState.
+ * @param {Function} setPaginatedData - Function to update the paginated data state.
+ */
+export async function getStoredReports(setPaginatedData){
+
+    try{
+
+        const bodyData = JSON.stringify({domain: window.location.hostname});
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            setPaginatedData(transformArray(storeResults.reports));
+        } else {
+            window.alert("Could not get the stored reports, try again later...");
+        }        
+
+    }catch(error){
+        console.log(error);
+    }
+
+};
+
+
+/**
+ * Loads a stored report by its ID.
+ * @param {string} id - The ID of the stored report.
+ */
+export async function loadStoredReport(id){
+
+    try{
+
+        const bodyData = JSON.stringify({action: "getReport", id});
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+            if(reportLoaded === "true"){
+                const currentReport = await getFromChromeStorage(window.location.hostname, false);
+                includeEditedFoundCases(storeResults.report, currentReport);
+            }
+            loadReport(storeResults.report);
+        } else {
+            window.alert("Could not get the report, try again later...");
+        }        
+
+    }catch(error){
+        console.log(error);
+    }
+};
+
+
+/**
+ * Removes a stored report from the server and updates the UI.
+ * @param {string} id - The ID of the report to be removed.
+ * @param {function} setPaginatedData - The function to set the paginated data in the UI.
+ * @param {function} setCurrentPage - The function to set the current page in the UI.
+ * @returns {Promise&lt;void>} A promise that resolves when the report is successfully removed.
+ */
+export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
+
+    try{
+
+        let bodyData = JSON.stringify({action: "remove", id});
+
+        let storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            window.alert("succesfully deleted");
+        } else {
+            window.alert("Could not remove the report, try again later...");
+        } 
+
+        bodyData = JSON.stringify({domain: window.location.hostname});
+
+        storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+            setPaginatedData(transformArray(storeResults.reports));
+            setCurrentPage(0);
+        }
+
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false);
+
+        if(parentId === id){
+            removeFromChromeStorage(window.location.hostname + ".parentId")
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+};
+
+
+/**
+ * Transforms the flat array of reports into a nested array of report branches.
+ * @param {Array} array - The array of reports.
+ * @returns {Array} The transformed nested array of report branches.
+ */
+function transformArray(array) {
+
+    const result = [];
+  
+    function findDescendants(parentId, branchElements) {
+        const descendants = array.filter((item) => item.parentId === parentId);
+    
+        descendants.forEach((descendant) => {
+            branchElements.push(descendant);
+            findDescendants(descendant.id, branchElements);
+        });
+    }
+  
+    const rootElements = array.filter((item) => item.parentId === null);
+    rootElements.forEach((rootElement) => {
+
+        const branchElements = []
+
+        branchElements.push(rootElement);
+
+        findDescendants(rootElement.id, branchElements);
+
+        result.push(branchElements);
+
+    });
+  
+    return result;
+};
+
+
+/**
+ * Stores a new report and updates the animateBtn and parentId state.
+ * @param {Function} setAnimateBtn - Function to update the animateBtn state.
+ * @param {string} authenticationState - The authentication state.
+ */
+export async function storeNewReport(setAnimateBtn, authenticationState){
+
+    try{
+        setAnimateBtn("store");
+
+        const report = await getFromChromeStorage(window.location.hostname, false);
+
+        const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+        
+        if(enableBlacklist){
+            await applyBlackList(report);
+        }
+
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false) ?? null;
+
+        const bodyData = JSON.stringify({action: "storeNewReport", domain: window.location.hostname, report, uploadedBy: authenticationState, parentId});
+
+        const storeResults = await fetchServer(bodyData, "reportStoring");
+
+        if(storeResults.success){
+          window.alert("Report successfully stored!");
+          storeOnChromeStorage(window.location.hostname + ".parentId", storeResults.newParentId);
+        } else {
+          window.alert("Could not store the report, try again later...");
+        }
+
+    }catch(error){
+        console.log(error);
+    }finally{
+        setAnimateBtn("none");
+    }
+
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#applyBlackList">applyBlackList</a></li><li><a href="global.html#blackListElement">blackListElement</a></li><li><a href="global.html#collapsibleClickHandler">collapsibleClickHandler</a></li><li><a href="global.html#createPopup">createPopup</a></li><li><a href="global.html#downloadLoadedReport">downloadLoadedReport</a></li><li><a href="global.html#evaluateScope">evaluateScope</a></li><li><a href="global.html#fetchServer">fetchServer</a></li><li><a href="global.html#getCategoryResults">getCategoryResults</a></li><li><a href="global.html#getCriteriaResults">getCriteriaResults</a></li><li><a href="global.html#getElementByPath">getElementByPath</a></li><li><a href="global.html#getFromChromeStorage">getFromChromeStorage</a></li><li><a href="global.html#getHasPart">getHasPart</a></li><li><a href="global.html#getImgSrc">getImgSrc</a></li><li><a href="global.html#getPageOutcomesByCategory">getPageOutcomesByCategory</a></li><li><a href="global.html#getStoredReports">getStoredReports</a></li><li><a href="global.html#getSubCategoryResults">getSubCategoryResults</a></li><li><a href="global.html#getSuccessCriterias">getSuccessCriterias</a></li><li><a href="global.html#getWcagHierarchy">getWcagHierarchy</a></li><li><a href="global.html#highlightElement">highlightElement</a></li><li><a href="global.html#includeEditedFoundCases">includeEditedFoundCases</a></li><li><a href="global.html#loadReport">loadReport</a></li><li><a href="global.html#loadStoredReport">loadStoredReport</a></li><li><a href="global.html#mapReportData">mapReportData</a></li><li><a href="global.html#onMouseOver">onMouseOver</a></li><li><a href="global.html#openOptionsPage">openOptionsPage</a></li><li><a href="global.html#removeElementHighlights">removeElementHighlights</a></li><li><a href="global.html#removeFromChromeStorage">removeFromChromeStorage</a></li><li><a href="global.html#removeLoadedReport">removeLoadedReport</a></li><li><a href="global.html#removeStoredReport">removeStoredReport</a></li><li><a href="global.html#selectHighlightedElement">selectHighlightedElement</a></li><li><a href="global.html#storeNewReport">storeNewReport</a></li><li><a href="global.html#storeOnChromeStorage">storeOnChromeStorage</a></li><li><a href="global.html#testEvaluators">testEvaluators</a></li><li><a href="global.html#transformArray">transformArray</a></li><li><a href="global.html#unselectHighlightedElement">unselectHighlightedElement</a></li><li><a href="global.html#uploadNewReport">uploadNewReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Jun 24 2023 17:10:12 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

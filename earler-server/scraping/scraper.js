@@ -52,7 +52,11 @@ class Scraper {
 
             console.log("\n  " + this.#Evaluator + ": Starting with " + webPage.url + " ...");
 
-            await this[this.#evaluator + "Scraper"](webPage, page);
+            if(this.#jsonld === null){
+                return await this[this.#evaluator + "Scraper"](webPage, page);
+            }else{
+                await this[this.#evaluator + "Scraper"](webPage, page);
+            }
             
             console.log("\n  " + this.#Evaluator + ": " + webPage.url + " scraping finished."); 
 
@@ -140,7 +144,13 @@ class Scraper {
                 const tr = i + 1
 
                 await page.click("table.evaluation-table > tbody > tr:nth-child("+ tr +") > td:nth-child(4) > a");
-                await page.waitForSelector('#list_tab');
+
+                try{
+                    await page.waitForSelector('#list_tab', {timeout: 500});
+                }catch(err){
+                    continue;
+                }
+                
 
                 const casesLocations = await page.evaluate(() => {
                     
@@ -214,7 +224,7 @@ class Scraper {
 
 
         // Wait for results to be loaded and scrape the results
-        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 120000});
+        await page.waitForSelector('fieldset[class="group_form"]', {timeout: 240000});
 
         const results = await page.evaluate(() => {
 
@@ -548,7 +558,7 @@ class Scraper {
         const results = await pa11y(webPage.url, {
             standard: 'WCAG2AAA',
             includeWarnings: true,
-            timeout: 60000
+            timeout: 120000
         });
 
         for(const issue of results.issues){

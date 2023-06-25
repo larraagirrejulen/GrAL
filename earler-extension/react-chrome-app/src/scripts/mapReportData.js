@@ -20,7 +20,12 @@ function getOutcomeVariables () {
 
 
 
-
+/**
+ * Maps the data of the currently loaded report for displaying it on the extension table taking into account blacklisted elements.
+ * @param {Object} evaluationreport - The evaluation report (optional).
+ * @param {Array} blackList - The blacklist (optional).
+ * @returns {Promise<void>} - A Promise that resolves when the mapping is completed.
+ */
 export async function mapReportData(evaluationreport = null, blackList = null){
 
     const evaluationReport = evaluationreport ? evaluationreport : await getFromChromeStorage(window.location.hostname, false);
@@ -126,7 +131,10 @@ export async function mapReportData(evaluationreport = null, blackList = null){
 }
 
 
-
+/**
+ * Gets the category results for the report table.
+ * @returns {Array} - An array of category results.
+ */
 function getCategoryResults(){
 
     const reportTableContent = [];
@@ -144,7 +152,11 @@ function getCategoryResults(){
 }
 
 
-
+/**
+ * Gets the sub-category results for a specific category.
+ * @param {string} categoryKey - The key of the category.
+ * @returns {Array} - An array of sub-category results.
+ */
 function getSubCategoryResults(categoryKey){
 
     const subCategoryResults = [];
@@ -162,7 +174,11 @@ function getSubCategoryResults(categoryKey){
 }
 
 
-
+/**
+ * Gets the criteria results for a specific sub-category.
+ * @param {string} subCategoryKey - The key of the sub-category.
+ * @returns {Array} - An array of criteria results.
+ */
 function getCriteriaResults(subCategoryKey){
 
     const criteriaResults = [];
@@ -191,7 +207,11 @@ function getCriteriaResults(subCategoryKey){
 
 
 
-
+/**
+ * Gets the "hasPart" results for a specific criteria.
+ * @param {string} criteriaKey - The key of the criteria.
+ * @returns {Array} - An array of "hasPart" results.
+ */
 function getHasPart(criteriaKey){
 
     const foundCasesResults = [];
@@ -287,7 +307,11 @@ function getHasPart(criteriaKey){
   
 
 
-
+/**
+ * Gets the page outcomes by category.
+ * @param {string} categoryKey - The key of the category.
+ * @returns {Object} - The page outcomes by category.
+ */
 function getPageOutcomesByCategory(categoryKey){
 
     const outcomes = {};

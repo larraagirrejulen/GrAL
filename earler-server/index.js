@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const scraperController = require('./scraping/scrapingController');
 const UserController = require('./userController');
 const ReportController = require('./reportController');
+const testController = require('./testCases/testController');
 
 
 
@@ -29,8 +30,8 @@ function routeHandlerWrapper(controllerMethod) {
 const userController = new UserController();
 const reportController = new ReportController();
 
-
 app.post('/scrapeAccessibilityResults', routeHandlerWrapper(scraperController));
+app.post('/testEvaluators', routeHandlerWrapper(testController));
 app.post('/userAuthentication', routeHandlerWrapper(userController.handleUserRequest.bind(userController)));
 app.post('/reportStoring', routeHandlerWrapper(reportController.handleReportRequest.bind(reportController)));
 

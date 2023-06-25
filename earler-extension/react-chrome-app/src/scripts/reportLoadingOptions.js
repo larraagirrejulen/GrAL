@@ -4,6 +4,11 @@ import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } f
 import { applyBlackList } from "./utils/moreUtils.js";
 
 
+/**
+ * Loads a new report.
+ * @param {Object} newReport - The new report to be loaded.
+ * @throws {Error} Throws an error if there is an issue with storing or mapping the report.
+ */
 export function loadReport(newReport){
 
     try{
@@ -14,6 +19,9 @@ export function loadReport(newReport){
     }
 }
 
+/**
+ * Removes the loaded report.
+ */
 export function removeLoadedReport(){
     
     if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
@@ -28,6 +36,10 @@ export function removeLoadedReport(){
     window.location.reload();
 }
 
+/**
+ * Uploads a new report.
+ * @param {Event} uploadEvent - The upload event containing the new report.
+ */
 export async function uploadNewReport(uploadEvent){
 
     const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
@@ -53,7 +65,9 @@ export async function uploadNewReport(uploadEvent){
 }
 
 
-
+/**
+ * Downloads the loaded report.
+ */
 export async function downloadLoadedReport(){
 
     const currentReport = await getFromChromeStorage(window.location.hostname, false);
@@ -112,6 +126,10 @@ export async function downloadLoadedReport(){
     } 
 }
 
+/**
+ * Evaluates the scope.
+ * @param {function} setAnimateBtn - The function to set the animate button state.
+ */
 export async function evaluateScope(setAnimateBtn){
 
     const scope = JSON.parse(localStorage.getItem("scope"));
@@ -145,7 +163,42 @@ export async function evaluateScope(setAnimateBtn){
 
 }
 
+/**
+ * Tests the evaluators.
+ */
+export async function testEvaluators(){
 
+    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
+    const body = JSON.stringify({ am, ac, mv, a11y, pa, lh });
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 600000);
+
+    const response = await fetch('http://localhost:7070/testEvaluators', {
+        body,
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        signal: controller.signal
+    });
+    
+    clearTimeout(timer);
+
+    if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+    
+    const fetchData = await response.json();
+
+    console.log(JSON.parse(fetchData));
+
+}
+
+/**
+ * Fetches data from the server.
+ * @param {string} bodyData - The body data to be sent in the request.
+ * @param {string} action - The action to be performed on the server.
+ * @param {number} [timeout=180000] - The timeout value for the request in milliseconds.
+ * @returns {Promise<Object>} A promise that resolves to the fetched data.
+ */
 function fetchServer(bodyData, action, timeout = 180000) {
 
     return new Promise(async (resolve, reject) => {
@@ -175,7 +228,11 @@ function fetchServer(bodyData, action, timeout = 180000) {
 
 }
 
-
+/**
+ * Includes edited found cases from the current report into the new report.
+ * @param {Object} newReport - The new report to include the edited found cases.
+ * @param {Object} currentReport - The current report containing the edited found cases.
+ */
 export function includeEditedFoundCases(newReport, currentReport){
 
     for(let index = 0; index < currentReport.auditSample.length; index++){

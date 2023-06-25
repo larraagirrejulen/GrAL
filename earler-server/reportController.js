@@ -20,8 +20,8 @@ class ReportController{
                 domain TEXT NOT NULL,
                 version INTEGER NOT NULL,
                 uploadedBy TEXT NOT NULL,
-                report TEXT NOT NULL,
                 parentId INTEGER,
+                report TEXT NOT NULL,
                 FOREIGN KEY (parentId) REFERENCES reports(id)
             );
         `);
@@ -59,9 +59,9 @@ class ReportController{
             this.#db.serialize(() => {
                 if(parentId !== null){
                     this.#db.run(`
-                        INSERT INTO reports (domain, version, uploadedBy, report, parentId)
+                        INSERT INTO reports (domain, version, uploadedBy, parentId, report)
                         VALUES (?, (SELECT COALESCE(version , 0) + 1 FROM reports WHERE id = ?), ?, ?, ?)
-                    `, [domain, parentId, uploadedBy, JSON.stringify(report), parentId], function(err) {
+                    `, [domain, parentId, uploadedBy, parentId, JSON.stringify(report)], function(err) {
                         if (err) {
                             reject(err);
                         } else {
@@ -70,8 +70,8 @@ class ReportController{
                     });
                 }else{
                     this.#db.run(`
-                        INSERT INTO reports (domain, version, uploadedBy, report, parentId)
-                        VALUES (?, 1, ?, ?, NULL)
+                        INSERT INTO reports (domain, version, uploadedBy, parentId, report)
+                        VALUES (?, 1, ?, NULL, ?)
                     `, [domain, uploadedBy, JSON.stringify(report)], function(err) {
                         if (err) {
                             reject(err);

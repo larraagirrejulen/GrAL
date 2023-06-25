@@ -8,7 +8,7 @@ import { getFromChromeStorage } from '../../../scripts/utils/chromeUtils';
 
 
 /**
- * Component for displaying the report results.
+ * Component for displaying currently loaded report results.
  * @returns {JSX.Element} ReportResults component.
  */
 export default function ReportResults(): JSX.Element {

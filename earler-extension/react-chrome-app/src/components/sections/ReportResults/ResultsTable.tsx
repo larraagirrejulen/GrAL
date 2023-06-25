@@ -126,9 +126,12 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
 
 
 /**
- * SubCategory component displays the sub-categories in the ResultsTable.
- * @param {Object} props - Component props.
- * @returns {JSX.Element} - JSX element representing the SubCategory component.
+ * React component for displaying subcategories of the selected categories
+ * @param {Object} props - The component props.
+ * @param {Array} props.subCategories - The array of subcategories.
+ * @param {boolean} props.mantainExtended - Indicates whether to maintain extended state.
+ * @param {any} props.conformanceLevels - The conformance levels.
+ * @returns {JSX.Element} The JSX element representing the subcategory component.
  */
 function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
@@ -182,9 +185,12 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
 
 
 /**
- * Criteria component displays the criteria in the ResultsTable.
- * @param {Object} props - Component props.
- * @returns {JSX.Element} - JSX element representing the Criteria component.
+ * React component for displaying the criterias of the selected subcategories.
+ * @param {Object} props - The component props.
+ * @param {Array} props.criterias - The array of criterias.
+ * @param {boolean} props.mantainExtended - Indicates whether to maintain extended state.
+ * @param {any} props.conformanceLevels - The conformance levels.
+ * @returns {JSX.Element} The JSX element representing the criterias component.
  */
 function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
@@ -248,7 +254,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
 
 
 /**
- * Renders the criteria results component.
+ * React component to display the results of the selected criteria.
  * @param {object} props - The component props.
  * @param {any} props.criteria - The criteria object.
  * @returns {JSX.Element} The criteria results component.
@@ -638,7 +644,7 @@ function CriteriaResults({criteria}:any){
 
 
 /**
- * Renders the pointers for the criteria result.
+ * Renders the pointers for the selected criteria result.
  * @param {object} resultGroupedPointers - The grouped pointers for the criteria result.
  * @param {boolean} edit - Flag indicating if the pointers are editable.
  * @param {array} removedPointers - Array of removed pointers.

@@ -1,5 +1,12 @@
 
 
+/**
+ * Highlights an HTML element by wrapping it with a styled wrapper.
+ *
+ * @param {HTMLElement} element - The element to highlight.
+ * @param {string} groupKey - The group key for the highlighter.
+ * @param {number} index - The index for the highlighter.
+ */
 export function highlightElement(element, groupKey, index){
 
     var wrapper = document.createElement('div');
@@ -20,10 +27,22 @@ export function highlightElement(element, groupKey, index){
 
 }
 
+/**
+ * Event handler for mouseover event on the popup element.
+ *
+ * @param {HTMLElement} popup - The popup element.
+ */
 function onMouseOver(popup){
     popup.style.visibility = "visible";
 }
 
+/**
+ * Selects a highlighted element and adds additional styling.
+ *
+ * @param {string} groupKey - The group key for the highlighted element.
+ * @param {number} index - The index for the highlighted element.
+ * @param {string} documentation - The documentation URL.
+ */
 export function selectHighlightedElement(groupKey, index, documentation){
 
     const wrapper = document.querySelector("#acCheckHighlighter_" + groupKey + "_" + index);
@@ -56,7 +75,9 @@ export function selectHighlightedElement(groupKey, index, documentation){
 
 
 
-
+/**
+ * Unselects a highlighted element and removes additional styling.
+ */
 export function unselectHighlightedElement(){
 
     const previousSelected = document.querySelector(".highlighted-wrapper.selected");
@@ -78,7 +99,9 @@ export function unselectHighlightedElement(){
 
 
 
-
+/**
+ * Removes the highlights from all highlighted elements.
+ */
 export function removeElementHighlights(){
 
     const wrappers = document.querySelectorAll(".highlighted-wrapper");
@@ -95,7 +118,12 @@ export function removeElementHighlights(){
 
 
 
-
+/**
+ * Creates a popup element with relevant information.
+ *
+ * @param {string} documentation - The documentation URL.
+ * @returns {HTMLElement} The created popup element.
+ */
 function createPopup(documentation){
 
     const popup = document.createElement("div");

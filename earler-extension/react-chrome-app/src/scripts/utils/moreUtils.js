@@ -5,13 +5,13 @@ import {  removeElementHighlights } from './highlightUtils.js';
 
 
 /**
- * Fetches the evaluation report from a server using a JSON body.
- * @async
- * @function fetchEvaluation
- * @param {string} bodyData - The JSON body containing the parameters for the evaluation report.
- * @param {number} [timeout=120000] - The timeout for the fetch request, in milliseconds.
- * @returns {Promise<object>} - The evaluation report as an object.
- * @throws {Error} If there was an error with the fetch request, or if the request timed out.
+ * Fetches data from the server.
+ *
+ * @param {object} bodyData - The data to send in the request body.
+ * @param {string} action - The server action to perform.
+ * @param {number} [timeout=120000] - The timeout value in milliseconds.
+ * @returns {Promise<object>} A promise that resolves to the fetched data.
+ * @throws {Error} If an error occurs during the fetch process.
  */
 export async function fetchServer(bodyData, action, timeout = 120000) {
 
@@ -40,7 +40,14 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
 
 }
 
-
+/**
+ * Retrieves an element from the DOM based on the provided path and inner text.
+ *
+ * @param {string} path - The path or selector to locate the element.
+ * @param {string} innerText - The inner text of the element (optional).
+ * @returns {HTMLElement} The matched element.
+ * @throws {Error} If the path is null or undefined.
+ */
 export function getElementByPath(path, innerText) {
     
     if (!path) throw new Error("Invalid input: path is null or undefined.");
@@ -69,7 +76,15 @@ export function getElementByPath(path, innerText) {
 }
 
 
-
+/**
+ * Event handler for the collapsible click event.
+ *
+ * @param {Array<boolean>} useState - The state variable used for collapsible items.
+ * @param {function} setUseState - The state setter function.
+ * @param {number} index - The index of the clicked item.
+ * @param {boolean} mantainExtended - Flag indicating whether to maintain the extended state.
+ * @param {number} arrayLength - The length of the array.
+ */
 export function collapsibleClickHandler(useState, setUseState, index, mantainExtended, arrayLength){
 
     removeElementHighlights();
@@ -83,7 +98,12 @@ export function collapsibleClickHandler(useState, setUseState, index, mantainExt
 
 
 
-
+/**
+ * Applies the blacklist to the current report.
+ *
+ * @param {object} currentReport - The current report object.
+ * @returns {Promise<void>} A promise that resolves when the blacklist is applied.
+ */
 export async function applyBlackList(currentReport){
 
     const successCriterias = getSuccessCriterias();

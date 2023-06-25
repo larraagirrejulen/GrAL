@@ -59,9 +59,11 @@ export async function loadStoredReport(id){
 
 
 /**
- * Removes a stored report by its ID and updates the paginated data state.
- * @param {string} id - The ID of the stored report to remove.
- * @param {Function} setPaginatedData - Function to update the paginated data state.
+ * Removes a stored report from the server and updates the UI.
+ * @param {string} id - The ID of the report to be removed.
+ * @param {function} setPaginatedData - The function to set the paginated data in the UI.
+ * @param {function} setCurrentPage - The function to set the current page in the UI.
+ * @returns {Promise<void>} A promise that resolves when the report is successfully removed.
  */
 export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
 

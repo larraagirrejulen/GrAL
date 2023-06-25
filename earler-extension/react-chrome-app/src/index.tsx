@@ -19,8 +19,7 @@ const exceptionsList = [
   "https://accessmonitor.acessibilidade.gov.pt", 
   "https://achecker.achecks.ca", 
   "https://github.com", 
-  "https://mauve.isti.cnr.it", 
-  "https://www.google.com"
+  "https://mauve.isti.cnr.it"
 ];
 
 // Check if the current URL is not in the exceptions list

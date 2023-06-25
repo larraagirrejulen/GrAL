@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
 import { getFromChromeStorage, getImgSrc } from '../../scripts/utils/chromeUtils.js';
-import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope } from '../../scripts/reportLoadingOptions.js';
+import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope, testEvaluators } from '../../scripts/reportLoadingOptions.js';
 import { storeNewReport } from '../../scripts/reportStorageOptions.js';
 
 
 /**
- * Component for displaying evaluation options.
+ * Component for displaying users evaluation options.
  * @param {Object} authenticationState - The authentication state.
  * @param {Function} setLoadingReports - The function to set the loading reports state.
  * @returns {JSX.Element} EvaluationOptions component.
@@ -27,6 +27,8 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
       setReportIsLoaded(value);
     });
   });
+
+  
   
   return ( 
     <div id="evaluationOptions">
@@ -53,12 +55,12 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
             <label onClick={removeLoadedReport}>Remove report</label>
             <label onClick={downloadLoadedReport}>Export report</label>
             <label id="importReport">
-              <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />
+              <input type="file" accept=".json" onChange={(event:any) => uploadNewReport(event)} />
               Import new report
             </label>
           </div>
         )}
-      </div>
+      </div><br/>
 
       {authenticationState !== "notLogged" && ( <>
         <div className='loggedOptions'>
@@ -80,6 +82,12 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
           />
         </div>
       </> )}
+
+      {/*<Button 
+        classList={"primary lineSpaced"} 
+        onClickHandler={()=>{testEvaluators()}}
+        innerText={"Test evaluators"}
+      />*/}
       
     </div>
   );
