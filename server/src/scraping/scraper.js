@@ -462,7 +462,7 @@ class Scraper {
     async a11yScraper(webPage, page){
 
         await page.goto(webPage.url, {waitUntil: "domcontentloaded"});
-        await page.addScriptTag({ path: './scraping/a11yAinspector.js' });
+        await page.addScriptTag({ path: './src/scraping/a11yAinspector.js' });
 
         const results = await page.evaluate(async () => {
 

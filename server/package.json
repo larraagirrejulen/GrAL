@@ -1,14 +1,14 @@
 {
-  "name": "puppeteer-scraper",
+  "name": "earler-server",
   "version": "1.0.0",
-  "description": "a web scraper",
+  "description": "A server for accessibility evaluations, user autentication, and report version control",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "test": "node tests/index.js",
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Julen",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

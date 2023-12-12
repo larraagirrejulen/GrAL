@@ -8,7 +8,7 @@ class ReportController{
 
     constructor(){
 
-        this.#db = new sqlite3.Database('database.db');
+        this.#db = new sqlite3.Database('./database.db');
 
         /*this.#db.run(`
             DROP TABLE reports;

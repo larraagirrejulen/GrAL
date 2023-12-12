@@ -8,7 +8,7 @@ class UserController{
 
     constructor(){
 
-        this.#db = new sqlite3.Database('database.db');
+        this.#db = new sqlite3.Database('./database.db');
 
         this.#db.run(`
         CREATE TABLE IF NOT EXISTS users (
