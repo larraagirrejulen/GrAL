@@ -24,10 +24,6 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ],
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
       }
     ],
   },
@@ -36,6 +32,6 @@ module.exports = {
   },
   output: {
     filename: "content.js",
-    path: path.resolve(__dirname, "..", "extension"),
+    path: path.resolve(__dirname, "..", "earler"),
   }
 };
