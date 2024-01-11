@@ -4,11 +4,10 @@ try{
   document.getElementById('saveOptions').addEventListener('click', ()=>{
 
     const mantainExtended = document.getElementById('mantainExtended').checked;
-    const shiftWebpage = document.getElementById('shiftWebpage').checked;
     const enableBlacklist = document.getElementById('enableBlacklist').checked;
 
     chrome.storage.sync.set(
-      { mantainExtended, shiftWebpage, enableBlacklist },
+      { mantainExtended, enableBlacklist },
       () => {
         chrome.storage.sync.set({ "blackListUpdated": true });
         // Update status to let user know options were saved.
@@ -41,10 +40,9 @@ try{
   });
   
   chrome.storage.sync.get(
-    { mantainExtended: false, shiftWebpage: false, enableBlacklist: false, blacklist: null }, // Default values if there are no saved ones
+    { mantainExtended: false, enableBlacklist: false, blacklist: null }, // Default values if there are no saved ones
     (items) => {
       document.getElementById('mantainExtended').checked = items.mantainExtended;
-      document.getElementById('shiftWebpage').checked = items.shiftWebpage;
       document.getElementById('enableBlacklist').checked = items.enableBlacklist;
       
       const blacklist = document.getElementById('blacklist');
