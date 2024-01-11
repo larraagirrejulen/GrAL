@@ -1,7 +1,8 @@
 
-import '../styles/extension.scss';
+import '../styles/earlerExtension.scss';
 
 import { useEffect, useState } from "react";
+
 import StoredReportManagement from './sections/StoredReportManagement';
 import UserAuthentication from './sections/UserAuthentication';
 import ScopeDefinition from './sections/ScopeDefinition';
@@ -9,7 +10,7 @@ import EvaluatorSelection from './sections/EvaluatorSelection';
 import EvaluationOptions from './sections/EvaluationOptions';
 import ReportResults from './sections/ReportResults/ReportResults';
 
-import { getFromChromeStorage, getImgSrc } from '../scripts/utils/chromeUtils';
+import { getImgSrc } from '../scripts/utils/chromeUtils';
 
 
 
@@ -17,24 +18,15 @@ import { getFromChromeStorage, getImgSrc } from '../scripts/utils/chromeUtils';
  * Extension main component that wraps all other functionalities.
  * @returns {JSX.Element} The rendered JSX element.
  */
-export default function Extension() {
+export default function EarlerExtension() {
 
-  const [shiftWebpage, setShiftWebpage] = useState(false);
   const [extensionHidden, setExtensionHidden] = useState(false);
+
+  useEffect(() => { document.body.style.position = 'relative' })
+  useEffect(() => { document.body.style.left = extensionHidden ? '0px' : '300px' }, [extensionHidden]);
+
   const [authenticationState, setAuthenticationState] = useState("notLogged");
   const [manageStoredReports, setManageStoredReports] = useState(false);
-
-
-  useEffect( ()=>{
-    getFromChromeStorage("shiftWebpage", true)
-    .then( value => value != null && setShiftWebpage(value) );
-  }, []);
-
-
-  useEffect(() => {
-    document.body.classList.toggle('earlerEnabled', shiftWebpage && !extensionHidden);
-  }, [extensionHidden, shiftWebpage]);
-    
 
   return (<>
 
@@ -43,7 +35,7 @@ export default function Extension() {
         id="hiddenEarlerLogo" 
         alt="extension logo when hidden" 
         src={getImgSrc("icon128")} 
-        onClick={()=>setExtensionHidden(!extensionHidden)} 
+        onClick={()=>setExtensionHidden(false)} 
       /> 
     )}
     
@@ -55,7 +47,7 @@ export default function Extension() {
         onClick={() => chrome.runtime.sendMessage({action: "openOptionsPage"})} 
       />
       
-      <span className="icon close" onClick={()=>setExtensionHidden(!extensionHidden)}>&times;</span>
+      <span className="icon close" onClick={()=>setExtensionHidden(true)}>&times;</span>
 
       <div className="earlerLogoContainer">
         <img 
