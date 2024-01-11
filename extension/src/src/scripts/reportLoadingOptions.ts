@@ -1,21 +1,23 @@
 
-import { mapReportData } from './mapReportData.js';
-import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils.js';
-import { applyBlackList } from "./utils/moreUtils.js";
+import { ConformanceLevel, Evaluator, ServerAction } from '../types/customTypes';
+import { Assertion, EvaluationReport, LocationPointer, Result } from '../types/evaluationReport';
+import { mapReportData } from './mapReportData';
+import { storeOnChromeStorage, getFromChromeStorage, removeFromChromeStorage } from './utils/chromeUtils';
+import { applyBlackList } from "./utils/moreUtils";
 
 
 /**
  * Loads a new report.
- * @param {Object} newReport - The new report to be loaded.
- * @throws {Error} Throws an error if there is an issue with storing or mapping the report.
+ * @param {EvaluationReport} newEvaluationReport - The new evaluation report to be loaded.
+ * @throws {Error} Throws an error if there is an issue with storing or mapping the evaluation report.
  */
-export function loadReport(newReport){
+export function loadReport(newEvaluationReport: EvaluationReport){
 
     try{
-        storeOnChromeStorage(window.location.hostname, newReport);
-        mapReportData(newReport);
+        storeOnChromeStorage(window.location.hostname, newEvaluationReport);
+        mapReportData(newEvaluationReport);
     } catch(error) {
-        throw new Error("Error when storing or mapping the report => " + error);
+        throw new Error(`Error when storing or mapping the report => ${error}`);
     }
 }
 
@@ -26,41 +28,46 @@ export function removeLoadedReport(){
     
     if (!window.confirm("Unsaved reports will be lost. Continue?")) return;
 
-    removeFromChromeStorage(window.location.hostname + ".parentId");
-    removeFromChromeStorage(window.location.hostname + ".reportIsLoaded");
+    removeFromChromeStorage(`${window.location.hostname}.parentId`);
+    removeFromChromeStorage(`${window.location.hostname}.reportIsLoaded`);
 
     const currentWebsite = window.location.hostname;
 
-    [currentWebsite, currentWebsite + ".siteSummary", currentWebsite + ".pageSummaries", currentWebsite + ".reportTableContent"].map((key) => removeFromChromeStorage(key));
+    [currentWebsite, `${currentWebsite}.siteSummary`, `${currentWebsite}.pageSummaries`, `${currentWebsite}.reportTableContent`].map((storageKey: any) => removeFromChromeStorage(storageKey));
 
     window.location.reload();
 }
 
 /**
  * Uploads a new report.
- * @param {Event} uploadEvent - The upload event containing the new report.
+ * @param {React.ChangeEvent<HTMLInputElement>} uploadEvent - The upload event containing the new report.
  */
-export async function uploadNewReport(uploadEvent){
+export async function uploadNewReport(uploadEvent: React.ChangeEvent<HTMLInputElement>){
 
-    const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+    const reportLoaded: boolean = await getFromChromeStorage(`${window.location.hostname}.reportIsLoaded`);
 
-    if(reportLoaded === "true") {
+    if(reportLoaded) {
         if (!window.confirm("The upload will overwrite the current stored report. You want to continue?")) return;
     }
 
-    const reader = new FileReader();
+    const uploadedFileReader = new FileReader();
 
-    reader.readAsText(uploadEvent.target.files[0], "UTF-8");
-    
-    reader.onload = async (uploadEvent) => {
-        const newReport = JSON.parse(uploadEvent.target.result);
+    if(uploadEvent.target && uploadEvent.target.files){
+        uploadedFileReader.readAsText(uploadEvent.target.files[0], "UTF-8");
+        
+        uploadedFileReader.onload = async (uploadEvent) => {
+            const newReport: EvaluationReport = JSON.parse(uploadEvent.target?.result as string);
 
-        const currentReport = await getFromChromeStorage(window.location.hostname, false);
+            const currentReport: EvaluationReport = await getFromChromeStorage(window.location.hostname);
 
-        includeEditedFoundCases(newReport, currentReport);
+            includeEditedFoundCases(newReport, currentReport);
 
-        loadReport(newReport);
+            loadReport(newReport);
+        }   
+    }else {
+        window.alert("Error uploading the file... Please try again");
     }
+
 
 }
 
@@ -70,12 +77,12 @@ export async function uploadNewReport(uploadEvent){
  */
 export async function downloadLoadedReport(){
 
-    const currentReport = await getFromChromeStorage(window.location.hostname, false);
-    const activeConformanceLevels = JSON.parse(localStorage.getItem("conformanceLevels"));
+    const currentReport: EvaluationReport = await getFromChromeStorage(window.location.hostname);
+    const activeConformanceLevels: ConformanceLevel[] = JSON.parse(localStorage.getItem("conformanceLevels") ?? '["A","AA"]');
 
-    currentReport.evaluationScope.conformanceTarget = "wai:WCAG2" + activeConformanceLevels[activeConformanceLevels.length - 1] + "-Conformance";
+    currentReport.evaluationScope.conformanceTarget = `wai:WCAG2${activeConformanceLevels[activeConformanceLevels.length - 1]}-Conformance`;
 
-    const untestedOutcome = {
+    const untestedOutcome: Result = {
         outcome: "earl:untested",
         description: "",
     };
@@ -94,14 +101,14 @@ export async function downloadLoadedReport(){
         }else if(criteria.result.outcome === "earl:untested"){
 
             criteria.result.description += "\n\n----------------------------------\n\n";
-            criteria.hasPart.forEach((elem) => {
-                elem.result.description += "\n\n----------------------------------\n\n";
+            criteria.hasPart.forEach((foundCase) => {
+                foundCase.result.description += "\n\n----------------------------------\n\n";
             });
         
         }
     });
 
-    const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+    const enableBlacklist: boolean = await getFromChromeStorage('enableBlackList', true);
         
     if(enableBlacklist){
         await applyBlackList(currentReport);
@@ -128,13 +135,13 @@ export async function downloadLoadedReport(){
 
 /**
  * Evaluates the scope.
- * @param {function} setAnimateBtn - The function to set the animate button state.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setAnimateBtn - The function to set the animate button state.
  */
-export async function evaluateScope(setAnimateBtn){
+export async function evaluateScope(setAnimateBtn: React.Dispatch<React.SetStateAction<string>>){
 
-    const scope = JSON.parse(localStorage.getItem("scope"));
+    const scope: {name: string, url: string}[] = JSON.parse(localStorage.getItem("scope") as string);
 
-    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    const checkboxes: [{checked: boolean, label: string, href: string}] = JSON.parse(localStorage.getItem("checkboxes") as string);
     const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
 
     if([am, ac, mv, a11y, pa, lh].every(val => val === false)) {
@@ -146,14 +153,16 @@ export async function evaluateScope(setAnimateBtn){
 
     const bodyData = JSON.stringify({ am, ac, mv, a11y, pa, lh, scope });
 
-    fetchServer(bodyData, "scrapeAccessibilityResults")
+    fetchServer(bodyData, "evaluation")
     .then( async (result) => {
-        const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+        const newReport = result as EvaluationReport
+        const reportLoaded = await getFromChromeStorage(`${window.location.hostname}.reportIsLoaded`);
         if(reportLoaded === "true"){
-            const currentReport = await getFromChromeStorage(window.location.hostname, false);
-            includeEditedFoundCases(result, currentReport);
+            const currentReport: EvaluationReport = await getFromChromeStorage(window.location.hostname);
+            includeEditedFoundCases(newReport, currentReport);
         }
-        loadReport(result);
+        console.log(newReport);
+        loadReport(newReport);
     })
     .catch((err) => {
         console.error("Error during evaluation process => ", err);
@@ -164,42 +173,14 @@ export async function evaluateScope(setAnimateBtn){
 }
 
 /**
- * Tests the evaluators.
- */
-export async function testEvaluators(){
-
-    const checkboxes = JSON.parse(localStorage.getItem("checkboxes"));
-    const [am, ac, mv, a11y, pa, lh] = checkboxes.map(({ checked }) => checked);
-    const body = JSON.stringify({ am, ac, mv, a11y, pa, lh });
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 600000);
-
-    const response = await fetch('http://localhost:7070/testEvaluators', {
-        body,
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        signal: controller.signal
-    });
-    
-    clearTimeout(timer);
-
-    if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
-    
-    const fetchData = await response.json();
-
-    console.log(JSON.parse(fetchData));
-
-}
-
-/**
  * Fetches data from the server.
- * @param {string} bodyData - The body data to be sent in the request.
- * @param {string} action - The action to be performed on the server.
- * @param {number} [timeout=180000] - The timeout value for the request in milliseconds.
+ *
+ * @param {BodyInit} bodyData - The data to send in the request body.
+ * @param {ServerAction} action - The server action to perform.
+ * @param {number} [timeout=180000] - The timeout value in milliseconds.
  * @returns {Promise<Object>} A promise that resolves to the fetched data.
  */
-function fetchServer(bodyData, action, timeout = 180000) {
+function fetchServer(bodyData: BodyInit, action: ServerAction, timeout = 180000) {
 
     return new Promise(async (resolve, reject) => {
         try{
@@ -223,7 +204,7 @@ function fetchServer(bodyData, action, timeout = 180000) {
         }catch(err){
             reject(err);
         }
-        
+
     });
 
 }
@@ -233,7 +214,7 @@ function fetchServer(bodyData, action, timeout = 180000) {
  * @param {Object} newReport - The new report to include the edited found cases.
  * @param {Object} currentReport - The current report containing the edited found cases.
  */
-export function includeEditedFoundCases(newReport, currentReport){
+export function includeEditedFoundCases(newReport: EvaluationReport, currentReport: EvaluationReport){
 
     for(let index = 0; index < currentReport.auditSample.length; index++){
 
@@ -249,14 +230,14 @@ export function includeEditedFoundCases(newReport, currentReport){
 
             if(editedAssertors.length > 0){
                 
-                const newFoundCase = newReport.auditSample[index].hasPart.find((elem) => 
-                    elem.subject === currentFoundCase.subject && elem.result.outcome === currentFoundCase.result.outcome
+                const newFoundCase = newReport.auditSample[index].hasPart.find((newFoundCase) => 
+                    newFoundCase.subject === currentFoundCase.subject && newFoundCase.result.outcome === currentFoundCase.result.outcome
                 );
 
-                const foundCaseTemplate = {
+                const foundCaseTemplate:any = {
                     "type": "Assertion",
                     "testcase": currentFoundCase.testcase,
-                    "assertedBy": [],
+                    "assertedBy": [] as Assertion[],
                     "subject": currentFoundCase.subject,
                     "mode": "earl:automatic",
                     "result":
@@ -274,9 +255,14 @@ export function includeEditedFoundCases(newReport, currentReport){
                 // Include assertor
                 for(const assertor of editedAssertors){
                     if(newReport.assertors.findIndex(elem => elem["xmlns:name"] === assertor.assertor) === -1){
-                        newReport.assertors.push(currentReport.assertors.find(
-                            elem => elem["xmlns:name"] === assertor.assertor
-                        ));
+
+                        const newAssertor: any = currentReport.assertors.find(
+                            (currentAssertor) => currentAssertor["xmlns:name"] === assertor.assertor
+                        );
+                    
+                        if (newAssertor) {
+                            newReport.assertors.push(newAssertor);
+                        }
                     }
 
                     if(!newFoundCase){
@@ -287,8 +273,8 @@ export function includeEditedFoundCases(newReport, currentReport){
 
                             if(!pointer.assertedBy.includes(assertor.assertor)) continue;
 
-                            const templatePointer = foundCaseTemplate.result.locationPointersGroup.find((elem) => 
-                                elem["ptr:expression"] === pointer["ptr:expression"]
+                            const templatePointer: any = foundCaseTemplate.result.locationPointersGroup.find(
+                                (pointr: any) => pointr["ptr:expression"] === pointer["ptr:expression"]
                             )
 
                             if(templatePointer){
@@ -356,7 +342,7 @@ export function includeEditedFoundCases(newReport, currentReport){
 
                 // Include scope
                 if(newReport.structuredSample.webpage.findIndex(elem => elem.id === currentFoundCase.subject) === -1){
-                    newReport.structuredSample.webpage.push(currentReport.structuredSample.webpage.find(elem => elem.id === currentFoundCase.subject))
+                    newReport.structuredSample.webpage.push(currentReport.structuredSample.webpage.find(elem => elem.id === currentFoundCase.subject) ?? {id: ""})
                 }
             }
         }

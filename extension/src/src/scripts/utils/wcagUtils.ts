@@ -1,34 +1,36 @@
 
-/**
- * Retrieves the WCAG hierarchy for a given category.
- * @function getWcagHierarchy
- * @param {string} category - The category to retrieve the hierarchy for.
- * @returns {string[]} An array containing the WCAG hierarchy for the specified category.
- */
-export function getWcagHierarchy(category){
-    return wcagHierarchy[category];
+import { WcagPrincipleId, WcagGuidelineId, WcagSuccessCriteriaId, ConformanceLevel, SuccessCriteriaName } from "../../types/customTypes";
+
+
+export function getWcagPrinciples(){
+    return wcagPrinciples;
 }
 
+export function getPrincipleGuidelines(principle: WcagPrincipleId){
+    return wcagGuidelines[principle];
+}
 
+export function getGuidelineSuccessCriteria(guideline: WcagGuidelineId){
+    return wcagSuccessCriterias[guideline];
+}
 
 /**
  * Returns an array of success criteria objects for WCAG 2.1.
  * @function getSuccessCriterias
  * @returns {Array} An array of success criteria objects.
  */
-export function getSuccessCriterias() { 
-    return successCriterias;
+export function getSuccessCriteriasInfo() { 
+    return successCriteriasInfo;
 };
 
+const wcagPrinciples = {
+    '1': '1 Perceivable',
+    '2': '2 Operable',
+    '3': '3 Understandable',
+    '4': '4 Robust'
+}
 
-
-const wcagHierarchy = { 
-    "mainCategories": {
-        '1': '1 Perceivable',
-        '2': '2 Operable',
-        '3': '3 Understandable',
-        '4': '4 Robust'
-    }, 
+const wcagGuidelines = {  
     '1': {
         '1.1': '1.1 Text Alternatives',
         '1.2': '1.2 Time-based Media',
@@ -49,7 +51,10 @@ const wcagHierarchy = {
     }, 
     '4': {
         '4.1' : '4.1 Compatible'
-    }, 
+    }
+}
+
+const wcagSuccessCriterias = {
     '1.1': {
         '1.1.1' : '1.1.1: Non-text Content',
     }, 
@@ -160,8 +165,11 @@ const wcagHierarchy = {
 }
 
 
-
-const successCriterias = [
+const successCriteriasInfo: {
+    num: WcagSuccessCriteriaId,
+    id: SuccessCriteriaName,
+    conformanceLevel: ConformanceLevel
+}[] = [
     {
         "num": "1.1.1",
         "id": "non-text-content",

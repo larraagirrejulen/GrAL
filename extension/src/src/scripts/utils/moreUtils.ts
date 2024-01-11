@@ -1,25 +1,27 @@
 
-import { getFromChromeStorage } from './chromeUtils.js';
-import { getSuccessCriterias } from './wcagUtils.js';
-import {  removeElementHighlights } from './highlightUtils.js';
+import { getFromChromeStorage } from './chromeUtils';
+import { getSuccessCriteriasInfo } from './wcagUtils';
+import { removeElementHighlights } from './highlightUtils';
+import { BlackListedElement, ServerAction, EarlOutcome, WcagSuccessCriteriaId } from '../../types/customTypes';
+import { Assertion, EvaluationReport, LocationPointer } from '../../types/evaluationReport';
 
 
 /**
  * Fetches data from the server.
  *
- * @param {object} bodyData - The data to send in the request body.
- * @param {string} action - The server action to perform.
- * @param {number} [timeout=120000] - The timeout value in milliseconds.
- * @returns {Promise<object>} A promise that resolves to the fetched data.
+ * @param {BodyInit} bodyData - The data to send in the request body.
+ * @param {ServerAction} action - The server action to perform.
+ * @param {number} [timeout=180000] - The timeout value in milliseconds.
+ * @returns {Promise<any>} A promise that resolves to the fetched data.
  * @throws {Error} If an error occurs during the fetch process.
  */
-export async function fetchServer(bodyData, action, timeout = 120000) {
+export async function fetchServer(bodyData: BodyInit, action: ServerAction, timeout = 180000) {
 
     try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeout);
 
-        const response = await fetch('http://localhost:7070/' + action, {
+        const response = await fetch(`http://localhost:7070/${action}`, {
             body: bodyData,
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -28,14 +30,14 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
         
         clearTimeout(timer);
 
-        if (!response.ok) throw new Error("HTTP error! Status: " + response.status);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         
         const fetchData = await response.json();
 
         return JSON.parse(fetchData);
 
-    } catch (error) {
-        throw new Error("Error fetching scraping server => " + error.name === 'AbortError' ? 'fetch timed out!' : error.message)
+    } catch (error: any) {
+        throw new Error(`Error fetching scraping server => ${error.name === 'AbortError' ? 'fetch timed out!' : error.message}`)
     }
 
 }
@@ -48,7 +50,7 @@ export async function fetchServer(bodyData, action, timeout = 120000) {
  * @returns {HTMLElement} The matched element.
  * @throws {Error} If the path is null or undefined.
  */
-export function getElementByPath(path, innerText) {
+export function getElementByPath(path: string, innerText: string) {
     
     if (!path) throw new Error("Invalid input: path is null or undefined.");
 
@@ -83,31 +85,33 @@ export function getElementByPath(path, innerText) {
  * @param {function} setUseState - The state setter function.
  * @param {number} index - The index of the clicked item.
  * @param {boolean} mantainExtended - Flag indicating whether to maintain the extended state.
- * @param {number} arrayLength - The length of the array.
  */
-export function collapsibleClickHandler(useState, setUseState, index, mantainExtended, arrayLength){
+export function collapsibleClickHandler(
+    useState: Array<boolean>, 
+    setUseState: React.Dispatch<React.SetStateAction<Array<boolean>>>, 
+    index: number, 
+    mantainExtended: boolean
+){
 
     removeElementHighlights();
 
-    const newStates = mantainExtended ? [...useState] : Array(arrayLength).fill(false);
+    const newStates = mantainExtended ? [...useState] : Array(useState.length).fill(false);
     newStates[index] = !useState[index];
     setUseState(newStates);
 
 }
 
 
-
-
 /**
  * Applies the blacklist to the current report.
  *
- * @param {object} currentReport - The current report object.
+ * @param {EvaluationReport} currentReport - The current report object.
  * @returns {Promise<void>} A promise that resolves when the blacklist is applied.
  */
-export async function applyBlackList(currentReport){
+export async function applyBlackList(currentReport: EvaluationReport){
 
-    const successCriterias = getSuccessCriterias();
-    const blacklist = await getFromChromeStorage("blacklist") ?? [];
+    const successCriteriaData = getSuccessCriteriasInfo();
+    const blacklist: BlackListedElement[] = await getFromChromeStorage("blackList", true) ?? [];
 
     if(blacklist.length === 0){
         return;
@@ -117,23 +121,23 @@ export async function applyBlackList(currentReport){
 
         const criteria = currentReport.auditSample[index];
 
-        const criteriaNumber = successCriterias[index].num;
+        const criteriaNumber = successCriteriaData[index].num;
 
-        let outcome = "earl:untested";
+        let outcome: EarlOutcome = "earl:untested";
 
         for (let i = 0; i < criteria.hasPart.length; i++) {
 
             const foundCase = criteria.hasPart[i];
 
             const blacklisteds = blacklist.filter(
-                item => item.criteria.startsWith(criteriaNumber) && "earl:" + item.outcome === foundCase.result.outcome
+                (blackListed: BlackListedElement) => blackListed.criteria.startsWith(criteriaNumber) && `earl:${blackListed.outcome}` === foundCase.result.outcome
             );
 
             if(blacklisteds.length > 0){
 
                 for(const listed of blacklisteds){
                     const index = foundCase.assertedBy.findIndex(
-                        item => item.assertor === listed.evaluator && item.description === listed.message
+                        (assertion: Assertion) => assertion.assertor === listed.evaluator && assertion.description === listed.message
                     );
                     if(index !== -1){
                         foundCase.assertedBy.splice(index, 1);
@@ -145,7 +149,7 @@ export async function applyBlackList(currentReport){
 
                 if(foundCase.assertedBy.length > 0){
 
-                    const newOutcome = foundCase.result.outcome;
+                    const newOutcome: EarlOutcome = foundCase.result.outcome;
     
                     if(outcome === "earl:untested" ||
                     (outcome === "earl:inapplicable" && newOutcome !== "earl:untested") ||
@@ -156,10 +160,10 @@ export async function applyBlackList(currentReport){
     
                     for (let j = 0; j < foundCase.result.locationPointersGroup.length; j++) {
     
-                        const pointer = foundCase.result.locationPointersGroup[j];
+                        const pointer: LocationPointer = foundCase.result.locationPointersGroup[j];
     
                         for(const listed of blacklisteds){
-                            const index = pointer.assertedBy.findIndex(item => item === listed.evaluator);
+                            const index = pointer.assertedBy.findIndex((evaluator: any) => evaluator === listed.evaluator);
                             if(index !== -1){
                                 pointer.assertedBy.splice(index, 1);
                                 if(pointer.assertedBy.length === 0){

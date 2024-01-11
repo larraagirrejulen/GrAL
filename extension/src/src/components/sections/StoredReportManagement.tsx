@@ -4,18 +4,21 @@ import '../../styles/sections/storedReportManagement.scss';
 import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
-import { loadStoredReport, getStoredReports, removeStoredReport } from '../../scripts/reportStorageOptions.js';
+import { loadStoredReport, getStoredReports, removeStoredReport } from '../../scripts/reportStorageOptions';
 import { storeOnChromeStorage } from '../../scripts/utils/chromeUtils';
 
+interface StoredReportManagementProps {
+  setManageStoredReports: React.Dispatch<React.SetStateAction<boolean>>;
+  authenticationState: string;
+}
 
 /**
  * Component for managing stored reports.
  * @param {Object} props - The component props.
  * @param {Function} props.setManageStoredReports - Function to set the manageStoredReports state.
  * @param {string} props.authenticationState - The authentication state.
- * @returns {JSX.Element} The rendered JSX element.
  */
-export default function StoredReportManagement({setManageStoredReports, authenticationState}:any) : JSX.Element {
+export default function StoredReportManagement({setManageStoredReports, authenticationState}: StoredReportManagementProps) {
 
   const [paginatedData, setPaginatedData] = useState([[]]);
 
@@ -34,7 +37,7 @@ export default function StoredReportManagement({setManageStoredReports, authenti
   const loadHandler = () => {
     const selected:any = paginatedData[currentPage][selectedIndex];
 
-    storeOnChromeStorage(window.location.hostname + ".parentId", selected.id);
+    storeOnChromeStorage(`${window.location.hostname}.parentId`, selected.id);
     loadStoredReport(selected.id);
   }
 

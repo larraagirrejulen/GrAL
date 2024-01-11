@@ -4,8 +4,8 @@ import '../../styles/sections/UserAuthentication.scss';
 import { useState, useEffect} from "react";
 import Button from "../reusables/Button";
 
-import { fetchServer } from '../../scripts/utils/moreUtils.js';
-import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "../../scripts/utils/chromeUtils.js";
+import { fetchServer } from '../../scripts/utils/moreUtils';
+import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "../../scripts/utils/chromeUtils";
 
 
 /**
@@ -23,7 +23,7 @@ export default function UserAuthentication ({authenticationState, setAuthenticat
     }
 
     useEffect( ()=>{
-        getFromChromeStorage("authenticationState", true)
+        getFromChromeStorage("authenticationState")
         .then( value => value != null && setAuthenticationState(value) );
     });
   
@@ -89,7 +89,7 @@ function LoginForm({setAuthState}:any): JSX.Element {
 
         const bodyData:any = JSON.stringify({email, password, action: "login"});
 
-        const loginResult:any = await fetchServer(bodyData, "userAuthentication");
+        const loginResult:any = await fetchServer(bodyData, "authentication");
 
         if(loginResult.success){
             storeOnChromeStorage("authenticationState", loginResult.username, true);
@@ -153,7 +153,7 @@ function RegisterForm({setAuthState}:any): JSX.Element {
 
         const bodyData:any = JSON.stringify({email, username, password, action: "register"});
 
-        const registerResult:any = await fetchServer(bodyData, "userAuthentication");
+        const registerResult:any = await fetchServer(bodyData, "authentication");
 
         if(registerResult.success){
             window.alert("Successfully registered");

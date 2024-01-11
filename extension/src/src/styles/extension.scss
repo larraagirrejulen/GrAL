@@ -1,12 +1,12 @@
 
 @import "colors";
 
-body.extension-active {
+body.earlerEnabled {
   position: relative;
   left: 300px;
 }
 
-#hidden_extension_logo{
+#hiddenEarlerLogo{
   all: initial;
   position: fixed;
   top: calc(50vh - 25px);
@@ -27,7 +27,7 @@ body.extension-active {
   }
 }
 
-#react_chrome_extension{
+#earlerExtension{
 
   & *{
     font-family: Arial, Helvetica, sans-serif;
@@ -81,7 +81,7 @@ body.extension-active {
     }
   }
 
-  & .img_container{
+  & .earlerLogoContainer{
     all: initial;
     display: block;
     align-self: center;

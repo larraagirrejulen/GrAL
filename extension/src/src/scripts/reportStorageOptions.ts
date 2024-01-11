@@ -1,20 +1,21 @@
 
-import { fetchServer, applyBlackList } from "./utils/moreUtils.js";
+import { fetchServer, applyBlackList } from "./utils/moreUtils";
 import { getFromChromeStorage, removeFromChromeStorage, storeOnChromeStorage } from "./utils/chromeUtils";
 import { loadReport, includeEditedFoundCases } from "./reportLoadingOptions";
+import { SetStateAction } from "react";
 
 
 /**
  * Retrieves the stored reports, adapts them, and sets them on the paginatedData useState.
  * @param {Function} setPaginatedData - Function to update the paginated data state.
  */
-export async function getStoredReports(setPaginatedData){
+export async function getStoredReports(setPaginatedData: { (value: SetStateAction<never[][]>): void; (arg0: any[]): void; }){
 
     try{
 
         const bodyData = JSON.stringify({domain: window.location.hostname});
 
-        const storeResults = await fetchServer(bodyData, "reportStoring");
+        const storeResults = await fetchServer(bodyData, "storage");
 
         if(storeResults.success){
             setPaginatedData(transformArray(storeResults.reports));
@@ -33,18 +34,18 @@ export async function getStoredReports(setPaginatedData){
  * Loads a stored report by its ID.
  * @param {string} id - The ID of the stored report.
  */
-export async function loadStoredReport(id){
+export async function loadStoredReport(id: string){
 
     try{
 
         const bodyData = JSON.stringify({action: "getReport", id});
 
-        const storeResults = await fetchServer(bodyData, "reportStoring");
+        const storeResults = await fetchServer(bodyData, "storage");
 
         if(storeResults.success){
-            const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false);
+            const reportLoaded = await getFromChromeStorage(window.location.hostname + ".reportIsLoaded");
             if(reportLoaded === "true"){
-                const currentReport = await getFromChromeStorage(window.location.hostname, false);
+                const currentReport = await getFromChromeStorage(window.location.hostname);
                 includeEditedFoundCases(storeResults.report, currentReport);
             }
             loadReport(storeResults.report);
@@ -65,13 +66,13 @@ export async function loadStoredReport(id){
  * @param {function} setCurrentPage - The function to set the current page in the UI.
  * @returns {Promise<void>} A promise that resolves when the report is successfully removed.
  */
-export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
+export async function removeStoredReport(id: string, setPaginatedData: { (value: SetStateAction<never[][]>): void; (arg0: any[]): void; }, setCurrentPage: { (value: SetStateAction<number>): void; (arg0: number): void; }){
 
     try{
 
         let bodyData = JSON.stringify({action: "remove", id});
 
-        let storeResults = await fetchServer(bodyData, "reportStoring");
+        let storeResults = await fetchServer(bodyData, "storage");
 
         if(storeResults.success){
             window.alert("succesfully deleted");
@@ -81,14 +82,14 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
 
         bodyData = JSON.stringify({domain: window.location.hostname});
 
-        storeResults = await fetchServer(bodyData, "reportStoring");
+        storeResults = await fetchServer(bodyData, "storage");
 
         if(storeResults.success){
             setPaginatedData(transformArray(storeResults.reports));
             setCurrentPage(0);
         }
 
-        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false);
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId");
 
         if(parentId === id){
             removeFromChromeStorage(window.location.hostname + ".parentId")
@@ -105,11 +106,11 @@ export async function removeStoredReport(id, setPaginatedData, setCurrentPage){
  * @param {Array} array - The array of reports.
  * @returns {Array} The transformed nested array of report branches.
  */
-function transformArray(array) {
+function transformArray(array: any[]) {
 
-    const result = [];
+    const result: any[][] = [];
   
-    function findDescendants(parentId, branchElements) {
+    function findDescendants(parentId: any, branchElements: any[]) {
         const descendants = array.filter((item) => item.parentId === parentId);
     
         descendants.forEach((descendant) => {
@@ -140,24 +141,24 @@ function transformArray(array) {
  * @param {Function} setAnimateBtn - Function to update the animateBtn state.
  * @param {string} authenticationState - The authentication state.
  */
-export async function storeNewReport(setAnimateBtn, authenticationState){
+export async function storeNewReport(setAnimateBtn: { (value: SetStateAction<string>): void; (arg0: string): void; }, authenticationState: any){
 
     try{
         setAnimateBtn("store");
 
-        const report = await getFromChromeStorage(window.location.hostname, false);
+        const report = await getFromChromeStorage(window.location.hostname);
 
-        const enableBlacklist = await getFromChromeStorage('enableBlacklist');
+        const enableBlacklist = await getFromChromeStorage('enableBlacklist', true);
         
         if(enableBlacklist){
             await applyBlackList(report);
         }
 
-        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId", false) ?? null;
+        const parentId = await getFromChromeStorage(window.location.hostname + ".parentId") ?? null;
 
         const bodyData = JSON.stringify({action: "storeNewReport", domain: window.location.hostname, report, uploadedBy: authenticationState, parentId});
 
-        const storeResults = await fetchServer(bodyData, "reportStoring");
+        const storeResults = await fetchServer(bodyData, "storage");
 
         if(storeResults.success){
           window.alert("Report successfully stored!");

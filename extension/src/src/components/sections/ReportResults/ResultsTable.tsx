@@ -5,12 +5,13 @@ import { useState, useEffect} from "react";
 import parse from 'html-react-parser';
 import Button from '../../reusables/Button';
 
-import { blackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../scripts/utils/chromeUtils.js';
-import { getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils.js';
-import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils.js';
+import { appendBlackListElement, getFromChromeStorage, getImgSrc, removeFromChromeStorage } from '../../../scripts/utils/chromeUtils';
+import { getElementByPath, collapsibleClickHandler } from '../../../scripts/utils/moreUtils';
+import { highlightElement, selectHighlightedElement, unselectHighlightedElement } from '../../../scripts/utils/highlightUtils';
 import { mapReportData } from '../../../scripts/mapReportData';
-import { getSuccessCriterias } from '../../../scripts/utils/wcagUtils';
+import { getSuccessCriteriasInfo } from '../../../scripts/utils/wcagUtils';
 import { loadReport } from '../../../scripts/reportLoadingOptions';
+import { Evaluator } from '../../../types/customTypes';
 
 
 const outcome2Background:any = {
@@ -28,7 +29,7 @@ const outcome2Description:any = {
     "earl:inapplicable": ["SC is not applicable", "Cannot apply:"]
 };
 
-const wcagCriterias = getSuccessCriterias();
+const wcagCriterias = getSuccessCriteriasInfo();
 
 
 /**
@@ -47,18 +48,18 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
      */
     useEffect(() => {
         (async ()=>{
-            const update = await getFromChromeStorage("blackListUpdated");
+            const update = await getFromChromeStorage("blackListUpdated", true);
             if(update){
                 removeFromChromeStorage("blackListUpdated", true);
                 mapReportData();
             }
         })();
 
-        getFromChromeStorage("mantainExtended")
+        getFromChromeStorage("mantainExtended", true)
         .then( value => {
             if(value != null) setMantainExtended(value) 
         });
-        getFromChromeStorage(window.location.hostname + ".reportTableContent", false)
+        getFromChromeStorage(`${window.location.hostname}.reportTableContent`)
         .then( value => {
             if(value != null) setReportTableContent(value)  
         });
@@ -98,8 +99,7 @@ export default function ResultsTable({conformanceLevels}:any): JSX.Element {
                                     selectedMainCategories, 
                                     setSelectedMainCategories, 
                                     index, 
-                                    mantainExtended, 
-                                    reportTableContent.length
+                                    mantainExtended
                                 )}
                             >
                                 <td>{mainCategory.categoryTitle}</td>
@@ -164,8 +164,7 @@ function SubCategory({subCategories, mantainExtended, conformanceLevels}:any){
                     selectedSubCategories, 
                     setSelectedSubCategories, 
                     index, 
-                    mantainExtended, 
-                    subCategories.length
+                    mantainExtended
                 )}
             >
                 <td>{subCategory.subCategoryTitle}</td>
@@ -219,8 +218,7 @@ function Criterias({criterias, mantainExtended, conformanceLevels}:any){
                         selectedCriterias, 
                         setSelectedCriterias, 
                         index, 
-                        mantainExtended, 
-                        criterias.length, 
+                        mantainExtended
                     )}
                 >
                     <td colSpan={2}>
@@ -276,9 +274,9 @@ function CriteriaResults({criteria}:any){
     async function getFoundCaseFromReport(index:any){
         
 
-        const evaluationReport = await getFromChromeStorage(window.location.hostname, false);
+        const evaluationReport = await getFromChromeStorage(window.location.hostname);
 
-        const criteriaTxt = wcagCriterias.find((elem:any) => elem.num === criteria.criteriaNumber);
+        const criteriaTxt:any = wcagCriterias.find((elem:any) => elem.num === criteria.criteriaNumber);
 
         const reportCriteria = evaluationReport.auditSample.find(
             (elem:any) => elem.test.includes(criteriaTxt.id)
@@ -304,7 +302,7 @@ function CriteriaResults({criteria}:any){
         const foundCase = reportCriteria.hasPart[foundCaseIndex];
         const locationPointersGroup = foundCase.result.locationPointersGroup;
 
-        const modifier = await getFromChromeStorage("authenticationState");
+        const modifier = await getFromChromeStorage("authenticationState", true);
 
         editedDescriptions.forEach((desc:any) => {
 
@@ -512,7 +510,7 @@ function CriteriaResults({criteria}:any){
                 <tr 
                     className="collapsible criteriaResult" 
                     onClick={
-                        () => collapsibleClickHandler(selectedCriteriaResults, setSelectedCriteriaResults, index, false, criteria.hasPart.length)
+                        () => collapsibleClickHandler(selectedCriteriaResults, setSelectedCriteriaResults, index, false)
                     }
                 >
                     <td colSpan={6} style={{...outcome2Background["earl:" + result.outcome]}}>
@@ -587,7 +585,7 @@ function CriteriaResults({criteria}:any){
                                         alt="Add message to blacklist" 
                                         title="Add message to blacklist"
                                         height="16px" 
-                                        onClick={() => blackListElement({
+                                        onClick={() => appendBlackListElement({
                                             evaluator: element.assertor, 
                                             criteria: criteria.criteria, 
                                             outcome: result.outcome, 
@@ -667,7 +665,7 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
             for (let i = 0; i < resultGroupedPointers[groupKey].length; i++) {
 
                 const pointer = resultGroupedPointers[groupKey][i];
-                const pointedElement = getElementByPath(pointer.path, pointer.innerText);
+                const pointedElement:any = getElementByPath(pointer.path, pointer.innerText);
 
                 if(pointedElement){
                     if(pointedElement.getAttribute('type') === "hidden" || pointedElement.getAttribute("hidden")!==null){
@@ -678,7 +676,7 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
                         newHiddenElements[groupKey].push(i);
 
                     }else if(!pointer.html.startsWith("<body")){
-                        highlightElement(pointedElement, groupKey, i);
+                        highlightElement(pointedElement, groupKey as Evaluator, i);
                     }
                 }else{
                     if (!newIgnoredElements[groupKey]) {
@@ -715,7 +713,7 @@ function CriteriaResultPointers({resultGroupedPointers, edit, removedPointers, s
             && !ignoredElements[groupKey]?.includes(index) 
             && !pointer.html.startsWith("<body")) {
     
-                selectHighlightedElement(groupKey, index, pointer.documentation);
+                selectHighlightedElement(groupKey as Evaluator, index, pointer.documentation);
             
             }
         } 

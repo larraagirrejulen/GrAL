@@ -9,7 +9,7 @@ import EvaluatorSelection from './sections/EvaluatorSelection';
 import EvaluationOptions from './sections/EvaluationOptions';
 import ReportResults from './sections/ReportResults/ReportResults';
 
-import { getFromChromeStorage, getImgSrc, openOptionsPage } from '../scripts/utils/chromeUtils.js';
+import { getFromChromeStorage, getImgSrc } from '../scripts/utils/chromeUtils';
 
 
 
@@ -17,7 +17,7 @@ import { getFromChromeStorage, getImgSrc, openOptionsPage } from '../scripts/uti
  * Extension main component that wraps all other functionalities.
  * @returns {JSX.Element} The rendered JSX element.
  */
-export default function Extension() : JSX.Element {
+export default function Extension() {
 
   const [shiftWebpage, setShiftWebpage] = useState(false);
   const [extensionHidden, setExtensionHidden] = useState(false);
@@ -32,7 +32,7 @@ export default function Extension() : JSX.Element {
 
 
   useEffect(() => {
-    document.body.classList.toggle('extension-active', shiftWebpage && !extensionHidden);
+    document.body.classList.toggle('earlerEnabled', shiftWebpage && !extensionHidden);
   }, [extensionHidden, shiftWebpage]);
     
 
@@ -40,24 +40,24 @@ export default function Extension() : JSX.Element {
 
     {extensionHidden && (
       <img 
-        id="hidden_extension_logo" 
+        id="hiddenEarlerLogo" 
         alt="extension logo when hidden" 
         src={getImgSrc("icon128")} 
         onClick={()=>setExtensionHidden(!extensionHidden)} 
       /> 
     )}
     
-    <div id="react_chrome_extension" className= {`${extensionHidden && 'hidden'}`}>
+    <div id="earlerExtension" className= {`${extensionHidden && 'hidden'}`}>
       <img 
         className="icon options" 
         src={getImgSrc("settingsGear")} 
         alt="open configuration options window" 
-        onClick={openOptionsPage} 
+        onClick={() => chrome.runtime.sendMessage({action: "openOptionsPage"})} 
       />
       
       <span className="icon close" onClick={()=>setExtensionHidden(!extensionHidden)}>&times;</span>
 
-      <div className="img_container">
+      <div className="earlerLogoContainer">
         <img 
           alt="extension logo" 
           src={getImgSrc("icon128")} 

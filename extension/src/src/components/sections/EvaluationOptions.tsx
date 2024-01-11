@@ -4,9 +4,9 @@ import '../../styles/sections/evaluationOptions.scss';
 import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 
-import { getFromChromeStorage, getImgSrc } from '../../scripts/utils/chromeUtils.js';
-import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope, testEvaluators } from '../../scripts/reportLoadingOptions.js';
-import { storeNewReport } from '../../scripts/reportStorageOptions.js';
+import { getFromChromeStorage, getImgSrc } from '../../scripts/utils/chromeUtils';
+import { removeLoadedReport, downloadLoadedReport, uploadNewReport, evaluateScope } from '../../scripts/reportLoadingOptions';
+import { storeNewReport } from '../../scripts/reportStorageOptions';
 
 
 /**
@@ -22,7 +22,7 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
   const [reportIsLoaded, setReportIsLoaded] = useState("false");
 
   useEffect(()=>{
-    getFromChromeStorage(window.location.hostname + ".reportIsLoaded", false)
+    getFromChromeStorage(`${window.location.hostname}.reportIsLoaded`)
     .then((value)=>{
       setReportIsLoaded(value);
     });
@@ -55,7 +55,7 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
             <label onClick={removeLoadedReport}>Remove report</label>
             <label onClick={downloadLoadedReport}>Export report</label>
             <label id="importReport">
-              <input type="file" accept=".json" onChange={(event:any) => uploadNewReport(event)} />
+              <input type="file" accept=".json" onChange={(event) => uploadNewReport(event)} />
               Import new report
             </label>
           </div>
@@ -82,12 +82,6 @@ export default function EvaluationOptions ({authenticationState, setLoadingRepor
           />
         </div>
       </> )}
-
-      {/*<Button 
-        classList={"primary lineSpaced"} 
-        onClickHandler={()=>{testEvaluators()}}
-        innerText={"Test evaluators"}
-      />*/}
       
     </div>
   );

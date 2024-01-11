@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Button from '../reusables/Button';
 import Dropdown from '../reusables/DropdownSection';
 
-import { getImgSrc } from '../../scripts/utils/chromeUtils.js';
+import { getImgSrc } from '../../scripts/utils/chromeUtils';
 
 
 const defaultScope = [{name: window.document.title, url: window.location.href}];

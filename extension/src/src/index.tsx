@@ -3,27 +3,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Extension from './components/Extension';
 
-/**
- * Root element for the extension.
- * @type {HTMLDivElement}
- */
-const rootElement = document.createElement("div");
-rootElement.id = "ac-check-extension";
-
-/**
- * List of websites where the extension will not be loaded.
- * @type {string[]}
- */
-const exceptionsList = [
-  "https://www.w3.org", 
-  "https://accessmonitor.acessibilidade.gov.pt", 
-  "https://achecker.achecks.ca", 
-  "https://github.com", 
-  "https://mauve.isti.cnr.it"
+const ignoredSites = [
+  "www.w3.org", 
+  "accessmonitor.acessibilidade.gov.pt", 
+  "achecker.achecks.ca", 
+  "github.com", 
+  "mauve.isti.cnr.it"
 ];
 
-// Check if the current URL is not in the exceptions list
-if (!exceptionsList.includes(String(window.location.origin))){
+// Check if the current URL is not in the ignoredSites list
+if (!ignoredSites.includes(`https://${String(window.location.origin)}`)){
+
+  const rootElement = document.createElement("div");
+  rootElement.id = "earlerExtension";
 
   // Append the root element to the document body
   document.body.appendChild(rootElement);

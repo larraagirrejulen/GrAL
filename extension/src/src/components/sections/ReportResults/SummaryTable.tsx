@@ -42,9 +42,9 @@ export default function SummaryTable({conformanceLevels}:any){
     };
 
     useEffect(() => { 
-        getFromChromeStorage(window.location.hostname + ".siteSummary", false)
+        getFromChromeStorage(`${window.location.hostname}.siteSummary`)
         .then( value => value != null && setSiteSummary(value) );
-        getFromChromeStorage(window.location.hostname + ".pageSummaries", false)
+        getFromChromeStorage(`${window.location.hostname}.pageSummaries`)
         .then( value => value != null && setPageSummaries(value) );
     },[]);
 
